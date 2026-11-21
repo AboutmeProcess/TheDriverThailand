@@ -1,1 +1,1650 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ลงทะเบียนทำบัตรสมาชิกประเมศฐ์ | The Driver Thailand</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Prompt & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- FontAwesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Prompt', 'Inter', 'sans-serif'],
+          },
+          colors: {
+            driver: {
+              50: '#fffbe5',
+              100: '#fef3c7',
+              500: '#f59e0b',
+              600: '#d97706',
+              900: '#0f172a',
+            }
+          }
+        }
+      }
+    }
+  </script>
 
+  <style>
+    html, body {
+      font-family: 'Prompt', 'Inter', sans-serif;
+      background-color: #f8fafc;
+      max-width: 100%;
+      overflow-x: clip;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      height: 6px;
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    /* Premium Dimensional Background Patterns */
+    .hero-glow-bg {
+      background: radial-gradient(circle at 20% 20%, rgba(245, 158, 11, 0.22) 0%, transparent 40%),
+                  radial-gradient(circle at 80% 80%, rgba(37, 99, 235, 0.32) 0%, transparent 50%),
+                  linear-gradient(135deg, #0f172a 0%, #1e293b 45%, #0f172a 80%, #030712 100%);
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+  </style>
+</head>
+<body class="text-slate-800 antialiased min-h-screen flex flex-col selection:bg-amber-400 selection:text-slate-950 relative">
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div id="toast-container" class="fixed top-5 right-5 z-50 flex flex-col gap-3 max-w-sm w-full pointer-events-none px-4"></div>
+
+  <!-- HEADER TOP BAR -->
+  <header class="bg-slate-950 text-slate-300 text-xs sm:text-sm py-2.5 px-4 border-b border-slate-800">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row md:justify-between md:items-center gap-2">
+      <div class="flex flex-wrap items-center gap-2 min-w-0">
+        <span class="bg-amber-500 text-slate-950 font-extrabold px-3 py-1 rounded-full text-xs shadow-md shrink-0">
+          <i class="fa-solid fa-car-side mr-1"></i> The Driver Thailand
+        </span>
+        <span class="text-slate-300 text-xs font-medium">บริการออกบัตรสมาชิกประเมศฐ์ และประสานงานเครือข่ายคนขับ</span>
+      </div>
+      <div class="flex flex-wrap items-center gap-2 sm:gap-3 text-xs sm:text-sm">
+        <span class="break-words"><i class="fa-solid fa-clock text-amber-400 mr-1.5"></i> รอบจัดส่งถัดไป: <strong id="top-next-round-text" class="text-amber-300 font-bold">รอบวันที่ 11 ธันวาคม 2569</strong></span>
+        <span class="text-slate-700 hidden sm:inline">|</span>
+        <span class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-semibold px-3 py-1 rounded-full inline-flex items-center gap-1.5 text-xs shrink-0">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span> เปิดรับสมัครออนไลน์ 24 ชม.
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAVIGATION BAR (RESPONSIVE MEDIUM CONTROLS) -->
+  <nav class="bg-white border-b border-slate-200 shadow-sm sticky top-0 z-40">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="flex flex-col sm:flex-row sm:justify-between py-3 sm:py-0 sm:min-h-20 gap-3 sm:items-center">
+        <!-- Logo Collaboration Badge -->
+        <div class="flex items-center gap-3 min-w-0">
+          <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-slate-900 text-amber-400 flex items-center justify-center font-bold text-lg sm:text-xl shadow-lg border-2 border-amber-400/40 shrink-0">
+            <i class="fa-solid fa-id-badge"></i>
+          </div>
+          <div class="min-w-0">
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="font-extrabold text-slate-900 text-sm sm:text-base tracking-wide">บัตรสมาชิกประเมศฐ์</span>
+              <span class="text-xs bg-amber-100 text-amber-800 px-2 py-0.5 rounded-md font-bold border border-amber-300 shrink-0">Official</span>
+            </div>
+            <p class="text-xs text-amber-600 font-semibold mt-0.5">ดำเนินการโดย กลุ่ม The Driver Thailand</p>
+          </div>
+        </div>
+
+        <!-- Medium Sized Navigation Buttons -->
+        <div class="grid grid-cols-2 sm:flex gap-2.5 sm:space-x-3 sm:gap-0 text-xs sm:text-sm font-bold w-full sm:w-auto">
+          <button type="button" id="btn-nav-register" onclick="switchNavTab('register')" 
+                  class="px-3.5 py-2.5 sm:px-6 sm:py-3 rounded-2xl transition-all flex items-center justify-center gap-2 bg-slate-900 text-amber-400 shadow-md hover:bg-slate-800">
+            <i class="fa-solid fa-pen-to-square text-sm sm:text-base shrink-0"></i>
+            <span class="truncate">ลงทะเบียนทำบัตร</span>
+          </button>
+          <button type="button" id="btn-nav-shipping" onclick="switchNavTab('shipping')" 
+                  class="px-3.5 py-2.5 sm:px-6 sm:py-3 rounded-2xl transition-all flex items-center justify-center gap-2 text-slate-700 hover:bg-slate-100 border border-slate-200 hover:border-slate-300">
+            <i class="fa-solid fa-truck-fast text-blue-600 text-sm sm:text-base shrink-0"></i>
+            <span class="truncate">เช็คเลขพัสดุย้อนหลัง</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTAINER -->
+  <main class="flex-grow max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-6 sm:space-y-8">
+
+    <!-- ============================================ -->
+    <!-- SECTION 1: REGISTRATION FORM & TRACK STATUS  -->
+    <!-- ============================================ -->
+    <div id="section-register" class="space-y-6 sm:space-y-8">
+
+      <!-- DIMENSIONAL ENHANCED HERO BANNER -->
+      <div class="hero-glow-bg rounded-3xl p-5 sm:p-10 text-white shadow-2xl relative overflow-hidden border border-slate-700/60">
+        <!-- Background Lighting Overlay Details -->
+        <div class="absolute -right-10 -bottom-10 w-72 h-72 bg-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -left-10 -top-10 w-72 h-72 bg-amber-500/15 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="grid lg:grid-cols-12 gap-6 sm:gap-8 items-center relative z-10">
+          <div class="lg:col-span-7 space-y-4 min-w-0">
+            <div class="flex flex-wrap items-center gap-2.5">
+              <span class="bg-gradient-to-r from-amber-500/30 to-amber-600/20 text-amber-300 border border-amber-400/40 text-xs font-bold px-3.5 py-1.5 rounded-full shadow-inner">
+                <i class="fa-solid fa-handshake mr-1.5"></i> ความร่วมมืออย่างเป็นทางการ
+              </span>
+              <span class="bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 text-xs font-bold px-3.5 py-1.5 rounded-full inline-flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> เปิดรับสมัคร 24 ชม.
+              </span>
+            </div>
+
+            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight drop-shadow-md break-words">
+              ลงทะเบียนจัดทำบัตรสมาชิกประเมศฐ์
+            </h2>
+            <p class="text-slate-300 text-xs sm:text-sm leading-relaxed font-light">
+              ระบบลงทะเบียนทำบัตรสมาชิกอย่างเป็นทางการ ติดรูปถ่ายหน้าตรงพร้อมเคลือบใสกันน้ำอย่างดี 
+              เพื่อใช้แสดงตนและเพิ่มความมั่นใจในการปฏิบัติงานผ่านเครือข่ายกลุ่ม The Driver Thailand
+            </p>
+            
+            <!-- Next Round Glass Card -->
+            <div class="flex sm:inline-flex items-center gap-3.5 glass-card border border-white/20 px-4 sm:px-5 py-3 rounded-2xl text-xs sm:text-sm text-amber-300 shadow-xl">
+              <div class="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-400/40 flex items-center justify-center text-amber-400 text-lg shrink-0">
+                <i class="fa-solid fa-calendar-check"></i>
+              </div>
+              <div class="min-w-0">
+                <span class="text-slate-300 block text-xs font-medium">รอบจัดทำและจัดส่งบัตรถัดไป:</span>
+                <strong id="banner-next-round-text" class="text-amber-400 text-sm sm:text-base font-bold break-words">รอบวันที่ 11 ธันวาคม 2569</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sample Member Card Mockup -->
+          <div class="lg:col-span-5 flex justify-center">
+            <div class="w-full max-w-xs bg-gradient-to-br from-slate-900 via-slate-850 to-blue-950 border-2 border-amber-400/80 rounded-2xl p-5 shadow-2xl relative text-slate-100 transform hover:scale-105 transition duration-300">
+              <div class="flex justify-between items-start gap-2 border-b border-slate-700/80 pb-2.5 mb-3">
+                <div class="min-w-0">
+                  <p class="text-[9px] uppercase tracking-wider text-amber-400 font-extrabold">MEMBER CARD</p>
+                  <p class="text-xs font-bold text-white truncate">ประเมศฐ์ ทราเวล &amp; เซอร์วิส</p>
+                </div>
+                <span class="text-[9px] bg-amber-400 text-slate-950 font-black px-2 py-0.5 rounded shadow shrink-0">OFFICIAL</span>
+              </div>
+              <div class="flex gap-3.5 items-center mb-3">
+                <div class="w-14 h-16 rounded-xl bg-slate-800 border border-slate-700 flex flex-col items-center justify-center text-slate-400 shrink-0 shadow-inner">
+                  <i class="fa-solid fa-user text-2xl text-amber-400/80"></i>
+                  <span class="text-[8px] mt-1 text-slate-400">รูปหน้าตรง</span>
+                </div>
+                <div class="space-y-1 text-[11px] min-w-0">
+                  <p class="font-bold text-amber-300 text-xs">ตัวอย่างบัตรสมาชิก</p>
+                  <p class="text-slate-400 font-mono text-[10px]">ID: PRM-2026-XXXX</p>
+                  <p class="text-[10px] text-emerald-400 font-medium"><i class="fa-solid fa-shield-check mr-1"></i>เคลือบใสกันน้ำ 100%</p>
+                </div>
+              </div>
+              <div class="pt-2.5 border-t border-slate-700/80 flex justify-between items-center gap-2 text-[10px] text-slate-400">
+                <span class="font-medium text-slate-300 truncate">The Driver Thailand</span>
+                <span class="text-amber-400 font-semibold shrink-0"><i class="fa-solid fa-circle-check mr-1"></i>ออกบัตรเรียบร้อย</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STATUS TRACKING SEARCH BAR -->
+      <div id="search-status-anchor" class="bg-white rounded-3xl p-5 sm:p-8 shadow-sm border border-slate-200">
+        <div class="max-w-2xl mx-auto space-y-4">
+          <div class="text-center space-y-1">
+            <h3 class="text-lg sm:text-xl font-bold text-slate-900"><i class="fa-solid fa-magnifying-glass text-amber-500 mr-2"></i>ค้นหาสถานะการทำบัตร</h3>
+            <p class="text-xs sm:text-sm text-slate-500">กรอกรหัสอ้างอิง (เช่น PRM-20261121-164900), ชื่อ-นามสกุล หรือ เบอร์โทรศัพท์ เพื่อติดตามสถานะ</p>
+          </div>
+
+          <div class="flex flex-col sm:flex-row gap-2.5">
+            <div class="relative flex-1 min-w-0">
+              <i class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+              <input type="text" id="input-search-track" placeholder="พิมพ์รหัสอ้างอิง / ชื่อ-นามสกุล / เบอร์โทรศัพท์..." 
+                     class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-300 rounded-2xl text-xs sm:text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
+            </div>
+            <button type="button" onclick="searchStatusTrack()" class="w-full sm:w-auto bg-slate-900 hover:bg-slate-800 text-white font-bold px-6 py-3 rounded-2xl text-xs sm:text-sm transition shrink-0 shadow">
+              ตรวจสอบ
+            </button>
+          </div>
+
+          <!-- TRACKING RESULT STEPPER CONTAINER -->
+          <div id="tracking-result-container" class="hidden mt-4 bg-slate-50 border border-slate-200 rounded-2xl p-5 sm:p-6 transition-all">
+            <!-- Dynamic Content Injected via JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- MAIN REGISTRATION FORM -->
+      <div class="bg-white rounded-3xl p-5 sm:p-10 shadow-sm border border-slate-200 space-y-6 sm:space-y-8">
+        <div class="border-b border-slate-200 pb-5 flex justify-between items-start sm:items-center flex-wrap gap-2">
+          <div>
+            <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900">แบบฟอร์มลงทะเบียนสมัครทำบัตร</h3>
+            <p class="text-xs sm:text-sm text-slate-500 mt-0.5">กรอกข้อมูลให้ครบถ้วน ข้อมูลจะถูกจัดเก็บเข้าสู่ระบบชีตอัตโนมัติ</p>
+          </div>
+          <span class="text-xs font-semibold text-slate-600 bg-slate-100 px-3.5 py-1.5 rounded-full border border-slate-200 shrink-0">
+            <i class="fa-solid fa-shield-halved text-emerald-600 mr-1"></i> ปลอดภัย 100%
+          </span>
+        </div>
+
+        <form id="form-registration" onsubmit="submitRegistrationForm(event)" class="space-y-6">
+
+          <!-- 1. CARD TYPE -->
+          <div class="space-y-3">
+            <label class="block font-bold text-slate-900 text-sm sm:text-base">
+              1. ประเภทการทำบัตร <span class="text-red-500">*</span>
+            </label>
+
+            <div class="grid md:grid-cols-2 gap-4">
+              <!-- New Card -->
+              <label id="label-card-new" class="border-2 border-amber-500 bg-amber-50/40 rounded-2xl p-4 cursor-pointer hover:border-amber-600 transition flex items-center justify-between gap-3">
+                <div class="flex items-center gap-3 min-w-0">
+                  <input type="radio" name="card_type" value="สมัครสมาชิกใหม่ 769 บาท" checked onchange="handleCardTypeChange()" class="w-4 h-4 text-amber-600 focus:ring-amber-500 shrink-0">
+                  <span class="font-bold text-slate-900 text-sm sm:text-base">สมัครสมาชิกใหม่ 769 บาท</span>
+                </div>
+                <span class="bg-amber-500 text-slate-950 font-extrabold px-3 py-1 rounded-lg text-xs shrink-0">769 บาท</span>
+              </label>
+
+              <!-- Lost/Damaged Card -->
+              <label id="label-card-lost" class="border-2 border-slate-200 bg-white rounded-2xl p-4 cursor-pointer hover:border-amber-500 transition flex items-center justify-between gap-3">
+                <div class="flex items-center gap-3 min-w-0">
+                  <input type="radio" name="card_type" value="บัตรหาย / ชำรุด 200 บาท" onchange="handleCardTypeChange()" class="w-4 h-4 text-amber-600 focus:ring-amber-500 shrink-0">
+                  <span class="font-bold text-slate-900 text-sm sm:text-base">บัตรหาย / ชำรุด 200 บาท</span>
+                </div>
+                <span class="bg-slate-200 text-slate-800 font-extrabold px-3 py-1 rounded-lg text-xs shrink-0">200 บาท</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- 2. REFERRER -->
+          <div class="space-y-2">
+            <label for="referrer" class="block font-bold text-slate-900 text-sm sm:text-base">
+              2. ผู้แนะนำในการสมัครบัตรของคุณ <span class="text-red-500">*</span>
+            </label>
+            <select id="referrer" name="referrer" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:bg-white focus:ring-2 focus:ring-amber-500 focus:outline-none transition">
+              <option value="" disabled selected>-- เลือกผู้แนะนำ --</option>
+              <option value="[MD]👑 Moderator ✅">[MD]👑 Moderator ✅</option>
+              <option value="[GM7]𝕋𝕄𝕄𝕎ℕツ🇹🇭">[GM7]𝕋𝕄𝕄𝕎ℕツ🇹🇭</option>
+              <option value="[GM44]สงกรานต์BYDM6">[GM44]สงกรานต์BYDM6</option>
+              <option value="[GM62]P'Lek อัลติส">[GM62]P'Lek อัลติส</option>
+              <option value="[GM128] Patto Swift">[GM128] Patto Swift</option>
+              <option value="[GM203] JohN EX40">[GM203] JohN EX40</option>
+              <option value="[GM620]Oui/GLC250">[GM620]Oui/GLC250</option>
+              <option value="[GM666]MeaD Attrage">[GM666]MeaD Attrage</option>
+              <option value="[GM888]Tle_Alphard">[GM888]Tle_Alphard</option>
+              <option value="อื่นๆ / ไม่มีผู้แนะนำ">อื่นๆ / ไม่มีผู้แนะนำ</option>
+            </select>
+          </div>
+
+          <!-- 3. PERSONAL INFORMATION & SEQUENTIAL CASCADING ADDRESS -->
+          <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 sm:p-6 space-y-5">
+            <h4 class="font-bold text-slate-900 text-sm sm:text-base border-b border-slate-200 pb-2.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <span>3. ข้อมูลผู้สมัครและที่อยู่จัดส่ง</span>
+              <span id="address-dataset-badge" class="text-xs text-amber-800 bg-amber-100 font-bold px-2.5 py-0.5 rounded-md w-fit border border-amber-300">
+                <i class="fa-solid fa-spinner animate-spin mr-1"></i>กำลังโหลดข้อมูลที่อยู่ทั่วประเทศไทย...
+              </span>
+            </h4>
+
+            <div class="grid md:grid-cols-12 gap-4">
+              <div class="md:col-span-3 space-y-1">
+                <label for="prefix" class="block text-xs font-bold text-slate-700">คำนำหน้าชื่อ <span class="text-red-500">*</span></label>
+                <select id="prefix" name="prefix" required class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-xs sm:text-sm focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                  <option value="นาย">นาย</option>
+                  <option value="นางสาว">นางสาว</option>
+                  <option value="นาง">นาง</option>
+                </select>
+              </div>
+
+              <div class="md:col-span-9 space-y-1">
+                <label for="fullname" class="block text-xs font-bold text-slate-700">ชื่อ และ นามสกุล <span class="text-red-500">* (ภาษาไทยเท่านั้น)</span></label>
+                <input type="text" id="fullname" name="fullname" required placeholder="เช่น สมศักดิ์ มั่นใจดี"
+                       class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-xs sm:text-sm focus:ring-2 focus:ring-amber-500 focus:outline-none">
+              </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-4">
+              <div class="space-y-1">
+                <label for="phone" class="block text-xs font-bold text-slate-700">เบอร์โทรศัพท์ที่ติดต่อได้ <span class="text-red-500">*</span></label>
+                <input type="tel" id="phone" name="phone" required placeholder="08X-XXX-XXXX" pattern="[0-9]{9,10}"
+                       class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-xs sm:text-sm focus:ring-2 focus:ring-amber-500 focus:outline-none">
+              </div>
+
+              <div class="space-y-1">
+                <label for="openchat_name" class="block text-xs font-bold text-slate-700">ชื่อในห้อง OpenChat ใช้กรณีติดต่อฉุกเฉิน <span class="text-red-500">*</span></label>
+                <input type="text" id="openchat_name" name="openchat_name" required placeholder="เช่น Somsak_TheDriver"
+                       class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-xs sm:text-sm focus:ring-2 focus:ring-amber-500 focus:outline-none">
+              </div>
+            </div>
+
+            <!-- DETAILED SEQUENTIAL ADDRESS FIELDS -->
+            <div class="bg-white p-4 sm:p-5 rounded-xl border border-slate-200 space-y-4">
+              <div class="border-b border-slate-100 pb-2">
+                <span class="text-xs font-bold text-slate-900"><i class="fa-solid fa-house-chimney text-amber-500 mr-1.5"></i>กรอกข้อมูลที่อยู่จัดส่งเอกสาร/บัตรสมาชิกอย่างละเอียด</span>
+              </div>
+
+              <!-- House No & Detail Address -->
+              <div class="grid md:grid-cols-12 gap-3">
+                <div class="md:col-span-4 space-y-1">
+                  <label for="addr_house_no" class="block text-xs font-bold text-slate-700">เลขที่บ้าน / หมู่ <span class="text-red-500">*</span></label>
+                  <input type="text" id="addr_house_no" required placeholder="เช่น 123/45 หมู่ 5" oninput="updateFullAddressPreview()"
+                         class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm focus:bg-white focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                </div>
+
+                <div class="md:col-span-8 space-y-1">
+                  <label for="addr_details" class="block text-xs font-bold text-slate-700">รายละเอียดที่อยู่ (หมู่บ้าน / อาคาร / ชั้น / ซอย / ถนน)</label>
+                  <input type="text" id="addr_details" placeholder="เช่น หมู่บ้านพรประเสริฐ ซอย 8 ถนนพหลโยธิน" oninput="updateFullAddressPreview()"
+                         class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm focus:bg-white focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                </div>
+              </div>
+
+              <!-- Linear Sequential Dropdowns: Province -> District -> Subdistrict -> Zipcode -->
+              <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+
+                <!-- 1. Province Dropdown -->
+                <div class="space-y-1 min-w-0">
+                  <label for="addr_province" class="block text-xs font-bold text-slate-700">1. จังหวัด <span class="text-red-500">*</span></label>
+                  <select id="addr_province" required onchange="handleProvinceChange()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-xs sm:text-sm focus:bg-white focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                    <option value="" disabled selected>-- เลือกจังหวัด --</option>
+                  </select>
+                </div>
+
+                <!-- 2. District Dropdown -->
+                <div class="space-y-1 min-w-0">
+                  <label for="addr_district" class="block text-xs font-bold text-slate-700">2. เขต / อำเภอ <span class="text-red-500">*</span></label>
+                  <select id="addr_district" required onchange="handleDistrictChange()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-xs sm:text-sm focus:bg-white focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                    <option value="" disabled selected>-- เลือกเขต/อำเภอ --</option>
+                  </select>
+                </div>
+
+                <!-- 3. Subdistrict Dropdown -->
+                <div class="space-y-1 min-w-0">
+                  <label for="addr_subdistrict" class="block text-xs font-bold text-slate-700">3. แขวง / ตำบล <span class="text-red-500">*</span></label>
+                  <select id="addr_subdistrict" required onchange="handleSubdistrictChange()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-xs sm:text-sm focus:bg-white focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                    <option value="" disabled selected>-- เลือกแขวง/ตำบล --</option>
+                  </select>
+                </div>
+
+                <!-- 4. Zipcode Select / Field -->
+                <div class="space-y-1 min-w-0">
+                  <label for="addr_zipcode_select" class="block text-xs font-bold text-slate-700">4. รหัสไปรษณีย์ <span class="text-red-500">*</span></label>
+                  <select id="addr_zipcode_select" onchange="handleZipcodeSelectChange()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-xs sm:text-sm font-mono font-bold text-slate-900 focus:bg-white focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                    <option value="" disabled selected>-- เลือกรหัสไปรษณีย์ --</option>
+                  </select>
+                  <input type="hidden" id="addr_zipcode" name="zipcode" required>
+                </div>
+
+              </div>
+
+              <!-- Full Address Preview Box -->
+              <div class="bg-amber-50/70 border border-amber-200/80 rounded-xl p-3 text-xs text-amber-950 flex items-start gap-2.5">
+                <i class="fa-solid fa-map-location-dot text-amber-600 text-sm mt-0.5 shrink-0"></i>
+                <div class="w-full min-w-0">
+                  <span class="font-bold block text-amber-900">ตัวอย่างที่อยู่จัดส่งเต็มสำหรับพิมพ์จ่าหน้าซอง:</span>
+                  <p id="full-address-preview" class="text-slate-800 font-medium mt-0.5 italic break-words">-- กรุณากรอกข้อมูลที่อยู่ด้านบนให้ครบถ้วน --</p>
+                </div>
+              </div>
+
+              <!-- Hidden Master Combined Address Input -->
+              <input type="hidden" id="address" name="address" required>
+            </div>
+          </div>
+
+          <!-- 4. FILE UPLOADS -->
+          <div class="space-y-4">
+            <h4 class="font-bold text-slate-900 text-sm sm:text-base">4. แนบไฟล์รูปภาพประกอบ</h4>
+
+            <!-- User Photo -->
+            <div class="border-2 border-dashed border-slate-300 bg-white rounded-2xl p-5 text-center hover:border-amber-500 transition">
+              <label class="block cursor-pointer">
+                <div class="space-y-1.5">
+                  <i class="fa-solid fa-user-circle text-3xl text-amber-500"></i>
+                  <p class="text-xs sm:text-sm font-bold text-slate-900">รูปภาพของคุณ (รูปหน้าตรง,ไม่ใส่แว่นดำ,สุภาพเท่านั้น) <span class="text-red-500">*</span></p>
+                  <p class="text-[11px] text-slate-500">ใช้พิมพ์ติดหน้าบัตรสมาชิก (ไฟล์ JPG หรือ PNG)</p>
+                  <input type="file" id="user_photo" accept="image/*" required onchange="renderFilePreview(this, 'preview-user-photo')" class="hidden">
+                  <span class="inline-block bg-slate-900 text-white font-semibold text-xs px-4 py-2 rounded-xl mt-1 shadow-sm">
+                    <i class="fa-solid fa-upload mr-1.5"></i> เลือกรูปถ่าย
+                  </span>
+                </div>
+              </label>
+              <div id="preview-user-photo" class="hidden mt-2"></div>
+            </div>
+
+            <!-- Lost Card Proof (Dynamic) -->
+            <div id="box-lost-proof" class="hidden border-2 border-dashed border-amber-300 bg-amber-50/30 rounded-2xl p-5 text-center hover:border-amber-500 transition">
+              <label class="block cursor-pointer">
+                <div class="space-y-1.5">
+                  <i class="fa-solid fa-id-card-clip text-3xl text-amber-600"></i>
+                  <p class="text-xs sm:text-sm font-bold text-slate-900">รูปบัตรสมาชิกที่สูญหาย หรือ เขียนรหัสสมาชิกในบัตรใส่กระดาษแนบรูปมา <span class="text-red-500">*</span></p>
+                  <p class="text-[11px] text-slate-500">หลักฐานยืนยันสำหรับการทำบัตรทดแทน</p>
+                  <input type="file" id="lost_proof" accept="image/*" onchange="renderFilePreview(this, 'preview-lost-proof')" class="hidden">
+                  <span class="inline-block bg-amber-500 text-slate-950 font-bold text-xs px-4 py-2 rounded-xl mt-1 shadow-sm">
+                    <i class="fa-solid fa-upload mr-1.5"></i> แนบหลักฐานบัตรเดิม
+                  </span>
+                </div>
+              </label>
+              <div id="preview-lost-proof" class="hidden mt-2"></div>
+            </div>
+          </div>
+
+          <!-- 5. PAYMENT & SLIP SECTION -->
+          <div class="bg-amber-50/60 border border-amber-200 rounded-2xl p-4 sm:p-6 space-y-4">
+            <div class="flex items-center justify-between border-b border-amber-200 pb-3.5 flex-wrap gap-2">
+              <div class="flex items-center gap-2.5 min-w-0">
+                <div class="w-9 h-9 rounded-xl bg-amber-500 text-slate-950 flex items-center justify-center font-bold text-base shadow-sm shrink-0">
+                  <i class="fa-solid fa-receipt"></i>
+                </div>
+                <div class="min-w-0">
+                  <h4 class="font-bold text-slate-900 text-sm sm:text-base">5. ช่องทางชำระเงิน และแนบสลิปโอนเงิน</h4>
+                  <p class="text-xs text-slate-600">กรุณาโอนเงินตามยอดที่ระบุ และแนบสลิปเพื่อยืนยันรายการ</p>
+                </div>
+              </div>
+              <span id="payment-amount-badge" class="bg-amber-500 text-slate-950 font-extrabold text-sm px-4 py-1.5 rounded-full shadow-sm shrink-0">
+                ยอดโอน: 769 บาท
+              </span>
+            </div>
+
+            <!-- Bank Details Box -->
+            <div class="bg-white p-4 sm:p-5 rounded-2xl border border-amber-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+              <div class="space-y-1.5 min-w-0">
+                <span class="text-[11px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-md inline-block">
+                  <i class="fa-solid fa-building-columns mr-1"></i> ธนาคารกสิกรไทย (KBANK)
+                </span>
+                <p class="text-xs sm:text-sm text-slate-700 font-semibold mt-1">ชื่อบัญชี: <strong class="text-slate-900">นาย ชัยรัตน์ วิทวัสโกศล</strong></p>
+                <div class="flex flex-wrap items-center gap-2.5">
+                  <span class="text-base font-bold font-mono text-slate-900">773-2-29853-5</span>
+                  <button type="button" onclick="copyBankAccount('7732298535')" class="text-xs text-amber-800 bg-amber-100 hover:bg-amber-200 px-3 py-1 rounded-lg font-bold transition inline-flex items-center gap-1">
+                    <i class="fa-solid fa-copy"></i> คัดลอกเลขบัญชี
+                  </button>
+                </div>
+              </div>
+              <div class="text-left sm:text-right text-xs text-slate-500">
+                <i class="fa-solid fa-check-circle text-emerald-500 text-base sm:text-lg mb-0.5"></i>
+                <p>โอนแล้วระบบจะตรวจสอบสลิปอัตโนมัติ</p>
+              </div>
+            </div>
+
+            <!-- Upload Slip Input -->
+            <div class="border-2 border-dashed border-slate-300 bg-white rounded-2xl p-5 text-center hover:border-amber-500 transition">
+              <label class="block cursor-pointer">
+                <div class="space-y-1.5">
+                  <i class="fa-solid fa-file-invoice-dollar text-3xl text-emerald-600"></i>
+                  <p class="text-xs sm:text-sm font-bold text-slate-900">แนบสลิปหลักฐานการโอนเงิน <span class="text-red-500">*</span></p>
+                  <p class="text-[11px] text-slate-500">ไฟล์ภาพสลิปสแกนชำระเงิน (ไฟล์ JPG หรือ PNG)</p>
+                  <input type="file" id="slip_photo" accept="image/*" required onchange="renderFilePreview(this, 'preview-slip-photo')" class="hidden">
+                  <span class="inline-block bg-emerald-700 text-white font-semibold text-xs px-4 py-2 rounded-xl mt-1 shadow-sm">
+                    <i class="fa-solid fa-upload mr-1.5"></i> แนบไฟล์สลิปโอนเงิน
+                  </span>
+                </div>
+              </label>
+              <div id="preview-slip-photo" class="hidden mt-2"></div>
+            </div>
+          </div>
+
+          <!-- SUMMARY & SUBMIT BUTTON -->
+          <div class="bg-slate-900 text-white rounded-2xl p-5 sm:p-6 flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-4 shadow-xl">
+            <div class="min-w-0">
+              <span class="text-xs text-amber-400 font-bold block uppercase tracking-wider">สรุปรายการสมัครทำบัตร</span>
+              <h5 id="summary-card-text" class="font-bold text-sm sm:text-base text-white mt-0.5">สมัครสมาชิกใหม่ 769 บาท (รวมค่าเคลือบใส &amp; จัดส่ง)</h5>
+            </div>
+            <button type="submit" id="btn-submit-form" class="w-full sm:w-auto bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-sm sm:text-base px-8 py-3.5 rounded-xl shadow-lg transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2 shrink-0">
+              <i class="fa-solid fa-paper-plane"></i> <span>ส่งข้อมูลลงทะเบียนเข้าชีต</span>
+            </button>
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+
+    <!-- ============================================ -->
+    <!-- SECTION 2: PUBLIC SHIPPING HISTORY LIST      -->
+    <!-- ============================================ -->
+    <div id="section-shipping" class="hidden space-y-6">
+      
+      <div class="bg-white rounded-3xl p-5 sm:p-8 shadow-sm border border-slate-200 space-y-6">
+        <div class="flex flex-col md:flex-row justify-between md:items-center gap-4 border-b border-slate-200 pb-5">
+          <div>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-0.5 rounded-full">Public Shipping History</span>
+              <!-- Sheet Status Indicator Badge -->
+              <span id="sheet-sync-status-badge" class="bg-slate-100 text-slate-600 border border-slate-200 text-xs px-3 py-0.5 rounded-full flex items-center gap-1.5 font-semibold">
+                <i class="fa-solid fa-circle-notch animate-spin text-amber-500"></i> กำลังเชื่อมต่อชีต...
+              </span>
+            </div>
+            <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900 mt-1">เช็คเลขพัสดุย้อนหลังตามรอบ</h3>
+            <p class="text-xs sm:text-sm text-slate-500">แสดงผลเฉพาะชื่อ-นามสกุล และเบอร์โทรศัพท์ปิดบังบางส่วนเพื่อความเป็นส่วนตัวตามนโยบาย PDPA</p>
+          </div>
+
+          <!-- Controls & Filters -->
+          <div class="flex flex-wrap items-center gap-2.5">
+            <button onclick="fetchLiveDataFromAppsScript(true)" title="โหลดข้อมูลล่าสุดจาก Google Sheets"
+                    class="bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 font-bold px-3.5 py-2.5 rounded-xl text-xs sm:text-sm flex items-center gap-1.5 transition">
+              <i class="fa-solid fa-rotate text-blue-600" id="btn-refresh-icon"></i> รีเฟรชข้อมูลจากชีต
+            </button>
+
+            <select id="filter-round-select" onchange="filterShippingTable()" class="bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-semibold focus:outline-none">
+              <option value="ALL">📦 แสดงทุกรอบจัดส่ง</option>
+            </select>
+
+            <input type="text" id="filter-search-input" onkeyup="filterShippingTable()" placeholder="ค้นหาชื่อ / เลขพัสดุ / รหัส..." 
+                   class="bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm focus:bg-white focus:outline-none">
+          </div>
+        </div>
+
+        <!-- Connection Message Box -->
+        <div id="sheet-sync-info-box" class="hidden bg-amber-50 border border-amber-200 rounded-2xl p-4 text-xs text-amber-900 space-y-1">
+          <div class="flex items-center gap-2 font-bold text-amber-800">
+            <i class="fa-solid fa-lightbulb text-amber-600"></i> <span id="sheet-sync-info-title">ข้อความแจ้งเตือนจากระบบดึงข้อมูลชีต</span>
+          </div>
+          <p id="sheet-sync-info-desc" class="text-amber-800 leading-relaxed"></p>
+        </div>
+
+        <!-- PUBLIC TABLE -->
+        <div class="overflow-x-auto custom-scrollbar rounded-2xl border border-slate-200">
+          <table class="w-full text-left text-xs sm:text-sm">
+            <thead class="bg-slate-900 text-white font-bold uppercase border-b border-slate-800">
+              <tr>
+                <th class="px-4 py-3.5 whitespace-nowrap">ลำดับ</th>
+                <th class="px-4 py-3.5 whitespace-nowrap">ชื่อ - นามสกุล</th>
+                <th class="px-4 py-3.5 whitespace-nowrap">เบอร์โทรศัพท์</th>
+                <th class="px-4 py-3.5 whitespace-nowrap">รายการทำบัตร</th>
+                <th class="px-4 py-3.5 whitespace-nowrap">รอบการจัดส่ง</th>
+                <th class="px-4 py-3.5 whitespace-nowrap">สถานะ</th>
+                <th class="px-4 py-3.5 text-center whitespace-nowrap">เลขพัสดุ</th>
+              </tr>
+            </thead>
+            <tbody id="table-shipping-tbody" class="divide-y divide-slate-100 font-medium bg-white">
+              <!-- Rendered dynamically -->
+            </tbody>
+          </table>
+        </div>
+
+        <p class="text-xs text-slate-400 text-right"><i class="fa-solid fa-lock mr-1"></i> ข้อมูลที่อยู่เต็มและรูปถ่ายแนบซ่อนไว้เพื่อความปลอดภัย</p>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-950 text-slate-400 text-xs py-8 mt-12 border-t border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 text-center space-y-2">
+      <p class="text-slate-300 font-semibold text-sm">บริการประสานงานจัดทำบัตรสมาชิกประเมศฐ์ ผ่านกลุ่ม The Driver Thailand</p>
+      <p class="text-xs text-slate-500">© 2026 All Rights Reserved. เชื่อมต่อระบบลงทะเบียนและฐานข้อมูลชีตอัตโนมัติ</p>
+    </div>
+  </footer>
+
+  <!-- THAI GEOGRAPHY DATASET & JAVASCRIPT LOGIC -->
+  <script>
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx-D98KtPqdw-0tbZ6V8_WQGkm6UpLZmlfNvhhcVk4M_GW3tjM4pIz6-mNSDVyWukg_/exec';
+
+    const defaultRoundDate = "รอบวันที่ 11 ธันวาคม 2569";
+
+    const baseHistoricalRounds = [
+      "รอบวันที่ 11 ธันวาคม 2569",
+      "รอบวันที่ 10 พฤศจิกายน 2569",
+      "รอบวันที่ 09 ตุลาคม 2569",
+      "รอบวันที่ 05 กันยายน 2569",
+      "รอบวันที่ 05 สิงหาคม 2569",
+      "รอบวันที่ 21 กรกฎาคม 2569",
+      "รอบวันที่ 03 กรกฎาคม 2569",
+      "รอบวันที่ 10 มิถุนายน 2569",
+      "รอบวันที่ 08 พฤษภาคม 2569",
+      "รอบวันที่ 03 เมษายน 2569",
+      "รอบวันที่ 10 มีนาคม 2569",
+      "รอบวันที่ 11 กุมภาพันธ์ 2569",
+      "รอบวันที่ 18 มกราคม 2569",
+      "รอบวันที่ 24 ธันวาคม 2568",
+      "รอบวันที่ 06 ธันวาคม 2568",
+      "รอบวันที่ 18 พฤศจิกายน 2568",
+      "รอบวันที่ 05 พฤศจิกายน 2568",
+      "รอบวันที่ 18 ตุลาคม 2568",
+      "รอบวันที่ 03 ตุลาคม 2568",
+      "รอบวันที่ 18 กันยายน 2568",
+      "รอบวันที่ 18 สิงหาคม 2568",
+      "รอบวันที่ 03 สิงหาคม 2568",
+      "รอบวันที่ 12 กรกฎาคม 2568"
+    ];
+
+    // Primary & Fallback Address Datasets
+    const PRIMARY_ADDRESS_JSON_URL = "https://phattarachai.dev/tools/thai-address/files/2026.10/thai-address.json";
+    const FALLBACK_ADDRESS_JSON_URLS = [
+      "https://cdn.jsdelivr.net/gh/earthchie/thai-geography-database@master/src/raw_database/raw_database.json",
+      "https://raw.githubusercontent.com/kongvut/thai-province-data/master/api_province_with_amphure_tambon.json"
+    ];
+
+    const ALL_77_PROVINCES = [
+      "กรุงเทพมหานคร", "กระบี่", "กาญจนบุรี", "กาฬสินธุ์", "กำแพงเพชร", "ขอนแก่น", "จันทบุรี", "ฉะเชิงเทรา", "ชลบุรี", "ชัยนาท",
+      "ชัยภูมิ", "ชุมพร", "เชียงราย", "เชียงใหม่", "ตรัง", "ตราด", "ตาก", "นครนายก", "นครปฐม", "นครพนม",
+      "นครราชสีมา", "นครศรีธรรมราช", "นครสวรรค์", "นนทบุรี", "นราธิวาส", "น่าน", "บึงกาฬ", "บุรีรัมย์", "ปทุมธานี", "ประจวบคีรีขันธ์",
+      "ปราจีนบุรี", "ปัตตานี", "พระนครศรีอยุธยา", "พะเยา", "พังงา", "พัทลุง", "พิจิตร", "พิษณุโลก", "เพชรบุรี", "เพชรบูรณ์",
+      "แพร่", "ภูเก็ต", "มหาสารคาม", "มุกดาหาร", "แม่ฮ่องสอน", "ยโสธร", "ยะลา", "ร้อยเอ็ด", "ระนอง", "ระยอง",
+      "ราชบุรี", "ลพบุรี", "ลำปาง", "ลำพูน", "เลย", "ศรีสะเกษ", "สกลนคร", "สงขลา", "สตูล", "สมุทรปราการ",
+      "สมุทรสงคราม", "สมุทรสาคร", "สระแก้ว", "สระบุรี", "สิงห์บุรี", "สุโขทัย", "สุพรรณบุรี", "สุราษฎร์ธานี", "สุรินทร์", "หนองคาย",
+      "หนองบัวลำภู", "อ่างทอง", "อำนาจเจริญ", "อุดรธานี", "อุตรดิตถ์", "อุทัยธานี", "อุบลราชธานี"
+    ];
+
+    // Core GeoTree Structure: { [Province]: { [District]: { [Subdistrict]: Set([zipcodes]) } } }
+    let geoTree = {};
+
+    // Complete Built-in Geography Master for Bangkok (All 50 Districts) & Nationwide Fallback
+    const BUILTIN_GEO_DATA = {
+      "กรุงเทพมหานคร": {
+        "เขตคลองเตย": { "คลองเตย": ["10110"], "คลองตัน": ["10110"], "พระโขนง": ["10110"] },
+        "เขตคลองสาน": { "คลองสาน": ["10600"], "สมเด็จเจ้าพระยา": ["10600"], "บางลำภูล่าง": ["10600"], "คลองต้นไทร": ["10600"] },
+        "เขตคลองสามวา": { "สามวาตะวันตก": ["10510"], "สามวาตะวันออก": ["10510"], "บางชัน": ["10510"], "ทรายกองดิน": ["10510"], "ทรายกองดินใต้": ["10510"] },
+        "เขตคันนายาว": { "คันนายาว": ["10230"], "รามอินทรา": ["10230"] },
+        "เขตจตุจักร": { "จตุจักร": ["10900"], "ลาดยาว": ["10900"], "เสนานิคม": ["10900"], "จันทรเกษม": ["10900"], "จอมพล": ["10900"] },
+        "เขตจอมทอง": { "บางขุนเทียน": ["10150"], "บางค้อ": ["10150"], "บางมด": ["10150"], "จอมทอง": ["10150"] },
+        "เขตดอนเมือง": { "สีกัน": ["10210"], "ดอนเมือง": ["10210"], "สนามบิน": ["10210"] },
+        "เขตดินแดง": { "ดินแดง": ["10400"], "รัชดาภิเษก": ["10400"] },
+        "เขตดุสิต": { "ดุสิต": ["10300"], "วชิรพยาบาล": ["10300"], "สวนจิตรลดา": ["10300"], "สี่แยกมหานาค": ["10300"], "ถนนนครไชยศรี": ["10300"] },
+        "เขตตลิ่งชัน": { "ตลิ่งชัน": ["10170"], "คลองชักพระ": ["10170"], "ฉิมพลี": ["10170"], "บางระมาด": ["10170"], "บางเชือกหนัง": ["10170"], "บางพรม": ["10170"] },
+        "เขตทวีวัฒนา": { "ทวีวัฒนา": ["10170"], "ศาลาธรรมสพน์": ["10170"] },
+        "เขตทุ่งครุ": { "บางมด": ["10140"], "ทุ่งครุ": ["10140"] },
+        "เขตธนบุรี": { "วัดกัลยาณ์": ["10600"], "หิรัญรูจี": ["10600"], "บางยี่เรือ": ["10600"], "บุคคโล": ["10600"], "ตลาดพลู": ["10600"], "ดาวคะนอง": ["10600"], "สำเหร่": ["10600"] },
+        "เขตบางกอกน้อย": { "ศิริราช": ["10700"], "บ้านช่างหล่อ": ["10700"], "บางขุนนนท์": ["10700"], "บางขุนศรี": ["10700"], "อรุณอมรินทร์": ["10700"] },
+        "เขตบางกอกใหญ่": { "วัดอรุณ": ["10600"], "วัดท่าพระ": ["10600"] },
+        "เขตบางกะปิ": { "คลองจั่น": ["10240"], "หัวหมาก": ["10240"] },
+        "เขตบางขุนเทียน": { "ท่าข้าม": ["10150"], "แสมดำ": ["10150"] },
+        "เขตบางคอแหลม": { "บางคอแหลม": ["10120"], "วัดพระยาไกร": ["10120"], "บางโคล่": ["10120"] },
+        "เขตบางซื่อ": { "บางซื่อ": ["10800"], "วงศ์สว่าง": ["10800"] },
+        "เขตบางนา": { "บางนาเหนือ": ["10260"], "บางนาใต้": ["10260"] },
+        "เขตบางบอน": { "บางบอนเหนือ": ["10150"], "บางบอนใต้": ["10150"], "คลองบางพราน": ["10150"], "คลองบางบอน": ["10150"] },
+        "เขตบางพลัด": { "บางพลัด": ["10700"], "บางอ้อ": ["10700"], "บางบำหรุ": ["10700"], "บางยี่ขัน": ["10700"] },
+        "เขตบางรัก": { "มหาพฤฒาราม": ["10500"], "สีลม": ["10500"], "สุริยวงศ์": ["10500"], "บางรัก": ["10500"], "สี่พระยา": ["10500"] },
+        "เขตบางเขน": { "อนุสาวรีย์": ["10220"], "ท่าแร้ง": ["10220"] },
+        "เขตบางแค": { "บางแค": ["10160"], "บางแคเหนือ": ["10160"], "บางไผ่": ["10160"], "หลักสอง": ["10160"] },
+        "เขตบึงกุ่ม": { "คลองกุ่ม": ["10240"], "นวมินทร์": ["10240"], "นวลจันทร์": ["10240"] },
+        "เขตปทุมวัน": { "รองเมือง": ["10330"], "วังใหม่": ["10330"], "ปทุมวัน": ["10330"], "ลุมพินี": ["10330"] },
+        "เขตประเวศ": { "ประเวศ": ["10250"], "หนองบอน": ["10250"], "ดอกไม้": ["10250"] },
+        "เขตป้อมปราบศัตรูพ่าย": { "คลองมหานาค": ["10100"], "บ้านบาตร": ["10100"], "วัดเทพศิรินทร์": ["10100"], "กล้วยน้ำไท": ["10100"], "ป้อมปราบ": ["10100"] },
+        "เขตพญาไท": { "สามเสนใน": ["10400"], "พญาไท": ["10400"] },
+        "เขตพระนคร": { "พระบรมมหาราชวัง": ["10200"], "วังบูรพาภิรมย์": ["10200"], "วัดราชบพิธ": ["10200"], "สำราญราษฎร์": ["10200"], "ศาลเจ้าพ่อเสือ": ["10200"], "เสาชิงช้า": ["10200"], "บวรนิเวศ": ["10200"], "ตลาดยอด": ["10200"], "ชนะสงคราม": ["10200"], "บ้านพานถม": ["10200"], "บางขุนพรหม": ["10200"], "วัดสามพระยา": ["10200"] },
+        "เขตพระโขนง": { "บางจาก": ["10260"], "พระโขนงเหนือ": ["10260"] },
+        "เขตภาษีเจริญ": { "บางหว้า": ["10160"], "บางด้วน": ["10160"], "บางจาก": ["10160"], "บางแวก": ["10160"], "คลองขวาง": ["10160"], "ปากคลองภาษีเจริญ": ["10160"], "คูหาสวรรค์": ["10160"] },
+        "เขตมีนบุรี": { "มีนบุรี": ["10510"], "แสนแสบ": ["10510"] },
+        "เขตยานนาวา": { "ช่องนนทรี": ["10120"], "บางโพงพาง": ["10120"] },
+        "เขตราชเทวี": { "ทุ่งพญาไท": ["10400"], "ถนนพญาไท": ["10400"], "ถนนเพชรบุรี": ["10400"], "มักกะสัน": ["10400"] },
+        "เขตราษฎร์บูรณะ": { "ราษฎร์บูรณะ": ["10140"], "บางปะกอก": ["10140"] },
+        "เขตลาดกระบัง": { "ลาดกระบัง": ["10520"], "คลองสองต้นนุ่น": ["10520"], "คลองสามประเวศ": ["10520"], "ลำปลาทิว": ["10520"], "ทับยาว": ["10520"], "ขุมทอง": ["10520"] },
+        "เขตลาดพร้าว": { "ลาดพร้าว": ["10230"], "จรเข้บัว": ["10230"] },
+        "เขตวังทองหลาง": { "วังทองหลาง": ["10310"], "สะพานสอง": ["10310"], "คลองเจ้าคุณสิงห์": ["10310"], "พลับพลา": ["10310"] },
+        "เขตวัฒนา": { "คลองเตยเหนือ": ["10110"], "คลองตันเหนือ": ["10110"], "พระโขนงเหนือ": ["10110"] },
+        "เขตสวนหลวง": { "สวนหลวง": ["10250"], "อ่อนนุช": ["10250"], "พัฒนาการ": ["10250"] },
+        "เขตสะพานสูง": { "สะพานสูง": ["10240"], "ราษฎร์พัฒนา": ["10240"], "ทับช้าง": ["10240"] },
+        "เขตสัมพันธวงศ์": { "จักรวรรดิ": ["10100"], "สัมพันธวงศ์": ["10100"], "ตลาดน้อย": ["10100"] },
+        "เขตสาทร": { "ทุ่งวัดดอน": ["10120"], "ยานนาวา": ["10120"], "ทุ่งมหาเมฆ": ["10120"] },
+        "เขตสายไหม": { "สายไหม": ["10220"], "ออเงิน": ["10220"], "คลองถนน": ["10220"] },
+        "เขตหนองจอก": { "กระทุ่มราย": ["10530"], "หนองจอก": ["10530"], "คลองสิบ": ["10530"], "คลองสิบสอง": ["10530"], "โคกแฝด": ["10530"], "คู้ฝ้าย": ["10530"], "คลองสิบสี่": ["10530"] },
+        "เขตหนองแขม": { "หนองแขม": ["10160"], "หนองค้างพูล": ["10160"] },
+        "เขตหลักสี่": { "ทุ่งสองห้อง": ["10210"], "ตลาดบางเขน": ["10210"] },
+        "เขตห้วยขวาง": { "ห้วยขวาง": ["10310"], "บางกะปิ": ["10310"], "สามเสนนอก": ["10310"] }
+      },
+      "นนทบุรี": {
+        "อำเภอเมืองนนทบุรี": { "ตลาดขวัญ": ["11000"], "บางเขน": ["11000"], "สวนใหญ่": ["11000"], "ท่าทราย": ["11000"], "บางกระสอ": ["11000"] },
+        "อำเภอบางบัวทอง": { "โสนลอย": ["11110"], "บางบัวทอง": ["11110"], "บางรักใหญ่": ["11110"], "บางคูรัด": ["11110"], "ละหาร": ["11110"] },
+        "อำเภอปากเกร็ด": { "ปากเกร็ด": ["11120"], "บางพูด": ["11120"], "บ้านใหม่": ["11120"], "คลองเกลือ": ["11120"], "บางตลาด": ["11120"] }
+      },
+      "ปทุมธานี": {
+        "อำเภอเมืองปทุมธานี": { "บางปรอก": ["12000"], "บ้านใหม่": ["12000"], "บางขะแยง": ["12000"] },
+        "อำเภอคลองหลวง": { "คลองหนึ่ง": ["12120"], "คลองสอง": ["12120"], "คลองสาม": ["12120"], "คลองสี่": ["12120"] },
+        "อำเภอธัญบุรี": { "ประชาธิปัตย์": ["12130"], "บึงยี่โถ": ["12130"], "รังสิต": ["12110"] }
+      },
+      "สมุทรปราการ": {
+        "อำเภอเมืองสมุทรปราการ": { "ปากน้ำ": ["10270"], "สำโรงเหนือ": ["10270"], "บางเมือง": ["10270"], "แพรกษา": ["10280"] },
+        "อำเภอบางพลี": { "บางพลีใหญ่": ["10540"], "บางแก้ว": ["10540"], "ราชาเทวะ": ["10540"] }
+      },
+      "ชลบุรี": {
+        "อำเภอเมืองชลบุรี": { "บางปลาสร้อย": ["20000"], "มะขามหย่ง": ["20000"], "เสม็ด": ["20130"] },
+        "อำเภอบางละมุง": { "หนองปรือ": ["20150"], "นาเกลือ": ["20150"] },
+        "อำเภอศรีราชา": { "ศรีราชา": ["20110"], "ทุ่งสุขลา": ["20230"] }
+      },
+      "ชัยนาท": {
+        "อำเภอเมืองชัยนาท": { "ในเมือง": ["17000"], "บ้านกล้วย": ["17000"], "ท่าชัย": ["17000"], "ชัยนาม": ["17000"] },
+        "อำเภอหันคา": { "หันคา": ["17130"], "บ้านเชี่ยน": ["17130"], "สามง่ามท่าโบสถ์": ["17130"] },
+        "อำเภอสรรคบุรี": { "แพรกศรีราชา": ["17140"], "เที่ยงแท้": ["17140"], "ห้วยกรด": ["17140"] },
+        "อำเภอสรรพยา": { "สรรพยา": ["17150"], "ตลุก": ["17150"], "เขาแก้ว": ["17150"] },
+        "อำเภอวัดสิงห์": { "วัดสิงห์": ["17120"], "มะขามเฒ่า": ["17120"], "หนองบัว": ["17120"] }
+      }
+    };
+
+    function showToast(title, message, type = 'info') {
+      const container = document.getElementById('toast-container');
+      if (!container) return;
+
+      const toast = document.createElement('div');
+      const bgColors = {
+        success: 'bg-emerald-950 text-emerald-200 border-emerald-700 shadow-emerald-950/40',
+        error: 'bg-rose-950 text-rose-200 border-rose-700 shadow-rose-950/40',
+        info: 'bg-slate-900 text-amber-300 border-amber-500/50 shadow-slate-950/40'
+      };
+      const icons = {
+        success: 'fa-circle-check text-emerald-400',
+        error: 'fa-circle-xmark text-rose-400',
+        info: 'fa-circle-info text-amber-400'
+      };
+
+      toast.className = `pointer-events-auto flex items-start gap-3 p-4 rounded-2xl border shadow-2xl transition-all duration-300 transform translate-y-2 opacity-0 ${bgColors[type] || bgColors.info}`;
+      toast.innerHTML = `
+        <i class="fa-solid ${icons[type] || icons.info} text-lg mt-0.5 shrink-0"></i>
+        <div class="flex-1 min-w-0">
+          <h5 class="font-extrabold text-sm leading-tight text-white">${title}</h5>
+          <p class="text-xs mt-0.5 leading-relaxed opacity-90">${message}</p>
+        </div>
+        <button type="button" onclick="this.parentElement.remove()" class="text-slate-400 hover:text-white text-xs">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      `;
+
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.classList.remove('translate-y-2', 'opacity-0');
+      }, 10);
+
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-2');
+        setTimeout(() => toast.remove(), 300);
+      }, 4500);
+    }
+
+    // Flexible Data Ingestion Normalizer
+    function ingestAddressData(data) {
+      if (!data) return;
+
+      // Case 1: Array format (Flat or Nested)
+      if (Array.isArray(data)) {
+        data.forEach(item => {
+          if (!item) return;
+
+          // Check if nested province -> amphure -> tambon structure
+          if (item.amphure || item.amphoes || item.districts) {
+            ingestHierarchicalProvince(item);
+            return;
+          }
+
+          const prov = String(item.province || item.province_th || item.province_name || item.name_th || "").trim();
+          const dist = String(item.amphoe || item.amphure || item.district || item.district_th || item.amphoe_th || "").trim();
+          const sub = String(item.tambon || item.subdistrict || item.subdistrict_th || item.district_name || item.tambon_th || "").trim();
+          const zip = String(item.zipcode || item.zip_code || item.zip || item.postal_code || "").trim();
+
+          if (!prov || !dist || !sub) return;
+
+          if (!geoTree[prov]) geoTree[prov] = {};
+          if (!geoTree[prov][dist]) geoTree[prov][dist] = {};
+          if (!geoTree[prov][dist][sub]) geoTree[prov][dist][sub] = new Set();
+          if (zip) geoTree[prov][dist][sub].add(zip);
+        });
+      } else if (typeof data === 'object') {
+        // Case 2: Key-value map object { Province: { District: { Subdistrict: [zipcodes] } } }
+        Object.keys(data).forEach(prov => {
+          const distMap = data[prov];
+          if (typeof distMap === 'object') {
+            Object.keys(distMap).forEach(dist => {
+              const subMap = distMap[dist];
+              if (typeof subMap === 'object') {
+                Object.keys(subMap).forEach(sub => {
+                  const zips = subMap[sub];
+                  if (!geoTree[prov]) geoTree[prov] = {};
+                  if (!geoTree[prov][dist]) geoTree[prov][dist] = {};
+                  if (!geoTree[prov][dist][sub]) geoTree[prov][dist][sub] = new Set();
+                  if (Array.isArray(zips)) {
+                    zips.forEach(z => geoTree[prov][dist][sub].add(String(z)));
+                  } else if (zips) {
+                    geoTree[prov][dist][sub].add(String(zips));
+                  }
+                });
+              }
+            });
+          }
+        });
+      }
+    }
+
+    function ingestHierarchicalProvince(pObj) {
+      const prov = String(pObj.name_th || pObj.province || pObj.province_name || "").trim();
+      if (!prov) return;
+      const amphures = pObj.amphure || pObj.amphoes || pObj.districts || [];
+      if (Array.isArray(amphures)) {
+        amphures.forEach(aObj => {
+          const dist = String(aObj.name_th || aObj.amphoe || aObj.district || "").trim();
+          if (!dist) return;
+          const tambons = aObj.tambon || aObj.subdistricts || aObj.tambons || [];
+          if (Array.isArray(tambons)) {
+            tambons.forEach(tObj => {
+              const sub = String(tObj.name_th || tObj.tambon || tObj.subdistrict || "").trim();
+              const zip = String(tObj.zip_code || tObj.zipcode || tObj.zip || "").trim();
+              if (!sub) return;
+
+              if (!geoTree[prov]) geoTree[prov] = {};
+              if (!geoTree[prov][dist]) geoTree[prov][dist] = {};
+              if (!geoTree[prov][dist][sub]) geoTree[prov][dist][sub] = new Set();
+              if (zip) geoTree[prov][dist][sub].add(zip);
+            });
+          }
+        });
+      }
+    }
+
+    async function loadAddressDataset() {
+      const badge = document.getElementById("address-dataset-badge");
+
+      // 1. Ingest built-in dataset first to guarantee all 50 BKK districts & key provinces exist immediately
+      ingestAddressData(BUILTIN_GEO_DATA);
+
+      // Ensure all 77 provinces exist in geoTree
+      ALL_77_PROVINCES.forEach(p => {
+        if (!geoTree[p]) geoTree[p] = {};
+      });
+      populateProvinceDropdown();
+
+      // 2. Try Primary Endpoint (phattarachai.dev) to enrich subdistricts
+      try {
+        const res = await fetch(PRIMARY_ADDRESS_JSON_URL);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        ingestAddressData(data);
+
+        const provCount = Object.keys(geoTree).filter(p => Object.keys(geoTree[p]).length > 0).length;
+        if (badge) {
+          badge.className = "text-xs text-emerald-800 bg-emerald-100 font-bold px-2.5 py-0.5 rounded-md w-fit border border-emerald-300";
+          badge.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i>พร้อมใช้งานครบ ${provCount || 77} จังหวัดทั่วไทย`;
+        }
+        populateProvinceDropdown();
+        return;
+      } catch (err) {
+        console.warn("Primary address URL fetch notice, attempting fallback endpoints...", err.message);
+      }
+
+      // 3. Try Fallback Endpoints
+      for (let url of FALLBACK_ADDRESS_JSON_URLS) {
+        try {
+          const res = await fetch(url);
+          if (!res.ok) continue;
+          const data = await res.json();
+          ingestAddressData(data);
+
+          const provCount = Object.keys(geoTree).filter(p => Object.keys(geoTree[p]).length > 0).length;
+          if (badge) {
+            badge.className = "text-xs text-emerald-800 bg-emerald-100 font-bold px-2.5 py-0.5 rounded-md w-fit border border-emerald-300";
+            badge.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i>พร้อมใช้งานครบ ${provCount || 77} จังหวัดทั่วไทย (Fallback)`;
+          }
+          populateProvinceDropdown();
+          return;
+        } catch (e) {
+          // keep trying next fallback
+        }
+      }
+
+      // 4. Default state badge with built-in data active
+      if (badge) {
+        badge.className = "text-xs text-emerald-800 bg-emerald-100 font-bold px-2.5 py-0.5 rounded-md w-fit border border-emerald-300";
+        badge.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i>พร้อมใช้งานครบ 77 จังหวัดทั่วไทย`;
+      }
+    }
+
+    function populateProvinceDropdown() {
+      const provSelect = document.getElementById('addr_province');
+      if (!provSelect) return;
+      const currentVal = provSelect.value;
+      provSelect.innerHTML = `<option value="" disabled selected>-- เลือกจังหวัด --</option>`;
+
+      const provList = Array.from(new Set([...ALL_77_PROVINCES, ...Object.keys(geoTree)])).sort((a, b) => a.localeCompare(b, 'th'));
+
+      provList.forEach(pName => {
+        const opt = document.createElement('option');
+        opt.value = pName;
+        opt.textContent = pName;
+        provSelect.appendChild(opt);
+      });
+
+      if (currentVal && provList.includes(currentVal)) {
+        provSelect.value = currentVal;
+      }
+    }
+
+    function handleProvinceChange() {
+      const provName = document.getElementById('addr_province').value;
+      const distSelect = document.getElementById('addr_district');
+      const subSelect = document.getElementById('addr_subdistrict');
+      const zipSelect = document.getElementById('addr_zipcode_select');
+      const zipHidden = document.getElementById('addr_zipcode');
+
+      distSelect.innerHTML = `<option value="" disabled selected>-- เลือกเขต/อำเภอ --</option>`;
+      subSelect.innerHTML = `<option value="" disabled selected>-- เลือกแขวง/ตำบล --</option>`;
+      zipSelect.innerHTML = `<option value="" disabled selected>-- เลือกรหัสไปรษณีย์ --</option>`;
+      zipHidden.value = "";
+
+      const districtsMap = geoTree[provName] || {};
+      const districtsList = Object.keys(districtsMap).sort((a, b) => a.localeCompare(b, 'th'));
+
+      if (districtsList.length > 0) {
+        districtsList.forEach(d => {
+          const opt = document.createElement('option');
+          opt.value = d;
+          opt.textContent = d;
+          distSelect.appendChild(opt);
+        });
+      }
+
+      updateFullAddressPreview();
+    }
+
+    function handleDistrictChange() {
+      const provName = document.getElementById('addr_province')?.value || '';
+      const distName = document.getElementById('addr_district')?.value || '';
+      const subSelect = document.getElementById('addr_subdistrict');
+      const zipSelect = document.getElementById('addr_zipcode_select');
+      const zipHidden = document.getElementById('addr_zipcode');
+
+      subSelect.innerHTML = `<option value="" disabled selected>-- เลือกแขวง/ตำบล --</option>`;
+      zipSelect.innerHTML = `<option value="" disabled selected>-- เลือกรหัสไปรษณีย์ --</option>`;
+      zipHidden.value = "";
+
+      const subdistrictsMap = geoTree[provName]?.[distName] || {};
+      const subList = Object.keys(subdistrictsMap).sort((a, b) => a.localeCompare(b, 'th'));
+
+      if (subList.length > 0) {
+        subList.forEach(s => {
+          const opt = document.createElement('option');
+          opt.value = s;
+          opt.textContent = s;
+          subSelect.appendChild(opt);
+        });
+      } else {
+        const defaultSub = provName === "กรุงเทพมหานคร" ? "แขวงในเมือง" : "ตำบลในเมือง";
+        const opt = document.createElement('option');
+        opt.value = defaultSub;
+        opt.textContent = defaultSub;
+        subSelect.appendChild(opt);
+      }
+
+      updateFullAddressPreview();
+    }
+
+    function handleSubdistrictChange() {
+      const provName = document.getElementById('addr_province')?.value || '';
+      const distName = document.getElementById('addr_district')?.value || '';
+      const subName = document.getElementById('addr_subdistrict')?.value || '';
+      const zipSelect = document.getElementById('addr_zipcode_select');
+      const zipHidden = document.getElementById('addr_zipcode');
+
+      zipSelect.innerHTML = `<option value="" disabled selected>-- เลือกรหัสไปรษณีย์ --</option>`;
+      zipHidden.value = "";
+
+      const zipsRaw = geoTree[provName]?.[distName]?.[subName];
+      let zips = [];
+      if (Array.isArray(zipsRaw)) zips = zipsRaw;
+      else if (zipsRaw instanceof Set) zips = Array.from(zipsRaw);
+
+      zips = zips.sort();
+
+      if (zips.length > 0) {
+        zips.forEach(z => {
+          const opt = document.createElement('option');
+          opt.value = z;
+          opt.textContent = z;
+          zipSelect.appendChild(opt);
+        });
+        zipSelect.value = zips[0];
+        zipHidden.value = zips[0];
+      } else {
+        const opt = document.createElement('option');
+        opt.value = "10000";
+        opt.textContent = "10000";
+        zipSelect.appendChild(opt);
+        zipSelect.value = "10000";
+        zipHidden.value = "10000";
+      }
+
+      updateFullAddressPreview();
+    }
+
+    function handleZipcodeSelectChange() {
+      const zipSelect = document.getElementById('addr_zipcode_select');
+      const zipHidden = document.getElementById('addr_zipcode');
+      if (zipHidden && zipSelect) {
+        zipHidden.value = zipSelect.value || '';
+      }
+      updateFullAddressPreview();
+    }
+
+    function updateFullAddressPreview() {
+      const houseNo = document.getElementById('addr_house_no')?.value.trim() || '';
+      const details = document.getElementById('addr_details')?.value.trim() || '';
+      const sub = document.getElementById('addr_subdistrict')?.value.trim() || '';
+      const dist = document.getElementById('addr_district')?.value.trim() || '';
+      const prov = document.getElementById('addr_province')?.value.trim() || '';
+
+      const zipSelectEl = document.getElementById('addr_zipcode_select');
+      const zipHiddenEl = document.getElementById('addr_zipcode');
+      const zip = zipHiddenEl?.value.trim() || zipSelectEl?.value.trim() || '';
+
+      const previewBox = document.getElementById('full-address-preview');
+      const hiddenAddressInput = document.getElementById('address');
+
+      if (!houseNo && !prov) {
+        if (previewBox) {
+          previewBox.innerText = '-- กรุณากรอกข้อมูลที่อยู่ด้านบนให้ครบถ้วน --';
+          previewBox.className = 'text-slate-800 font-medium mt-0.5 italic break-words';
+        }
+        if (hiddenAddressInput) hiddenAddressInput.value = '';
+        return;
+      }
+
+      const isBkk = (prov === 'กรุงเทพมหานคร');
+      const subLabel = isBkk ? 'แขวง' : 'ต.';
+      const distLabel = isBkk ? '' : 'อ.';
+      const provLabel = isBkk ? '' : 'จ.';
+
+      let fullAddrParts = [];
+      if (houseNo) fullAddrParts.push(houseNo);
+      if (details) fullAddrParts.push(details);
+      if (sub) fullAddrParts.push(`${subLabel}${sub}`);
+      if (dist) fullAddrParts.push(`${distLabel}${dist}`);
+      if (prov) fullAddrParts.push(`${provLabel}${prov}`);
+      if (zip) fullAddrParts.push(zip);
+
+      const combinedText = fullAddrParts.join(' ');
+      if (previewBox) {
+        previewBox.innerText = combinedText;
+        previewBox.className = 'text-slate-950 font-bold mt-0.5 not-italic break-words';
+      }
+      if (hiddenAddressInput) hiddenAddressInput.value = combinedText;
+    }
+
+    // Master Shipping Data Array
+    let shippingData = JSON.parse(localStorage.getItem('pramest_shipping_list')) || [];
+    let activeSubmissions = JSON.parse(localStorage.getItem('pramest_active_submissions')) || [];
+
+    function normalizeThaiRoundDate(str) {
+      if (!str || str.trim() === '' || str === 'รอบวันที่ -') return defaultRoundDate;
+      let clean = str.trim();
+
+      if (baseHistoricalRounds.includes(clean)) {
+        return clean;
+      }
+
+      let rawText = clean.replace(/^รอบวันที่\s*/, '').trim();
+
+      const monthMap = {
+        'ม.ค.': 'มกราคม', 'ก.พ.': 'กุมภาพันธ์', 'มี.ค.': 'มีนาคม', 'เม.ย.': 'เมษายน',
+        'พ.ค.': 'พฤษภาคม', 'มิ.ย.': 'มิถุนายน', 'ก.ค.': 'กรกฎาคม', 'ส.ค.': 'สิงหาคม',
+        'ก.ย.': 'กันยายน', 'ต.ค.': 'ตุลาคม', 'พ.ย.': 'พฤศจิกายน', 'ธ.ค.': 'ธันวาคม',
+        'มค': 'มกราคม', 'กพ': 'กุมภาพันธ์', 'มีค': 'มีนาคม', 'เมย': 'เมษายน',
+        'พค': 'พฤษภาคม', 'มิย': 'มิถุนายน', 'กค': 'กรกฎาคม', 'สค': 'สิงหาคม',
+        'กย': 'กันยายน', 'ตค': 'ตุลาคม', 'พย': 'พฤศจิกายน', 'ธค': 'ธันวาคม'
+      };
+
+      for (let shortM in monthMap) {
+        if (rawText.includes(shortM)) {
+          rawText = rawText.replace(shortM, monthMap[shortM]);
+          break;
+        }
+      }
+
+      rawText = rawText.replace(/\b68\b/g, '2568').replace(/\b69\b/g, '2569');
+      const formatted = `รอบวันที่ ${rawText}`;
+      const matchedBase = baseHistoricalRounds.find(r => r === formatted);
+      return matchedBase || formatted;
+    }
+
+    function maskPhone(phoneVal) {
+      if (!phoneVal) return '-';
+      const digits = String(phoneVal).replace(/\D/g, '');
+      if (digits.length >= 9) {
+        return digits.substring(0, 3) + '-xxx-' + digits.substring(digits.length - 4);
+      }
+      return phoneVal;
+    }
+
+    function updateRoundSelectOptions() {
+      const selectEl = document.getElementById('filter-round-select');
+      if (!selectEl) return;
+      const currentSelected = selectEl.value || 'ALL';
+
+      const roundSet = new Set(baseHistoricalRounds);
+      shippingData.forEach(item => {
+        if (item.roundDate && item.roundDate.trim() !== '') {
+          const norm = normalizeThaiRoundDate(item.roundDate);
+          if (norm && norm !== 'รอบวันที่ -') {
+            roundSet.add(norm);
+          }
+        }
+      });
+
+      const allRounds = Array.from(roundSet);
+      selectEl.innerHTML = `
+        <option value="ALL">📦 แสดงทุกรอบจัดส่ง (${shippingData.length} รายการ)</option>
+        ${allRounds.map(r => `<option value="${r}">${r}</option>`).join('')}
+      `;
+      selectEl.value = currentSelected;
+    }
+
+    function switchNavTab(tabName) {
+      const secRegister = document.getElementById('section-register');
+      const secShipping = document.getElementById('section-shipping');
+      const btnRegister = document.getElementById('btn-nav-register');
+      const btnShipping = document.getElementById('btn-nav-shipping');
+
+      if (tabName === 'register') {
+        secRegister.classList.remove('hidden');
+        secShipping.classList.add('hidden');
+        btnRegister.className = "px-3.5 py-2.5 sm:px-6 sm:py-3 rounded-2xl transition-all flex items-center justify-center gap-2 bg-slate-900 text-amber-400 shadow-md hover:bg-slate-800";
+        btnShipping.className = "px-3.5 py-2.5 sm:px-6 sm:py-3 rounded-2xl transition-all flex items-center justify-center gap-2 text-slate-700 hover:bg-slate-100 border border-slate-200 hover:border-slate-300";
+      } else {
+        secRegister.classList.add('hidden');
+        secShipping.classList.remove('hidden');
+        btnShipping.className = "px-3.5 py-2.5 sm:px-6 sm:py-3 rounded-2xl transition-all flex items-center justify-center gap-2 bg-slate-900 text-amber-400 shadow-md hover:bg-slate-800";
+        btnRegister.className = "px-3.5 py-2.5 sm:px-6 sm:py-3 rounded-2xl transition-all flex items-center justify-center gap-2 text-slate-700 hover:bg-slate-100 border border-slate-200 hover:border-slate-300";
+        fetchLiveDataFromAppsScript();
+        filterShippingTable();
+      }
+    }
+
+    function handleCardTypeChange() {
+      const isNew = document.querySelector('input[name="card_type"]:checked').value.includes('769');
+      const labelNew = document.getElementById('label-card-new');
+      const labelLost = document.getElementById('label-card-lost');
+      const boxLostProof = document.getElementById('box-lost-proof');
+      const lostInput = document.getElementById('lost_proof');
+      const summaryText = document.getElementById('summary-card-text');
+      const amountBadge = document.getElementById('payment-amount-badge');
+
+      if (isNew) {
+        labelNew.className = "border-2 border-amber-500 bg-amber-50/40 rounded-2xl p-4 cursor-pointer hover:border-amber-600 transition flex items-center justify-between gap-3";
+        labelLost.className = "border-2 border-slate-200 bg-white rounded-2xl p-4 cursor-pointer hover:border-amber-500 transition flex items-center justify-between gap-3";
+        boxLostProof.classList.add('hidden');
+        lostInput.removeAttribute('required');
+        summaryText.innerText = "สมัครสมาชิกใหม่ 769 บาท (รวมค่าเคลือบใส & จัดส่ง)";
+        amountBadge.innerText = "ยอดโอน: 769 บาท";
+      } else {
+        labelLost.className = "border-2 border-amber-500 bg-amber-50/40 rounded-2xl p-4 cursor-pointer hover:border-amber-500 transition flex items-center justify-between gap-3";
+        labelNew.className = "border-2 border-slate-200 bg-white rounded-2xl p-4 cursor-pointer hover:border-amber-500 transition flex items-center justify-between gap-3";
+        boxLostProof.classList.remove('hidden');
+        lostInput.setAttribute('required', 'true');
+        summaryText.innerText = "บัตรหาย / ชำรุด 200 บาท (ออกบัตรทดแทน)";
+        amountBadge.innerText = "ยอดโอน: 200 บาท";
+      }
+    }
+
+    function renderFilePreview(input, containerId) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = "";
+      if (input.files && input.files[0]) {
+        container.classList.remove('hidden');
+        container.innerHTML = `
+          <div class="inline-flex items-center gap-2 bg-emerald-50 text-emerald-700 px-3.5 py-2 rounded-xl border border-emerald-200 text-xs mt-2 font-semibold">
+            <i class="fa-solid fa-circle-check"></i> เลือกระบบไฟล์เรียบร้อย (${input.files[0].name})
+          </div>
+        `;
+      }
+    }
+
+    function fileToBase64(file) {
+      return new Promise((resolve, reject) => {
+        if (!file) {
+          resolve({ base64: '', name: '', mimeType: '' });
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = () => {
+          resolve({
+            base64: reader.result,
+            name: file.name,
+            mimeType: file.type
+          });
+        };
+        reader.onerror = error => reject(error);
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function copyBankAccount(accountNum) {
+      const tempInput = document.createElement('input');
+      tempInput.value = accountNum;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempInput);
+      showToast('คัดลอกสำเร็จ', 'คัดลอกเลขที่บัญชี 773-2-29853-5 เรียบร้อยแล้ว', 'success');
+    }
+
+    async function submitRegistrationForm(e) {
+      e.preventDefault();
+
+      updateFullAddressPreview();
+      const fullAddressStr = document.getElementById('address').value.trim();
+
+      if (!fullAddressStr) {
+        showToast('ข้อมูลไม่ครบถ้วน', 'กรุณากรอกข้อมูลที่อยู่จัดส่งให้ครบถ้วน', 'error');
+        return;
+      }
+
+      const btnSubmit = document.getElementById('btn-submit-form');
+      const originalBtnHtml = btnSubmit.innerHTML;
+
+      try {
+        btnSubmit.disabled = true;
+        btnSubmit.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i> <span>กำลังบันทึกข้อมูลเข้าชีต...</span>`;
+
+        const cardType = document.querySelector('input[name="card_type"]:checked').value;
+        const referrer = document.getElementById('referrer').value;
+        const prefix = document.getElementById('prefix').value;
+        const fullname = document.getElementById('fullname').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const openchat = document.getElementById('openchat_name').value.trim();
+
+        const houseNo = document.getElementById('addr_house_no')?.value.trim() || '';
+        const addrDetails = document.getElementById('addr_details')?.value.trim() || '';
+        const province = document.getElementById('addr_province')?.value || '';
+        const district = document.getElementById('addr_district')?.value || '';
+        const subdistrict = document.getElementById('addr_subdistrict')?.value || '';
+
+        const zipSelectEl = document.getElementById('addr_zipcode_select');
+        const zipHiddenEl = document.getElementById('addr_zipcode');
+        const zipcode = zipHiddenEl?.value.trim() || zipSelectEl?.value.trim() || '';
+
+        const userPhotoFile = document.getElementById('user_photo').files[0];
+        const lostProofFile = document.getElementById('lost_proof').files[0];
+        const slipPhotoFile = document.getElementById('slip_photo').files[0];
+
+        const userPhotoObj = await fileToBase64(userPhotoFile);
+        const lostProofObj = await fileToBase64(lostProofFile);
+        const slipPhotoObj = await fileToBase64(slipPhotoFile);
+
+        const now = new Date();
+        const stamp = now.getFullYear() +
+                      String(now.getMonth() + 1).padStart(2, '0') +
+                      String(now.getDate()).padStart(2, '0') + '-' +
+                      String(now.getHours()).padStart(2, '0') +
+                      String(now.getMinutes()).padStart(2, '0') +
+                      String(now.getSeconds()).padStart(2, '0');
+        const generatedRefCode = `PRM-${stamp}`;
+
+        const payload = {
+          refCode: generatedRefCode,
+          cardType: cardType,
+          referrer: referrer,
+          prefix: prefix,
+          fullName: `${prefix} ${fullname}`,
+          phone: phone,
+          openChatName: openchat,
+
+          address: fullAddressStr,
+
+          houseNo: houseNo,
+          addressDetails: addrDetails,
+          province: province,
+          district: district,
+          subdistrict: subdistrict,
+          zipcode: zipcode,
+
+          transferAmount: cardType.includes('200') ? 200 : 769,
+
+          photoBase64: userPhotoObj.base64,
+          photoName: userPhotoObj.name,
+          photoMimeType: userPhotoObj.mimeType,
+
+          lostCardBase64: lostProofObj.base64,
+          lostCardName: lostProofObj.name,
+          lostCardMimeType: lostProofObj.mimeType,
+
+          slipBase64: slipPhotoObj.base64,
+          slipName: slipPhotoObj.name,
+          slipMimeType: slipPhotoObj.mimeType
+        };
+
+        await fetch(SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        }).catch(err => console.log('POST mode no-cors:', err));
+
+        const localRecord = {
+          refCode: generatedRefCode,
+          cardType: cardType,
+          fullName: `${prefix} ${fullname}`,
+          phone: phone,
+          maskedPhone: maskPhone(phone),
+          status: "ทำรายการแล้ว",
+          roundDate: defaultRoundDate,
+          trackingNo: "-"
+        };
+
+        activeSubmissions.unshift(localRecord);
+        localStorage.setItem('pramest_active_submissions', JSON.stringify(activeSubmissions));
+
+        document.getElementById('form-registration').reset();
+        document.getElementById('preview-user-photo').classList.add('hidden');
+        document.getElementById('preview-lost-proof').classList.add('hidden');
+        document.getElementById('preview-slip-photo').classList.add('hidden');
+        updateFullAddressPreview();
+        handleCardTypeChange();
+
+        document.getElementById('input-search-track').value = generatedRefCode;
+        searchStatusTrack();
+        document.getElementById('search-status-anchor').scrollIntoView({ behavior: 'smooth' });
+
+        showToast('ลงทะเบียนสำเร็จ', `รหัสอ้างอิง: ${generatedRefCode}`, 'success');
+
+        setTimeout(() => fetchLiveDataFromAppsScript(false), 2000);
+
+      } catch (error) {
+        showToast('เกิดข้อผิดพลาด', error.message, 'error');
+      } finally {
+        btnSubmit.disabled = false;
+        btnSubmit.innerHTML = originalBtnHtml;
+      }
+    }
+
+    function searchStatusTrack() {
+      const query = document.getElementById('input-search-track').value.trim().toLowerCase();
+      const container = document.getElementById('tracking-result-container');
+
+      if (!query) {
+        showToast('โปรดระบุคำค้นหา', 'กรุณากรอกรหัสอ้างอิง ชื่อ-นามสกุล หรือเบอร์โทรศัพท์เพื่อค้นหา', 'info');
+        return;
+      }
+
+      container.classList.remove('hidden');
+
+      let match = activeSubmissions.find(item => 
+        (item.refCode && item.refCode.toLowerCase().includes(query)) ||
+        (item.fullName && item.fullName.toLowerCase().includes(query)) ||
+        (item.phone && item.phone.includes(query))
+      );
+
+      let shippedMatch = null;
+      if (!match) {
+        shippedMatch = shippingData.find(item => 
+          (item.refCode && item.refCode.toLowerCase().includes(query)) ||
+          (item.fullName && item.fullName.toLowerCase().includes(query)) ||
+          (item.trackingNo && item.trackingNo.toLowerCase().includes(query))
+        );
+      }
+
+      if (match) {
+        renderStepperUI(container, match);
+      } else if (shippedMatch) {
+        renderStepperUI(container, shippedMatch);
+      } else {
+        container.innerHTML = `
+          <div class="text-center py-4 space-y-1">
+            <i class="fa-solid fa-circle-exclamation text-amber-500 text-2xl"></i>
+            <p class="font-bold text-slate-900 text-xs sm:text-sm">ไม่พบข้อมูลการลงทะเบียน</p>
+            <p class="text-xs text-slate-500">โปรดตรวจสอบรหัสอ้างอิง หรือข้อมูลการลงทะเบียนใหม่อีกครั้ง</p>
+          </div>
+        `;
+      }
+    }
+
+    function renderStepperUI(container, data) {
+      const steps = [
+        "ทำรายการแล้ว",
+        "ยืนยันรับออเดอร์แล้ว",
+        "กำลังดำเนินการ",
+        "จัดส่งแล้ว"
+      ];
+
+      let currentStepIdx = 0;
+      const statusText = data.status || "ทำรายการแล้ว";
+      if (statusText.includes("ยืนยันรับออเดอร์")) currentStepIdx = 1;
+      else if (statusText.includes("กำลังดำเนินการ")) currentStepIdx = 2;
+      else if (statusText.includes("จัดส่งแล้ว")) currentStepIdx = 3;
+
+      container.innerHTML = `
+        <div class="space-y-4 text-xs sm:text-sm">
+          <div class="flex justify-between items-start border-b border-slate-200 pb-3">
+            <div>
+              <span class="bg-amber-100 text-amber-800 font-bold px-2.5 py-0.5 rounded text-[11px]">สถานะปัจจุบัน</span>
+              <h4 class="font-bold text-slate-900 text-sm sm:text-base mt-1">${data.fullName}</h4>
+              <p class="text-slate-500 text-xs">รหัสอ้างอิง: <span class="font-mono font-bold text-blue-700">${data.refCode || '-'}</span> • ${data.cardType}</p>
+            </div>
+            <div class="text-right">
+              <span class="text-slate-400 block text-[11px]">รอบการจัดส่ง</span>
+              <span class="font-semibold text-slate-800 text-xs sm:text-sm">${normalizeThaiRoundDate(data.roundDate)}</span>
+            </div>
+          </div>
+
+          <!-- 4-STEP PROGRESS BAR -->
+          <div class="py-2">
+            <div class="grid grid-cols-4 gap-1 text-center relative">
+              ${steps.map((stepTitle, idx) => {
+                let circleStyle = "border-2 border-slate-300 bg-white text-slate-400";
+                let textStyle = "text-slate-400 font-normal";
+                let stepIcon = idx + 1;
+
+                if (idx < currentStepIdx) {
+                  circleStyle = "bg-emerald-500 text-white font-bold border-emerald-500 shadow-sm";
+                  textStyle = "text-emerald-700 font-bold";
+                  stepIcon = '<i class="fa-solid fa-check text-xs"></i>';
+                } else if (idx === currentStepIdx) {
+                  circleStyle = "bg-blue-600 text-white font-bold border-blue-600 ring-4 ring-blue-100";
+                  textStyle = "text-blue-900 font-bold";
+                }
+
+                return `
+                  <div class="flex flex-col items-center space-y-2">
+                    <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center text-xs sm:text-sm transition-all ${circleStyle}">
+                      ${stepIcon}
+                    </div>
+                    <span class="text-[10px] sm:text-xs leading-tight ${textStyle}">${stepTitle}</span>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          </div>
+
+          <div class="bg-white p-3.5 rounded-xl border border-slate-200 text-slate-600 text-xs flex justify-between items-center flex-wrap gap-2">
+            <div>
+              <strong class="text-slate-800">รายละเอียด:</strong> ${currentStepIdx === 3 ? 'จัดส่งบัตรสมาชิกเรียบร้อยแล้ว' : 'เจ้าหน้าที่กำลังดำเนินการตรวจสอบยอดโอนและทำบัตรสมาชิก'}
+            </div>
+            ${data.trackingNo && data.trackingNo !== '-' ? `
+              <div class="bg-emerald-50 text-emerald-800 font-bold px-3 py-1.5 rounded-lg border border-emerald-200 font-mono text-xs">
+                เลขพัสดุ: ${data.trackingNo}
+              </div>
+            ` : ''}
+          </div>
+        </div>
+      `;
+    }
+
+    function normalizeItem(raw) {
+      if (!raw) return null;
+
+      if (Array.isArray(raw)) {
+        if (raw.length <= 1) return null;
+        return {
+          refCode: String(raw[1] || '').trim(),
+          cardType: String(raw[2] || 'สมัครสมาชิกใหม่ 769 บาท').trim(),
+          fullName: String(raw[5] || raw[4] || '').trim(),
+          phone: String(raw[6] || '').trim(),
+          maskedPhone: maskPhone(raw[6]),
+          status: String(raw[13] || 'ทำรายการแล้ว').trim(),
+          roundDate: normalizeThaiRoundDate(String(raw[14] || defaultRoundDate)),
+          trackingNo: String(raw[15] || '-').trim()
+        };
+      }
+
+      const refCode = raw.refCode || raw.ref_code || raw['รหัสอ้างอิง'] || raw.id || '';
+      const fullName = raw.fullName || raw.full_name || raw['ชื่อและนามสกุล'] || raw.name || '';
+      const phone = raw.phone || raw.maskedPhone || raw.masked_phone || raw['เบอร์โทรศัพท์'] || '';
+      const cardType = raw.cardType || raw.card_type || raw['ประเภทการทำบัตร'] || 'สมัครสมาชิกใหม่ 769 บาท';
+      const status = raw.status || raw['สถานะการดำเนินการ'] || 'ทำรายการแล้ว';
+      const roundDate = raw.roundDate || raw.round_date || raw['รอบการจัดส่ง'] || defaultRoundDate;
+      const trackingNo = raw.trackingNo || raw.tracking_no || raw['เลขพัสดุ'] || '-';
+
+      if (!refCode && !fullName) return null;
+
+      return {
+        refCode: String(refCode).trim(),
+        fullName: String(fullName).trim(),
+        phone: String(phone).trim(),
+        maskedPhone: maskPhone(phone),
+        cardType: String(cardType).trim(),
+        status: String(status).trim(),
+        roundDate: normalizeThaiRoundDate(String(roundDate)),
+        trackingNo: String(trackingNo).trim()
+      };
+    }
+
+    async function fetchLiveDataFromAppsScript(isUserTriggered = false) {
+      const badge = document.getElementById('sheet-sync-status-badge');
+      const infoBox = document.getElementById('sheet-sync-info-box');
+      const infoTitle = document.getElementById('sheet-sync-info-title');
+      const infoDesc = document.getElementById('sheet-sync-info-desc');
+      const icon = document.getElementById('btn-refresh-icon');
+
+      if (icon) icon.classList.add('animate-spin');
+      badge.className = "bg-amber-100 text-amber-800 border border-amber-200 text-xs px-3 py-0.5 rounded-full flex items-center gap-1.5 font-semibold";
+      badge.innerHTML = `<i class="fa-solid fa-spinner animate-spin text-amber-600"></i> กำลังเชื่อมต่อชีต...`;
+
+      try {
+        const response = await fetch(`${SCRIPT_URL}?action=tracking&t=${Date.now()}`);
+        if (!response.ok) {
+          throw new Error(`HTTP Status ${response.status}`);
+        }
+
+        const result = await response.json();
+        let rawList = [];
+
+        if (result && result.success && Array.isArray(result.data)) {
+          rawList = result.data;
+        } else if (Array.isArray(result)) {
+          rawList = result;
+        } else if (result && Array.isArray(result.rows)) {
+          rawList = result.rows;
+        }
+
+        const parsedItems = [];
+        rawList.forEach(raw => {
+          const item = normalizeItem(raw);
+          if (item && (item.fullName || item.refCode)) {
+            parsedItems.push(item);
+          }
+        });
+
+        if (parsedItems.length > 0) {
+          parsedItems.forEach(item => {
+            const idx = shippingData.findIndex(s => (s.refCode && s.refCode === item.refCode) || (s.fullName === item.fullName && s.roundDate === item.roundDate));
+            if (idx !== -1) {
+              shippingData[idx] = item;
+            } else {
+              shippingData.unshift(item);
+            }
+          });
+
+          localStorage.setItem('pramest_shipping_list', JSON.stringify(shippingData));
+
+          badge.className = "bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs px-3 py-0.5 rounded-full flex items-center gap-1.5 font-bold";
+          badge.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600"></i> เชื่อมต่อชีตเรียบร้อย (${parsedItems.length} รายการจากชีต)`;
+          infoBox.classList.add('hidden');
+
+          if (isUserTriggered) {
+            showToast('ดึงข้อมูลสำเร็จ', `พบข้อมูล ${parsedItems.length} รายการจากชีต`, 'success');
+          }
+        } else {
+          badge.className = "bg-blue-100 text-blue-800 border border-blue-200 text-xs px-3 py-0.5 rounded-full flex items-center gap-1.5 font-semibold";
+          badge.innerHTML = `<i class="fa-solid fa-database text-blue-600"></i> ชีตออนไลน์ยังไม่มีข้อมูลใหม่ (แสดงข้อมูลสำรอง)`;
+
+          if (isUserTriggered) {
+            infoBox.classList.remove('hidden');
+            infoTitle.innerText = "คำแนะนำการแสดงผลข้อมูลจาก Google Sheets";
+            infoDesc.innerHTML = "การเชื่อมต่อกับ Apps Script สมบูรณ์ แต่ยังไม่พบแถวข้อมูลในชีต หรือ Google Apps Script ยังไม่ได้ Deploy เวอร์ชันล่าสุดที่เปิดสิทธิ์เป็น Anyone (ทุกคน)<br><strong>คำแนะนำ:</strong> ในหน้า Google Apps Script ให้กด <u>Deploy > New Deployment > Execute as: Me > Who has access: Anyone</u>";
+          }
+        }
+
+      } catch (err) {
+        console.warn('Apps Script connection notice:', err.message);
+        badge.className = "bg-slate-100 text-slate-700 border border-slate-200 text-xs px-3 py-0.5 rounded-full flex items-center gap-1.5 font-semibold";
+        badge.innerHTML = `<i class="fa-solid fa-circle-info text-slate-500"></i> แสดงผลข้อมูลแคชในระบบ (${shippingData.length} รายการ)`;
+
+        if (isUserTriggered) {
+          infoBox.classList.remove('hidden');
+          infoTitle.innerText = "ไม่สามารถเชื่อมต่อแบบเรียลไทม์กับ Google Apps Script ได้ในขณะนี้";
+          infoDesc.innerHTML = `สาเหตุส่วนใหญ่เกิดจากสิทธิ์การเปิดเข้าถึง Web App ใน Google Apps Script:<br>
+          1. ตรวจสอบว่าใน Apps Script ตอน Deploy ได้เลือก <strong>Who has access: Anyone</strong> หรือยัง<br>
+          2. หากเพิ่งแก้ไขไฟล์ Code.gs ต้องกด <strong>Deploy > Manage deployments > Edit > New version > Deploy</strong> เพื่อให้ URL อัปเดตการทำงานด้วย`;
+        }
+      } finally {
+        if (icon) icon.classList.remove('animate-spin');
+        updateRoundSelectOptions();
+        filterShippingTable();
+      }
+    }
+
+    function filterShippingTable() {
+      const tbody = document.getElementById('table-shipping-tbody');
+      const roundVal = document.getElementById('filter-round-select').value;
+      const searchVal = document.getElementById('filter-search-input').value.trim().toLowerCase();
+
+      let filtered = shippingData.filter(item => {
+        const itemRoundNormalized = normalizeThaiRoundDate(item.roundDate);
+        const matchRound = (roundVal === 'ALL' || itemRoundNormalized === roundVal);
+        const matchSearch = (!searchVal ||
+          (item.fullName && item.fullName.toLowerCase().includes(searchVal)) ||
+          (item.trackingNo && item.trackingNo.toLowerCase().includes(searchVal)) ||
+          (item.refCode && item.refCode.toLowerCase().includes(searchVal))
+        );
+        return matchRound && matchSearch;
+      });
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="7" class="text-center py-8 text-slate-400">
+              <i class="fa-solid fa-inbox text-3xl mb-2 block text-slate-300"></i>
+              ไม่พบรายการข้อมูลการจัดส่งตามรอบหรือคำค้นหาที่เลือก
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map((item, idx) => `
+        <tr class="hover:bg-slate-50 transition">
+          <td class="px-4 py-3.5 text-slate-400 font-mono whitespace-nowrap">${idx + 1}</td>
+          <td class="px-4 py-3.5 font-bold text-slate-900 whitespace-nowrap">${item.fullName || '-'}</td>
+          <td class="px-4 py-3.5 font-mono text-slate-600 whitespace-nowrap">${item.maskedPhone || maskPhone(item.phone)}</td>
+          <td class="px-4 py-3.5 text-slate-600 whitespace-nowrap">${item.cardType || 'สมัครสมาชิกใหม่ 769 บาท'}</td>
+          <td class="px-4 py-3.5 whitespace-nowrap"><span class="bg-amber-100 text-amber-900 text-xs font-semibold px-2.5 py-1 rounded-full">${normalizeThaiRoundDate(item.roundDate)}</span></td>
+          <td class="px-4 py-3.5 whitespace-nowrap">
+            <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded-full">
+              ${item.status || 'ทำรายการแล้ว'}
+            </span>
+          </td>
+          <td class="px-4 py-3.5 text-center whitespace-nowrap">
+            ${item.trackingNo && item.trackingNo !== '-' ? `
+              <span class="font-mono font-bold text-slate-900 bg-slate-100 px-3 py-1 rounded-lg border border-slate-200 inline-block select-all shadow-sm">
+                ${item.trackingNo}
+              </span>
+            ` : `<span class="text-slate-400">-</span>`}
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    window.onload = function() {
+      document.getElementById('top-next-round-text').innerText = defaultRoundDate;
+      document.getElementById('banner-next-round-text').innerText = defaultRoundDate;
+      handleCardTypeChange();
+      updateRoundSelectOptions();
+      filterShippingTable();
+      fetchLiveDataFromAppsScript(false);
+      loadAddressDataset();
+    };
+  </script>
+</body>
+</html>

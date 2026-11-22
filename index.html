@@ -120,6 +120,9 @@
           <a href="index.html" class="px-3.5 py-2.5 rounded-xl bg-slate-900 text-amber-400 shadow-sm transition">
             <i class="fa-solid fa-house mr-1.5"></i> หน้าหลัก
           </a>
+          <a href="register.html" class="px-3.5 py-2.5 rounded-xl text-emerald-800 bg-emerald-50/80 hover:bg-emerald-100 border border-emerald-200/80 transition">
+            <i class="fa-solid fa-user-plus mr-1.5 text-emerald-600"></i> ระบบสมาชิก
+          </a>
           <a href="pcard.html" class="px-3.5 py-2.5 rounded-xl text-slate-700 hover:bg-amber-50 hover:text-amber-700 transition">
             <i class="fa-solid fa-id-card mr-1.5 text-amber-500"></i> ทำบัตรสมาชิกประเมศฐ์ / เช็คพัสดุ
           </a>
@@ -142,6 +145,13 @@
         <a href="index.html" onclick="toggleMobileMenu()" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-slate-900 text-amber-400">
           <i class="fa-solid fa-house w-5 text-center"></i>
           <span>หน้าหลัก The Driver Thailand</span>
+        </a>
+        <a href="register.html" class="flex items-center justify-between px-4 py-3 rounded-xl bg-emerald-50 text-emerald-950 border border-emerald-200">
+          <span class="flex items-center gap-3">
+            <i class="fa-solid fa-user-plus w-5 text-center text-emerald-600"></i>
+            <span>ระบบสมาชิก The Driver Thailand</span>
+          </span>
+          <span class="text-[11px] bg-emerald-600 text-white px-2 py-0.5 rounded-md font-extrabold">ลงทะเบียน</span>
         </a>
         <a href="pcard.html" class="flex items-center justify-between px-4 py-3 rounded-xl bg-amber-50 text-amber-950 border border-amber-200">
           <span class="flex items-center gap-3">
@@ -192,7 +202,11 @@
             </p>
 
             <!-- Primary CTA Buttons -->
-            <div class="flex flex-col sm:flex-row gap-3.5 pt-2">
+            <div class="flex flex-col sm:flex-row flex-wrap gap-3.5 pt-2">
+              <a href="register.html" class="px-6 py-4 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-sm sm:text-base shadow-xl shadow-emerald-500/20 flex items-center justify-center gap-2.5 transition transform hover:-translate-y-0.5">
+                <i class="fa-solid fa-user-plus text-lg"></i>
+                <span>เข้าสู่ระบบสมาชิก</span>
+              </a>
               <a href="pcard.html" class="px-6 py-4 rounded-2xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold text-sm sm:text-base shadow-xl shadow-amber-500/20 flex items-center justify-center gap-2.5 transition transform hover:-translate-y-0.5">
                 <i class="fa-solid fa-id-badge text-lg"></i>
                 <span>สมัครทำบัตรสมาชิกประเมศฐ์</span>
@@ -214,23 +228,39 @@
                 <p class="text-[11px] sm:text-xs text-slate-400">ระบบลงทะเบียนและเช็คสถานะ</p>
               </div>
               <div>
-                <p class="text-xl sm:text-2xl font-black text-sky-400">Official</p>
-                <p class="text-[11px] sm:text-xs text-slate-400">บัตรเคลือบใสกันน้ำมาตรฐาน</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Right Quick-Access Action Hub Card -->
-          <div class="lg:col-span-5">
-            <div class="glass-panel border border-white/15 rounded-3xl p-5 sm:p-7 shadow-2xl space-y-4">
-              <div class="flex items-center justify-between border-b border-white/10 pb-3">
-                <span class="text-sm font-bold text-amber-300 flex items-center gap-2">
-                  <i class="fa-solid fa-bolt"></i> เมนูลัดเข้าใช้งานระบบ
-                </span>
-                <span class="text-[11px] text-slate-400">เลือกบริการที่ต้องการ</span>
-              </div>
+              <!-- Quick Link 0: Member System -->
+              <a href="https://sites.google.com/view/registeronlinetdt/ระบบสมาชก" target="_blank" rel="noopener noreferrer" class="block p-4 rounded-2xl bg-slate-900/90 hover:bg-slate-800 border border-sky-500/40 transition group">
+                <div class="flex items-center justify-between gap-3">
+                  <div class="flex items-center gap-3.5 min-w-0">
+                    <div class="w-11 h-11 rounded-xl bg-sky-500 text-slate-950 flex items-center justify-center text-lg font-bold shrink-0">
+                      <i class="fa-solid fa-users-gear"></i>
+                    </div>
+                    <div class="min-w-0">
+                      <h3 class="font-bold text-white text-sm sm:text-base group-hover:text-sky-300 transition truncate">ระบบสมาชิก The Driver Thailand</h3>
+                      <p class="text-xs text-slate-400 truncate">ทะเบียนสมาชิก ลงทะเบียนออนไลน์ และข้อมูลสมาชิกกลุ่ม</p>
+                    </div>
+                  </div>
+                  <i class="fa-solid fa-arrow-up-right-from-square text-sky-400 group-hover:translate-x-1 transition"></i>
+                </div>
+              </a>
 
               <!-- Quick Link 1 -->
+              <a href="register.html" class="block p-4 rounded-2xl bg-slate-900/90 hover:bg-slate-800 border border-emerald-500/40 transition group">
+                <div class="flex items-center justify-between gap-3">
+                  <div class="flex items-center gap-3.5 min-w-0">
+                    <div class="w-11 h-11 rounded-xl bg-emerald-500 text-slate-950 flex items-center justify-center text-lg font-bold shrink-0">
+                      <i class="fa-solid fa-user-plus"></i>
+                    </div>
+                    <div class="min-w-0">
+                      <h3 class="font-bold text-white text-sm sm:text-base group-hover:text-emerald-300 transition truncate">ระบบสมาชิก The Driver Thailand</h3>
+                      <p class="text-xs text-slate-400 truncate">ลงทะเบียนสมาชิกเครือข่ายและจัดการข้อมูลสมาชิก</p>
+                    </div>
+                  </div>
+                  <i class="fa-solid fa-chevron-right text-emerald-400 group-hover:translate-x-1 transition"></i>
+                </div>
+              </a>
+
+              <!-- Quick Link 2 -->
               <a href="pcard.html" class="block p-4 rounded-2xl bg-slate-900/90 hover:bg-slate-800 border border-amber-500/40 transition group">
                 <div class="flex items-center justify-between gap-3">
                   <div class="flex items-center gap-3.5 min-w-0">
@@ -246,7 +276,7 @@
                 </div>
               </a>
 
-              <!-- Quick Link 2 -->
+              <!-- Quick Link 3 -->
               <a href="blacklist.html" class="block p-4 rounded-2xl bg-slate-900/90 hover:bg-slate-800 border border-rose-500/30 transition group">
                 <div class="flex items-center justify-between gap-3">
                   <div class="flex items-center gap-3.5 min-w-0">
@@ -277,7 +307,57 @@
         <p class="text-xs sm:text-sm text-slate-500">เลือกใช้งานระบบย่อยต่างๆ ของ The Driver Thailand ได้สะดวกรวดเร็วทั้งบนมือถือและคอมพิวเตอร์</p>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-6">
+      <div class="grid md:grid-cols-3 gap-6">
+        <!-- Card 1: Member Registration System -->
+        <div class="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 shadow-sm card-hover flex flex-col justify-between space-y-6">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-xl font-bold">
+                <i class="fa-solid fa-user-plus"></i>
+              </div>
+              <span class="text-xs font-bold bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full">ทะเบียนสมาชิก</span>
+            </div>
+            <h3 class="text-lg sm:text-xl font-extrabold text-slate-900">ระบบสมาชิก The Driver Thailand</h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              ลงทะเบียนเข้าสู่ฐานข้อมูลสมาชิกเครือข่ายคนขับรถมืออาชีพ ยืนยันตัวตนและอัปเดตข้อมูลสมาชิกในกลุ่ม
+            </p>
+            <ul class="space-y-2 text-xs text-slate-600 pt-1">
+              <li><i class="fa-solid fa-check text-emerald-500 mr-2"></i>บันทึกข้อมูลสมาชิกเข้าสู่ระบบเครือข่าย</li>
+              <li><i class="fa-solid fa-check text-emerald-500 mr-2"></i>เชื่อมโยงการยืนยันตัวตนในกลุ่ม OpenChat</li>
+              <li><i class="fa-solid fa-check text-emerald-500 mr-2"></i>รองรับการใช้งานทั้งบนมือถือและคอมพิวเตอร์</li>
+            </ul>
+          </div>
+          <a href="register.html" class="w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2">
+            <span>เปิดหน้าระบบสมาชิก</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <!-- Card 2: Member Card Registration & Tracking -->
+        <div class="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 shadow-sm card-hover flex flex-col justify-between space-y-6">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <div class="w-12 h-12 rounded-2xl bg-sky-100 text-sky-600 flex items-center justify-center text-xl font-bold">
+                <i class="fa-solid fa-users-gear"></i>
+              </div>
+              <span class="text-xs font-bold bg-sky-100 text-sky-800 px-3 py-1 rounded-full">ฐานข้อมูลสมาชิก</span>
+            </div>
+            <h3 class="text-lg sm:text-xl font-extrabold text-slate-900">ระบบสมาชิก The Driver Thailand</h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              ศูนย์รวมระบบทะเบียนสมาชิกเครือข่ายคนขับรถมืออาชีพ สำหรับลงทะเบียนยืนยันตัวตนและตรวจสอบสถานะสมาชิกกลุ่ม
+            </p>
+            <ul class="space-y-2 text-xs text-slate-600 pt-1">
+              <li><i class="fa-solid fa-check text-sky-500 mr-2"></i>ลงทะเบียนเข้าสู่ระบบสมาชิกเครือข่าย</li>
+              <li><i class="fa-solid fa-check text-sky-500 mr-2"></i>ตรวจสอบข้อมูลและรหัสประจำตัวสมาชิก</li>
+              <li><i class="fa-solid fa-check text-sky-500 mr-2"></i>เชื่อมต่อสิทธิประโยชน์ร่วมกับกลุ่ม TDT</li>
+            </ul>
+          </div>
+          <a href="https://sites.google.com/view/registeronlinetdt/ระบบสมาชก" target="_blank" rel="noopener noreferrer" class="w-full py-3 px-4 rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2">
+            <span>เปิดหน้าระบบสมาชิก</span>
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+        </div>
+
         <!-- Card 1: Member Card Registration & Tracking -->
         <div class="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 shadow-sm card-hover flex flex-col justify-between space-y-6">
           <div class="space-y-4">
@@ -415,6 +495,7 @@
       </div>
       <div class="flex flex-wrap justify-center gap-4 font-semibold">
         <a href="index.html" class="hover:text-amber-400 transition">หน้าหลัก</a>
+        <a href="register.html" class="hover:text-emerald-400 transition">ระบบสมาชิก</a>
         <a href="pcard.html" class="hover:text-amber-400 transition">ทำบัตรสมาชิก / เช็คพัสดุ</a>
         <a href="blacklist.html" class="hover:text-rose-400 transition">Blacklist</a>
       </div>

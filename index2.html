@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Driver Thailand | ศูนย์กลางเครือข่ายคนขับรถมืออาชีพ</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Prompt & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- FontAwesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Prompt', 'Inter', 'sans-serif'],
+          },
+          colors: {
+            driver: {
+              50: '#fffbe5',
+              100: '#fef3c7',
+              500: '#f59e0b',
+              600: '#d97706',
+              900: '#0f172a',
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    html, body {
+      font-family: 'Prompt', sans-serif;
+      background-color: #f8fafc;
+      max-width: 100%;
+      overflow-x: clip;
+    }
+    /* Dimensional Hero Background */
+    .hero-dark-mesh {
+      background: radial-gradient(circle at 15% 25%, rgba(245, 158, 11, 0.22) 0%, transparent 45%),
+                  radial-gradient(circle at 85% 75%, rgba(37, 99, 235, 0.30) 0%, transparent 50%),
+                  linear-gradient(135deg, #090d16 0%, #0f172a 50%, #1e293b 100%);
+    }
+    .glass-panel {
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    .card-hover {
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-4px);
+    }
+  </style>
+</head>
+<body class="text-slate-800 antialiased min-h-screen flex flex-col selection:bg-amber-400 selection:text-slate-950">
+
+  <!-- Non-blocking Toast Notification -->
+  <div id="toast-box" class="hidden fixed bottom-5 right-5 z-50 max-w-sm w-[calc(100vw-2.5rem)] bg-slate-900 text-white border border-amber-400/50 rounded-2xl p-4 shadow-2xl">
+    <div class="flex items-start gap-3">
+      <i id="toast-icon" class="fa-solid fa-circle-check text-emerald-400 text-lg mt-0.5 shrink-0"></i>
+      <div class="text-xs sm:text-sm leading-relaxed flex-1 min-w-0" id="toast-text"></div>
+      <button type="button" onclick="hideToast()" class="text-slate-400 hover:text-white shrink-0" aria-label="ปิด">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- TOP ANNOUNCEMENT BAR -->
+  <header class="bg-slate-950 text-slate-300 text-xs py-2.5 px-4 border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
+      <div class="flex items-center gap-2 flex-wrap">
+        <span class="bg-amber-500 text-slate-950 font-extrabold px-2.5 py-0.5 rounded-full text-[11px] shadow">
+          <i class="fa-solid fa-car-side mr-1"></i> OFFICIAL PORTAL
+        </span>
+        <span class="text-slate-300 font-medium">เครือข่ายคนขับรถรับส่งผู้โดยสารและบริการมืออาชีพแห่งประเทศไทย</span>
+      </div>
+      <div class="flex items-center gap-3 text-xs">
+        <span class="text-amber-300 font-semibold">
+          <i class="fa-solid fa-calendar-check mr-1"></i> รอบส่งบัตรถัดไป: 11 ธันวาคม 2569
+        </span>
+        <span class="hidden md:inline text-slate-700">|</span>
+        <span class="hidden md:inline-flex items-center gap-1.5 text-emerald-400 font-semibold">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> ระบบออนไลน์พร้อมใช้งาน
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <!-- STICKY NAVIGATION BAR -->
+  <nav class="bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="flex justify-between items-center h-16 sm:h-20">
+        <!-- Brand Logo -->
+        <a href="index.htm" class="flex items-center gap-3 min-w-0 group">
+          <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-slate-900 text-amber-400 flex items-center justify-center font-black text-lg sm:text-xl shadow-lg border-2 border-amber-400/50 group-hover:scale-105 transition shrink-0">
+            <i class="fa-solid fa-steering-wheel"></i>
+          </div>
+          <div class="min-w-0">
+            <div class="flex items-center gap-1.5">
+              <span class="font-black text-slate-900 text-base sm:text-lg tracking-tight truncate">The Driver Thailand</span>
+              <span class="hidden sm:inline-block text-[10px] bg-amber-100 text-amber-800 px-2 py-0.5 rounded-md font-extrabold border border-amber-300">TDT</span>
+            </div>
+            <p class="text-[11px] sm:text-xs text-slate-500 font-medium truncate">ศูนย์บริการสมาชิก &amp; ระบบตรวจสอบความปลอดภัย</p>
+          </div>
+        </a>
+
+        <!-- Desktop Menu -->
+        <div class="hidden lg:flex items-center gap-1.5 text-sm font-bold">
+          <a href="#home" class="px-3.5 py-2.5 rounded-xl bg-slate-900 text-amber-400 shadow-sm transition">
+            <i class="fa-solid fa-house mr-1.5"></i> หน้าหลัก
+          </a>
+          <a href="member-card.html" class="px-3.5 py-2.5 rounded-xl text-slate-700 hover:bg-amber-50 hover:text-amber-700 transition">
+            <i class="fa-solid fa-id-card mr-1.5 text-amber-500"></i> ทำบัตรสมาชิกประเมศฐ์
+          </a>
+          <a href="member-card.html#search-status-anchor" class="px-3.5 py-2.5 rounded-xl text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition">
+            <i class="fa-solid fa-truck-fast mr-1.5 text-blue-600"></i> เช็คสถานะ / เลขพัสดุ
+          </a>
+          <a href="Blacklist.html" class="px-3.5 py-2.5 rounded-xl text-rose-700 bg-rose-50/70 hover:bg-rose-100 border border-rose-200/80 transition">
+            <i class="fa-solid fa-user-shield mr-1.5 text-rose-600"></i> ตรวจสอบ Blacklist
+          </a>
+          <a href="#services" class="px-3.5 py-2.5 rounded-xl text-slate-700 hover:bg-slate-100 transition">
+            <i class="fa-solid fa-circle-info mr-1.5 text-slate-500"></i> บริการและสิทธิพิเศษ
+          </a>
+        </div>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button type="button" id="mobile-menu-btn" onclick="toggleMobileMenu()" class="lg:hidden p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 transition" aria-label="เปิดเมนู">
+          <i id="mobile-menu-icon" class="fa-solid fa-bars text-lg"></i>
+        </button>
+      </div>
+
+      <!-- Mobile Dropdown Menu -->
+      <div id="mobile-menu-panel" class="hidden lg:hidden pb-4 pt-2 border-t border-slate-100 space-y-2 text-sm font-bold">
+        <a href="#home" onclick="toggleMobileMenu()" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-slate-900 text-amber-400">
+          <i class="fa-solid fa-house w-5 text-center"></i>
+          <span>หน้าหลัก The Driver Thailand</span>
+        </a>
+        <a href="member-card.html" class="flex items-center justify-between px-4 py-3 rounded-xl bg-amber-50 text-amber-950 border border-amber-200">
+          <span class="flex items-center gap-3">
+            <i class="fa-solid fa-id-card w-5 text-center text-amber-600"></i>
+            <span>ลงทะเบียนทำบัตรสมาชิกประเมศฐ์</span>
+          </span>
+          <span class="text-[11px] bg-amber-500 text-slate-950 px-2 py-0.5 rounded-md font-extrabold">เปิดรับสมัคร</span>
+        </a>
+        <a href="member-card.html#search-status-anchor" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-slate-50 text-slate-800 hover:bg-slate-100">
+          <i class="fa-solid fa-truck-fast w-5 text-center text-blue-600"></i>
+          <span>เช็คสถานะทำบัตร &amp; เลขพัสดุย้อนหลัง</span>
+        </a>
+        <a href="Blacklist.html" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-rose-50 text-rose-800 border border-rose-200">
+          <i class="fa-solid fa-user-shield w-5 text-center text-rose-600"></i>
+          <span>ระบบตรวจสอบรายชื่อ Blacklist</span>
+        </a>
+        <a href="#rules-contact" onclick="toggleMobileMenu()" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-slate-50 text-slate-800 hover:bg-slate-100">
+          <i class="fa-solid fa-comments w-5 text-center text-emerald-600"></i>
+          <span>กติกาเครือข่าย &amp; ติดต่อทีมงาน OpenChat</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main id="home" class="flex-grow">
+
+    <!-- HERO SECTION -->
+    <section class="hero-dark-mesh text-white relative overflow-hidden">
+      <div class="absolute -top-20 -left-20 w-80 h-80 bg-amber-500/15 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-24 -right-20 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-20 relative z-10">
+        <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          <!-- Left Hero Copy -->
+          <div class="lg:col-span-7 space-y-6">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/20 border border-amber-400/40 text-amber-300 text-xs font-bold">
+              <i class="fa-solid fa-award"></i>
+              <span>ยกระดับมาตรฐานคนขับรถมืออาชีพทั่วประเทศ</span>
+            </div>
+
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black leading-tight tracking-tight">
+              ศูนย์กลางบริการสมาชิก
+              <span class="block text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-400 to-yellow-500 mt-1">
+                The Driver Thailand
+              </span>
+            </h1>
+
+            <p class="text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl font-light">
+              รวมทุกระบบสำคัญสำหรับสมาชิกเครือข่ายคนขับไว้ในที่เดียว ทั้งระบบลงทะเบียนจัดทำบัตรสมาชิกประเมศฐ์อย่างเป็นทางการ
+              ระบบติดตามสถานะและเลขพัสดุจัดส่ง รวมถึงฐานข้อมูลตรวจสอบประวัติ Blacklist เพื่อความปลอดภัยในการรับงานร่วมกัน
+            </p>
+
+            <!-- Primary CTA Buttons -->
+            <div class="flex flex-col sm:flex-row gap-3.5 pt-2">
+              <a href="member-card.html" class="px-6 py-4 rounded-2xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold text-sm sm:text-base shadow-xl shadow-amber-500/20 flex items-center justify-center gap-2.5 transition transform hover:-translate-y-0.5">
+                <i class="fa-solid fa-id-badge text-lg"></i>
+                <span>สมัครทำบัตรสมาชิกประเมศฐ์</span>
+              </a>
+              <a href="Blacklist.html" class="px-6 py-4 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/20 text-white font-bold text-sm sm:text-base flex items-center justify-center gap-2.5 transition">
+                <i class="fa-solid fa-shield-halved text-rose-400 text-lg"></i>
+                <span>ตรวจสอบข้อมูล Blacklist</span>
+              </a>
+            </div>
+
+            <!-- Key Metrics Strip -->
+            <div class="grid grid-cols-3 gap-3 sm:gap-6 pt-4 border-t border-white/10">
+              <div>
+                <p class="text-xl sm:text-2xl font-black text-amber-400">77 จังหวัด</p>
+                <p class="text-[11px] sm:text-xs text-slate-400">เครือข่ายครอบคลุมทั่วไทย</p>
+              </div>
+              <div>
+                <p class="text-xl sm:text-2xl font-black text-emerald-400">24 ชม.</p>
+                <p class="text-[11px] sm:text-xs text-slate-400">ระบบลงทะเบียนและเช็คสถานะ</p>
+              </div>
+              <div>
+                <p class="text-xl sm:text-2xl font-black text-sky-400">Official</p>
+                <p class="text-[11px] sm:text-xs text-slate-400">บัตรเคลือบใสกันน้ำมาตรฐาน</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Quick-Access Action Hub Card -->
+          <div class="lg:col-span-5">
+            <div class="glass-panel border border-white/15 rounded-3xl p-5 sm:p-7 shadow-2xl space-y-4">
+              <div class="flex items-center justify-between border-b border-white/10 pb-3">
+                <span class="text-sm font-bold text-amber-300 flex items-center gap-2">
+                  <i class="fa-solid fa-bolt"></i> เมนูลัดเข้าใช้งานระบบ
+                </span>
+                <span class="text-[11px] text-slate-400">เลือกบริการที่ต้องการ</span>
+              </div>
+
+              <!-- Quick Link 1 -->
+              <a href="member-card.html" class="block p-4 rounded-2xl bg-slate-900/90 hover:bg-slate-800 border border-amber-500/40 transition group">
+                <div class="flex items-center justify-between gap-3">
+                  <div class="flex items-center gap-3.5 min-w-0">
+                    <div class="w-11 h-11 rounded-xl bg-amber-500 text-slate-950 flex items-center justify-center text-lg font-bold shrink-0">
+                      <i class="fa-solid fa-id-card"></i>
+                    </div>
+                    <div class="min-w-0">
+                      <h3 class="font-bold text-white text-sm sm:text-base group-hover:text-amber-300 transition truncate">ลงทะเบียนทำบัตรสมาชิก</h3>
+                      <p class="text-xs text-slate-400 truncate">สมัครใหม่ 769 บ. / บัตรหาย-ชำรุด 200 บ.</p>
+                    </div>
+                  </div>
+                  <i class="fa-solid fa-chevron-right text-amber-400 group-hover:translate-x-1 transition"></i>
+                </div>
+              </a>
+
+              <!-- Quick Link 2 -->
+              <a href="member-card.html#search-status-anchor" class="block p-4 rounded-2xl bg-slate-900/90 hover:bg-slate-800 border border-blue-500/30 transition group">
+                <div class="flex items-center justify-between gap-3">
+                  <div class="flex items-center gap-3.5 min-w-0">
+                    <div class="w-11 h-11 rounded-xl bg-blue-600 text-white flex items-center justify-center text-lg shrink-0">
+                      <i class="fa-solid fa-truck-fast"></i>
+                    </div>
+                    <div class="min-w-0">
+                      <h3 class="font-bold text-white text-sm sm:text-base group-hover:text-blue-300 transition truncate">ติดตามสถานะ &amp; เลขพัสดุ</h3>
+                      <p class="text-xs text-slate-400 truncate">เช็ครหัสอ้างอิงและประวัติการจัดส่งย้อนหลัง</p>
+                    </div>
+                  </div>
+                  <i class="fa-solid fa-chevron-right text-blue-400 group-hover:translate-x-1 transition"></i>
+                </div>
+              </a>
+
+              <!-- Quick Link 3 -->
+              <a href="Blacklist.html" class="block p-4 rounded-2xl bg-slate-900/90 hover:bg-slate-800 border border-rose-500/30 transition group">
+                <div class="flex items-center justify-between gap-3">
+                  <div class="flex items-center gap-3.5 min-w-0">
+                    <div class="w-11 h-11 rounded-xl bg-rose-600 text-white flex items-center justify-center text-lg shrink-0">
+                      <i class="fa-solid fa-user-shield"></i>
+                    </div>
+                    <div class="min-w-0">
+                      <h3 class="font-bold text-white text-sm sm:text-base group-hover:text-rose-300 transition truncate">ระบบตรวจสอบ Blacklist</h3>
+                      <p class="text-xs text-slate-400 truncate">เช็คประวัติเฝ้าระวังก่อนส่งต่องานหรือรับร่วมงาน</p>
+                    </div>
+                  </div>
+                  <i class="fa-solid fa-chevron-right text-rose-400 group-hover:translate-x-1 transition"></i>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAIN SERVICES & SYSTEM MODULES -->
+    <section id="services" class="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16 space-y-10">
+      <div class="text-center max-w-2xl mx-auto space-y-2">
+        <span class="text-xs font-extrabold uppercase tracking-widest text-amber-600 bg-amber-100 px-3 py-1 rounded-full">
+          OUR DIGITAL SERVICES
+        </span>
+        <h2 class="text-2xl sm:text-3xl font-black text-slate-900">ระบบบริการสำหรับสมาชิกเครือข่าย</h2>
+        <p class="text-xs sm:text-sm text-slate-500">เลือกใช้งานระบบย่อยต่างๆ ของ The Driver Thailand ได้สะดวกรวดเร็วทั้งบนมือถือและคอมพิวเตอร์</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Card 1: Member Card Registration -->
+        <div class="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 shadow-sm card-hover flex flex-col justify-between space-y-6">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center text-xl font-bold">
+                <i class="fa-solid fa-id-badge"></i>
+              </div>
+              <span class="text-xs font-bold bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full">เปิดรับสมัคร</span>
+            </div>
+            <h3 class="text-lg sm:text-xl font-extrabold text-slate-900">ระบบลงทะเบียนบัตรสมาชิกประเมศฐ์</h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              ยื่นขอออกบัตรสมาชิกอย่างเป็นทางการ ติดรูปถ่ายหน้าตรงพร้อมเคลือบใสกันน้ำอย่างดี รองรับทั้งสมาชิกใหม่และการแจ้งบัตรหาย/ชำรุด
+            </p>
+            <ul class="space-y-2 text-xs text-slate-600 pt-1">
+              <li><i class="fa-solid fa-check text-emerald-500 mr-2"></i>สมัครสมาชิกใหม่ 769 บาท (รวมผลิต &amp; จัดส่ง)</li>
+              <li><i class="fa-solid fa-check text-emerald-500 mr-2"></i>ทำบัตรทดแทนกรณีสูญหาย/ชำรุด 200 บาท</li>
+              <li><i class="fa-solid fa-check text-emerald-500 mr-2"></i>ระบบเลือกที่อยู่จัดส่งครบทั้ง 77 จังหวัด</li>
+            </ul>
+          </div>
+          <a href="member-card.html" class="w-full py-3 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-amber-400 font-bold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2">
+            <span>เข้าสู่หน้าลงทะเบียนทำบัตร</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <!-- Card 2: Tracking & Parcel History -->
+        <div class="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 shadow-sm card-hover flex flex-col justify-between space-y-6">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <div class="w-12 h-12 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center text-xl font-bold">
+                <i class="fa-solid fa-box-open"></i>
+              </div>
+              <span class="text-xs font-bold bg-blue-100 text-blue-800 px-3 py-1 rounded-full">ซิงค์ข้อมูลชีต</span>
+            </div>
+            <h3 class="text-lg sm:text-xl font-extrabold text-slate-900">ติดตามสถานะและเลขพัสดุจัดส่ง</h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              ตรวจสอบความคืบหน้าการผลิตบัตรแบบ 4 ขั้นตอน ค้นหาด้วยรหัสอ้างอิง ชื่อ-นามสกุล หรือเบอร์โทรศัพท์ พร้อมดูเลขพัสดุย้อนหลังได้ทุกรอบ
+            </p>
+            <ul class="space-y-2 text-xs text-slate-600 pt-1">
+              <li><i class="fa-solid fa-check text-blue-500 mr-2"></i>แสดงสถานะ 4 ขั้นตอนตั้งแต่รับออเดอร์จนจัดส่ง</li>
+              <li><i class="fa-solid fa-check text-blue-500 mr-2"></i>ค้นหาและคัดลอกเลขพัสดุ KEX / ขนส่งได้ทันที</li>
+              <li><i class="fa-solid fa-check text-blue-500 mr-2"></i>กรองดูรายชื่อตามรอบการจัดส่งย้อนหลังทั้งหมด</li>
+            </ul>
+          </div>
+          <a href="member-card.html#search-status-anchor" class="w-full py-3 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2">
+            <span>ตรวจสอบสถานะและเลขพัสดุ</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <!-- Card 3: Blacklist Verification -->
+        <div class="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 shadow-sm card-hover flex flex-col justify-between space-y-6 md:col-span-2 lg:col-span-1">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <div class="w-12 h-12 rounded-2xl bg-rose-100 text-rose-600 flex items-center justify-center text-xl font-bold">
+                <i class="fa-solid fa-user-shield"></i>
+              </div>
+              <span class="text-xs font-bold bg-rose-100 text-rose-800 px-3 py-1 rounded-full">ความปลอดภัย</span>
+            </div>
+            <h3 class="text-lg sm:text-xl font-extrabold text-slate-900">ระบบตรวจสอบรายชื่อ Blacklist</h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              ฐานข้อมูลกลางสำหรับสมาชิกเครือข่าย ใช้ตรวจสอบประวัติบุคคลเฝ้าระวังก่อนการโอนมัดจำ การส่งต่องาน หรือการร่วมงานขับรถ
+            </p>
+            <ul class="space-y-2 text-xs text-slate-600 pt-1">
+              <li><i class="fa-solid fa-check text-rose-500 mr-2"></i>ลดความเสี่ยงจากการถูกโกงค่าจ้างหรือทิ้งงาน</li>
+              <li><i class="fa-solid fa-check text-rose-500 mr-2"></i>อัปเดตข้อมูลโดยทีมผู้ดูแลเครือข่ายอย่างต่อเนื่อง</li>
+              <li><i class="fa-solid fa-check text-rose-500 mr-2"></i>เปิดให้สมาชิกตรวจสอบได้ฟรีตลอด 24 ชั่วโมง</li>
+            </ul>
+          </div>
+          <a href="Blacklist.html" class="w-full py-3 px-4 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2">
+            <span>เปิดหน้าตรวจสอบ Blacklist</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS STEPS SECTION -->
+    <section class="bg-slate-900 text-white py-12 sm:py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 space-y-10">
+        <div class="text-center max-w-2xl mx-auto space-y-2">
+          <span class="text-xs font-extrabold uppercase tracking-widest text-amber-400">HOW IT WORKS</span>
+          <h2 class="text-2xl sm:text-3xl font-black">ขั้นตอนการสมัครทำบัตรสมาชิกประเมศฐ์</h2>
+          <p class="text-xs sm:text-sm text-slate-400">ดำเนินการออนไลน์ครบจบใน 4 ขั้นตอนง่ายๆ ไม่ต้องเดินทาง</p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div class="bg-slate-800/80 border border-slate-700 rounded-2xl p-5 space-y-3">
+            <span class="w-9 h-9 rounded-xl bg-amber-500 text-slate-950 font-black flex items-center justify-center text-sm">1</span>
+            <h3 class="font-bold text-base text-white">กรอกข้อมูลผู้สมัคร</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">เลือกประเภทการทำบัตร ระบุผู้แนะนำ ชื่อ-นามสกุล เบอร์โทร และที่อยู่จัดส่งให้ครบถ้วน</p>
+          </div>
+          <div class="bg-slate-800/80 border border-slate-700 rounded-2xl p-5 space-y-3">
+            <span class="w-9 h-9 rounded-xl bg-amber-500 text-slate-950 font-black flex items-center justify-center text-sm">2</span>
+            <h3 class="font-bold text-base text-white">แนบรูปถ่ายหน้าตรง</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">อัปโหลดรูปภาพหน้าตรงสุภาพ ไม่สวมแว่นดำ เพื่อใช้พิมพ์ติดบนหน้าบัตรสมาชิก</p>
+          </div>
+          <div class="bg-slate-800/80 border border-slate-700 rounded-2xl p-5 space-y-3">
+            <span class="w-9 h-9 rounded-xl bg-amber-500 text-slate-950 font-black flex items-center justify-center text-sm">3</span>
+            <h3 class="font-bold text-base text-white">ชำระเงินและแนบสลิป</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">โอนชำระค่าธรรมเนียมตามประเภทบัตรและแนบหลักฐานสลิปโอนเงินในแบบฟอร์ม</p>
+          </div>
+          <div class="bg-slate-800/80 border border-slate-700 rounded-2xl p-5 space-y-3">
+            <span class="w-9 h-9 rounded-xl bg-emerald-500 text-slate-950 font-black flex items-center justify-center text-sm">4</span>
+            <h3 class="font-bold text-base text-white">รอรับบัตรถึงบ้าน</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">แอดมินตรวจสอบข้อมูล ผลิตบัตรเคลือบใส และอัปเดตเลขพัสดุจัดส่งให้ตรวจสอบออนไลน์</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RULES & CONTACT SECTION -->
+    <section id="rules-contact" class="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
+      <div class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-sm grid lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-7 space-y-4">
+          <span class="text-xs font-extrabold text-amber-700 bg-amber-100 px-3 py-1 rounded-full">
+            <i class="fa-solid fa-circle-exclamation mr-1"></i> ข้อแนะนำสำหรับผู้สมัคร
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-black text-slate-900">มาตรฐานรูปถ่ายและการติดต่อทีมงาน</h2>
+          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            เพื่อให้บัตรสมาชิกประเมศฐ์มีความน่าเชื่อถือและใช้งานได้จริงในการรับงาน กรุณาใช้รูปถ่ายหน้าตรงที่เห็นใบหน้าชัดเจน แต่งกายสุภาพ และกรอกชื่อในห้อง OpenChat ให้ตรงกับที่ใช้ติดต่อในกลุ่ม
+          </p>
+          <div class="grid sm:grid-cols-2 gap-3 pt-2 text-xs">
+            <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 flex items-center gap-3">
+              <i class="fa-solid fa-user-check text-emerald-600 text-lg"></i>
+              <span class="font-semibold text-slate-800">รูปหน้าตรง ชัดเจน ไม่ใส่แว่นดำ</span>
+            </div>
+            <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 flex items-center gap-3">
+              <i class="fa-solid fa-receipt text-amber-600 text-lg"></i>
+              <span class="font-semibold text-slate-800">เก็บเลขอ้างอิง PRM ไว้เช็คสถานะ</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5 bg-slate-950 text-white rounded-2xl p-6 space-y-4 border border-slate-800">
+          <h3 class="text-lg font-extrabold text-amber-400">ต้องการความช่วยเหลือหรือสอบถามเพิ่มเติม?</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            หากพบปัญหาในการกรอกฟอร์ม อัปโหลดรูปภาพ หรือต้องการแก้ไขข้อมูลการจัดส่ง สามารถติดต่อแอดมินผู้ดูแลในห้อง OpenChat ของกลุ่ม The Driver Thailand ได้ทันที
+          </p>
+          <div class="pt-2 flex flex-col gap-2.5">
+            <a href="member-card.html" class="w-full py-3 px-4 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs sm:text-sm text-center transition">
+              ไปที่หน้าแบบฟอร์มลงทะเบียน
+            </a>
+            <button type="button" onclick="copySiteUrl()" class="w-full py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs text-center border border-slate-700 transition">
+              <i class="fa-solid fa-link mr-1.5 text-amber-400"></i> คัดลอกลิงก์เว็บไซต์แชร์ให้เพื่อนสมาชิก
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-950 text-slate-400 border-t border-slate-800 py-8 px-4">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 text-xs">
+      <div class="text-center sm:text-left">
+        <p class="font-bold text-white text-sm">The Driver Thailand</p>
+        <p class="text-slate-500 mt-0.5">ศูนย์ประสานงานเครือข่ายคนขับรถมืออาชีพ &amp; บริการบัตรสมาชิกประเมศฐ์</p>
+      </div>
+      <div class="flex flex-wrap justify-center gap-4 font-semibold">
+        <a href="#home" class="hover:text-amber-400 transition">หน้าหลัก</a>
+        <a href="member-card.html" class="hover:text-amber-400 transition">ทำบัตรสมาชิก</a>
+        <a href="member-card.html#search-status-anchor" class="hover:text-amber-400 transition">เช็คเลขพัสดุ</a>
+        <a href="Blacklist.html" class="hover:text-rose-400 transition">Blacklist</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    let toastTimer = null;
+
+    function toggleMobileMenu() {
+      const panel = document.getElementById("mobile-menu-panel");
+      const icon = document.getElementById("mobile-menu-icon");
+      if (!panel || !icon) return;
+      const isHidden = panel.classList.contains("hidden");
+      if (isHidden) {
+        panel.classList.remove("hidden");
+        icon.className = "fa-solid fa-xmark text-lg";
+      } else {
+        panel.classList.add("hidden");
+        icon.className = "fa-solid fa-bars text-lg";
+      }
+    }
+
+    function showToast(message) {
+      const box = document.getElementById("toast-box");
+      const text = document.getElementById("toast-text");
+      if (!box || !text) return;
+      text.textContent = message;
+      box.classList.remove("hidden");
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(hideToast, 4000);
+    }
+
+    function hideToast() {
+      const box = document.getElementById("toast-box");
+      if (box) box.classList.add("hidden");
+    }
+
+    function copySiteUrl() {
+      const url = "https://aboutmeprocess.github.io/TheDriverThailand/";
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(url).catch(() => {});
+        } else {
+          const input = document.createElement("input");
+          input.value = url;
+          document.body.appendChild(input);
+          input.select();
+          document.execCommand("copy");
+          document.body.removeChild(input);
+        }
+      } catch (_) {}
+      showToast("คัดลอกลิงก์เว็บไซต์ The Driver Thailand เรียบร้อยแล้วครับ");
+    }
+  </script>
+</body>
+</html>

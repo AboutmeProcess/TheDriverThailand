@@ -876,11 +876,11 @@
   </footer>
 
   <script>
-    // ตั้งค่า URL ของ Web App จากสคริปต์ upload_member_database.gs และหน้าประกาศความเป็นส่วนตัว
+    // ตั้งค่า URL ของ Web App จากสคริปต์ศูนย์กลางฐานข้อมูล TheDriverThailand_Data และหน้าประกาศความเป็นส่วนตัว
     const FORM_CONFIG = {
       privacyPolicyUrl: 'privacy_policy.html',
       privacyReadStorageKey: 'tdt_privacy_policy_read_v1',
-      submitEndpointUrl: '', // วาง Web App URL ที่ได้จากการ Deploy สคริปต์ upload_member_database.gs ที่นี่
+      submitEndpointUrl: 'https://script.google.com/macros/s/AKfycbyVNMZq0rBm56TT4dfmHy6XbqbxTDP0CW5r4B5_GN9BpPqSaN8koCUKl9YjHYh3vEZO/exec',
       memberSystemUrl: 'register.html',
       draftStorageKey: 'tdt_member_registration_draft_v3',
       submissionsStorageKey: 'tdt_member_registration_submissions_v3'
@@ -1283,6 +1283,7 @@
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
               ...formData,
+              action: 'members',
               carPhotoBase64: uploadedPhotos.car.base64,
               carPhotoMimeType: uploadedPhotos.car.mimeType,
               selfiePhotoBase64: uploadedPhotos.selfie.base64,

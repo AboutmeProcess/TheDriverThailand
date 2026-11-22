@@ -34,14 +34,7 @@
       color: #0f172a;
       max-width: 100%;
       overflow-x: clip;
-      transition: background-color 0.25s ease, color 0.25s ease;
     }
-    html.tdt-dark-mode, html.tdt-dark-mode body { background-color: #060911; color: #f1f5f9; }
-    html.tdt-dark-mode main .bg-white { background-color: #0f172a; border-color: #1e293b; color: #f1f5f9; }
-    html.tdt-dark-mode main .bg-slate-50 { background-color: #131c31; border-color: #334155; color: #f8fafc; }
-    html.tdt-dark-mode main .text-slate-900, html.tdt-dark-mode main .text-slate-800 { color: #f8fafc; }
-    html.tdt-dark-mode main .text-slate-700, html.tdt-dark-mode main .text-slate-600, html.tdt-dark-mode main .text-slate-500 { color: #cbd5e1; }
-    html.tdt-dark-mode main input, html.tdt-dark-mode main select, html.tdt-dark-mode main textarea { background-color: #0b1120; border-color: #334155; color: #f8fafc; }
     .hero-glow-bg {
       background:
         radial-gradient(circle at 18% 22%, rgba(244, 63, 94, 0.24) 0%, transparent 45%),
@@ -298,13 +291,10 @@
             </span>
           </span>
         </a>
-        <div class="tdt-util-group" title="ปรับขนาดตัวอักษรและโหมดหน้าเว็บ">
+        <div class="tdt-util-group" title="ปรับขนาดตัวอักษร">
           <button type="button" onclick="tdtChangeFontScale(-1)" aria-label="ลดขนาดตัวอักษร" class="tdt-util-btn">A-</button>
           <span id="tdt-font-pct" style="font-size:11px;font-weight:400;color:#fde68a;padding:0 4px;">100%</span>
           <button type="button" onclick="tdtChangeFontScale(1)" aria-label="เพิ่มขนาดตัวอักษร" class="tdt-util-btn">A+</button>
-          <button type="button" onclick="tdtToggleTheme()" aria-label="สลับโหมดสีสว่างหรือสีเข้ม" class="tdt-util-btn">
-            <i id="tdt-theme-icon-d" class="fa-solid fa-moon" style="color:#fcd34d;"></i>
-          </button>
         </div>
       </div>
 
@@ -1508,7 +1498,6 @@
 
         (function initSharedNavAndAccessibility() {
           const SCALE_KEY = "tdt_font_scale_pct";
-          const THEME_KEY = "tdt_theme_mode";
           let scalePct = 100;
           function applyScale(pct) {
             scalePct = Math.min(130, Math.max(90, Number(pct) || 100));
@@ -1517,18 +1506,7 @@
             if (lbl) lbl.textContent = `${scalePct}%`;
             try { localStorage.setItem(SCALE_KEY, String(scalePct)); } catch (_) {}
           }
-          function applyTheme(mode) {
-            const dark = mode === "dark";
-            document.documentElement.classList.toggle("tdt-dark-mode", dark);
-            const cls = dark ? "fa-solid fa-sun" : "fa-solid fa-moon";
-            const dIcon = document.getElementById("tdt-theme-icon-d");
-            const mIcon = document.getElementById("tdt-theme-icon-m");
-            if (dIcon) dIcon.className = cls;
-            if (mIcon) mIcon.className = cls;
-            try { localStorage.setItem(THEME_KEY, dark ? "dark" : "light"); } catch (_) {}
-          }
           window.tdtChangeFontScale = function (step) { applyScale(scalePct + step * 10); };
-          window.tdtToggleTheme = function () { applyTheme(document.documentElement.classList.contains("tdt-dark-mode") ? "light" : "dark"); };
           window.tdtToggleDropdown = function (cat, ev) {
             if (ev) ev.stopPropagation();
             ["member", "group"].forEach(k => {
@@ -1562,8 +1540,6 @@
           try {
             const s = localStorage.getItem(SCALE_KEY);
             if (s) applyScale(Number(s));
-            const t = localStorage.getItem(THEME_KEY);
-            if (t === "dark" || t === "light") applyTheme(t);
           } catch (_) {}
         })();
     </script>

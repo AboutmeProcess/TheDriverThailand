@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Driver TH 🇹🇭 Premium Service</title>
-<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
 <style>
@@ -18,19 +18,24 @@
     overflow-x: hidden;
   }
 
-  /* Topmost Global Site Navigation Bar */
-  .global-top-nav {
-    background: #020617;
-    color: #E2E8F0;
-    border-bottom: 1px solid #1E293B;
+  /* UNIFIED TOPMOST GLOBAL SITE NAVIGATION BAR (EXACT SAME SIZE & POSITION ACROSS ALL 4 PAGES) */
+  .tdt-global-nav {
+    box-sizing: border-box;
+    font-family: 'Prompt', sans-serif;
+    background-color: #020617;
+    color: #e2e8f0;
+    border-bottom: 1px solid #1e293b;
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 4px 12px rgba(2, 6, 23, 0.25);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
     width: 100%;
   }
-  .global-top-nav-inner {
-    max-width: 1200px;
+  .tdt-global-nav *, .tdt-global-nav *::before, .tdt-global-nav *::after {
+    box-sizing: border-box;
+  }
+  .tdt-global-nav-inner {
+    max-width: 1152px;
     margin: 0 auto;
     padding: 10px 16px;
     display: flex;
@@ -38,57 +43,78 @@
     align-items: center;
     justify-content: space-between;
     gap: 8px;
+    min-height: 52px;
   }
-  .global-brand {
+  @media (min-width: 640px) {
+    .tdt-global-nav-inner {
+      padding: 10px 24px;
+    }
+  }
+  .tdt-global-brand {
     display: inline-flex;
     align-items: center;
     gap: 8px;
     font-size: 13px;
-    font-weight: 700;
-    color: #FBBF24;
+    line-height: 1.25;
+    font-weight: 800;
+    color: #fbbf24;
     text-decoration: none;
-    white-space: nowrap;
+    flex-shrink: 0;
+    transition: color 0.15s ease;
   }
-  .global-brand:hover {
-    color: #FDE68A;
+  @media (min-width: 640px) {
+    .tdt-global-brand {
+      font-size: 14px;
+    }
   }
-  .global-nav-links {
+  .tdt-global-brand:hover {
+    color: #fcd34d;
+  }
+  .tdt-global-links {
     display: flex;
     align-items: center;
     gap: 6px;
     overflow-x: auto;
     padding: 2px 0;
+    margin: 0;
   }
-  .global-nav-link {
+  @media (min-width: 640px) {
+    .tdt-global-links {
+      gap: 8px;
+    }
+  }
+  .tdt-nav-btn {
     display: inline-flex;
     align-items: center;
     gap: 6px;
     padding: 6px 12px;
-    border-radius: 10px;
+    border-radius: 12px;
     font-size: 12px;
-    font-weight: 600;
+    line-height: 16px;
+    font-weight: 700;
     text-decoration: none;
     white-space: nowrap;
-    background: #0F172A;
+    flex-shrink: 0;
+    background-color: #0f172a;
     border: 1px solid #334155;
-    color: #E2E8F0;
-    transition: background 0.2s, border-color 0.2s;
+    color: #e2e8f0;
+    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
   }
-  .global-nav-link:hover {
-    background: #1E293B;
+  .tdt-nav-btn:hover {
+    background-color: #1e293b;
   }
-  .global-nav-link.link-pcard {
-    color: #FCD34D;
-  }
-  .global-nav-link.link-blacklist {
-    color: #FDA4AF;
-  }
-  .global-nav-link.active {
-    background: #10B981;
-    border-color: #10B981;
+  .tdt-nav-btn.is-home i { color: #94a3b8; }
+  .tdt-nav-btn.is-pcard { color: #fcd34d; }
+  .tdt-nav-btn.is-pcard i { color: #fbbf24; }
+  .tdt-nav-btn.is-blacklist { color: #fda4af; }
+  .tdt-nav-btn.is-blacklist i { color: #fb7185; }
+  .tdt-nav-btn.active-register {
+    background-color: #10b981;
+    border-color: #10b981;
     color: #020617;
-    font-weight: 700;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   }
+  .tdt-nav-btn.active-register i { color: #020617; }
 
   .page-wrap {
     width: 100%;
@@ -506,26 +532,26 @@
 <body>
 
 <!-- TOPMOST GLOBAL SITE NAVIGATION BAR -->
-<nav class="global-top-nav">
-  <div class="global-top-nav-inner">
-    <a href="index.html" class="global-brand">
+<nav class="tdt-global-nav">
+  <div class="tdt-global-nav-inner">
+    <a href="index.html" class="tdt-global-brand">
       <i class="fa-solid fa-car-side"></i>
       <span>The Driver Thailand</span>
     </a>
-    <div class="global-nav-links">
-      <a href="index.html" class="global-nav-link">
+    <div class="tdt-global-links">
+      <a href="index.html" class="tdt-nav-btn is-home">
         <i class="fa-solid fa-house"></i>
         <span>หน้าหลัก</span>
       </a>
-      <a href="register.html" class="global-nav-link active">
+      <a href="register.html" class="tdt-nav-btn active-register">
         <i class="fa-solid fa-user-plus"></i>
         <span>ระบบสมาชิก</span>
       </a>
-      <a href="pcard.html" class="global-nav-link link-pcard">
+      <a href="pcard.html" class="tdt-nav-btn is-pcard">
         <i class="fa-solid fa-id-badge"></i>
         <span>ทำบัตรสมาชิกประเมศฐ์</span>
       </a>
-      <a href="blacklist.html" class="global-nav-link link-blacklist">
+      <a href="blacklist.html" class="tdt-nav-btn is-blacklist">
         <i class="fa-solid fa-user-shield"></i>
         <span>ตรวจสอบ Blacklist</span>
       </a>

@@ -39,6 +39,8 @@
   <style>
     html {
       scroll-behavior: smooth;
+      font-size: 16px;
+      transition: font-size 0.18s ease;
     }
     html, body, input, select, textarea, button, code, pre, .font-mono, .font-sans {
       font-family: 'Prompt', sans-serif !important;
@@ -48,6 +50,60 @@
       color: #0f172a;
       max-width: 100%;
       overflow-x: clip;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
+    /* Dark Mode Overrides for Page Body & Main Cards */
+    html.tdt-dark-mode,
+    html.tdt-dark-mode body {
+      background-color: #060911;
+      color: #f1f5f9;
+    }
+    html.tdt-dark-mode main .bg-white {
+      background-color: #0f172a;
+      border-color: rgba(251, 191, 36, 0.22);
+      color: #f1f5f9;
+    }
+    html.tdt-dark-mode main .text-slate-900 {
+      color: #f8fafc;
+    }
+    html.tdt-dark-mode main .text-slate-600,
+    html.tdt-dark-mode main .text-slate-500 {
+      color: #cbd5e1;
+    }
+    html.tdt-dark-mode main .border-slate-200,
+    html.tdt-dark-mode main .border-slate-200\/90 {
+      border-color: #1e293b;
+    }
+    html.tdt-dark-mode main .from-emerald-50 {
+      --tw-gradient-from: rgba(16, 185, 129, 0.16);
+      --tw-gradient-to: rgba(16, 185, 129, 0.08);
+    }
+    html.tdt-dark-mode main .from-teal-50 {
+      --tw-gradient-from: rgba(20, 184, 166, 0.16);
+      --tw-gradient-to: rgba(20, 184, 166, 0.08);
+    }
+    html.tdt-dark-mode main .from-amber-50,
+    html.tdt-dark-mode main .from-yellow-50 {
+      --tw-gradient-from: rgba(245, 158, 11, 0.18);
+      --tw-gradient-to: rgba(217, 119, 6, 0.08);
+    }
+    html.tdt-dark-mode main .from-sky-50,
+    html.tdt-dark-mode main .from-blue-50 {
+      --tw-gradient-from: rgba(14, 165, 233, 0.16);
+      --tw-gradient-to: rgba(59, 130, 246, 0.08);
+    }
+    html.tdt-dark-mode main .from-rose-50 {
+      --tw-gradient-from: rgba(244, 63, 94, 0.16);
+      --tw-gradient-to: rgba(225, 29, 72, 0.08);
+    }
+    html.tdt-dark-mode main .from-purple-50 {
+      --tw-gradient-from: rgba(168, 85, 247, 0.16);
+      --tw-gradient-to: rgba(99, 102, 241, 0.08);
+    }
+    html.tdt-dark-mode main .from-slate-100 {
+      --tw-gradient-from: rgba(51, 65, 85, 0.45);
+      --tw-gradient-to: rgba(30, 41, 59, 0.35);
     }
 
     /* Executive Obsidian & Champagne Gold Mesh */
@@ -218,6 +274,36 @@
       border-color: rgba(251, 191, 36, 0.5);
       transform: translateX(2px);
     }
+    .tdt-util-group {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background-color: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(251, 191, 36, 0.25);
+      border-radius: 12px;
+      padding: 3px;
+    }
+    .tdt-util-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      height: 28px;
+      padding: 0 8px;
+      border-radius: 9px;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #e2e8f0;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background-color 0.15s ease, color 0.15s ease;
+    }
+    .tdt-util-btn:hover {
+      background-color: rgba(251, 191, 36, 0.18);
+      color: #fde68a;
+    }
   </style>
 </head>
 <body class="antialiased min-h-screen flex flex-col">
@@ -377,16 +463,41 @@
           <i class="fa-solid fa-user-shield"></i>
           <span>ตรวจสอบ Blacklist</span>
         </a>
+
+        <!-- ตัวปรับขนาดตัวอักษร & โหมดสีสว่าง/สีเข้ม -->
+        <div class="tdt-util-group" title="ปรับขนาดตัวอักษรและโหมดหน้าเว็บ">
+          <button type="button" onclick="changeFontScale(-1)" aria-label="ลดขนาดตัวอักษร" class="tdt-util-btn" title="ลดขนาดตัวอักษร">
+            <span>A-</span>
+          </button>
+          <span id="font-scale-label" class="text-[10.5px] font-bold text-amber-300 px-1 select-none">100%</span>
+          <button type="button" onclick="changeFontScale(1)" aria-label="เพิ่มขนาดตัวอักษร" class="tdt-util-btn" title="เพิ่มขนาดตัวอักษร">
+            <span>A+</span>
+          </button>
+          <button type="button" onclick="toggleThemeMode()" id="btn-theme-toggle-desktop" aria-label="สลับโหมดสีสว่างหรือสีเข้ม" class="tdt-util-btn" title="สลับโหมดสีสว่าง / สีเข้ม">
+            <i id="theme-icon-desktop" class="fa-solid fa-moon text-amber-300"></i>
+          </button>
+        </div>
       </div>
 
       <!-- Mobile & Tablet Action Buttons (Zero Overflow) -->
-      <div class="flex lg:hidden items-center gap-2">
-        <a href="blacklist.html" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-rose-500/15 border border-rose-400/40 text-rose-300 text-xs font-bold">
+      <div class="flex lg:hidden items-center gap-1.5">
+        <div class="tdt-util-group">
+          <button type="button" onclick="changeFontScale(-1)" aria-label="ลดขนาดตัวอักษร" class="tdt-util-btn px-2">
+            <span>A-</span>
+          </button>
+          <button type="button" onclick="changeFontScale(1)" aria-label="เพิ่มขนาดตัวอักษร" class="tdt-util-btn px-2">
+            <span>A+</span>
+          </button>
+          <button type="button" onclick="toggleThemeMode()" id="btn-theme-toggle-mobile" aria-label="สลับโหมดสีสว่างหรือสีเข้ม" class="tdt-util-btn px-2">
+            <i id="theme-icon-mobile" class="fa-solid fa-moon text-amber-300"></i>
+          </button>
+        </div>
+        <a href="blacklist.html" class="inline-flex items-center gap-1.5 px-2.5 py-2 rounded-xl bg-rose-500/15 border border-rose-400/40 text-rose-300 text-xs font-bold">
           <i class="fa-solid fa-user-shield"></i>
-          <span>Blacklist</span>
+          <span class="hidden sm:inline">Blacklist</span>
         </a>
         <button type="button" onclick="toggleMobileNavDrawer()" id="btn-mobile-menu" aria-expanded="false" aria-label="เปิดเมนูทั้งหมด"
-          class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-amber-400 text-slate-950 font-extrabold text-xs shadow">
+          class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-amber-400 text-slate-950 font-extrabold text-xs shadow">
           <i id="mobile-menu-icon" class="fa-solid fa-bars"></i>
           <span>เมนู</span>
         </button>
@@ -860,6 +971,57 @@
   </footer>
 
   <script>
+    const FONT_SCALE_KEY = "tdt_font_scale_pct";
+    const THEME_MODE_KEY = "tdt_theme_mode";
+    let currentFontScale = 100;
+
+    function applyFontScale(pct) {
+      currentFontScale = Math.min(130, Math.max(90, Number(pct) || 100));
+      document.documentElement.style.fontSize = `${(currentFontScale / 100) * 16}px`;
+      const labelEl = document.getElementById("font-scale-label");
+      if (labelEl) labelEl.textContent = `${currentFontScale}%`;
+      try {
+        localStorage.setItem(FONT_SCALE_KEY, String(currentFontScale));
+      } catch (_) {}
+    }
+
+    function changeFontScale(step) {
+      const nextScale = currentFontScale + (step * 10);
+      applyFontScale(nextScale);
+      showToast(`ขนาดตัวอักษร: ${currentFontScale}%`);
+    }
+
+    function applyThemeMode(mode) {
+      const isDark = mode === "dark";
+      document.documentElement.classList.toggle("tdt-dark-mode", isDark);
+      const desktopIcon = document.getElementById("theme-icon-desktop");
+      const mobileIcon = document.getElementById("theme-icon-mobile");
+      const iconClass = isDark
+        ? "fa-solid fa-sun text-amber-300"
+        : "fa-solid fa-moon text-amber-300";
+      if (desktopIcon) desktopIcon.className = iconClass;
+      if (mobileIcon) mobileIcon.className = iconClass;
+      try {
+        localStorage.setItem(THEME_MODE_KEY, isDark ? "dark" : "light");
+      } catch (_) {}
+    }
+
+    function toggleThemeMode() {
+      const currentlyDark = document.documentElement.classList.contains("tdt-dark-mode");
+      const nextMode = currentlyDark ? "light" : "dark";
+      applyThemeMode(nextMode);
+      showToast(nextMode === "dark" ? "เปิดโหมดหน้าเว็บสีเข้มแล้วครับ" : "เปิดโหมดหน้าเว็บสีสว่างแล้วครับ");
+    }
+
+    (function initAccessibilityPreferences() {
+      try {
+        const savedScale = localStorage.getItem(FONT_SCALE_KEY);
+        if (savedScale) applyFontScale(Number(savedScale));
+        const savedTheme = localStorage.getItem(THEME_MODE_KEY);
+        if (savedTheme === "dark" || savedTheme === "light") applyThemeMode(savedTheme);
+      } catch (_) {}
+    })();
+
     let toastTimer = null;
 
     function closeAllDesktopDropdowns() {

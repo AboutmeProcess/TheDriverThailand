@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Driver TH 🇹🇭 Premium Service</title>
 <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -16,6 +17,79 @@
     max-width: 100%;
     overflow-x: hidden;
   }
+
+  /* Topmost Global Site Navigation Bar */
+  .global-top-nav {
+    background: #020617;
+    color: #E2E8F0;
+    border-bottom: 1px solid #1E293B;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(2, 6, 23, 0.25);
+    width: 100%;
+  }
+  .global-top-nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px 16px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .global-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #FBBF24;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .global-brand:hover {
+    color: #FDE68A;
+  }
+  .global-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    overflow-x: auto;
+    padding: 2px 0;
+  }
+  .global-nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    background: #0F172A;
+    border: 1px solid #334155;
+    color: #E2E8F0;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .global-nav-link:hover {
+    background: #1E293B;
+  }
+  .global-nav-link.link-pcard {
+    color: #FCD34D;
+  }
+  .global-nav-link.link-blacklist {
+    color: #FDA4AF;
+  }
+  .global-nav-link.active {
+    background: #10B981;
+    border-color: #10B981;
+    color: #020617;
+    font-weight: 700;
+  }
+
   .page-wrap {
     width: 100%;
     max-width: 100%;
@@ -430,6 +504,34 @@
 </style>
 </head>
 <body>
+
+<!-- TOPMOST GLOBAL SITE NAVIGATION BAR -->
+<nav class="global-top-nav">
+  <div class="global-top-nav-inner">
+    <a href="index.html" class="global-brand">
+      <i class="fa-solid fa-car-side"></i>
+      <span>The Driver Thailand</span>
+    </a>
+    <div class="global-nav-links">
+      <a href="index.html" class="global-nav-link">
+        <i class="fa-solid fa-house"></i>
+        <span>หน้าหลัก</span>
+      </a>
+      <a href="register.html" class="global-nav-link active">
+        <i class="fa-solid fa-user-plus"></i>
+        <span>ระบบสมาชิก</span>
+      </a>
+      <a href="pcard.html" class="global-nav-link link-pcard">
+        <i class="fa-solid fa-id-badge"></i>
+        <span>ทำบัตรสมาชิกประเมศฐ์</span>
+      </a>
+      <a href="blacklist.html" class="global-nav-link link-blacklist">
+        <i class="fa-solid fa-user-shield"></i>
+        <span>ตรวจสอบ Blacklist</span>
+      </a>
+    </div>
+  </div>
+</nav>
 
 <div class="page-wrap">
   <!-- 1. แบนเนอร์ -->

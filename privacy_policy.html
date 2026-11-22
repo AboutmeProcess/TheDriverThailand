@@ -3,13 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ประกาศความเป็นส่วนตัว | The Driver TH Premium Service</title>
+  <title>ประกาศความเป็นส่วนตัว (PDPA) | 🚖 The Driver TH 🇹🇭 Premium Service</title>
+  <!-- โหลด Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- โหลดฟอนต์ Prompt จาก Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- โหลดไอคอน FontAwesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Prompt', 'sans-serif'],
+            mono: ['Prompt', 'sans-serif'],
+          }
+        }
+      }
+    };
+  </script>
   <style>
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+      transition: font-size 0.18s ease;
+    }
     html, body, input, select, textarea, button, code, pre, .font-mono, .font-sans {
       font-family: 'Prompt', sans-serif !important;
     }
@@ -18,190 +38,502 @@
       color: #0f172a;
       max-width: 100%;
       overflow-x: clip;
+      transition: background-color 0.25s ease, color 0.25s ease;
     }
+    html.tdt-dark-mode, html.tdt-dark-mode body { background-color: #060911; color: #f1f5f9; }
+    html.tdt-dark-mode main article, html.tdt-dark-mode main .bg-white { background-color: #0f172a; border-color: #1e293b; color: #f1f5f9; }
+    html.tdt-dark-mode main .bg-slate-50 { background-color: #131c31; border-color: #334155; color: #f8fafc; }
+    html.tdt-dark-mode main .text-slate-900, html.tdt-dark-mode main .text-slate-800 { color: #f8fafc; }
+    html.tdt-dark-mode main .text-slate-700, html.tdt-dark-mode main .text-slate-600 { color: #cbd5e1; }
+
     .hero-glow-bg {
       background:
         radial-gradient(circle at 18% 22%, rgba(245, 158, 11, 0.24) 0%, transparent 45%),
         radial-gradient(circle at 82% 78%, rgba(16, 185, 129, 0.16) 0%, transparent 50%),
         linear-gradient(135deg, #070a12 0%, #0f172a 52%, #172033 100%);
     }
+
+    /* UNIFIED GLOBAL NAVIGATION BAR (MATCHING INDEX.HTML) */
+    .tdt-global-nav {
+      box-sizing: border-box;
+      font-family: 'Prompt', sans-serif;
+      background: rgba(6, 9, 17, 0.96);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      color: #e2e8f0;
+      border-bottom: 1px solid rgba(251, 191, 36, 0.25);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.45);
+      width: 100%;
+    }
+    .tdt-global-nav *, .tdt-global-nav *::before, .tdt-global-nav *::after { box-sizing: border-box; }
+    .tdt-global-nav-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 12px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 11px;
+    }
+    @media (min-width: 640px) {
+      .tdt-global-nav-inner { padding: 14px 24px; gap: 12px; }
+    }
+    .tdt-nav-top-row {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .tdt-global-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 16px;
+      line-height: 1.3;
+      font-weight: 400;
+      color: #fbbf24;
+      text-decoration: none;
+      text-align: left;
+      transition: color 0.15s ease;
+    }
+    .tdt-brand-text-stack {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 7px;
+      line-height: 1.3;
+      font-weight: 400;
+    }
+    .tdt-brand-subline-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 400;
+      color: #cbd5e1;
+      text-align: left;
+    }
+    .tdt-brand-exec-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(251, 191, 36, 0.18);
+      border: 1px solid rgba(251, 191, 36, 0.45);
+      color: #fde68a;
+      font-size: 10.5px;
+      font-weight: 400;
+      padding: 2px 8px;
+      border-radius: 999px;
+      line-height: 1.25;
+    }
+    .tdt-brand-logo-img {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      object-fit: cover;
+      object-position: center;
+      background: #ffffff;
+      padding: 0;
+      border: 1.5px solid rgba(251, 191, 36, 0.9);
+      box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.55), 0 0 0 2px rgba(251, 191, 36, 0.18);
+      flex-shrink: 0;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+    }
+    .tdt-global-brand:hover .tdt-brand-logo-img { transform: scale(1.06); border-color: #fde68a; }
+    @media (min-width: 640px) {
+      .tdt-global-brand { font-size: 19px; }
+      .tdt-brand-logo-img { width: 58px; height: 58px; border-radius: 18px; }
+    }
+    .tdt-global-brand:hover { color: #fde68a; }
+    .tdt-global-right-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 8px;
+      width: 100%;
+    }
+    .tdt-cat-dropdown-wrap { position: relative; display: inline-block; }
+    .tdt-cat-menu-panel {
+      display: none;
+      position: absolute;
+      left: 0;
+      top: calc(100% + 8px);
+      width: 310px;
+      max-width: calc(100vw - 32px);
+      border-radius: 16px;
+      padding: 10px;
+      background-color: #070b14;
+      border: 1px solid rgba(251, 191, 36, 0.45);
+      box-shadow: 0 24px 54px -10px rgba(0, 0, 0, 0.92), 0 0 0 1px rgba(15, 23, 42, 0.9);
+      z-index: 1060;
+      text-align: left;
+    }
+    .tdt-cat-menu-panel.is-open { display: block; }
+    .tdt-cat-menu-header {
+      padding: 8px 12px;
+      margin-bottom: 6px;
+      border-radius: 11px;
+      font-size: 11px;
+      font-weight: 400;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .tdt-cat-menu-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 12px;
+      background-color: #0d1424;
+      border: 1px solid rgba(148, 163, 184, 0.14);
+      color: #f1f5f9;
+      text-decoration: none;
+      margin-bottom: 6px;
+      transition: all 0.18s ease;
+    }
+    .tdt-cat-menu-link:last-child { margin-bottom: 0; }
+    .tdt-cat-menu-link:hover { background-color: #162038; border-color: rgba(251, 191, 36, 0.5); transform: translateX(2px); }
+    .tdt-cat-menu-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 12px;
+    }
+    .tdt-cat-menu-title { display: block; font-size: 12px; font-weight: 400; line-height: 1.3; }
+    .tdt-cat-menu-sub { display: block; font-size: 10px; font-weight: 400; color: #94a3b8; line-height: 1.25; }
+    .tdt-nav-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      height: 36px;
+      min-height: 36px;
+      padding: 0 13px;
+      border-radius: 11px;
+      font-size: 12px;
+      line-height: 16px;
+      font-weight: 400;
+      text-decoration: none;
+      white-space: nowrap;
+      background-color: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      color: #e2e8f0;
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+    .tdt-nav-btn:hover { background-color: #1e293b; border-color: rgba(251, 191, 36, 0.5); transform: translateY(-1px); }
+    .tdt-nav-btn.is-member-cat { color: #6ee7b7; border-color: rgba(52, 211, 153, 0.35); background-color: rgba(6, 78, 59, 0.22); }
+    .tdt-nav-btn.is-member-cat i { color: #34d399; }
+    .tdt-nav-btn.is-quick-register,
+    .tdt-nav-btn.is-quick-check-code { color: #5eead4; border-color: rgba(45, 212, 191, 0.38); background-color: rgba(19, 78, 74, 0.28); }
+    .tdt-nav-btn.is-quick-register i,
+    .tdt-nav-btn.is-quick-check-code i { color: #2dd4bf; }
+    .tdt-nav-btn.is-group-cat { color: #fcd34d; border-color: rgba(251, 191, 36, 0.38); background-color: rgba(120, 53, 15, 0.22); }
+    .tdt-nav-btn.is-group-cat i { color: #fbbf24; }
+    .tdt-nav-btn.is-blacklist { color: #fda4af; border-color: rgba(251, 113, 133, 0.35); }
+    .tdt-nav-btn.is-blacklist i { color: #fb7185; }
+    .tdt-nav-btn.active-current {
+      background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+      border-color: #fcd34d;
+      color: #060911;
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.35);
+    }
+    .tdt-nav-btn.active-current i { color: #060911; }
+    .tdt-util-group {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background-color: rgba(15, 23, 42, 0.92);
+      border: 1px solid rgba(251, 191, 36, 0.28);
+      border-radius: 12px;
+      padding: 3px;
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+    .tdt-util-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      height: 30px;
+      padding: 0 9px;
+      border-radius: 9px;
+      font-size: 12px;
+      font-weight: 400;
+      color: #e2e8f0;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background-color 0.15s ease, color 0.15s ease;
+    }
+    .tdt-util-btn:hover { background-color: rgba(251, 191, 36, 0.18); color: #fde68a; }
   </style>
 </head>
 <body class="antialiased min-h-screen flex flex-col selection:bg-amber-400 selection:text-slate-950">
-  <!-- แถบหัวเรื่อง -->
-  <header class="bg-slate-950 text-white border-b border-amber-400/25 sticky top-0 z-50 shadow-lg">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-3">
-      <div class="flex items-center gap-2.5 min-w-0">
-        <div class="w-9 h-9 rounded-xl bg-amber-500/20 border border-amber-400/40 text-amber-400 flex items-center justify-center shrink-0">
-          <i class="fa-solid fa-shield-halved"></i>
-        </div>
-        <div class="min-w-0">
-          <p class="font-extrabold text-xs sm:text-sm text-amber-300 truncate">The Driver TH Premium Service</p>
-          <p class="text-[11px] text-slate-400 truncate">ประกาศความเป็นส่วนตัว (Privacy Notice)</p>
+  <!-- UNIFIED GLOBAL SITE NAVIGATION BAR -->
+  <nav class="tdt-global-nav">
+    <div class="tdt-global-nav-inner">
+      <div class="tdt-nav-top-row">
+        <a href="index.html" class="tdt-global-brand">
+          <img src="TheDriverTH.jpg" alt="โลโก้ The Driver Thailand"
+            onerror="this.onerror=null;this.src='https://placehold.co/80x80/0f172a/fbbf24?text=TDT';"
+            class="tdt-brand-logo-img">
+          <span class="tdt-brand-text-stack">
+            <span>🚖 The Driver TH 🇹🇭 Premium Service</span>
+            <span class="tdt-brand-subline-row">
+              <span class="tdt-brand-exec-pill"><i class="fa-solid fa-crown" style="font-size:9px;"></i> EXECUTIVE NETWORK</span>
+              <span>เครือข่ายคนขับรถรับส่งผู้โดยสารและบริการมืออาชีพแห่งประเทศไทย</span>
+            </span>
+          </span>
+        </a>
+        <div class="tdt-util-group" title="ปรับขนาดตัวอักษรและโหมดหน้าเว็บ">
+          <button type="button" onclick="tdtChangeFontScale(-1)" aria-label="ลดขนาดตัวอักษร" class="tdt-util-btn">A-</button>
+          <span id="tdt-font-pct" style="font-size:11px;font-weight:400;color:#fde68a;padding:0 4px;">100%</span>
+          <button type="button" onclick="tdtChangeFontScale(1)" aria-label="เพิ่มขนาดตัวอักษร" class="tdt-util-btn">A+</button>
+          <button type="button" onclick="tdtToggleTheme()" aria-label="สลับโหมดสีสว่างหรือสีเข้ม" class="tdt-util-btn">
+            <i id="tdt-theme-icon-d" class="fa-solid fa-moon" style="color:#fcd34d;"></i>
+          </button>
         </div>
       </div>
-      <a href="member_register.html" onclick="confirmPrivacyReadAndReturn(event)"
-        class="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold text-xs px-3.5 py-2 rounded-xl shadow shrink-0 inline-flex items-center gap-1.5 transition">
-        <i class="fa-solid fa-check"></i>
-        <span>อ่านจบแล้ว กลับไปติ๊กยอมรับ</span>
-      </a>
+
+      <div class="tdt-global-right-controls" aria-label="เมนูหลักของหน้าเว็บ">
+        <a href="index.html" class="tdt-nav-btn"><i class="fa-solid fa-house"></i><span>หน้าหลัก</span></a>
+        <a href="member_register.html" class="tdt-nav-btn is-quick-register"><i class="fa-solid fa-file-signature"></i><span>ลงทะเบียนสมาชิกใหม่</span></a>
+        <a href="register.html" class="tdt-nav-btn is-quick-check-code"><i class="fa-solid fa-users-viewfinder"></i><span>ตรวจสอบรหัสสมาชิก</span></a>
+
+        <div class="tdt-cat-dropdown-wrap" id="nav-drop-member">
+          <button type="button" onclick="tdtToggleDropdown('member', event)" id="nav-btn-member" aria-expanded="false" class="tdt-nav-btn is-member-cat">
+            <i class="fa-solid fa-users"></i><span>หมวดหมู่บริการสมาชิก</span><i id="nav-chev-member" class="fa-solid fa-chevron-down" style="font-size:10px;transition:transform 0.2s;"></i>
+          </button>
+          <div id="nav-panel-member" class="tdt-cat-menu-panel">
+            <div class="tdt-cat-menu-header" style="background:rgba(6,78,59,0.55);color:#6ee7b7;border:1px solid rgba(16,185,129,0.25);">
+              <span><i class="fa-solid fa-users"></i> หมวดหมู่บริการสมาชิก</span><span style="font-size:10px;opacity:0.85;">3 เมนู</span>
+            </div>
+            <a href="member_edit.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(245,158,11,0.16);color:#fbbf24;border:1px solid rgba(251,191,36,0.3);"><i class="fa-solid fa-user-pen"></i></span>
+              <span><span class="tdt-cat-menu-title">แก้ไขข้อมูลสมาชิกเดิม</span><span class="tdt-cat-menu-sub">แจ้งเปลี่ยนรถ ทะเบียน หรือข้อมูลติดต่อ</span></span>
+            </a>
+            <a href="unblock_request.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(14,165,233,0.16);color:#38bdf8;border:1px solid rgba(56,189,248,0.3);"><i class="fa-solid fa-unlock-keyhole"></i></span>
+              <span><span class="tdt-cat-menu-title">ขอปลดล็อกห้อง Line OpenChat</span><span class="tdt-cat-menu-sub">ยื่นคำร้องชี้แจงกรณีถูกบล็อกหรือลบออก</span></span>
+            </a>
+            <a href="luxury_car_register.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(245,158,11,0.16);color:#fbbf24;border:1px solid rgba(251,191,36,0.3);"><i class="fa-solid fa-crown"></i></span>
+              <span><span class="tdt-cat-menu-title">ลงทะเบียนห้อง Luxury Car</span><span class="tdt-cat-menu-sub">สมัครเข้าห้องกลุ่มคนขับรถ Luxury Car</span></span>
+            </a>
+          </div>
+        </div>
+
+        <div class="tdt-cat-dropdown-wrap" id="nav-drop-group">
+          <button type="button" onclick="tdtToggleDropdown('group', event)" id="nav-btn-group" aria-expanded="false" class="tdt-nav-btn is-group-cat active-current">
+            <i class="fa-solid fa-briefcase"></i><span>หมวดหมู่บริการของกลุ่ม</span><i id="nav-chev-group" class="fa-solid fa-chevron-down" style="font-size:10px;transition:transform 0.2s;"></i>
+          </button>
+          <div id="nav-panel-group" class="tdt-cat-menu-panel">
+            <div class="tdt-cat-menu-header" style="background:rgba(120,53,15,0.45);color:#fcd34d;border:1px solid rgba(251,191,36,0.25);">
+              <span><i class="fa-solid fa-gem"></i> หมวดหมู่บริการของกลุ่ม</span><span style="font-size:10px;opacity:0.85;">5 เมนู</span>
+            </div>
+            <a href="pcard.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(245,158,11,0.16);color:#fbbf24;border:1px solid rgba(251,191,36,0.3);"><i class="fa-solid fa-id-badge"></i></span>
+              <span><span class="tdt-cat-menu-title">ทำบัตรสมาชิกประเมศฐ์ &amp; เช็คพัสดุ</span><span class="tdt-cat-menu-sub">สมัครทำบัตรเคลือบใสและตรวจสอบเลขพัสดุ</span></span>
+            </a>
+            <a href="vip_referral_guide.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(168,85,247,0.16);color:#c084fc;border:1px solid rgba(192,132,252,0.3);"><i class="fa-solid fa-map-location-dot"></i></span>
+              <span><span class="tdt-cat-menu-title">[VIP] ลายแทงสถานที่ท่องเที่ยว</span><span class="tdt-cat-menu-sub">ขอรับลายแทงร้านค้า/สถานที่เพื่อรับค่าแนะนำ</span></span>
+            </a>
+            <a href="rtaf_pass_register.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(59,130,246,0.16);color:#60a5fa;border:1px solid rgba(96,165,250,0.3);"><i class="fa-solid fa-plane-departure"></i></span>
+              <span><span class="tdt-cat-menu-title">ทำบัตรผ่านยานพาหนะ ทอ. (ดอนเมือง)</span><span class="tdt-cat-menu-sub">ขอทำบัตรผ่านเข้า - ออก เขตพื้นที่ ทอ.</span></span>
+            </a>
+            <a href="tour_book_order.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(20,184,166,0.16);color:#2dd4bf;border:1px solid rgba(45,212,191,0.3);"><i class="fa-solid fa-book"></i></span>
+              <span><span class="tdt-cat-menu-title">บริการสั่งซื้อสมุดทัวร์</span><span class="tdt-cat-menu-sub">โซนกรุงเทพฯ-ปริมณฑล และ พัทยา-ชลบุรี</span></span>
+            </a>
+            <a href="privacy_policy.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(148,163,184,0.16);color:#cbd5e1;border:1px solid rgba(148,163,184,0.3);"><i class="fa-solid fa-scale-balanced"></i></span>
+              <span><span class="tdt-cat-menu-title">ประกาศความเป็นส่วนตัว (PDPA)</span><span class="tdt-cat-menu-sub">นโยบายคุ้มครองข้อมูลส่วนบุคคลของกลุ่ม</span></span>
+            </a>
+          </div>
+        </div>
+
+        <a href="blacklist.html" class="tdt-nav-btn is-blacklist"><i class="fa-solid fa-user-shield"></i><span>ตรวจสอบ Blacklist</span></a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- แถบหัวเรื่องรอง -->
+  <header class="bg-slate-900/95 text-white border-b border-amber-400/20 shadow">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-2.5 text-xs sm:text-sm text-amber-300 font-semibold">
+        <i class="fa-solid fa-shield-halved text-amber-400"></i>
+        <span>PDPA PRIVACY NOTICE &amp; COMMUNITY TERMS</span>
+      </div>
+      <span class="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-300 bg-emerald-500/15 border border-emerald-400/30 px-3 py-1 rounded-full">
+        <i class="fa-solid fa-circle-check"></i> บันทึกสถานะการอ่านอัตโนมัติแล้ว
+      </span>
     </div>
   </header>
 
-  <main class="flex-grow max-w-4xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-6">
-    <!-- Hero -->
-    <section class="hero-glow-bg text-white rounded-3xl p-6 sm:p-8 border border-amber-400/30 shadow-xl space-y-3">
-      <span class="inline-flex items-center gap-1.5 bg-amber-500/20 border border-amber-400/40 text-amber-300 text-xs font-bold px-3.5 py-1 rounded-full">
-        <i class="fa-solid fa-scale-balanced"></i> พระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 (PDPA)
+  <!-- เนื้อหาหลัก -->
+  <main class="flex-grow max-w-4xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-6 sm:space-y-8">
+    <!-- Hero Banner -->
+    <section class="hero-glow-bg rounded-3xl p-6 sm:p-10 text-white shadow-2xl border border-amber-400/30 space-y-4">
+      <span class="inline-flex items-center gap-2 bg-amber-500/20 border border-amber-400/40 text-amber-300 text-xs font-bold px-3.5 py-1 rounded-full">
+        <i class="fa-solid fa-scale-balanced"></i> ประกาศคุ้มครองข้อมูลส่วนบุคคล (PDPA)
       </span>
-      <h1 class="text-xl sm:text-3xl font-black leading-snug">
-        ประกาศความเป็นส่วนตัว สำหรับสมาชิก กลุ่ม The Driver TH Premium Service
+      <h1 class="text-2xl sm:text-3xl font-black leading-tight text-amber-300">
+        ประกาศความเป็นส่วนตัว สำหรับสมาชิก<br class="hidden sm:inline">
+        กลุ่ม 🚖 The Driver TH 🇹🇭 Premium Service
       </h1>
-      <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-        กลุ่ม The Driver TH Premium Service ได้ตระหนักถึงความสำคัญกับการคุ้มครองข้อมูลส่วนบุคคลของท่านตาม พระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 กลุ่ม The Driver TH Premium Service จึงจัดทำประกาศเกี่ยวกับการคุ้มครองข้อมูลส่วนบุคคล (Privacy Notice) (“ประกาศ”) ฉบับนี้ขึ้น เพื่ออธิบายให้ท่านทราบถึงวิธีการที่ กลุ่ม The Driver TH Premium Service ปฏิบัติต่อข้อมูลส่วนบุคคลของท่าน ตาม พระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 เช่น วิธีการเก็บรวบรวม ใช้ เปิดเผย (รวมเรียกว่า “การประมวลผลฯ”) หรือการดำเนินการใด ๆ กับข้อมูลส่วนบุคคล และเพื่อให้ท่านทราบถึงวัตถุประสงค์ในการประมวลผล ระยะเวลาในการเก็บรักษาข้อมูลส่วนบุคคล ตลอดจนถึงสิทธิของท่านในฐานะเจ้าของข้อมูลส่วนบุคคล และดำเนินการตามที่กฎหมายว่าด้วยการคุ้มครองข้อมูลส่วนบุคคลกำหนด
+      <p class="text-slate-300 text-xs sm:text-sm leading-relaxed font-light">
+        กลุ่ม <strong>🚖 The Driver TH 🇹🇭 Premium Service</strong> ให้ความสำคัญอย่างยิ่งต่อการคุ้มครองข้อมูลส่วนบุคคลและความปลอดภัยของสมาชิกทุกท่าน จึงได้จัดทำประกาศความเป็นส่วนตัวฉบับนี้ขึ้น เพื่อชี้แจงรายละเอียดเกี่ยวกับการเก็บรวบรวม ใช้ เปิดเผย และคุ้มครองข้อมูลส่วนบุคคลของท่านตามพระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 (PDPA)
       </p>
     </section>
 
-    <!-- เนื้อหาประกาศความเป็นส่วนตัวฉบับเต็ม -->
-    <article class="bg-white rounded-3xl p-6 sm:p-9 border border-slate-200 shadow-sm space-y-6 text-xs sm:text-sm text-slate-700 leading-relaxed">
-      <section class="space-y-3">
-        <h2 class="text-base sm:text-lg font-extrabold text-slate-900 border-l-4 border-amber-500 pl-3">
-          ข้อมูลส่วนบุคคลของท่านที่กลุ่ม The Driver TH Premium Service เก็บรวบรวม
-        </h2>
-        <p>
-          กลุ่ม The Driver TH Premium Service อาจเก็บรวบรวมข้อมูลส่วนบุคคลของท่าน ไม่ว่าจะเป็นข้อมูลส่วนบุคคลที่ท่านให้ไว้กับกลุ่ม The Driver TH Premium Service โดยตรง หรือโดยอ้อมจากแหล่งข้อมูลอื่นๆ โดยข้อมูลส่วนบุคคลของท่านที่กลุ่ม The Driver TH Premium Service อาจนำมาทำการประมวลผลฯ ได้แก่
-        </p>
-        <ol class="list-decimal ml-5 space-y-2">
-          <li><strong>ข้อมูลส่วนตัว</strong> เช่น ชื่อ นามสกุล ชื่อเล่น วันเดือนปีเกิด อายุ เพศ รูปถ่าย ลายมือชื่อ เป็นต้น</li>
-          <li><strong>ข้อมูลที่ระบุตัวตนที่ออกโดยราชการ</strong> เช่น เลขที่บัตรประจำตัวประชาชน เลขที่หนังสือเดินทาง รวมถึงข้อมูลจากใบอนุญาตขับขี่ ทะเบียนบ้าน หนังสือรับรองนิติบุคคลที่ระบุรายชื่อกรรมการ หรือข้อมูลอื่นที่คล้ายคลึงกัน</li>
-          <li><strong>ข้อมูลการติดต่อ</strong> เช่น ที่อยู่ตามบัตรประจำตัวประชาชน ที่อยู่ตามทะเบียนบ้าน สถานศึกษา สถานที่จัดส่งสินค้า สถานที่จัดส่งใบแจ้งหนี้ สถานที่จัดส่งใบกำกับภาษี หมายเลขโทรศัพท์ อีเมล ข้อมูลบัญชีผู้ใช้โซเชียลมีเดีย เช่น บัญชีผู้ใช้ Line, Facebook เป็นต้น</li>
-          <li><strong>ข้อมูลเกี่ยวกับธุรกิจของลูกค้า</strong> เช่น ชื่อร้านค้า บริษัท หน่วยงาน หรือองค์กรที่สังกัด ชื่อตำแหน่ง ภาพถ่ายร้านค้า เป็นต้น</li>
-          <li><strong>ข้อมูลทางด้านการเงิน</strong> เช่น เลขที่บัญชีเงินฝากธนาคาร วงเงินสินเชื่อ เงื่อนไขการชำระเงิน เป็นต้น</li>
-          <li><strong>ข้อมูลการทำธุรกรรมการซื้อขาย</strong> เช่น รหัสลูกค้า ประวัติการสั่งซื้อสินค้าและ/หรือใช้บริการ รายละเอียดการร้องเรียนเกี่ยวกับสินค้า เป็นต้น</li>
-          <li><strong>ข้อมูลที่ใช้ประกอบเป็นหลักฐานในการลงทะเบียนเป็นลูกค้า</strong> เช่น ข้อมูลส่วนบุคคลที่ปรากฎในสำเนาบัตรประจำตัวประชาชน สำเนาหนังสือเดินทาง สำเนาทะเบียนบ้าน สำเนาใบเปลี่ยนชื่อนามสกุล แบบฟอร์มลงทะเบียน หนังสือมอบอำนาจ สำเนาใบทะเบียนพาณิชย์ สำเนาใบทะเบียนภาษีมูลค่าเพิ่ม (ภ.พ.20) แผนที่ โฉนดที่ดิน เอกสารหลักประกัน เป็นต้น</li>
-          <li><strong>ข้อมูลด้านเทคนิค</strong> เช่น ข้อมูลจราจรทางคอมพิวเตอร์ (Log) หมายเลขประจำเครื่องคอมพิวเตอร์ (IP Address) และข้อมูลที่กลุ่ม The Driver TH Premium Service ได้เก็บรวบรวมผ่านคุกกี้ (Cookies) หรือเทคโนโลยีอื่นที่คล้ายคลึงกัน เป็นต้น</li>
-          <li><strong>ข้อมูลอื่นๆ</strong> เช่น พฤติกรรมหรือแนวโน้มในการซื้อสินค้าและ/หรือใช้บริการ บันทึกการสนทนา บันทึกกิจกรรมภายในสำนักงานและ/หรือร้านค้า บันทึกภาพนิ่ง หรือภาพเคลื่อนไหวผ่านกล้องวงจรปิด (CCTV) เป็นต้น</li>
-          <li><strong>ข้อมูลส่วนบุคคลที่มีความละเอียดอ่อน</strong> โดยทั่วไปแล้วกลุ่ม The Driver TH Premium Service ไม่มีความประสงค์ที่จะเก็บรวมรวมข้อมูลส่วนบุคคลที่มีความละเอียดอ่อนของท่านเพื่อวัตถุประสงค์ใดโดยเฉพาะ เช่น ข้อมูลศาสนาและหมู่โลหิตที่ปรากฎอยู่ในสำเนาบัตรประจำตัวประชาชนของท่าน หรือข้อมูลสัญชาติที่ปรากฎอยู่ในหนังสือเดินทาง เป็นต้น หากท่านได้มอบสำเนาเอกสารดังกล่าวให้แก่กลุ่ม The Driver TH Premium Service ขอให้ท่านปกปิดข้อมูลดังกล่าว หากท่านมิได้ปกปิดข้อมูลข้างต้น ถือว่าท่านอนุญาตให้กลุ่ม The Driver TH Premium Service ดำเนินการปกปิดข้อมูลเหล่านั้น และถือว่าเอกสารที่มีการปกปิดข้อมูลดังกล่าว มีผลสมบูรณ์และบังคับใช้ได้ตามกฎหมายทุกประการ ทั้งนี้ หากกลุ่ม The Driver TH Premium Service ไม่สามารถปกปิดข้อมูลได้เนื่องจากข้อจำกัดทางเทคนิคบางประการ กลุ่ม The Driver TH Premium Service จะเก็บรวบรวมและใช้ข้อมูลดังกล่าวเพื่อเป็นส่วนหนึ่งของเอกสารยืนยันตัวตนของท่านเท่านั้น</li>
-        </ol>
-        <p class="bg-slate-50 border border-slate-200 rounded-2xl p-4">
-          กลุ่ม The Driver TH Premium Service จะไม่เก็บรวบรวมข้อมูลส่วนบุคคลของผู้เยาว์ คนเสมือนไร้ความสามารถ คนไร้ความสามารถ หากไม่ได้รับความยินยอมหรือหากไม่ได้อาศัยฐานทางกฎหมายอื่นใด ทั้งนี้หากกลุ่ม The Driver TH Premium Service ทราบว่า กลุ่ม The Driver TH Premium Service ได้บังเอิญเก็บรวบรวมข้อมูลส่วนบุคคลจากบุคคลเหล่านี้โดยมิได้รับความยินยอมและโดยไม่ได้อาศัยฐานทางกฎหมายอื่นใด กลุ่ม The Driver TH Premium Service จะดำเนินการลบข้อมูลส่วนบุคคลดังกล่าวทันทีที่กลุ่ม The Driver TH Premium Service ทราบถึงกรณีดังกล่าว
-        </p>
-      </section>
-
-      <section class="space-y-3">
-        <h2 class="text-base sm:text-lg font-extrabold text-slate-900 border-l-4 border-amber-500 pl-3">
-          วัตถุประสงค์และฐานทางกฎหมายในการประมวลผลข้อมูลส่วนบุคคล
-        </h2>
-        <p>กลุ่ม The Driver TH Premium Service อาจทำการประมวลผลข้อมูลส่วนบุคคลของท่าน เพื่อวัตถุประสงค์ต่างๆ ภายใต้ฐานทางกฎหมาย ดังต่อไปนี้ (รวมกันเรียกว่า “วัตถุประสงค์”)</p>
-
-        <div class="space-y-2">
-          <h3 class="font-bold text-slate-900">1. วัตถุประสงค์ที่ กลุ่ม The Driver TH Premium Service ทำการประมวลผลข้อมูลส่วนบุคคลของท่าน โดยอาศัยฐานความยินยอม</h3>
-          <ul class="list-disc ml-5 space-y-1.5">
-            <li><strong>วัตถุประสงค์ด้านการตลาดและการติดต่อสื่อสาร</strong> เพื่อทำการตลาด การติดต่อสื่อสาร การขาย การให้บริการ การเสนอข้อเสนอพิเศษ การเสนอสิทธิพิเศษ โปรโมชั่น ส่วนลด การแจ้งข่าวสารและข้อมูลเกี่ยวกับผลิตภัณฑ์ สินค้า และบริการ ของกลุ่ม The Driver TH Premium Service ที่ไม่สามารถอาศัยฐานทางกฎหมายอื่นใดได้</li>
-            <li><strong>เพื่อติดต่อและสื่อสารกับท่าน</strong> เช่น เพื่อใช้ในการติดต่อ ประสานงาน ให้บริการ ประชาสัมพันธ์ นำเสนอข้อมูลทางการตลาด การขาย ข้อเสนอพิเศษ โปรโมชั่น การแจ้งเตือน ข่าวสาร และข้อมูลเกี่ยวกับผลิตภัณฑ์ สินค้า และบริการของกลุ่ม The Driver TH Premium Service ให้แก่ท่าน และเพื่อประมวลผลและปรับปรุงแก้ไขข้อมูลส่วนบุคคลของท่านในฐานะสมาชิกของกลุ่ม The Driver TH Premium Service ให้เป็นปัจจุบัน รวมทั้งจัดการในด้านต่าง ๆ ที่เกี่ยวข้องกับการบริการลูกค้า ไม่ว่าจะเป็นคำถาม คำขอ คำติชม ผลตอบรับ คำร้องเรียน ข้อเรียกร้อง ข้อพิพาท หรือการเยียวยาชดใช้ค่าเสียหาย เพื่อให้ความช่วยเหลือและแก้ไขปัญหาทางเทคนิค เพื่อแจ้งการดำเนินการแก้ไขปัญหาให้แก่ท่าน และสำรวจความคิดเห็นและความพึงพอใจของท่านต่อบริการหรือกิจกรรมของกลุ่ม The Driver TH Premium Service รวมถึงเพื่อปรับปรุงแก้ไขข้อมูลส่วนบุคคลของท่าน (เช่น รายชื่อ/รายนามลูกค้า) ให้เป็นปัจจุบัน และเพื่อจัดเก็บเอกสารที่เกี่ยวข้องซึ่งอาจมีการอ้างถึงท่าน</li>
-            <li><strong>วัตถุประสงค์ต่างๆ ในการใช้ข้อมูลส่วนบุคคลที่ละเอียดอ่อน</strong> โดยทั่วไปแล้วกลุ่ม The Driver TH Premium Service ไม่มีความประสงค์ที่จะเก็บรวมรวมข้อมูลส่วนบุคคลที่มีความละเอียดอ่อนของท่านเพื่อวัตถุประสงค์ใดโดยเฉพาะ เช่น ข้อมูลศาสนาและหมู่โลหิตที่ปรากฎอยู่ในสำเนาบัตรประจำตัวประชาชนของท่าน หรือข้อมูลสัญชาติที่ปรากฎอยู่ในหนังสือเดินทาง เป็นต้น หากท่านได้มอบสำเนาเอกสารดังกล่าวให้แก่กลุ่ม The Driver TH Premium Service ขอให้ท่านปกปิดข้อมูลดังกล่าว หากท่านมิได้ปกปิดข้อมูลข้างต้น ถือว่าท่านอนุญาตให้กลุ่ม The Driver TH Premium Service ดำเนินการปกปิดข้อมูลเหล่านั้น และถือว่าเอกสารที่มีการปกปิดข้อมูลดังกล่าว มีผลสมบูรณ์และบังคับใช้ได้ตามกฎหมายทุกประการ</li>
-          </ul>
-        </div>
-
-        <div class="space-y-2">
-          <h3 class="font-bold text-slate-900">2. วัตถุประสงค์ที่กลุ่ม The Driver TH Premium Service ทำการประมวลผลข้อมูลส่วนบุคคลของท่าน โดยอาศัยฐานทางกฎหมายอื่นๆ</h3>
-          <p>กลุ่ม The Driver TH Premium Service อาจอาศัยหรืออ้างถึงฐานทางกฎหมายอื่นๆ ได้แก่ 1) ฐานการปฏิบัติตามสัญญา 2) ฐานปฏิบัติตามกฎหมาย 3) ฐานการป้องกันหรือระงับอันตรายต่อชีวิต ร่างกาย หรือสุขภาพของบุคคล และ 4) ฐานประโยชน์โดยชอบด้วยกฎหมาย ตามที่กฎหมายว่าด้วยการคุ้มครองข้อมูลส่วนบุคคลอนุญาต แล้วแต่กรณี เพื่อประมวลผลข้อมูลส่วนบุคคลของท่าน ตามวัตถุประสงค์ดังต่อไปนี้</p>
-          <ol class="list-decimal ml-5 space-y-1.5">
-            <li><strong>เพื่อจัดหาผลิตภัณฑ์ สินค้าและบริการให้แก่ท่าน</strong> เช่น เพื่อดำเนินการตามคำขอของท่านก่อนเข้าทำสัญญา เพื่อเข้าทำสัญญาและจัดการกับความสัมพันธ์ทางสัญญาระหว่างกลุ่ม The Driver TH Premium Service กับท่าน เพื่อเสนอราคาตามที่ท่านร้องขอ เพื่อให้บริการ ดำเนินการตรวจสอบและปรับปรุงบริการ เพื่ออำนวยความสะดวกแก่ท่าน เพื่อสนับสนุนและดำเนินกิจกรรมอื่น ๆ ที่เกี่ยวข้องกับผลิตภัณฑ์ สินค้า และบริการของกลุ่ม The Driver TH Premium Service เพื่อบริหารจัดการบัญชีของท่านและเพื่อดำเนินธุรกรรมทางการเงินและธุรกรรมที่เกี่ยวข้องกับการชำระเงิน การคืนเงิน การออกใบสำคัญรับเงิน ใบเสร็จ ใบแจ้งหนี้ ใบกำกับภาษี เพื่อดำเนินการและติดตามการจัดส่ง รับ ส่งคืน และเปลี่ยนผลิตภัณฑ์ สินค้า และบริการของกลุ่ม The Driver TH Premium Service รวมถึงการตรวจสอบและการยืนยันและยกเลิกธุรกรรม เพื่อประมวลผลคำสั่งซื้อของท่าน</li>
-            <li><strong>การลงทะเบียนและการยืนยันตัวตน</strong> เช่น เพื่อลงทะเบียน ตรวจสอบ ยืนยัน และรับรองตัวตนของท่าน</li>
-            <li><strong>เพื่อคัดเลือกลูกค้า</strong> เช่น เพื่อตรวจสอบสถานะลูกค้า และ/หรือ ตรวจสอบประวัติในรูปแบบอื่น ๆ ของท่าน รวมถึงการประเมินความเสี่ยงเกี่ยวกับท่าน การตรวจสอบ การประเมินความเหมาะสมและคุณสมบัติของท่าน การออกคำขอใบเสนอราคาและการเชิญชวนประกวดราคา การเข้าทำสัญญากับท่าน</li>
-            <li><strong>เพื่อการดำเนินการใด ๆ ที่เกี่ยวข้องกับโปรแกรมการสะสมคะแนน</strong> เช่น ดำเนินการเพื่อให้สมาชิกสามารถสะสมคะแนน เพิ่ม ใช้ แลกเปลี่ยน รับ จ่าย และ/หรือ โอนคะแนนสะสม หรือ แลกเปลี่ยนข้อมูลส่วนบุคคลของสมาชิกซึ่งได้ให้ไว้ในการสมัครสมาชิกหรือได้รับจากการทำธุรกรรมกับกลุ่ม The Driver TH Premium Service รวมถึงกิจกรรมใด ๆ ที่กลุ่ม The Driver TH Premium Service เห็นว่าเป็นประโยชน์กับสมาชิกโปรแกรมดังกล่าว</li>
-            <li><strong>เพื่อดำเนินการจัดกิจกรรมการฝึกอบรม</strong> ทั้งในรูปแบบการฝึกอบรมทั่วไปและแบบอิเล็กทรอนิกส์ (e-learning)</li>
-            <li><strong>การบริหารจัดการทางด้านเทคโนโลยีสารสนเทศ</strong> เช่น เพื่อวัตถุประสงค์ในการบริหารจัดการธุรกิจของกลุ่ม The Driver TH Premium Service ดำเนินการประชาสัมพันธ์ภายในองค์กร รวมถึงการจัดการระบบปฏิบัติการด้านเทคโนโลยีสารสนเทศ การจัดการระบบติดต่อสื่อสาร ระบบความปลอดภัยทางด้านเทคโนโลยีสารสนเทศขององค์กร รวมถึงการควบคุมและการบันทึกการเข้าถึงระบบ การติดตามตรวจสอบระบบ อุปกรณ์ และระบบอินเทอร์เน็ต</li>
-            <li><strong>การทำงานของเว็บไซต์ และแพลตฟอร์ม</strong> เช่น เพื่อดูแล ดำเนินงาน ติดตาม สังเกตการณ์ และจัดการเว็บไซต์และแพลตฟอร์มเพื่ออำนวยความสะดวกและรับรองให้ท่านมั่นใจว่าเว็บไซต์และแพลตฟอร์มทำงานอย่างราบรื่น มีประสิทธิภาพและปลอดภัย เพื่ออำนวยความสะดวกท่านในการใช้งานเว็บไซต์และแพลตฟอร์ม เพื่อปรับปรุงแผนงานและเนื้อหาของเว็บไซต์และแพลตฟอร์มให้ดียิ่งขึ้น</li>
-            <li><strong>เพื่อการแนะนำและการปรับเนื้อหาให้เหมาะกับบุคคล</strong> เช่น เพื่อทราบถึงความต้องการของท่าน และปรับผลิตภัณฑ์ สินค้าและบริการของกลุ่ม The Driver TH Premium Service ให้เหมาะสมกับท่าน</li>
-            <li><strong>การปฏิบัติตามหน้าที่ตามกฎหมายและคำสั่งของหน่วยงานรัฐ</strong> เช่น เพื่อดำเนินการตามกฎหมาย กระบวนพิจารณา หรือคำสั่งของหน่วยงานรัฐ ซึ่งรวมถึงหน่วยงานรัฐภายนอกประเทศไทย และ/หรือให้ความร่วมมือกับศาล ผู้กำกับดูแล หน่วยงานรัฐ และหน่วยงานที่บังคับใช้กฎหมาย ในกรณีที่กลุ่ม The Driver TH Premium Service มีเหตุผลอันควรเชื่อได้ว่าต้องปฏิบัติตามกฎหมาย และ/หรือ คำสั่ง หรือต้องให้ความร่วมมือดังกล่าว</li>
-            <li><strong>เพื่อตรวจจับการทุจริต</strong> เช่น เพื่อพิสูจน์ยืนยันตัวตนของท่าน เพื่อตรวจสอบการปฏิบัติตามกฎหมายและกฎระเบียบอื่น ๆ เช่น เพื่อปฏิบัติตามกฎด้านการป้องกันและปราบปรามการฟอกเงิน และป้องกันการทุจริต รวมถึงการตรวจสอบและบันทึกเป็นการภายใน การจัดการทรัพย์สิน ฐานข้อมูลด้านการทุจริต ระบบ และการควบคุมธุรกิจอื่น ๆ</li>
-            <li><strong>เพื่อป้องกันหรือระงับอันตราย</strong> ต่อชีวิต ร่างกาย หรือสุขภาพของบุคคล</li>
-          </ol>
-          <p class="pt-1">
-            เนื่องจากข้อมูลส่วนบุคคลของท่านที่กลุ่ม The Driver TH Premium Service จะดำเนินการประมวลผลเพื่อวัตถุประสงค์ข้างต้นในส่วนที่มีความเกี่ยวเนื่องกับการปฏิบัติตามกฎหมายหรือสัญญาหรือมีความจำเป็นเพื่อเข้าทำสัญญากับท่าน ดังนั้นกรณีที่ท่านไม่ประสงค์ที่จะให้ข้อมูลส่วนบุคคลกับกลุ่ม The Driver TH Premium Service อาจมีผลกระทบทางกฎหมาย หรืออาจทำให้กลุ่ม The Driver TH Premium Service ไม่สามารถปฏิบัติหน้าที่ภายใต้สัญญาที่ได้เข้าทำกับท่าน หรือไม่สามารถเข้าทำสัญญากับท่านได้ ในกรณีดังกล่าว กลุ่ม The Driver TH Premium Service อาจมีความจำเป็นต้องปฏิเสธการเข้าทำสัญญากับท่าน หรือยกเลิกการซื้อขายหรือการให้บริการที่เกี่ยวข้องกับท่าน ไม่ว่าทั้งหมดหรือบางส่วน
-          </p>
-        </div>
-      </section>
-
-      <section class="space-y-3">
-        <h2 class="text-base sm:text-lg font-extrabold text-slate-900 border-l-4 border-amber-500 pl-3">
-          การเปิดเผยข้อมูลส่วนบุคคล
-        </h2>
-        <p>กลุ่ม The Driver TH Premium Service อาจเปิดเผยข้อมูลส่วนบุคคลของท่านให้แก่บุคคลและ/หรือหน่วยงานต่างๆ ดังต่อไปนี้</p>
-        <ol class="list-decimal ml-5 space-y-1.5">
-          <li><strong>กลุ่ม The Driver TH Premium Service</strong> ทั้งนี้ให้หมายความรวมถึงผู้บริหาร กรรมการ พนักงาน ลูกจ้าง และหรือบุคลากรภายในของกลุ่ม The Driver TH Premium Service ดังกล่าวเท่าที่เกี่ยวข้องและตามความจำเป็น</li>
-          <li><strong>ที่ปรึกษา</strong> เช่น ที่ปรึกษากฎหมาย ทนายความ ผู้ตรวจสอบบัญชี หรือผู้เชี่ยวชาญอื่นใด เป็นต้น</li>
-          <li><strong>บุคคลภายนอกตามที่กฎหมายกำหนด</strong> เช่น หน่วยงานรัฐบาล ศาล เจ้าพนักงาน หน่วยงานรัฐ หรือบุคคลอื่น ในกรณีที่กลุ่ม The Driver TH Premium Service มีเหตุอันควรที่เชื่อว่าจำเป็นจะต้องปฏิบัติหน้าที่ตามกฎหมายหรือข้อบังคับทางกฎหมาย หรือเพื่อปกป้องสิทธิของ กลุ่ม The Driver TH Premium Service สิทธิของบุคคลอื่น หรือเพื่อความปลอดภัยของบุคคล หรือเพื่อตรวจสอบ ป้องกัน หรือจัดการเกี่ยวกับปัญหาการทุจริต หรือด้านความมั่นคงปลอดภัย</li>
-        </ol>
-      </section>
-
+    <!-- รายละเอียดประกาศความเป็นส่วนตัวทั้ง 9 ข้อ -->
+    <article class="bg-white rounded-3xl p-6 sm:p-10 shadow-sm border border-slate-200/90 space-y-6 text-xs sm:text-sm text-slate-700 leading-relaxed">
       <section class="space-y-2">
         <h2 class="text-base sm:text-lg font-extrabold text-slate-900 border-l-4 border-amber-500 pl-3">
-          ระยะเวลาเก็บรักษาข้อมูลส่วนบุคคล
+          1. ข้อมูลส่วนบุคคลที่เราเก็บรวบรวม
         </h2>
-        <p>
-          กลุ่ม The Driver TH Premium Service จะเก็บรักษาข้อมูลส่วนบุคคลของท่านในระยะเวลาเท่าที่จำเป็นอย่างเหมาะสมเพื่อใช้ตามวัตถุประสงค์ที่กลุ่ม The Driver TH Premium Service ได้แจ้งแก่ท่านตามนโยบายความเป็นส่วนตัวฉบับนี้ นอกจากนี้ กลุ่ม The Driver TH Premium Service จะเก็บรักษาข้อมูลส่วนบุคคลเป็นระยะเวลาตามที่กฎหมายที่เกี่ยวข้องกำหนด (ถ้ามี)
-        </p>
-        <p>
-          ทั้งนี้ กลุ่ม The Driver TH Premium Service จะเก็บรักษาข้อมูลส่วนบุคคลของท่านเป็นระยะเวลาไม่เกิน 10 ปี นับแต่วันที่นิติสัมพันธ์ระหว่างกลุ่ม The Driver TH Premium Service กับท่านสิ้นสุดลง หลังจากครบกำหนดระยะเวลาดังกล่าว กลุ่ม The Driver TH Premium Service จะดำเนินการลบหรือทำลายหรือทำให้ข้อมูลส่วนบุคคลของท่านเป็นข้อมูลส่วนบุคคลที่ไม่สามารถระบุตัวตนได้ เว้นแต่จะเป็นกรณีที่กลุ่ม The Driver TH Premium Service สามารถเก็บรักษาข้อมูลส่วนบุคคลดังกล่าวได้ต่อไปตามที่กฎหมายว่าด้วยการคุ้มครองข้อมูลส่วนบุคคลหรือกฎหมายอื่นที่เกี่ยวข้องกำหนด
-        </p>
-      </section>
-
-      <section class="space-y-2">
-        <h2 class="text-base sm:text-lg font-extrabold text-slate-900 border-l-4 border-amber-500 pl-3">
-          การส่งหรือโอนข้อมูลส่วนบุคคลไปต่างประเทศ
-        </h2>
-        <p>
-          กลุ่ม The Driver TH Premium Service อาจมีการเก็บข้อมูลของท่านบนคอมพิวเตอร์เซิร์ฟเวอร์หรือคลาวด์ของผู้ให้บริการที่อยู่ต่างประเทศ และอาจมีการประมวลผลข้อมูลโดยใช้โปรแกรมหรือแอปพลิเคชันสำเร็จรูปของผู้ให้บริการในต่างประเทศ ทั้งนี้ ในการส่งหรือโอนข้อมูลของท่านไปยังต่างประเทศ ไม่ว่ากรณีใดๆ กลุ่ม The Driver TH Premium Service จะปฏิบัติตามพระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562
-        </p>
-      </section>
-
-      <section class="space-y-2">
-        <h2 class="text-base sm:text-lg font-extrabold text-slate-900 border-l-4 border-amber-500 pl-3">
-          สิทธิ์ของเจ้าของข้อมูลส่วนบุคคล
-        </h2>
-        <p>ในฐานะเจ้าของข้อมูลส่วนบุคคล ท่านมีสิทธิ์ต่างๆ ภายใต้กฎหมายว่าด้วยการคุ้มครองข้อมูลส่วนบุคคล ดังต่อไปนี้</p>
-        <ul class="list-disc ml-5 space-y-1.5">
-          <li><strong>สิทธิในการเข้าถึงข้อมูลส่วนบุคคล:</strong> ท่านมีสิทธิในการเข้าถึงข้อมูลส่วนบุคคลของท่านและขอให้กลุ่ม The Driver TH Premium Service ทำสำเนาข้อมูลส่วนบุคคลดังกล่าวให้แก่ท่าน</li>
-          <li><strong>สิทธิในการโอนย้ายข้อมูลส่วนบุคคล:</strong> ท่านมีสิทธิที่จะขอรับข้อมูลส่วนบุคคลของท่าน รวมถึงมีสิทธิขอให้ส่งหรือโอนข้อมูลส่วนบุคคลของท่านไปยังผู้ควบคุมข้อมูลส่วนบุคคลรายอื่น หรือตัวท่านเอง เว้นแต่โดยสภาพไม่สามารถทำได้</li>
-          <li><strong>สิทธิในการคัดค้านการประมวลผลข้อมูลส่วนบุคคล:</strong> ท่านมีสิทธิขอคัดค้านการประมวลผลข้อมูลส่วนบุคคลของท่านได้</li>
-          <li><strong>สิทธิในการลบข้อมูลส่วนบุคคล:</strong> ท่านมีสิทธิขอให้กลุ่ม The Driver TH Premium Service ลบ ทำลาย หรือทำให้ข้อมูลส่วนบุคคลของท่านเป็นข้อมูลที่ไม่สามารถระบุตัวตนได้</li>
-          <li><strong>สิทธิในการระงับการใช้ข้อมูลส่วนบุคคล:</strong> ท่านมีสิทธิขอให้กลุ่ม The Driver TH Premium Service ระงับการประมวลผลข้อมูลส่วนบุคคลของท่าน</li>
-          <li><strong>สิทธิในการแก้ไขข้อมูลส่วนบุคคลให้ถูกต้อง:</strong> ท่านมีสิทธิขอแก้ไขข้อมูลส่วนบุคคลของท่านให้ถูกต้อง หากข้อมูลส่วนบุคคลของท่านนั้นไม่ถูกต้อง ไม่เป็นปัจจุบัน ไม่ครบถ้วนสมบูรณ์ หรือก่อให้เกิดความเข้าใจผิด</li>
-          <li><strong>สิทธิที่จะเพิกถอนความยินยอม:</strong> ท่านมีสิทธิในการเพิกถอนความยินยอมในการประมวลผลข้อมูลส่วนบุคคลที่ท่านได้ให้ความยินยอมไว้กับกลุ่ม The Driver TH Premium Service ได้ ในกรณีที่กลุ่ม The Driver TH Premium Service อาศัยความยินยอมของท่านในการประมวลผลข้อมูลส่วนบุคคล</li>
-          <li><strong>สิทธิในการยื่นข้อร้องเรียน:</strong> ท่านมีสิทธิในการยื่นข้อร้องเรียนต่อคณะกรรมการผู้เชี่ยวชาญที่ได้รับการแต่งตั้งโดยคณะกรรมการคุ้มครองข้อมูลส่วนบุคคล</li>
+        <p>เพื่อใช้ในการยืนยันตัวตนสมาชิกตัวจริง 100% และการบริหารจัดการเครือข่ายคนขับรถบริการมืออาชีพ กลุ่มอาจเก็บรวบรวมข้อมูลส่วนบุคคลของท่าน ดังต่อไปนี้:</p>
+        <ul class="list-disc ml-6 space-y-1">
+          <li><strong>ข้อมูลระบุตัวตน:</strong> ชื่อ-นามสกุล, ชื่อที่ใช้ในห้อง Line OpenChat, รูปถ่ายใบหน้าจริงคู่กับกระดาษลายมือยืนยันตัวตน</li>
+          <li><strong>ข้อมูลการติดต่อ:</strong> เบอร์โทรศัพท์, Line ID และที่อยู่ปัจจุบันสำหรับติดต่อประสานงานหรือจัดส่งเอกสาร/บัตรสมาชิก</li>
+          <li><strong>ข้อมูลยานพาหนะและเอกสารประกอบ:</strong> ยี่ห้อรถ, รุ่นรถ, สีรถ, หมายเลขทะเบียนรถ, รูปถ่ายรถยนต์ รวมถึงสำเนาเอกสารเท่าที่จำเป็นเฉพาะกรณีท่านยื่นขอทำบัตรผ่านยานพาหนะหรือบริการเฉพาะทาง</li>
+          <li><strong>ข้อมูลการทำรายการ:</strong> หลักฐานการชำระค่าธรรมเนียม (สลิปโอนเงิน) เฉพาะกรณีสมัครบริการที่มีค่าใช้จ่าย เช่น การทำบัตรสมาชิกประเมศฐ์ หรือสั่งซื้อสมุดทัวร์</li>
         </ul>
-        <p class="pt-1">ทั้งนี้ กลุ่ม The Driver TH Premium Service ขอสงวนสิทธิในการพิจารณาคำร้องขอใช้สิทธิของท่านและดำเนินการตามที่กฎหมายว่าด้วยการคุ้มครองข้อมูลส่วนบุคคลกำหนด</p>
       </section>
 
       <section class="space-y-2">
         <h2 class="text-base sm:text-lg font-extrabold text-slate-900 border-l-4 border-amber-500 pl-3">
-          มาตรการความมั่นคงปลอดภัยในการเก็บรักษาข้อมูลส่วนบุคคล
+          2. วัตถุประสงค์ในการเก็บรวบรวม ใช้ หรือเปิดเผยข้อมูลส่วนบุคคล
+        </h2>
+        <ul class="list-disc ml-6 space-y-1">
+          <li>เพื่อตรวจสอบและยืนยันตัวตนของสมาชิก ป้องกันการแอบอ้างและมิจฉาชีพแฝงตัวเข้ามาก่อความเสียหายภายในกลุ่ม</li>
+          <li>เพื่อออกหมายเลขสมาชิก (Member ID) และแสดงผลตรวจสอบสถานะสมาชิกบนระบบออนไลน์ของกลุ่ม</li>
+          <li>เพื่อประสานงานการรับ-ส่งงาน ตรวจสอบประวัติเฝ้าระวังภัย (Blacklist) และระงับข้อพิพาทที่อาจเกิดขึ้นระหว่างสมาชิกหรือผู้โดยสาร</li>
+          <li>เพื่อจัดทำบัตรสมาชิกประเมศฐ์ ดำเนินการจัดส่งพัสดุ หรือประสานงานยื่นขอทำบัตรผ่านยานพาหนะตามคำร้องของสมาชิก</li>
+        </ul>
+      </section>
+
+      <section class="space-y-2">
+        <h2 class="text-base sm:text-lg font-extrabold text-slate-900 border-l-4 border-amber-500 pl-3">
+          3. ข้อกำหนดด้านรูปถ่ายยืนยันตัวตนและข้อมูลที่ห้ามส่ง
         </h2>
         <p>
-          กลุ่ม The Driver TH Premium Service จัดให้มีมาตรการการรักษาความมั่นคงปลอดภัยที่เหมาะสม ตามนโยบายและแนวทางปฏิบัติด้านเทคโนโลยีสารสนเทศของกลุ่ม The Driver TH Premium Service เพื่อป้องกันการสูญหาย การเข้าถึง การใช้ การเปลี่ยนแปลง การแก้ไข หรือการเปิดเผยข้อมูลส่วนบุคคลโดยปราศจากอำนาจหรือโดยมิชอบ นอกจากนี้ กลุ่ม The Driver TH Premium Service จะจัดให้มีการทบทวนมาตรการดังกล่าวเป็นระยะเพื่อความเหมาะสม
+          เพื่อความปลอดภัยสูงสุดของข้อมูลส่วนบุคคลของสมาชิก <strong>กลุ่มขอสงวนสิทธิ์ไม่อนุญาตให้สมาชิกส่งรูปถ่ายคู่กับบัตรประชาชนหรือใบขับขี่ในการสมัครสมาชิกทั่วไป</strong> โดยให้ใช้การเขียนข้อความด้วยลายมือลงบนกระดาษจริงแล้วถ่ายคู่กับใบหน้าเท่านั้น หากมีการส่งภาพบัตรประชาชนมาโดยไม่จำเป็น ทีมผู้ดูแลจะดำเนินการลบทิ้งทันที
         </p>
       </section>
 
-      <section class="bg-amber-50 border border-amber-200 rounded-2xl p-4 sm:p-5 space-y-1.5">
-        <h2 class="text-base font-extrabold text-amber-950">การติดต่อ กลุ่ม The Driver TH Premium Service</h2>
-        <p class="text-amber-900">
-          หากท่านมีความประสงค์จะใช้สิทธิที่เกี่ยวข้องกับข้อมูลส่วนบุคคลของท่าน หรือมีข้อสงสัยเกี่ยวกับข้อมูลส่วนบุคคลของท่านภายใต้นโยบายความเป็นส่วนตัวฉบับนี้ ท่านสามารถติดต่อกลุ่ม The Driver TH Premium Service หรือเจ้าหน้าที่คุ้มครองข้อมูลส่วนบุคคลของกลุ่ม The Driver TH Premium Service ได้ที่ <strong>Line @Thedrivethailand</strong>
+      <section class="space-y-2">
+        <h2 class="text-base sm:text-lg font-extrabold text-slate-900 border-l-4 border-amber-500 pl-3">
+          4. การเปิดเผยข้อมูลส่วนบุคคลและการแสดงผลบนเว็บไซต์
+        </h2>
+        <p>
+          ข้อมูลส่วนบุคคลของท่านจะถูกเก็บรักษาเป็นความลับในฐานข้อมูลของคณะผู้ดูแลกลุ่ม <strong>ไม่มีการนำไปขาย แลกเปลี่ยน หรือเปิดเผยต่อบุคคลภายนอกเพื่อวัตถุประสงค์ทางการตลาด</strong> ยกเว้นการแสดงผลเฉพาะข้อมูลที่จำเป็นบนระบบค้นหารหัสสมาชิก (เช่น รหัสสมาชิก ชื่อในห้องแชท และเลขทะเบียนรถ) และกรณีจำเป็นต้องให้ความร่วมมือกับเจ้าหน้าที่ตำรวจหรือหน่วยงานราชการตามกฎหมายเมื่อเกิดเหตุทุจริตหรืออาชญากรรม
         </p>
       </section>
 
-      <div class="pt-4 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3">
-        <p class="text-xs text-slate-500">เมื่อกดปุ่มยืนยัน ระบบจะบันทึกสถานะการอ่านและกลับไปยังหน้าแบบฟอร์มลงทะเบียน</p>
-        <a href="member_register.html" onclick="confirmPrivacyReadAndReturn(event)"
-          class="w-full sm:w-auto text-center bg-slate-950 hover:bg-slate-800 text-amber-400 border border-amber-400/40 font-extrabold text-xs sm:text-sm px-6 py-3 rounded-xl shadow-lg transition inline-flex items-center justify-center gap-2">
-          <i class="fa-solid fa-circle-check text-emerald-400"></i>
-          <span>ยืนยันว่าอ่านประกาศความเป็นส่วนตัวแล้ว กลับไปกรอกฟอร์ม</span>
-        </a>
+      <section class="space-y-2">
+        <h2 class="text-base sm:text-lg font-extrabold text-slate-900 border-l-4 border-amber-500 pl-3">
+          5. มาตรการรักษาความมั่นคงปลอดภัยของข้อมูล
+        </h2>
+        <p>
+          กลุ่มจัดให้มีมาตรการควบคุมการเข้าถึงข้อมูลส่วนบุคคล โดยจำกัดสิทธิ์เฉพาะคณะผู้ดูแลระบบที่ได้รับมอบหมายเท่านั้นในการเข้าถึงฐานข้อมูลสมาชิก รูปถ่ายยืนยันตัวตน และเอกสารประกอบต่างๆ เพื่อป้องกันการสูญหาย การเข้าถึง หรือการนำไปใช้โดยมิชอบ
+        </p>
+      </section>
+
+      <section class="space-y-2">
+        <h2 class="text-base sm:text-lg font-extrabold text-slate-900 border-l-4 border-amber-500 pl-3">
+          6. ระยะเวลาในการเก็บรักษาข้อมูลส่วนบุคคล
+        </h2>
+        <p>
+          กลุ่มจะเก็บรักษาข้อมูลส่วนบุคคลของท่านไว้ตลอดระยะเวลาที่ท่านยังคงสถานะเป็นสมาชิกของกลุ่ม <strong>🚖 The Driver TH 🇹🇭 Premium Service</strong> และเมื่อท่านสิ้นสุดสมาชิกภาพหรือร้องขอให้ลบข้อมูล ทีมผู้ดูแลจะดำเนินการลบหรือทำลายข้อมูลส่วนบุคคลของท่านออกจากระบบภายใน 30 วัน เว้นแต่กรณีที่จำเป็นต้องเก็บไว้เพื่อเป็นหลักฐานทางกฎหมายหรือประวัติเฝ้าระวังภัย
+        </p>
+      </section>
+
+      <section class="space-y-2">
+        <h2 class="text-base sm:text-lg font-extrabold text-slate-900 border-l-4 border-amber-500 pl-3">
+          7. สิทธิของเจ้าของข้อมูลส่วนบุคคล
+        </h2>
+        <p>ในฐานะเจ้าของข้อมูลส่วนบุคคล ท่านมีสิทธิตามกฎหมาย PDPA ดังนี้:</p>
+        <ul class="list-disc ml-6 space-y-1">
+          <li>สิทธิในการขอเข้าถึงและขอรับสำเนาข้อมูลส่วนบุคคลของท่าน</li>
+          <li>สิทธิในการขอแก้ไขข้อมูลส่วนบุคคลให้ถูกต้อง เป็นปัจจุบัน และไม่ก่อให้เกิดความเข้าใจผิด</li>
+          <li>สิทธิในการขอถอนความยินยอม ขอระงับการใช้ หรือขอให้ลบ/ทำลายข้อมูลส่วนบุคคลของท่าน (ซึ่งอาจส่งผลให้ไม่สามารถคงสถานะสมาชิกในห้องแชทได้)</li>
+        </ul>
+      </section>
+
+      <section class="space-y-2">
+        <h2 class="text-base sm:text-lg font-extrabold text-slate-900 border-l-4 border-amber-500 pl-3">
+          8. ข้อตกลงและกติกาการเป็นสมาชิกเครือข่าย
+        </h2>
+        <p>
+          สมาชิกตกลงที่จะปฏิบัติตามกติกาของกลุ่มอย่างเคร่งครัด ไม่ใส่เบอร์โทรศัพท์ในชื่อโปรไฟล์ห้อง OpenChat ไม่แอบอ้างหรือสวมรอยเป็นสมาชิกท่านอื่น ไม่ทิ้งงาน/เทงานผู้โดยสาร และไม่กระทำการใดๆ ที่ก่อให้เกิดความเสียหายต่อชื่อเสียงของเครือข่าย <strong>🚖 The Driver TH 🇹🇭 Premium Service</strong>
+        </p>
+      </section>
+
+      <section class="space-y-2">
+        <h2 class="text-base sm:text-lg font-extrabold text-slate-900 border-l-4 border-amber-500 pl-3">
+          9. ช่องทางการติดต่อคณะผู้ดูแลกลุ่ม
+        </h2>
+        <p>
+          หากท่านมีข้อสงสัยเกี่ยวกับประกาศความเป็นส่วนตัวฉบับนี้ หรือต้องการใช้สิทธิเกี่ยวกับข้อมูลส่วนบุคคลของท่าน สามารถติดต่อทีมผู้ดูแลกลุ่มได้โดยตรงทาง <strong>Line Official: @Thedrivethailand</strong>
+        </p>
+      </section>
+
+      <!-- กล่องยืนยันการอ่านและปุ่มกลับไปหน้าแบบฟอร์ม -->
+      <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 mt-6">
+        <div class="flex items-start gap-3">
+          <i class="fa-solid fa-circle-check text-emerald-600 text-xl mt-0.5 shrink-0"></i>
+          <div>
+            <p class="font-extrabold text-emerald-950 text-xs sm:text-sm">ระบบบันทึกสถานะการเปิดอ่านประกาศความเป็นส่วนตัวเรียบร้อยแล้ว</p>
+            <p class="text-xs text-emerald-800 mt-0.5">ท่านสามารถกลับไปยังหน้าแบบฟอร์มและกดติ๊กช่อง <strong>“ยอมรับและยืนยัน”</strong> เพื่อส่งข้อมูลได้ทันที</p>
+          </div>
+        </div>
+        <div class="flex flex-wrap items-center gap-2 shrink-0">
+          <button type="button" onclick="confirmReadAndCloseOrBack()"
+            class="bg-slate-950 hover:bg-slate-800 text-amber-400 font-extrabold text-xs sm:text-sm px-5 py-3 rounded-xl shadow transition inline-flex items-center gap-2">
+            <i class="fa-solid fa-check-double"></i>
+            <span>รับทราบและกลับไปหน้าแบบฟอร์ม</span>
+          </button>
+        </div>
       </div>
     </article>
   </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-950 text-slate-400 border-t border-amber-500/20 py-8 px-4 text-xs mt-10">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+      <div class="text-center sm:text-left">
+        <p class="font-bold text-amber-300">🚖 The Driver TH 🇹🇭 Premium Service Official Network</p>
+        <p class="text-[11px] text-slate-500 mt-0.5">ศูนย์กลางระบบสมาชิก บัตรสมาชิกประเมศฐ์ และระบบเฝ้าระวังภัยกลุ่มคนขับรถรับจ้าง</p>
+      </div>
+      <div class="flex flex-wrap justify-center gap-4 font-semibold">
+        <a href="index.html" class="hover:text-amber-400 transition">หน้าหลัก</a>
+        <a href="register.html" class="hover:text-emerald-400 transition">ระบบสมาชิก</a>
+        <a href="member_register.html" class="hover:text-teal-400 transition">ลงทะเบียนสมาชิกใหม่</a>
+        <a href="pcard.html" class="hover:text-amber-400 transition">ทำบัตรสมาชิกประเมศฐ์</a>
+        <a href="blacklist.html" class="hover:text-rose-400 transition">ตรวจสอบ Blacklist</a>
+      </div>
+    </div>
+  </footer>
 
   <script>
     const PRIVACY_READ_KEY = 'tdt_privacy_policy_read_v1';
@@ -212,15 +544,69 @@
       } catch (_) {}
     }
 
-    function confirmPrivacyReadAndReturn(event) {
+    function confirmReadAndCloseOrBack() {
       markAsRead();
       if (window.opener && !window.opener.closed) {
-        event.preventDefault();
         window.close();
+      } else if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        window.location.href = 'member_register.html';
       }
     }
 
     document.addEventListener('DOMContentLoaded', markAsRead);
+
+    (function initSharedNavAndAccessibility() {
+      const SCALE_KEY = "tdt_font_scale_pct";
+      const THEME_KEY = "tdt_theme_mode";
+      let scalePct = 100;
+      function applyScale(pct) {
+        scalePct = Math.min(130, Math.max(90, Number(pct) || 100));
+        document.documentElement.style.fontSize = `${(scalePct / 100) * 16}px`;
+        const lbl = document.getElementById("tdt-font-pct");
+        if (lbl) lbl.textContent = `${scalePct}%`;
+        try { localStorage.setItem(SCALE_KEY, String(scalePct)); } catch (_) {}
+      }
+      function applyTheme(mode) {
+        const dark = mode === "dark";
+        document.documentElement.classList.toggle("tdt-dark-mode", dark);
+        const cls = dark ? "fa-solid fa-sun" : "fa-solid fa-moon";
+        const dIcon = document.getElementById("tdt-theme-icon-d");
+        if (dIcon) dIcon.className = cls;
+        try { localStorage.setItem(THEME_KEY, dark ? "dark" : "light"); } catch (_) {}
+      }
+      window.tdtChangeFontScale = function (step) { applyScale(scalePct + step * 10); };
+      window.tdtToggleTheme = function () { applyTheme(document.documentElement.classList.contains("tdt-dark-mode") ? "light" : "dark"); };
+      window.tdtToggleDropdown = function (cat, ev) {
+        if (ev) ev.stopPropagation();
+        ["member", "group"].forEach(k => {
+          const panel = document.getElementById(`nav-panel-${k}`);
+          const chev = document.getElementById(`nav-chev-${k}`);
+          if (!panel) return;
+          const open = k === cat ? !panel.classList.contains("is-open") : false;
+          panel.classList.toggle("is-open", open);
+          if (chev) chev.style.transform = open ? "rotate(180deg)" : "rotate(0deg)";
+        });
+      };
+      document.addEventListener("click", function (ev) {
+        const mDrop = document.getElementById("nav-drop-member");
+        const gDrop = document.getElementById("nav-drop-group");
+        if (!(mDrop && mDrop.contains(ev.target)) && !(gDrop && gDrop.contains(ev.target))) {
+          ["member", "group"].forEach(k => {
+            document.getElementById(`nav-panel-${k}`)?.classList.remove("is-open");
+            const chev = document.getElementById(`nav-chev-${k}`);
+            if (chev) chev.style.transform = "rotate(0deg)";
+          });
+        }
+      });
+      try {
+        const s = localStorage.getItem(SCALE_KEY);
+        if (s) applyScale(Number(s));
+        const t = localStorage.getItem(THEME_KEY);
+        if (t === "dark" || t === "light") applyTheme(t);
+      } catch (_) {}
+    })();
   </script>
 </body>
 </html>

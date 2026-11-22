@@ -1114,4 +1114,1084 @@
     });
   </script>
 </body>
+</html>    html {
+      scroll-behavior: smooth;
+    }
+    html, body {
+      font-family: 'Prompt', 'Inter', sans-serif;
+      background-color: #f8fafc;
+      color: #0f172a;
+      max-width: 100%;
+      overflow-x: clip;
+    }
+    .hero-glow-bg {
+      background:
+        radial-gradient(circle at 18% 22%, rgba(245, 158, 11, 0.25) 0%, transparent 45%),
+        radial-gradient(circle at 82% 78%, rgba(56, 189, 248, 0.18) 0%, transparent 50%),
+        linear-gradient(135deg, #05070e 0%, #0d1322 52%, #182136 100%);
+    }
+    .gold-shimmer-text {
+      background: linear-gradient(90deg, #fde68a 0%, #fbbf24 35%, #f59e0b 65%, #fef08a 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: goldShimmer 5s linear infinite;
+    }
+    @keyframes goldShimmer {
+      to { background-position: 200% center; }
+    }
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-5px); }
+    }
+    @keyframes iconBouncePop {
+      0%, 100% { transform: translateY(0) scale(1); }
+      40% { transform: translateY(-6px) scale(1.12) rotate(-4deg); }
+      70% { transform: translateY(-2px) scale(1.04) rotate(3deg); }
+    }
+    .icon-float { animation: floatSlow 3.2s ease-in-out infinite; }
+    .group:hover .icon-bounce-hover,
+    .icon-bounce-hover:hover {
+      animation: iconBouncePop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* UNIFIED TOPMOST GLOBAL SITE NAVIGATION BAR */
+    .tdt-global-nav {
+      box-sizing: border-box;
+      font-family: 'Prompt', sans-serif;
+      background: linear-gradient(90deg, #060911 0%, #0d1322 50%, #060911 100%);
+      color: #e2e8f0;
+      border-bottom: 1px solid rgba(251, 191, 36, 0.25);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.35);
+      width: 100%;
+    }
+    .tdt-global-nav *, .tdt-global-nav *::before, .tdt-global-nav *::after {
+      box-sizing: border-box;
+    }
+    .tdt-global-nav-inner {
+      max-width: 1152px;
+      margin: 0 auto;
+      padding: 10px 16px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      min-height: 52px;
+    }
+    @media (min-width: 640px) {
+      .tdt-global-nav-inner {
+        padding: 10px 24px;
+      }
+    }
+    .tdt-global-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      line-height: 1.25;
+      font-weight: 800;
+      color: #fbbf24;
+      text-decoration: none;
+      flex-shrink: 0;
+      transition: color 0.15s ease;
+    }
+    @media (min-width: 640px) {
+      .tdt-global-brand {
+        font-size: 14px;
+      }
+    }
+    .tdt-global-brand:hover {
+      color: #fde68a;
+    }
+    .tdt-global-brand:hover i {
+      animation: iconBouncePop 0.6s ease;
+    }
+    .tdt-global-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 2px 0;
+      margin: 0;
+    }
+    @media (min-width: 640px) {
+      .tdt-global-links {
+        gap: 8px;
+      }
+    }
+    .tdt-nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      line-height: 16px;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+      flex-shrink: 0;
+      background-color: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      color: #e2e8f0;
+      transition: all 0.2s ease;
+    }
+    .tdt-nav-btn:hover {
+      background-color: #1e293b;
+      border-color: rgba(251, 191, 36, 0.45);
+      transform: translateY(-1px);
+    }
+    .tdt-nav-btn:hover i {
+      animation: iconBouncePop 0.55s ease;
+    }
+    .tdt-nav-btn.is-home i { color: #94a3b8; }
+    .tdt-nav-btn.is-register { color: #6ee7b7; }
+    .tdt-nav-btn.is-register i { color: #34d399; }
+    .tdt-nav-btn.is-pcard { color: #fcd34d; }
+    .tdt-nav-btn.is-pcard i { color: #fbbf24; }
+    .tdt-nav-btn.is-blacklist { color: #fda4af; }
+    .tdt-nav-btn.is-blacklist i { color: #fb7185; }
+  </style>
+</head>
+<body class="text-slate-800 antialiased min-h-screen flex flex-col selection:bg-amber-400 selection:text-slate-950 relative">
+  <!-- กล่องแจ้งเตือน Toast มุมขวาบน -->
+  <div id="toast-container" class="fixed top-5 right-5 z-50 flex flex-col gap-3 max-w-sm w-full pointer-events-none px-4"></div>
+
+  <!-- TOPMOST GLOBAL SITE NAVIGATION BAR -->
+  <nav class="tdt-global-nav">
+    <div class="tdt-global-nav-inner">
+      <a href="index.html" class="tdt-global-brand">
+        <i class="fa-solid fa-car-side"></i>
+        <span>The Driver Thailand</span>
+      </a>
+      <div class="tdt-global-links">
+        <a href="index.html" class="tdt-nav-btn is-home">
+          <i class="fa-solid fa-house"></i>
+          <span>หน้าหลัก</span>
+        </a>
+        <a href="register.html" class="tdt-nav-btn is-register">
+          <i class="fa-solid fa-user-plus"></i>
+          <span>ระบบสมาชิก</span>
+        </a>
+        <a href="pcard.html" class="tdt-nav-btn is-pcard">
+          <i class="fa-solid fa-id-badge"></i>
+          <span>ทำบัตรสมาชิกประเมศฐ์</span>
+        </a>
+        <a href="blacklist.html" class="tdt-nav-btn is-blacklist">
+          <i class="fa-solid fa-user-shield"></i>
+          <span>ตรวจสอบ Blacklist</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- แถบประกาศด้านบนสุด -->
+  <header class="bg-slate-900/95 text-slate-300 text-xs py-2.5 px-4 border-b border-amber-500/15">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
+      <div class="flex items-center gap-2 flex-wrap">
+        <span class="bg-gradient-to-r from-amber-400 to-yellow-500 text-slate-950 font-extrabold px-2.5 py-0.5 rounded-full text-[11px] shadow-sm">
+          <i class="fa-solid fa-plane-departure mr-1"></i> RTAF DON MUEANG VEHICLE PASS
+        </span>
+        <span class="text-slate-300 font-medium">แบบฟอร์มขอทำบัตรผ่านยานพาหนะเข้า - ออก เขตพื้นที่ ทอ. (ดอนเมือง)</span>
+      </div>
+      <div class="flex items-center gap-3 text-xs">
+        <a href="https://forms.gle/68yjUXdAbY79XMxD8" target="_blank" rel="noopener noreferrer"
+          class="text-amber-300 hover:text-amber-200 font-semibold inline-flex items-center gap-1.5 transition">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i> เปิดแบบฟอร์มต้นฉบับ (Google Forms)
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- พื้นที่เนื้อหาหลัก -->
+  <main class="flex-grow max-w-5xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-6 sm:space-y-8">
+    <!-- Hero Banner -->
+    <section class="hero-glow-bg rounded-3xl p-6 sm:p-10 text-white shadow-2xl border border-amber-400/40 relative overflow-hidden">
+      <div class="absolute -right-16 -top-16 w-72 h-72 bg-amber-500/20 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -left-16 -bottom-16 w-72 h-72 bg-sky-500/15 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="relative z-10 space-y-4">
+        <div class="flex flex-wrap items-center gap-2.5">
+          <span class="bg-amber-500/20 border border-amber-400/50 text-amber-300 text-xs font-bold px-3.5 py-1 rounded-full inline-flex items-center gap-1.5">
+            <i class="fa-solid fa-shield-halved icon-float"></i> ROYAL THAI AIR FORCE AREA PASS
+          </span>
+          <span class="bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-xs font-bold px-3.5 py-1 rounded-full inline-flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> บันทึกร่างอัตโนมัติ
+          </span>
+        </div>
+
+        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black leading-tight">
+          แบบฟอร์มขอทำบัตรผ่านยานพาหนะ <span class="gold-shimmer-text">เข้า - ออก เขตพื้นที่ ทอ. (ดอนเมือง)</span>
+        </h1>
+        <p class="text-slate-300 text-xs sm:text-sm leading-relaxed max-w-3xl font-light">
+          บริการประสานงานยื่นขอจัดทำบัตรผ่านยานพาหนะเข้า - ออก เขตพื้นที่กองทัพอากาศ (ดอนเมือง) สำหรับสมาชิกเครือข่าย <strong>The Driver Thailand</strong> เพื่อความสะดวกในการเดินทางรับ - ส่งผู้โดยสารและติดต่อราชการ/สายการบิน
+        </p>
+
+        <div class="bg-amber-500/10 border border-amber-400/35 rounded-2xl p-3.5 sm:p-4 text-xs text-amber-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div class="flex items-start gap-2.5 min-w-0">
+            <i class="fa-solid fa-circle-info text-amber-400 text-base mt-0.5 shrink-0"></i>
+            <div class="min-w-0 space-y-0.5">
+              <strong class="text-amber-300 block">ข้อชี้แจงสำคัญสำหรับผู้ยื่นขอทำบัตรผ่านยานพาหนะ ทอ. (ดอนเมือง):</strong>
+              <span>กรุณาเตรียมสำเนาเอกสารประจำตัวผู้ขับขี่และเอกสารรถให้ชัดเจนครบถ้วน เพื่อใช้ประกอบการยื่นขออนุญาตตามระเบียบของหน่วยงาน</span>
+            </div>
+          </div>
+          <a href="https://forms.gle/68yjUXdAbY79XMxD8" target="_blank" rel="noopener noreferrer"
+            class="shrink-0 bg-slate-950 hover:bg-slate-900 text-amber-300 border border-amber-400/40 font-bold px-3.5 py-2 rounded-xl text-xs whitespace-nowrap inline-flex items-center gap-1.5 transition">
+            <i class="fa-solid fa-up-right-from-square"></i> ดูฟอร์ม Google ต้นฉบับ
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- กฎและเอกสารประกอบการยื่นขอทำบัตรผ่าน ทอ. (ดอนเมือง) -->
+    <section class="bg-white rounded-3xl p-5 sm:p-8 shadow-sm border border-slate-200/90 space-y-5">
+      <div class="flex items-start gap-3 bg-amber-50 border border-amber-200 border-l-4 border-l-amber-500 rounded-2xl p-4">
+        <div class="w-10 h-10 rounded-xl bg-amber-500/15 text-amber-600 flex items-center justify-center text-lg shrink-0">
+          <i class="fa-solid fa-file-shield icon-float"></i>
+        </div>
+        <div class="text-xs sm:text-sm space-y-1">
+          <h2 class="font-extrabold text-amber-950">เอกสารและเงื่อนไขการขอทำบัตรผ่านยานพาหนะเข้า - ออก เขตพื้นที่ ทอ. (ดอนเมือง)</h2>
+          <p class="text-amber-900/90 leading-relaxed">
+            1. <strong>สำเนาบัตรประจำตัวประชาชน</strong> และ <strong>สำเนาใบอนุญาตขับขี่รถยนต์</strong> ของผู้ขับขี่ (ที่ยังไม่หมดอายุ)<br>
+            2. <strong>สำเนารายการจดทะเบียนรถยนต์ (หน้าเล่มทะเบียน / ใบคู่มือจดทะเบียนรถ)</strong> ที่ตรงกับคันที่ยื่นขอทำบัตร<br>
+            3. <strong>รูปถ่ายรถยนต์</strong> ด้านหน้า/ด้านข้างที่เห็นแผ่นป้ายทะเบียนชัดเจน และ <strong>หลักฐานการชำระค่าธรรมเนียม/ค่าดำเนินการ</strong>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- กล่องแสดงผลการส่งคำขอสำเร็จ -->
+    <div id="rtaf-success-box" class="hidden bg-emerald-950 text-emerald-100 border border-emerald-500/40 rounded-3xl p-5 sm:p-7 shadow-xl space-y-4">
+      <div class="flex items-start justify-between gap-3 border-b border-emerald-800/80 pb-4">
+        <div class="flex items-center gap-3">
+          <div class="w-11 h-11 rounded-2xl bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 flex items-center justify-center text-xl shrink-0">
+            <i class="fa-solid fa-circle-check"></i>
+          </div>
+          <div>
+            <h3 class="font-extrabold text-base sm:text-lg text-white">บันทึกคำขอทำบัตรผ่านยานพาหนะ ทอ. (ดอนเมือง) เรียบร้อยแล้ว</h3>
+            <p class="text-xs text-emerald-300">เลขที่คำขออ้างอิง: <strong id="rtaf-ref-code" class="font-mono text-amber-300">-</strong></p>
+          </div>
+        </div>
+        <button type="button" onclick="document.getElementById('rtaf-success-box').classList.add('hidden')" class="text-emerald-300 hover:text-white text-sm">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div id="rtaf-summary-details" class="grid sm:grid-cols-2 gap-2.5 text-xs bg-slate-950/60 p-4 rounded-2xl border border-emerald-800/60"></div>
+      <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
+        <p class="text-xs text-emerald-200/90">
+          <i class="fa-brands fa-line mr-1 text-emerald-400"></i> เจ้าหน้าที่จะตรวจสอบเอกสารและแจ้งความคืบหน้าการรับบัตรทาง <strong>Line ID</strong> หรือ <strong>เบอร์โทรศัพท์</strong> ที่ระบุไว้
+        </p>
+        <button type="button" onclick="copyRtafRef()" class="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold px-4 py-2.5 rounded-xl text-xs inline-flex items-center gap-1.5 transition">
+          <i class="fa-solid fa-copy"></i> คัดลอกเลขที่คำขอ
+        </button>
+      </div>
+    </div>
+
+    <!-- แบบฟอร์มขอทำบัตรผ่านยานพาหนะเข้า - ออก เขตพื้นที่ ทอ. (ดอนเมือง) -->
+    <section class="bg-white rounded-3xl p-5 sm:p-10 shadow-sm border border-slate-200/90 space-y-6 sm:space-y-8">
+      <div class="border-b border-slate-200 pb-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div>
+          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">แบบฟอร์มขอทำบัตรผ่านยานพาหนะเข้า - ออก เขตพื้นที่ ทอ. (ดอนเมือง)</h2>
+          <p class="text-xs sm:text-sm text-slate-500 mt-0.5">กรอกข้อมูลให้ตรงกับเอกสารราชการทุกช่อง ช่องที่มี <span class="text-rose-500 font-bold">*</span> จำเป็นต้องระบุ</p>
+        </div>
+        <div class="flex items-center gap-2.5 flex-wrap">
+          <span id="draft-status-badge" class="text-xs font-semibold text-slate-600 bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200">
+            <i class="fa-solid fa-floppy-disk text-slate-400 mr-1"></i> พร้อมบันทึกร่าง
+          </span>
+          <button type="button" onclick="clearFormDraft()" class="text-xs font-bold text-rose-700 bg-rose-50 hover:bg-rose-100 border border-rose-200 px-3 py-1.5 rounded-xl transition">
+            <i class="fa-solid fa-eraser mr-1"></i> ล้างแบบร่าง
+          </button>
+        </div>
+      </div>
+
+      <form id="rtaf-pass-form" onsubmit="handleRtafFormSubmit(event)" class="space-y-6">
+        <!-- หมวดที่ 1: ประเภทคำขอทำบัตรผ่าน -->
+        <div class="bg-amber-50/70 border border-amber-200 rounded-3xl p-5 sm:p-6 space-y-4">
+          <h3 class="font-extrabold text-slate-900 text-sm sm:text-base border-b border-amber-200 pb-3 flex items-center gap-2">
+            <i class="fa-solid fa-plane-departure text-amber-600 text-lg"></i>
+            <span>ประเภทการยื่นขอทำบัตรผ่านยานพาหนะ ทอ. (ดอนเมือง)</span>
+          </h3>
+
+          <div class="grid md:grid-cols-3 gap-3 text-xs sm:text-sm">
+            <label id="label-rtaf-new" class="border-2 border-amber-500 bg-white rounded-2xl p-4 cursor-pointer hover:border-amber-600 transition flex items-start gap-2.5 shadow-sm">
+              <input type="radio" name="passRequestType" value="ขอทำบัตรผ่านยานพาหนะใหม่" checked onchange="handlePassTypeChange()" class="mt-1 w-4 h-4 text-amber-600 focus:ring-amber-500 shrink-0">
+              <div class="min-w-0">
+                <span class="font-bold text-slate-900 block">ขอทำบัตรผ่านใหม่</span>
+                <span class="text-[11px] text-slate-500 block mt-0.5">สำหรับรถที่ยังไม่เคยมีบัตรผ่าน ทอ.</span>
+              </div>
+            </label>
+
+            <label id="label-rtaf-renew" class="border-2 border-slate-200 bg-white rounded-2xl p-4 cursor-pointer hover:border-amber-500 transition flex items-start gap-2.5 shadow-sm">
+              <input type="radio" name="passRequestType" value="ต่ออายุบัตรผ่านยานพาหนะ (บัตรเดิมหมดอายุ)" onchange="handlePassTypeChange()" class="mt-1 w-4 h-4 text-amber-600 focus:ring-amber-500 shrink-0">
+              <div class="min-w-0">
+                <span class="font-bold text-slate-900 block">ต่ออายุบัตรผ่านเดิม</span>
+                <span class="text-[11px] text-slate-500 block mt-0.5">สำหรับบัตรผ่านเดิมที่ใกล้หมดอายุ</span>
+              </div>
+            </label>
+
+            <label id="label-rtaf-replace" class="border-2 border-slate-200 bg-white rounded-2xl p-4 cursor-pointer hover:border-amber-500 transition flex items-start gap-2.5 shadow-sm">
+              <input type="radio" name="passRequestType" value="เปลี่ยนรถ / บัตรชำรุด / บัตรสูญหาย" onchange="handlePassTypeChange()" class="mt-1 w-4 h-4 text-amber-600 focus:ring-amber-500 shrink-0">
+              <div class="min-w-0">
+                <span class="font-bold text-slate-900 block">เปลี่ยนรถ / บัตรหาย-ชำรุด</span>
+                <span class="text-[11px] text-slate-500 block mt-0.5">ขอออกบัตรทดแทนหรือเปลี่ยนทะเบียน</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- หมวดที่ 2: ข้อมูลสมาชิกและผู้ขอทำบัตร -->
+        <div class="bg-slate-50/80 border border-slate-200 rounded-3xl p-5 sm:p-6 space-y-4">
+          <h3 class="font-extrabold text-slate-900 text-sm sm:text-base border-b border-slate-200 pb-3 flex items-center gap-2">
+            <i class="fa-solid fa-user-tie text-amber-600"></i>
+            <span>ข้อมูลผู้ยื่นคำขอและข้อมูลสมาชิก</span>
+          </h3>
+
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="space-y-1.5">
+              <label for="rtaf_member_code" class="block text-xs font-bold text-slate-700">
+                หมายเลขสมาชิกกลุ่ม The Driver Thailand <span class="text-rose-500">*</span>
+              </label>
+              <input type="text" id="rtaf_member_code" name="memberCode" required placeholder="เช่น B999 หรือ A123"
+                class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-mono font-bold uppercase focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
+            </div>
+
+            <div class="space-y-1.5">
+              <label for="rtaf_chat_name" class="block text-xs font-bold text-slate-700">
+                ชื่อที่ใช้ในห้อง Line OpenChat <span class="text-rose-500">*</span>
+              </label>
+              <input type="text" id="rtaf_chat_name" name="chatName" required placeholder="เช่น [B999] แทนไทย Camry"
+                class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
+            </div>
+          </div>
+
+          <div class="grid md:grid-cols-12 gap-4">
+            <div class="md:col-span-3 space-y-1.5">
+              <label for="rtaf_prefix" class="block text-xs font-bold text-slate-700">
+                คำนำหน้า / ยศ <span class="text-rose-500">*</span>
+              </label>
+              <input type="text" id="rtaf_prefix" name="prefix" required placeholder="เช่น นาย / นาง / น.ส. / ร.ต."
+                class="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
+            </div>
+
+            <div class="md:col-span-4 space-y-1.5">
+              <label for="rtaf_first_name" class="block text-xs font-bold text-slate-700">
+                ชื่อจริง <span class="text-rose-500">*</span>
+              </label>
+              <input type="text" id="rtaf_first_name" name="firstName" required placeholder="ระบุชื่อจริงตามบัตรประชาชน"
+                class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
+            </div>
+
+            <div class="md:col-span-5 space-y-1.5">
+              <label for="rtaf_last_name" class="block text-xs font-bold text-slate-700">
+                นามสกุล <span class="text-rose-500">*</span>
+              </label>
+              <input type="text" id="rtaf_last_name" name="lastName" required placeholder="ระบุนามสกุลจริงตามบัตรประชาชน"
+                class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
+            </div>
+          </div>
+
+          <div class="grid md:grid-cols-3 gap-4">
+            <div class="space-y-1.5">
+              <label for="rtaf_id_card" class="block text-xs font-bold text-slate-700">
+                เลขประจำตัวประชาชน 13 หลัก <span class="text-rose-500">*</span>
+              </label>
+              <input type="text" id="rtaf_id_card" name="idCardNumber" required maxlength="17" placeholder="X-XXXX-XXXXX-XX-X"
+                class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-mono focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
+            </div>
+
+            <div class="space-y-1.5">
+              <label for="rtaf_phone" class="block text-xs font-bold text-slate-700">
+                เบอร์โทรศัพท์ติดต่อ <span class="text-rose-500">*</span>
+              </label>
+              <input type="tel" id="rtaf_phone" name="phone" required pattern="[0-9\-+\s]{9,15}" placeholder="เช่น 0812345678"
+                class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-mono focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
+            </div>
+
+            <div class="space-y-1.5">
+              <label for="rtaf_line_id" class="block text-xs font-bold text-slate-700">
+                Line ID <span class="text-rose-500">*</span>
+              </label>
+              <input type="text" id="rtaf_line_id" name="lineId" required placeholder="ระบุ Line ID สำหรับติดต่อ"
+                class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
+            </div>
+          </div>
+
+          <div class="space-y-1.5">
+            <label for="rtaf_address" class="block text-xs font-bold text-slate-700">
+              ที่อยู่ปัจจุบัน / ที่อยู่สำหรับจัดส่งบัตรผ่านทางไปรษณีย์ <span class="text-rose-500">*</span>
+            </label>
+            <textarea id="rtaf_address" name="address" rows="2" required placeholder="ระบุบ้านเลขที่ หมู่ ซอย ถนน แขวง/ตำบล เขต/อำเภอ จังหวัด และรหัสไปรษณีย์..."
+              class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition"></textarea>
+          </div>
+        </div>
+
+        <!-- หมวดที่ 3: ข้อมูลยานพาหนะที่ยื่นขอทำบัตรผ่าน -->
+        <div class="bg-slate-50/80 border border-slate-200 rounded-3xl p-5 sm:p-6 space-y-4">
+          <h3 class="font-extrabold text-slate-900 text-sm sm:text-base border-b border-slate-200 pb-3 flex items-center gap-2">
+            <i class="fa-solid fa-car-side text-amber-600"></i>
+            <span>ข้อมูลยานพาหนะที่ยื่นขอทำบัตรผ่าน (ตรงตามเล่มทะเบียนรถ)</span>
+          </h3>
+
+          <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="space-y-1.5">
+              <label for="rtaf_car_brand" class="block text-xs font-bold text-slate-700">
+                ยี่ห้อรถ <span class="text-rose-500">*</span>
+              </label>
+              <input type="text" id="rtaf_car_brand" name="carBrand" required placeholder="เช่น Toyota / Honda"
+                class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
+            </div>
+
+            <div class="space-y-1.5">
+              <label for="rtaf_car_model" class="block text-xs font-bold text-slate-700">
+                รุ่นรถ <span class="text-rose-500">*</span>
+              </label>
+              <input type="text" id="rtaf_car_model" name="carModel" required placeholder="เช่น Camry / Fortuner"
+                class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
+            </div>
+
+            <div class="space-y-1.5">
+              <label for="rtaf_car_color" class="block text-xs font-bold text-slate-700">
+                สีรถ <span class="text-rose-500">*</span>
+              </label>
+              <input type="text" id="rtaf_car_color" name="carColor" required placeholder="เช่น สีดำ / สีขาวมุก"
+                class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
+            </div>
+
+            <div class="space-y-1.5">
+              <label for="rtaf_car_type" class="block text-xs font-bold text-slate-700">
+                ลักษณะรถ / ประเภทรถ <span class="text-rose-500">*</span>
+              </label>
+              <select id="rtaf_car_type" name="carType" required
+                class="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
+                <option value="รถยนต์นั่งส่วนบุคคลไม่เกิน 7 คน (เก๋ง / SUV)">เก๋ง / SUV (ไม่เกิน 7 คน)</option>
+                <option value="รถยนต์นั่งส่วนบุคคลเกิน 7 คน (รถตู้ / MPV)">รถตู้ / MPV (เกิน 7 คน)</option>
+                <option value="รถยนต์บรรทุกส่วนบุคคล (กระบะ)">รถยนต์กระบะ</option>
+                <option value="รถยนต์รับจ้างสาธารณะ / ป้ายเขียว">รถยนต์รับจ้าง / ป้ายเขียว</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="space-y-1.5">
+              <label for="rtaf_license_plate" class="block text-xs font-bold text-slate-700">
+                หมายเลขทะเบียนรถ <span class="text-rose-500">*</span>
+              </label>
+              <input type="text" id="rtaf_license_plate" name="licensePlate" required placeholder="เช่น 1กข 1234"
+                class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
+            </div>
+
+            <div class="space-y-1.5">
+              <label for="rtaf_plate_province" class="block text-xs font-bold text-slate-700">
+                จังหวัดที่จดทะเบียน <span class="text-rose-500">*</span>
+              </label>
+              <input type="text" id="rtaf_plate_province" name="plateProvince" required placeholder="เช่น กรุงเทพมหานคร"
+                class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
+            </div>
+          </div>
+        </div>
+
+        <!-- หมวดที่ 4: แนบเอกสารประกอบการขอทำบัตรผ่าน ทอ. (ดอนเมือง) -->
+        <div class="bg-slate-50/80 border border-slate-200 rounded-3xl p-5 sm:p-6 space-y-5">
+          <div class="border-b border-slate-200 pb-3 flex flex-wrap items-center justify-between gap-2">
+            <h3 class="font-extrabold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+              <i class="fa-solid fa-folder-open text-amber-600"></i>
+              <span>แนบเอกสารประกอบการขอทำบัตรผ่านยานพาหนะ</span>
+            </h3>
+            <span class="text-xs text-slate-500">ถ่ายภาพเอกสารให้ชัดเจน อ่านตัวอักษรได้ครบถ้วน (JPG หรือ PNG)</span>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-4">
+            <!-- เอกสารที่ 1: สำเนาบัตรประจำตัวประชาชน -->
+            <div class="border-2 border-dashed border-slate-300 bg-white rounded-2xl p-4 hover:border-amber-500 transition space-y-2.5 text-center">
+              <i class="fa-solid fa-address-card text-2xl text-amber-600"></i>
+              <p class="text-xs sm:text-sm font-bold text-slate-900">
+                1. สำเนาบัตรประจำตัวประชาชน (เซ็นรับรองสำเนาถูกต้อง) <span class="text-rose-500">*</span>
+              </p>
+              <p class="text-[11px] text-slate-500">ขีดคร่อมระบุ “ใช้สำหรับทำบัตรผ่านยานพาหนะเข้า-ออก ทอ. เท่านั้น”</p>
+              <label class="inline-flex items-center justify-center bg-slate-950 hover:bg-slate-800 text-amber-400 border border-amber-400/30 font-semibold text-xs px-4 py-2 rounded-xl cursor-pointer transition">
+                <i class="fa-solid fa-upload mr-1.5"></i> เลือกไฟล์บัตรประชาชน
+                <input type="file" id="doc_id_card" accept="image/*" required onchange="handleRtafDocUpload(this, 'idCard')" class="hidden">
+              </label>
+              <div id="preview-doc-idCard" class="hidden pt-1"></div>
+            </div>
+
+            <!-- เอกสารที่ 2: สำเนาใบอนุญาตขับขี่ -->
+            <div class="border-2 border-dashed border-slate-300 bg-white rounded-2xl p-4 hover:border-amber-500 transition space-y-2.5 text-center">
+              <i class="fa-solid fa-id-card text-2xl text-emerald-600"></i>
+              <p class="text-xs sm:text-sm font-bold text-slate-900">
+                2. สำเนาใบอนุญาตขับขี่รถยนต์ (ยังไม่หมดอายุ) <span class="text-rose-500">*</span>
+              </p>
+              <p class="text-[11px] text-slate-500">ขีดคร่อมระบุ “ใช้สำหรับทำบัตรผ่านยานพาหนะเข้า-ออก ทอ. เท่านั้น”</p>
+              <label class="inline-flex items-center justify-center bg-emerald-700 hover:bg-emerald-800 text-white font-semibold text-xs px-4 py-2 rounded-xl cursor-pointer transition">
+                <i class="fa-solid fa-upload mr-1.5"></i> เลือกไฟล์ใบขับขี่
+                <input type="file" id="doc_driver_license" accept="image/*" required onchange="handleRtafDocUpload(this, 'driverLicense')" class="hidden">
+              </label>
+              <div id="preview-doc-driverLicense" class="hidden pt-1"></div>
+            </div>
+
+            <!-- เอกสารที่ 3: สำเนารายการจดทะเบียนรถยนต์ -->
+            <div class="border-2 border-dashed border-slate-300 bg-white rounded-2xl p-4 hover:border-amber-500 transition space-y-2.5 text-center">
+              <i class="fa-solid fa-book text-2xl text-sky-600"></i>
+              <p class="text-xs sm:text-sm font-bold text-slate-900">
+                3. สำเนารายการจดทะเบียนรถยนต์ (หน้าเล่มทะเบียนรถ) <span class="text-rose-500">*</span>
+              </p>
+              <p class="text-[11px] text-slate-500">แสดงชื่อผู้ถือกรรมสิทธิ์/ผู้ครอบครอง และเลขทะเบียนตรงกับรถที่ยื่น</p>
+              <label class="inline-flex items-center justify-center bg-sky-700 hover:bg-sky-800 text-white font-semibold text-xs px-4 py-2 rounded-xl cursor-pointer transition">
+                <i class="fa-solid fa-upload mr-1.5"></i> เลือกไฟล์สำเนาทะเบียนรถ
+                <input type="file" id="doc_car_reg" accept="image/*" required onchange="handleRtafDocUpload(this, 'carReg')" class="hidden">
+              </label>
+              <div id="preview-doc-carReg" class="hidden pt-1"></div>
+            </div>
+
+            <!-- เอกสารที่ 4: รูปถ่ายรถยนต์พร้อมแผ่นป้ายทะเบียน -->
+            <div class="border-2 border-dashed border-slate-300 bg-white rounded-2xl p-4 hover:border-amber-500 transition space-y-2.5 text-center">
+              <i class="fa-solid fa-car text-2xl text-amber-500"></i>
+              <p class="text-xs sm:text-sm font-bold text-slate-900">
+                4. รูปถ่ายรถยนต์ที่ยื่นขอทำบัตรผ่าน (เห็นป้ายทะเบียนชัดเจน) <span class="text-rose-500">*</span>
+              </p>
+              <p class="text-[11px] text-slate-500">ถ่ายมุมเฉียงด้านหน้าเห็นตัวรถและเลขทะเบียนชัดเจน</p>
+              <label class="inline-flex items-center justify-center bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs px-4 py-2 rounded-xl cursor-pointer transition">
+                <i class="fa-solid fa-upload mr-1.5"></i> เลือกรูปถ่ายรถยนต์
+                <input type="file" id="doc_car_photo" accept="image/*" required onchange="handleRtafDocUpload(this, 'carPhoto')" class="hidden">
+              </label>
+              <div id="preview-doc-carPhoto" class="hidden pt-1"></div>
+            </div>
+          </div>
+
+          <!-- แนบสลิปค่าธรรมเนียม / เอกสารเพิ่มเติม -->
+          <div class="border-2 border-dashed border-amber-300 bg-amber-50/40 rounded-2xl p-4 text-center space-y-2.5">
+            <i class="fa-solid fa-file-invoice-dollar text-2xl text-emerald-600"></i>
+            <p class="text-xs sm:text-sm font-bold text-slate-900">
+              5. แนบสลิปหลักฐานการโอนค่าธรรมเนียม / หรือเอกสารเพิ่มเติม (ถ้ามี)
+            </p>
+            <p class="text-[11px] text-slate-500">แนบสลิปการชำระเงินหรือเอกสารประกอบเพิ่มเติม (ไฟล์ JPG หรือ PNG)</p>
+            <label class="inline-flex items-center justify-center bg-slate-950 hover:bg-slate-800 text-amber-400 border border-amber-400/30 font-semibold text-xs px-5 py-2.5 rounded-xl cursor-pointer transition">
+              <i class="fa-solid fa-upload mr-1.5"></i> เลือกไฟล์สลิป / เอกสารเพิ่มเติม
+              <input type="file" id="doc_slip_extra" accept="image/*" onchange="handleRtafDocUpload(this, 'slipExtra')" class="hidden">
+            </label>
+            <div id="preview-doc-slipExtra" class="hidden pt-1"></div>
+          </div>
+        </div>
+
+        <!-- หมวดที่ 5: ประกาศความเป็นส่วนตัว (รูปแบบเดียวกับ member_register.html) -->
+        <div class="bg-amber-50/70 border border-amber-200 rounded-2xl p-4 sm:p-5 space-y-4">
+          <div class="bg-white/95 border border-amber-200 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div class="space-y-1 min-w-0">
+              <p class="font-extrabold text-slate-900 text-xs sm:text-sm flex items-center gap-2">
+                <i class="fa-solid fa-shield-halved text-amber-600"></i>
+                <span>ประกาศความเป็นส่วนตัว สำหรับสมาชิก กลุ่ม The Driver TH Premium Service</span>
+              </p>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                กรุณากดอ่านประกาศความเป็นส่วนตัวฉบับเต็มในหน้าถัดไปก่อน จึงจะสามารถติ๊กช่อง <strong>“ยอมรับและยืนยัน”</strong> ด้านล่างได้
+              </p>
+              <div id="privacy-read-status" class="text-[11px] font-bold text-amber-800 inline-flex items-center gap-1.5 pt-0.5">
+                <i class="fa-solid fa-lock text-amber-600"></i>
+                <span>สถานะ: ยังไม่ได้เปิดอ่านประกาศความเป็นส่วนตัว</span>
+              </div>
+            </div>
+
+            <a href="privacy_policy.html" target="_blank" rel="noopener noreferrer" onclick="markPrivacyPolicyOpened()"
+              class="shrink-0 inline-flex items-center justify-center gap-2 bg-slate-950 hover:bg-slate-800 text-amber-400 border border-amber-400/40 font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow transition">
+              <i class="fa-solid fa-book-open-reader"></i>
+              <span>เปิดอ่านประกาศความเป็นส่วนตัว</span>
+              <i class="fa-solid fa-arrow-up-right-from-square text-[11px]"></i>
+            </a>
+          </div>
+
+          <label onclick="handleAcceptCheckboxClick(event)" class="flex items-start gap-3 cursor-pointer text-xs sm:text-sm text-slate-800 select-none">
+            <input type="checkbox" id="accept_rtaf_terms" required onchange="handleAcceptCheckboxChange(this)"
+              class="mt-1 w-4 h-4 text-amber-600 rounded border-slate-300 focus:ring-amber-500 shrink-0">
+            <span>
+              <strong>ยอมรับและยืนยัน</strong> — ข้าพเจ้าขอรับรองว่าสำเนาเอกสารและข้อมูลยานพาหนะข้างต้นเป็นความจริงทุกประการ ยินยอมให้นำส่งเอกสารเพื่อขอทำบัตรผ่านยานพาหนะเข้า - ออก เขตพื้นที่ ทอ. (ดอนเมือง) และได้อ่านยอมรับประกาศความเป็นส่วนตัวของกลุ่ม <strong>The Driver Thailand</strong> <span class="text-rose-500 font-bold">*</span>
+            </span>
+          </label>
+
+          <div class="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-3 pt-2">
+            <a href="index.html" class="w-full sm:w-auto text-center px-5 py-3 rounded-xl border border-slate-300 bg-white hover:bg-slate-100 text-slate-700 font-bold text-xs sm:text-sm transition">
+              <i class="fa-solid fa-arrow-left mr-1.5"></i> กลับหน้าหลัก
+            </a>
+            <button type="submit" id="btn-submit-rtaf"
+              class="group w-full sm:w-auto bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold text-sm sm:text-base px-8 py-3.5 rounded-xl shadow-lg transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
+              <i class="fa-solid fa-paper-plane icon-bounce-hover"></i>
+              <span>ส่งคำขอทำบัตรผ่านยานพาหนะ ทอ.</span>
+            </button>
+          </div>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-950 text-slate-400 border-t border-amber-500/20 py-8 px-4 text-xs mt-10">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+      <div class="text-center sm:text-left">
+        <p class="font-bold text-amber-300">The Driver Thailand Official Network</p>
+        <p class="text-[11px] text-slate-500 mt-0.5">ศูนย์กลางระบบสมาชิก บัตรสมาชิกประเมศฐ์ และระบบเฝ้าระวังภัยกลุ่มคนขับรถรับจ้าง</p>
+      </div>
+      <div class="flex flex-wrap justify-center gap-4 font-semibold">
+        <a href="index.html" class="hover:text-amber-400 transition">หน้าหลัก</a>
+        <a href="register.html" class="hover:text-emerald-400 transition">ระบบสมาชิก</a>
+        <a href="member_register.html" class="hover:text-teal-400 transition">ลงทะเบียนสมาชิกใหม่</a>
+        <a href="pcard.html" class="hover:text-amber-400 transition">ทำบัตรสมาชิกประเมศฐ์</a>
+        <a href="blacklist.html" class="hover:text-rose-400 transition">ตรวจสอบ Blacklist</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const RTAF_FORM_CONFIG = {
+      googleFormUrl: 'https://forms.gle/68yjUXdAbY79XMxD8',
+      privacyPolicyUrl: 'privacy_policy.html',
+      privacyReadStorageKey: 'tdt_privacy_policy_read_v1',
+      submitEndpointUrl: '', // ใส่ Web App URL ของ Google Apps Script สำหรับบันทึกคำขอทำบัตรผ่านยานพาหนะ ทอ. (ดอนเมือง) ที่นี่
+      draftStorageKey: 'tdt_rtaf_pass_draft_v1',
+      submissionsStorageKey: 'tdt_rtaf_pass_submissions_v1'
+    };
+
+    const RTAF_DRAFT_IDS = [
+      'rtaf_member_code',
+      'rtaf_chat_name',
+      'rtaf_prefix',
+      'rtaf_first_name',
+      'rtaf_last_name',
+      'rtaf_id_card',
+      'rtaf_phone',
+      'rtaf_line_id',
+      'rtaf_address',
+      'rtaf_car_brand',
+      'rtaf_car_model',
+      'rtaf_car_color',
+      'rtaf_car_type',
+      'rtaf_license_plate',
+      'rtaf_plate_province'
+    ];
+
+    let uploadedRtafDocs = {
+      idCard: { base64: '', name: '', mimeType: '' },
+      driverLicense: { base64: '', name: '', mimeType: '' },
+      carReg: { base64: '', name: '', mimeType: '' },
+      carPhoto: { base64: '', name: '', mimeType: '' },
+      slipExtra: { base64: '', name: '', mimeType: '' }
+    };
+
+    let lastSubmittedRtafRef = '';
+
+    function escapeHtml(val) {
+      return String(val ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function showToast(title, message, type = 'info') {
+      const container = document.getElementById('toast-container');
+      if (!container) return;
+      const styles = {
+        success: 'bg-emerald-950 text-emerald-200 border-emerald-500/40',
+        error: 'bg-rose-950 text-rose-200 border-rose-500/40',
+        info: 'bg-slate-950 text-amber-300 border-amber-400/50'
+      };
+      const icons = {
+        success: 'fa-circle-check text-emerald-400',
+        error: 'fa-circle-xmark text-rose-400',
+        info: 'fa-circle-info text-amber-400'
+      };
+      const toast = document.createElement('div');
+      toast.className = `pointer-events-auto flex items-start gap-3 p-4 rounded-2xl border shadow-2xl transition-all duration-300 ${styles[type] || styles.info}`;
+      toast.innerHTML = `
+        <i class="fa-solid ${icons[type] || icons.info} text-lg mt-0.5 shrink-0"></i>
+        <div class="flex-1 min-w-0">
+          <h4 class="font-extrabold text-sm text-white leading-tight">${escapeHtml(title)}</h4>
+          <p class="text-xs mt-0.5 opacity-90 leading-relaxed">${escapeHtml(message)}</p>
+        </div>
+        <button type="button" onclick="this.parentElement.remove()" class="text-slate-400 hover:text-white text-xs">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      `;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.classList.add('opacity-0');
+        setTimeout(() => toast.remove(), 300);
+      }, 4200);
+    }
+
+    function handlePassTypeChange() {
+      const selected = document.querySelector('input[name="passRequestType"]:checked')?.value || '';
+      const labelNew = document.getElementById('label-rtaf-new');
+      const labelRenew = document.getElementById('label-rtaf-renew');
+      const labelReplace = document.getElementById('label-rtaf-replace');
+      const defaultClass = 'border-2 border-slate-200 bg-white rounded-2xl p-4 cursor-pointer hover:border-amber-500 transition flex items-start gap-2.5 shadow-sm';
+      const activeClass = 'border-2 border-amber-500 bg-white rounded-2xl p-4 cursor-pointer hover:border-amber-600 transition flex items-start gap-2.5 shadow-sm';
+
+      if (labelNew) labelNew.className = selected.includes('ใหม่') ? activeClass : defaultClass;
+      if (labelRenew) labelRenew.className = selected.includes('ต่ออายุ') ? activeClass : defaultClass;
+      if (labelReplace) labelReplace.className = selected.includes('เปลี่ยนรถ') ? activeClass : defaultClass;
+      saveFormDraft();
+    }
+
+    function hasReadPrivacyPolicy() {
+      try {
+        return localStorage.getItem(RTAF_FORM_CONFIG.privacyReadStorageKey) === 'true';
+      } catch (_) {
+        return false;
+      }
+    }
+
+    function updatePrivacyReadBadge() {
+      const statusEl = document.getElementById('privacy-read-status');
+      if (!statusEl) return;
+      if (hasReadPrivacyPolicy()) {
+        statusEl.className = 'text-[11px] font-bold text-emerald-700 inline-flex items-center gap-1.5 pt-0.5';
+        statusEl.innerHTML = '<i class="fa-solid fa-circle-check text-emerald-600"></i><span>สถานะ: เปิดอ่านประกาศความเป็นส่วนตัวแล้ว สามารถติ๊กยอมรับและยืนยันได้</span>';
+      } else {
+        statusEl.className = 'text-[11px] font-bold text-amber-800 inline-flex items-center gap-1.5 pt-0.5';
+        statusEl.innerHTML = '<i class="fa-solid fa-lock text-amber-600"></i><span>สถานะ: ยังไม่ได้เปิดอ่านประกาศความเป็นส่วนตัว</span>';
+      }
+    }
+
+    function markPrivacyPolicyOpened() {
+      try {
+        localStorage.setItem(RTAF_FORM_CONFIG.privacyReadStorageKey, 'true');
+      } catch (_) {}
+      updatePrivacyReadBadge();
+    }
+
+    function handleAcceptCheckboxClick(event) {
+      const checkbox = document.getElementById('accept_rtaf_terms');
+      if (!checkbox) return;
+      if (!hasReadPrivacyPolicy()) {
+        event.preventDefault();
+        checkbox.checked = false;
+        markPrivacyPolicyOpened();
+        window.open(RTAF_FORM_CONFIG.privacyPolicyUrl, '_blank', 'noopener,noreferrer');
+        showToast(
+          'กรุณาอ่านประกาศความเป็นส่วนตัว',
+          'ระบบเปิดหน้าประกาศความเป็นส่วนตัวให้แล้ว กรุณาอ่านรายละเอียดให้ครบถ้วนแล้วกลับมาติ๊กยอมรับครับ',
+          'info'
+        );
+      }
+    }
+
+    function handleAcceptCheckboxChange(checkboxEl) {
+      if (!checkboxEl) return;
+      if (checkboxEl.checked && !hasReadPrivacyPolicy()) {
+        checkboxEl.checked = false;
+        markPrivacyPolicyOpened();
+        window.open(RTAF_FORM_CONFIG.privacyPolicyUrl, '_blank', 'noopener,noreferrer');
+        showToast(
+          'กรุณาอ่านประกาศความเป็นส่วนตัว',
+          'ระบบเปิดหน้าประกาศความเป็นส่วนตัวให้แล้ว กรุณาอ่านรายละเอียดก่อนกดติ๊กยอมรับครับ',
+          'info'
+        );
+      }
+    }
+
+    function compressImageFile(file, maxWidth = 1000, quality = 0.8) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = e => {
+          const img = new Image();
+          img.onload = () => {
+            const canvas = document.createElement('canvas');
+            let width = img.width;
+            let height = img.height;
+            if (width > maxWidth) {
+              height = Math.round((height * maxWidth) / width);
+              width = maxWidth;
+            }
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, width, height);
+            resolve(canvas.toDataURL('image/jpeg', quality));
+          };
+          img.onerror = reject;
+          img.src = e.target.result;
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    async function handleRtafDocUpload(inputEl, kind) {
+      const file = inputEl?.files?.[0];
+      const previewBox = document.getElementById(`preview-doc-${kind}`);
+      if (!file || !previewBox) return;
+
+      if (!file.type.startsWith('image/')) {
+        showToast('ไฟล์ไม่ถูกต้อง', 'กรุณาเลือกไฟล์รูปภาพ (JPG หรือ PNG) เท่านั้น', 'error');
+        inputEl.value = '';
+        return;
+      }
+
+      try {
+        const compressedBase64 = await compressImageFile(file);
+        uploadedRtafDocs[kind] = {
+          base64: compressedBase64,
+          name: file.name,
+          mimeType: 'image/jpeg'
+        };
+        previewBox.classList.remove('hidden');
+        previewBox.innerHTML = `
+          <div class="inline-flex items-center gap-2 bg-emerald-50 border border-emerald-200 text-emerald-900 px-2.5 py-1.5 rounded-xl text-xs font-semibold">
+            <img src="${compressedBase64}" alt="ตัวอย่างเอกสาร" class="w-9 h-9 rounded-lg object-cover border border-emerald-300 shrink-0">
+            <span class="truncate max-w-[160px]">${escapeHtml(file.name)}</span>
+          </div>
+        `;
+      } catch (err) {
+        showToast('อัปโหลดเอกสารไม่สำเร็จ', 'ไม่สามารถประมวลผลรูปภาพได้ กรุณาลองใหม่อีกครั้ง', 'error');
+      }
+    }
+
+    function saveFormDraft() {
+      try {
+        const draft = {};
+        RTAF_DRAFT_IDS.forEach(id => {
+          const el = document.getElementById(id);
+          if (el) draft[id] = el.value;
+        });
+        const typeRadio = document.querySelector('input[name="passRequestType"]:checked');
+        if (typeRadio) draft.passRequestType = typeRadio.value;
+        localStorage.setItem(RTAF_FORM_CONFIG.draftStorageKey, JSON.stringify(draft));
+        const badge = document.getElementById('draft-status-badge');
+        if (badge) {
+          badge.className = 'text-xs font-semibold text-emerald-800 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-200';
+          badge.innerHTML = '<i class="fa-solid fa-floppy-disk text-emerald-600 mr-1"></i> บันทึกร่างอัตโนมัติแล้ว';
+        }
+      } catch (_) {}
+    }
+
+    function restoreFormDraft() {
+      try {
+        const raw = localStorage.getItem(RTAF_FORM_CONFIG.draftStorageKey);
+        if (!raw) return;
+        const draft = JSON.parse(raw);
+        let restored = false;
+        RTAF_DRAFT_IDS.forEach(id => {
+          const el = document.getElementById(id);
+          if (el && typeof draft[id] === 'string' && draft[id].trim() !== '') {
+            el.value = draft[id];
+            restored = true;
+          }
+        });
+        if (draft.passRequestType) {
+          document.querySelectorAll('input[name="passRequestType"]').forEach(r => {
+            if (r.value === draft.passRequestType) r.checked = true;
+          });
+          handlePassTypeChange();
+        }
+        if (restored) {
+          showToast('กู้คืนแบบร่างแล้ว', 'ระบบดึงข้อมูลที่พิมพ์ค้างไว้กลับมาให้อัตโนมัติแล้วครับ', 'info');
+        }
+      } catch (_) {}
+    }
+
+    function clearFormDraft() {
+      try {
+        localStorage.removeItem(RTAF_FORM_CONFIG.draftStorageKey);
+        document.getElementById('rtaf-pass-form')?.reset();
+        uploadedRtafDocs = {
+          idCard: { base64: '', name: '', mimeType: '' },
+          driverLicense: { base64: '', name: '', mimeType: '' },
+          carReg: { base64: '', name: '', mimeType: '' },
+          carPhoto: { base64: '', name: '', mimeType: '' },
+          slipExtra: { base64: '', name: '', mimeType: '' }
+        };
+        ['idCard', 'driverLicense', 'carReg', 'carPhoto', 'slipExtra'].forEach(k => {
+          document.getElementById(`preview-doc-${k}`)?.classList.add('hidden');
+        });
+        handlePassTypeChange();
+        const badge = document.getElementById('draft-status-badge');
+        if (badge) {
+          badge.className = 'text-xs font-semibold text-slate-600 bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200';
+          badge.innerHTML = '<i class="fa-solid fa-floppy-disk text-slate-400 mr-1"></i> ล้างแบบร่างเรียบร้อยแล้ว';
+        }
+        showToast('ล้างข้อมูลเรียบร้อย', 'ล้างแบบร่างในแบบฟอร์มเรียบร้อยแล้วครับ', 'success');
+      } catch (_) {}
+    }
+
+    function copyRtafRef() {
+      if (!lastSubmittedRtafRef) return;
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(lastSubmittedRtafRef).catch(() => {});
+        } else {
+          const tempInput = document.createElement('input');
+          tempInput.value = lastSubmittedRtafRef;
+          document.body.appendChild(tempInput);
+          tempInput.select();
+          document.execCommand('copy');
+          document.body.removeChild(tempInput);
+        }
+      } catch (_) {}
+      showToast('คัดลอกสำเร็จ', `คัดลอกเลขที่คำขอ ${lastSubmittedRtafRef} เรียบร้อยแล้วครับ`, 'success');
+    }
+
+    async function handleRtafFormSubmit(event) {
+      event.preventDefault();
+      const btn = document.getElementById('btn-submit-rtaf');
+      const originalHtml = btn.innerHTML;
+
+      try {
+        if (!uploadedRtafDocs.idCard.base64) {
+          showToast('เอกสารไม่ครบถ้วน', 'กรุณาแนบสำเนาบัตรประจำตัวประชาชนครับ', 'error');
+          return;
+        }
+        if (!uploadedRtafDocs.driverLicense.base64) {
+          showToast('เอกสารไม่ครบถ้วน', 'กรุณาแนบสำเนาใบอนุญาตขับขี่รถยนต์ครับ', 'error');
+          return;
+        }
+        if (!uploadedRtafDocs.carReg.base64) {
+          showToast('เอกสารไม่ครบถ้วน', 'กรุณาแนบสำเนารายการจดทะเบียนรถยนต์ครับ', 'error');
+          return;
+        }
+        if (!uploadedRtafDocs.carPhoto.base64) {
+          showToast('เอกสารไม่ครบถ้วน', 'กรุณาแนบรูปถ่ายรถยนต์ที่เห็นแผ่นป้ายทะเบียนชัดเจนครับ', 'error');
+          return;
+        }
+        if (!hasReadPrivacyPolicy() || !document.getElementById('accept_rtaf_terms')?.checked) {
+          showToast('กรุณายืนยันประกาศความเป็นส่วนตัว', 'กรุณาเปิดอ่านประกาศความเป็นส่วนตัวและติ๊กยอมรับก่อนส่งคำขอครับ', 'error');
+          return;
+        }
+
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> <span>กำลังส่งคำขอทำบัตรผ่านยานพาหนะ...</span>';
+
+        const now = new Date();
+        const refCode = 'RTAF-' +
+          now.getFullYear() +
+          String(now.getMonth() + 1).padStart(2, '0') +
+          String(now.getDate()).padStart(2, '0') + '-' +
+          String(now.getHours()).padStart(2, '0') +
+          String(now.getMinutes()).padStart(2, '0') +
+          String(now.getSeconds()).padStart(2, '0');
+
+        const passRequestType = document.querySelector('input[name="passRequestType"]:checked')?.value || '';
+        const memberCode = document.getElementById('rtaf_member_code').value.trim().toUpperCase();
+        const chatName = document.getElementById('rtaf_chat_name').value.trim();
+        const prefix = document.getElementById('rtaf_prefix').value.trim();
+        const firstName = document.getElementById('rtaf_first_name').value.trim();
+        const lastName = document.getElementById('rtaf_last_name').value.trim();
+        const idCardNumber = document.getElementById('rtaf_id_card').value.trim();
+        const phone = document.getElementById('rtaf_phone').value.trim();
+        const lineId = document.getElementById('rtaf_line_id').value.trim();
+        const address = document.getElementById('rtaf_address').value.trim();
+        const carBrand = document.getElementById('rtaf_car_brand').value.trim();
+        const carModel = document.getElementById('rtaf_car_model').value.trim();
+        const carColor = document.getElementById('rtaf_car_color').value.trim();
+        const carType = document.getElementById('rtaf_car_type').value;
+        const licensePlate = document.getElementById('rtaf_license_plate').value.trim();
+        const plateProvince = document.getElementById('rtaf_plate_province').value.trim();
+
+        const record = {
+          refCode,
+          action: 'rtaf_vehicle_pass',
+          submittedAt: now.toISOString(),
+          passRequestType,
+          memberCode,
+          chatName,
+          prefix,
+          firstName,
+          lastName,
+          fullName: `${prefix} ${firstName} ${lastName}`.trim(),
+          idCardNumber,
+          phone,
+          lineId,
+          address,
+          carBrand,
+          carModel,
+          carColor,
+          carType,
+          licensePlate,
+          plateProvince,
+          status: 'รอตรวจสอบเอกสาร ทอ.'
+        };
+
+        if (RTAF_FORM_CONFIG.submitEndpointUrl) {
+          await fetch(RTAF_FORM_CONFIG.submitEndpointUrl, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              ...record,
+              idCardBase64: uploadedRtafDocs.idCard.base64,
+              idCardName: uploadedRtafDocs.idCard.name,
+              driverLicenseBase64: uploadedRtafDocs.driverLicense.base64,
+              driverLicenseName: uploadedRtafDocs.driverLicense.name,
+              carRegBase64: uploadedRtafDocs.carReg.base64,
+              carRegName: uploadedRtafDocs.carReg.name,
+              carPhotoBase64: uploadedRtafDocs.carPhoto.base64,
+              carPhotoName: uploadedRtafDocs.carPhoto.name,
+              slipExtraBase64: uploadedRtafDocs.slipExtra.base64,
+              slipExtraName: uploadedRtafDocs.slipExtra.name
+            })
+          });
+        }
+
+        const existing = JSON.parse(localStorage.getItem(RTAF_FORM_CONFIG.submissionsStorageKey) || '[]');
+        existing.unshift(record);
+        localStorage.setItem(RTAF_FORM_CONFIG.submissionsStorageKey, JSON.stringify(existing));
+        localStorage.removeItem(RTAF_FORM_CONFIG.draftStorageKey);
+
+        lastSubmittedRtafRef = refCode;
+        const successBox = document.getElementById('rtaf-success-box');
+        const refEl = document.getElementById('rtaf-ref-code');
+        const summaryEl = document.getElementById('rtaf-summary-details');
+        if (refEl) refEl.textContent = refCode;
+        if (summaryEl) {
+          summaryEl.innerHTML = `
+            <div><span class="text-emerald-400">ผู้ยื่นคำขอ:</span> <strong>${escapeHtml(prefix)} ${escapeHtml(firstName)} ${escapeHtml(lastName)}</strong> (รหัส: <strong class="font-mono text-amber-300">${escapeHtml(memberCode)}</strong>)</div>
+            <div><span class="text-emerald-400">ประเภทคำขอ:</span> <strong>${escapeHtml(passRequestType)}</strong></div>
+            <div><span class="text-emerald-400">ข้อมูลยานพาหนะ:</span> <strong>${escapeHtml(carBrand)} ${escapeHtml(carModel)} (${escapeHtml(carColor)}) · ${escapeHtml(licensePlate)} ${escapeHtml(plateProvince)}</strong></div>
+            <div><span class="text-emerald-400">ช่องทางติดต่อกลับ:</span> <strong>${escapeHtml(phone)}</strong> (Line: ${escapeHtml(lineId)})</div>
+          `;
+        }
+        successBox?.classList.remove('hidden');
+        successBox?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        document.getElementById('rtaf-pass-form')?.reset();
+        uploadedRtafDocs = {
+          idCard: { base64: '', name: '', mimeType: '' },
+          driverLicense: { base64: '', name: '', mimeType: '' },
+          carReg: { base64: '', name: '', mimeType: '' },
+          carPhoto: { base64: '', name: '', mimeType: '' },
+          slipExtra: { base64: '', name: '', mimeType: '' }
+        };
+        ['idCard', 'driverLicense', 'carReg', 'carPhoto', 'slipExtra'].forEach(k => {
+          document.getElementById(`preview-doc-${k}`)?.classList.add('hidden');
+        });
+        handlePassTypeChange();
+        showToast('ส่งคำขอสำเร็จ', `บันทึกคำขอทำบัตรผ่านยานพาหนะ ทอ. (ดอนเมือง) เรียบร้อยแล้ว เลขที่: ${refCode}`, 'success');
+      } catch (err) {
+        showToast('เกิดข้อผิดพลาด', err.message || 'ไม่สามารถส่งคำขอได้ กรุณาลองใหม่อีกครั้ง', 'error');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = originalHtml;
+      }
+    }
+
+    window.addEventListener('storage', e => {
+      if (e.key === RTAF_FORM_CONFIG.privacyReadStorageKey) {
+        updatePrivacyReadBadge();
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      updatePrivacyReadBadge();
+      handlePassTypeChange();
+      restoreFormDraft();
+      RTAF_DRAFT_IDS.forEach(id => {
+        const el = document.getElementById(id);
+        el?.addEventListener('input', saveFormDraft);
+        el?.addEventListener('change', saveFormDraft);
+      });
+    });
+  </script>
+</body>
 </html>

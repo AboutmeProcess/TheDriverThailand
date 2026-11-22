@@ -439,8 +439,11 @@
     .tdt-nav-btn {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 6px;
-      padding: 7px 12px;
+      height: 36px;
+      min-height: 36px;
+      padding: 0 13px;
       border-radius: 11px;
       font-size: 12px;
       line-height: 16px;
@@ -812,128 +815,128 @@
           </div>
         </div>
       </div>
+        <!-- Right Quick Hub Card replaced by Network Service Billboard Carousel -->
+        <div class="lg:col-span-5">
+          <div id="service-billboard" aria-label="สื่อประชาสัมพันธ์บริการเครือข่าย" class="billboard-3d-shell space-y-2.5"
+            onmouseenter="pauseBillboardTemporarily(true)"
+            onmouseleave="pauseBillboardTemporarily(false)"
+            ontouchstart="handleBillboardTouchStart(event)"
+            ontouchend="handleBillboardTouchEnd(event)">
+            <div class="billboard-3d-stage p-5 sm:p-6 text-white relative">
+              <div id="billboard-orb-primary" class="absolute -right-16 -top-16 w-60 h-60 rounded-full bg-amber-400/20 blur-3xl pointer-events-none transition-colors duration-500"></div>
+              <div id="billboard-orb-secondary" class="absolute -left-16 -bottom-16 w-60 h-60 rounded-full bg-emerald-400/15 blur-3xl pointer-events-none transition-colors duration-500"></div>
+
+              <div class="relative z-10 space-y-4">
+                <div class="flex items-center justify-between gap-2 border-b border-amber-400/15 pb-3">
+                  <div class="flex items-center gap-2.5 min-w-0">
+                    <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-400/25 to-amber-600/20 border border-amber-400/40 text-amber-300 flex items-center justify-center shadow-inner shrink-0">
+                      <i class="fa-solid fa-tv text-sm icon-float"></i>
+                    </div>
+                    <div class="min-w-0">
+                      <h2 class="text-xs sm:text-sm font-bold text-white truncate">สื่อประชาสัมพันธ์บริการเครือข่าย</h2>
+                      <p class="text-[10.5px] text-amber-200/75 truncate">อัปเดตบริการและสิทธิประโยชน์ของกลุ่ม</p>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-1.5 shrink-0">
+                    <button type="button" onclick="toggleBillboardAutoplay()" id="btn-billboard-autoplay"
+                      class="inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-white/10 hover:bg-white/15 text-amber-200 border border-white/15 text-[10px] font-bold transition">
+                      <i id="billboard-autoplay-icon" class="fa-solid fa-pause text-[9px]"></i>
+                      <span id="billboard-autoplay-text">เล่นอัตโนมัติ</span>
+                    </button>
+                    <span id="billboard-slide-counter" class="text-[10px] font-extrabold bg-amber-400/20 text-amber-300 border border-amber-400/40 px-2 py-0.5 rounded-full">1 / 5</span>
+                  </div>
+                </div>
+
+                <div class="space-y-2.5">
+                  <div class="flex flex-wrap items-center gap-1.5">
+                    <span id="billboard-badge" class="inline-flex items-center gap-1 text-[10.5px] font-extrabold px-2.5 py-0.5 rounded-full bg-amber-400/20 border border-amber-300/40 text-amber-300">
+                      <i class="fa-solid fa-id-badge"></i> บัตรสมาชิกประจำกลุ่ม
+                    </span>
+                    <span id="billboard-tag" class="text-[10.5px] font-bold px-2.5 py-0.5 rounded-full bg-white/10 text-slate-200 border border-white/15">
+                      เคลือบใสกันน้ำ • เช็คพัสดุได้
+                    </span>
+                  </div>
+
+                  <h3 id="billboard-title" class="text-xl sm:text-2xl font-black leading-snug tracking-tight text-white">
+                    ทำบัตรสมาชิกประเมศฐ์ &amp; เช็คเลขพัสดุ
+                  </h3>
+
+                  <p id="billboard-desc" class="text-xs text-slate-300 leading-relaxed">
+                    ยกระดับความน่าเชื่อถือของคนขับรถมืออาชีพ ด้วยบัตรสมาชิกติดรูปถ่ายหน้าตรงเคลือบใสอย่างดี พร้อมตรวจสอบสถานะการจัดส่งและเลขพัสดุย้อนหลังได้ทันที
+                  </p>
+                </div>
+
+                <div id="billboard-visual-card" class="billboard-depth-card rounded-2xl p-4 space-y-3">
+                  <div class="flex items-center justify-between text-[10.5px] text-amber-200/80 border-b border-white/10 pb-2.5">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <img src="TheDriverTH.jpg" alt="The Driver Thailand"
+                        onerror="this.onerror=null;this.src='https://placehold.co/48x48/0f172a/fbbf24?text=TDT';"
+                        class="w-6 h-6 object-contain bg-transparent shrink-0" style="filter:drop-shadow(0 2px 6px rgba(0,0,0,0.45));">
+                      <span id="billboard-card-kicker" class="font-extrabold tracking-wider uppercase text-amber-300 truncate">PRAMET MEMBER CARD</span>
+                    </div>
+                    <span id="billboard-card-status" class="inline-flex items-center gap-1 text-emerald-300 font-bold shrink-0">
+                      <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> รอบถัดไป 11 ธ.ค. 69
+                    </span>
+                  </div>
+
+                  <div class="flex items-center gap-3.5">
+                    <div id="billboard-icon-box" class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-400/25 to-amber-600/20 border border-amber-300/40 text-amber-300 flex items-center justify-center text-2xl shadow-inner shrink-0 icon-float">
+                      <i id="billboard-main-icon" class="fa-solid fa-id-badge"></i>
+                    </div>
+                    <div class="min-w-0 space-y-0.5">
+                      <p id="billboard-highlight-title" class="text-xs sm:text-sm font-extrabold text-white leading-snug truncate">
+                        บัตรสมาชิกติดรูปถ่ายหน้าตรง
+                      </p>
+                      <p id="billboard-highlight-sub" class="text-[11px] text-slate-300 leading-snug">
+                        จัดส่งทั่วประเทศพร้อมแจ้งเลขติดตามพัสดุ
+                      </p>
+                    </div>
+                  </div>
+
+                  <div id="billboard-features-list" class="grid grid-cols-2 gap-2 text-[10.5px]">
+                    <div class="bg-slate-950/70 border border-white/10 rounded-xl px-2.5 py-1.5 text-slate-200 font-semibold truncate">
+                      <i class="fa-solid fa-check text-amber-400 mr-1"></i> เคลือบใสกันน้ำอย่างดี
+                    </div>
+                    <div class="bg-slate-950/70 border border-white/10 rounded-xl px-2.5 py-1.5 text-slate-200 font-semibold truncate">
+                      <i class="fa-solid fa-check text-amber-400 mr-1"></i> เช็คเลขพัสดุย้อนหลังได้
+                    </div>
+                  </div>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-2.5 pt-0.5">
+                  <a id="billboard-cta-link" href="pcard.html"
+                    class="flex-1 min-w-[150px] inline-flex items-center justify-center gap-2 bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 text-slate-950 font-extrabold text-xs px-4 py-3 rounded-xl shadow-lg shadow-amber-500/25 transition">
+                    <span id="billboard-cta-label">สมัครทำบัตร / เช็คพัสดุ</span>
+                    <i class="fa-solid fa-arrow-right text-[11px]"></i>
+                  </a>
+                  <a id="billboard-secondary-link" href="register.html"
+                    class="inline-flex items-center justify-center gap-1.5 bg-white/10 hover:bg-white/15 text-amber-200 border border-white/20 font-bold text-xs px-3.5 py-3 rounded-xl transition">
+                    <i class="fa-solid fa-circle-info text-[11px]"></i>
+                    <span id="billboard-secondary-label">ตรวจสอบรหัสสมาชิก</span>
+                  </a>
+                </div>
+
+                <div class="flex items-center justify-between gap-3 pt-2 border-t border-white/10">
+                  <div id="billboard-dots" class="flex items-center gap-1.5 flex-wrap" role="tablist" aria-label="เลือกสไลด์สื่อประชาสัมพันธ์บริการเครือข่าย"></div>
+                  <div class="flex items-center gap-1.5 shrink-0">
+                    <button type="button" onclick="prevBillboardSlide()" aria-label="สไลด์ก่อนหน้า" class="billboard-nav-btn" style="width:34px;height:34px;">
+                      <i class="fa-solid fa-chevron-left text-[11px]"></i>
+                    </button>
+                    <button type="button" onclick="nextBillboardSlide()" aria-label="สไลด์ถัดไป" class="billboard-nav-btn" style="width:34px;height:34px;">
+                      <i class="fa-solid fa-chevron-right text-[11px]"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- MAIN CONTENT -->
   <main class="flex-grow max-w-6xl w-full mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-10 sm:space-y-14">
-
-    <!-- SECTION: 3D SERVICE BILLBOARD CAROUSEL (MULTI-SLIDE SHOWCASE) -->
-    <section id="service-billboard" aria-label="ป้ายประชาสัมพันธ์สื่อบริการ" class="space-y-3">
-      <div class="flex items-center justify-between gap-2 px-1">
-        <span class="inline-flex items-center gap-1.5 text-xs font-extrabold text-amber-800 bg-amber-100 border border-amber-300 px-3 py-1 rounded-full">
-          <i class="fa-solid fa-tv text-amber-600"></i> สื่อประชาสัมพันธ์บริการเครือข่าย
-        </span>
-        <div class="flex items-center gap-2 text-[11px] text-slate-500">
-          <button type="button" onclick="toggleBillboardAutoplay()" id="btn-billboard-autoplay"
-            class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-200/80 hover:bg-slate-300/80 text-slate-800 font-bold transition">
-            <i id="billboard-autoplay-icon" class="fa-solid fa-pause text-[10px]"></i>
-            <span id="billboard-autoplay-text">เล่นอัตโนมัติ</span>
-          </button>
-          <span id="billboard-slide-counter" class="font-bold text-slate-700">1 / 5</span>
-        </div>
-      </div>
-
-      <div class="billboard-3d-shell"
-        onmouseenter="pauseBillboardTemporarily(true)"
-        onmouseleave="pauseBillboardTemporarily(false)"
-        ontouchstart="handleBillboardTouchStart(event)"
-        ontouchend="handleBillboardTouchEnd(event)">
-        <div class="billboard-3d-stage p-5 sm:p-8 lg:p-10 text-white relative">
-          <!-- แสงไฟสร้างมิติพื้นหลัง -->
-          <div id="billboard-orb-primary" class="absolute -right-20 -top-20 w-72 h-72 rounded-full bg-amber-400/20 blur-3xl pointer-events-none transition-colors duration-500"></div>
-          <div id="billboard-orb-secondary" class="absolute -left-20 -bottom-20 w-72 h-72 rounded-full bg-emerald-400/15 blur-3xl pointer-events-none transition-colors duration-500"></div>
-
-          <div class="grid lg:grid-cols-12 gap-6 lg:gap-8 items-center relative z-10">
-            <!-- ฝั่งซ้าย: ข้อความโปรโมตบริการและปุ่มเข้าใช้งาน -->
-            <div class="lg:col-span-7 space-y-4">
-              <div class="flex flex-wrap items-center gap-2">
-                <span id="billboard-badge" class="inline-flex items-center gap-1.5 text-[11px] font-extrabold px-3 py-1 rounded-full bg-amber-400/20 border border-amber-300/40 text-amber-300">
-                  <i class="fa-solid fa-id-badge"></i> บริการยอดนิยม
-                </span>
-                <span id="billboard-tag" class="text-[11px] font-bold px-2.5 py-1 rounded-full bg-white/10 text-slate-200 border border-white/15">
-                  บัตรเคลือบใสกันน้ำ
-                </span>
-              </div>
-
-              <h2 id="billboard-title" class="text-2xl sm:text-3xl lg:text-4xl font-black leading-tight tracking-tight">
-                บัตรสมาชิกประเมศฐ์ &amp; ระบบเช็คพัสดุ
-              </h2>
-
-              <p id="billboard-desc" class="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-2xl">
-                ยกระดับความน่าเชื่อถือของคนขับรถมืออาชีพ ด้วยบัตรสมาชิกติดรูปถ่ายหน้าตรงเคลือบใสอย่างดี พร้อมตรวจสอบสถานะการจัดส่งและเลขพัสดุได้ทันที
-              </p>
-
-              <div class="flex flex-wrap items-center gap-3 pt-1">
-                <a id="billboard-cta-link" href="pcard.html"
-                  class="inline-flex items-center gap-2 bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 text-slate-950 font-extrabold text-xs sm:text-sm px-5 py-3 rounded-2xl shadow-lg shadow-amber-500/25 transition transform hover:-translate-y-0.5">
-                  <span id="billboard-cta-label">สมัครทำบัตร / เช็คพัสดุ</span>
-                  <i class="fa-solid fa-arrow-right"></i>
-                </a>
-                <a id="billboard-secondary-link" href="register.html"
-                  class="inline-flex items-center gap-1.5 bg-white/10 hover:bg-white/15 text-amber-200 border border-white/20 font-bold text-xs sm:text-sm px-4 py-3 rounded-2xl transition">
-                  <i class="fa-solid fa-circle-info text-xs"></i>
-                  <span id="billboard-secondary-label">ตรวจสอบรหัสสมาชิก</span>
-                </a>
-              </div>
-            </div>
-
-            <!-- ฝั่งขวา: การ์ดสื่อแสดงผล 3 มิติ (เปลี่ยนภาพ/กราฟิกตามสไลด์) -->
-            <div class="lg:col-span-5">
-              <div id="billboard-visual-card" class="billboard-depth-card rounded-3xl p-5 sm:p-6 space-y-4">
-                <div class="flex items-center justify-between text-[11px] text-amber-200/80 border-b border-white/10 pb-3">
-                  <div class="flex items-center gap-2 min-w-0">
-                    <img src="TheDriverTH.jpg" alt="The Driver Thailand"
-                      onerror="this.onerror=null;this.src='https://placehold.co/48x48/0f172a/fbbf24?text=TDT';"
-                      class="w-7 h-7 object-contain bg-transparent shrink-0" style="filter:drop-shadow(0 2px 6px rgba(0,0,0,0.45));">
-                    <span id="billboard-card-kicker" class="font-extrabold tracking-wider uppercase text-amber-300 truncate">THE DRIVER TH VIP</span>
-                  </div>
-                  <span id="billboard-card-status" class="inline-flex items-center gap-1.5 text-emerald-300 font-bold shrink-0">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400"></span> พร้อมให้บริการ
-                  </span>
-                </div>
-
-                <div class="flex items-center gap-4 py-1">
-                  <div id="billboard-icon-box" class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br from-amber-400/25 to-amber-600/20 border border-amber-300/40 text-amber-300 flex items-center justify-center text-3xl sm:text-4xl shadow-inner shrink-0 icon-float">
-                    <i id="billboard-main-icon" class="fa-solid fa-id-badge"></i>
-                  </div>
-                  <div class="min-w-0 space-y-1">
-                    <p id="billboard-highlight-title" class="text-sm sm:text-base font-extrabold text-white leading-snug">
-                      รอบส่งบัตรถัดไป 11 ธ.ค. 69
-                    </p>
-                    <p id="billboard-highlight-sub" class="text-xs text-slate-300 leading-relaxed">
-                      แจ้งเลขพัสดุครบถ้วน ติดตามสถานะได้ทุกขั้นตอน
-                    </p>
-                  </div>
-                </div>
-
-                <div id="billboard-features-list" class="grid grid-cols-2 gap-2 pt-1 text-[11px]">
-                  <div class="bg-slate-950/70 border border-white/10 rounded-xl px-3 py-2 text-slate-200 font-semibold truncate">
-                    <i class="fa-solid fa-check text-amber-400 mr-1"></i> เคลือบใสกันน้ำอย่างดี
-                  </div>
-                  <div class="bg-slate-950/70 border border-white/10 rounded-xl px-3 py-2 text-slate-200 font-semibold truncate">
-                    <i class="fa-solid fa-check text-amber-400 mr-1"></i> เช็คเลขพัสดุย้อนหลังได้
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- ปุ่มเลื่อนซ้าย-ขวา และตัวชี้สไลด์ -->
-          <div class="flex items-center justify-between gap-4 mt-6 pt-4 border-t border-white/10 relative z-10">
-            <div id="billboard-dots" class="flex items-center gap-2 flex-wrap" role="tablist" aria-label="เลือกสไลด์ป้ายประชาสัมพันธ์"></div>
-            <div class="flex items-center gap-2 shrink-0">
-              <button type="button" onclick="prevBillboardSlide()" aria-label="สไลด์ก่อนหน้า" class="billboard-nav-btn">
-                <i class="fa-solid fa-chevron-left text-xs"></i>
-              </button>
-              <button type="button" onclick="nextBillboardSlide()" aria-label="สไลด์ถัดไป" class="billboard-nav-btn">
-                <i class="fa-solid fa-chevron-right text-xs"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
     <!-- SECTION: ALL SERVICES -->
     <section id="services" class="space-y-6">

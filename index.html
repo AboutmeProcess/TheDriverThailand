@@ -106,20 +106,21 @@
       --tw-gradient-to: rgba(30, 41, 59, 0.35);
     }
 
-    /* Executive Obsidian & Champagne Gold Mesh */
+    /* Executive Obsidian & Champagne Gold Mesh (Always High Contrast for Hero Banner) */
     .luxury-hero-bg {
       background:
         radial-gradient(circle at 12% 18%, rgba(245, 158, 11, 0.24) 0%, transparent 42%),
         radial-gradient(circle at 88% 82%, rgba(217, 119, 6, 0.18) 0%, transparent 48%),
         radial-gradient(circle at 50% 0%, rgba(148, 163, 184, 0.12) 0%, transparent 55%),
-        linear-gradient(135deg, #070a12 0%, #0f172a 52%, #172033 100%);
+        linear-gradient(135deg, #070a12 0%, #0f172a 52%, #172033 100%) !important;
+      color: #ffffff !important;
     }
 
     .luxury-glass {
-      background: rgba(255, 255, 255, 0.055);
+      background: rgba(15, 23, 42, 0.78);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(251, 191, 36, 0.22);
+      border: 1px solid rgba(251, 191, 36, 0.28);
     }
 
     .gold-shimmer-text {
@@ -506,7 +507,6 @@
 
     <!-- Mobile & Tablet Collapsible Drawer (Grouped by Categories) -->
     <div id="mobile-nav-drawer" class="hidden lg:hidden border-t border-slate-800 bg-slate-950/98 px-4 py-4 space-y-4 max-h-[82vh] overflow-y-auto">
-      <!-- Quick Top Actions -->
       <div class="grid grid-cols-2 gap-2 text-xs font-bold">
         <a href="index.html" class="flex items-center gap-2.5 p-3 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 shadow">
           <i class="fa-solid fa-house w-4 text-center"></i>
@@ -518,7 +518,6 @@
         </a>
       </div>
 
-      <!-- หมวดหมู่บริการสมาชิก -->
       <div class="space-y-2">
         <div class="text-[11px] font-extrabold uppercase tracking-wider text-emerald-400 px-1 flex items-center gap-1.5">
           <i class="fa-solid fa-users"></i> หมวดหมู่บริการสมาชิก
@@ -547,7 +546,6 @@
         </div>
       </div>
 
-      <!-- หมวดหมู่บริการของกลุ่ม -->
       <div class="space-y-2 pt-1 border-t border-slate-800/80">
         <div class="text-[11px] font-extrabold uppercase tracking-wider text-amber-400 px-1 flex items-center gap-1.5">
           <i class="fa-solid fa-briefcase"></i> หมวดหมู่บริการของกลุ่ม
@@ -579,7 +577,7 @@
   </nav>
 
   <!-- TOP ANNOUNCEMENT BAR -->
-  <header class="bg-slate-900/95 text-slate-300 text-xs py-2.5 px-4 border-b border-amber-500/15">
+  <header class="bg-slate-950 text-slate-300 text-xs py-2.5 px-4 border-b border-amber-500/15">
     <div class="max-w-6xl mx-auto flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
       <div class="flex items-center gap-2 flex-wrap">
         <span class="bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-extrabold px-2.5 py-0.5 rounded-full text-[11px] shadow-sm">
@@ -1088,22 +1086,6 @@
     function hideToast() {
       const box = document.getElementById("toast-box");
       if (box) box.classList.add("hidden");
-    }
-
-    function copyLineId(lineId) {
-      try {
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(lineId).catch(() => {});
-        } else {
-          const tempInput = document.createElement("input");
-          tempInput.value = lineId;
-          document.body.appendChild(tempInput);
-          tempInput.select();
-          document.execCommand("copy");
-          document.body.removeChild(tempInput);
-        }
-      } catch (_) {}
-      showToast(`คัดลอก Line ID: ${lineId} เรียบร้อยแล้วครับ`);
     }
   </script>
 </body>

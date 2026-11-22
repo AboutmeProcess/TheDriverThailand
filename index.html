@@ -162,6 +162,69 @@
       box-shadow: 0 22px 38px -12px rgba(9, 13, 22, 0.14), 0 0 0 1px rgba(245, 158, 11, 0.35);
     }
 
+    /* 3D Showcase Billboard Carousel */
+    .billboard-3d-shell {
+      perspective: 1400px;
+      transform-style: preserve-3d;
+    }
+    .billboard-3d-stage {
+      position: relative;
+      border-radius: 28px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(251, 191, 36, 0.24) 0%, transparent 45%),
+        radial-gradient(circle at 85% 80%, rgba(16, 185, 129, 0.16) 0%, transparent 48%),
+        linear-gradient(135deg, #060911 0%, #0f172a 55%, #19243b 100%);
+      border: 1px solid rgba(251, 191, 36, 0.35);
+      box-shadow:
+        0 28px 60px -15px rgba(2, 6, 23, 0.55),
+        0 10px 25px -8px rgba(245, 158, 11, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s ease;
+    }
+    .billboard-3d-stage:hover {
+      transform: rotateX(1.2deg) rotateY(-1.2deg) translateY(-3px);
+      box-shadow:
+        0 34px 70px -15px rgba(2, 6, 23, 0.65),
+        0 14px 30px -8px rgba(245, 158, 11, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    }
+    .billboard-depth-card {
+      background: linear-gradient(145deg, rgba(15, 23, 42, 0.92) 0%, rgba(30, 41, 59, 0.82) 100%);
+      border: 1px solid rgba(251, 191, 36, 0.35);
+      box-shadow:
+        0 20px 35px -10px rgba(0, 0, 0, 0.55),
+        0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+      transform: translateZ(18px);
+    }
+    .billboard-nav-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      background: rgba(6, 9, 17, 0.82);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(251, 191, 36, 0.45);
+      color: #fde68a;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+    }
+    .billboard-nav-btn:hover {
+      background: #fbbf24;
+      color: #060911;
+      transform: scale(1.08);
+    }
+    .billboard-dot {
+      height: 8px;
+      border-radius: 999px;
+      transition: all 0.28s ease;
+      cursor: pointer;
+      border: none;
+    }
+
     /* COMPACT & RESPONSIVE GLOBAL NAVIGATION BAR (NO HORIZONTAL OVERFLOW) */
     .tdt-global-nav {
       box-sizing: border-box;
@@ -744,6 +807,118 @@
   <!-- MAIN CONTENT -->
   <main class="flex-grow max-w-6xl w-full mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-10 sm:space-y-14">
 
+    <!-- SECTION: 3D SERVICE BILLBOARD CAROUSEL (MULTI-SLIDE SHOWCASE) -->
+    <section id="service-billboard" aria-label="ป้ายประชาสัมพันธ์สื่อบริการ" class="space-y-3">
+      <div class="flex items-center justify-between gap-2 px-1">
+        <span class="inline-flex items-center gap-1.5 text-xs font-extrabold text-amber-800 bg-amber-100 border border-amber-300 px-3 py-1 rounded-full">
+          <i class="fa-solid fa-tv text-amber-600"></i> สื่อประชาสัมพันธ์บริการเครือข่าย
+        </span>
+        <div class="flex items-center gap-2 text-[11px] text-slate-500">
+          <button type="button" onclick="toggleBillboardAutoplay()" id="btn-billboard-autoplay"
+            class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-200/80 hover:bg-slate-300/80 text-slate-800 font-bold transition">
+            <i id="billboard-autoplay-icon" class="fa-solid fa-pause text-[10px]"></i>
+            <span id="billboard-autoplay-text">เล่นอัตโนมัติ</span>
+          </button>
+          <span id="billboard-slide-counter" class="font-bold text-slate-700">1 / 5</span>
+        </div>
+      </div>
+
+      <div class="billboard-3d-shell"
+        onmouseenter="pauseBillboardTemporarily(true)"
+        onmouseleave="pauseBillboardTemporarily(false)"
+        ontouchstart="handleBillboardTouchStart(event)"
+        ontouchend="handleBillboardTouchEnd(event)">
+        <div class="billboard-3d-stage p-5 sm:p-8 lg:p-10 text-white relative">
+          <!-- แสงไฟสร้างมิติพื้นหลัง -->
+          <div id="billboard-orb-primary" class="absolute -right-20 -top-20 w-72 h-72 rounded-full bg-amber-400/20 blur-3xl pointer-events-none transition-colors duration-500"></div>
+          <div id="billboard-orb-secondary" class="absolute -left-20 -bottom-20 w-72 h-72 rounded-full bg-emerald-400/15 blur-3xl pointer-events-none transition-colors duration-500"></div>
+
+          <div class="grid lg:grid-cols-12 gap-6 lg:gap-8 items-center relative z-10">
+            <!-- ฝั่งซ้าย: ข้อความโปรโมตบริการและปุ่มเข้าใช้งาน -->
+            <div class="lg:col-span-7 space-y-4">
+              <div class="flex flex-wrap items-center gap-2">
+                <span id="billboard-badge" class="inline-flex items-center gap-1.5 text-[11px] font-extrabold px-3 py-1 rounded-full bg-amber-400/20 border border-amber-300/40 text-amber-300">
+                  <i class="fa-solid fa-id-badge"></i> บริการยอดนิยม
+                </span>
+                <span id="billboard-tag" class="text-[11px] font-bold px-2.5 py-1 rounded-full bg-white/10 text-slate-200 border border-white/15">
+                  บัตรเคลือบใสกันน้ำ
+                </span>
+              </div>
+
+              <h2 id="billboard-title" class="text-2xl sm:text-3xl lg:text-4xl font-black leading-tight tracking-tight">
+                บัตรสมาชิกประเมศฐ์ &amp; ระบบเช็คพัสดุ
+              </h2>
+
+              <p id="billboard-desc" class="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-2xl">
+                ยกระดับความน่าเชื่อถือของคนขับรถมืออาชีพ ด้วยบัตรสมาชิกติดรูปถ่ายหน้าตรงเคลือบใสอย่างดี พร้อมตรวจสอบสถานะการจัดส่งและเลขพัสดุได้ทันที
+              </p>
+
+              <div class="flex flex-wrap items-center gap-3 pt-1">
+                <a id="billboard-cta-link" href="pcard.html"
+                  class="inline-flex items-center gap-2 bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 text-slate-950 font-extrabold text-xs sm:text-sm px-5 py-3 rounded-2xl shadow-lg shadow-amber-500/25 transition transform hover:-translate-y-0.5">
+                  <span id="billboard-cta-label">สมัครทำบัตร / เช็คพัสดุ</span>
+                  <i class="fa-solid fa-arrow-right"></i>
+                </a>
+                <a id="billboard-secondary-link" href="register.html"
+                  class="inline-flex items-center gap-1.5 bg-white/10 hover:bg-white/15 text-amber-200 border border-white/20 font-bold text-xs sm:text-sm px-4 py-3 rounded-2xl transition">
+                  <i class="fa-solid fa-circle-info text-xs"></i>
+                  <span id="billboard-secondary-label">ตรวจสอบรหัสสมาชิก</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- ฝั่งขวา: การ์ดสื่อแสดงผล 3 มิติ (เปลี่ยนภาพ/กราฟิกตามสไลด์) -->
+            <div class="lg:col-span-5">
+              <div id="billboard-visual-card" class="billboard-depth-card rounded-3xl p-5 sm:p-6 space-y-4">
+                <div class="flex items-center justify-between text-[11px] text-amber-200/80 border-b border-white/10 pb-3">
+                  <span id="billboard-card-kicker" class="font-extrabold tracking-wider uppercase text-amber-300">THE DRIVER TH VIP</span>
+                  <span id="billboard-card-status" class="inline-flex items-center gap-1.5 text-emerald-300 font-bold">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400"></span> พร้อมให้บริการ
+                  </span>
+                </div>
+
+                <div class="flex items-center gap-4 py-1">
+                  <div id="billboard-icon-box" class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br from-amber-400/25 to-amber-600/20 border border-amber-300/40 text-amber-300 flex items-center justify-center text-3xl sm:text-4xl shadow-inner shrink-0 icon-float">
+                    <i id="billboard-main-icon" class="fa-solid fa-id-badge"></i>
+                  </div>
+                  <div class="min-w-0 space-y-1">
+                    <p id="billboard-highlight-title" class="text-sm sm:text-base font-extrabold text-white leading-snug">
+                      รอบส่งบัตรถัดไป 11 ธ.ค. 69
+                    </p>
+                    <p id="billboard-highlight-sub" class="text-xs text-slate-300 leading-relaxed">
+                      แจ้งเลขพัสดุครบถ้วน ติดตามสถานะได้ทุกขั้นตอน
+                    </p>
+                  </div>
+                </div>
+
+                <div id="billboard-features-list" class="grid grid-cols-2 gap-2 pt-1 text-[11px]">
+                  <div class="bg-slate-950/70 border border-white/10 rounded-xl px-3 py-2 text-slate-200 font-semibold truncate">
+                    <i class="fa-solid fa-check text-amber-400 mr-1"></i> เคลือบใสกันน้ำอย่างดี
+                  </div>
+                  <div class="bg-slate-950/70 border border-white/10 rounded-xl px-3 py-2 text-slate-200 font-semibold truncate">
+                    <i class="fa-solid fa-check text-amber-400 mr-1"></i> เช็คเลขพัสดุย้อนหลังได้
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ปุ่มเลื่อนซ้าย-ขวา และตัวชี้สไลด์ -->
+          <div class="flex items-center justify-between gap-4 mt-6 pt-4 border-t border-white/10 relative z-10">
+            <div id="billboard-dots" class="flex items-center gap-2 flex-wrap" role="tablist" aria-label="เลือกสไลด์ป้ายประชาสัมพันธ์"></div>
+            <div class="flex items-center gap-2 shrink-0">
+              <button type="button" onclick="prevBillboardSlide()" aria-label="สไลด์ก่อนหน้า" class="billboard-nav-btn">
+                <i class="fa-solid fa-chevron-left text-xs"></i>
+              </button>
+              <button type="button" onclick="nextBillboardSlide()" aria-label="สไลด์ถัดไป" class="billboard-nav-btn">
+                <i class="fa-solid fa-chevron-right text-xs"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- SECTION: ALL SERVICES -->
     <section id="services" class="space-y-6">
       <div class="text-center max-w-2xl mx-auto space-y-2">
@@ -1087,6 +1262,231 @@
       const box = document.getElementById("toast-box");
       if (box) box.classList.add("hidden");
     }
+
+    /* 3D Multi-Slide Service Billboard Controller */
+    const BILLBOARD_SLIDES = [
+      {
+        badge: "บัตรสมาชิกประจำกลุ่ม",
+        badgeIcon: "fa-solid fa-id-badge",
+        tag: "เคลือบใสกันน้ำ • เช็คพัสดุได้",
+        title: "ทำบัตรสมาชิกประเมศฐ์ & เช็คเลขพัสดุ",
+        desc: "ยกระดับความน่าเชื่อถือของคนขับรถมืออาชีพ ด้วยบัตรสมาชิกติดรูปถ่ายหน้าตรงเคลือบใสอย่างดี พร้อมตรวจสอบสถานะการจัดส่งและเลขพัสดุย้อนหลังได้ทันที",
+        ctaLabel: "สมัครทำบัตร / เช็คพัสดุ",
+        ctaHref: "pcard.html",
+        secondaryLabel: "ตรวจสอบรหัสสมาชิก",
+        secondaryHref: "register.html",
+        kicker: "PRAMET MEMBER CARD",
+        status: "รอบถัดไป 11 ธ.ค. 69",
+        mainIcon: "fa-solid fa-id-badge",
+        highlightTitle: "บัตรสมาชิกติดรูปถ่ายหน้าตรง",
+        highlightSub: "จัดส่งทั่วประเทศพร้อมแจ้งเลขติดตามพัสดุ",
+        features: ["เคลือบใสกันน้ำอย่างดี", "เช็คเลขพัสดุย้อนหลังได้"],
+        orbPrimary: "rgba(251, 191, 36, 0.24)",
+        orbSecondary: "rgba(217, 119, 6, 0.16)"
+      },
+      {
+        badge: "ยืนยันตัวตนสมาชิกใหม่",
+        badgeIcon: "fa-solid fa-file-signature",
+        tag: "บันทึกร่างอัตโนมัติ • ตรวจใน 14 วัน",
+        title: "ลงทะเบียนสมาชิก The Driver Thailand",
+        desc: "สมัครยืนยันตัวตนสำหรับสมาชิกคนขับทั่วไปและผู้ปล่อยงานหลัก/บริษัท เพื่อรับรหัสสมาชิกประจำตัวและเข้าถึงบริการครบวงจรของเครือข่าย",
+        ctaLabel: "กรอกใบสมัครสมาชิกใหม่",
+        ctaHref: "member_register.html",
+        secondaryLabel: "แก้ไขข้อมูลสมาชิกเดิม",
+        secondaryHref: "member_edit.html",
+        kicker: "OFFICIAL MEMBER REGISTRY",
+        status: "เปิดรับสมัครออนไลน์",
+        mainIcon: "fa-solid fa-file-signature",
+        highlightTitle: "รองรับทั้งคนขับและผู้ปล่อยงาน",
+        highlightSub: "ระบบบันทึกร่างอัตโนมัติไม่หายแม้สลับหน้าจอ",
+        features: ["ออกรหัสสมาชิกทางการ", "คุ้มครองข้อมูลตาม PDPA"],
+        orbPrimary: "rgba(16, 185, 129, 0.24)",
+        orbSecondary: "rgba(251, 191, 36, 0.14)"
+      },
+      {
+        badge: "เครือข่ายรถพรีเมียม",
+        badgeIcon: "fa-solid fa-crown",
+        tag: "LUXURY SEDAN • VIP VAN • EV",
+        title: "ห้อง OpenChat สำหรับคนขับรถ Luxury Car",
+        desc: "พื้นที่เฉพาะสำหรับสมาชิกคนขับรถ Luxury Car, Executive Van และรถผู้บริหารระดับพรีเมียม เพื่อประสานงานและส่งต่อลูกค้าคุณภาพ",
+        ctaLabel: "สมัครเข้าห้อง Luxury Car",
+        ctaHref: "luxury_car_register.html",
+        secondaryLabel: "[VIP] ลายแทงท่องเที่ยว",
+        secondaryHref: "vip_referral_guide.html",
+        kicker: "LUXURY & VIP FLEET",
+        status: "คัดกรองรถ & หลักฐาน",
+        mainIcon: "fa-solid fa-crown",
+        highlightTitle: "มาตรฐานรถหรูระดับผู้บริหาร",
+        highlightSub: "ตรวจรูปภายนอก ห้องโดยสาร และยืนยันตัวตน",
+        features: ["ห้องเฉพาะกลุ่ม Luxury", "เชื่อมต่อลายแทง VIP"],
+        orbPrimary: "rgba(245, 158, 11, 0.28)",
+        orbSecondary: "rgba(168, 85, 247, 0.14)"
+      },
+      {
+        badge: "สิทธิประโยชน์ & งานบริการ",
+        badgeIcon: "fa-solid fa-map-location-dot",
+        tag: "ลายแทง VIP • บัตรผ่าน ทอ. • สมุดทัวร์",
+        title: "ครบเครื่องเรื่องลายแทง VIP บัตรผ่าน ทอ. และสมุดทัวร์",
+        desc: "รับลายแทงสถานที่ท่องเที่ยวเพื่อรับค่าแนะนำ ยื่นขอทำบัตรผ่านยานพาหนะเขตพื้นที่ ทอ. (ดอนเมือง) หรือสั่งซื้อสมุดทัวร์โซน กทม.-ปริมณฑล และพัทยา-ชลบุรี",
+        ctaLabel: "ขอรับลายแทงสถานที่ท่องเที่ยว",
+        ctaHref: "vip_referral_guide.html",
+        secondaryLabel: "สั่งซื้อสมุดทัวร์",
+        secondaryHref: "tour_book_order.html",
+        kicker: "GROUP SERVICES HUB",
+        status: "พร้อมให้บริการทุกโซน",
+        mainIcon: "fa-solid fa-map-location-dot",
+        highlightTitle: "ลายแทง VIP + บัตรผ่าน ทอ. + สมุดทัวร์",
+        highlightSub: "รวมบริการสำคัญของกลุ่มไว้ในจุดเดียว",
+        features: ["บัตรผ่านพื้นที่ ทอ. ดอนเมือง", "สมุดทัวร์ 2 โซนราคาชัดเจน"],
+        orbPrimary: "rgba(56, 189, 248, 0.22)",
+        orbSecondary: "rgba(251, 191, 36, 0.16)"
+      },
+      {
+        badge: "ความปลอดภัย & ช่วยเหลือ",
+        badgeIcon: "fa-solid fa-shield-halved",
+        tag: "เช็ก Blacklist • ขอปลดล็อก OpenChat",
+        title: "ศูนย์เฝ้าระวังภัย Blacklist & ขอปลดล็อกห้องแชท",
+        desc: "ตรวจสอบเบอร์โทร เลขบัญชี หรือประวัติเตือนภัยก่อนออกเดินทางไกล พร้อมช่องทางยื่นคำร้องขอปลดล็อกกรณีถูกบล็อกหรือลบออกจากห้อง OpenChat",
+        ctaLabel: "ตรวจสอบประวัติ Blacklist",
+        ctaHref: "blacklist.html",
+        secondaryLabel: "ขอปลดล็อกห้อง OpenChat",
+        secondaryHref: "unblock_request.html",
+        kicker: "SAFETY & UNBLOCK SUPPORT",
+        status: "เฝ้าระวังภัยตลอด 24 ชม.",
+        mainIcon: "fa-solid fa-user-shield",
+        highlightTitle: "เช็กประวัติไว ลดความเสี่ยงก่อนรับงาน",
+        highlightSub: "แจ้งเบาะแสเตือนภัยและยื่นคำร้องปลดล็อกได้ง่าย",
+        features: ["ค้นหาเบอร์/บัญชีได้ทันที", "ยื่นคำร้องปลดล็อกออนไลน์"],
+        orbPrimary: "rgba(244, 63, 94, 0.24)",
+        orbSecondary: "rgba(56, 189, 248, 0.14)"
+      }
+    ];
+
+    let currentBillboardIdx = 0;
+    let billboardTimer = null;
+    let billboardPausedByUser = false;
+    let billboardPausedByHover = false;
+    let billboardTouchStartX = 0;
+
+    function renderBillboardSlide(index) {
+      const total = BILLBOARD_SLIDES.length;
+      currentBillboardIdx = ((index % total) + total) % total;
+      const slide = BILLBOARD_SLIDES[currentBillboardIdx];
+
+      const badgeEl = document.getElementById("billboard-badge");
+      const tagEl = document.getElementById("billboard-tag");
+      const titleEl = document.getElementById("billboard-title");
+      const descEl = document.getElementById("billboard-desc");
+      const ctaLink = document.getElementById("billboard-cta-link");
+      const ctaLabel = document.getElementById("billboard-cta-label");
+      const secLink = document.getElementById("billboard-secondary-link");
+      const secLabel = document.getElementById("billboard-secondary-label");
+      const kickerEl = document.getElementById("billboard-card-kicker");
+      const statusEl = document.getElementById("billboard-card-status");
+      const mainIconEl = document.getElementById("billboard-main-icon");
+      const hlTitleEl = document.getElementById("billboard-highlight-title");
+      const hlSubEl = document.getElementById("billboard-highlight-sub");
+      const featListEl = document.getElementById("billboard-features-list");
+      const counterEl = document.getElementById("billboard-slide-counter");
+      const orb1 = document.getElementById("billboard-orb-primary");
+      const orb2 = document.getElementById("billboard-orb-secondary");
+
+      if (badgeEl) badgeEl.innerHTML = `<i class="${slide.badgeIcon}"></i> ${slide.badge}`;
+      if (tagEl) tagEl.textContent = slide.tag;
+      if (titleEl) titleEl.textContent = slide.title;
+      if (descEl) descEl.textContent = slide.desc;
+      if (ctaLink) ctaLink.href = slide.ctaHref;
+      if (ctaLabel) ctaLabel.textContent = slide.ctaLabel;
+      if (secLink) secLink.href = slide.secondaryHref;
+      if (secLabel) secLabel.textContent = slide.secondaryLabel;
+      if (kickerEl) kickerEl.textContent = slide.kicker;
+      if (statusEl) {
+        statusEl.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-400"></span> ${slide.status}`;
+      }
+      if (mainIconEl) mainIconEl.className = slide.mainIcon;
+      if (hlTitleEl) hlTitleEl.textContent = slide.highlightTitle;
+      if (hlSubEl) hlSubEl.textContent = slide.highlightSub;
+      if (counterEl) counterEl.textContent = `${currentBillboardIdx + 1} / ${total}`;
+      if (orb1) orb1.style.backgroundColor = slide.orbPrimary;
+      if (orb2) orb2.style.backgroundColor = slide.orbSecondary;
+
+      if (featListEl) {
+        featListEl.innerHTML = slide.features.map(f => `
+          <div class="bg-slate-950/70 border border-white/10 rounded-xl px-3 py-2 text-slate-200 font-semibold truncate">
+            <i class="fa-solid fa-check text-amber-400 mr-1"></i> ${f}
+          </div>
+        `).join("");
+      }
+
+      const dotsContainer = document.getElementById("billboard-dots");
+      if (dotsContainer) {
+        dotsContainer.innerHTML = BILLBOARD_SLIDES.map((_, i) => {
+          const active = i === currentBillboardIdx;
+          return `<button type="button" onclick="goToBillboardSlide(${i})" aria-label="สไลด์ที่ ${i + 1}" class="billboard-dot" style="width:${active ? "26px" : "8px"};background:${active ? "#fbbf24" : "rgba(255,255,255,0.28)"}"></button>`;
+        }).join("");
+      }
+    }
+
+    function nextBillboardSlide() {
+      renderBillboardSlide(currentBillboardIdx + 1);
+    }
+
+    function prevBillboardSlide() {
+      renderBillboardSlide(currentBillboardIdx - 1);
+    }
+
+    function goToBillboardSlide(index) {
+      renderBillboardSlide(index);
+    }
+
+    function syncBillboardTimer() {
+      if (billboardTimer) {
+        clearInterval(billboardTimer);
+        billboardTimer = null;
+      }
+      if (!billboardPausedByUser && !billboardPausedByHover) {
+        billboardTimer = setInterval(nextBillboardSlide, 5000);
+      }
+    }
+
+    function pauseBillboardTemporarily(isHovering) {
+      billboardPausedByHover = Boolean(isHovering);
+      syncBillboardTimer();
+    }
+
+    function toggleBillboardAutoplay() {
+      billboardPausedByUser = !billboardPausedByUser;
+      const iconEl = document.getElementById("billboard-autoplay-icon");
+      const textEl = document.getElementById("billboard-autoplay-text");
+      if (billboardPausedByUser) {
+        if (iconEl) iconEl.className = "fa-solid fa-play text-[10px]";
+        if (textEl) textEl.textContent = "หยุดชั่วคราว";
+      } else {
+        if (iconEl) iconEl.className = "fa-solid fa-pause text-[10px]";
+        if (textEl) textEl.textContent = "เล่นอัตโนมัติ";
+      }
+      syncBillboardTimer();
+    }
+
+    function handleBillboardTouchStart(event) {
+      if (event.changedTouches && event.changedTouches.length > 0) {
+        billboardTouchStartX = event.changedTouches[0].clientX;
+      }
+    }
+
+    function handleBillboardTouchEnd(event) {
+      if (!event.changedTouches || event.changedTouches.length === 0) return;
+      const diffX = event.changedTouches[0].clientX - billboardTouchStartX;
+      if (Math.abs(diffX) > 45) {
+        if (diffX < 0) nextBillboardSlide();
+        else prevBillboardSlide();
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      renderBillboardSlide(0);
+      syncBillboardTimer();
+    });
   </script>
 </body>
-</html>
+</html></selection-tag>

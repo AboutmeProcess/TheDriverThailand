@@ -22,11 +22,12 @@
           },
           colors: {
             driver: {
-              50: '#fffbe5',
+              50: '#fffbeb',
               100: '#fef3c7',
+              400: '#fbbf24',
               500: '#f59e0b',
               600: '#d97706',
-              900: '#0f172a',
+              900: '#090d16',
             }
           }
         }
@@ -41,39 +42,77 @@
     html, body {
       font-family: 'Prompt', sans-serif;
       background-color: #f8fafc;
+      color: #0f172a;
       max-width: 100%;
       overflow-x: clip;
     }
-    /* Dimensional Hero Background */
-    .hero-dark-mesh {
-      background: radial-gradient(circle at 15% 25%, rgba(245, 158, 11, 0.22) 0%, transparent 45%),
-                  radial-gradient(circle at 85% 75%, rgba(37, 99, 235, 0.30) 0%, transparent 50%),
-                  linear-gradient(135deg, #090d16 0%, #0f172a 50%, #1e293b 100%);
+
+    /* Executive Obsidian & Champagne Gold Mesh */
+    .luxury-hero-bg {
+      background:
+        radial-gradient(circle at 12% 18%, rgba(245, 158, 11, 0.24) 0%, transparent 42%),
+        radial-gradient(circle at 88% 82%, rgba(217, 119, 6, 0.18) 0%, transparent 48%),
+        radial-gradient(circle at 50% 0%, rgba(148, 163, 184, 0.12) 0%, transparent 55%),
+        linear-gradient(135deg, #070a12 0%, #0f172a 52%, #172033 100%);
     }
-    .glass-panel {
-      background: rgba(255, 255, 255, 0.06);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+
+    .luxury-glass {
+      background: rgba(255, 255, 255, 0.055);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(251, 191, 36, 0.22);
     }
-    .card-hover {
-      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+
+    .gold-shimmer-text {
+      background: linear-gradient(90deg, #fde68a 0%, #fbbf24 35%, #f59e0b 65%, #fef08a 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: goldShimmer 5s linear infinite;
     }
-    .card-hover:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 30px -10px rgba(15, 23, 42, 0.12);
+
+    @keyframes goldShimmer {
+      to { background-position: 200% center; }
+    }
+
+    /* Bouncy & Floating Icon Animations */
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-5px); }
+    }
+    @keyframes iconBouncePop {
+      0%, 100% { transform: translateY(0) scale(1); }
+      40% { transform: translateY(-6px) scale(1.12) rotate(-4deg); }
+      70% { transform: translateY(-2px) scale(1.04) rotate(3deg); }
+    }
+
+    .icon-float {
+      animation: floatSlow 3.2s ease-in-out infinite;
+    }
+    .group:hover .icon-bounce-hover,
+    .icon-bounce-hover:hover {
+      animation: iconBouncePop 0.65s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .card-luxury {
+      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+    .card-luxury:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 22px 38px -12px rgba(9, 13, 22, 0.14), 0 0 0 1px rgba(245, 158, 11, 0.35);
     }
 
     /* UNIFIED TOPMOST GLOBAL SITE NAVIGATION BAR (EXACT SAME SIZE & POSITION ACROSS ALL 4 PAGES) */
     .tdt-global-nav {
       box-sizing: border-box;
       font-family: 'Prompt', sans-serif;
-      background-color: #020617;
+      background: linear-gradient(90deg, #060911 0%, #0d1322 50%, #060911 100%);
       color: #e2e8f0;
-      border-bottom: 1px solid #1e293b;
+      border-bottom: 1px solid rgba(251, 191, 36, 0.25);
       position: sticky;
       top: 0;
       z-index: 1000;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.35);
       width: 100%;
     }
     .tdt-global-nav *, .tdt-global-nav *::before, .tdt-global-nav *::after {
@@ -113,7 +152,10 @@
       }
     }
     .tdt-global-brand:hover {
-      color: #fcd34d;
+      color: #fde68a;
+    }
+    .tdt-global-brand:hover i {
+      animation: iconBouncePop 0.6s ease;
     }
     .tdt-global-links {
       display: flex;
@@ -140,13 +182,18 @@
       text-decoration: none;
       white-space: nowrap;
       flex-shrink: 0;
-      background-color: #0f172a;
-      border: 1px solid #334155;
+      background-color: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(148, 163, 184, 0.25);
       color: #e2e8f0;
-      transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+      transition: all 0.2s ease;
     }
     .tdt-nav-btn:hover {
       background-color: #1e293b;
+      border-color: rgba(251, 191, 36, 0.45);
+      transform: translateY(-1px);
+    }
+    .tdt-nav-btn:hover i {
+      animation: iconBouncePop 0.55s ease;
     }
     .tdt-nav-btn.is-register { color: #6ee7b7; }
     .tdt-nav-btn.is-register i { color: #34d399; }
@@ -155,20 +202,20 @@
     .tdt-nav-btn.is-blacklist { color: #fda4af; }
     .tdt-nav-btn.is-blacklist i { color: #fb7185; }
     .tdt-nav-btn.active-home {
-      background-color: #f59e0b;
-      border-color: #f59e0b;
-      color: #020617;
-      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+      border-color: #fcd34d;
+      color: #060911;
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.35);
     }
-    .tdt-nav-btn.active-home i { color: #020617; }
+    .tdt-nav-btn.active-home i { color: #060911; }
   </style>
 </head>
 <body class="text-slate-800 antialiased min-h-screen flex flex-col selection:bg-amber-400 selection:text-slate-950">
 
   <!-- Non-blocking Toast Notification -->
-  <div id="toast-box" class="hidden fixed bottom-5 right-5 z-50 max-w-sm w-[calc(100vw-2.5rem)] bg-slate-900 text-white border border-amber-400/50 rounded-2xl p-4 shadow-2xl">
+  <div id="toast-box" class="hidden fixed bottom-5 right-5 z-50 max-w-sm w-[calc(100vw-2.5rem)] bg-slate-950 text-white border border-amber-400/60 rounded-2xl p-4 shadow-2xl">
     <div class="flex items-start gap-3">
-      <i id="toast-icon" class="fa-solid fa-circle-check text-emerald-400 text-lg mt-0.5 shrink-0"></i>
+      <i id="toast-icon" class="fa-solid fa-circle-check text-amber-400 text-lg mt-0.5 shrink-0 icon-float"></i>
       <div class="text-xs sm:text-sm leading-relaxed flex-1 min-w-0 break-words" id="toast-text"></div>
       <button type="button" onclick="hideToast()" class="text-slate-400 hover:text-white shrink-0" aria-label="ปิด">
         <i class="fa-solid fa-xmark"></i>
@@ -205,11 +252,11 @@
   </nav>
 
   <!-- TOP ANNOUNCEMENT BAR -->
-  <header class="bg-slate-900 text-slate-300 text-xs py-2.5 px-4 border-b border-slate-800/80">
-    <div class="max-w-6xl mx-auto px-0 sm:px-2 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
+  <header class="bg-slate-900/95 text-slate-300 text-xs py-2.5 px-4 border-b border-amber-500/15">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
       <div class="flex items-center gap-2 flex-wrap">
-        <span class="bg-amber-500 text-slate-950 font-extrabold px-2.5 py-0.5 rounded-full text-[11px] shadow">
-          <i class="fa-solid fa-car-side mr-1"></i> OFFICIAL PORTAL
+        <span class="bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-extrabold px-2.5 py-0.5 rounded-full text-[11px] shadow-sm">
+          <i class="fa-solid fa-crown mr-1"></i> EXECUTIVE NETWORK
         </span>
         <span class="text-slate-300 font-medium">เครือข่ายคนขับรถรับส่งผู้โดยสารและบริการมืออาชีพแห่งประเทศไทย</span>
       </div>
@@ -219,49 +266,49 @@
         </span>
         <span class="hidden md:inline text-slate-700">|</span>
         <span class="hidden md:inline-flex items-center gap-1.5 text-emerald-400 font-semibold">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> ระบบออนไลน์พร้อมใช้งาน
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> ระบบออนไลน์พร้อมใช้งาน
         </span>
       </div>
     </div>
   </header>
 
   <!-- HERO SECTION -->
-  <section class="hero-dark-mesh text-white relative overflow-hidden border-b border-slate-800">
+  <section class="luxury-hero-bg text-white relative overflow-hidden border-b border-amber-500/20">
     <div class="absolute -right-24 -top-24 w-96 h-96 bg-amber-500/15 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="absolute -left-24 -bottom-24 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -left-24 -bottom-24 w-96 h-96 bg-amber-600/10 rounded-full blur-3xl pointer-events-none"></div>
 
     <div class="max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-16 relative z-10">
       <div class="grid lg:grid-cols-12 gap-8 items-center">
         <div class="lg:col-span-7 space-y-5">
-          <div class="inline-flex items-center gap-2 bg-amber-500/15 border border-amber-400/30 text-amber-300 text-xs font-bold px-3.5 py-1.5 rounded-full">
-            <i class="fa-solid fa-shield-halved"></i>
+          <div class="inline-flex items-center gap-2 bg-amber-500/15 border border-amber-400/40 text-amber-300 text-xs font-bold px-3.5 py-1.5 rounded-full shadow-inner">
+            <i class="fa-solid fa-shield-halved icon-float"></i>
             <span>OFFICIAL COMMUNITY &amp; DRIVER NETWORK</span>
           </div>
 
           <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black leading-tight tracking-tight">
             ยกระดับมาตรฐาน<br>
-            <span class="bg-gradient-to-r from-amber-300 via-amber-400 to-yellow-500 bg-clip-text text-transparent">
+            <span class="gold-shimmer-text">
               คนขับรถมืออาชีพทั่วไทย
             </span>
           </h1>
 
           <p class="text-slate-300 text-sm sm:text-base leading-relaxed font-light max-w-2xl">
-            ศูนย์รวมบริการสำหรับสมาชิกกลุ่ม <strong>The Driver Thailand</strong> ครบจบในที่เดียว ทั้งระบบลงทะเบียนสมาชิก
-            การทำบัตรสมาชิกประเมศฐ์พร้อมเช็คเลขพัสดุ และการตรวจสอบประวัติเฝ้าระวังภัย (Blacklist) เพื่อความปลอดภัยในการรับงาน
+            ศูนย์รวมบริการสำหรับสมาชิกกลุ่ม <strong class="text-amber-300 font-semibold">The Driver Thailand</strong> ครบจบในที่เดียว ทั้งระบบลงทะเบียนสมาชิก
+            การทำบัตรสมาชิกประเมศฐ์พร้อมเช็คเลขพัสดุ และการตรวจสอบประวัติเฝ้าระวังภัย (Blacklist) เพื่อความปลอดภัยระดับพรีเมียม
           </p>
 
           <!-- Primary CTA Buttons -->
           <div class="flex flex-wrap items-center gap-3 pt-2">
-            <a href="register.html" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs sm:text-sm px-5 py-3.5 rounded-2xl shadow-lg shadow-emerald-500/20 transition inline-flex items-center gap-2">
-              <i class="fa-solid fa-user-plus"></i>
+            <a href="register.html" class="group bg-gradient-to-r from-emerald-400 to-emerald-500 hover:from-emerald-300 hover:to-emerald-400 text-slate-950 font-extrabold text-xs sm:text-sm px-5 py-3.5 rounded-2xl shadow-lg shadow-emerald-500/25 transition inline-flex items-center gap-2">
+              <i class="fa-solid fa-user-plus icon-bounce-hover"></i>
               <span>เข้าสู่ระบบสมาชิก</span>
             </a>
-            <a href="pcard.html" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs sm:text-sm px-5 py-3.5 rounded-2xl shadow-lg shadow-amber-500/20 transition inline-flex items-center gap-2">
-              <i class="fa-solid fa-id-badge"></i>
+            <a href="pcard.html" class="group bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 hover:from-amber-300 hover:to-yellow-400 text-slate-950 font-extrabold text-xs sm:text-sm px-5 py-3.5 rounded-2xl shadow-lg shadow-amber-500/25 transition inline-flex items-center gap-2">
+              <i class="fa-solid fa-id-badge icon-bounce-hover"></i>
               <span>ทำบัตรสมาชิกประเมศฐ์</span>
             </a>
-            <a href="blacklist.html" class="bg-rose-600/90 hover:bg-rose-500 text-white font-bold text-xs sm:text-sm px-5 py-3.5 rounded-2xl border border-rose-400/40 shadow-lg transition inline-flex items-center gap-2">
-              <i class="fa-solid fa-user-shield"></i>
+            <a href="blacklist.html" class="group bg-rose-600/90 hover:bg-rose-500 text-white font-bold text-xs sm:text-sm px-5 py-3.5 rounded-2xl border border-rose-400/50 shadow-lg shadow-rose-600/20 transition inline-flex items-center gap-2">
+              <i class="fa-solid fa-user-shield icon-bounce-hover"></i>
               <span>เช็กประวัติ Blacklist</span>
             </a>
           </div>
@@ -269,63 +316,63 @@
 
         <!-- Right Quick Hub Card -->
         <div class="lg:col-span-5">
-          <div class="glass-panel border border-white/15 rounded-3xl p-5 sm:p-6 shadow-2xl space-y-4">
-            <div class="flex items-center justify-between border-b border-white/10 pb-3">
+          <div class="luxury-glass rounded-3xl p-5 sm:p-6 shadow-2xl space-y-4">
+            <div class="flex items-center justify-between border-b border-amber-400/15 pb-3.5">
               <div class="flex items-center gap-2.5">
-                <div class="w-9 h-9 rounded-xl bg-amber-500/20 border border-amber-400/40 text-amber-400 flex items-center justify-center">
-                  <i class="fa-solid fa-compass"></i>
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400/25 to-amber-600/20 border border-amber-400/40 text-amber-300 flex items-center justify-center shadow-inner">
+                  <i class="fa-solid fa-compass text-lg icon-float"></i>
                 </div>
                 <div>
                   <h2 class="text-sm font-bold text-white">ทางลัดเข้าใช้งานระบบ</h2>
-                  <p class="text-[11px] text-slate-400">เลือกเมนูบริการที่ต้องการได้ทันที</p>
+                  <p class="text-[11px] text-amber-200/70">เลือกเมนูบริการที่ต้องการได้ทันที</p>
                 </div>
               </div>
-              <span class="text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 px-2.5 py-0.5 rounded-full">ONLINE</span>
+              <span class="text-[10px] font-extrabold bg-amber-400/20 text-amber-300 border border-amber-400/40 px-2.5 py-0.5 rounded-full">VIP ACCESS</span>
             </div>
 
             <div class="space-y-2.5">
-              <a href="register.html" class="block p-3.5 rounded-2xl bg-slate-900/80 hover:bg-slate-800 border border-slate-700/80 hover:border-emerald-400/60 transition group">
+              <a href="register.html" class="block p-3.5 rounded-2xl bg-slate-950/75 hover:bg-slate-900 border border-slate-700/80 hover:border-emerald-400/70 transition group">
                 <div class="flex items-center justify-between gap-3">
                   <div class="flex items-center gap-3 min-w-0">
-                    <div class="w-10 h-10 rounded-xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center text-base shrink-0">
-                      <i class="fa-solid fa-users-gear"></i>
+                    <div class="w-10 h-10 rounded-xl bg-emerald-500/15 border border-emerald-400/30 text-emerald-400 flex items-center justify-center text-base shrink-0">
+                      <i class="fa-solid fa-users-gear icon-bounce-hover"></i>
                     </div>
                     <div class="min-w-0">
                       <p class="text-xs sm:text-sm font-bold text-white group-hover:text-emerald-300 transition truncate">1. ระบบลงทะเบียนสมาชิก</p>
-                      <p class="text-[11px] text-slate-400 truncate">สมัครสมาชิกกลุ่ม ออกบัตรดิจิทัล &amp; ทะเบียนสมาชิก</p>
+                      <p class="text-[11px] text-slate-400 truncate">สมัครสมาชิกกลุ่ม ค้นหารหัส &amp; ตรวจสอบสถานะ</p>
                     </div>
                   </div>
-                  <i class="fa-solid fa-chevron-right text-slate-500 group-hover:text-emerald-400 transition text-xs"></i>
+                  <i class="fa-solid fa-chevron-right text-slate-500 group-hover:text-emerald-400 group-hover:translate-x-1 transition text-xs"></i>
                 </div>
               </a>
 
-              <a href="pcard.html" class="block p-3.5 rounded-2xl bg-slate-900/80 hover:bg-slate-800 border border-slate-700/80 hover:border-amber-400/60 transition group">
+              <a href="pcard.html" class="block p-3.5 rounded-2xl bg-slate-950/75 hover:bg-slate-900 border border-slate-700/80 hover:border-amber-400/70 transition group">
                 <div class="flex items-center justify-between gap-3">
                   <div class="flex items-center gap-3 min-w-0">
-                    <div class="w-10 h-10 rounded-xl bg-amber-500/15 text-amber-400 flex items-center justify-center text-base shrink-0">
-                      <i class="fa-solid fa-id-card"></i>
+                    <div class="w-10 h-10 rounded-xl bg-amber-500/15 border border-amber-400/30 text-amber-400 flex items-center justify-center text-base shrink-0">
+                      <i class="fa-solid fa-id-card icon-bounce-hover"></i>
                     </div>
                     <div class="min-w-0">
                       <p class="text-xs sm:text-sm font-bold text-white group-hover:text-amber-300 transition truncate">2. ทำบัตรสมาชิกประเมศฐ์ &amp; เช็คพัสดุ</p>
                       <p class="text-[11px] text-slate-400 truncate">ลงทะเบียนทำบัตรเคลือบใส &amp; ตรวจสอบเลขพัสดุ</p>
                     </div>
                   </div>
-                  <i class="fa-solid fa-chevron-right text-slate-500 group-hover:text-amber-400 transition text-xs"></i>
+                  <i class="fa-solid fa-chevron-right text-slate-500 group-hover:text-amber-400 group-hover:translate-x-1 transition text-xs"></i>
                 </div>
               </a>
 
-              <a href="blacklist.html" class="block p-3.5 rounded-2xl bg-slate-900/80 hover:bg-slate-800 border border-slate-700/80 hover:border-rose-400/60 transition group">
+              <a href="blacklist.html" class="block p-3.5 rounded-2xl bg-slate-950/75 hover:bg-slate-900 border border-slate-700/80 hover:border-rose-400/70 transition group">
                 <div class="flex items-center justify-between gap-3">
                   <div class="flex items-center gap-3 min-w-0">
-                    <div class="w-10 h-10 rounded-xl bg-rose-500/15 text-rose-400 flex items-center justify-center text-base shrink-0">
-                      <i class="fa-solid fa-shield-cat"></i>
+                    <div class="w-10 h-10 rounded-xl bg-rose-500/15 border border-rose-400/30 text-rose-400 flex items-center justify-center text-base shrink-0">
+                      <i class="fa-solid fa-shield-cat icon-bounce-hover"></i>
                     </div>
                     <div class="min-w-0">
                       <p class="text-xs sm:text-sm font-bold text-white group-hover:text-rose-300 transition truncate">3. ศูนย์เฝ้าระวังภัย (Blacklist)</p>
                       <p class="text-[11px] text-slate-400 truncate">ค้นหาเบอร์โทร/เลขบัญชีคนโกง &amp; แจ้งเบาะแส</p>
                     </div>
                   </div>
-                  <i class="fa-solid fa-chevron-right text-slate-500 group-hover:text-rose-400 transition text-xs"></i>
+                  <i class="fa-solid fa-chevron-right text-slate-500 group-hover:text-rose-400 group-hover:translate-x-1 transition text-xs"></i>
                 </div>
               </a>
             </div>
@@ -341,59 +388,63 @@
     <!-- SECTION: 3 CORE SERVICES -->
     <section id="services" class="space-y-6">
       <div class="text-center max-w-2xl mx-auto space-y-2">
-        <span class="text-xs font-extrabold uppercase tracking-wider text-amber-600 bg-amber-100 px-3 py-1 rounded-full">CORE SERVICES</span>
+        <span class="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-amber-800 bg-amber-100 border border-amber-300 px-3.5 py-1 rounded-full">
+          <i class="fa-solid fa-gem text-amber-600"></i> CORE SERVICES
+        </span>
         <h2 class="text-2xl sm:text-3xl font-black text-slate-900">บริการหลักของเครือข่าย The Driver Thailand</h2>
-        <p class="text-xs sm:text-sm text-slate-500">เลือกใช้งานระบบออนไลน์ที่ออกแบบมาเพื่อความสะดวกและปลอดภัยของสมาชิกคนขับรถโดยเฉพาะ</p>
+        <p class="text-xs sm:text-sm text-slate-500">เลือกใช้งานระบบออนไลน์ที่ออกแบบมาเพื่อความสะดวก หรูหรา และปลอดภัยของสมาชิกคนขับรถโดยเฉพาะ</p>
       </div>
 
       <div class="grid md:grid-cols-3 gap-5 sm:gap-6">
         <!-- Service Card 1: Member System -->
-        <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm card-hover flex flex-col justify-between space-y-5">
+        <div class="group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
           <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-600 flex items-center justify-center text-xl">
-              <i class="fa-solid fa-user-plus"></i>
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-50 to-emerald-100 border border-emerald-200 text-emerald-600 flex items-center justify-center text-xl shadow-sm">
+              <i class="fa-solid fa-user-plus icon-bounce-hover"></i>
             </div>
             <h3 class="text-lg font-extrabold text-slate-900">ระบบสมาชิก The Driver Thailand</h3>
             <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              ลงทะเบียนเข้าสู่ระบบสมาชิกของเครือข่าย ออกบัตรสมาชิกดิจิทัลพร้อม QR Code ยืนยันตัวตน และตรวจสอบรายชื่อสมาชิกในระบบ
+              ลงทะเบียนเข้าสู่ระบบสมาชิกของเครือข่าย ค้นหารหัสสมาชิกประจำตัว และตรวจสอบกติกาการยืนยันตัวตนของกลุ่ม
             </p>
           </div>
-          <a href="register.html" class="w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2">
+          <a href="register.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-600 text-white font-bold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md shadow-emerald-600/15">
             <span>เปิดระบบสมาชิก</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
         </div>
 
         <!-- Service Card 2: Pramet Member Card -->
-        <div class="bg-white rounded-3xl p-6 border-2 border-amber-400/70 shadow-sm card-hover flex flex-col justify-between space-y-5 relative">
-          <span class="absolute top-4 right-4 text-[10px] font-extrabold bg-amber-400 text-slate-950 px-2.5 py-0.5 rounded-full">แนะนำ</span>
+        <div class="group bg-white rounded-3xl p-6 border-2 border-amber-400/80 shadow-md card-luxury flex flex-col justify-between space-y-5 relative">
+          <span class="absolute top-4 right-4 text-[10px] font-extrabold bg-gradient-to-r from-amber-400 to-yellow-400 text-slate-950 px-3 py-0.5 rounded-full shadow-sm">
+            <i class="fa-solid fa-star mr-1"></i>แนะนำ
+          </span>
           <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-amber-50 border border-amber-200 text-amber-600 flex items-center justify-center text-xl">
-              <i class="fa-solid fa-id-badge"></i>
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-50 to-amber-100 border border-amber-300 text-amber-600 flex items-center justify-center text-xl shadow-sm">
+              <i class="fa-solid fa-id-badge icon-bounce-hover"></i>
             </div>
             <h3 class="text-lg font-extrabold text-slate-900">ทำบัตรสมาชิกประเมศฐ์ &amp; เช็คพัสดุ</h3>
             <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
               สมัครทำบัตรสมาชิกประเมศฐ์แบบติดรูปถ่ายหน้าตรง เคลือบใสกันน้ำอย่างดี พร้อมระบบติดตามสถานะ 4 ขั้นตอนและเช็คเลขพัสดุย้อนหลัง
             </p>
           </div>
-          <a href="pcard.html" class="w-full py-3 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-amber-400 font-bold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2">
+          <a href="pcard.html" class="w-full py-3 px-4 rounded-xl bg-slate-950 hover:bg-slate-800 text-amber-400 border border-amber-400/30 font-bold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
             <span>สมัครทำบัตร / เช็คพัสดุ</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
         </div>
 
         <!-- Service Card 3: Blacklist Guard -->
-        <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm card-hover flex flex-col justify-between space-y-5">
+        <div class="group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
           <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-rose-50 border border-rose-200 text-rose-600 flex items-center justify-center text-xl">
-              <i class="fa-solid fa-user-shield"></i>
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-rose-50 to-rose-100 border border-rose-200 text-rose-600 flex items-center justify-center text-xl shadow-sm">
+              <i class="fa-solid fa-user-shield icon-bounce-hover"></i>
             </div>
             <h3 class="text-lg font-extrabold text-slate-900">ศูนย์เฝ้าระวังภัย (Blacklist)</h3>
             <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
               ตรวจสอบเบอร์โทรศัพท์ เลขบัญชีธนาคาร หรือชื่อผู้ว่าจ้างก่อนออกเดินทางไกล พร้อมช่องทางแจ้งเบาะแสเตือนภัยคนโกงร่วมกันในกลุ่ม
             </p>
           </div>
-          <a href="blacklist.html" class="w-full py-3 px-4 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2">
+          <a href="blacklist.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-rose-600 to-rose-500 hover:from-rose-500 hover:to-rose-600 text-white font-bold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md shadow-rose-600/15">
             <span>เข้าสู่ศูนย์ตรวจสอบ Blacklist</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
@@ -402,40 +453,42 @@
     </section>
 
     <!-- SECTION: COMMUNITY GUIDELINES & CONTACT -->
-    <section id="rules-contact" class="bg-slate-900 text-white rounded-3xl p-6 sm:p-10 shadow-xl border border-slate-800">
+    <section id="rules-contact" class="luxury-hero-bg text-white rounded-3xl p-6 sm:p-10 shadow-2xl border border-amber-400/25">
       <div class="grid lg:grid-cols-12 gap-8 items-center">
         <div class="lg:col-span-7 space-y-4">
-          <span class="text-xs font-bold text-amber-400 uppercase tracking-wider">COMMUNITY GUIDELINES</span>
+          <span class="inline-flex items-center gap-1.5 text-xs font-bold text-amber-300 uppercase tracking-wider">
+            <i class="fa-solid fa-award"></i> COMMUNITY GUIDELINES
+          </span>
           <h2 class="text-xl sm:text-2xl font-extrabold">ข้อปฏิบัติและช่องทางติดต่อทีมงาน</h2>
           <ul class="space-y-2.5 text-xs sm:text-sm text-slate-300">
             <li class="flex items-start gap-2.5">
-              <i class="fa-solid fa-circle-check text-emerald-400 mt-1 shrink-0"></i>
-              <span>ตรวจสอบประวัติผู้ว่าจ้างในระบบ <strong>Blacklist</strong> ทุกครั้งก่อนรับงานเหมาหรืองานเดินทางข้ามจังหวัด</span>
+              <i class="fa-solid fa-circle-check text-amber-400 mt-1 shrink-0"></i>
+              <span>ตรวจสอบประวัติผู้ว่าจ้างในระบบ <strong class="text-white">Blacklist</strong> ทุกครั้งก่อนรับงานเหมาหรืองานเดินทางข้ามจังหวัด</span>
             </li>
             <li class="flex items-start gap-2.5">
-              <i class="fa-solid fa-circle-check text-emerald-400 mt-1 shrink-0"></i>
+              <i class="fa-solid fa-circle-check text-amber-400 mt-1 shrink-0"></i>
               <span>การสมัครทำบัตรสมาชิกประเมศฐ์ กรุณาใช้รูปถ่ายหน้าตรงสุภาพ ไม่สวมแว่นตาดำ เพื่อความรวดเร็วในการออกบัตร</span>
             </li>
             <li class="flex items-start gap-2.5">
-              <i class="fa-solid fa-circle-check text-emerald-400 mt-1 shrink-0"></i>
+              <i class="fa-solid fa-circle-check text-amber-400 mt-1 shrink-0"></i>
               <span>หากพบปัญหาการใช้งานระบบหรือต้องการประสานงานเร่งด่วน สามารถติดต่อแอดมินได้ทาง Line Official</span>
             </li>
           </ul>
         </div>
 
-        <div class="lg:col-span-5 bg-slate-800/80 border border-slate-700 rounded-2xl p-5 sm:p-6 space-y-4">
+        <div class="lg:col-span-5 luxury-glass rounded-2xl p-5 sm:p-6 space-y-4">
           <div class="flex items-center gap-3">
-            <div class="w-11 h-11 rounded-xl bg-emerald-500/20 border border-emerald-400/40 text-emerald-400 flex items-center justify-center text-xl shrink-0">
-              <i class="fa-brands fa-line"></i>
+            <div class="w-12 h-12 rounded-xl bg-emerald-500/20 border border-emerald-400/40 text-emerald-400 flex items-center justify-center text-2xl shrink-0">
+              <i class="fa-brands fa-line icon-float"></i>
             </div>
             <div>
-              <p class="text-xs text-slate-400">ติดต่อทีมงานแอดมิน (LINE OA)</p>
+              <p class="text-xs text-amber-200/80">ติดต่อทีมงานแอดมิน (LINE OA)</p>
               <p class="text-base sm:text-lg font-extrabold text-white font-mono">@Thedriverthailand</p>
             </div>
           </div>
 
-          <button type="button" onclick="copyLineId('@Thedriverthailand')" class="w-full py-3 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs sm:text-sm transition flex items-center justify-center gap-2 shadow">
-            <i class="fa-solid fa-copy"></i>
+          <button type="button" onclick="copyLineId('@Thedriverthailand')" class="group w-full py-3 px-4 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold text-xs sm:text-sm transition flex items-center justify-center gap-2 shadow-lg">
+            <i class="fa-solid fa-copy icon-bounce-hover"></i>
             <span>คัดลอก Line ID ติดต่อทีมงาน</span>
           </button>
         </div>
@@ -445,10 +498,10 @@
   </main>
 
   <!-- FOOTER -->
-  <footer class="bg-slate-950 text-slate-400 border-t border-slate-800 py-8 px-4 text-xs">
+  <footer class="bg-slate-950 text-slate-400 border-t border-amber-500/20 py-8 px-4 text-xs">
     <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
       <div class="text-center sm:text-left">
-        <p class="font-bold text-slate-200">The Driver Thailand Official Network</p>
+        <p class="font-bold text-amber-300">The Driver Thailand Official Network</p>
         <p class="text-[11px] text-slate-500 mt-0.5">ศูนย์กลางระบบสมาชิก บัตรสมาชิกประเมศฐ์ และระบบเฝ้าระวังภัยกลุ่มคนขับรถรับจ้าง</p>
       </div>
       <div class="flex flex-wrap justify-center gap-4 font-semibold">

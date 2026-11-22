@@ -384,9 +384,17 @@
             <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900">แบบฟอร์มลงทะเบียนสมัครทำบัตร</h3>
             <p class="text-xs sm:text-sm text-slate-500 mt-0.5">กรอกข้อมูลให้ครบถ้วน ข้อมูลจะถูกจัดเก็บเข้าสู่ระบบชีตอัตโนมัติ</p>
           </div>
-          <span class="text-xs font-semibold text-slate-600 bg-slate-100 px-3.5 py-1.5 rounded-full border border-slate-200 shrink-0">
-            <i class="fa-solid fa-shield-halved text-emerald-600 mr-1"></i> ปลอดภัย 100%
-          </span>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span id="pcard-draft-status" class="text-xs font-semibold text-slate-600 bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200">
+              <i class="fa-solid fa-floppy-disk text-amber-600 mr-1"></i> จำร่างอัตโนมัติ
+            </span>
+            <button type="button" onclick="clearPcardDraftAndForm()" class="text-xs font-bold text-rose-600 hover:text-rose-700 bg-rose-50 hover:bg-rose-100 border border-rose-200 px-3 py-1.5 rounded-full transition">
+              <i class="fa-solid fa-eraser mr-1"></i> ล้างแบบร่าง
+            </button>
+            <span class="text-xs font-semibold text-slate-600 bg-slate-100 px-3.5 py-1.5 rounded-full border border-slate-200 shrink-0">
+              <i class="fa-solid fa-shield-halved text-emerald-600 mr-1"></i> ปลอดภัย 100%
+            </span>
+          </div>
         </div>
 
         <form id="form-registration" onsubmit="submitRegistrationForm(event)" class="space-y-6">
@@ -680,12 +688,17 @@
         </div>
 
         <div class="grid md:grid-cols-2 gap-3">
-          <input type="text" id="shipping-search-input" oninput="renderShippingTable()" placeholder="ค้นหาชื่อ-นามสกุล หรือเลขพัสดุ..."
+          <input type="text" id="shipping-search-input" oninput="renderShippingTable()" placeholder="ค้นหาชื่อ-นามสกุล เบอร์โทร หรือเลขพัสดุ..."
                  class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-2.5 text-xs sm:text-sm focus:bg-white focus:ring-2 focus:ring-amber-500 focus:outline-none">
           <select id="shipping-round-filter" onchange="renderShippingTable()"
                   class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-2.5 text-xs sm:text-sm focus:bg-white focus:ring-2 focus:ring-amber-500 focus:outline-none">
             <option value="ALL">แสดงทุกรอบการจัดส่ง</option>
           </select>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-600 bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5">
+          <span id="shipping-result-summary" class="font-bold text-slate-800">แสดง 0 รายการจากทั้งหมด 0 รายการ</span>
+          <span class="text-[11px] text-slate-500"><i class="fa-solid fa-shield-halved text-emerald-600 mr-1"></i>เบอร์โทรศัพท์ถูกปกปิดบางหลักเพื่อความปลอดภัย (PDPA)</span>
         </div>
 
         <div class="overflow-x-auto custom-scrollbar rounded-2xl border border-slate-200">
@@ -713,6 +726,7 @@
 
   <script>
     const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbx-D98KtPqdw-0tbZ6V8_WQGkm6UpLZmlfNvhhcVk4M_GW3tjM4pIz6-mNSDVyWukg_/exec";
+    const PCARD_DRAFT_STORAGE_KEY = "pramest_pcard_draft_v1";
     const THAI_GEO_URLS = [
       "https://cdn.jsdelivr.net/gh/earthchie/thai-geography-database@master/src/raw_database/raw_database.json",
       "https://raw.githubusercontent.com/earthchie/thai-geography-database/master/src/raw_database/raw_database.json",
@@ -1198,6 +1212,127 @@
           previewEl.classList.remove("not-italic", "font-bold", "text-slate-950");
         }
       }
+      savePcardDraft();
+    }
+
+    const PCARD_DRAFT_FIELDS = [
+      "referrer",
+      "prefix",
+      "fullname",
+      "phone",
+      "openchat_name",
+      "addr_house_no",
+      "addr_details",
+      "addr_subdistrict_manual",
+      "addr_zipcode_manual"
+    ];
+
+    function bindPcardDraftListeners() {
+      PCARD_DRAFT_FIELDS.forEach((id) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.addEventListener("input", savePcardDraft);
+        el.addEventListener("change", savePcardDraft);
+      });
+      document.querySelectorAll('input[name="card_type"]').forEach((radio) => {
+        radio.addEventListener("change", savePcardDraft);
+      });
+    }
+
+    function savePcardDraft() {
+      try {
+        const draft = {
+          cardType: document.querySelector('input[name="card_type"]:checked')?.value || ""
+        };
+        PCARD_DRAFT_FIELDS.forEach((id) => {
+          const el = document.getElementById(id);
+          if (el) draft[id] = el.value;
+        });
+        localStorage.setItem(PCARD_DRAFT_STORAGE_KEY, JSON.stringify(draft));
+        const statusEl = document.getElementById("pcard-draft-status");
+        if (statusEl) {
+          statusEl.innerHTML = '<i class="fa-solid fa-floppy-disk text-emerald-600 mr-1"></i> บันทึกร่างอัตโนมัติแล้ว';
+        }
+      } catch (_) {}
+    }
+
+    function restorePcardDraft() {
+      try {
+        const raw = localStorage.getItem(PCARD_DRAFT_STORAGE_KEY);
+        if (!raw) return;
+        const draft = JSON.parse(raw);
+        if (!draft || typeof draft !== "object") return;
+
+        if (draft.cardType) {
+          const targetRadio = Array.from(document.querySelectorAll('input[name="card_type"]')).find((r) => r.value === draft.cardType);
+          if (targetRadio) {
+            targetRadio.checked = true;
+            handleCardTypeChange();
+          }
+        }
+
+        let restoredCount = 0;
+        PCARD_DRAFT_FIELDS.forEach((id) => {
+          const el = document.getElementById(id);
+          if (el && typeof draft[id] === "string" && draft[id].trim() !== "") {
+            el.value = draft[id];
+            restoredCount++;
+          }
+        });
+
+        if (draft.addr_subdistrict_manual || draft.addr_zipcode_manual) {
+          toggleManualGeoFields(true);
+          if (draft.addr_zipcode_manual) {
+            const zipHidden = document.getElementById("addr_zipcode");
+            if (zipHidden) zipHidden.value = draft.addr_zipcode_manual;
+          }
+        }
+
+        if (restoredCount > 0) {
+          updateFullAddressPreview();
+          const statusEl = document.getElementById("pcard-draft-status");
+          if (statusEl) {
+            statusEl.innerHTML = '<i class="fa-solid fa-rotate-left text-amber-700 mr-1"></i> กู้คืนร่างอัตโนมัติแล้ว';
+          }
+          showUiMessage("กู้คืนข้อมูลที่กรอกค้างไว้ในฟอร์มให้อัตโนมัติแล้วครับ", "info");
+        }
+      } catch (_) {}
+    }
+
+    function clearPcardDraftAndForm() {
+      try {
+        localStorage.removeItem(PCARD_DRAFT_STORAGE_KEY);
+      } catch (_) {}
+      document.getElementById("form-registration")?.reset();
+      document.getElementById("preview-user-photo")?.classList.add("hidden");
+      document.getElementById("preview-slip-photo")?.classList.add("hidden");
+      document.getElementById("preview-lost-proof")?.classList.add("hidden");
+      handleCardTypeChange();
+      handleProvinceChange();
+      updateFullAddressPreview();
+      const statusEl = document.getElementById("pcard-draft-status");
+      if (statusEl) {
+        statusEl.innerHTML = '<i class="fa-solid fa-floppy-disk text-slate-500 mr-1"></i> ล้างแบบร่างแล้ว';
+      }
+      showUiMessage("ล้างแบบร่างและข้อมูลในฟอร์มเรียบร้อยแล้วครับ", "success");
+    }
+
+    function copyValueWithToast(val, label = "คัดลอกแล้ว") {
+      const clean = String(val || "").trim();
+      if (!clean || clean === "-" || clean === "รอจัดส่ง") return;
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(clean).catch(() => {});
+        } else {
+          const tempInput = document.createElement("input");
+          tempInput.value = clean;
+          document.body.appendChild(tempInput);
+          tempInput.select();
+          document.execCommand("copy");
+          document.body.removeChild(tempInput);
+        }
+      } catch (_) {}
+      showUiMessage(`${label}: ${clean}`, "success");
     }
 
     function handleCardTypeChange() {
@@ -1292,9 +1427,43 @@
     }
 
     function maskPhoneNumber(phone) {
-      const digits = String(phone || "").replace(/\D/g, "");
-      if (digits.length < 7) return phone || "-";
-      return digits.slice(0, 3) + "xxx" + digits.slice(-3);
+      const raw = String(phone ?? "").trim();
+      const digits = raw.replace(/\D/g, "");
+      if (digits.length >= 7) {
+        return `${digits.slice(0, 3)}xxx${digits.slice(-3)}`;
+      }
+      if (digits.length >= 4) {
+        return `${digits.slice(0, 2)}xx${digits.slice(-2)}`;
+      }
+      return raw ? "xxx-xxx-xxxx" : "-";
+    }
+
+    function extractFieldValue(row, keys = []) {
+      if (!row || typeof row !== "object") return "";
+      for (const k of keys) {
+        if (row[k] !== undefined && row[k] !== null && String(row[k]).trim() !== "") {
+          return String(row[k]).trim();
+        }
+      }
+      const lowerMap = {};
+      Object.keys(row).forEach((rk) => {
+        lowerMap[String(rk).trim().toLowerCase()] = row[rk];
+      });
+      for (const k of keys) {
+        const found = lowerMap[String(k).trim().toLowerCase()];
+        if (found !== undefined && found !== null && String(found).trim() !== "") {
+          return String(found).trim();
+        }
+      }
+      return "";
+    }
+
+    function normalizeRoundKey(text) {
+      return String(text || "")
+        .replace(/^(รอบวันที่|รอบที่|รอบ)\s*/i, "")
+        .replace(/\s+/g, " ")
+        .trim()
+        .toLowerCase();
     }
 
     function getStepIndexFromStatus(statusText) {
@@ -1317,9 +1486,9 @@
       }
 
       const found = shippingRecords.find((r) => {
-        const refCode = String(r["รหัสอ้างอิง"] || r.refCode || "").toLowerCase();
-        const name = String(r["ชื่อและนามสกุล"] || r.fullname || r.fullName || "").toLowerCase();
-        const phone = String(r["เบอร์โทรศัพท์"] || r.phone || "").toLowerCase();
+        const refCode = extractFieldValue(r, ["รหัสอ้างอิง", "refCode", "ref_code", "id"]).toLowerCase();
+        const name = extractFieldValue(r, ["ชื่อและนามสกุล", "ชื่อ-นามสกุล", "fullname", "fullName", "name"]).toLowerCase();
+        const phone = extractFieldValue(r, ["เบอร์โทรศัพท์", "เบอร์โทร", "phone", "tel"]).toLowerCase();
         return refCode.includes(q) || name.includes(q) || phone.includes(q);
       });
 
@@ -1329,10 +1498,12 @@
         return;
       }
 
-      const fullName = escapeHtml(found["ชื่อและนามสกุล"] || found.fullname || found.fullName || "-");
-      const status = escapeHtml(found["สถานะการดำเนินการ"] || found.status || "ทำรายการแล้ว");
-      const roundText = escapeHtml(found["รอบการจัดส่ง"] || found.roundDate || "-");
-      const trackingNo = escapeHtml(found["เลขพัสดุ"] || found.trackingNo || "รอจัดส่ง");
+      const rawRefCode = extractFieldValue(found, ["รหัสอ้างอิง", "refCode", "ref_code", "id"]);
+      const fullName = escapeHtml(extractFieldValue(found, ["ชื่อและนามสกุล", "ชื่อ-นามสกุล", "fullname", "fullName", "name"]) || "-");
+      const status = escapeHtml(extractFieldValue(found, ["สถานะการดำเนินการ", "สถานะ", "status"]) || "ทำรายการแล้ว");
+      const roundText = escapeHtml(extractFieldValue(found, ["รอบการจัดส่ง", "รอบจัดส่ง", "roundDate", "round_date", "round"]) || "-");
+      const rawTrackingNo = extractFieldValue(found, ["เลขพัสดุ", "trackingNo", "tracking_no", "tracking"]);
+      const trackingNo = escapeHtml(rawTrackingNo || "รอจัดส่ง");
       const step = getStepIndexFromStatus(status);
 
       const steps = ["ทำรายการแล้ว", "ยืนยันรับออเดอร์แล้ว", "กำลังดำเนินการ", "จัดส่งแล้ว"];
@@ -1346,12 +1517,28 @@
         `;
       }).join("");
 
+      const copyButtonsHtml = `
+        <div class="flex flex-wrap items-center gap-2 mt-2">
+          ${rawRefCode ? `
+            <button type="button" onclick="copyValueWithToast('${escapeHtml(rawRefCode)}', 'คัดลอกรหัสอ้างอิงแล้ว')" class="text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 px-3 py-1.5 rounded-lg transition inline-flex items-center gap-1.5">
+              <i class="fa-solid fa-copy text-amber-600"></i> คัดลอกรหัสอ้างอิง (${escapeHtml(rawRefCode)})
+            </button>
+          ` : ""}
+          ${rawTrackingNo && rawTrackingNo !== "-" && rawTrackingNo !== "รอจัดส่ง" ? `
+            <button type="button" onclick="copyValueWithToast('${escapeHtml(rawTrackingNo)}', 'คัดลอกเลขพัสดุแล้ว')" class="text-xs font-bold bg-amber-100 hover:bg-amber-200 text-amber-950 border border-amber-300 px-3 py-1.5 rounded-lg transition inline-flex items-center gap-1.5">
+              <i class="fa-solid fa-barcode text-amber-700"></i> คัดลอกเลขพัสดุ (${trackingNo})
+            </button>
+          ` : ""}
+        </div>
+      `;
+
       container.innerHTML = `
         <div class="space-y-4">
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-3">
             <div>
               <p class="text-sm font-extrabold text-slate-900">${fullName}</p>
               <p class="text-xs text-slate-600">รอบการจัดส่ง: <strong>${roundText}</strong> | เลขพัสดุ: <strong class="font-mono">${trackingNo}</strong></p>
+              ${copyButtonsHtml}
             </div>
             <span class="text-xs font-bold px-3 py-1 rounded-full bg-amber-100 text-amber-900 w-fit">${status}</span>
           </div>
@@ -1366,8 +1553,14 @@
         if (badge) badge.textContent = "กำลังซิงค์ข้อมูลชีต...";
         const res = await fetch(GAS_WEB_APP_URL);
         const data = await res.json();
-        const list = Array.isArray(data) ? data : (data.data || data.records || []);
-        shippingRecords = list.filter((item) => item && (item["ชื่อและนามสกุล"] || item.fullname || item.fullName));
+        const list = Array.isArray(data) ? data : (data.data || data.records || data.rows || []);
+        shippingRecords = list.filter((item) => {
+          if (!item || typeof item !== "object") return false;
+          const n = extractFieldValue(item, ["ชื่อและนามสกุล", "ชื่อ-นามสกุล", "fullname", "fullName", "name"]);
+          const t = extractFieldValue(item, ["เลขพัสดุ", "trackingNo", "tracking_no", "tracking"]);
+          const r = extractFieldValue(item, ["รอบการจัดส่ง", "รอบจัดส่ง", "roundDate", "round_date", "round"]);
+          return Boolean(n || t || r);
+        });
         if (badge) {
           badge.textContent = `อัปเดตแล้ว (${shippingRecords.length} รายการ)`;
           badge.className = "bg-emerald-100 text-emerald-800 text-xs font-semibold px-3 py-0.5 rounded-full";
@@ -1378,24 +1571,44 @@
           badge.textContent = "ซิงค์ข้อมูลไม่สำเร็จ";
           badge.className = "bg-rose-100 text-rose-800 text-xs font-semibold px-3 py-0.5 rounded-full";
         }
+        renderShippingTable();
       }
     }
 
     function renderShippingTable() {
       const tbody = document.getElementById("shipping-table-body");
+      const summaryEl = document.getElementById("shipping-result-summary");
       if (!tbody) return;
 
       const kw = (document.getElementById("shipping-search-input")?.value || "").trim().toLowerCase();
+      const kwDigits = kw.replace(/\D/g, "");
       const selectedRound = document.getElementById("shipping-round-filter")?.value || "ALL";
+      const selectedRoundNorm = normalizeRoundKey(selectedRound);
 
       const filtered = shippingRecords.filter((row) => {
-        const name = String(row["ชื่อและนามสกุล"] || row.fullname || row.fullName || "").toLowerCase();
-        const tracking = String(row["เลขพัสดุ"] || row.trackingNo || "").toLowerCase();
-        const roundVal = String(row["รอบการจัดส่ง"] || row.roundDate || "");
-        const matchKw = !kw || name.includes(kw) || tracking.includes(kw);
-        const matchRound = selectedRound === "ALL" || roundVal === selectedRound;
+        const name = extractFieldValue(row, ["ชื่อและนามสกุล", "ชื่อ-นามสกุล", "fullname", "fullName", "name"]).toLowerCase();
+        const phoneRaw = extractFieldValue(row, ["เบอร์โทรศัพท์", "เบอร์โทร", "phone", "tel"]).toLowerCase();
+        const phoneDigits = phoneRaw.replace(/\D/g, "");
+        const tracking = extractFieldValue(row, ["เลขพัสดุ", "trackingNo", "tracking_no", "tracking"]).toLowerCase();
+        const roundVal = extractFieldValue(row, ["รอบการจัดส่ง", "รอบจัดส่ง", "roundDate", "round_date", "round"]);
+        const roundNorm = normalizeRoundKey(roundVal);
+
+        const matchKw = !kw
+          || name.includes(kw)
+          || tracking.includes(kw)
+          || phoneRaw.includes(kw)
+          || (kwDigits.length >= 3 && phoneDigits.includes(kwDigits));
+
+        const matchRound = selectedRound === "ALL"
+          || roundVal === selectedRound
+          || (selectedRoundNorm && (roundNorm === selectedRoundNorm || roundNorm.includes(selectedRoundNorm) || selectedRoundNorm.includes(roundNorm)));
+
         return matchKw && matchRound;
       });
+
+      if (summaryEl) {
+        summaryEl.textContent = `แสดง ${filtered.length.toLocaleString("th-TH")} รายการจากทั้งหมด ${shippingRecords.length.toLocaleString("th-TH")} รายการ`;
+      }
 
       if (!filtered.length) {
         tbody.innerHTML = '<tr><td colspan="5" class="px-4 py-6 text-center text-slate-500">ไม่พบข้อมูลการจัดส่งตามเงื่อนไขที่เลือก</td></tr>';
@@ -1403,18 +1616,27 @@
       }
 
       tbody.innerHTML = filtered.slice(0, 150).map((row) => {
-        const fullName = escapeHtml(row["ชื่อและนามสกุล"] || row.fullname || row.fullName || "-");
-        const phone = escapeHtml(maskPhoneNumber(row["เบอร์โทรศัพท์"] || row.phone || ""));
-        const status = escapeHtml(row["สถานะการดำเนินการ"] || row.status || "ทำรายการแล้ว");
-        const roundVal = escapeHtml(row["รอบการจัดส่ง"] || row.roundDate || "-");
-        const tracking = escapeHtml(row["เลขพัสดุ"] || row.trackingNo || "-");
+        const fullName = escapeHtml(extractFieldValue(row, ["ชื่อและนามสกุล", "ชื่อ-นามสกุล", "fullname", "fullName", "name"]) || "-");
+        const phoneRaw = extractFieldValue(row, ["เบอร์โทรศัพท์", "เบอร์โทร", "phone", "tel"]);
+        const phoneMasked = escapeHtml(maskPhoneNumber(phoneRaw));
+        const status = escapeHtml(extractFieldValue(row, ["สถานะการดำเนินการ", "สถานะ", "status"]) || "ทำรายการแล้ว");
+        const roundVal = escapeHtml(extractFieldValue(row, ["รอบการจัดส่ง", "รอบจัดส่ง", "roundDate", "round_date", "round"]) || "-");
+        const rawTracking = extractFieldValue(row, ["เลขพัสดุ", "trackingNo", "tracking_no", "tracking"]);
+        const trackingEscaped = escapeHtml(rawTracking || "-");
+
+        const copyTrackingBtn = rawTracking && rawTracking !== "-" && rawTracking !== "รอจัดส่ง"
+          ? `<button type="button" onclick="copyValueWithToast('${trackingEscaped}', 'คัดลอกเลขพัสดุแล้ว')" title="คัดลอกเลขพัสดุ" class="ml-2 text-xs font-bold text-amber-800 hover:text-amber-950 bg-amber-100 hover:bg-amber-200 border border-amber-300 px-2 py-0.5 rounded-md transition inline-flex items-center gap-1">
+               <i class="fa-solid fa-copy"></i> คัดลอก
+             </button>`
+          : "";
+
         return `
           <tr class="hover:bg-amber-50/50 transition">
             <td class="px-4 py-3 font-semibold text-slate-900 whitespace-nowrap">${fullName}</td>
-            <td class="px-4 py-3 text-slate-600 whitespace-nowrap">${phone}</td>
+            <td class="px-4 py-3 font-mono text-slate-600 whitespace-nowrap">${phoneMasked}</td>
             <td class="px-4 py-3 font-semibold text-amber-700 whitespace-nowrap">${status}</td>
             <td class="px-4 py-3 text-slate-700 whitespace-nowrap">${roundVal}</td>
-            <td class="px-4 py-3 font-mono text-slate-800 whitespace-nowrap">${tracking}</td>
+            <td class="px-4 py-3 font-mono text-slate-800 whitespace-nowrap">${trackingEscaped}${copyTrackingBtn}</td>
           </tr>
         `;
       }).join("");
@@ -1490,12 +1712,14 @@
         });
 
         showUiMessage(`ส่งข้อมูลลงทะเบียนเรียบร้อยแล้ว! รหัสอ้างอิงของคุณคือ: ${refCode}`, "success");
+        try { localStorage.removeItem(PCARD_DRAFT_STORAGE_KEY); } catch (_) {}
         document.getElementById("form-registration").reset();
         document.getElementById("preview-user-photo")?.classList.add("hidden");
         document.getElementById("preview-slip-photo")?.classList.add("hidden");
         document.getElementById("preview-lost-proof")?.classList.add("hidden");
         handleCardTypeChange();
         handleProvinceChange();
+        updateFullAddressPreview();
         setTimeout(fetchShippingDataFromSheet, 1500);
       } catch (_) {
         showUiMessage("เกิดข้อผิดพลาดในการส่งข้อมูล กรุณาลองใหม่อีกครั้งครับ", "error");
@@ -1506,6 +1730,8 @@
     }
 
     populateRoundFilterOptions();
+    bindPcardDraftListeners();
+    restorePcardDraft();
     loadThailandGeoData();
     fetchShippingDataFromSheet();
   </script>

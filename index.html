@@ -6,10 +6,10 @@
   <title>The Driver Thailand | ศูนย์กลางเครือข่ายคนขับรถมืออาชีพ</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Google Fonts: Prompt & Inter -->
+  <!-- Google Fonts: Prompt Only (Unified Typography) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <!-- FontAwesome 6 Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -18,7 +18,8 @@
       theme: {
         extend: {
           fontFamily: {
-            sans: ['Prompt', 'Inter', 'sans-serif'],
+            sans: ['Prompt', 'sans-serif'],
+            mono: ['Prompt', 'sans-serif'],
           },
           colors: {
             driver: {
@@ -39,8 +40,10 @@
     html {
       scroll-behavior: smooth;
     }
+    html, body, input, select, textarea, button, code, pre, .font-mono, .font-sans {
+      font-family: 'Prompt', sans-serif !important;
+    }
     html, body {
-      font-family: 'Prompt', sans-serif;
       background-color: #f8fafc;
       color: #0f172a;
       max-width: 100%;
@@ -203,6 +206,14 @@
     .tdt-nav-btn.is-blacklist i { color: #fb7185; }
     .tdt-nav-btn.is-unblock { color: #7dd3fc; }
     .tdt-nav-btn.is-unblock i { color: #38bdf8; }
+    .tdt-nav-btn.is-luxury { color: #fde68a; }
+    .tdt-nav-btn.is-luxury i { color: #f59e0b; }
+    .tdt-nav-btn.is-vip { color: #d8b4fe; }
+    .tdt-nav-btn.is-vip i { color: #c084fc; }
+    .tdt-nav-btn.is-rtaf { color: #93c5fd; }
+    .tdt-nav-btn.is-rtaf i { color: #60a5fa; }
+    .tdt-nav-btn.is-tourbook { color: #5eead4; }
+    .tdt-nav-btn.is-tourbook i { color: #2dd4bf; }
     .tdt-nav-btn.active-home {
       background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
       border-color: #fcd34d;
@@ -248,6 +259,22 @@
         <a href="unblock_request.html" class="tdt-nav-btn is-unblock">
           <i class="fa-solid fa-unlock-keyhole"></i>
           <span>ขอปลดล็อก OpenChat</span>
+        </a>
+        <a href="luxury_car_register.html" class="tdt-nav-btn is-luxury">
+          <i class="fa-solid fa-crown"></i>
+          <span>ห้อง Luxury Car</span>
+        </a>
+        <a href="vip_referral_guide.html" class="tdt-nav-btn is-vip">
+          <i class="fa-solid fa-map-location-dot"></i>
+          <span>[VIP] ลายแทงท่องเที่ยว</span>
+        </a>
+        <a href="rtaf_pass_register.html" class="tdt-nav-btn is-rtaf">
+          <i class="fa-solid fa-plane-departure"></i>
+          <span>บัตรผ่าน ทอ.</span>
+        </a>
+        <a href="tour_book_order.html" class="tdt-nav-btn is-tourbook">
+          <i class="fa-solid fa-book"></i>
+          <span>สั่งซื้อสมุดทัวร์</span>
         </a>
         <a href="blacklist.html" class="tdt-nav-btn is-blacklist">
           <i class="fa-solid fa-user-shield"></i>
@@ -540,48 +567,90 @@
             <i class="fa-solid fa-arrow-right"></i>
           </a>
         </div>
-      </div>
-    </section>
 
-    <!-- SECTION: COMMUNITY GUIDELINES & CONTACT -->
-    <section id="rules-contact" class="luxury-hero-bg text-white rounded-3xl p-6 sm:p-10 shadow-2xl border border-amber-400/25">
-      <div class="grid lg:grid-cols-12 gap-8 items-center">
-        <div class="lg:col-span-7 space-y-4">
-          <span class="inline-flex items-center gap-1.5 text-xs font-bold text-amber-300 uppercase tracking-wider">
-            <i class="fa-solid fa-award"></i> COMMUNITY GUIDELINES
-          </span>
-          <h2 class="text-xl sm:text-2xl font-extrabold">ข้อปฏิบัติและช่องทางติดต่อทีมงาน</h2>
-          <ul class="space-y-2.5 text-xs sm:text-sm text-slate-300">
-            <li class="flex items-start gap-2.5">
-              <i class="fa-solid fa-circle-check text-amber-400 mt-1 shrink-0"></i>
-              <span>ตรวจสอบประวัติผู้ว่าจ้างในระบบ <strong class="text-white">Blacklist</strong> ทุกครั้งก่อนรับงานเหมาหรืองานเดินทางข้ามจังหวัด</span>
-            </li>
-            <li class="flex items-start gap-2.5">
-              <i class="fa-solid fa-circle-check text-amber-400 mt-1 shrink-0"></i>
-              <span>การสมัครทำบัตรสมาชิกประเมศฐ์ กรุณาใช้รูปถ่ายหน้าตรงสุภาพ ไม่สวมแว่นตาดำ เพื่อความรวดเร็วในการออกบัตร</span>
-            </li>
-            <li class="flex items-start gap-2.5">
-              <i class="fa-solid fa-circle-check text-amber-400 mt-1 shrink-0"></i>
-              <span>หากพบปัญหาการใช้งานระบบหรือต้องการประสานงานเร่งด่วน สามารถติดต่อแอดมินได้ทาง Line Official</span>
-            </li>
-          </ul>
+        <!-- Service Card 7: Edit Member Info -->
+        <div class="group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
+          <div class="space-y-3">
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-50 to-orange-100 border border-amber-200 text-amber-600 flex items-center justify-center text-xl shadow-sm">
+              <i class="fa-solid fa-user-pen icon-bounce-hover"></i>
+            </div>
+            <h3 class="text-lg font-extrabold text-slate-900">แก้ไขข้อมูลสมาชิกเดิม</h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              สำหรับสมาชิกที่มีรหัสสมาชิกอยู่แล้ว ต้องการแจ้งเปลี่ยนรถยนต์คันใหม่ เปลี่ยนทะเบียนรถ หรือแก้ไขข้อมูลติดต่อ
+            </p>
+          </div>
+          <a href="member_edit.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-bold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
+            <span>แจ้งแก้ไขข้อมูลสมาชิก</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
         </div>
 
-        <div class="lg:col-span-5 luxury-glass rounded-2xl p-5 sm:p-6 space-y-4">
-          <div class="flex items-center gap-3">
-            <div class="w-12 h-12 rounded-xl bg-emerald-500/20 border border-emerald-400/40 text-emerald-400 flex items-center justify-center text-2xl shrink-0">
-              <i class="fa-brands fa-line icon-float"></i>
+        <!-- Service Card 8: Luxury Car OpenChat -->
+        <div class="group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
+          <div class="space-y-3">
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-yellow-50 to-amber-100 border border-amber-300 text-amber-700 flex items-center justify-center text-xl shadow-sm">
+              <i class="fa-solid fa-crown icon-bounce-hover"></i>
             </div>
-            <div>
-              <p class="text-xs text-amber-200/80">ติดต่อทีมงานแอดมิน (LINE OA)</p>
-              <p class="text-base sm:text-lg font-extrabold text-white font-mono">@Thedriverthailand</p>
-            </div>
+            <h3 class="text-lg font-extrabold text-slate-900">ลงทะเบียนห้อง Luxury Car</h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              ลงทะเบียนขอเข้าห้อง Line OpenChat สำหรับสมาชิกกลุ่มคนขับรถ Luxury Car / Executive Van / VIP โดยเฉพาะ
+            </p>
           </div>
+          <a href="luxury_car_register.html" class="w-full py-3 px-4 rounded-xl bg-slate-950 hover:bg-slate-800 text-amber-300 border border-amber-400/40 font-bold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
+            <span>สมัครเข้าห้อง Luxury Car</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
 
-          <button type="button" onclick="copyLineId('@Thedriverthailand')" class="group w-full py-3 px-4 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold text-xs sm:text-sm transition flex items-center justify-center gap-2 shadow-lg">
-            <i class="fa-solid fa-copy icon-bounce-hover"></i>
-            <span>คัดลอก Line ID ติดต่อทีมงาน</span>
-          </button>
+        <!-- Service Card 9: [VIP] Tourism Referral Guide -->
+        <div class="group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
+          <div class="space-y-3">
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-50 to-indigo-100 border border-purple-200 text-purple-600 flex items-center justify-center text-xl shadow-sm">
+              <i class="fa-solid fa-map-location-dot icon-bounce-hover"></i>
+            </div>
+            <h3 class="text-lg font-extrabold text-slate-900">[VIP] ลายแทงสถานที่ท่องเที่ยว</h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              บริการขอรับลายแทงสถานที่ท่องเที่ยว ร้านค้า ร้านอาหาร และจุดบริการพันธมิตรทั่วไทยเพื่อรับค่าแนะนำ
+            </p>
+          </div>
+          <a href="vip_referral_guide.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-purple-700 to-indigo-700 hover:from-purple-600 hover:to-indigo-600 text-white font-bold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
+            <span>ขอรับสิทธิ์ลายแทง VIP</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <!-- Service Card 10: RTAF Don Mueang Pass -->
+        <div class="group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
+          <div class="space-y-3">
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-50 to-sky-100 border border-blue-200 text-blue-600 flex items-center justify-center text-xl shadow-sm">
+              <i class="fa-solid fa-plane-departure icon-bounce-hover"></i>
+            </div>
+            <h3 class="text-lg font-extrabold text-slate-900">ทำบัตรผ่านยานพาหนะ ทอ.</h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              แบบฟอร์มขอทำบัตรผ่านยานพาหนะเข้า - ออก เขตพื้นที่กองทัพอากาศ (ดอนเมือง) ทั้งขอใหม่และต่ออายุบัตร
+            </p>
+          </div>
+          <a href="rtaf_pass_register.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-blue-700 to-sky-600 hover:from-blue-600 hover:to-sky-500 text-white font-bold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
+            <span>ยื่นขอทำบัตรผ่าน ทอ.</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <!-- Service Card 11: Tour Book Order -->
+        <div class="group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
+          <div class="space-y-3">
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-teal-50 to-emerald-100 border border-teal-200 text-teal-700 flex items-center justify-center text-xl shadow-sm">
+              <i class="fa-solid fa-book icon-bounce-hover"></i>
+            </div>
+            <h3 class="text-lg font-extrabold text-slate-900">บริการสั่งซื้อสมุดทัวร์</h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              สั่งซื้อสมุดทัวร์ออนไลน์ เลือกได้ 2 พื้นที่บริการ (กรุงเทพฯ-ปริมณฑล และ พัทยา-ชลบุรี) พร้อมจัดส่งถึงบ้าน
+            </p>
+          </div>
+          <a href="tour_book_order.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-teal-700 to-emerald-600 hover:from-teal-600 hover:to-emerald-500 text-white font-bold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
+            <span>สั่งซื้อสมุดทัวร์</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
         </div>
       </div>
     </section>

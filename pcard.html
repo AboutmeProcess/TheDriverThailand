@@ -1667,6 +1667,16 @@
       return cleaned;
     }
 
+    function formatFullPhoneDisplay(phoneRaw) {
+      const cleaned = String(phoneRaw || "").trim();
+      if (!cleaned) return "-";
+      const digits = cleaned.replace(/\D/g, "");
+      if (digits.length === 10 && digits.startsWith("0")) {
+        return `${digits.slice(0, 3)}-${digits.slice(3, 6)}-${digits.slice(6)}`;
+      }
+      return cleaned;
+    }
+
     function maskFullNameSurname(nameRaw) {
       const cleaned = String(nameRaw || "").trim().replace(/\s+/g, " ");
       if (!cleaned || cleaned === "-") return "-";
@@ -1776,7 +1786,7 @@
         const rawFullName = extractFieldValue(row, ["ชื่อและนามสกุล", "ชื่อ-นามสกุล", "fullname", "fullName", "name"]) || "-";
         const fullNameMasked = escapeHtml(maskFullNameSurname(rawFullName));
         const phoneRaw = extractPhoneFromRow(row);
-        const phoneDisplay = escapeHtml(maskPhoneNumber(phoneRaw));
+        const phoneDisplay = escapeHtml(formatFullPhoneDisplay(maskPhoneNumber(phoneRaw)));
         const rawStatus = extractFieldValue(row, ["สถานะการดำเนินการ", "สถานะ", "status"]) || "ทำรายการแล้ว";
         const statusEscaped = escapeHtml(rawStatus);
         const statusBadgeClass = getStatusBadgeClass(rawStatus);
@@ -1784,16 +1794,19 @@
         const rawTracking = extractFieldValue(row, ["เลขพัสดุ", "trackingNo", "tracking_no", "tracking"]);
         const trackingEscaped = escapeHtml(rawTracking || "-");
 
-        const copyTrackingBtn = rawTracking && rawTracking !== "-" && rawTracking !== "รอจัดส่ง"
-          ? `<button type="button" onclick="copyValueWithToast('${trackingEscaped}', 'คัดลอกเลขพัสดุแล้ว')" title="คัดลอกเลขพัสดุ" class="ml-2 text-xs font-bold text-amber-800 hover:text-amber-950 bg-amber-100 hover:bg-amber-200 border border-amber-300 px-2 py-0.5 rounded-md transition inline-flex items-center gap-1">
-               <i class="fa-solid fa-copy"></i> คัดลอก
+        const hasCopyableTracking = Boolean(rawTracking && rawTracking !== "-" && rawTracking !== "รอจัดส่ง");
+        const trackingCellHtml = hasCopyableTracking
+          ? `<button type="button" onclick="copyValueWithToast('${trackingEscaped}', 'คัดลอกเลขพัสดุแล้ว')" title="กดเพื่อคัดลอกเลขพัสดุ" class="group inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-gradient-to-r from-amber-300 via-amber-400 to-yellow-400 hover:from-amber-200 hover:to-yellow-300 text-slate-950 font-mono font-extrabold text-xs sm:text-sm border border-amber-500/60 shadow-sm hover:shadow-md active:scale-95 transition cursor-pointer">
+               <i class="fa-solid fa-barcode text-slate-900"></i>
+               <span>${trackingEscaped}</span>
+               <i class="fa-regular fa-copy text-[11px] text-slate-800/80 group-hover:text-slate-950"></i>
              </button>`
-          : "";
+          : `<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs font-semibold bg-slate-100 text-slate-500 border border-slate-200">${trackingEscaped}</span>`;
 
         return `
           <tr class="hover:bg-amber-50/50 transition">
             <td class="px-4 py-3 font-semibold text-slate-900 whitespace-nowrap">${fullNameMasked}</td>
-            <td class="px-4 py-3 font-mono text-slate-700 whitespace-nowrap">${phoneDisplay}</td>
+            <td class="px-4 py-3 font-mono text-slate-800 whitespace-nowrap">${phoneDisplay}</td>
             <td class="px-4 py-3 whitespace-nowrap">
               <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold border shadow-2xs ${statusBadgeClass}">
                 ${statusEscaped}
@@ -1805,7 +1818,7 @@
                 <span>${roundVal}</span>
               </span>
             </td>
-            <td class="px-4 py-3 font-mono text-slate-800 whitespace-nowrap">${trackingEscaped}${copyTrackingBtn}</td>
+            <td class="px-4 py-3 whitespace-nowrap">${trackingCellHtml}</td>
           </tr>
         `;
       }).join("");

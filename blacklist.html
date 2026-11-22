@@ -1,828 +1,232 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ศูนย์เฝ้าระวังและแจ้งเตือนภัยกลุ่มขับรถรับจ้าง (Driver Guard Thailand)</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts (Prompt & Sarabun) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    screens: {
-                        'xs': '400px',
-                    },
-                    fontFamily: {
-                        sans: ['Prompt', 'Sarabun', 'sans-serif'],
-                        body: ['Sarabun', 'sans-serif'],
-                    }
-                }
-            }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ศูนย์เฝ้าระวังภัย Blacklist | The Driver Thailand</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Prompt', 'sans-serif'],
+            mono: ['Prompt', 'sans-serif'],
+          }
         }
-    </script>
-    <style>
-        body {
-            font-family: 'Prompt', 'Sarabun', sans-serif;
-            background-color: #f8fafc;
-            color: #0f172a;
-            overflow-x: hidden;
-        }
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f1f5f9;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 9999px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8;
-        }
-        .line-clamp-2 {
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        .line-clamp-3 {
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        /* Executive Obsidian & Gold Banner */
-        .luxury-guard-banner {
-            background:
-                radial-gradient(circle at 15% 20%, rgba(225, 29, 72, 0.22) 0%, transparent 45%),
-                radial-gradient(circle at 85% 80%, rgba(245, 158, 11, 0.18) 0%, transparent 50%),
-                linear-gradient(135deg, #070a12 0%, #0f172a 55%, #172033 100%);
-        }
-
-        @keyframes floatSlow {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-5px); }
-        }
-        @keyframes iconBouncePop {
-            0%, 100% { transform: translateY(0) scale(1); }
-            40% { transform: translateY(-6px) scale(1.12) rotate(-4deg); }
-            70% { transform: translateY(-2px) scale(1.04) rotate(3deg); }
-        }
-        .icon-float { animation: floatSlow 3.2s ease-in-out infinite; }
-        .group:hover .icon-bounce-hover,
-        .icon-bounce-hover:hover {
-            animation: iconBouncePop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        /* UNIFIED TOPMOST GLOBAL SITE NAVIGATION BAR (EXACT SAME SIZE & POSITION ACROSS ALL 4 PAGES) */
-        .tdt-global-nav {
-            box-sizing: border-box;
-            font-family: 'Prompt', sans-serif;
-            background: linear-gradient(90deg, #060911 0%, #0d1322 50%, #060911 100%);
-            color: #e2e8f0;
-            border-bottom: 1px solid rgba(251, 191, 36, 0.25);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.35);
-            width: 100%;
-        }
-        .tdt-global-nav *, .tdt-global-nav *::before, .tdt-global-nav *::after {
-            box-sizing: border-box;
-        }
-        .tdt-global-nav-inner {
-            max-width: 1152px;
-            margin: 0 auto;
-            padding: 10px 16px;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            gap: 8px;
-            min-height: 52px;
-        }
-        @media (min-width: 640px) {
-            .tdt-global-nav-inner {
-                padding: 10px 24px;
-            }
-        }
-        .tdt-global-brand {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 13px;
-            line-height: 1.25;
-            font-weight: 800;
-            color: #fbbf24;
-            text-decoration: none;
-            flex-shrink: 0;
-            transition: color 0.15s ease;
-        }
-        @media (min-width: 640px) {
-            .tdt-global-brand {
-                font-size: 14px;
-            }
-        }
-        .tdt-global-brand:hover {
-            color: #fde68a;
-        }
-        .tdt-global-brand:hover i {
-            animation: iconBouncePop 0.6s ease;
-        }
-        .tdt-global-links {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            overflow-x: auto;
-            padding: 2px 0;
-            margin: 0;
-        }
-        @media (min-width: 640px) {
-            .tdt-global-links {
-                gap: 8px;
-            }
-        }
-        .tdt-nav-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 12px;
-            border-radius: 12px;
-            font-size: 12px;
-            line-height: 16px;
-            font-weight: 700;
-            text-decoration: none;
-            white-space: nowrap;
-            flex-shrink: 0;
-            background-color: rgba(15, 23, 42, 0.85);
-            border: 1px solid rgba(148, 163, 184, 0.25);
-            color: #e2e8f0;
-            transition: all 0.2s ease;
-        }
-        .tdt-nav-btn:hover {
-            background-color: #1e293b;
-            border-color: rgba(251, 191, 36, 0.45);
-            transform: translateY(-1px);
-        }
-        .tdt-nav-btn:hover i {
-            animation: iconBouncePop 0.55s ease;
-        }
-        .tdt-nav-btn.is-home i { color: #94a3b8; }
-        .tdt-nav-btn.is-register { color: #6ee7b7; }
-        .tdt-nav-btn.is-register i { color: #34d399; }
-        .tdt-nav-btn.is-pcard { color: #fcd34d; }
-        .tdt-nav-btn.is-pcard i { color: #fbbf24; }
-        .tdt-nav-btn.active-blacklist {
-            background: linear-gradient(135deg, #f43f5e 0%, #be123c 100%);
-            border-color: #fda4af;
-            color: #ffffff;
-            box-shadow: 0 4px 12px rgba(225, 29, 72, 0.35);
-        }
-        .tdt-nav-btn.active-blacklist i { color: #ffffff; }
-    </style>
+      }
+    };
+  </script>
+  <style>
+    html, body, input, select, textarea, button, code, pre, .font-mono, .font-sans {
+      font-family: 'Prompt', sans-serif !important;
+    }
+    html, body {
+      background-color: #f8fafc;
+      color: #0f172a;
+      max-width: 100%;
+      overflow-x: clip;
+    }
+    .hero-glow-bg {
+      background:
+        radial-gradient(circle at 18% 22%, rgba(244, 63, 94, 0.24) 0%, transparent 45%),
+        radial-gradient(circle at 82% 78%, rgba(245, 158, 11, 0.18) 0%, transparent 50%),
+        linear-gradient(135deg, #070a12 0%, #0f172a 52%, #172033 100%);
+    }
+    .tdt-global-nav {
+      box-sizing: border-box;
+      background: linear-gradient(90deg, #060911 0%, #0d1322 50%, #060911 100%);
+      color: #e2e8f0;
+      border-bottom: 1px solid rgba(251, 191, 36, 0.25);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.35);
+      width: 100%;
+    }
+    .tdt-global-nav-inner {
+      max-width: 1152px;
+      margin: 0 auto;
+      padding: 10px 16px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      min-height: 52px;
+    }
+    .tdt-global-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 800;
+      color: #fbbf24;
+      text-decoration: none;
+    }
+    .tdt-global-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 2px 0;
+    }
+    .tdt-nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+      flex-shrink: 0;
+      background-color: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      color: #e2e8f0;
+      transition: all 0.2s ease;
+    }
+    .tdt-nav-btn:hover { background-color: #1e293b; border-color: rgba(251, 191, 36, 0.45); }
+    .tdt-nav-btn.is-home i { color: #94a3b8; }
+    .tdt-nav-btn.is-register { color: #6ee7b7; }
+    .tdt-nav-btn.is-register i { color: #34d399; }
+    .tdt-nav-btn.is-pcard { color: #fcd34d; }
+    .tdt-nav-btn.is-pcard i { color: #fbbf24; }
+    .tdt-nav-btn.is-unblock { color: #7dd3fc; }
+    .tdt-nav-btn.is-unblock i { color: #38bdf8; }
+    .tdt-nav-btn.is-luxury { color: #fde68a; }
+    .tdt-nav-btn.is-luxury i { color: #f59e0b; }
+    .tdt-nav-btn.is-vip { color: #d8b4fe; }
+    .tdt-nav-btn.is-vip i { color: #c084fc; }
+    .tdt-nav-btn.is-rtaf { color: #93c5fd; }
+    .tdt-nav-btn.is-rtaf i { color: #60a5fa; }
+    .tdt-nav-btn.is-tourbook { color: #5eead4; }
+    .tdt-nav-btn.is-tourbook i { color: #2dd4bf; }
+    .tdt-nav-btn.active-blacklist {
+      background: linear-gradient(135deg, #fb7185 0%, #e11d48 100%);
+      border-color: #fda4af;
+      color: #ffffff;
+    }
+  </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between bg-slate-50 text-slate-900 selection:bg-amber-400 selection:text-slate-950">
+<body class="antialiased min-h-screen flex flex-col">
+  <nav class="tdt-global-nav">
+    <div class="tdt-global-nav-inner">
+      <a href="index.html" class="tdt-global-brand">
+        <i class="fa-solid fa-car-side"></i>
+        <span>The Driver Thailand</span>
+      </a>
+      <div class="tdt-global-links">
+        <a href="index.html" class="tdt-nav-btn is-home"><i class="fa-solid fa-house"></i><span>หน้าหลัก</span></a>
+        <a href="register.html" class="tdt-nav-btn is-register"><i class="fa-solid fa-user-plus"></i><span>ระบบสมาชิก</span></a>
+        <a href="pcard.html" class="tdt-nav-btn is-pcard"><i class="fa-solid fa-id-badge"></i><span>ทำบัตรสมาชิกประเมศฐ์</span></a>
+        <a href="unblock_request.html" class="tdt-nav-btn is-unblock"><i class="fa-solid fa-unlock-keyhole"></i><span>ขอปลดล็อก OpenChat</span></a>
+        <a href="luxury_car_register.html" class="tdt-nav-btn is-luxury"><i class="fa-solid fa-crown"></i><span>ห้อง Luxury Car</span></a>
+        <a href="vip_referral_guide.html" class="tdt-nav-btn is-vip"><i class="fa-solid fa-map-location-dot"></i><span>[VIP] ลายแทงท่องเที่ยว</span></a>
+        <a href="rtaf_pass_register.html" class="tdt-nav-btn is-rtaf"><i class="fa-solid fa-plane-departure"></i><span>บัตรผ่าน ทอ.</span></a>
+        <a href="tour_book_order.html" class="tdt-nav-btn is-tourbook"><i class="fa-solid fa-book"></i><span>สั่งซื้อสมุดทัวร์</span></a>
+        <a href="blacklist.html" class="tdt-nav-btn active-blacklist"><i class="fa-solid fa-user-shield"></i><span>ตรวจสอบ Blacklist</span></a>
+      </div>
+    </div>
+  </nav>
 
-    <!-- TOPMOST GLOBAL SITE NAVIGATION BAR -->
-    <nav class="tdt-global-nav">
-        <div class="tdt-global-nav-inner">
-            <a href="index.html" class="tdt-global-brand">
-                <i class="fa-solid fa-car-side"></i>
-                <span>The Driver Thailand</span>
-            </a>
-            <div class="tdt-global-links">
-                <a href="index.html" class="tdt-nav-btn is-home">
-                    <i class="fa-solid fa-house"></i>
-                    <span>หน้าหลัก</span>
-                </a>
-                <a href="register.html" class="tdt-nav-btn is-register">
-                    <i class="fa-solid fa-user-plus"></i>
-                    <span>ระบบสมาชิก</span>
-                </a>
-                <a href="pcard.html" class="tdt-nav-btn is-pcard">
-                    <i class="fa-solid fa-id-badge"></i>
-                    <span>ทำบัตรสมาชิกประเมศฐ์</span>
-                </a>
-                <a href="blacklist.html" class="tdt-nav-btn active-blacklist">
-                    <i class="fa-solid fa-user-shield"></i>
-                    <span>ตรวจสอบ Blacklist</span>
-                </a>
-            </div>
+  <main class="flex-grow max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-6">
+    <section class="hero-glow-bg text-white rounded-3xl p-6 sm:p-10 border border-rose-500/30 shadow-xl space-y-4">
+      <span class="inline-flex items-center gap-2 bg-rose-500/20 border border-rose-400/40 text-rose-300 text-xs font-bold px-3.5 py-1 rounded-full">
+        <i class="fa-solid fa-shield-halved"></i> DRIVER SAFETY &amp; BLACKLIST GUARD
+      </span>
+      <h1 class="text-2xl sm:text-4xl font-extrabold">ศูนย์เฝ้าระวังภัย <span class="text-amber-400">Blacklist</span> เครือข่ายคนขับรถ</h1>
+      <p class="text-slate-300 text-xs sm:text-sm max-w-3xl">ตรวจสอบประวัติเบอร์โทรศัพท์ เลขบัญชีธนาคาร หรือชื่อผู้ว่าจ้างก่อนรับงานเดินทางไกล และแจ้งเบาะแสเตือนภัยคนโกงร่วมกันในกลุ่ม</p>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2 text-xs">
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-3.5">
+          <span class="text-slate-400 block">จำนวนเคสเตือนภัย</span>
+          <strong id="statTotalCases" class="text-lg sm:text-xl font-extrabold text-amber-400">0</strong>
         </div>
-    </nav>
-
-    <!-- TOP NAVIGATION HEADER (Fully Responsive Layout) -->
-    <header class="bg-white/95 backdrop-blur-md border-b border-slate-200 sticky top-[46px] z-30 shadow-sm">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6">
-            <div class="flex items-center justify-between h-16 sm:h-20 gap-2">
-                <!-- Brand Title Box -->
-                <div class="flex items-center gap-2.5 sm:gap-3 min-w-0">
-                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-slate-950 border-2 border-amber-400/60 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg text-rose-500 text-lg sm:text-2xl font-black shrink-0">
-                        <i class="fa-solid fa-shield-cat icon-float"></i>
-                    </div>
-                    <div class="min-w-0">
-                        <div class="flex flex-wrap items-center gap-1 sm:gap-2">
-                            <h1 class="text-sm sm:text-lg md:text-xl font-extrabold tracking-tight text-slate-900 truncate">
-                                ศูนย์เฝ้าระวังภัยคนโกง
-                            </h1>
-                            <span class="text-[9px] sm:text-[10px] font-bold bg-rose-100 text-rose-700 border border-rose-200 px-2 py-0.5 rounded-full uppercase tracking-wider shrink-0 whitespace-nowrap">
-                                กลุ่มรถรับจ้าง
-                            </span>
-                        </div>
-                        <p class="text-[11px] sm:text-xs text-slate-500 truncate hidden xs:block">
-                            Blacklist by The Driver Thailand • เช็กประวัติคนโกง &amp; แจ้งเตือนภัยกลุ่ม
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Status Badge & Action Button -->
-                <div class="flex items-center gap-2 shrink-0">
-                    <!-- Dynamic Connection Status Indicator -->
-                    <div id="connectionBadge" class="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">
-                        <span id="connectionDot" class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
-                        <span id="connectionBadgeText">เชื่อมต่อ Google Sheets</span>
-                    </div>
-
-                    <!-- Add Scammer Shortcut Button -->
-                    <a href="#reportForm" class="group bg-gradient-to-r from-rose-600 to-rose-500 hover:from-rose-500 hover:to-rose-600 text-white px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-1.5 shadow-md shadow-rose-200 shrink-0 whitespace-nowrap">
-                        <i class="fa-solid fa-triangle-exclamation text-xs sm:text-sm icon-bounce-hover"></i>
-                        <span>แจ้งภัยคนโกง</span>
-                    </a>
-                </div>
-            </div>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-3.5">
+          <span class="text-slate-400 block">ยอดความเสียหายรวม</span>
+          <strong id="statTotalDamage" class="text-lg sm:text-xl font-extrabold text-rose-400">฿0</strong>
         </div>
-    </header>
-
-    <!-- BANNER & LIVE STATS OVERVIEW -->
-    <section class="luxury-guard-banner border-b border-amber-500/20 py-5 sm:py-7 text-white">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6">
-            <!-- Alert Notice Banner -->
-            <div class="mb-4 sm:mb-5 p-3.5 sm:p-4 bg-white/5 backdrop-blur-md border border-amber-400/30 rounded-2xl flex items-start gap-3 shadow-lg">
-                <div class="w-9 h-9 bg-amber-500/20 text-amber-400 rounded-xl flex items-center justify-center shrink-0 text-base sm:text-lg border border-amber-400/40">
-                    <i class="fa-solid fa-bullhorn icon-float"></i>
-                </div>
-                <div class="text-xs sm:text-sm text-slate-200 leading-relaxed min-w-0">
-                    <strong class="text-amber-300 font-bold">เตือนภัยพี่น้องคนขับรถทุกท่าน:</strong> กรุณาตรวจสอบเอกสาร สลิปโอนเงิน และประวัติเบอร์โทร/เลขบัญชีของผู้โดยสารหรือผู้ว่าจ้างก่อนออกเดินทางไกลทุกครั้ง ข้อมูลในนี้มาจากประสบการณ์จริงของเพื่อนสมาชิกเพื่อเฝ้าระวังร่วมกัน (หากเคลียร์ยอดแล้ว สามารถยื่น <span class="font-semibold text-rose-300">คำร้องขอลบข้อมูล</span> ให้ทีมงานตรวจสอบได้) ติดต่อทีมงาน Line <span class="font-mono text-amber-300">@Thedriverthailand</span>
-                </div>
-            </div>
-
-            <!-- 4 Summary Stat Cards -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-4">
-                <div class="bg-white/5 backdrop-blur-md border border-white/10 hover:border-amber-400/40 transition p-3.5 sm:p-4 rounded-2xl shadow-lg relative overflow-hidden">
-                    <div class="absolute -right-2 -bottom-2 text-white/5 text-4xl sm:text-5xl pointer-events-none">
-                        <i class="fa-solid fa-users-slash"></i>
-                    </div>
-                    <div class="text-[11px] sm:text-xs text-slate-300 font-medium mb-1 flex items-center gap-1.5 truncate">
-                        <i class="fa-solid fa-triangle-exclamation text-rose-400 shrink-0"></i> เคสเตือนภัยทั้งหมด
-                    </div>
-                    <div class="text-xl sm:text-3xl font-extrabold text-white" id="statTotalCases">0</div>
-                    <div class="text-[10px] sm:text-[11px] text-slate-400 mt-0.5">รายการในระบบ</div>
-                </div>
-
-                <div class="bg-white/5 backdrop-blur-md border border-white/10 hover:border-amber-400/40 transition p-3.5 sm:p-4 rounded-2xl shadow-lg relative overflow-hidden">
-                    <div class="absolute -right-2 -bottom-2 text-white/5 text-4xl sm:text-5xl pointer-events-none">
-                        <i class="fa-solid fa-hand-holding-dollar"></i>
-                    </div>
-                    <div class="text-[11px] sm:text-xs text-slate-300 font-medium mb-1 flex items-center gap-1.5 truncate">
-                        <i class="fa-solid fa-coins text-amber-400 shrink-0"></i> ยอดเสียหายรวม
-                    </div>
-                    <div class="text-xl sm:text-3xl font-extrabold text-amber-400 truncate" id="statTotalDamage">฿0</div>
-                    <div class="text-[10px] sm:text-[11px] text-slate-400 mt-0.5">ประมาณการรวม</div>
-                </div>
-
-                <div class="bg-white/5 backdrop-blur-md border border-white/10 hover:border-amber-400/40 transition p-3.5 sm:p-4 rounded-2xl shadow-lg relative overflow-hidden">
-                    <div class="absolute -right-2 -bottom-2 text-white/5 text-4xl sm:text-5xl pointer-events-none">
-                        <i class="fa-solid fa-ghost"></i>
-                    </div>
-                    <div class="text-[11px] sm:text-xs text-slate-300 font-medium mb-1 flex items-center gap-1.5 truncate">
-                        <i class="fa-solid fa-mask text-amber-300 shrink-0"></i> พฤติกรรมพบมากสุด
-                    </div>
-                    <div class="text-sm sm:text-lg font-bold text-white truncate" id="statTopType">-</div>
-                    <div class="text-[10px] sm:text-[11px] text-slate-400 mt-0.5">ประเภทที่ถูกแจ้งบ่อย</div>
-                </div>
-
-                <div class="bg-white/5 backdrop-blur-md border border-white/10 hover:border-amber-400/40 transition p-3.5 sm:p-4 rounded-2xl shadow-lg relative overflow-hidden">
-                    <div class="absolute -right-2 -bottom-2 text-white/5 text-4xl sm:text-5xl pointer-events-none">
-                        <i class="fa-solid fa-database"></i>
-                    </div>
-                    <div class="text-[11px] sm:text-xs text-slate-300 font-medium mb-1 flex items-center gap-1.5 truncate">
-                        <i class="fa-solid fa-wifi text-emerald-400 shrink-0"></i> สถานะฐานข้อมูล
-                    </div>
-                    <div class="text-sm sm:text-base font-bold text-emerald-400 truncate" id="statStorageMode">Google Sheets</div>
-                    <div class="text-[10px] sm:text-[11px] text-slate-400 mt-0.5 truncate" id="statSyncTime">ซิงค์ออนไลน์สำเร็จ</div>
-                </div>
-            </div>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-3.5">
+          <span class="text-slate-400 block">รูปแบบที่พบบ่อย</span>
+          <strong id="statTopType" class="text-sm sm:text-base font-bold text-white truncate block">-</strong>
         </div>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-3.5">
+          <span class="text-slate-400 block">สถานะฐานข้อมูล</span>
+          <strong id="statStorageMode" class="text-sm sm:text-base font-bold text-emerald-400">Google Sheets</strong>
+        </div>
+      </div>
     </section>
 
-    <!-- MAIN CONTENT CONTAINER -->
-    <main class="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-8 flex-grow w-full">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
-            
-            <!-- LEFT COLUMN: REPORT FORM CONTAINER -->
-            <section id="reportForm" class="lg:col-span-5 bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden lg:sticky lg:top-24">
-                <div class="bg-slate-950 p-4 sm:p-5 border-b border-amber-400/30 flex items-center justify-between gap-2 text-white">
-                    <div class="flex items-center gap-2.5 min-w-0">
-                        <div class="w-8 h-8 rounded-lg bg-rose-500/20 text-rose-400 flex items-center justify-center border border-rose-400/40 shrink-0">
-                            <i class="fa-solid fa-file-pen text-sm icon-bounce-hover"></i>
-                        </div>
-                        <h2 class="font-bold text-base sm:text-lg text-white truncate">บันทึกข้อมูลเตือนภัยคนโกง</h2>
-                    </div>
-                    <span class="text-[10px] sm:text-[11px] font-bold bg-amber-400 text-slate-950 px-2.5 py-0.5 rounded-full shrink-0 whitespace-nowrap">
-                        แสดงทันที
-                    </span>
-                </div>
+    <section class="bg-white rounded-3xl p-5 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+      <div class="flex flex-col sm:flex-row gap-3">
+        <input type="text" id="searchInput" oninput="onSearchOrFilterChange()" placeholder="ค้นหาชื่อ, เบอร์โทร, เลขบัญชีธนาคาร หรือเส้นทาง..."
+          class="flex-1 bg-slate-50 border border-slate-300 rounded-2xl px-4 py-3 text-xs sm:text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500">
+        <select id="filterType" onchange="onSearchOrFilterChange()" class="bg-slate-50 border border-slate-300 rounded-2xl px-4 py-3 text-xs sm:text-sm font-semibold">
+          <option value="ALL">ทุกประเภทการโกง</option>
+          <option value="สลิปปลอม">สลิปปลอม</option>
+          <option value="ไม่จ่ายค่าโดยสาร">ไม่จ่ายค่าโดยสาร</option>
+          <option value="เบี้ยวงาน / เทงาน">เบี้ยวงาน / เทงาน</option>
+          <option value="โกงเงินมัดจำ">โกงเงินมัดจำ</option>
+        </select>
+        <button type="button" onclick="fetchDataFromCloud()" class="bg-slate-950 hover:bg-slate-800 text-amber-400 font-bold px-5 py-3 rounded-2xl text-xs sm:text-sm">
+          <i id="refreshSpinIcon" class="fa-solid fa-rotate mr-1"></i> อัปเดตข้อมูล
+        </button>
+      </div>
+      <div id="quickRiskBanner" class="hidden"></div>
+      <div id="feedContainer" class="grid md:grid-cols-2 gap-4"></div>
+      <div id="emptyState" class="hidden text-center py-8 text-slate-500 text-sm">ไม่พบข้อมูลที่ค้นหา</div>
+      <div id="paginationBar" class="hidden flex items-center justify-between pt-2 text-xs text-slate-500">
+        <span>แสดง <strong id="showingStart">0</strong> - <strong id="showingEnd">0</strong> จาก <strong id="totalFilteredRecords">0</strong> รายการ</span>
+        <div id="pageButtonsContainer" class="flex items-center gap-1.5"></div>
+      </div>
+    </section>
 
-                <form id="scamForm" class="p-4 sm:p-5 space-y-4 text-xs sm:text-sm">
-                    <!-- Scammer Name / Profile -->
-                    <div>
-                        <label class="block font-semibold text-slate-700 mb-1.5">
-                            ชื่อ-นามสกุล / ชื่อเล่น / FB / Line ผู้ก่อเหตุ <span class="text-rose-600">*</span>
-                        </label>
-                        <div class="relative">
-                            <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
-                                <i class="fa-solid fa-user-ninja"></i>
-                            </span>
-                            <input type="text" id="scammerName" required placeholder="เช่น นายสมชาย ใจเค็ม (FB: Somchai Taxi)" 
-                                class="w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 focus:bg-white text-slate-900 placeholder-slate-400 outline-none transition">
-                        </div>
-                    </div>
-
-                    <!-- Phone Number -->
-                    <div>
-                        <label class="block font-semibold text-slate-700 mb-1.5">
-                            เบอร์โทรศัพท์ติดต่อผู้ก่อเหตุ
-                        </label>
-                        <div class="relative">
-                            <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
-                                <i class="fa-solid fa-phone"></i>
-                            </span>
-                            <input type="text" id="contactPhone" placeholder="เช่น 081-234-5678" 
-                                class="w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 focus:bg-white text-slate-900 placeholder-slate-400 outline-none transition">
-                        </div>
-                    </div>
-
-                    <!-- Bank Account / PromptPay -->
-                    <div>
-                        <label class="block font-semibold text-slate-700 mb-1.5">
-                            เลขบัญชีธนาคาร / พร้อมเพย์
-                        </label>
-                        <div class="relative">
-                            <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
-                                <i class="fa-solid fa-credit-card"></i>
-                            </span>
-                            <input type="text" id="bankAccount" placeholder="เช่น กสิกรไทย 012-3-45678-9" 
-                                class="w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 focus:bg-white text-slate-900 placeholder-slate-400 outline-none transition">
-                        </div>
-                    </div>
-
-                    <!-- Scam Category & Amount Grid -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                        <!-- Category -->
-                        <div>
-                            <label class="block font-semibold text-slate-700 mb-1.5">
-                                ประเภทการโกง <span class="text-rose-600">*</span>
-                            </label>
-                            <select id="scamType" required class="w-full px-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 focus:bg-white text-slate-900 outline-none transition">
-                                <option value="ไม่จ่ายค่าโดยสาร">ไม่จ่ายค่าโดยสาร (ชิ่งหนี)</option>
-                                <option value="เบี้ยวงาน/เทงาน">เบี้ยวงาน / เทงานเหมา</option>
-                                <option value="หลอกโอนเงิน/สลิปปลอม">สลิปปลอม / โอนไม่ครบ</option>
-                                <option value="หลอกโอนมัดจำ/ค่าประกัน">หลอกโอนมัดจำ / ค่าประกัน</option>
-                                <option value="ขโมยทรัพย์สิน">ขโมยทรัพย์สิน / ของหาย</option>
-                                <option value="อื่นๆ">พฤติกรรมสุ่มเสี่ยงอื่นๆ</option>
-                            </select>
-                        </div>
-
-                        <!-- Damage Amount -->
-                        <div>
-                            <label class="block font-semibold text-slate-700 mb-1.5">
-                                ยอดความเสียหาย (บาท)
-                            </label>
-                            <div class="relative">
-                                <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">฿</span>
-                                <input type="number" id="damageAmount" min="0" placeholder="0" 
-                                    class="w-full pl-8 pr-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 focus:bg-white text-slate-900 placeholder-slate-400 outline-none transition">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Date & Location -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                        <div>
-                            <label class="block font-semibold text-slate-700 mb-1.5">
-                                วันที่เกิดเหตุ
-                            </label>
-                            <input type="date" id="incidentDate" 
-                                class="w-full px-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 focus:bg-white text-slate-900 outline-none transition">
-                        </div>
-
-                        <div>
-                            <label class="block font-semibold text-slate-700 mb-1.5">
-                                สถานที่ / เส้นทางวิ่งงาน
-                            </label>
-                            <input type="text" id="incidentLocation" placeholder="เช่น รังสิต ไป พัทยา" 
-                                class="w-full px-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 focus:bg-white text-slate-900 placeholder-slate-400 outline-none transition">
-                        </div>
-                    </div>
-
-                    <!-- Details -->
-                    <div>
-                        <label class="block font-semibold text-slate-700 mb-1.5">
-                            รายละเอียดพฤติการณ์ <span class="text-rose-600">*</span>
-                        </label>
-                        <textarea id="description" rows="3" required placeholder="ระบุเหตุการณ์ เช่น เรียกรถเหมาไปส่งแล้วทำทีลงไปกดเงินเซเว่นแล้วหนี หรือส่งสลิปโอนปลอมผ่านไลน์..." 
-                            class="w-full px-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 focus:bg-white text-slate-900 placeholder-slate-400 outline-none transition"></textarea>
-                    </div>
-
-                    <!-- Reporter Info -->
-                    <div>
-                        <label class="block font-semibold text-slate-700 mb-1.5">
-                            ชื่อผู้แจ้งเบาะแส / กลุ่มรถรับจ้าง
-                        </label>
-                        <input type="text" id="reporterName" placeholder="เช่น พี่ชัย แท็กซี่มีนบุรี (ไม่ระบุได้)" 
-                            class="w-full px-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 focus:bg-white text-slate-900 placeholder-slate-400 outline-none transition">
-                    </div>
-
-                    <!-- Image Attachment Uploader (Multi-Image up to 10 max) -->
-                    <div>
-                        <div class="flex items-center justify-between mb-1.5 gap-2">
-                            <label class="block font-semibold text-slate-700 truncate">
-                                แนบรูปหลักฐาน (แชท / รูปคนโกง / สลิป)
-                            </label>
-                            <span id="imageCounter" class="text-[10px] sm:text-xs font-semibold text-amber-800 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-full shrink-0 whitespace-nowrap">
-                                แนบรูปแล้ว 0 / 10 รูป
-                            </span>
-                        </div>
-                        <div class="mt-1 flex flex-col items-center justify-center p-3.5 border-2 border-slate-300 border-dashed rounded-xl bg-slate-50 hover:bg-amber-50/40 hover:border-amber-400 transition relative">
-                            <div class="space-y-1 text-center" id="uploadPlaceholder">
-                                <i class="fa-solid fa-images text-2xl sm:text-3xl text-amber-500 icon-bounce-hover"></i>
-                                <div class="flex text-xs text-slate-600 justify-center">
-                                    <label for="imageInput" class="relative cursor-pointer rounded-md font-bold text-amber-700 hover:text-amber-800">
-                                        <span>คลิกเลือกไฟล์ภาพ (เลือกได้หลายรูป)</span>
-                                        <input id="imageInput" type="file" accept="image/*" multiple class="sr-only" onchange="previewImages(event)">
-                                    </label>
-                                </div>
-                                <p class="text-[10px] text-slate-400">แนบได้สูงสุด 10 รูป • ระบบจะบีบอัดรูปให้อัตโนมัติ</p>
-                            </div>
-
-                            <!-- Multi-Image Thumbnails Grid Preview -->
-                            <div id="imagePreviewContainer" class="hidden w-full space-y-3">
-                                <div id="imagePreviewGrid" class="grid grid-cols-3 sm:grid-cols-5 gap-2">
-                                    <!-- Rendered dynamically by JS -->
-                                </div>
-                                <div class="flex items-center justify-between pt-2 border-t border-slate-200">
-                                    <label for="imageInputMore" class="cursor-pointer text-xs font-semibold text-amber-700 hover:text-amber-800 flex items-center gap-1">
-                                        <i class="fa-solid fa-plus-circle"></i> เพิ่มรูปภาพอีก
-                                        <input id="imageInputMore" type="file" accept="image/*" multiple class="sr-only" onchange="previewImages(event)">
-                                    </label>
-                                    <button type="button" onclick="removeAllImages()" class="text-xs text-slate-500 hover:text-rose-600 font-medium">
-                                        ลบรูปทั้งหมด
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Submit Button -->
-                    <div class="pt-2 space-y-2">
-                        <div class="flex items-center justify-between text-[11px] text-slate-500 px-0.5">
-                            <span id="draftStatusText" class="inline-flex items-center gap-1">
-                                <i class="fa-solid fa-cloud-arrow-up text-slate-400"></i> ระบบจำร่างอัตโนมัติพร้อมใช้งาน
-                            </span>
-                            <button type="button" onclick="resetFormAndDraft()" class="text-rose-600 hover:text-rose-700 font-semibold inline-flex items-center gap-1">
-                                <i class="fa-solid fa-eraser"></i> ล้างแบบร่าง
-                            </button>
-                        </div>
-                        <button type="submit" id="submitBtn" class="group w-full bg-gradient-to-r from-rose-600 to-rose-500 hover:from-rose-500 hover:to-rose-600 text-white font-bold py-3 px-4 rounded-xl shadow-md shadow-rose-200 transition flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-paper-plane icon-bounce-hover" id="submitBtnIcon"></i>
-                            <span id="submitBtnText">ลงบันทึกเตือนภัยทันที</span>
-                        </button>
-                    </div>
-                </form>
-            </section>
-
-            <!-- RIGHT COLUMN: BLACKLIST FEED -->
-            <section id="feedSectionHeader" class="lg:col-span-7 space-y-4 min-w-0">
-                
-                <!-- Search, View Mode & Filters Toolbar Card -->
-                <div class="bg-white p-4 sm:p-5 rounded-2xl shadow-sm border border-slate-200 space-y-4">
-                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-slate-200">
-                        <div class="min-w-0">
-                            <h2 class="font-bold text-base sm:text-lg text-slate-900 flex items-center gap-2">
-                                <i class="fa-solid fa-shield-virus text-rose-600 shrink-0 icon-bounce-hover"></i>
-                                <span class="truncate">รายชื่อเตือนภัยในระบบ</span>
-                            </h2>
-                            <p class="text-xs text-slate-500 truncate">ค้นหาเบอร์โทร เลขบัญชี หรือชื่อเพื่อเช็กความปลอดภัยก่อนรับงาน</p>
-                        </div>
-                        
-                        <div class="flex items-center justify-between w-full sm:w-auto gap-2 shrink-0">
-                            <!-- View Mode Toggle Buttons -->
-                            <div class="bg-slate-100 p-1 rounded-xl border border-slate-200 flex items-center gap-1 shrink-0">
-                                <button type="button" onclick="setViewMode('detailed')" id="btnViewDetailed" title="มุมมองการ์ดรายละเอียด"
-                                    class="px-2.5 py-1 rounded-lg text-xs font-semibold transition bg-slate-950 text-amber-400 shadow-sm whitespace-nowrap">
-                                    <i class="fa-solid fa-table-cells-large"></i> <span class="inline sm:inline">รายละเอียด</span>
-                                </button>
-                                <button type="button" onclick="setViewMode('compact')" id="btnViewCompact" title="มุมมองกะทัดรัด (เน้นสแกนเร็ว)"
-                                    class="px-2.5 py-1 rounded-lg text-xs font-semibold transition text-slate-600 hover:text-slate-900 whitespace-nowrap">
-                                    <i class="fa-solid fa-list-ul"></i> <span class="inline sm:inline">กะทัดรัด</span>
-                                </button>
-                            </div>
-
-                            <!-- Manual Refresh Data Button -->
-                            <button type="button" onclick="fetchDataFromCloud()" title="รีเฟรชข้อมูลล่าสุด" 
-                                class="bg-slate-950 hover:bg-slate-800 text-amber-400 px-3 py-1.5 rounded-xl border border-amber-400/30 text-xs font-semibold transition flex items-center gap-1.5 shrink-0 whitespace-nowrap">
-                                <i class="fa-solid fa-rotate" id="refreshSpinIcon"></i>
-                                <span>รีเฟรช</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Search Input & Dropdown Grid -->
-                    <div class="grid grid-cols-1 sm:grid-cols-12 gap-2.5 sm:gap-3">
-                        <div class="sm:col-span-6 relative">
-                            <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                            </span>
-                            <input type="text" id="searchInput" onkeyup="onSearchOrFilterChange()" placeholder="ค้นหาชื่อ, เบอร์โทร (มี/ไม่มีขีดก็เจอ), เลขบัญชี..." 
-                                class="w-full pl-9 pr-8 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 focus:bg-white text-slate-900 placeholder-slate-400 outline-none transition">
-                            <button type="button" id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600">
-                                <i class="fa-solid fa-xmark"></i>
-                            </button>
-                        </div>
-
-                        <div class="sm:col-span-6">
-                            <select id="filterType" onchange="onSearchOrFilterChange()" class="w-full px-3 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 focus:bg-white text-slate-900 outline-none transition">
-                                <option value="ALL">ทุกประเภทการโกง</option>
-                                <option value="ไม่จ่ายค่าโดยสาร">ไม่จ่ายค่าโดยสาร</option>
-                                <option value="เบี้ยวงาน/เทงาน">เบี้ยวงาน / เทงาน</option>
-                                <option value="หลอกโอนเงิน/สลิปปลอม">สลิปปลอม / โอนไม่ครบ</option>
-                                <option value="หลอกโอนมัดจำ/ค่าประกัน">หลอกโอนมัดจำ / ค่าประกัน</option>
-                                <option value="ขโมยทรัพย์สิน">ขโมยทรัพย์สิน</option>
-                                <option value="อื่นๆ">อื่นๆ</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <!-- Extra Filter: Evidence Only & Sort Order -->
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pt-1 border-t border-slate-100 text-xs">
-                        <label class="inline-flex items-center gap-2 cursor-pointer select-none text-slate-700 font-medium">
-                            <input type="checkbox" id="filterHasImages" onchange="onSearchOrFilterChange()" class="w-4 h-4 rounded border-slate-300 text-rose-600 focus:ring-amber-500">
-                            <span><i class="fa-regular fa-images text-amber-600 mr-1"></i>แสดงเฉพาะเคสที่มีรูปหลักฐาน</span>
-                        </label>
-
-                        <div class="flex items-center gap-2">
-                            <span class="text-slate-500 shrink-0">เรียงลำดับ:</span>
-                            <select id="sortOrder" onchange="onSearchOrFilterChange()" class="px-2.5 py-1.5 bg-slate-50 border border-slate-300 rounded-lg text-xs font-semibold text-slate-800 focus:ring-2 focus:ring-amber-500 outline-none">
-                                <option value="DEFAULT">ล่าสุดก่อน</option>
-                                <option value="AMOUNT_DESC">ยอดเสียหายสูง - ต่ำ</option>
-                                <option value="REPEAT_DESC">ถูกแจ้งซ้ำมากสุด</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <!-- Quick Risk Check Result Banner -->
-                    <div id="quickRiskBanner" class="hidden rounded-xl p-3 sm:p-3.5 border text-xs sm:text-sm transition-all"></div>
-                </div>
-
-                <!-- Feed Cards Dynamic Container -->
-                <div id="feedContainer" class="space-y-4">
-                    <!-- Dynamic Scammer Cards Rendered Here -->
-                </div>
-
-                <!-- Empty State Component -->
-                <div id="emptyState" class="hidden bg-white rounded-2xl border border-slate-200 p-8 sm:p-12 text-center shadow-sm">
-                    <div class="w-14 h-14 sm:w-16 sm:h-16 bg-slate-100 text-slate-400 rounded-full flex items-center justify-center mx-auto mb-3 text-xl sm:text-2xl border border-slate-200">
-                        <i class="fa-solid fa-folder-open"></i>
-                    </div>
-                    <h3 class="text-sm sm:text-base font-semibold text-slate-700">ไม่พบรายการแจ้งเตือนภัย</h3>
-                    <p class="text-xs text-slate-500 mt-1">ลองเปลี่ยนคำค้นหา หรือกรอกข้อมูลแจ้งเบาะแสคนโกงรายใหม่</p>
-                </div>
-
-                <!-- PAGINATION CONTROLS BAR -->
-                <div id="paginationBar" class="bg-white p-3.5 sm:p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
-                    <!-- Items Per Page Selector -->
-                    <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2 text-slate-500 w-full sm:w-auto">
-                        <span>แสดงหน้าละ:</span>
-                        <select id="pageSizeSelect" onchange="changePageSize(this.value)" class="bg-slate-50 border border-slate-300 rounded-lg px-2 py-1 text-xs font-semibold text-slate-700 outline-none">
-                            <option value="6" selected>6 รายการ</option>
-                            <option value="12">12 รายการ</option>
-                            <option value="24">24 รายการ</option>
-                        </select>
-                        <span class="text-slate-400 hidden xs:inline">|</span>
-                        <span class="text-slate-500 text-[11px] sm:text-xs">แสดง <span id="showingStart">0</span>-<span id="showingEnd">0</span> จาก <span id="totalFilteredRecords">0</span> เคส</span>
-                    </div>
-
-                    <!-- Page Navigation Buttons -->
-                    <div class="flex items-center gap-1.5 flex-wrap justify-center" id="pageButtonsContainer">
-                        <!-- Rendered by JS -->
-                    </div>
-                </div>
-
-            </section>
+    <section class="bg-white rounded-3xl p-5 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+      <div class="flex items-center justify-between flex-wrap gap-2 border-b border-slate-200 pb-4">
+        <h2 class="text-lg sm:text-xl font-extrabold text-slate-900"><i class="fa-solid fa-triangle-exclamation text-rose-600 mr-2"></i>แจ้งเบาะแสเตือนภัยคนโกง</h2>
+        <span id="draftStatusText" class="text-xs text-slate-500"><i class="fa-solid fa-floppy-disk"></i> พร้อมบันทึกร่างอัตโนมัติ</span>
+      </div>
+      <form id="scamForm" class="space-y-4">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <input type="text" id="scammerName" required placeholder="ชื่อผู้ก่อเหตุ / ชื่อโปรไฟล์ *" class="bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
+          <input type="text" id="contactPhone" placeholder="เบอร์โทรศัพท์ผู้ก่อเหตุ" class="bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
+          <input type="text" id="bankAccount" placeholder="เลขบัญชีธนาคาร / ชื่อบัญชี" class="bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
+          <select id="scamType" class="bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
+            <option value="ไม่จ่ายค่าโดยสาร">ไม่จ่ายค่าโดยสาร</option>
+            <option value="สลิปปลอม">สลิปปลอม</option>
+            <option value="เบี้ยวงาน / เทงาน">เบี้ยวงาน / เทงาน</option>
+            <option value="โกงเงินมัดจำ">โกงเงินมัดจำ</option>
+            <option value="อื่นๆ">อื่นๆ</option>
+          </select>
+          <input type="number" id="damageAmount" placeholder="ยอดความเสียหาย (บาท)" class="bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
+          <input type="date" id="incidentDate" class="bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
         </div>
-    </main>
-
-    <!-- MODAL 1: FULL DETAIL VIEW MODAL -->
-    <div id="detailModal" class="hidden fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 overflow-y-auto" onclick="closeDetailModal()">
-        <div class="relative max-w-2xl w-full bg-white rounded-2xl overflow-hidden shadow-2xl border border-slate-200 my-auto max-h-[90vh] flex flex-col" onclick="event.stopPropagation()">
-            <!-- Modal Header -->
-            <div class="p-3.5 sm:p-5 bg-slate-950 text-white border-b border-amber-400/30 flex justify-between items-center shrink-0 gap-2">
-                <div class="flex items-center gap-2 min-w-0">
-                    <span id="detailBadge" class="px-2.5 py-1 rounded-full text-xs font-semibold border shrink-0">
-                        ประเภท
-                    </span>
-                    <h3 class="font-bold text-sm sm:text-lg text-white truncate" id="detailScammerName">
-                        ชื่อผู้ก่อเหตุ
-                    </h3>
-                </div>
-                <button type="button" onclick="closeDetailModal()" class="text-slate-400 hover:text-white text-lg w-8 h-8 rounded-lg hover:bg-slate-800 flex items-center justify-center shrink-0">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-
-            <!-- Modal Content Body -->
-            <div class="p-4 sm:p-5 overflow-y-auto space-y-4 text-xs sm:text-sm">
-                <!-- Info Grid -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 bg-slate-50 p-3.5 sm:p-4 rounded-xl border border-slate-200">
-                    <div class="flex items-center justify-between bg-white px-3 py-2 rounded-lg border border-slate-200 gap-2 min-w-0">
-                        <div class="truncate">
-                            <span class="text-slate-400">เบอร์โทร:</span>
-                            <span id="detailPhone" class="font-bold text-slate-800 ml-1 font-mono"></span>
-                        </div>
-                        <button type="button" id="btnCopyPhone" class="text-amber-800 hover:text-amber-900 font-semibold text-[10px] bg-amber-50 px-2 py-1 rounded border border-amber-200 transition shrink-0">
-                            <i class="fa-regular fa-copy"></i> คัดลอก
-                        </button>
-                    </div>
-
-                    <div class="flex items-center justify-between bg-white px-3 py-2 rounded-lg border border-slate-200 gap-2 min-w-0">
-                        <div class="truncate">
-                            <span class="text-slate-400">เลขบัญชี:</span>
-                            <span id="detailBank" class="font-bold text-slate-800 ml-1 font-mono"></span>
-                        </div>
-                        <button type="button" id="btnCopyBank" class="text-amber-800 hover:text-amber-900 font-semibold text-[10px] bg-amber-50 px-2 py-1 rounded border border-amber-200 transition shrink-0">
-                            <i class="fa-regular fa-copy"></i> คัดลอก
-                        </button>
-                    </div>
-
-                    <div>
-                        <span class="text-slate-400">ยอดเสียหาย:</span>
-                        <span id="detailAmount" class="font-bold text-amber-600 text-sm sm:text-base ml-1"></span>
-                    </div>
-
-                    <div>
-                        <span class="text-slate-400">วันที่เกิดเหตุ:</span>
-                        <span id="detailDate" class="font-medium text-slate-800 ml-1"></span>
-                    </div>
-
-                    <div class="sm:col-span-2">
-                        <span class="text-slate-400">สถานที่ / เส้นทาง:</span>
-                        <span id="detailLocation" class="font-medium text-slate-800 ml-1"></span>
-                    </div>
-                </div>
-
-                <!-- Full Description -->
-                <div class="bg-rose-50/50 border border-rose-100 p-3.5 sm:p-4 rounded-xl">
-                    <div class="text-xs font-bold text-rose-700 mb-1">รายละเอียดพฤติการณ์:</div>
-                    <p id="detailDescription" class="text-slate-700 whitespace-pre-line leading-relaxed text-xs sm:text-sm"></p>
-                </div>
-
-                <!-- Evidence Images Gallery in Detail Modal -->
-                <div id="detailImagesSection" class="hidden space-y-2">
-                    <div class="text-xs font-bold text-slate-700 flex items-center justify-between">
-                        <span>หลักฐานรูปภาพแนบ (<span id="detailImagesCount">0</span> รูป)</span>
-                        <span class="text-[11px] font-normal text-slate-400">คลิกที่รูปเพื่อขยายเต็มจอ</span>
-                    </div>
-                    <div id="detailImagesGrid" class="grid grid-cols-3 sm:grid-cols-4 gap-2"></div>
-                </div>
-
-                <!-- Footer Meta & Delete Request Button -->
-                <div class="pt-3 border-t border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-slate-500">
-                    <div class="truncate">
-                        <span>รหัสเคส: <strong id="detailCaseId" class="font-mono text-slate-700"></strong></span>
-                        <span class="mx-1.5">•</span>
-                        <span>ผู้แจ้ง: <strong id="detailReporter" class="text-slate-700"></strong></span>
-                    </div>
-                    <div class="flex items-center gap-2 shrink-0">
-                        <button type="button" id="btnDetailShareOpenChat" class="text-emerald-800 hover:text-emerald-950 bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 px-3 py-1.5 rounded-lg font-semibold transition flex items-center justify-center gap-1.5 whitespace-nowrap">
-                            <i class="fa-brands fa-line"></i> คัดลอกแชร์ OpenChat
-                        </button>
-                        <button type="button" id="btnDetailRequestDelete" class="text-amber-800 hover:text-amber-900 bg-amber-50 hover:bg-amber-100 border border-amber-300 px-3 py-1.5 rounded-lg font-semibold transition flex items-center justify-center gap-1.5 whitespace-nowrap">
-                            <i class="fa-solid fa-flag"></i> แจ้งขอลบเคสนี้
-                        </button>
-                    </div>
-                </div>
-            </div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <input type="text" id="incidentLocation" placeholder="เส้นทาง / สถานที่เกิดเหตุ" class="bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
+          <input type="text" id="reporterName" placeholder="ชื่อผู้แจ้ง / รหัสสมาชิก" class="bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
         </div>
-    </div>
-
-    <!-- MODAL 2: DELETION REQUEST MODAL -->
-    <div id="deleteRequestModal" class="hidden fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 overflow-y-auto" onclick="closeDeleteRequestModal()">
-        <div class="relative max-w-md w-full bg-white rounded-2xl overflow-hidden shadow-2xl border border-slate-200 my-auto" onclick="event.stopPropagation()">
-            <div class="p-3.5 sm:p-4 bg-slate-950 text-white border-b border-amber-400/30 flex items-center justify-between gap-2">
-                <div class="flex items-center gap-2.5 min-w-0">
-                    <div class="w-8 h-8 rounded-lg bg-amber-400/20 text-amber-400 flex items-center justify-center shrink-0">
-                        <i class="fa-solid fa-user-shield text-sm"></i>
-                    </div>
-                    <div class="min-w-0">
-                        <h3 class="font-bold text-sm sm:text-base text-white truncate">ยื่นคำร้องขอลบข้อมูล</h3>
-                        <p class="text-[10px] sm:text-[11px] text-amber-300/80 truncate">ทีมงานจะตรวจสอบความถูกต้องก่อนลบออกจากระบบ</p>
-                    </div>
-                </div>
-                <button type="button" onclick="closeDeleteRequestModal()" class="text-slate-400 hover:text-white w-8 h-8 rounded-lg hover:bg-slate-800 flex items-center justify-center shrink-0">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-
-            <form id="deleteRequestForm" class="p-4 sm:p-5 space-y-3.5 text-xs sm:text-sm">
-                <input type="hidden" id="delTargetCaseId">
-                <input type="hidden" id="delTargetName">
-
-                <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs">
-                    <div class="text-slate-500">เคสที่ยื่นคำร้อง:</div>
-                    <div class="font-bold text-slate-800 mt-0.5 truncate" id="delTargetSummary">-</div>
-                </div>
-
-                <div>
-                    <label class="block font-semibold text-slate-700 mb-1">เหตุผลในการขอลบข้อมูล <span class="text-rose-600">*</span></label>
-                    <select id="delReasonType" required class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 outline-none text-xs sm:text-sm">
-                        <option value="ชำระเงินคืน / เคลียร์ยอดครบถ้วนแล้ว">ชำระเงินคืน / เคลียร์ยอดครบถ้วนแล้ว</option>
-                        <option value="ลงข้อมูลผิดพลาด / เข้าใจผิด">ลงข้อมูลผิดพลาด / เข้าใจผิด</option>
-                        <option value="ถูกสวมรอย / แอบอ้างพาดพิงไม่เป็นธรรม">ถูกสวมรอย / แอบอ้างพาดพิงไม่เป็นธรรม</option>
-                        <option value="อื่นๆ">เหตุผลอื่นๆ</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label class="block font-semibold text-slate-700 mb-1">รายละเอียดเพิ่มเติม / หลักฐานอ้างอิง <span class="text-rose-600">*</span></label>
-                    <textarea id="delReasonDetail" rows="2" required placeholder="ระบุรายละเอียด เช่น โอนเงินคืนให้พี่คนขับเรียบร้อยแล้วเมื่อวันที่..."
-                        class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 outline-none text-xs sm:text-sm"></textarea>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div>
-                        <label class="block font-semibold text-slate-700 mb-1">ชื่อผู้ยื่นคำร้อง <span class="text-rose-600">*</span></label>
-                        <input type="text" id="delRequesterName" required placeholder="ระบุชื่อผู้แจ้ง"
-                            class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 outline-none text-xs sm:text-sm">
-                    </div>
-                    <div>
-                        <label class="block font-semibold text-slate-700 mb-1">เบอร์โทร / ไลน์ติดต่อกลับ <span class="text-rose-600">*</span></label>
-                        <input type="text" id="delRequesterContact" required placeholder="เช่น 08x-xxx-xxxx"
-                            class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 outline-none text-xs sm:text-sm">
-                    </div>
-                </div>
-
-                <div class="pt-2 flex items-center justify-end gap-2">
-                    <button type="button" onclick="closeDeleteRequestModal()" class="px-4 py-2 rounded-xl border border-slate-300 text-slate-600 hover:bg-slate-100 font-semibold transition">
-                        ยกเลิก
-                    </button>
-                    <button type="submit" id="btnSubmitDeleteReq" class="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold shadow-sm flex items-center gap-1.5 transition">
-                        <i class="fa-solid fa-paper-plane"></i>
-                        <span>ส่งคำร้องให้ทีมงาน</span>
-                    </button>
-                </div>
-            </form>
+        <textarea id="description" rows="3" required placeholder="รายละเอียดพฤติการณ์ *" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm"></textarea>
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <label class="inline-flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs px-4 py-2.5 rounded-xl cursor-pointer">
+            <i class="fa-solid fa-camera"></i> แนบรูปหลักฐาน (สูงสุด 10 รูป)
+            <input type="file" accept="image/*" multiple onchange="previewImages(event)" class="hidden">
+          </label>
+          <span id="imageCounter" class="text-xs text-slate-500">แนบรูปแล้ว 0 / 10 รูป</span>
+          <button type="submit" id="submitBtn" class="bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-extrabold text-xs sm:text-sm px-6 py-3 rounded-xl shadow">
+            <i id="submitBtnIcon" class="fa-solid fa-paper-plane mr-1"></i> <span id="submitBtnText">ลงบันทึกเตือนภัยทันที</span>
+          </button>
         </div>
-    </div>
+        <div id="imagePreviewContainer" class="hidden"><div id="imagePreviewGrid" class="grid grid-cols-5 gap-2"></div></div>
+      </form>
+    </section>
+  </main>
 
-    <!-- MODAL 3: LIGHTBOX FULL IMAGE SLIDER MODAL -->
-    <div id="lightboxModal" class="hidden fixed inset-0 z-[60] bg-slate-950/90 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4" onclick="closeLightbox()">
-        <div class="relative max-w-4xl w-full flex flex-col items-center my-auto" onclick="event.stopPropagation()">
-            <!-- Top Bar -->
-            <div class="w-full flex items-center justify-between text-white mb-2 px-2">
-                <span id="lightboxCounter" class="text-xs sm:text-sm font-semibold bg-white/10 px-3 py-1 rounded-full">1 / 1</span>
-                <button type="button" onclick="closeLightbox()" class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center text-base sm:text-lg shrink-0">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-
-            <!-- Image Container with Safe Responsive Side Padding -->
-            <div class="relative w-full flex items-center justify-center px-10 sm:px-14">
-                <button type="button" id="lightboxPrevBtn" onclick="navigateLightbox(-1)" class="absolute left-0 sm:left-2 z-10 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-slate-900/80 hover:bg-slate-900 text-white border border-white/20 flex items-center justify-center text-sm sm:text-base shrink-0 shadow-lg">
-                    <i class="fa-solid fa-chevron-left"></i>
-                </button>
-
-                <img id="lightboxImg" src="" alt="หลักฐาน" class="max-h-[75vh] max-w-full rounded-xl shadow-2xl object-contain border border-white/10">
-
-                <button type="button" id="lightboxNextBtn" onclick="navigateLightbox(1)" class="absolute right-0 sm:right-2 z-10 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-slate-900/80 hover:bg-slate-900 text-white border border-white/20 flex items-center justify-center text-sm sm:text-base shrink-0 shadow-lg">
-                    <i class="fa-solid fa-chevron-right"></i>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- TOAST NOTIFICATION CONTAINER (Responsive Mobile Width) -->
+  <!-- TOAST NOTIFICATION CONTAINER (Responsive Mobile Width) -->
     <div id="toast" class="fixed bottom-4 left-3 right-3 sm:left-auto sm:right-5 z-[70] transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none sm:max-w-md">
         <div class="bg-slate-950 text-white px-4 py-3 rounded-xl shadow-xl border border-amber-400/50 flex items-center gap-2.5 text-xs sm:text-sm w-full">
             <i id="toastIcon" class="fa-solid fa-circle-check text-emerald-400 text-base shrink-0"></i>
@@ -832,9 +236,6 @@
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
-        // ==========================================
-        // CONFIGURATION & STATE
-        // ==========================================
         const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbx0jk2GOWTMAILomX47Ur0-y1gvc_H9Bz_wfANcBqiJcm_vd9DmSGs8XDpofEsx-5IHoA/exec';
         const LOCAL_STORAGE_KEY = 'driver_guard_reports_v2';
         const DRAFT_STORAGE_KEY = 'driver_guard_report_draft_v1';
@@ -842,57 +243,39 @@
 
         let allReports = [];
         let filteredReports = [];
-        let selectedImagesBase64 = []; // Array of compressed Base64 strings
-        let viewMode = 'detailed'; // 'detailed' | 'compact'
+        let selectedImagesBase64 = [];
+        let viewMode = 'detailed';
         let currentPage = 1;
         let pageSize = 6;
-
-        // Lightbox state
         let lightboxImages = [];
         let lightboxIndex = 0;
+        let toastTimer = null;
 
-        // ==========================================
-        // INITIALIZATION
-        // ==========================================
-        document.addEventListener('DOMContentLoaded', () => {
-            const dateInput = document.getElementById('incidentDate');
-            if (dateInput) {
-                dateInput.value = new Date().toISOString().split('T')[0];
-            }
+        const DRAFT_FIELD_IDS = [
+            'scammerName',
+            'contactPhone',
+            'bankAccount',
+            'scamType',
+            'damageAmount',
+            'incidentDate',
+            'incidentLocation',
+            'description',
+            'reporterName'
+        ];
 
-            document.getElementById('scamForm').addEventListener('submit', handleReportSubmit);
-            document.getElementById('deleteRequestForm').addEventListener('submit', handleDeleteRequestSubmit);
-
-            // Bind auto-save draft listeners on form inputs
-            bindFormDraftAutoSave();
-            restoreFormDraft();
-
-            // Support initial search query from URL (?q=...)
-            applyUrlQueryParam();
-
-            // Load initial data
-            fetchDataFromCloud();
-        });
-
-        function applyUrlQueryParam() {
-            try {
-                const params = new URLSearchParams(window.location.search);
-                const q = (params.get('q') || '').trim();
-                if (q) {
-                    const searchEl = document.getElementById('searchInput');
-                    if (searchEl) searchEl.value = q;
-                }
-            } catch (_) {}
+        function escapeHtml(str) {
+            return String(str || '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
         }
 
-        // ==========================================
-        // GOOGLE DRIVE URL NORMALIZATION & ERROR HANDLING
-        // ==========================================
         function resolveDriveImageUrl(url) {
             if (!url || typeof url !== 'string') return '';
             const cleaned = url.trim();
             if (!cleaned) return '';
-
             if (cleaned.startsWith('data:image')) return cleaned;
 
             const drivePatterns = [
@@ -907,7 +290,6 @@
                     return `https://drive.google.com/thumbnail?id=${match[1]}&sz=w1000`;
                 }
             }
-
             return cleaned;
         }
 
@@ -918,36 +300,6 @@
                 parentThumb.style.display = 'none';
             } else {
                 imgEl.style.display = 'none';
-            }
-        }
-
-        // ==========================================
-        // DATA FETCHING & SYNC (GOOGLE SHEETS + LOCAL FALLBACK)
-        // ==========================================
-        async function fetchDataFromCloud() {
-            const spinIcon = document.getElementById('refreshSpinIcon');
-            if (spinIcon) spinIcon.classList.add('fa-spin');
-
-            try {
-                const res = await fetch(WEB_APP_URL + '?t=' + Date.now(), { method: 'GET' });
-                if (!res.ok) throw new Error('Network error');
-                const rawData = await res.json();
-
-                if (Array.isArray(rawData)) {
-                    allReports = rawData.map(normalizeRecord);
-                    saveToLocalBackup(allReports);
-                    updateConnectionUI(true);
-                } else {
-                    throw new Error('Invalid JSON format');
-                }
-            } catch (err) {
-                console.warn('Cloud fetch failed, using LocalStorage fallback:', err);
-                allReports = loadFromLocalBackup();
-                updateConnectionUI(false);
-            } finally {
-                if (spinIcon) spinIcon.classList.remove('fa-spin');
-                updateStats();
-                onSearchOrFilterChange();
             }
         }
 
@@ -981,16 +333,14 @@
         function saveToLocalBackup(data) {
             try {
                 localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(data));
-            } catch (e) {
-                console.warn('LocalStorage quota exceeded');
-            }
+            } catch (_) {}
         }
 
         function loadFromLocalBackup() {
             try {
                 const raw = localStorage.getItem(LOCAL_STORAGE_KEY);
                 return raw ? JSON.parse(raw) : [];
-            } catch (e) {
+            } catch (_) {
                 return [];
             }
         }
@@ -1023,9 +373,92 @@
             }
         }
 
-        // ==========================================
-        // MULTI-IMAGE UPLOAD & COMPRESSION (UP TO 10)
-        // ==========================================
+        async function fetchDataFromCloud() {
+            const spinIcon = document.getElementById('refreshSpinIcon');
+            if (spinIcon) spinIcon.classList.add('fa-spin');
+
+            try {
+                const res = await fetch(WEB_APP_URL + '?t=' + Date.now(), { method: 'GET' });
+                if (!res.ok) throw new Error('Network error');
+                const rawData = await res.json();
+
+                if (Array.isArray(rawData)) {
+                    allReports = rawData.map(normalizeRecord);
+                    saveToLocalBackup(allReports);
+                    updateConnectionUI(true);
+                } else {
+                    throw new Error('Invalid JSON format');
+                }
+            } catch (_) {
+                allReports = loadFromLocalBackup();
+                updateConnectionUI(false);
+            } finally {
+                if (spinIcon) spinIcon.classList.remove('fa-spin');
+                updateStats();
+                onSearchOrFilterChange();
+            }
+        }
+
+        function compressImageToBase64(file, maxWidth, quality) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        const canvas = document.createElement('canvas');
+                        let width = img.width;
+                        let height = img.height;
+                        if (width > maxWidth) {
+                            height = Math.round((height * maxWidth) / width);
+                            width = maxWidth;
+                        }
+                        canvas.width = width;
+                        canvas.height = height;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, width, height);
+                        resolve(canvas.toDataURL('image/jpeg', quality));
+                    };
+                    img.onerror = reject;
+                    img.src = e.target.result;
+                };
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function renderSelectedImagesPreview() {
+            const count = selectedImagesBase64.length;
+            const counterEl = document.getElementById('imageCounter');
+            if (counterEl) counterEl.textContent = `แนบรูปแล้ว ${count} / ${MAX_IMAGES} รูป`;
+
+            const placeholder = document.getElementById('uploadPlaceholder');
+            const previewContainer = document.getElementById('imagePreviewContainer');
+            const grid = document.getElementById('imagePreviewGrid');
+
+            if (count === 0) {
+                placeholder?.classList.remove('hidden');
+                previewContainer?.classList.add('hidden');
+                if (grid) grid.innerHTML = '';
+                return;
+            }
+
+            placeholder?.classList.add('hidden');
+            previewContainer?.classList.remove('hidden');
+
+            if (grid) {
+                grid.innerHTML = selectedImagesBase64.map((src, idx) => `
+                    <div class="relative group aspect-square rounded-lg overflow-hidden border border-slate-300 bg-white shadow-sm">
+                        <img src="${src}" alt="รูปหลักฐาน ${idx + 1}" class="w-full h-full object-cover">
+                        <button type="button" onclick="removeSingleImage(${idx})" title="ลบรูปนี้"
+                            class="absolute top-1 right-1 w-5 h-5 rounded-full bg-rose-600 text-white text-[10px] flex items-center justify-center shadow hover:bg-rose-700 transition">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                        <span class="absolute bottom-1 left-1 bg-slate-900/70 text-white text-[9px] px-1 rounded">#${idx + 1}</span>
+                    </div>
+                `).join('');
+            }
+        }
+
         async function previewImages(event) {
             const files = Array.from(event.target.files || []);
             if (!files.length) return;
@@ -1047,74 +480,11 @@
                 try {
                     const compressed = await compressImageToBase64(file, 800, 0.75);
                     selectedImagesBase64.push(compressed);
-                } catch (err) {
-                    console.error('Image compression error:', err);
-                }
+                } catch (_) {}
             }
 
             event.target.value = '';
             renderSelectedImagesPreview();
-        }
-
-        function compressImageToBase64(file, maxWidth, quality) {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    const img = new Image();
-                    img.onload = () => {
-                        const canvas = document.createElement('canvas');
-                        let width = img.width;
-                        let height = img.height;
-
-                        if (width > maxWidth) {
-                            height = Math.round((height * maxWidth) / width);
-                            width = maxWidth;
-                        }
-
-                        canvas.width = width;
-                        canvas.height = height;
-                        const ctx = canvas.getContext('2d');
-                        ctx.drawImage(img, 0, 0, width, height);
-                        resolve(canvas.toDataURL('image/jpeg', quality));
-                    };
-                    img.onerror = reject;
-                    img.src = e.target.result;
-                };
-                reader.onerror = reject;
-                reader.readAsDataURL(file);
-            });
-        }
-
-        function renderSelectedImagesPreview() {
-            const count = selectedImagesBase64.length;
-            document.getElementById('imageCounter').textContent = `แนบรูปแล้ว ${count} / ${MAX_IMAGES} รูป`;
-
-            const placeholder = document.getElementById('uploadPlaceholder');
-            const previewContainer = document.getElementById('imagePreviewContainer');
-            const grid = document.getElementById('imagePreviewGrid');
-
-            if (count === 0) {
-                placeholder.classList.remove('hidden');
-                previewContainer.classList.add('hidden');
-                grid.innerHTML = '';
-                return;
-            }
-
-            placeholder.classList.add('hidden');
-            previewContainer.classList.remove('hidden');
-
-            grid.innerHTML = selectedImagesBase64.map((src, idx) => `
-                <div class="relative group aspect-square rounded-lg overflow-hidden border border-slate-300 bg-white shadow-sm">
-                    <img src="${src}" alt="รูปหลักฐาน ${idx + 1}" class="w-full h-full object-cover">
-                    <button type="button" onclick="removeSingleImage(${idx})" title="ลบรูปนี้"
-                        class="absolute top-1 right-1 w-5 h-5 rounded-full bg-rose-600 text-white text-[10px] flex items-center justify-center shadow hover:bg-rose-700 transition">
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
-                    <span class="absolute bottom-1 left-1 bg-slate-900/70 text-white text-[9px] px-1 rounded">
-                        #${idx + 1}
-                    </span>
-                </div>
-            `).join('');
         }
 
         function removeSingleImage(index) {
@@ -1127,28 +497,11 @@
             renderSelectedImagesPreview();
         }
 
-        // ==========================================
-        // AUTO-SAVE FORM DRAFT IN LOCALSTORAGE
-        // ==========================================
-        const DRAFT_FIELD_IDS = [
-            'scammerName',
-            'contactPhone',
-            'bankAccount',
-            'scamType',
-            'damageAmount',
-            'incidentDate',
-            'incidentLocation',
-            'description',
-            'reporterName'
-        ];
-
-        function bindFormDraftAutoSave() {
-            DRAFT_FIELD_IDS.forEach(id => {
-                const el = document.getElementById(id);
-                if (!el) return;
-                el.addEventListener('input', saveFormDraft);
-                el.addEventListener('change', saveFormDraft);
-            });
+        function updateDraftStatusUI(label, colorClass = 'text-slate-500') {
+            const el = document.getElementById('draftStatusText');
+            if (!el) return;
+            el.className = `inline-flex items-center gap-1 ${colorClass}`;
+            el.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> ${escapeHtml(label)}`;
         }
 
         function saveFormDraft() {
@@ -1163,23 +516,20 @@
             } catch (_) {}
         }
 
-        function updateDraftStatusUI(label, colorClass = 'text-slate-500') {
-            const el = document.getElementById('draftStatusText');
-            if (!el) return;
-            el.className = `inline-flex items-center gap-1 ${colorClass}`;
-            el.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> ${escapeHtml(label)}`;
+        function clearFormDraft() {
+            try {
+                localStorage.removeItem(DRAFT_STORAGE_KEY);
+            } catch (_) {}
         }
 
         function resetFormAndDraft() {
             clearFormDraft();
-            document.getElementById('scamForm').reset();
+            document.getElementById('scamForm')?.reset();
             const dateInput = document.getElementById('incidentDate');
-            if (dateInput) {
-                dateInput.value = new Date().toISOString().split('T')[0];
-            }
+            if (dateInput) dateInput.value = new Date().toISOString().split('T')[0];
             removeAllImages();
             updateDraftStatusUI('ล้างแบบร่างเรียบร้อยแล้ว', 'text-slate-500');
-            showToast('ล้างข้อมูลแบบร่างในฟอร์มแล้วครับ', 'info');
+            showToast('ล้างข้อมูลแบบร่างในฟอร์มแล้วครับ', 'success');
         }
 
         function restoreFormDraft() {
@@ -1193,9 +543,7 @@
                 DRAFT_FIELD_IDS.forEach(id => {
                     const el = document.getElementById(id);
                     if (el && typeof draft[id] === 'string' && draft[id].trim() !== '') {
-                        if (id === 'incidentDate' && draft[id] === new Date().toISOString().split('T')[0]) {
-                            return;
-                        }
+                        if (id === 'incidentDate' && draft[id] === new Date().toISOString().split('T')[0]) return;
                         el.value = draft[id];
                         hasRestoredAny = true;
                     }
@@ -1203,20 +551,20 @@
 
                 if (hasRestoredAny) {
                     updateDraftStatusUI('กู้คืนร่างอัตโนมัติแล้ว', 'text-amber-700 font-semibold');
-                    showToast('กู้คืนข้อมูลฟอร์มที่พิมพ์ค้างไว้ให้อัตโนมัติแล้วครับ', 'info');
+                    showToast('กู้คืนข้อมูลฟอร์มที่พิมพ์ค้างไว้ให้อัตโนมัติแล้วครับ', 'success');
                 }
             } catch (_) {}
         }
 
-        function clearFormDraft() {
-            try {
-                localStorage.removeItem(DRAFT_STORAGE_KEY);
-            } catch (_) {}
+        function bindFormDraftAutoSave() {
+            DRAFT_FIELD_IDS.forEach(id => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                el.addEventListener('input', saveFormDraft);
+                el.addEventListener('change', saveFormDraft);
+            });
         }
 
-        // ==========================================
-        // FORM SUBMISSION (ADD NEW REPORT)
-        // ==========================================
         async function handleReportSubmit(e) {
             e.preventDefault();
 
@@ -1239,32 +587,28 @@
                 return;
             }
 
-            submitBtn.disabled = true;
-            submitIcon.className = 'fa-solid fa-spinner fa-spin';
-            submitText.textContent = 'กำลังบันทึกข้อมูล...';
+            if (submitBtn) submitBtn.disabled = true;
+            if (submitIcon) submitIcon.className = 'fa-solid fa-spinner fa-spin';
+            if (submitText) submitText.textContent = 'กำลังบันทึกข้อมูล...';
 
             const caseId = 'CASE-' + Date.now().toString().slice(-6);
-
             const payload = {
                 id: caseId,
                 timestamp: incidentDate + ' ' + new Date().toLocaleTimeString('th-TH'),
-                name: name,
-                phone: phone,
-                bankAccount: bankAccount,
-                scamType: scamType,
-                amount: amount,
-                location: location,
-                details: details,
+                name,
+                phone,
+                bankAccount,
+                scamType,
+                amount,
+                location,
+                details,
                 imageBase64: selectedImagesBase64[0] || '',
                 imagesBase64: selectedImagesBase64,
-                reporter: reporter
+                reporter
             };
 
             try {
-                const localRecord = normalizeRecord({
-                    ...payload,
-                    images: [...selectedImagesBase64]
-                });
+                const localRecord = normalizeRecord({ ...payload, images: [...selectedImagesBase64] });
                 allReports.unshift(localRecord);
                 saveToLocalBackup(allReports);
                 updateStats();
@@ -1278,37 +622,32 @@
                 });
 
                 showToast('บันทึกข้อมูลเตือนภัยเรียบร้อยแล้ว!', 'success');
-
                 clearFormDraft();
-                document.getElementById('scamForm').reset();
-                document.getElementById('incidentDate').value = new Date().toISOString().split('T')[0];
+                document.getElementById('scamForm')?.reset();
+                const dateInput = document.getElementById('incidentDate');
+                if (dateInput) dateInput.value = new Date().toISOString().split('T')[0];
                 removeAllImages();
-
                 setTimeout(fetchDataFromCloud, 2000);
-            } catch (err) {
-                console.error('Submit error:', err);
+            } catch (_) {
                 showToast('บันทึกในเครื่องเรียบร้อยแล้ว', 'warning');
             } finally {
-                submitBtn.disabled = false;
-                submitIcon.className = 'fa-solid fa-paper-plane';
-                submitText.textContent = 'ลงบันทึกเตือนภัยทันที';
+                if (submitBtn) submitBtn.disabled = false;
+                if (submitIcon) submitIcon.className = 'fa-solid fa-paper-plane icon-bounce-hover';
+                if (submitText) submitText.textContent = 'ลงบันทึกเตือนภัยทันที';
             }
         }
 
-        // ==========================================
-        // SEARCH, FILTER, VIEW MODE & PAGINATION
-        // ==========================================
         function setViewMode(mode) {
             viewMode = mode;
             const btnDetailed = document.getElementById('btnViewDetailed');
             const btnCompact = document.getElementById('btnViewCompact');
 
             if (mode === 'detailed') {
-                btnDetailed.className = 'px-2.5 py-1 rounded-lg text-xs font-semibold transition bg-slate-950 text-amber-400 shadow-sm whitespace-nowrap';
-                btnCompact.className = 'px-2.5 py-1 rounded-lg text-xs font-semibold transition text-slate-600 hover:text-slate-900 whitespace-nowrap';
+                if (btnDetailed) btnDetailed.className = 'px-2.5 py-1 rounded-lg text-xs font-semibold transition bg-slate-950 text-amber-400 shadow-sm whitespace-nowrap';
+                if (btnCompact) btnCompact.className = 'px-2.5 py-1 rounded-lg text-xs font-semibold transition text-slate-600 hover:text-slate-900 whitespace-nowrap';
             } else {
-                btnCompact.className = 'px-2.5 py-1 rounded-lg text-xs font-semibold transition bg-slate-950 text-amber-400 shadow-sm whitespace-nowrap';
-                btnDetailed.className = 'px-2.5 py-1 rounded-lg text-xs font-semibold transition text-slate-600 hover:text-slate-900 whitespace-nowrap';
+                if (btnCompact) btnCompact.className = 'px-2.5 py-1 rounded-lg text-xs font-semibold transition bg-slate-950 text-amber-400 shadow-sm whitespace-nowrap';
+                if (btnDetailed) btnDetailed.className = 'px-2.5 py-1 rounded-lg text-xs font-semibold transition text-slate-600 hover:text-slate-900 whitespace-nowrap';
             }
             renderFeed();
         }
@@ -1327,30 +666,26 @@
         }
 
         function onSearchOrFilterChange() {
-            const rawQuery = document.getElementById('searchInput').value.trim();
+            const rawQuery = (document.getElementById('searchInput')?.value || '').trim();
             const query = rawQuery.toLowerCase();
             const queryDigits = rawQuery.replace(/\D/g, '');
-            const typeFilter = document.getElementById('filterType').value;
+            const typeFilter = document.getElementById('filterType')?.value || 'ALL';
             const onlyWithImages = Boolean(document.getElementById('filterHasImages')?.checked);
             const sortOrder = document.getElementById('sortOrder')?.value || 'DEFAULT';
             const clearBtn = document.getElementById('clearSearchBtn');
             const riskBanner = document.getElementById('quickRiskBanner');
 
-            if (query.length > 0) {
-                clearBtn.classList.remove('hidden');
-            } else {
-                clearBtn.classList.add('hidden');
+            if (clearBtn) {
+                if (query.length > 0) clearBtn.classList.remove('hidden');
+                else clearBtn.classList.add('hidden');
             }
 
             filteredReports = allReports.filter(item => {
                 const matchType = typeFilter === 'ALL' || item.scamType === typeFilter;
                 if (!matchType) return false;
-
-                if (onlyWithImages && (!item.images || item.images.length === 0)) {
-                    return false;
-                }
-
+                if (onlyWithImages && (!item.images || item.images.length === 0)) return false;
                 if (!query) return true;
+
                 const searchable = [
                     item.id,
                     item.name,
@@ -1363,15 +698,11 @@
 
                 if (searchable.includes(query)) return true;
 
-                // Digit-normalized search (matches phone/bank regardless of dashes or spaces)
                 if (queryDigits.length >= 4) {
                     const phoneDigits = String(item.phone || '').replace(/\D/g, '');
                     const bankDigits = String(item.bankAccount || '').replace(/\D/g, '');
-                    if (phoneDigits.includes(queryDigits) || bankDigits.includes(queryDigits)) {
-                        return true;
-                    }
+                    if (phoneDigits.includes(queryDigits) || bankDigits.includes(queryDigits)) return true;
                 }
-
                 return false;
             });
 
@@ -1381,7 +712,6 @@
                 filteredReports.sort((a, b) => getRepeatCountForItem(b) - getRepeatCountForItem(a));
             }
 
-            // Update Quick Risk Check Banner when user types a search term
             if (riskBanner) {
                 if (!rawQuery) {
                     riskBanner.classList.add('hidden');
@@ -1421,7 +751,8 @@
         }
 
         function clearSearch() {
-            document.getElementById('searchInput').value = '';
+            const el = document.getElementById('searchInput');
+            if (el) el.value = '';
             onSearchOrFilterChange();
         }
 
@@ -1435,21 +766,23 @@
             const totalPages = Math.max(1, Math.ceil(filteredReports.length / pageSize));
             currentPage = Math.min(Math.max(1, page), totalPages);
             renderFeed();
-            const headerEl = document.getElementById('feedSectionHeader');
-            if (headerEl) {
-                headerEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
+            document.getElementById('feedSectionHeader')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
         function updateStats() {
             const totalCases = allReports.length;
             const totalDamage = allReports.reduce((sum, item) => sum + (Number(item.amount) || 0), 0);
 
-            document.getElementById('statTotalCases').textContent = totalCases.toLocaleString('th-TH');
-            document.getElementById('statTotalDamage').textContent = '฿' + totalDamage.toLocaleString('th-TH');
+            const totalCasesEl = document.getElementById('statTotalCases');
+            const totalDamageEl = document.getElementById('statTotalDamage');
+            const topTypeEl = document.getElementById('statTopType');
 
+            if (totalCasesEl) totalCasesEl.textContent = totalCases.toLocaleString('th-TH');
+            if (totalDamageEl) totalDamageEl.textContent = '฿' + totalDamage.toLocaleString('th-TH');
+
+            if (!topTypeEl) return;
             if (totalCases === 0) {
-                document.getElementById('statTopType').textContent = '-';
+                topTypeEl.textContent = '-';
                 return;
             }
 
@@ -1467,12 +800,9 @@
                     topType = k;
                 }
             }
-            document.getElementById('statTopType').textContent = topType;
+            topTypeEl.textContent = topType;
         }
 
-        // ==========================================
-        // RENDER FEED CARDS & PAGINATION
-        // ==========================================
         function getBadgeColorClass(scamType) {
             if (scamType.includes('สลิปปลอม')) return 'bg-purple-100 text-purple-700 border-purple-200';
             if (scamType.includes('ไม่จ่าย')) return 'bg-rose-100 text-rose-700 border-rose-200';
@@ -1480,52 +810,6 @@
             if (scamType.includes('มัดจำ')) return 'bg-orange-100 text-orange-700 border-orange-200';
             if (scamType.includes('ขโมย')) return 'bg-red-100 text-red-800 border-red-200';
             return 'bg-slate-100 text-slate-700 border-slate-200';
-        }
-
-        function escapeHtml(str) {
-            return String(str || '')
-                .replace(/&/g, '&amp;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;')
-                .replace(/"/g, '&quot;')
-                .replace(/'/g, '&#39;');
-        }
-
-        function renderFeed() {
-            const container = document.getElementById('feedContainer');
-            const emptyState = document.getElementById('emptyState');
-            const paginationBar = document.getElementById('paginationBar');
-
-            const total = filteredReports.length;
-            document.getElementById('totalFilteredRecords').textContent = total;
-
-            if (total === 0) {
-                container.innerHTML = '';
-                emptyState.classList.remove('hidden');
-                paginationBar.classList.add('hidden');
-                return;
-            }
-
-            emptyState.classList.add('hidden');
-            paginationBar.classList.remove('hidden');
-
-            const totalPages = Math.ceil(total / pageSize);
-            if (currentPage > totalPages) currentPage = totalPages;
-
-            const startIdx = (currentPage - 1) * pageSize;
-            const endIdx = Math.min(startIdx + pageSize, total);
-            const pageItems = filteredReports.slice(startIdx, endIdx);
-
-            document.getElementById('showingStart').textContent = startIdx + 1;
-            document.getElementById('showingEnd').textContent = endIdx;
-
-            if (viewMode === 'compact') {
-                container.innerHTML = pageItems.map(item => renderCompactCard(item)).join('');
-            } else {
-                container.innerHTML = pageItems.map(item => renderDetailedCard(item)).join('');
-            }
-
-            renderPaginationButtons(totalPages);
         }
 
         function renderDetailedCard(item) {
@@ -1550,9 +834,7 @@
                             <div onclick="openLightboxByCase('${safeId}', ${idx})" class="relative w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden border border-slate-200 shrink-0 cursor-pointer group bg-slate-100">
                                 <img src="${escapeHtml(imgSrc)}" alt="หลักฐาน" onerror="handleImageError(this)" class="w-full h-full object-cover group-hover:scale-105 transition">
                                 ${idx === 3 && item.images.length > 4 ? `
-                                    <div class="absolute inset-0 bg-slate-900/70 text-white font-bold text-xs flex items-center justify-center">
-                                        +${item.images.length - 4}
-                                    </div>
+                                    <div class="absolute inset-0 bg-slate-900/70 text-white font-bold text-xs flex items-center justify-center">+${item.images.length - 4}</div>
                                 ` : ''}
                             </div>
                         `).join('')}
@@ -1562,19 +844,15 @@
 
             return `
                 <article class="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-sm hover:border-amber-400/70 hover:shadow-md transition min-w-0">
-                    <!-- Top Row -->
                     <div class="flex flex-wrap items-start justify-between gap-2 mb-3">
                         <div class="space-y-1 min-w-0 flex-1">
                             <div class="flex flex-wrap items-center gap-2">
-                                <span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold border shrink-0 ${badgeClass}">
-                                    ${escapeHtml(item.scamType)}
-                                </span>
+                                <span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold border shrink-0 ${badgeClass}">${escapeHtml(item.scamType)}</span>
                                 ${repeatBadgeHtml}
                                 <span class="text-[11px] font-mono text-slate-400 shrink-0">#${safeId}</span>
                             </div>
                             <h3 class="font-bold text-base sm:text-lg text-slate-900 truncate">${safeName}</h3>
                         </div>
-
                         <div class="text-right shrink-0">
                             <div class="text-[11px] text-slate-400">ยอดเสียหาย</div>
                             <div class="font-extrabold text-amber-600 text-sm sm:text-base">
@@ -1583,18 +861,13 @@
                         </div>
                     </div>
 
-                    <!-- Phone & Bank Copy Pills -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3 text-xs">
                         <div class="flex items-center justify-between bg-slate-50 px-3 py-2 rounded-xl border border-slate-200 gap-2 min-w-0">
                             <span class="truncate text-slate-600">
                                 <i class="fa-solid fa-phone text-slate-400 mr-1.5 shrink-0"></i>
                                 <strong class="font-mono text-slate-800">${safePhone || 'ไม่ระบุเบอร์'}</strong>
                             </span>
-                            ${item.phone ? `
-                                <button type="button" onclick="copyText('${safePhone}', 'คัดลอกเบอร์โทรแล้ว')" class="text-amber-800 hover:text-amber-900 font-semibold text-[11px] px-2 py-0.5 rounded bg-amber-50 border border-amber-200 shrink-0 transition">
-                                    คัดลอก
-                                </button>
-                            ` : ''}
+                            ${item.phone ? `<button type="button" onclick="copyText('${safePhone}', 'คัดลอกเบอร์โทรแล้ว')" class="text-amber-800 hover:text-amber-900 font-semibold text-[11px] px-2 py-0.5 rounded bg-amber-50 border border-amber-200 shrink-0 transition">คัดลอก</button>` : ''}
                         </div>
 
                         <div class="flex items-center justify-between bg-slate-50 px-3 py-2 rounded-xl border border-slate-200 gap-2 min-w-0">
@@ -1602,28 +875,18 @@
                                 <i class="fa-solid fa-credit-card text-slate-400 mr-1.5 shrink-0"></i>
                                 <strong class="font-mono text-slate-800">${safeBank || 'ไม่ระบุบัญชี'}</strong>
                             </span>
-                            ${item.bankAccount ? `
-                                <button type="button" onclick="copyText('${safeBank}', 'คัดลอกเลขบัญชีแล้ว')" class="text-amber-800 hover:text-amber-900 font-semibold text-[11px] px-2 py-0.5 rounded bg-amber-50 border border-amber-200 shrink-0 transition">
-                                    คัดลอก
-                                </button>
-                            ` : ''}
+                            ${item.bankAccount ? `<button type="button" onclick="copyText('${safeBank}', 'คัดลอกเลขบัญชีแล้ว')" class="text-amber-800 hover:text-amber-900 font-semibold text-[11px] px-2 py-0.5 rounded bg-amber-50 border border-amber-200 shrink-0 transition">คัดลอก</button>` : ''}
                         </div>
                     </div>
 
-                    <!-- Description Snippet -->
-                    <p class="text-xs sm:text-sm text-slate-700 line-clamp-3 leading-relaxed bg-slate-50/70 p-3 rounded-xl border border-slate-100">
-                        ${escapeHtml(item.details)}
-                    </p>
-
+                    <p class="text-xs sm:text-sm text-slate-700 line-clamp-3 leading-relaxed bg-slate-50/70 p-3 rounded-xl border border-slate-100">${escapeHtml(item.details)}</p>
                     ${imagesHtml}
 
-                    <!-- Footer Actions -->
                     <div class="mt-3 pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2 text-xs">
                         <div class="text-slate-400 truncate max-w-[45%]">
                             <i class="fa-solid fa-location-dot text-rose-500 mr-1 shrink-0"></i>
                             ${escapeHtml(item.location || 'ไม่ระบุเส้นทาง')}
                         </div>
-
                         <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
                             <button type="button" onclick="shareCaseToOpenChat('${safeId}')" title="คัดลอกข้อความเตือนภัยแชร์ลง LINE OpenChat" class="text-emerald-700 hover:text-emerald-900 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 px-2.5 py-1.5 rounded-lg transition font-semibold whitespace-nowrap">
                                 <i class="fa-brands fa-line text-[12px]"></i> แชร์เตือนภัย
@@ -1652,9 +915,7 @@
                 <article class="bg-white rounded-xl border border-slate-200 p-3.5 shadow-sm hover:border-amber-400/70 transition flex flex-col sm:flex-row sm:items-center justify-between gap-3 min-w-0">
                     <div class="min-w-0 space-y-1 flex-1">
                         <div class="flex flex-wrap items-center gap-2">
-                            <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold border shrink-0 ${badgeClass}">
-                                ${escapeHtml(item.scamType)}
-                            </span>
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold border shrink-0 ${badgeClass}">${escapeHtml(item.scamType)}</span>
                             <h3 class="font-bold text-sm text-slate-900 truncate">${safeName}</h3>
                             ${imgCount > 0 ? `<span class="text-[10px] text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded shrink-0"><i class="fa-regular fa-image"></i> ${imgCount}</span>` : ''}
                         </div>
@@ -1681,6 +942,7 @@
 
         function renderPaginationButtons(totalPages) {
             const container = document.getElementById('pageButtonsContainer');
+            if (!container) return;
             if (totalPages <= 1) {
                 container.innerHTML = '';
                 return;
@@ -1700,11 +962,7 @@
                 const activeClass = p === currentPage
                     ? 'bg-slate-950 text-amber-400 border-slate-950 font-bold'
                     : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-100';
-                html += `
-                    <button type="button" onclick="goToPage(${p})" class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg border ${activeClass} text-xs transition">
-                        ${p}
-                    </button>
-                `;
+                html += `<button type="button" onclick="goToPage(${p})" class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg border ${activeClass} text-xs transition">${p}</button>`;
             }
 
             html += `
@@ -1717,16 +975,55 @@
             container.innerHTML = html;
         }
 
-        // ==========================================
-        // MODAL 1: FULL DETAIL MODAL
-        // ==========================================
+        function renderFeed() {
+            const container = document.getElementById('feedContainer');
+            const emptyState = document.getElementById('emptyState');
+            const paginationBar = document.getElementById('paginationBar');
+
+            const total = filteredReports.length;
+            const totalFilteredEl = document.getElementById('totalFilteredRecords');
+            if (totalFilteredEl) totalFilteredEl.textContent = total;
+
+            if (total === 0) {
+                if (container) container.innerHTML = '';
+                emptyState?.classList.remove('hidden');
+                paginationBar?.classList.add('hidden');
+                return;
+            }
+
+            emptyState?.classList.add('hidden');
+            paginationBar?.classList.remove('hidden');
+
+            const totalPages = Math.ceil(total / pageSize);
+            if (currentPage > totalPages) currentPage = totalPages;
+
+            const startIdx = (currentPage - 1) * pageSize;
+            const endIdx = Math.min(startIdx + pageSize, total);
+            const pageItems = filteredReports.slice(startIdx, endIdx);
+
+            const startEl = document.getElementById('showingStart');
+            const endEl = document.getElementById('showingEnd');
+            if (startEl) startEl.textContent = startIdx + 1;
+            if (endEl) endEl.textContent = endIdx;
+
+            if (container) {
+                container.innerHTML = viewMode === 'compact'
+                    ? pageItems.map(item => renderCompactCard(item)).join('')
+                    : pageItems.map(item => renderDetailedCard(item)).join('');
+            }
+
+            renderPaginationButtons(totalPages);
+        }
+
         function openDetailModal(caseId) {
             const item = allReports.find(r => r.id === caseId);
             if (!item) return;
 
             const badge = document.getElementById('detailBadge');
-            badge.className = `px-2.5 py-1 rounded-full text-xs font-semibold border shrink-0 ${getBadgeColorClass(item.scamType)}`;
-            badge.textContent = item.scamType;
+            if (badge) {
+                badge.className = `px-2.5 py-1 rounded-full text-xs font-semibold border shrink-0 ${getBadgeColorClass(item.scamType)}`;
+                badge.textContent = item.scamType;
+            }
 
             document.getElementById('detailScammerName').textContent = item.name;
             document.getElementById('detailPhone').textContent = item.phone || 'ไม่ระบุ';
@@ -1739,17 +1036,24 @@
             document.getElementById('detailReporter').textContent = item.reporter || 'ไม่ระบุ';
 
             const btnPhone = document.getElementById('btnCopyPhone');
-            btnPhone.onclick = () => copyText(item.phone, 'คัดลอกเบอร์โทรแล้ว');
-            btnPhone.style.display = item.phone ? 'inline-flex' : 'none';
+            if (btnPhone) {
+                btnPhone.onclick = () => copyText(item.phone, 'คัดลอกเบอร์โทรแล้ว');
+                btnPhone.style.display = item.phone ? 'inline-flex' : 'none';
+            }
 
             const btnBank = document.getElementById('btnCopyBank');
-            btnBank.onclick = () => copyText(item.bankAccount, 'คัดลอกเลขบัญชีแล้ว');
-            btnBank.style.display = item.bankAccount ? 'inline-flex' : 'none';
+            if (btnBank) {
+                btnBank.onclick = () => copyText(item.bankAccount, 'คัดลอกเลขบัญชีแล้ว');
+                btnBank.style.display = item.bankAccount ? 'inline-flex' : 'none';
+            }
 
-            document.getElementById('btnDetailRequestDelete').onclick = () => {
-                closeDetailModal();
-                openDeleteRequestModal(item.id);
-            };
+            const btnDel = document.getElementById('btnDetailRequestDelete');
+            if (btnDel) {
+                btnDel.onclick = () => {
+                    closeDetailModal();
+                    openDeleteRequestModal(item.id);
+                };
+            }
 
             const btnShare = document.getElementById('btnDetailShareOpenChat');
             if (btnShare) {
@@ -1759,66 +1063,73 @@
             const imgSection = document.getElementById('detailImagesSection');
             const imgGrid = document.getElementById('detailImagesGrid');
             if (item.images && item.images.length > 0) {
-                imgSection.classList.remove('hidden');
-                document.getElementById('detailImagesCount').textContent = item.images.length;
-                imgGrid.innerHTML = item.images.map((src, idx) => `
-                    <div onclick="openLightboxByCase('${escapeHtml(item.id)}', ${idx})" class="aspect-square rounded-xl overflow-hidden border border-slate-200 cursor-pointer group bg-slate-100">
-                        <img src="${escapeHtml(src)}" alt="หลักฐาน ${idx + 1}" onerror="handleImageError(this)" class="w-full h-full object-cover group-hover:scale-105 transition">
-                    </div>
-                `).join('');
+                imgSection?.classList.remove('hidden');
+                const countEl = document.getElementById('detailImagesCount');
+                if (countEl) countEl.textContent = item.images.length;
+                if (imgGrid) {
+                    imgGrid.innerHTML = item.images.map((src, idx) => `
+                        <div onclick="openLightboxByCase('${escapeHtml(item.id)}', ${idx})" class="aspect-square rounded-xl overflow-hidden border border-slate-200 cursor-pointer group bg-slate-100">
+                            <img src="${escapeHtml(src)}" alt="หลักฐาน ${idx + 1}" onerror="handleImageError(this)" class="w-full h-full object-cover group-hover:scale-105 transition">
+                        </div>
+                    `).join('');
+                }
             } else {
-                imgSection.classList.add('hidden');
-                imgGrid.innerHTML = '';
+                imgSection?.classList.add('hidden');
+                if (imgGrid) imgGrid.innerHTML = '';
             }
 
-            document.getElementById('detailModal').classList.remove('hidden');
+            document.getElementById('detailModal')?.classList.remove('hidden');
         }
 
         function closeDetailModal() {
-            document.getElementById('detailModal').classList.add('hidden');
+            document.getElementById('detailModal')?.classList.add('hidden');
         }
 
-        // ==========================================
-        // MODAL 2: DELETION REQUEST MODAL
-        // ==========================================
         function openDeleteRequestModal(caseId) {
             const item = allReports.find(r => r.id === caseId);
             if (!item) return;
 
-            document.getElementById('delTargetCaseId').value = item.id;
-            document.getElementById('delTargetName').value = item.name;
-            document.getElementById('delTargetSummary').textContent = `[${item.id}] ${item.name} (${item.scamType})`;
-            document.getElementById('deleteRequestModal').classList.remove('hidden');
+            const caseInput = document.getElementById('delTargetCaseId');
+            const nameInput = document.getElementById('delTargetName');
+            const summaryEl = document.getElementById('delTargetSummary');
+
+            if (caseInput) caseInput.value = item.id;
+            if (nameInput) nameInput.value = item.name;
+            if (summaryEl) summaryEl.textContent = `[${item.id}] ${item.name} (${item.scamType})`;
+
+            document.getElementById('deleteRequestModal')?.classList.remove('hidden');
         }
 
         function closeDeleteRequestModal() {
-            document.getElementById('deleteRequestModal').classList.add('hidden');
-            document.getElementById('deleteRequestForm').reset();
+            document.getElementById('deleteRequestModal')?.classList.add('hidden');
+            document.getElementById('deleteRequestForm')?.reset();
         }
 
         async function handleDeleteRequestSubmit(e) {
             e.preventDefault();
 
             const btn = document.getElementById('btnSubmitDeleteReq');
-            btn.disabled = true;
-            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>กำลังส่งคำร้อง...</span>';
+            if (btn) {
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>กำลังส่งคำร้อง...</span>';
+            }
 
-            const targetCaseId = document.getElementById('delTargetCaseId').value;
-            const targetName = document.getElementById('delTargetName').value;
-            const reasonType = document.getElementById('delReasonType').value;
-            const reasonDetail = document.getElementById('delReasonDetail').value.trim();
-            const requesterName = document.getElementById('delRequesterName').value.trim();
-            const requesterContact = document.getElementById('delRequesterContact').value.trim();
+            const targetCaseId = document.getElementById('delTargetCaseId')?.value || '';
+            const targetName = document.getElementById('delTargetName')?.value || '';
+            const reasonType = document.getElementById('delReasonType')?.value || '';
+            const reasonDetail = (document.getElementById('delReasonDetail')?.value || '').trim();
+            const requesterName = (document.getElementById('delRequesterName')?.value || '').trim();
+            const requesterContact = (document.getElementById('delRequesterContact')?.value || '').trim();
 
             const payload = {
                 action: 'request_delete',
                 requestId: 'REQ-' + Date.now().toString().slice(-6),
                 timestamp: new Date().toLocaleString('sv-SE', { timeZone: 'Asia/Bangkok' }),
-                targetCaseId: targetCaseId,
-                targetName: targetName,
+                targetCaseId,
+                targetName,
                 reason: `${reasonType}: ${reasonDetail}`,
-                requesterName: requesterName,
-                requesterContact: requesterContact
+                requesterName,
+                requesterContact
             };
 
             try {
@@ -1828,29 +1139,41 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
                 });
-
                 showToast('ส่งคำร้องขอลบข้อมูลให้ทีมงานตรวจสอบแล้วครับ', 'success');
                 closeDeleteRequestModal();
-            } catch (err) {
-                console.error('Delete request failed:', err);
+            } catch (_) {
                 showToast('เกิดข้อผิดพลาดในการส่งคำร้อง กรุณาลองใหม่', 'error');
             } finally {
-                btn.disabled = false;
-                btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> <span>ส่งคำร้องให้ทีมงาน</span>';
+                if (btn) {
+                    btn.disabled = false;
+                    btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> <span>ส่งคำร้องให้ทีมงาน</span>';
+                }
             }
         }
 
-        // ==========================================
-        // MODAL 3: LIGHTBOX SLIDER
-        // ==========================================
+        function updateLightboxUI() {
+            const imgEl = document.getElementById('lightboxImg');
+            if (imgEl) {
+                imgEl.onerror = () => handleImageError(imgEl);
+                imgEl.src = lightboxImages[lightboxIndex] || '';
+            }
+            const counterEl = document.getElementById('lightboxCounter');
+            if (counterEl) counterEl.textContent = `${lightboxIndex + 1} / ${lightboxImages.length}`;
+
+            const showNav = lightboxImages.length > 1;
+            const prevBtn = document.getElementById('lightboxPrevBtn');
+            const nextBtn = document.getElementById('lightboxNextBtn');
+            if (prevBtn) prevBtn.style.display = showNav ? 'flex' : 'none';
+            if (nextBtn) nextBtn.style.display = showNav ? 'flex' : 'none';
+        }
+
         function openLightboxByCase(caseId, startIndex) {
             const item = allReports.find(r => r.id === caseId);
             if (!item || !item.images || !item.images.length) return;
-
             lightboxImages = item.images;
-            lightboxIndex = startIndex || 0;
+            lightboxIndex = Number(startIndex) || 0;
             updateLightboxUI();
-            document.getElementById('lightboxModal').classList.remove('hidden');
+            document.getElementById('lightboxModal')?.classList.remove('hidden');
         }
 
         function navigateLightbox(step) {
@@ -1859,24 +1182,31 @@
             updateLightboxUI();
         }
 
-        function updateLightboxUI() {
-            const imgEl = document.getElementById('lightboxImg');
-            imgEl.onerror = () => handleImageError(imgEl);
-            imgEl.src = lightboxImages[lightboxIndex];
-            document.getElementById('lightboxCounter').textContent = `${lightboxIndex + 1} / ${lightboxImages.length}`;
-
-            const showNav = lightboxImages.length > 1;
-            document.getElementById('lightboxPrevBtn').style.display = showNav ? 'flex' : 'none';
-            document.getElementById('lightboxNextBtn').style.display = showNav ? 'flex' : 'none';
-        }
-
         function closeLightbox() {
-            document.getElementById('lightboxModal').classList.add('hidden');
+            document.getElementById('lightboxModal')?.classList.add('hidden');
         }
 
-        // ==========================================
-        // SHARE WARNING TO LINE OPENCHAT
-        // ==========================================
+        function fallbackCopy(text, successMsg) {
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+            showToast(successMsg || 'คัดลอกเรียบร้อยแล้ว', 'success');
+        }
+
+        function copyText(text, successMsg) {
+            if (!text) return;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text)
+                    .then(() => showToast(successMsg || 'คัดลอกเรียบร้อยแล้ว', 'success'))
+                    .catch(() => fallbackCopy(text, successMsg));
+            } else {
+                fallbackCopy(text, successMsg);
+            }
+        }
+
         function shareCaseToOpenChat(caseId) {
             const item = allReports.find(r => r.id === caseId);
             if (!item) return;
@@ -1896,51 +1226,48 @@
             copyText(shareText, 'คัดลอกข้อความเตือนภัยพร้อมลิงก์เช็กประวัติแล้วครับ!');
         }
 
-        // ==========================================
-        // UTILITIES (COPY & TOAST)
-        // ==========================================
-        function copyText(text, successMsg) {
-            if (!text) return;
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(text).then(() => {
-                    showToast(successMsg || 'คัดลอกเรียบร้อยแล้ว', 'success');
-                }).catch(() => fallbackCopy(text, successMsg));
-            } else {
-                fallbackCopy(text, successMsg);
-            }
-        }
-
-        function fallbackCopy(text, successMsg) {
-            const ta = document.createElement('textarea');
-            ta.value = text;
-            document.body.appendChild(ta);
-            ta.select();
-            document.execCommand('copy');
-            document.body.removeChild(ta);
-            showToast(successMsg || 'คัดลอกเรียบร้อยแล้ว', 'success');
-        }
-
-        let toastTimer = null;
         function showToast(message, type = 'success') {
             const toast = document.getElementById('toast');
             const icon = document.getElementById('toastIcon');
             const msg = document.getElementById('toastMessage');
 
-            msg.textContent = message;
-            if (type === 'error') {
-                icon.className = 'fa-solid fa-circle-xmark text-rose-400 text-base shrink-0';
-            } else if (type === 'warning') {
-                icon.className = 'fa-solid fa-triangle-exclamation text-amber-400 text-base shrink-0';
-            } else {
-                icon.className = 'fa-solid fa-circle-check text-emerald-400 text-base shrink-0';
+            if (msg) msg.textContent = message;
+            if (icon) {
+                if (type === 'error') icon.className = 'fa-solid fa-circle-xmark text-rose-400 text-base shrink-0';
+                else if (type === 'warning') icon.className = 'fa-solid fa-triangle-exclamation text-amber-400 text-base shrink-0';
+                else icon.className = 'fa-solid fa-circle-check text-emerald-400 text-base shrink-0';
             }
 
-            toast.classList.remove('translate-y-24', 'opacity-0');
+            toast?.classList.remove('translate-y-24', 'opacity-0');
             clearTimeout(toastTimer);
             toastTimer = setTimeout(() => {
-                toast.classList.add('translate-y-24', 'opacity-0');
+                toast?.classList.add('translate-y-24', 'opacity-0');
             }, 3000);
         }
+
+        function applyUrlQueryParam() {
+            try {
+                const params = new URLSearchParams(window.location.search);
+                const q = (params.get('q') || '').trim();
+                if (q) {
+                    const searchEl = document.getElementById('searchInput');
+                    if (searchEl) searchEl.value = q;
+                }
+            } catch (_) {}
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const dateInput = document.getElementById('incidentDate');
+            if (dateInput) dateInput.value = new Date().toISOString().split('T')[0];
+
+            document.getElementById('scamForm')?.addEventListener('submit', handleReportSubmit);
+            document.getElementById('deleteRequestForm')?.addEventListener('submit', handleDeleteRequestSubmit);
+
+            bindFormDraftAutoSave();
+            restoreFormDraft();
+            applyUrlQueryParam();
+            fetchDataFromCloud();
+        });
     </script>
 </body>
 </html>

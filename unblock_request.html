@@ -476,60 +476,147 @@
         </div>
 
         <!-- ส่วนที่ 4: แนบภาพหลักฐานประกอบ -->
-        <div class="bg-slate-50/80 border border-slate-200 rounded-3xl p-5 sm:p-6 space-y-4">
+        <div class="bg-slate-50/80 border border-slate-200 rounded-3xl p-5 sm:p-6 space-y-5">
           <div class="border-b border-slate-200 pb-3 flex flex-wrap items-center justify-between gap-2">
             <h3 class="font-extrabold text-slate-900 text-sm sm:text-base flex items-center gap-2">
-              <i class="fa-solid fa-images text-amber-600"></i>
+              <i class="fa-solid fa-camera-retro text-amber-600"></i>
               <span>แนบภาพหลักฐานประกอบการขอปลดล็อก</span>
             </h3>
-            <span class="text-xs text-slate-500">รองรับไฟล์ JPG, PNG (สูงสุด 2 ภาพ)</span>
+            <span class="text-xs text-slate-500">ดูตัวอย่างรูปแบบภาพหลักฐานที่ถูกต้องได้ในแต่ละกล่องด้านล่าง</span>
           </div>
 
-          <div class="grid md:grid-cols-2 gap-4">
-            <!-- ภาพที่ 1: ภาพหน้าจอข้อความแจ้งเตือนโดนบล็อก / โปรไฟล์ OpenChat ปัจจุบัน -->
-            <div class="border-2 border-dashed border-slate-300 bg-white rounded-2xl p-5 text-center hover:border-amber-500 transition flex flex-col justify-between space-y-3">
-              <div class="space-y-1.5">
-                <i class="fa-solid fa-mobile-screen-button text-3xl text-amber-500 icon-bounce-hover"></i>
-                <p class="text-xs sm:text-sm font-bold text-slate-900">
-                  ภาพหน้าจอโปรไฟล์ OpenChat ปัจจุบัน หรือหน้าแจ้งเตือนถูกบล็อก <span class="text-rose-500">*</span>
-                </p>
-                <p class="text-[11px] text-slate-500">แสดงให้เห็นว่าได้แก้ไขชื่อและรูปโปรไฟล์ตามกติกาเรียบร้อยแล้ว</p>
+          <div class="grid md:grid-cols-2 gap-5">
+            <!-- ภาพที่ 1: ภาพหน้าจอโปรไฟล์ OpenChat ปัจจุบัน หรือหน้าแจ้งเตือนถูกบล็อก -->
+            <div class="border-2 border-dashed border-slate-300 bg-white rounded-2xl p-5 hover:border-amber-500 transition flex flex-col justify-between space-y-4">
+              <div class="space-y-3">
+                <div class="flex items-center justify-between gap-2">
+                  <span class="text-xs font-extrabold text-amber-900 bg-amber-50 border border-amber-300 px-2.5 py-1 rounded-lg">
+                    <i class="fa-solid fa-mobile-screen-button mr-1"></i> หลักฐานที่ 1 (โปรไฟล์ / แจ้งเตือน)
+                  </span>
+                  <span class="text-[11px] font-bold text-rose-600 bg-rose-50 border border-rose-200 px-2.5 py-0.5 rounded-full">
+                    จำเป็นต้องแนบ *
+                  </span>
+                </div>
+
+                <!-- ตัวอย่างภาพหลักฐานที่ 1 -->
+                <div class="bg-slate-950 rounded-xl p-3.5 text-white border border-amber-400/40 space-y-2">
+                  <div class="flex items-center justify-between text-[10px] text-amber-300 font-bold">
+                    <span><i class="fa-solid fa-image mr-1"></i> ตัวอย่างภาพหน้าจอที่ถูกต้อง</span>
+                    <span class="text-emerald-400">เห็นชื่อ + รูปโปรไฟล์ชัดเจน</span>
+                  </div>
+                  <div class="bg-slate-900 rounded-lg p-2.5 border border-slate-800 grid grid-cols-12 gap-2.5 items-center">
+                    <div class="col-span-4 flex flex-col items-center justify-center text-center">
+                      <div class="w-12 h-12 rounded-full bg-slate-800 border-2 border-emerald-400/70 flex items-center justify-center text-emerald-300 text-xl">
+                        <i class="fa-solid fa-user-check"></i>
+                      </div>
+                      <span class="text-[9px] text-slate-300 mt-1 leading-tight">รูปจริงเห็นใบหน้า</span>
+                    </div>
+                    <div class="col-span-8 bg-slate-800/90 text-slate-100 rounded-lg p-2 border border-slate-700 text-left space-y-1">
+                      <p class="text-[9px] font-extrabold text-amber-300">ตัวอย่างโปรไฟล์ OpenChat:</p>
+                      <p class="text-[10px] font-bold text-white leading-tight">[B999] แทนไทย Camry</p>
+                      <p class="text-[9px] text-emerald-400"><i class="fa-solid fa-check mr-1"></i>ไม่มีเบอร์โทรในชื่อ</p>
+                    </div>
+                  </div>
+                  <p class="text-[10px] text-slate-300 text-center leading-snug">
+                    แคปหน้าจอโปรไฟล์ในห้อง OpenChat ที่แก้ไขเรียบร้อยแล้ว หรือหน้าแจ้งเตือนถูกบล็อก
+                  </p>
+                </div>
+
+                <div class="text-center space-y-1">
+                  <p class="text-xs sm:text-sm font-bold text-slate-900">
+                    ภาพหน้าจอโปรไฟล์ OpenChat ปัจจุบัน หรือหน้าแจ้งเตือนถูกบล็อก <span class="text-rose-500">*</span>
+                  </p>
+                  <p class="text-[11px] text-slate-500">แสดงให้เห็นว่าได้แก้ไขชื่อและรูปโปรไฟล์ตามกติกาเรียบร้อยแล้ว (ไฟล์ JPG หรือ PNG)</p>
+                </div>
               </div>
-              <div>
+
+              <div class="text-center space-y-2">
                 <label class="inline-flex items-center justify-center bg-slate-950 hover:bg-slate-800 text-amber-400 border border-amber-400/30 font-semibold text-xs sm:text-sm px-5 py-2.5 rounded-xl cursor-pointer transition shadow-sm">
                   <i class="fa-solid fa-upload mr-1.5"></i> เลือกรูปหลักฐานที่ 1
                   <input type="file" id="proof_screen_file" accept="image/*" required onchange="handleProofUpload(this, 'screen')" class="hidden">
                 </label>
-                <div id="preview-proof-screen" class="hidden mt-3"></div>
+                <div id="preview-proof-screen" class="hidden pt-1"></div>
               </div>
             </div>
 
-            <!-- ภาพที่ 2: หลักฐานเพิ่มเติม (ถ้ามี) -->
-            <div class="border-2 border-dashed border-slate-300 bg-white rounded-2xl p-5 text-center hover:border-amber-500 transition flex flex-col justify-between space-y-3">
-              <div class="space-y-1.5">
-                <i class="fa-solid fa-file-shield text-3xl text-emerald-600 icon-bounce-hover"></i>
-                <p class="text-xs sm:text-sm font-bold text-slate-900">
-                  ภาพหลักฐานชี้แจงเพิ่มเติม / รูปยืนยันตัวตน (ถ้ามี)
-                </p>
-                <p class="text-[11px] text-slate-500">เช่น ภาพแชทชี้แจง หรือหลักฐานยืนยันความบริสุทธิ์ใจ</p>
+            <!-- ภาพที่ 2: หลักฐานเพิ่มเติม -->
+            <div class="border-2 border-dashed border-slate-300 bg-white rounded-2xl p-5 hover:border-amber-500 transition flex flex-col justify-between space-y-4">
+              <div class="space-y-3">
+                <div class="flex items-center justify-between gap-2">
+                  <span class="text-xs font-extrabold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-lg">
+                    <i class="fa-solid fa-file-shield mr-1"></i> หลักฐานที่ 2 (ชี้แจงเพิ่มเติม)
+                  </span>
+                  <span class="text-[11px] font-bold text-slate-600 bg-slate-100 border border-slate-200 px-2.5 py-0.5 rounded-full">
+                    แนบเพิ่มเติม (ถ้ามี)
+                  </span>
+                </div>
+
+                <!-- ตัวอย่างภาพหลักฐานที่ 2 -->
+                <div class="bg-slate-900 rounded-xl p-3.5 text-white border border-slate-800 space-y-2">
+                  <div class="flex items-center justify-between text-[10px] text-amber-300 font-bold">
+                    <span><i class="fa-solid fa-camera mr-1"></i> ตัวอย่างภาพหลักฐานเพิ่มเติม</span>
+                    <span class="text-emerald-400">ภาพแชท / ยืนยันตัวตน</span>
+                  </div>
+                  <div class="bg-gradient-to-b from-slate-800 to-slate-950 rounded-lg p-3 border border-slate-700/80 flex flex-col items-center justify-center gap-2">
+                    <div class="flex items-center justify-center gap-3">
+                      <i class="fa-solid fa-comments text-3xl text-emerald-400"></i>
+                      <i class="fa-solid fa-id-card-clip text-3xl text-amber-400"></i>
+                    </div>
+                    <p class="text-[10px] text-slate-300 text-center leading-snug">
+                      ภาพแคปหน้าจอแชทชี้แจงข้อเท็จจริง หรือรูปถ่ายยืนยันตัวตนเพื่อประกอบการพิจารณาของแอดมิน
+                    </p>
+                  </div>
+                </div>
+
+                <div class="text-center space-y-1">
+                  <p class="text-xs sm:text-sm font-bold text-slate-900">
+                    ภาพหลักฐานชี้แจงเพิ่มเติม / รูปยืนยันตัวตน (ถ้ามี)
+                  </p>
+                  <p class="text-[11px] text-slate-500">เช่น ภาพแชทชี้แจง หรือหลักฐานยืนยันความบริสุทธิ์ใจ (ไฟล์ JPG หรือ PNG)</p>
+                </div>
               </div>
-              <div>
+
+              <div class="text-center space-y-2">
                 <label class="inline-flex items-center justify-center bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-600 text-white font-semibold text-xs sm:text-sm px-5 py-2.5 rounded-xl cursor-pointer transition shadow-sm">
                   <i class="fa-solid fa-upload mr-1.5"></i> เลือกรูปหลักฐานที่ 2
                   <input type="file" id="proof_extra_file" accept="image/*" onchange="handleProofUpload(this, 'extra')" class="hidden">
                 </label>
-                <div id="preview-proof-extra" class="hidden mt-3"></div>
+                <div id="preview-proof-extra" class="hidden pt-1"></div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- ส่วนที่ 5: คำรับรองและยอมรับกติกา -->
+        <!-- ส่วนที่ 5: ประกาศความเป็นส่วนตัว (รูปแบบเดียวกับ member_register.html) -->
         <div class="bg-amber-50/70 border border-amber-200 rounded-2xl p-4 sm:p-5 space-y-4">
-          <label class="flex items-start gap-3 cursor-pointer text-xs sm:text-sm text-slate-800">
-            <input type="checkbox" id="accept_unblock_terms" required class="mt-1 w-4 h-4 text-amber-600 rounded border-slate-300 focus:ring-amber-500 shrink-0">
+          <div class="bg-white/95 border border-amber-200 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div class="space-y-1 min-w-0">
+              <p class="font-extrabold text-slate-900 text-xs sm:text-sm flex items-center gap-2">
+                <i class="fa-solid fa-shield-halved text-amber-600"></i>
+                <span>ประกาศความเป็นส่วนตัว สำหรับสมาชิก กลุ่ม The Driver TH Premium Service</span>
+              </p>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                กรุณากดอ่านประกาศความเป็นส่วนตัวฉบับเต็มในหน้าถัดไปก่อน จึงจะสามารถติ๊กช่อง <strong>“ยอมรับและยืนยัน”</strong> ด้านล่างได้
+              </p>
+              <div id="privacy-read-status" class="text-[11px] font-bold text-amber-800 inline-flex items-center gap-1.5 pt-0.5">
+                <i class="fa-solid fa-lock text-amber-600"></i>
+                <span>สถานะ: ยังไม่ได้เปิดอ่านประกาศความเป็นส่วนตัว</span>
+              </div>
+            </div>
+
+            <a href="privacy_policy.html" target="_blank" rel="noopener noreferrer" onclick="markPrivacyPolicyOpened()"
+              class="shrink-0 inline-flex items-center justify-center gap-2 bg-slate-950 hover:bg-slate-800 text-amber-400 border border-amber-400/40 font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow transition">
+              <i class="fa-solid fa-book-open-reader"></i>
+              <span>เปิดอ่านประกาศความเป็นส่วนตัว</span>
+              <i class="fa-solid fa-arrow-up-right-from-square text-[11px]"></i>
+            </a>
+          </div>
+
+          <label onclick="handleAcceptCheckboxClick(event)" class="flex items-start gap-3 cursor-pointer text-xs sm:text-sm text-slate-800 select-none">
+            <input type="checkbox" id="accept_unblock_terms" required onchange="handleAcceptCheckboxChange(this)"
+              class="mt-1 w-4 h-4 text-amber-600 rounded border-slate-300 focus:ring-amber-500 shrink-0">
             <span>
-              ข้าพเจ้าขอรับรองว่าข้อมูลและคำชี้แจงข้างต้นเป็นความจริงทุกประการ และยินดีปฏิบัติตามกติกาของห้องแชทและ <a href="privacy_policy.html" target="_blank" rel="noopener noreferrer" class="font-bold text-amber-800 underline hover:text-amber-950">ประกาศความเป็นส่วนตัวของกลุ่ม The Driver Thailand</a> อย่างเคร่งครัด <span class="text-rose-500 font-bold">*</span>
+              <strong>ยอมรับและยืนยัน</strong> — ข้าพเจ้าขอรับรองว่าข้อมูลและคำชี้แจงข้างต้นเป็นความจริงทุกประการ และได้อ่านยอมรับประกาศความเป็นส่วนตัวและข้อกำหนดเงื่อนไขของกลุ่ม <strong>The Driver Thailand</strong> <span class="text-rose-500 font-bold">*</span>
             </span>
           </label>
 
@@ -567,6 +654,8 @@
   <script>
     const UNBLOCK_CONFIG = {
       googleFormUrl: 'https://forms.gle/wqqhCbGiwhZ6M2CQ7',
+      privacyPolicyUrl: 'privacy_policy.html',
+      privacyReadStorageKey: 'tdt_privacy_policy_read_v1',
       submitEndpointUrl: 'https://script.google.com/macros/s/AKfycbyroK1pLk2X-zM77XV_sKPmgWlvTutJWD3-DUcjr39taXeDHPCy7LaIxaJqEplUOrIJ/exec',
       draftStorageKey: 'tdt_unblock_request_draft_v1',
       submissionsStorageKey: 'tdt_unblock_request_submissions_v1'
@@ -590,7 +679,8 @@
       screen: { base64: '', name: '', mimeType: '' },
       extra: { base64: '', name: '', mimeType: '' }
     };
-    let lastUnblockRefCode = '';
+
+    let lastSubmittedUnblockRef = '';
 
     function escapeHtml(val) {
       return String(val ?? '')
@@ -631,6 +721,63 @@
         toast.classList.add('opacity-0');
         setTimeout(() => toast.remove(), 300);
       }, 4200);
+    }
+
+    function hasReadPrivacyPolicy() {
+      try {
+        return localStorage.getItem(UNBLOCK_CONFIG.privacyReadStorageKey) === 'true';
+      } catch (_) {
+        return false;
+      }
+    }
+
+    function updatePrivacyReadBadge() {
+      const statusEl = document.getElementById('privacy-read-status');
+      if (!statusEl) return;
+      if (hasReadPrivacyPolicy()) {
+        statusEl.className = 'text-[11px] font-bold text-emerald-700 inline-flex items-center gap-1.5 pt-0.5';
+        statusEl.innerHTML = '<i class="fa-solid fa-circle-check text-emerald-600"></i><span>สถานะ: เปิดอ่านประกาศความเป็นส่วนตัวแล้ว สามารถติ๊กยอมรับและยืนยันได้</span>';
+      } else {
+        statusEl.className = 'text-[11px] font-bold text-amber-800 inline-flex items-center gap-1.5 pt-0.5';
+        statusEl.innerHTML = '<i class="fa-solid fa-lock text-amber-600"></i><span>สถานะ: ยังไม่ได้เปิดอ่านประกาศความเป็นส่วนตัว</span>';
+      }
+    }
+
+    function markPrivacyPolicyOpened() {
+      try {
+        localStorage.setItem(UNBLOCK_CONFIG.privacyReadStorageKey, 'true');
+      } catch (_) {}
+      updatePrivacyReadBadge();
+    }
+
+    function handleAcceptCheckboxClick(event) {
+      const checkbox = document.getElementById('accept_unblock_terms');
+      if (!checkbox) return;
+      if (!hasReadPrivacyPolicy()) {
+        event.preventDefault();
+        checkbox.checked = false;
+        markPrivacyPolicyOpened();
+        window.open(UNBLOCK_CONFIG.privacyPolicyUrl, '_blank', 'noopener,noreferrer');
+        showToast(
+          'กรุณาอ่านประกาศความเป็นส่วนตัว',
+          'ระบบเปิดหน้าประกาศความเป็นส่วนตัวให้แล้ว กรุณาอ่านรายละเอียดให้ครบถ้วนแล้วกลับมาติ๊กยอมรับครับ',
+          'info'
+        );
+      }
+    }
+
+    function handleAcceptCheckboxChange(checkboxEl) {
+      if (!checkboxEl) return;
+      if (checkboxEl.checked && !hasReadPrivacyPolicy()) {
+        checkboxEl.checked = false;
+        markPrivacyPolicyOpened();
+        window.open(UNBLOCK_CONFIG.privacyPolicyUrl, '_blank', 'noopener,noreferrer');
+        showToast(
+          'กรุณาอ่านประกาศความเป็นส่วนตัว',
+          'ระบบเปิดหน้าประกาศความเป็นส่วนตัวให้แล้ว กรุณาอ่านรายละเอียดก่อนกดติ๊กยอมรับครับ',
+          'info'
+        );
+      }
     }
 
     function compressImageFile(file, maxWidth = 900, quality = 0.78) {
@@ -691,6 +838,13 @@
       }
     }
 
+    function getSelectedBlockedRooms() {
+      const checked = Array.from(document.querySelectorAll('input[name="blockedRooms"]:checked')).map(cb => cb.value);
+      const otherText = (document.getElementById('blocked_room_other')?.value || '').trim();
+      if (otherText) checked.push(`อื่นๆ: ${otherText}`);
+      return checked;
+    }
+
     function saveFormDraft() {
       try {
         const draft = {};
@@ -723,7 +877,7 @@
         });
         if (Array.isArray(draft.blockedRooms) && draft.blockedRooms.length > 0) {
           document.querySelectorAll('input[name="blockedRooms"]').forEach(cb => {
-            if (draft.blockedRooms.includes(cb.value)) cb.checked = true;
+            cb.checked = draft.blockedRooms.includes(cb.value);
           });
           restored = true;
         }
@@ -755,14 +909,20 @@
     }
 
     function copyUnblockRef() {
-      if (!lastUnblockRefCode) return;
-      const tempInput = document.createElement('input');
-      tempInput.value = lastUnblockRefCode;
-      document.body.appendChild(tempInput);
-      tempInput.select();
-      document.execCommand('copy');
-      document.body.removeChild(tempInput);
-      showToast('คัดลอกสำเร็จ', `คัดลอกเลขที่คำร้อง ${lastUnblockRefCode} เรียบร้อยแล้ว`, 'success');
+      if (!lastSubmittedUnblockRef) return;
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(lastSubmittedUnblockRef).catch(() => {});
+        } else {
+          const tempInput = document.createElement('input');
+          tempInput.value = lastSubmittedUnblockRef;
+          document.body.appendChild(tempInput);
+          tempInput.select();
+          document.execCommand('copy');
+          document.body.removeChild(tempInput);
+        }
+      } catch (_) {}
+      showToast('คัดลอกสำเร็จ', `คัดลอกเลขที่คำร้อง ${lastSubmittedUnblockRef} เรียบร้อยแล้วครับ`, 'success');
     }
 
     async function handleUnblockFormSubmit(event) {
@@ -771,16 +931,17 @@
       const originalHtml = btn.innerHTML;
 
       try {
-        const checkedRooms = Array.from(document.querySelectorAll('input[name="blockedRooms"]:checked')).map(cb => cb.value);
-        const otherRoom = document.getElementById('blocked_room_other').value.trim();
-        if (otherRoom) checkedRooms.push(otherRoom);
-
-        if (checkedRooms.length === 0) {
-          showToast('ข้อมูลไม่ครบถ้วน', 'กรุณาเลือกหรือระบุชื่อห้อง Line OpenChat ที่โดนบล็อกอย่างน้อย 1 ห้องครับ', 'error');
+        const selectedRooms = getSelectedBlockedRooms();
+        if (selectedRooms.length === 0) {
+          showToast('ข้อมูลไม่ครบถ้วน', 'กรุณาเลือกห้อง Line OpenChat ที่โดนบล็อกอย่างน้อย 1 ห้องครับ', 'error');
           return;
         }
         if (!uploadedProofs.screen.base64) {
           showToast('ข้อมูลไม่ครบถ้วน', 'กรุณาแนบภาพหน้าจอโปรไฟล์ OpenChat ปัจจุบัน หรือหน้าแจ้งเตือนถูกบล็อกครับ', 'error');
+          return;
+        }
+        if (!hasReadPrivacyPolicy() || !document.getElementById('accept_unblock_terms')?.checked) {
+          showToast('กรุณายืนยันประกาศความเป็นส่วนตัว', 'กรุณาเปิดอ่านประกาศความเป็นส่วนตัวและติ๊กยอมรับก่อนส่งคำร้องครับ', 'error');
           return;
         }
 
@@ -795,24 +956,22 @@
           String(now.getHours()).padStart(2, '0') +
           String(now.getMinutes()).padStart(2, '0') +
           String(now.getSeconds()).padStart(2, '0');
-        lastUnblockRefCode = refCode;
 
         const oldChatName = document.getElementById('old_chat_name').value.trim();
         const newChatName = document.getElementById('new_chat_name').value.trim();
-        const memberCode = document.getElementById('member_code').value.trim() || '-';
+        const memberCode = document.getElementById('member_code').value.trim();
         const blockedDate = document.getElementById('blocked_date').value;
         const fullName = document.getElementById('applicant_fullname').value.trim();
         const phone = document.getElementById('applicant_phone').value.trim();
         const lineId = document.getElementById('applicant_line_id').value.trim();
-        const vehicleInfo = document.getElementById('applicant_plate').value.trim() || '-';
+        const vehicleInfo = document.getElementById('applicant_plate').value.trim();
         const reasonCategory = document.getElementById('block_reason_category').value;
         const explanation = document.getElementById('appeal_explanation').value.trim();
 
-        const payload = {
-          action: 'unblock_request',
+        const record = {
           refCode,
           submittedAt: now.toISOString(),
-          blockedRooms: checkedRooms.join(', '),
+          blockedRooms: selectedRooms.join(', '),
           oldChatName,
           newChatName,
           memberCode,
@@ -823,8 +982,7 @@
           vehicleInfo,
           reasonCategory,
           explanation,
-          proofScreenName: uploadedProofs.screen.name,
-          proofExtraName: uploadedProofs.extra.name || ''
+          status: 'รอตรวจสอบ'
         };
 
         if (UNBLOCK_CONFIG.submitEndpointUrl) {
@@ -833,30 +991,33 @@
             mode: 'no-cors',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-              ...payload,
+              ...record,
               proofScreenBase64: uploadedProofs.screen.base64,
+              proofScreenName: uploadedProofs.screen.name,
               proofScreenMimeType: uploadedProofs.screen.mimeType,
               proofExtraBase64: uploadedProofs.extra.base64,
+              proofExtraName: uploadedProofs.extra.name,
               proofExtraMimeType: uploadedProofs.extra.mimeType
             })
           });
         }
 
         const existing = JSON.parse(localStorage.getItem(UNBLOCK_CONFIG.submissionsStorageKey) || '[]');
-        existing.unshift(payload);
+        existing.unshift(record);
         localStorage.setItem(UNBLOCK_CONFIG.submissionsStorageKey, JSON.stringify(existing));
         localStorage.removeItem(UNBLOCK_CONFIG.draftStorageKey);
 
+        lastSubmittedUnblockRef = refCode;
         const successBox = document.getElementById('unblock-success-box');
-        const successRef = document.getElementById('unblock-ref-code');
-        const successDetails = document.getElementById('unblock-summary-details');
-        if (successRef) successRef.textContent = refCode;
-        if (successDetails) {
-          successDetails.innerHTML = `
-            <div><span class="text-emerald-400">ผู้ยื่นคำร้อง:</span> <strong>${escapeHtml(fullName)}</strong> (รหัสสมาชิก: ${escapeHtml(memberCode)})</div>
-            <div><span class="text-emerald-400">ช่องทางติดต่อ:</span> <strong class="font-mono">${escapeHtml(phone)}</strong> / Line: <strong>${escapeHtml(lineId)}</strong></div>
-            <div><span class="text-emerald-400">ห้องที่ขอปลดล็อก:</span> <strong>${escapeHtml(checkedRooms.join(', '))}</strong></div>
-            <div><span class="text-emerald-400">ชื่อในห้องเดิม / ใหม่:</span> <strong>${escapeHtml(oldChatName)}</strong> ${newChatName ? `→ <strong>${escapeHtml(newChatName)}</strong>` : ''}</div>
+        const refEl = document.getElementById('unblock-ref-code');
+        const summaryEl = document.getElementById('unblock-summary-details');
+        if (refEl) refEl.textContent = refCode;
+        if (summaryEl) {
+          summaryEl.innerHTML = `
+            <div><span class="text-emerald-400">ผู้ยื่นคำร้อง:</span> <strong>${escapeHtml(fullName)}</strong> (${escapeHtml(phone)})</div>
+            <div><span class="text-emerald-400">Line ID ติดต่อกลับ:</span> <strong>${escapeHtml(lineId)}</strong></div>
+            <div><span class="text-emerald-400">ชื่อในห้อง OpenChat เดิม:</span> <strong>${escapeHtml(oldChatName)}</strong></div>
+            <div><span class="text-emerald-400">ห้องที่ขอปลดล็อก:</span> <strong>${escapeHtml(selectedRooms.join(', '))}</strong></div>
           `;
         }
         successBox?.classList.remove('hidden');
@@ -873,14 +1034,21 @@
         document.getElementById('preview-proof-extra')?.classList.add('hidden');
         showToast('ส่งคำร้องสำเร็จ', `บันทึกคำร้องขอปลดล็อกเรียบร้อยแล้ว เลขที่คำร้อง: ${refCode}`, 'success');
       } catch (err) {
-        showToast('เกิดข้อผิดพลาด', err.message || 'ไม่สามารถส่งข้อมูลได้ กรุณาลองใหม่อีกครั้ง', 'error');
+        showToast('เกิดข้อผิดพลาด', err.message || 'ไม่สามารถส่งคำร้องได้ กรุณาลองใหม่อีกครั้ง', 'error');
       } finally {
         btn.disabled = false;
         btn.innerHTML = originalHtml;
       }
     }
 
+    window.addEventListener('storage', e => {
+      if (e.key === UNBLOCK_CONFIG.privacyReadStorageKey) {
+        updatePrivacyReadBadge();
+      }
+    });
+
     document.addEventListener('DOMContentLoaded', () => {
+      updatePrivacyReadBadge();
       const dateEl = document.getElementById('blocked_date');
       if (dateEl) dateEl.value = new Date().toISOString().split('T')[0];
       restoreFormDraft();

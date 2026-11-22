@@ -105,17 +105,19 @@
       box-shadow: 0 22px 38px -12px rgba(9, 13, 22, 0.14), 0 0 0 1px rgba(245, 158, 11, 0.35);
     }
 
-    /* UNIFIED TOPMOST GLOBAL SITE NAVIGATION BAR (EXACT SAME SIZE & POSITION ACROSS ALL 4 PAGES) */
+    /* COMPACT & RESPONSIVE GLOBAL NAVIGATION BAR (NO HORIZONTAL OVERFLOW) */
     .tdt-global-nav {
       box-sizing: border-box;
       font-family: 'Prompt', sans-serif;
-      background: linear-gradient(90deg, #060911 0%, #0d1322 50%, #060911 100%);
+      background: rgba(6, 9, 17, 0.96);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       color: #e2e8f0;
       border-bottom: 1px solid rgba(251, 191, 36, 0.25);
       position: sticky;
       top: 0;
       z-index: 1000;
-      box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.45);
       width: 100%;
     }
     .tdt-global-nav *, .tdt-global-nav *::before, .tdt-global-nav *::after {
@@ -126,11 +128,10 @@
       margin: 0 auto;
       padding: 10px 16px;
       display: flex;
-      flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: 8px;
-      min-height: 52px;
+      gap: 12px;
+      min-height: 58px;
     }
     @media (min-width: 640px) {
       .tdt-global-nav-inner {
@@ -140,8 +141,8 @@
     .tdt-global-brand {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      font-size: 13px;
+      gap: 10px;
+      font-size: 14px;
       line-height: 1.25;
       font-weight: 800;
       color: #fbbf24;
@@ -151,7 +152,7 @@
     }
     @media (min-width: 640px) {
       .tdt-global-brand {
-        font-size: 14px;
+        font-size: 15px;
       }
     }
     .tdt-global-brand:hover {
@@ -160,34 +161,21 @@
     .tdt-global-brand:hover i {
       animation: iconBouncePop 0.6s ease;
     }
-    .tdt-global-links {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      overflow-x: auto;
-      padding: 2px 0;
-      margin: 0;
-    }
-    @media (min-width: 640px) {
-      .tdt-global-links {
-        gap: 8px;
-      }
-    }
     .tdt-nav-btn {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 6px 12px;
+      padding: 7px 13px;
       border-radius: 12px;
-      font-size: 12px;
+      font-size: 12.5px;
       line-height: 16px;
       font-weight: 700;
       text-decoration: none;
       white-space: nowrap;
-      flex-shrink: 0;
       background-color: rgba(15, 23, 42, 0.85);
       border: 1px solid rgba(148, 163, 184, 0.25);
       color: #e2e8f0;
+      cursor: pointer;
       transition: all 0.2s ease;
     }
     .tdt-nav-btn:hover {
@@ -195,25 +183,12 @@
       border-color: rgba(251, 191, 36, 0.45);
       transform: translateY(-1px);
     }
-    .tdt-nav-btn:hover i {
-      animation: iconBouncePop 0.55s ease;
-    }
     .tdt-nav-btn.is-register { color: #6ee7b7; }
     .tdt-nav-btn.is-register i { color: #34d399; }
     .tdt-nav-btn.is-pcard { color: #fcd34d; }
     .tdt-nav-btn.is-pcard i { color: #fbbf24; }
     .tdt-nav-btn.is-blacklist { color: #fda4af; }
     .tdt-nav-btn.is-blacklist i { color: #fb7185; }
-    .tdt-nav-btn.is-unblock { color: #7dd3fc; }
-    .tdt-nav-btn.is-unblock i { color: #38bdf8; }
-    .tdt-nav-btn.is-luxury { color: #fde68a; }
-    .tdt-nav-btn.is-luxury i { color: #f59e0b; }
-    .tdt-nav-btn.is-vip { color: #d8b4fe; }
-    .tdt-nav-btn.is-vip i { color: #c084fc; }
-    .tdt-nav-btn.is-rtaf { color: #93c5fd; }
-    .tdt-nav-btn.is-rtaf i { color: #60a5fa; }
-    .tdt-nav-btn.is-tourbook { color: #5eead4; }
-    .tdt-nav-btn.is-tourbook i { color: #2dd4bf; }
     .tdt-nav-btn.active-home {
       background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
       border-color: #fcd34d;
@@ -236,49 +211,155 @@
     </div>
   </div>
 
-  <!-- TOPMOST GLOBAL SITE NAVIGATION BAR -->
-  <nav class="tdt-global-nav">
+  <!-- COMPACT & CLEAN GLOBAL SITE NAVIGATION BAR -->
+  <nav class="tdt-global-nav" aria-label="เมนูหลักเว็บไซต์">
     <div class="tdt-global-nav-inner">
+      <!-- Brand -->
       <a href="index.html" class="tdt-global-brand">
-        <i class="fa-solid fa-car-side"></i>
+        <span class="w-8 h-8 rounded-xl bg-amber-400/15 border border-amber-400/40 flex items-center justify-center text-amber-400">
+          <i class="fa-solid fa-car-side"></i>
+        </span>
         <span>The Driver Thailand</span>
       </a>
-      <div class="tdt-global-links">
+
+      <!-- Desktop Menu (Compact 5 Items, Zero Overflow) -->
+      <div class="hidden lg:flex items-center gap-2">
         <a href="index.html" class="tdt-nav-btn active-home">
           <i class="fa-solid fa-house"></i>
           <span>หน้าหลัก</span>
         </a>
         <a href="register.html" class="tdt-nav-btn is-register">
-          <i class="fa-solid fa-user-plus"></i>
+          <i class="fa-solid fa-users"></i>
           <span>ระบบสมาชิก</span>
         </a>
         <a href="pcard.html" class="tdt-nav-btn is-pcard">
           <i class="fa-solid fa-id-badge"></i>
-          <span>ทำบัตรสมาชิกประเมศฐ์</span>
+          <span>บัตรสมาชิกประเมศฐ์</span>
         </a>
-        <a href="unblock_request.html" class="tdt-nav-btn is-unblock">
-          <i class="fa-solid fa-unlock-keyhole"></i>
-          <span>ขอปลดล็อก OpenChat</span>
-        </a>
-        <a href="luxury_car_register.html" class="tdt-nav-btn is-luxury">
-          <i class="fa-solid fa-crown"></i>
-          <span>ห้อง Luxury Car</span>
-        </a>
-        <a href="vip_referral_guide.html" class="tdt-nav-btn is-vip">
-          <i class="fa-solid fa-map-location-dot"></i>
-          <span>[VIP] ลายแทงท่องเที่ยว</span>
-        </a>
-        <a href="rtaf_pass_register.html" class="tdt-nav-btn is-rtaf">
-          <i class="fa-solid fa-plane-departure"></i>
-          <span>บัตรผ่าน ทอ.</span>
-        </a>
-        <a href="tour_book_order.html" class="tdt-nav-btn is-tourbook">
-          <i class="fa-solid fa-book"></i>
-          <span>สั่งซื้อสมุดทัวร์</span>
-        </a>
+
+        <!-- Dropdown Menu for Forms & Member Services -->
+        <div class="relative" id="desktop-services-dropdown">
+          <button type="button" onclick="toggleDesktopServicesMenu(event)" aria-expanded="false" id="btn-desktop-services"
+            class="tdt-nav-btn text-amber-200 border-amber-400/35 hover:border-amber-400">
+            <i class="fa-solid fa-grid-2 text-amber-400"></i>
+            <span>บริการ &amp; แบบฟอร์มทั้งหมด</span>
+            <i id="desktop-dropdown-chevron" class="fa-solid fa-chevron-down text-[10px] text-amber-400 transition-transform duration-200"></i>
+          </button>
+
+          <div id="desktop-services-panel"
+            class="hidden absolute right-0 mt-2.5 w-80 bg-slate-950/98 backdrop-blur-xl border border-amber-400/30 rounded-2xl shadow-2xl p-2.5 space-y-1 z-50">
+            <div class="px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-wider text-amber-400/80 border-b border-slate-800">
+              ลงทะเบียน &amp; จัดการข้อมูลสมาชิก
+            </div>
+            <a href="member_register.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-900 text-xs font-semibold text-slate-200 hover:text-teal-300 transition">
+              <i class="fa-solid fa-file-signature text-teal-400 w-4 text-center"></i>
+              <span>ลงทะเบียนสมาชิกใหม่</span>
+            </a>
+            <a href="member_edit.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-900 text-xs font-semibold text-slate-200 hover:text-amber-300 transition">
+              <i class="fa-solid fa-user-pen text-amber-400 w-4 text-center"></i>
+              <span>แก้ไขข้อมูลสมาชิกเดิม</span>
+            </a>
+            <a href="unblock_request.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-900 text-xs font-semibold text-slate-200 hover:text-sky-300 transition">
+              <i class="fa-solid fa-unlock-keyhole text-sky-400 w-4 text-center"></i>
+              <span>ขอปลดล็อกห้อง Line OpenChat</span>
+            </a>
+            <a href="luxury_car_register.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-900 text-xs font-semibold text-slate-200 hover:text-amber-300 transition">
+              <i class="fa-solid fa-crown text-amber-400 w-4 text-center"></i>
+              <span>ลงทะเบียนห้อง Luxury Car</span>
+            </a>
+
+            <div class="px-3 py-1.5 pt-2 text-[10px] font-extrabold uppercase tracking-wider text-amber-400/80 border-b border-slate-800">
+              สิทธิพิเศษ &amp; เอกสารบริการ
+            </div>
+            <a href="vip_referral_guide.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-900 text-xs font-semibold text-slate-200 hover:text-purple-300 transition">
+              <i class="fa-solid fa-map-location-dot text-purple-400 w-4 text-center"></i>
+              <span>[VIP] ลายแทงสถานที่ท่องเที่ยว</span>
+            </a>
+            <a href="rtaf_pass_register.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-900 text-xs font-semibold text-slate-200 hover:text-blue-300 transition">
+              <i class="fa-solid fa-plane-departure text-blue-400 w-4 text-center"></i>
+              <span>ทำบัตรผ่านยานพาหนะ ทอ. (ดอนเมือง)</span>
+            </a>
+            <a href="tour_book_order.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-900 text-xs font-semibold text-slate-200 hover:text-teal-300 transition">
+              <i class="fa-solid fa-book text-teal-400 w-4 text-center"></i>
+              <span>บริการสั่งซื้อสมุดทัวร์</span>
+            </a>
+            <a href="privacy_policy.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-900 text-xs font-semibold text-slate-200 hover:text-slate-300 transition">
+              <i class="fa-solid fa-scale-balanced text-slate-400 w-4 text-center"></i>
+              <span>ประกาศความเป็นส่วนตัว (PDPA)</span>
+            </a>
+          </div>
+        </div>
+
         <a href="blacklist.html" class="tdt-nav-btn is-blacklist">
           <i class="fa-solid fa-user-shield"></i>
           <span>ตรวจสอบ Blacklist</span>
+        </a>
+      </div>
+
+      <!-- Mobile & Tablet Action Buttons (Zero Overflow) -->
+      <div class="flex lg:hidden items-center gap-2">
+        <a href="blacklist.html" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-rose-500/15 border border-rose-400/40 text-rose-300 text-xs font-bold">
+          <i class="fa-solid fa-user-shield"></i>
+          <span>Blacklist</span>
+        </a>
+        <button type="button" onclick="toggleMobileNavDrawer()" id="btn-mobile-menu" aria-expanded="false" aria-label="เปิดเมนูทั้งหมด"
+          class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-amber-400 text-slate-950 font-extrabold text-xs shadow">
+          <i id="mobile-menu-icon" class="fa-solid fa-bars"></i>
+          <span>เมนู</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile & Tablet Collapsible Drawer -->
+    <div id="mobile-nav-drawer" class="hidden lg:hidden border-t border-slate-800 bg-slate-950/98 px-4 py-4 space-y-4">
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs font-bold">
+        <a href="index.html" class="flex items-center gap-2.5 p-3 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 shadow">
+          <i class="fa-solid fa-house w-4 text-center"></i>
+          <span>หน้าหลัก</span>
+        </a>
+        <a href="register.html" class="flex items-center gap-2.5 p-3 rounded-xl bg-slate-900 border border-slate-800 text-emerald-300 hover:border-emerald-400/50">
+          <i class="fa-solid fa-users w-4 text-center text-emerald-400"></i>
+          <span>ระบบสมาชิก</span>
+        </a>
+        <a href="member_register.html" class="flex items-center gap-2.5 p-3 rounded-xl bg-slate-900 border border-slate-800 text-teal-300 hover:border-teal-400/50">
+          <i class="fa-solid fa-file-signature w-4 text-center text-teal-400"></i>
+          <span>ลงทะเบียนใหม่</span>
+        </a>
+        <a href="member_edit.html" class="flex items-center gap-2.5 p-3 rounded-xl bg-slate-900 border border-slate-800 text-amber-200 hover:border-amber-400/50">
+          <i class="fa-solid fa-user-pen w-4 text-center text-amber-400"></i>
+          <span>แก้ไขข้อมูลสมาชิก</span>
+        </a>
+        <a href="pcard.html" class="flex items-center gap-2.5 p-3 rounded-xl bg-slate-900 border border-slate-800 text-amber-300 hover:border-amber-400/50">
+          <i class="fa-solid fa-id-badge w-4 text-center text-amber-400"></i>
+          <span>บัตรสมาชิกประเมศฐ์</span>
+        </a>
+        <a href="unblock_request.html" class="flex items-center gap-2.5 p-3 rounded-xl bg-slate-900 border border-slate-800 text-sky-300 hover:border-sky-400/50">
+          <i class="fa-solid fa-unlock-keyhole w-4 text-center text-sky-400"></i>
+          <span>ขอปลดล็อก OpenChat</span>
+        </a>
+        <a href="luxury_car_register.html" class="flex items-center gap-2.5 p-3 rounded-xl bg-slate-900 border border-slate-800 text-amber-200 hover:border-amber-400/50">
+          <i class="fa-solid fa-crown w-4 text-center text-amber-400"></i>
+          <span>ห้อง Luxury Car</span>
+        </a>
+        <a href="vip_referral_guide.html" class="flex items-center gap-2.5 p-3 rounded-xl bg-slate-900 border border-slate-800 text-purple-300 hover:border-purple-400/50">
+          <i class="fa-solid fa-map-location-dot w-4 text-center text-purple-400"></i>
+          <span>[VIP] ลายแทงเที่ยว</span>
+        </a>
+        <a href="rtaf_pass_register.html" class="flex items-center gap-2.5 p-3 rounded-xl bg-slate-900 border border-slate-800 text-blue-300 hover:border-blue-400/50">
+          <i class="fa-solid fa-plane-departure w-4 text-center text-blue-400"></i>
+          <span>บัตรผ่าน ทอ.</span>
+        </a>
+        <a href="tour_book_order.html" class="flex items-center gap-2.5 p-3 rounded-xl bg-slate-900 border border-slate-800 text-teal-200 hover:border-teal-400/50">
+          <i class="fa-solid fa-book w-4 text-center text-teal-400"></i>
+          <span>สั่งซื้อสมุดทัวร์</span>
+        </a>
+        <a href="blacklist.html" class="flex items-center gap-2.5 p-3 rounded-xl bg-slate-900 border border-slate-800 text-rose-300 hover:border-rose-400/50">
+          <i class="fa-solid fa-user-shield w-4 text-center text-rose-400"></i>
+          <span>ตรวจสอบ Blacklist</span>
+        </a>
+        <a href="privacy_policy.html" class="flex items-center gap-2.5 p-3 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:border-slate-500">
+          <i class="fa-solid fa-scale-balanced w-4 text-center text-slate-400"></i>
+          <span>นโยบาย PDPA</span>
         </a>
       </div>
     </div>
@@ -678,6 +759,43 @@
 
   <script>
     let toastTimer = null;
+
+    function toggleDesktopServicesMenu(event) {
+      if (event) event.stopPropagation();
+      const panel = document.getElementById("desktop-services-panel");
+      const btn = document.getElementById("btn-desktop-services");
+      const chevron = document.getElementById("desktop-dropdown-chevron");
+      if (!panel) return;
+      const isHidden = panel.classList.contains("hidden");
+      panel.classList.toggle("hidden", !isHidden);
+      if (btn) btn.setAttribute("aria-expanded", String(isHidden));
+      if (chevron) chevron.style.transform = isHidden ? "rotate(180deg)" : "rotate(0deg)";
+    }
+
+    function toggleMobileNavDrawer() {
+      const drawer = document.getElementById("mobile-nav-drawer");
+      const btn = document.getElementById("btn-mobile-menu");
+      const icon = document.getElementById("mobile-menu-icon");
+      if (!drawer) return;
+      const isHidden = drawer.classList.contains("hidden");
+      drawer.classList.toggle("hidden", !isHidden);
+      if (btn) btn.setAttribute("aria-expanded", String(isHidden));
+      if (icon) {
+        icon.className = isHidden ? "fa-solid fa-xmark" : "fa-solid fa-bars";
+      }
+    }
+
+    document.addEventListener("click", function (event) {
+      const dropdown = document.getElementById("desktop-services-dropdown");
+      const panel = document.getElementById("desktop-services-panel");
+      const btn = document.getElementById("btn-desktop-services");
+      const chevron = document.getElementById("desktop-dropdown-chevron");
+      if (dropdown && panel && !dropdown.contains(event.target)) {
+        panel.classList.add("hidden");
+        if (btn) btn.setAttribute("aria-expanded", "false");
+        if (chevron) chevron.style.transform = "rotate(0deg)";
+      }
+    });
 
     function showToast(message) {
       const box = document.getElementById("toast-box");

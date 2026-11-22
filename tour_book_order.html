@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>บริการสั่งซื้อสมุดทัวร์ | The Driver Thailand</title>
+  <!-- โหลด Tailwind CSS สำหรับจัดเลย์เอาต์และการออกแบบ -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- โหลดฟอนต์ Prompt และ Inter จาก Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- โหลดไอคอน FontAwesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Prompt', 'Inter', 'sans-serif'],
+          },
+          colors: {
+            driver: {
+              50: '#fffbeb',
+              100: '#fef3c7',
+              400: '#fbbf24',
+              500: '#f59e0b',
+              600: '#d97706',
+              900: '#090d16',
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    html, body {
+      font-family: 'Prompt', 'Inter', sans-serif;
+      background-color: #f8fafc;
+      color: #0f172a;
+      max-width: 100%;
+      overflow-x: clip;
+    }
+    .hero-glow-bg {
+      background:
+        radial-gradient(circle at 18% 22%, rgba(245, 158, 11, 0.25) 0%, transparent 45%),
+        radial-gradient(circle at 82% 78%, rgba(16, 185, 129, 0.18) 0%, transparent 50%),
+        linear-gradient(135deg, #05070e 0%, #0d1322 52%, #182136 100%);
+    }
+    .gold-shimmer-text {
+      background: linear-gradient(90deg, #fde68a 0%, #fbbf24 35%, #f59e0b 65%, #fef08a 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: goldShimmer 5s linear infinite;
+    }
+    @keyframes goldShimmer {
+      to { background-position: 200% center; }
+    }
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-5px); }
+    }
+    @keyframes iconBouncePop {
+      0%, 100% { transform: translateY(0) scale(1); }
+      40% { transform: translateY(-6px) scale(1.12) rotate(-4deg); }
+      70% { transform: translateY(-2px) scale(1.04) rotate(3deg); }
+    }
+    .icon-float { animation: floatSlow 3.2s ease-in-out infinite; }
+    .group:hover .icon-bounce-hover,
+    .icon-bounce-hover:hover {
+      animation: iconBouncePop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* UNIFIED TOPMOST GLOBAL SITE NAVIGATION BAR */
+    .tdt-global-nav {
+      box-sizing: border-box;
+      font-family: 'Prompt', sans-serif;
+      background: linear-gradient(90deg, #060911 0%, #0d1322 50%, #060911 100%);
+      color: #e2e8f0;
+      border-bottom: 1px solid rgba(251, 191, 36, 0.25);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.35);
+      width: 100%;
+    }
+    .tdt-global-nav *, .tdt-global-nav *::before, .tdt-global-nav *::after {
+      box-sizing: border-box;
+    }
+    .tdt-global-nav-inner {
+      max-width: 1152px;
+      margin: 0 auto;
+      padding: 10px 16px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      min-height: 52px;
+    }
+    @media (min-width: 640px) {
+      .tdt-global-nav-inner {
+        padding: 10px 24px;
+      }
+    }
+    .tdt-global-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      line-height: 1.25;
+      font-weight: 800;
+      color: #fbbf24;
+      text-decoration: none;
+      flex-shrink: 0;
+      transition: color 0.15s ease;
+    }
+    @media (min-width: 640px) {
+      .tdt-global-brand {
+        font-size: 14px;
+      }
+    }
+    .tdt-global-brand:hover {
+      color: #fde68a;
+    }
+    .tdt-global-brand:hover i {
+      animation: iconBouncePop 0.6s ease;
+    }
+    .tdt-global-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 2px 0;
+      margin: 0;
+    }
+    @media (min-width: 640px) {
+      .tdt-global-links {
+        gap: 8px;
+      }
+    }
+    .tdt-nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      line-height: 16px;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+      flex-shrink: 0;
+      background-color: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      color: #e2e8f0;
+      transition: all 0.2s ease;
+    }
+    .tdt-nav-btn:hover {
+      background-color: #1e293b;
+      border-color: rgba(251, 191, 36, 0.45);
+      transform: translateY(-1px);
+    }
+    .tdt-nav-btn:hover i {
+      animation: iconBouncePop 0.55s ease;
+    }
+    .tdt-nav-btn.is-home i { color: #94a3b8; }
+    .tdt-nav-btn.is-register { color: #6ee7b7; }
+    .tdt-nav-btn.is-register i { color: #34d399; }
+    .tdt-nav-btn.is-pcard { color: #fcd34d; }
+    .tdt-nav-btn.is-pcard i { color: #fbbf24; }
+    .tdt-nav-btn.is-blacklist { color: #fda4af; }
+    .tdt-nav-btn.is-blacklist i { color: #fb7185; }
+  </style>
+</head>
+<body class="text-slate-800 antialiased min-h-screen flex flex-col selection:bg-amber-400 selection:text-slate-950 relative">
+  <!-- กล่องแจ้งเตือน Toast มุมขวาบน -->
+  <div id="toast-container" class="fixed top-5 right-5 z-50 flex flex-col gap-3 max-w-sm w-full pointer-events-none px-4"></div>
+
+  <!-- TOPMOST GLOBAL SITE NAVIGATION BAR -->
+  <nav class="tdt-global-nav">
+    <div class="tdt-global-nav-inner">
+      <a href="index.html" class="tdt-global-brand">
+        <i class="fa-solid fa-car-side"></i>
+        <span>The Driver Thailand</span>
+      </a>
+      <div class="tdt-global-links">
+        <a href="index.html" class="tdt-nav-btn is-home">
+          <i class="fa-solid fa-house"></i>
+          <span>หน้าหลัก</span>
+        </a>
+        <a href="register.html" class="tdt-nav-btn is-register">
+          <i class="fa-solid fa-user-plus"></i>
+          <span>ระบบสมาชิก</span>
+        </a>
+        <a href="pcard.html" class="tdt-nav-btn is-pcard">
+          <i class="fa-solid fa-id-badge"></i>
+          <span>ทำบัตรสมาชิกประเมศฐ์</span>
+        </a>
+        <a href="blacklist.html" class="tdt-nav-btn is-blacklist">
+          <i class="fa-solid fa-user-shield"></i>
+          <span>ตรวจสอบ Blacklist</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- แถบประกาศด้านบนสุด -->
+  <header class="bg-slate-900/95 text-slate-300 text-xs py-2.5 px-4 border-b border-amber-500/15">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
+      <div class="flex items-center gap-2 flex-wrap">
+        <span class="bg-gradient-to-r from-amber-400 to-yellow-500 text-slate-950 font-extrabold px-2.5 py-0.5 rounded-full text-[11px] shadow-sm">
+          <i class="fa-solid fa-book-open mr-1"></i> OFFICIAL TOUR BOOK SERVICE
+        </span>
+        <span class="text-slate-300 font-medium">บริการสั่งซื้อสมุดทัวร์ (โซนกรุงเทพฯ-ปริมณฑล และ โซนพัทยา-ชลบุรี)</span>
+      </div>
+      <div class="flex items-center gap-3 text-xs flex-wrap">
+        <a href="https://forms.gle/6i84qmJ5hsw6M3rJ9" target="_blank" rel="noopener noreferrer"
+          class="text-amber-300 hover:text-amber-200 font-semibold inline-flex items-center gap-1 transition">
+          <i class="fa-solid fa-up-right-from-square"></i> ฟอร์ม กทม.-ปริมณฑล
+        </a>
+        <span class="text-slate-600">|</span>
+        <a href="https://forms.gle/77YyNCXtiexZsPbs6" target="_blank" rel="noopener noreferrer"
+          class="text-sky-300 hover:text-sky-200 font-semibold inline-flex items-center gap-1 transition">
+          <i class="fa-solid fa-up-right-from-square"></i> ฟอร์ม พัทยา-ชลบุรี
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- พื้นที่เนื้อหาหลัก -->
+  <main class="flex-grow max-w-5xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-6 sm:space-y-8">
+    <!-- Hero Banner -->
+    <section class="hero-glow-bg rounded-3xl p-6 sm:p-10 text-white shadow-2xl border border-amber-400/40 relative overflow-hidden">
+      <div class="absolute -right-16 -top-16 w-72 h-72 bg-amber-500/20 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -left-16 -bottom-16 w-72 h-72 bg-emerald-500/15 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="relative z-10 space-y-4">
+        <div class="flex flex-wrap items-center gap-2.5">
+          <span class="bg-amber-500/20 border border-amber-400/50 text-amber-300 text-xs font-bold px-3.5 py-1 rounded-full inline-flex items-center gap-1.5">
+            <i class="fa-solid fa-book-bookmark icon-float"></i> TOUR VOUCHER &amp; LOGBOOK ORDER
+          </span>
+          <span class="bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-xs font-bold px-3.5 py-1 rounded-full inline-flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> บันทึกร่างอัตโนมัติ
+          </span>
+        </div>
+
+        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black leading-tight">
+          บริการสั่งซื้อ<span class="gold-shimmer-text">สมุดทัวร์</span> สำหรับสมาชิกคนขับรถ
+        </h1>
+        <p class="text-slate-300 text-xs sm:text-sm leading-relaxed max-w-3xl font-light">
+          เลือกสั่งซื้อสมุดทัวร์สำหรับใช้ออกเอกสารรับส่งนักท่องเที่ยวและติดต่อสถานที่ท่องเที่ยว/จุดตรวจได้อย่างถูกต้องตามระเบียบ รองรับทั้ง <strong>2 พื้นที่บริการ (กรุงเทพฯ และปริมณฑล / พัทยา ชลบุรี)</strong> พร้อมจัดส่งทางไปรษณีย์ถึงหน้าบ้าน
+        </p>
+
+        <div class="bg-amber-500/10 border border-amber-400/35 rounded-2xl p-3.5 sm:p-4 text-xs text-amber-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div class="flex items-start gap-2.5 min-w-0">
+            <i class="fa-solid fa-circle-info text-amber-400 text-base mt-0.5 shrink-0"></i>
+            <div class="min-w-0 space-y-0.5">
+              <strong class="text-amber-300 block">คำแนะนำก่อนสั่งซื้อสมุดทัวร์:</strong>
+              <span>กรุณาเลือกโซนพื้นที่สมุดทัวร์ที่ต้องการใช้งานด้านล่าง ระบบจะคำนวณราคาตามโซนและจำนวนเล่มให้อัตโนมัติ</span>
+            </div>
+          </div>
+          <a id="btn-hero-google-form" href="https://forms.gle/6i84qmJ5hsw6M3rJ9" target="_blank" rel="noopener noreferrer"
+            class="shrink-0 bg-slate-950 hover:bg-slate-900 text-amber-300 border border-amber-400/40 font-bold px-3.5 py-2 rounded-xl text-xs whitespace-nowrap inline-flex items-center gap-1.5 transition">
+            <i class="fa-solid fa-up-right-from-square"></i> <span id="hero-google-form-label">ดูฟอร์ม กทม.-ปริมณฑล ต้นฉบับ</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- กล่องแสดงผลการสั่งซื้อสำเร็จ -->
+    <div id="tourbook-success-box" class="hidden bg-emerald-950 text-emerald-100 border border-emerald-500/40 rounded-3xl p-5 sm:p-7 shadow-xl space-y-4">
+      <div class="flex items-start justify-between gap-3 border-b border-emerald-800/80 pb-4">
+        <div class="flex items-center gap-3">
+          <div class="w-11 h-11 rounded-2xl bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 flex items-center justify-center text-xl shrink-0">
+            <i class="fa-solid fa-circle-check"></i>
+          </div>
+          <div>
+            <h3 class="font-extrabold text-base sm:text-lg text-white">บันทึกคำสั่งซื้อสมุดทัวร์เรียบร้อยแล้ว</h3>
+            <p class="text-xs text-emerald-300">เลขที่คำสั่งซื้ออ้างอิง: <strong id="tourbook-ref-code" class="font-mono text-amber-300">-</strong></p>
+          </div>
+        </div>
+        <button type="button" onclick="document.getElementById('tourbook-success-box').classList.add('hidden')" class="text-emerald-300 hover:text-white text-sm">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div id="tourbook-summary-details" class="grid sm:grid-cols-2 gap-2.5 text-xs bg-slate-950/60 p-4 rounded-2xl border border-emerald-800/60"></div>
+      <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
+        <p class="text-xs text-emerald-200/90">
+          <i class="fa-solid fa-truck-fast mr-1 text-amber-400"></i> เจ้าหน้าที่จะตรวจสอบยอดโอนและจัดส่งสมุดทัวร์ตามที่อยู่ที่ระบุ พร้อมแจ้งเลขพัสดุทาง Line ID
+        </p>
+        <button type="button" onclick="copyTourbookRef()" class="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold px-4 py-2.5 rounded-xl text-xs inline-flex items-center gap-1.5 transition">
+          <i class="fa-solid fa-copy"></i> คัดลอกเลขที่คำสั่งซื้อ
+        </button>
+      </div>
+    </div>
+
+    <!-- แบบฟอร์มสั่งซื้อสมุดทัวร์ -->
+    <section class="bg-white rounded-3xl p-5 sm:p-10 shadow-sm border border-slate-200/90 space-y-6 sm:space-y-8">
+      <div class="border-b border-slate-200 pb-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div>
+          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">แบบฟอร์มสั่งซื้อสมุดทัวร์</h2>
+          <p class="text-xs sm:text-sm text-slate-500 mt-0.5">เลือกโซนสมุดทัวร์ กรอกข้อมูลผู้รับ และแนบสลิปการโอนเงิน ช่องที่มี <span class="text-rose-500 font-bold">*</span> จำเป็นต้องระบุ</p>
+        </div>
+        <div class="flex items-center gap-2.5 flex-wrap">
+          <span id="draft-status-badge" class="text-xs font-semibold text-slate-600 bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200">
+            <i class="fa-solid fa-floppy-disk text-slate-400 mr-1"></i> พร้อมบันทึกร่าง
+          </span>
+          <button type="button" onclick="clearFormDraft()" class="text-xs font-bold text-rose-700 bg-rose-50 hover:bg-rose-100 border border-rose-200 px-3 py-1.5 rounded-xl transition">
+            <i class="fa-solid fa-eraser mr-1"></i> ล้างแบบร่าง
+          </button>
+        </div>
+      </div>
+
+      <form id="tourbook-order-form" onsubmit="handleTourbookFormSubmit(event)" class="space-y-6">
+        <!-- หมวดที่ 1: เลือกประเภทสมุดทัวร์ (2 แบบ ราคาแตกต่างกันตามโซน) -->
+        <div class="bg-amber-50/70 border border-amber-200 rounded-3xl p-5 sm:p-6 space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-amber-200 pb-3">
+            <h3 class="font-extrabold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+              <i class="fa-solid fa-book text-amber-600 text-lg"></i>
+              <span>เลือกโซนสมุดทัวร์ที่ต้องการสั่งซื้อ <span class="text-rose-500">*</span></span>
+            </h3>
+            <span class="text-xs font-bold text-amber-900 bg-amber-100 border border-amber-300 px-3 py-1 rounded-full">
+              มีให้เลือก 2 แบบตามพื้นที่ให้บริการ
+            </span>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-4">
+            <!-- แบบที่ 1: กรุงเทพ และ ปริมณฑล -->
+            <label id="label-zone-bkk" class="border-2 border-amber-500 bg-white rounded-2xl p-4 sm:p-5 cursor-pointer hover:border-amber-600 transition flex flex-col justify-between gap-3 shadow-sm">
+              <div class="flex items-start justify-between gap-2">
+                <div class="flex items-start gap-2.5 min-w-0">
+                  <input type="radio" name="tourBookZone" value="BKK" checked onchange="handleZoneOrQtyChange()" class="mt-1 w-4 h-4 text-amber-600 focus:ring-amber-500 shrink-0">
+                  <div class="min-w-0">
+                    <span class="font-extrabold text-slate-900 text-sm sm:text-base block">แบบที่ 1 : กรุงเทพ และ ปริมณฑล</span>
+                    <span class="text-xs text-slate-500 block mt-0.5">สมุดทัวร์สำหรับเขตพื้นที่กรุงเทพมหานครและปริมณฑล</span>
+                  </div>
+                </div>
+                <span id="badge-price-bkk" class="bg-amber-500 text-slate-950 font-black px-3 py-1 rounded-xl text-xs sm:text-sm shrink-0">
+                  250 บาท/เล่ม
+                </span>
+              </div>
+              <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-600">
+                <span><i class="fa-solid fa-truck text-emerald-600 mr-1"></i> รวมค่าจัดส่งพัสดุแล้ว</span>
+                <a href="https://forms.gle/6i84qmJ5hsw6M3rJ9" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-amber-700 hover:underline font-bold">
+                  ฟอร์ม กทม. <i class="fa-solid fa-up-right-from-square text-[10px]"></i>
+                </a>
+              </div>
+            </label>
+
+            <!-- แบบที่ 2: พัทยา ชลบุรี -->
+            <label id="label-zone-pty" class="border-2 border-slate-200 bg-white rounded-2xl p-4 sm:p-5 cursor-pointer hover:border-amber-500 transition flex flex-col justify-between gap-3 shadow-sm">
+              <div class="flex items-start justify-between gap-2">
+                <div class="flex items-start gap-2.5 min-w-0">
+                  <input type="radio" name="tourBookZone" value="PTY" onchange="handleZoneOrQtyChange()" class="mt-1 w-4 h-4 text-amber-600 focus:ring-amber-500 shrink-0">
+                  <div class="min-w-0">
+                    <span class="font-extrabold text-slate-900 text-sm sm:text-base block">แบบที่ 2 : พัทยา ชลบุรี</span>
+                    <span class="text-xs text-slate-500 block mt-0.5">สมุดทัวร์สำหรับเขตพื้นที่พัทยา ชลบุรี และภาคตะวันออก</span>
+                  </div>
+                </div>
+                <span id="badge-price-pty" class="bg-slate-200 text-slate-900 font-black px-3 py-1 rounded-xl text-xs sm:text-sm shrink-0">
+                  300 บาท/เล่ม
+                </span>
+              </div>
+              <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-600">
+                <span><i class="fa-solid fa-truck text-emerald-600 mr-1"></i> รวมค่าจัดส่งพัสดุแล้ว</span>
+                <a href="https://forms.gle/77YyNCXtiexZsPbs6" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-sky-700 hover:underline font-bold">
+                  ฟอร์ม พัทยา <i class="fa-solid fa-up-right-from-square text-[10px]"></i>
+                </a>
+              </div>
+            </label>
+          </div>
+
+          <!-- เลือกจำนวนเล่มที่ต้องการสั่งซื้อ -->
+          <div class="grid md:grid-cols-2 gap-4 pt-2">
+            <div class="space-y-1.5">
+              <label for="order_quantity" class="block text-xs font-bold text-slate-700">
+                จำนวนสมุดทัวร์ที่ต้องการสั่งซื้อ <span class="text-rose-500">*</span>
+              </label>
+              <select id="order_quantity" name="quantity" required onchange="handleZoneOrQtyChange()"
+                class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
+                <option value="1" selected>1 เล่ม</option>
+                <option value="2">2 เล่ม</option>
+                <option value="3">3 เล่ม</option>
+                <option value="4">4 เล่ม</option>
+                <option value="5">5 เล่ม</option>
+                <option value="10">10 เล่ม</option>
+              </select>
+            </div>
+
+            <div class="bg-slate-950 text-white rounded-2xl p-4 border border-amber-400/40 flex items-center justify-between gap-3">
+              <div>
+                <span class="text-[11px] text-amber-300 font-bold block uppercase">ยอดรวมที่ต้องชำระทั้งหมด</span>
+                <span id="calc-formula-text" class="text-xs text-slate-300">กรุงเทพ และ ปริมณฑล (250 บาท × 1 เล่ม)</span>
+              </div>
+              <div class="text-right shrink-0">
+                <span id="total-price-display" class="text-xl sm:text-2xl font-black text-amber-400 font-mono">250 บาท</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- หมวดที่ 2: ข้อมูลสมาชิกผู้สั่งซื้อ -->
+        <div class="bg-slate-50/80 border border-slate-200 rounded-3xl p-5 sm:p-6 space-y-4">
+          <h3 class="font-extrabold text-slate-900 text-sm sm:text-base border-b border-slate-200 pb-3 flex items-center gap-2">
+            <i class="fa-solid fa-user-check text-amber-600"></i>
+            <span>ข้อมูลผู้สั่งซื้อและข้อมูลสมาชิก</span>
+          </h3>
+
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="space-y-1.5">
+              <label for="tb_member_code" class="block text-xs font-bold text-slate-700">
+                หมายเลขสมาชิกกลุ่ม The Driver Thailand <span class="text-rose-500">*</span>
+              </label>
+              <input type="text" id="tb_member_code" name="memberCode" required placeholder="เช่น B999 หรือ A123"
+                class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-mono font-bold uppercase focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
+            </div>
+
+            <div class="space-y-1.5">
+              <label for="tb_chat_name" class="block text-xs font-bold text-slate-700">
+                ชื่อที่ใช้ในห้อง Line OpenChat <span class="text-rose-500">*</span>
+              </label>
+              <input type="text" id="tb_chat_name" name="chatName" required placeholder="เช่น [B999] แทนไทย Camry"
+                class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
+            </div>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="space-y-1.5">
+              <label for="tb_fullname" class="block text-xs font-bold text-slate-700">
+                ชื่อ - นามสกุลผู้รับพัสดุ <span class="text-rose-500">*</span>
+              </label>
+              <input type="text" id="tb_fullname" name="fullName" required placeholder="ระบุชื่อและนามสกุลจริงสำหรับจ่าหน้าซอง"
+                class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
+            </div>
+
+            <div class="space-y-1.5">
+              <label for="tb_phone" class="block text-xs font-bold text-slate-700">
+                เบอร์โทรศัพท์ติดต่อ <span class="text-rose-500">*</span>
+              </label>
+              <input type="tel" id="tb_phone" name="phone" required pattern="[0-9\-+\s]{9,15}" placeholder="เช่น 0812345678"
+                class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-mono focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
+            </div>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="space-y-1.5">
+              <label for="tb_line_id" class="block text-xs font-bold text-slate-700">
+                Line ID (สำหรับแจ้งเลขพัสดุจัดส่ง) <span class="text-rose-500">*</span>
+              </label>
+              <input type="text" id="tb_line_id" name="lineId" required placeholder="ระบุ Line ID ของคุณ"
+                class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
+            </div>
+
+            <div class="space-y-1.5">
+              <label for="tb_license_plate" class="block text-xs font-bold text-slate-700">
+                หมายเลขทะเบียนรถ (ถ้ามี)
+              </label>
+              <input type="text" id="tb_license_plate" name="licensePlate" placeholder="เช่น 1กข 1234 กรุงเทพมหานคร"
+                class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
+            </div>
+          </div>
+
+          <div class="space-y-1.5">
+            <label for="tb_shipping_address" class="block text-xs font-bold text-slate-700">
+              ที่อยู่จัดส่งพัสดุ (ระบุบ้านเลขที่ หมู่ ซอย ถนน แขวง/ตำบล เขต/อำเภอ จังหวัด และรหัสไปรษณีย์) <span class="text-rose-500">*</span>
+            </label>
+            <textarea id="tb_shipping_address" name="shippingAddress" rows="3" required
+              placeholder="เช่น 123/45 หมู่ 5 ซอยพหลโยธิน 8 แขวงสามเสนใน เขตพญาไท กรุงเทพมหานคร 10400"
+              class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition"></textarea>
+          </div>
+        </div>
+
+        <!-- หมวดที่ 3: ช่องทางชำระเงิน และแนบสลิปโอนเงิน -->
+        <div class="bg-amber-50/70 border border-amber-200 rounded-3xl p-5 sm:p-6 space-y-4">
+          <div class="flex items-center justify-between border-b border-amber-200 pb-3.5 flex-wrap gap-2">
+            <div class="flex items-center gap-2.5 min-w-0">
+              <div class="w-10 h-10 rounded-xl bg-amber-500 text-slate-950 flex items-center justify-center font-bold text-base shadow-sm shrink-0">
+                <i class="fa-solid fa-receipt"></i>
+              </div>
+              <div class="min-w-0">
+                <h3 class="font-extrabold text-slate-900 text-sm sm:text-base">ช่องทางชำระเงิน และแนบสลิปโอนเงิน</h3>
+                <p class="text-xs text-slate-600">โอนเงินตามยอดรวมที่คำนวณไว้ด้านบน และแนบสลิปเพื่อยืนยันคำสั่งซื้อ</p>
+              </div>
+            </div>
+            <span id="payment-amount-badge" class="bg-amber-500 text-slate-950 font-extrabold text-xs sm:text-sm px-4 py-2 rounded-full shadow-sm shrink-0">
+              ยอดโอน: 250 บาท
+            </span>
+          </div>
+
+          <div class="bg-white p-4 sm:p-5 rounded-2xl border border-amber-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+            <div class="space-y-1.5 min-w-0">
+              <span class="text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-lg inline-block">
+                <i class="fa-solid fa-building-columns mr-1"></i> ธนาคารกสิกรไทย (KBANK)
+              </span>
+              <p class="text-xs sm:text-sm text-slate-700 font-semibold mt-1">
+                ชื่อบัญชี: <strong class="text-slate-900">นาย ชัยรัตน์ วิทวัสโกศล</strong>
+              </p>
+              <div class="flex flex-wrap items-center gap-2.5">
+                <span class="text-base font-bold font-mono text-slate-900">773-2-29853-5</span>
+                <button type="button" onclick="copyBankAccount('7732298535')"
+                  class="text-xs sm:text-sm text-amber-900 bg-amber-100 hover:bg-amber-200 px-3.5 py-2 rounded-xl font-bold transition inline-flex items-center gap-1.5">
+                  <i class="fa-solid fa-copy"></i> คัดลอกเลขบัญชี
+                </button>
+              </div>
+            </div>
+            <div class="text-left sm:text-right text-xs text-slate-500">
+              <i class="fa-solid fa-circle-check text-emerald-500 text-base sm:text-lg mb-0.5"></i>
+              <p>กรุณาตรวจสอบยอดโอนให้ตรงกับโซนและจำนวนเล่ม</p>
+            </div>
+          </div>
+
+          <div class="border-2 border-dashed border-slate-300 bg-white rounded-2xl p-5 text-center hover:border-amber-500 transition space-y-2.5">
+            <i class="fa-solid fa-file-invoice-dollar text-3xl text-emerald-600 icon-bounce-hover"></i>
+            <p class="text-xs sm:text-sm font-bold text-slate-900">
+              แนบสลิปหลักฐานการโอนเงิน <span class="text-rose-500">*</span>
+            </p>
+            <p class="text-[11px] text-slate-500">ไฟล์ภาพสลิปโอนเงินที่เห็นยอดเงิน วันเวลา และเลขที่รายการชัดเจน (JPG หรือ PNG)</p>
+            <div>
+              <label class="inline-flex items-center justify-center bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-600 text-white font-semibold text-xs sm:text-sm px-5 py-2.5 rounded-xl cursor-pointer shadow-sm transition">
+                <i class="fa-solid fa-upload mr-1.5"></i> แนบไฟล์สลิปโอนเงิน
+                <input type="file" id="tb_slip_file" accept="image/*" required onchange="handleSlipUpload(this)" class="hidden">
+              </label>
+              <div id="preview-tb-slip" class="hidden pt-2"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- หมวดที่ 4: ประกาศความเป็นส่วนตัว (รูปแบบเดียวกับ member_register.html) -->
+        <div class="bg-amber-50/70 border border-amber-200 rounded-2xl p-4 sm:p-5 space-y-4">
+          <div class="bg-white/95 border border-amber-200 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div class="space-y-1 min-w-0">
+              <p class="font-extrabold text-slate-900 text-xs sm:text-sm flex items-center gap-2">
+                <i class="fa-solid fa-shield-halved text-amber-600"></i>
+                <span>ประกาศความเป็นส่วนตัว สำหรับสมาชิก กลุ่ม The Driver TH Premium Service</span>
+              </p>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                กรุณากดอ่านประกาศความเป็นส่วนตัวฉบับเต็มในหน้าถัดไปก่อน จึงจะสามารถติ๊กช่อง <strong>“ยอมรับและยืนยัน”</strong> ด้านล่างได้
+              </p>
+              <div id="privacy-read-status" class="text-[11px] font-bold text-amber-800 inline-flex items-center gap-1.5 pt-0.5">
+                <i class="fa-solid fa-lock text-amber-600"></i>
+                <span>สถานะ: ยังไม่ได้เปิดอ่านประกาศความเป็นส่วนตัว</span>
+              </div>
+            </div>
+
+            <a href="privacy_policy.html" target="_blank" rel="noopener noreferrer" onclick="markPrivacyPolicyOpened()"
+              class="shrink-0 inline-flex items-center justify-center gap-2 bg-slate-950 hover:bg-slate-800 text-amber-400 border border-amber-400/40 font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow transition">
+              <i class="fa-solid fa-book-open-reader"></i>
+              <span>เปิดอ่านประกาศความเป็นส่วนตัว</span>
+              <i class="fa-solid fa-arrow-up-right-from-square text-[11px]"></i>
+            </a>
+          </div>
+
+          <label onclick="handleAcceptCheckboxClick(event)" class="flex items-start gap-3 cursor-pointer text-xs sm:text-sm text-slate-800 select-none">
+            <input type="checkbox" id="accept_tourbook_terms" required onchange="handleAcceptCheckboxChange(this)"
+              class="mt-1 w-4 h-4 text-amber-600 rounded border-slate-300 focus:ring-amber-500 shrink-0">
+            <span>
+              <strong>ยอมรับและยืนยัน</strong> — ข้าพเจ้าตรวจสอบโซนสมุดทัวร์ จำนวนเล่ม และที่อยู่จัดส่งถูกต้องครบถ้วนแล้ว และได้อ่านยอมรับประกาศความเป็นส่วนตัวของกลุ่ม <strong>The Driver Thailand</strong> <span class="text-rose-500 font-bold">*</span>
+            </span>
+          </label>
+
+          <div class="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-3 pt-2">
+            <a href="index.html" class="w-full sm:w-auto text-center px-5 py-3 rounded-xl border border-slate-300 bg-white hover:bg-slate-100 text-slate-700 font-bold text-xs sm:text-sm transition">
+              <i class="fa-solid fa-arrow-left mr-1.5"></i> กลับหน้าหลัก
+            </a>
+            <button type="submit" id="btn-submit-tourbook"
+              class="group w-full sm:w-auto bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold text-sm sm:text-base px-8 py-3.5 rounded-xl shadow-lg transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
+              <i class="fa-solid fa-cart-shopping icon-bounce-hover"></i>
+              <span>ยืนยันสั่งซื้อสมุดทัวร์</span>
+            </button>
+          </div>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-950 text-slate-400 border-t border-amber-500/20 py-8 px-4 text-xs mt-10">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+      <div class="text-center sm:text-left">
+        <p class="font-bold text-amber-300">The Driver Thailand Official Network</p>
+        <p class="text-[11px] text-slate-500 mt-0.5">ศูนย์กลางระบบสมาชิก บัตรสมาชิกประเมศฐ์ และระบบเฝ้าระวังภัยกลุ่มคนขับรถรับจ้าง</p>
+      </div>
+      <div class="flex flex-wrap justify-center gap-4 font-semibold">
+        <a href="index.html" class="hover:text-amber-400 transition">หน้าหลัก</a>
+        <a href="register.html" class="hover:text-emerald-400 transition">ระบบสมาชิก</a>
+        <a href="member_register.html" class="hover:text-teal-400 transition">ลงทะเบียนสมาชิกใหม่</a>
+        <a href="pcard.html" class="hover:text-amber-400 transition">ทำบัตรสมาชิกประเมศฐ์</a>
+        <a href="blacklist.html" class="hover:text-rose-400 transition">ตรวจสอบ Blacklist</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // กำหนดราคาสมุดทัวร์ทั้ง 2 แบบ (สามารถปรับแก้ตัวเลขราคาให้ตรงกับฟอร์มได้ทันที)
+    const TOURBOOK_ZONES = {
+      BKK: {
+        code: 'BKK',
+        name: 'กรุงเทพ และ ปริมณฑล',
+        unitPrice: 250,
+        googleFormUrl: 'https://forms.gle/6i84qmJ5hsw6M3rJ9',
+        formLabel: 'ดูฟอร์ม กทม.-ปริมณฑล ต้นฉบับ'
+      },
+      PTY: {
+        code: 'PTY',
+        name: 'พัทยา ชลบุรี',
+        unitPrice: 300,
+        googleFormUrl: 'https://forms.gle/77YyNCXtiexZsPbs6',
+        formLabel: 'ดูฟอร์ม พัทยา-ชลบุรี ต้นฉบับ'
+      }
+    };
+
+    const TOURBOOK_CONFIG = {
+      privacyPolicyUrl: 'privacy_policy.html',
+      privacyReadStorageKey: 'tdt_privacy_policy_read_v1',
+      submitEndpointUrl: '', // ใส่ Web App URL ของ Google Apps Script สำหรับบันทึกคำสั่งซื้อสมุดทัวร์ที่นี่
+      draftStorageKey: 'tdt_tourbook_order_draft_v1',
+      submissionsStorageKey: 'tdt_tourbook_order_submissions_v1'
+    };
+
+    const TOURBOOK_DRAFT_IDS = [
+      'order_quantity',
+      'tb_member_code',
+      'tb_chat_name',
+      'tb_fullname',
+      'tb_phone',
+      'tb_line_id',
+      'tb_license_plate',
+      'tb_shipping_address'
+    ];
+
+    let uploadedSlipPhoto = { base64: '', name: '', mimeType: '' };
+    let lastSubmittedTourbookRef = '';
+
+    function escapeHtml(val) {
+      return String(val ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function showToast(title, message, type = 'info') {
+      const container = document.getElementById('toast-container');
+      if (!container) return;
+      const styles = {
+        success: 'bg-emerald-950 text-emerald-200 border-emerald-500/40',
+        error: 'bg-rose-950 text-rose-200 border-rose-500/40',
+        info: 'bg-slate-950 text-amber-300 border-amber-400/50'
+      };
+      const icons = {
+        success: 'fa-circle-check text-emerald-400',
+        error: 'fa-circle-xmark text-rose-400',
+        info: 'fa-circle-info text-amber-400'
+      };
+      const toast = document.createElement('div');
+      toast.className = `pointer-events-auto flex items-start gap-3 p-4 rounded-2xl border shadow-2xl transition-all duration-300 ${styles[type] || styles.info}`;
+      toast.innerHTML = `
+        <i class="fa-solid ${icons[type] || icons.info} text-lg mt-0.5 shrink-0"></i>
+        <div class="flex-1 min-w-0">
+          <h4 class="font-extrabold text-sm text-white leading-tight">${escapeHtml(title)}</h4>
+          <p class="text-xs mt-0.5 opacity-90 leading-relaxed">${escapeHtml(message)}</p>
+        </div>
+        <button type="button" onclick="this.parentElement.remove()" class="text-slate-400 hover:text-white text-xs">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      `;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.classList.add('opacity-0');
+        setTimeout(() => toast.remove(), 300);
+      }, 4200);
+    }
+
+    function getSelectedZoneData() {
+      const val = document.querySelector('input[name="tourBookZone"]:checked')?.value || 'BKK';
+      return TOURBOOK_ZONES[val] || TOURBOOK_ZONES.BKK;
+    }
+
+    function handleZoneOrQtyChange() {
+      const zone = getSelectedZoneData();
+      const qty = Math.max(1, parseInt(document.getElementById('order_quantity')?.value || '1', 10));
+      const totalAmount = zone.unitPrice * qty;
+
+      const labelBkk = document.getElementById('label-zone-bkk');
+      const labelPty = document.getElementById('label-zone-pty');
+      const badgeBkk = document.getElementById('badge-price-bkk');
+      const badgePty = document.getElementById('badge-price-pty');
+
+      const activeCardClass = 'border-2 border-amber-500 bg-white rounded-2xl p-4 sm:p-5 cursor-pointer hover:border-amber-600 transition flex flex-col justify-between gap-3 shadow-sm';
+      const defaultCardClass = 'border-2 border-slate-200 bg-white rounded-2xl p-4 sm:p-5 cursor-pointer hover:border-amber-500 transition flex flex-col justify-between gap-3 shadow-sm';
+      const activeBadgeClass = 'bg-amber-500 text-slate-950 font-black px-3 py-1 rounded-xl text-xs sm:text-sm shrink-0';
+      const defaultBadgeClass = 'bg-slate-200 text-slate-900 font-black px-3 py-1 rounded-xl text-xs sm:text-sm shrink-0';
+
+      if (zone.code === 'BKK') {
+        if (labelBkk) labelBkk.className = activeCardClass;
+        if (labelPty) labelPty.className = defaultCardClass;
+        if (badgeBkk) badgeBkk.className = activeBadgeClass;
+        if (badgePty) badgePty.className = defaultBadgeClass;
+      } else {
+        if (labelPty) labelPty.className = activeCardClass;
+        if (labelBkk) labelBkk.className = defaultCardClass;
+        if (badgePty) badgePty.className = activeBadgeClass;
+        if (badgeBkk) badgeBkk.className = defaultBadgeClass;
+      }
+
+      const formulaEl = document.getElementById('calc-formula-text');
+      const totalEl = document.getElementById('total-price-display');
+      const payBadgeEl = document.getElementById('payment-amount-badge');
+      const heroFormBtn = document.getElementById('btn-hero-google-form');
+      const heroFormLabel = document.getElementById('hero-google-form-label');
+
+      if (formulaEl) formulaEl.textContent = `${zone.name} (${zone.unitPrice.toLocaleString()} บาท × ${qty} เล่ม)`;
+      if (totalEl) totalEl.textContent = `${totalAmount.toLocaleString()} บาท`;
+      if (payBadgeEl) payBadgeEl.textContent = `ยอดโอน: ${totalAmount.toLocaleString()} บาท`;
+      if (heroFormBtn) heroFormBtn.href = zone.googleFormUrl;
+      if (heroFormLabel) heroFormLabel.textContent = zone.formLabel;
+
+      saveFormDraft();
+    }
+
+    function copyBankAccount(accountNum) {
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(accountNum).catch(() => {});
+        } else {
+          const tempInput = document.createElement('input');
+          tempInput.value = accountNum;
+          document.body.appendChild(tempInput);
+          tempInput.select();
+          document.execCommand('copy');
+          document.body.removeChild(tempInput);
+        }
+      } catch (_) {}
+      showToast('คัดลอกสำเร็จ', 'คัดลอกเลขที่บัญชี 773-2-29853-5 เรียบร้อยแล้วครับ', 'success');
+    }
+
+    function hasReadPrivacyPolicy() {
+      try {
+        return localStorage.getItem(TOURBOOK_CONFIG.privacyReadStorageKey) === 'true';
+      } catch (_) {
+        return false;
+      }
+    }
+
+    function updatePrivacyReadBadge() {
+      const statusEl = document.getElementById('privacy-read-status');
+      if (!statusEl) return;
+      if (hasReadPrivacyPolicy()) {
+        statusEl.className = 'text-[11px] font-bold text-emerald-700 inline-flex items-center gap-1.5 pt-0.5';
+        statusEl.innerHTML = '<i class="fa-solid fa-circle-check text-emerald-600"></i><span>สถานะ: เปิดอ่านประกาศความเป็นส่วนตัวแล้ว สามารถติ๊กยอมรับและยืนยันได้</span>';
+      } else {
+        statusEl.className = 'text-[11px] font-bold text-amber-800 inline-flex items-center gap-1.5 pt-0.5';
+        statusEl.innerHTML = '<i class="fa-solid fa-lock text-amber-600"></i><span>สถานะ: ยังไม่ได้เปิดอ่านประกาศความเป็นส่วนตัว</span>';
+      }
+    }
+
+    function markPrivacyPolicyOpened() {
+      try {
+        localStorage.setItem(TOURBOOK_CONFIG.privacyReadStorageKey, 'true');
+      } catch (_) {}
+      updatePrivacyReadBadge();
+    }
+
+    function handleAcceptCheckboxClick(event) {
+      const checkbox = document.getElementById('accept_tourbook_terms');
+      if (!checkbox) return;
+      if (!hasReadPrivacyPolicy()) {
+        event.preventDefault();
+        checkbox.checked = false;
+        markPrivacyPolicyOpened();
+        window.open(TOURBOOK_CONFIG.privacyPolicyUrl, '_blank', 'noopener,noreferrer');
+        showToast(
+          'กรุณาอ่านประกาศความเป็นส่วนตัว',
+          'ระบบเปิดหน้าประกาศความเป็นส่วนตัวให้แล้ว กรุณาอ่านรายละเอียดให้ครบถ้วนแล้วกลับมาติ๊กยอมรับครับ',
+          'info'
+        );
+      }
+    }
+
+    function handleAcceptCheckboxChange(checkboxEl) {
+      if (!checkboxEl) return;
+      if (checkboxEl.checked && !hasReadPrivacyPolicy()) {
+        checkboxEl.checked = false;
+        markPrivacyPolicyOpened();
+        window.open(TOURBOOK_CONFIG.privacyPolicyUrl, '_blank', 'noopener,noreferrer');
+        showToast(
+          'กรุณาอ่านประกาศความเป็นส่วนตัว',
+          'ระบบเปิดหน้าประกาศความเป็นส่วนตัวให้แล้ว กรุณาอ่านรายละเอียดก่อนกดติ๊กยอมรับครับ',
+          'info'
+        );
+      }
+    }
+
+    function compressImageFile(file, maxWidth = 900, quality = 0.8) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = e => {
+          const img = new Image();
+          img.onload = () => {
+            const canvas = document.createElement('canvas');
+            let width = img.width;
+            let height = img.height;
+            if (width > maxWidth) {
+              height = Math.round((height * maxWidth) / width);
+              width = maxWidth;
+            }
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, width, height);
+            resolve(canvas.toDataURL('image/jpeg', quality));
+          };
+          img.onerror = reject;
+          img.src = e.target.result;
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    async function handleSlipUpload(inputEl) {
+      const file = inputEl?.files?.[0];
+      const previewBox = document.getElementById('preview-tb-slip');
+      if (!file || !previewBox) return;
+
+      if (!file.type.startsWith('image/')) {
+        showToast('ไฟล์ไม่ถูกต้อง', 'กรุณาเลือกไฟล์รูปภาพสลิป (JPG หรือ PNG) เท่านั้น', 'error');
+        inputEl.value = '';
+        return;
+      }
+
+      try {
+        const compressedBase64 = await compressImageFile(file);
+        uploadedSlipPhoto = {
+          base64: compressedBase64,
+          name: file.name,
+          mimeType: 'image/jpeg'
+        };
+        previewBox.classList.remove('hidden');
+        previewBox.innerHTML = `
+          <div class="inline-flex items-center gap-2.5 bg-emerald-50 border border-emerald-200 text-emerald-900 px-3 py-2 rounded-xl text-xs font-semibold">
+            <img src="${compressedBase64}" alt="ตัวอย่างสลิปโอนเงิน" class="w-10 h-10 rounded-lg object-cover border border-emerald-300 shrink-0">
+            <span class="truncate max-w-[180px]">${escapeHtml(file.name)}</span>
+          </div>
+        `;
+      } catch (err) {
+        showToast('อัปโหลดสลิปไม่สำเร็จ', 'ไม่สามารถประมวลผลรูปภาพได้ กรุณาลองใหม่อีกครั้ง', 'error');
+      }
+    }
+
+    function saveFormDraft() {
+      try {
+        const draft = {};
+        TOURBOOK_DRAFT_IDS.forEach(id => {
+          const el = document.getElementById(id);
+          if (el) draft[id] = el.value;
+        });
+        const zoneRadio = document.querySelector('input[name="tourBookZone"]:checked');
+        if (zoneRadio) draft.tourBookZone = zoneRadio.value;
+        localStorage.setItem(TOURBOOK_CONFIG.draftStorageKey, JSON.stringify(draft));
+        const badge = document.getElementById('draft-status-badge');
+        if (badge) {
+          badge.className = 'text-xs font-semibold text-emerald-800 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-200';
+          badge.innerHTML = '<i class="fa-solid fa-floppy-disk text-emerald-600 mr-1"></i> บันทึกร่างอัตโนมัติแล้ว';
+        }
+      } catch (_) {}
+    }
+
+    function restoreFormDraft() {
+      try {
+        const raw = localStorage.getItem(TOURBOOK_CONFIG.draftStorageKey);
+        if (!raw) return;
+        const draft = JSON.parse(raw);
+        let restored = false;
+        TOURBOOK_DRAFT_IDS.forEach(id => {
+          const el = document.getElementById(id);
+          if (el && typeof draft[id] === 'string' && draft[id].trim() !== '') {
+            el.value = draft[id];
+            restored = true;
+          }
+        });
+        if (draft.tourBookZone) {
+          document.querySelectorAll('input[name="tourBookZone"]').forEach(r => {
+            if (r.value === draft.tourBookZone) r.checked = true;
+          });
+        }
+        handleZoneOrQtyChange();
+        if (restored) {
+          showToast('กู้คืนแบบร่างแล้ว', 'ระบบดึงข้อมูลคำสั่งซื้อที่พิมพ์ค้างไว้กลับมาให้อัตโนมัติแล้วครับ', 'info');
+        }
+      } catch (_) {}
+    }
+
+    function clearFormDraft() {
+      try {
+        localStorage.removeItem(TOURBOOK_CONFIG.draftStorageKey);
+        document.getElementById('tourbook-order-form')?.reset();
+        uploadedSlipPhoto = { base64: '', name: '', mimeType: '' };
+        document.getElementById('preview-tb-slip')?.classList.add('hidden');
+        handleZoneOrQtyChange();
+        const badge = document.getElementById('draft-status-badge');
+        if (badge) {
+          badge.className = 'text-xs font-semibold text-slate-600 bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200';
+          badge.innerHTML = '<i class="fa-solid fa-floppy-disk text-slate-400 mr-1"></i> ล้างแบบร่างเรียบร้อยแล้ว';
+        }
+        showToast('ล้างข้อมูลเรียบร้อย', 'ล้างแบบร่างในแบบฟอร์มเรียบร้อยแล้วครับ', 'success');
+      } catch (_) {}
+    }
+
+    function copyTourbookRef() {
+      if (!lastSubmittedTourbookRef) return;
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(lastSubmittedTourbookRef).catch(() => {});
+        } else {
+          const tempInput = document.createElement('input');
+          tempInput.value = lastSubmittedTourbookRef;
+          document.body.appendChild(tempInput);
+          tempInput.select();
+          document.execCommand('copy');
+          document.body.removeChild(tempInput);
+        }
+      } catch (_) {}
+      showToast('คัดลอกสำเร็จ', `คัดลอกเลขที่คำสั่งซื้อ ${lastSubmittedTourbookRef} เรียบร้อยแล้วครับ`, 'success');
+    }
+
+    async function handleTourbookFormSubmit(event) {
+      event.preventDefault();
+      const btn = document.getElementById('btn-submit-tourbook');
+      const originalHtml = btn.innerHTML;
+
+      try {
+        if (!uploadedSlipPhoto.base64) {
+          showToast('ข้อมูลไม่ครบถ้วน', 'กรุณาแนบสลิปหลักฐานการโอนเงินก่อนยืนยันคำสั่งซื้อครับ', 'error');
+          return;
+        }
+        if (!hasReadPrivacyPolicy() || !document.getElementById('accept_tourbook_terms')?.checked) {
+          showToast('กรุณายืนยันประกาศความเป็นส่วนตัว', 'กรุณาเปิดอ่านประกาศความเป็นส่วนตัวและติ๊กยอมรับก่อนส่งคำสั่งซื้อครับ', 'error');
+          return;
+        }
+
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> <span>กำลังบันทึกคำสั่งซื้อสมุดทัวร์...</span>';
+
+        const zone = getSelectedZoneData();
+        const qty = Math.max(1, parseInt(document.getElementById('order_quantity')?.value || '1', 10));
+        const totalAmount = zone.unitPrice * qty;
+
+        const now = new Date();
+        const refCode = 'TBK-' +
+          now.getFullYear() +
+          String(now.getMonth() + 1).padStart(2, '0') +
+          String(now.getDate()).padStart(2, '0') + '-' +
+          String(now.getHours()).padStart(2, '0') +
+          String(now.getMinutes()).padStart(2, '0') +
+          String(now.getSeconds()).padStart(2, '0');
+
+        const memberCode = document.getElementById('tb_member_code').value.trim().toUpperCase();
+        const chatName = document.getElementById('tb_chat_name').value.trim();
+        const fullName = document.getElementById('tb_fullname').value.trim();
+        const phone = document.getElementById('tb_phone').value.trim();
+        const lineId = document.getElementById('tb_line_id').value.trim();
+        const licensePlate = document.getElementById('tb_license_plate').value.trim();
+        const shippingAddress = document.getElementById('tb_shipping_address').value.trim();
+
+        const record = {
+          refCode,
+          action: 'tour_book_order',
+          submittedAt: now.toISOString(),
+          zoneCode: zone.code,
+          zoneName: zone.name,
+          unitPrice: zone.unitPrice,
+          quantity: qty,
+          totalAmount,
+          memberCode,
+          chatName,
+          fullName,
+          phone,
+          lineId,
+          licensePlate,
+          shippingAddress,
+          status: 'รอตรวจสอบยอดโอนและจัดส่ง'
+        };
+
+        if (TOURBOOK_CONFIG.submitEndpointUrl) {
+          await fetch(TOURBOOK_CONFIG.submitEndpointUrl, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              ...record,
+              slipBase64: uploadedSlipPhoto.base64,
+              slipName: uploadedSlipPhoto.name,
+              slipMimeType: uploadedSlipPhoto.mimeType
+            })
+          });
+        }
+
+        const existing = JSON.parse(localStorage.getItem(TOURBOOK_CONFIG.submissionsStorageKey) || '[]');
+        existing.unshift(record);
+        localStorage.setItem(TOURBOOK_CONFIG.submissionsStorageKey, JSON.stringify(existing));
+        localStorage.removeItem(TOURBOOK_CONFIG.draftStorageKey);
+
+        lastSubmittedTourbookRef = refCode;
+        const successBox = document.getElementById('tourbook-success-box');
+        const refEl = document.getElementById('tourbook-ref-code');
+        const summaryEl = document.getElementById('tourbook-summary-details');
+        if (refEl) refEl.textContent = refCode;
+        if (summaryEl) {
+          summaryEl.innerHTML = `
+            <div><span class="text-emerald-400">รายการที่สั่งซื้อ:</span> <strong>สมุดทัวร์ ${escapeHtml(zone.name)}</strong> (${qty} เล่ม)</div>
+            <div><span class="text-emerald-400">ยอดโอนชำระ:</span> <strong class="font-mono text-amber-300">${totalAmount.toLocaleString()} บาท</strong></div>
+            <div><span class="text-emerald-400">ผู้รับพัสดุ:</span> <strong>${escapeHtml(fullName)}</strong> (รหัสสมาชิก: <strong class="font-mono">${escapeHtml(memberCode)}</strong>)</div>
+            <div><span class="text-emerald-400">เบอร์โทร / Line ID:</span> <strong>${escapeHtml(phone)}</strong> / ${escapeHtml(lineId)}</div>
+          `;
+        }
+        successBox?.classList.remove('hidden');
+        successBox?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        document.getElementById('tourbook-order-form')?.reset();
+        uploadedSlipPhoto = { base64: '', name: '', mimeType: '' };
+        document.getElementById('preview-tb-slip')?.classList.add('hidden');
+        handleZoneOrQtyChange();
+        showToast('สั่งซื้อสำเร็จ', `บันทึกคำสั่งซื้อสมุดทัวร์เรียบร้อยแล้ว เลขที่: ${refCode}`, 'success');
+      } catch (err) {
+        showToast('เกิดข้อผิดพลาด', err.message || 'ไม่สามารถบันทึกคำสั่งซื้อได้ กรุณาลองใหม่อีกครั้ง', 'error');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = originalHtml;
+      }
+    }
+
+    window.addEventListener('storage', e => {
+      if (e.key === TOURBOOK_CONFIG.privacyReadStorageKey) {
+        updatePrivacyReadBadge();
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      updatePrivacyReadBadge();
+      handleZoneOrQtyChange();
+      restoreFormDraft();
+      TOURBOOK_DRAFT_IDS.forEach(id => {
+        const el = document.getElementById(id);
+        el?.addEventListener('input', saveFormDraft);
+        el?.addEventListener('change', saveFormDraft);
+      });
+    });
+  </script>
+</body>
+</html>

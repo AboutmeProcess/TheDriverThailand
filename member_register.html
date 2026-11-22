@@ -50,11 +50,6 @@
         radial-gradient(circle at 82% 78%, rgba(16, 185, 129, 0.16) 0%, transparent 50%),
         linear-gradient(135deg, #070a12 0%, #0f172a 52%, #172033 100%);
     }
-    .glass-card {
-      background: rgba(255, 255, 255, 0.055);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-    }
     .gold-shimmer-text {
       background: linear-gradient(90deg, #fde68a 0%, #fbbf24 35%, #f59e0b 65%, #fef08a 100%);
       background-size: 200% auto;
@@ -265,13 +260,13 @@
             <i class="fa-solid fa-circle-info text-amber-400 text-base mt-0.5 shrink-0"></i>
             <div class="min-w-0 space-y-0.5">
               <strong class="text-amber-300 block">คำชี้แจงก่อนกรอกแบบฟอร์มลงทะเบียนสมาชิก:</strong>
-              <span>ข้อมูลทั้งหมดจะถูกใช้เพื่อยืนยันตัวตนคนขับรถบริการตัวจริง 100% และจัดเก็บในฐานข้อมูลสมาชิกของกลุ่ม The Driver Thailand อย่างปลอดภัย</span>
+              <span>ข้อมูลทั้งหมดจะถูกใช้เพื่อยืนยันตัวตนสมาชิกตัวจริง 100% และจัดเก็บในฐานข้อมูลสมาชิกของกลุ่ม The Driver Thailand อย่างปลอดภัย</span>
             </div>
           </div>
           <div class="flex flex-wrap items-center gap-2 shrink-0">
-            <a href="https://forms.gle/jW12E3QxqGKkZ1dz8" target="_blank" rel="noopener noreferrer"
+            <a href="privacy_policy.html" target="_blank" rel="noopener noreferrer" onclick="markPrivacyPolicyOpened()"
               class="bg-white/10 hover:bg-white/20 text-amber-200 border border-amber-300/30 font-bold px-3.5 py-2 rounded-xl text-xs whitespace-nowrap inline-flex items-center gap-1.5 transition">
-              <i class="fa-solid fa-arrow-up-right-from-square"></i> เปิดฟอร์มอ้างอิงต้นฉบับ
+              <i class="fa-solid fa-shield-halved"></i> อ่านประกาศความเป็นส่วนตัว
             </a>
             <a href="register.html"
               class="bg-slate-950 hover:bg-slate-900 text-amber-300 border border-amber-400/40 font-bold px-3.5 py-2 rounded-xl text-xs whitespace-nowrap inline-flex items-center gap-1.5 transition">
@@ -282,8 +277,8 @@
       </div>
     </section>
 
-    <!-- กฎการถ่ายรูปยืนยันตัวตน + ตัวอย่างรูปคู่กับกระดาษ -->
-    <section class="bg-white rounded-3xl p-5 sm:p-8 shadow-sm border border-slate-200/90 space-y-6">
+    <!-- กฎการถ่ายรูปยืนยันตัวตน -->
+    <section class="bg-white rounded-3xl p-5 sm:p-8 shadow-sm border border-slate-200/90 space-y-5">
       <div class="flex items-start gap-3 bg-amber-50 border border-amber-200 border-l-4 border-l-amber-500 rounded-2xl p-4">
         <div class="w-10 h-10 rounded-xl bg-amber-500/15 text-amber-600 flex items-center justify-center text-lg shrink-0">
           <i class="fa-solid fa-triangle-exclamation icon-float"></i>
@@ -291,46 +286,9 @@
         <div class="text-xs sm:text-sm space-y-1">
           <h2 class="font-extrabold text-amber-950">ข้อควรระวังสำคัญ: กฎการตั้งโปรไฟล์และการส่งรูปถ่ายยืนยันตัวตน</h2>
           <p class="text-amber-900/90 leading-relaxed">
-            1) <strong>รูปโปรไฟล์ในห้อง Line Open Chat</strong> ต้องเป็นรูปจริงเห็นใบหน้าชัดเจน และ <strong>ห้ามใส่เบอร์โทรศัพท์ในชื่อโปรไฟล์</strong><br>
-            2) <strong>รูปถ่ายยืนยันตัวตน</strong> ต้อง <strong>เขียนข้อความด้วยลายมือลงบนกระดาษจริง</strong> แล้วถือถ่ายคู่กับใบหน้าให้ชัดเจน <strong>ห้ามพิมพ์แปะรูป ห้ามใช้ AI สร้างภาพ และห้ามถือคู่กับบัตรประชาชนหรือใบขับขี่</strong>
+            • <strong>รูปโปรไฟล์ในห้อง Line Open Chat</strong> ต้องเป็นรูปจริงเห็นใบหน้าชัดเจน และ <strong>ห้ามใส่เบอร์โทรศัพท์ในชื่อโปรไฟล์</strong><br>
+            • <strong>รูปถ่ายยืนยันตัวตน</strong> ต้อง <strong>เขียนข้อความด้วยลายมือลงบนกระดาษจริง</strong> แล้วถือถ่ายคู่กับใบหน้าให้ชัดเจน <strong>ห้ามพิมพ์แปะรูป ห้ามใช้ AI สร้างภาพ และห้ามถือคู่กับบัตรประชาชนหรือใบขับขี่</strong>
           </p>
-        </div>
-      </div>
-
-      <!-- ตัวอย่างรูปถ่ายคู่กับกระดาษตามกติกากลุ่ม -->
-      <div class="bg-slate-950 text-white rounded-2xl p-5 sm:p-6 border border-amber-400/30 shadow-lg">
-        <div class="grid md:grid-cols-12 gap-5 items-center">
-          <div class="md:col-span-5 flex justify-center">
-            <div class="w-full max-w-xs bg-slate-900 border-2 border-amber-400/70 rounded-2xl p-4 text-center space-y-3 shadow-inner">
-              <div class="flex items-center justify-between text-[10px] text-amber-300 font-bold border-b border-slate-800 pb-2">
-                <span><i class="fa-solid fa-camera mr-1"></i> ตัวอย่างภาพถ่ายที่ถูกต้อง</span>
-                <span class="bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full">ผ่านการอนุมัติ</span>
-              </div>
-              <div class="mx-auto w-16 h-16 rounded-full bg-slate-800 border-2 border-amber-400/60 flex items-center justify-center text-amber-300 text-2xl">
-                <i class="fa-solid fa-user-check"></i>
-              </div>
-              <div class="bg-amber-50 text-slate-900 rounded-xl p-3 border-2 border-dashed border-amber-500 text-left space-y-1 shadow">
-                <p class="text-[10px] font-extrabold text-amber-800 uppercase tracking-wider">กระดาษเขียนด้วยลายมือจริง:</p>
-                <p class="text-xs font-bold leading-snug">“สมัครสมาชิกกลุ่ม The Driver Thailand”</p>
-                <p class="text-[11px] font-semibold text-slate-700">ชื่อ-นามสกุล : ..............................</p>
-                <p class="text-[11px] font-semibold text-slate-700">ทะเบียนรถ : ..................................</p>
-                <p class="text-[11px] font-semibold text-slate-700">วันที่เขียน : ......../......../............</p>
-              </div>
-              <p class="text-[11px] text-slate-400">ถือกระดาษระดับอกคู่กับใบหน้าจริง เห็นตัวหนังสือและใบหน้าชัดเจน</p>
-            </div>
-          </div>
-
-          <div class="md:col-span-7 space-y-3 text-xs sm:text-sm">
-            <span class="inline-flex items-center gap-1.5 bg-amber-500/20 text-amber-300 border border-amber-400/40 px-3 py-1 rounded-full text-xs font-bold">
-              <i class="fa-solid fa-pen-nib"></i> คำแนะนำการแนบรูปคู่กับกระดาษดังรูปตัวอย่างด้านบน
-            </span>
-            <h3 class="text-base sm:text-lg font-extrabold text-white">รายละเอียดที่ต้องเขียนลงบนกระดาษจริงด้วยลายมือ</h3>
-            <ul class="space-y-2 text-slate-300 list-disc ml-5">
-              <li>เขียนข้อความระบุว่า <strong class="text-amber-300">“สมัครสมาชิกกลุ่ม The Driver Thailand”</strong> พร้อม <strong class="text-white">ชื่อ-นามสกุล, หมายเลขทะเบียนรถ และวันที่สมัคร</strong> ลงบนกระดาษจริงด้วยลายมือตนเอง</li>
-              <li>ถ่ายรูปเซลฟี่หรือให้ผู้อื่นถ่ายคู่กับใบหน้าของคุณ โดยให้เห็นทั้ง <strong>ใบหน้าจริง</strong> และ <strong>ข้อความบนกระดาษ</strong> ชัดเจน ไม่กลับด้านจนอ่านไม่ออก</li>
-              <li>ห้ามถ่ายติดบัตรประชาชน ใบขับขี่ หรือเอกสารราชการใดๆ เพื่อคุ้มครองข้อมูลส่วนบุคคลของคุณเอง</li>
-            </ul>
-          </div>
         </div>
       </div>
 
@@ -341,9 +299,9 @@
           </h3>
           <ul class="space-y-1.5 text-emerald-950/90 list-disc ml-5">
             <li>เปลี่ยนรูปโปรไฟล์ในห้อง Line Open Chat เป็นรูปจริงและไม่มีเบอร์โทรในชื่อ</li>
-            <li>เขียนข้อความตามตัวอย่างลงบนกระดาษจริงด้วยลายมือตนเอง</li>
+            <li>เขียนข้อความลงบนกระดาษจริงด้วยลายมือตนเอง</li>
             <li>ถือกระดาษที่เขียนถ่ายรูปคู่กับใบหน้าให้เห็นชัดเจน</li>
-            <li>รูปถ่ายรถยนต์และแผ่นป้ายทะเบียนตรงกับข้อมูลที่กรอกในแบบฟอร์ม</li>
+            <li>สำหรับคนขับรถ รูปถ่ายรถยนต์และแผ่นป้ายทะเบียนต้องตรงกับข้อมูลที่กรอกในแบบฟอร์ม</li>
           </ul>
         </div>
         <div class="bg-rose-50/70 border border-rose-200 rounded-2xl p-4 sm:p-5 space-y-2.5">
@@ -387,12 +345,12 @@
       </div>
     </div>
 
-    <!-- แบบฟอร์มหลัก -->
+    <!-- แบบฟอร์มหลัก (ไม่มีลำดับตัวเลขหน้าคำถาม) -->
     <section class="bg-white rounded-3xl p-5 sm:p-10 shadow-sm border border-slate-200/90 space-y-6 sm:space-y-8">
       <div class="border-b border-slate-200 pb-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
           <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">กรอกข้อมูลสมัครสมาชิก</h2>
-          <p class="text-xs sm:text-sm text-slate-500 mt-0.5">ช่องที่มีเครื่องหมาย <span class="text-rose-500 font-bold">*</span> จำเป็นต้องกรอกให้ครบถ้วนตามรายการคำถาม</p>
+          <p class="text-xs sm:text-sm text-slate-500 mt-0.5">ช่องที่มีเครื่องหมาย <span class="text-rose-500 font-bold">*</span> จำเป็นต้องกรอกให้ครบถ้วน</p>
         </div>
         <div class="flex items-center gap-2.5 flex-wrap">
           <span id="draft-status-badge" class="text-xs font-semibold text-slate-600 bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200">
@@ -405,57 +363,72 @@
       </div>
 
       <form id="member-registration-form" onsubmit="handleMemberFormSubmit(event)" class="space-y-6">
-        <!-- หมวดที่ 1: ข้อมูลในห้อง Line Open Chat และโปรไฟล์ -->
-        <div class="bg-slate-50/80 border border-slate-200 rounded-3xl p-5 sm:p-6 space-y-4">
-          <h3 class="font-extrabold text-slate-900 text-sm sm:text-base border-b border-slate-200 pb-3 flex items-center gap-2">
-            <span class="w-7 h-7 rounded-lg bg-slate-950 text-amber-400 text-xs font-black flex items-center justify-center">1</span>
-            <span>ข้อมูลบัญชี Line Open Chat และการตั้งค่าโปรไฟล์</span>
-          </h3>
+        <!-- หมวดประเภทผู้สมัคร (ผู้ปล่อยงาน / สมาชิกทั่วไป) -->
+        <div class="bg-amber-50/60 border border-amber-200 rounded-3xl p-5 sm:p-6 space-y-4">
+          <div class="space-y-1">
+            <h3 class="font-extrabold text-slate-900 text-sm sm:text-base">
+              คุณเป็นผู้ปล่อยงานเป็นหลัก / บริษัทปล่อยงาน <span class="text-rose-500">*</span>
+            </h3>
+            <p class="text-xs text-slate-600">เลือกประเภทสถานะของคุณเพื่อให้ระบบปรับช่องกรอกข้อมูลและเอกสารแนบให้เหมาะสม</p>
+          </div>
 
-          <div class="grid md:grid-cols-2 gap-4">
-            <div class="space-y-1.5">
-              <label for="member_chat_name" class="block text-xs font-bold text-slate-700">
-                1. ชื่อที่ใช้ในห้อง Line Open Chat <span class="text-rose-500">*</span>
-              </label>
-              <input type="text" id="member_chat_name" name="chatName" required placeholder="เช่น แทนไทย_Camry (ห้ามใส่เบอร์โทรในชื่อ)"
-                class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
-              <p class="text-[11px] text-slate-500">ระบุชื่อโปรไฟล์ปัจจุบันที่คุณใช้ในห้องแชทกลุ่ม The Driver Thailand</p>
-            </div>
+          <div class="grid md:grid-cols-2 gap-3.5">
+            <label id="label-role-dispatcher" class="border-2 border-slate-200 bg-white rounded-2xl p-4 cursor-pointer hover:border-amber-500 transition flex items-start gap-3 shadow-sm">
+              <input type="radio" name="dispatcherRole" value="ใช่ ฉันเป็นผู้ปล่อยงานเป็นหลัก / บริษัทปล่อยงาน" onchange="handleDispatcherRoleChange()" class="mt-1 w-4 h-4 text-amber-600 focus:ring-amber-500 shrink-0">
+              <div class="min-w-0">
+                <span class="font-bold text-slate-900 text-xs sm:text-sm block">ใช่ ฉันเป็นผู้ปล่อยงานเป็นหลัก / บริษัทปล่อยงาน</span>
+                <span class="text-[11px] text-slate-500 block mt-0.5">ไม่ต้องอัปโหลดรูปถ่ายรถยนต์ และสามารถใช้ชื่อบริษัท/ตัวแทนได้</span>
+              </div>
+            </label>
 
-            <div class="space-y-1.5">
-              <label for="member_profile_changed" class="block text-xs font-bold text-slate-700">
-                2. คุณได้เปลี่ยนรูปโปรไฟล์และตั้งชื่อตามกติกาห้องแล้วหรือยัง? <span class="text-rose-500">*</span>
-              </label>
-              <select id="member_profile_changed" name="profileChanged" required
-                class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
-                <option value="" disabled selected>-- เลือกคำตอบของท่าน --</option>
-                <option value="เปลี่ยนรูปโปรไฟล์จริงและตั้งชื่อตามกติกาเรียบร้อยแล้ว">เปลี่ยนรูปโปรไฟล์จริงและตั้งชื่อตามกติกาเรียบร้อยแล้ว</option>
-                <option value="เปลี่ยนรูปโปรไฟล์แล้ว รอรับรหัสสมาชิกเพื่อใส่หน้าชื่อ">เปลี่ยนรูปโปรไฟล์แล้ว รอรับรหัสสมาชิกเพื่อใส่หน้าชื่อ</option>
-              </select>
-              <p class="text-[11px] text-slate-500">ต้องใช้รูปใบหน้าจริงเท่านั้น และห้ามใส่เบอร์โทรศัพท์ในชื่อโปรไฟล์</p>
-            </div>
+            <label id="label-role-driver" class="border-2 border-amber-500 bg-amber-50/70 rounded-2xl p-4 cursor-pointer hover:border-amber-600 transition flex items-start gap-3 shadow-sm">
+              <input type="radio" name="dispatcherRole" value="ไม่ใช่ ฉันเป็นสมาชิกทั่วไป / ปล่อยงานเป็นบางครั้ง" checked onchange="handleDispatcherRoleChange()" class="mt-1 w-4 h-4 text-amber-600 focus:ring-amber-500 shrink-0">
+              <div class="min-w-0">
+                <span class="font-bold text-slate-900 text-xs sm:text-sm block">ไม่ใช่ ฉันเป็นสมาชิกทั่วไป / ปล่อยงานเป็นบางครั้ง</span>
+                <span class="text-[11px] text-slate-500 block mt-0.5">กรอกข้อมูลคนขับ รถยนต์ และแนบรูปถ่ายรถตามปกติ</span>
+              </div>
+            </label>
           </div>
         </div>
 
-        <!-- หมวดที่ 2: ข้อมูลส่วนตัวและการติดต่อ -->
+        <!-- หมวดข้อมูลในห้อง Line Open Chat -->
         <div class="bg-slate-50/80 border border-slate-200 rounded-3xl p-5 sm:p-6 space-y-4">
           <h3 class="font-extrabold text-slate-900 text-sm sm:text-base border-b border-slate-200 pb-3 flex items-center gap-2">
-            <span class="w-7 h-7 rounded-lg bg-slate-950 text-amber-400 text-xs font-black flex items-center justify-center">2</span>
-            <span>ข้อมูลส่วนตัวและช่องทางติดต่อ</span>
+            <i class="fa-brands fa-line text-emerald-600 text-lg"></i>
+            <span>ข้อมูลบัญชี Line Open Chat</span>
           </h3>
+
+          <div class="space-y-1.5">
+            <label for="member_chat_name" class="block text-xs font-bold text-slate-700">
+              ชื่อที่ใช้ในห้อง Line Open Chat <span class="text-rose-500">*</span>
+            </label>
+            <input type="text" id="member_chat_name" name="chatName" required placeholder="เช่น แทนไทย_Camry (ห้ามใส่เบอร์โทรในชื่อ)"
+              class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
+            <p class="text-[11px] text-slate-500">ระบุชื่อโปรไฟล์ปัจจุบันที่คุณใช้ในห้องแชทกลุ่ม The Driver Thailand</p>
+          </div>
+        </div>
+
+        <!-- หมวดข้อมูลส่วนตัวและการติดต่อ -->
+        <div class="bg-slate-50/80 border border-slate-200 rounded-3xl p-5 sm:p-6 space-y-4">
+          <div class="border-b border-slate-200 pb-3 flex flex-wrap items-center justify-between gap-2">
+            <h3 class="font-extrabold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+              <i class="fa-solid fa-user-tie text-amber-600"></i>
+              <span id="personal-section-title">ข้อมูลส่วนตัว [ไม่ใช่ ฉันเป็นสมาชิกทั่วไป / ปล่อยงานเป็นบางครั้ง]</span>
+            </h3>
+          </div>
 
           <div class="grid md:grid-cols-2 gap-4">
             <div class="space-y-1.5">
               <label for="member_first_name" class="block text-xs font-bold text-slate-700">
-                3. ชื่อ <span class="text-rose-500">*</span>
+                <span id="label-first-name-text">ชื่อ</span> <span class="text-rose-500">*</span>
               </label>
-              <input type="text" id="member_first_name" name="firstName" required placeholder="ระบุชื่อจริง (ไม่ต้องใส่คำนำหน้า หรือใส่ได้ตามจริง)"
+              <input type="text" id="member_first_name" name="firstName" required placeholder="ระบุชื่อจริง"
                 class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
             </div>
 
             <div class="space-y-1.5">
               <label for="member_last_name" class="block text-xs font-bold text-slate-700">
-                4. นามสกุล <span class="text-rose-500">*</span>
+                นามสกุล <span id="last-name-required-star" class="text-rose-500">*</span>
               </label>
               <input type="text" id="member_last_name" name="lastName" required placeholder="ระบุนามสกุลจริง"
                 class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
@@ -465,7 +438,7 @@
           <div class="grid md:grid-cols-2 gap-4">
             <div class="space-y-1.5">
               <label for="member_phone" class="block text-xs font-bold text-slate-700">
-                5. เบอร์ติดต่อ <span class="text-rose-500">*</span>
+                เบอร์ติดต่อ <span class="text-rose-500">*</span>
               </label>
               <input type="tel" id="member_phone" name="phone" required pattern="[0-9\-+\s]{9,15}" placeholder="เช่น 0812345678"
                 class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-mono focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
@@ -474,9 +447,9 @@
 
             <div class="space-y-1.5">
               <label for="member_line_id" class="block text-xs font-bold text-slate-700">
-                6. Line ID <span class="text-rose-500">*</span>
+                Line ID <span class="text-rose-500">*</span>
               </label>
-              <input type="text" id="member_line_id" name="lineId" required placeholder="ระบุ Line ID ส่วนตัวสำหรับติดต่อประสานงาน"
+              <input type="text" id="member_line_id" name="lineId" required placeholder="ระบุ Line ID สำหรับติดต่อประสานงาน"
                 class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
               <p class="text-[11px] text-slate-500">กรุณาตั้งค่าเปิดรับเพื่อนจาก ID ในแอป LINE เพื่อให้แอดมินติดต่อได้</p>
             </div>
@@ -484,24 +457,29 @@
 
           <div class="space-y-1.5">
             <label for="member_address" class="block text-xs font-bold text-slate-700">
-              7. ที่อยู่ของคุณ <span class="text-rose-500">*</span>
+              <span id="label-address-text">ที่อยู่ของคุณ</span> <span class="text-rose-500">*</span>
             </label>
             <textarea id="member_address" name="address" rows="2" required placeholder="ระบุบ้านเลขที่ หมู่ ถนน แขวง/ตำบล เขต/อำเภอ จังหวัด และรหัสไปรษณีย์..."
               class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition"></textarea>
           </div>
         </div>
 
-        <!-- หมวดที่ 3: ข้อมูลยานพาหนะ -->
-        <div class="bg-slate-50/80 border border-slate-200 rounded-3xl p-5 sm:p-6 space-y-4">
-          <h3 class="font-extrabold text-slate-900 text-sm sm:text-base border-b border-slate-200 pb-3 flex items-center gap-2">
-            <span class="w-7 h-7 rounded-lg bg-slate-950 text-amber-400 text-xs font-black flex items-center justify-center">3</span>
-            <span>ข้อมูลรถยนต์ที่ใช้งาน</span>
-          </h3>
+        <!-- หมวดข้อมูลยานพาหนะ -->
+        <div id="vehicle-info-section" class="bg-slate-50/80 border border-slate-200 rounded-3xl p-5 sm:p-6 space-y-4">
+          <div class="border-b border-slate-200 pb-3 flex flex-wrap items-center justify-between gap-2">
+            <h3 class="font-extrabold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+              <i class="fa-solid fa-car-side text-amber-600"></i>
+              <span>ข้อมูลรถยนต์ที่ใช้งาน</span>
+            </h3>
+            <span id="vehicle-optional-badge" class="hidden text-xs font-bold text-amber-800 bg-amber-100 border border-amber-300 px-3 py-1 rounded-full">
+              ไม่บังคับสำหรับผู้ปล่อยงาน / บริษัทปล่อยงาน
+            </span>
+          </div>
 
           <div class="grid md:grid-cols-3 gap-4">
             <div class="space-y-1.5">
               <label for="car_brand" class="block text-xs font-bold text-slate-700">
-                8. ยี่ห้อรถของคุณ <span class="text-rose-500">*</span>
+                ยี่ห้อรถของคุณ <span class="vehicle-req-star text-rose-500">*</span>
               </label>
               <input type="text" id="car_brand" name="carBrand" required placeholder="เช่น Toyota / Honda / BYD / Hyundai"
                 class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
@@ -509,7 +487,7 @@
 
             <div class="space-y-1.5">
               <label for="car_model" class="block text-xs font-bold text-slate-700">
-                9. รุ่นรถของคุณ <span class="text-rose-500">*</span>
+                รุ่นรถของคุณ <span class="vehicle-req-star text-rose-500">*</span>
               </label>
               <input type="text" id="car_model" name="carModel" required placeholder="เช่น Camry 2.5 HV / Accord / Staria"
                 class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
@@ -517,7 +495,7 @@
 
             <div class="space-y-1.5">
               <label for="license_plate" class="block text-xs font-bold text-slate-700">
-                10. หมายเลขทะเบียนรถ <span class="text-rose-500">*</span>
+                หมายเลขทะเบียนรถ <span class="vehicle-req-star text-rose-500">*</span>
               </label>
               <input type="text" id="license_plate" name="licensePlate" required placeholder="เช่น 1กข 1234 กรุงเทพมหานคร"
                 class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
@@ -525,55 +503,155 @@
           </div>
         </div>
 
-        <!-- หมวดที่ 4: รูปถ่ายยืนยันตัวตนและรูปรถ -->
-        <div class="bg-slate-50/80 border border-slate-200 rounded-3xl p-5 sm:p-6 space-y-4">
-          <h3 class="font-extrabold text-slate-900 text-sm sm:text-base border-b border-slate-200 pb-3 flex items-center gap-2">
-            <span class="w-7 h-7 rounded-lg bg-slate-950 text-amber-400 text-xs font-black flex items-center justify-center">4</span>
-            <span>แนบรูปถ่ายรถและรูปยืนยันตัวตน</span>
-          </h3>
+        <!-- หมวดแนบรูปถ่ายพร้อมภาพตัวอย่างประกอบ -->
+        <div class="bg-slate-50/80 border border-slate-200 rounded-3xl p-5 sm:p-6 space-y-5">
+          <div class="border-b border-slate-200 pb-3 flex flex-wrap items-center justify-between gap-2">
+            <h3 class="font-extrabold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+              <i class="fa-solid fa-camera-retro text-amber-600"></i>
+              <span>แนบรูปถ่ายยืนยันตัวตนและรูปถ่ายรถ</span>
+            </h3>
+            <span class="text-xs text-slate-500">ดูตัวอย่างรูปแบบการถ่ายภาพที่ถูกต้องได้ในแต่ละกล่องด้านล่าง</span>
+          </div>
 
-          <div class="grid md:grid-cols-2 gap-4">
-            <div class="border-2 border-dashed border-slate-300 bg-white rounded-2xl p-5 text-center hover:border-amber-500 transition space-y-2">
-              <i class="fa-solid fa-car text-3xl text-emerald-600 icon-bounce-hover"></i>
-              <p class="text-xs sm:text-sm font-bold text-slate-900">
-                11. รูปถ่ายรถของคุณ (ตรงกับข้อมูลที่ลงทะเบียน) <span class="text-rose-500">*</span>
-              </p>
-              <p class="text-[11px] text-slate-500">ถ่ายให้เห็นตัวรถและแผ่นป้ายทะเบียนชัดเจนตรงกับข้อมูลที่กรอกในข้อ 8-10</p>
-              <label class="inline-block bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-600 text-white font-semibold text-xs sm:text-sm px-4 py-2 rounded-xl cursor-pointer transition">
-                <i class="fa-solid fa-upload mr-1.5"></i> เลือกรูปถ่ายรถ
-                <input type="file" id="car_photo_file" accept="image/*" required onchange="handlePhotoUpload(this, 'car')" class="hidden">
-              </label>
-              <div id="preview-car-photo" class="hidden pt-2"></div>
+          <div class="grid md:grid-cols-2 gap-5">
+            <!-- กล่องอัปโหลดรูปถ่ายรถ + ตัวอย่างภาพถ่ายรถ -->
+            <div id="car-photo-upload-card" class="border-2 border-dashed border-slate-300 bg-white rounded-2xl p-5 hover:border-amber-500 transition flex flex-col justify-between space-y-4">
+              <div class="space-y-3">
+                <div class="flex items-center justify-between gap-2">
+                  <span class="text-xs font-extrabold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-lg">
+                    <i class="fa-solid fa-car mr-1"></i> รูปถ่ายรถยนต์
+                  </span>
+                  <span id="car-photo-req-badge" class="text-[11px] font-bold text-rose-600 bg-rose-50 border border-rose-200 px-2.5 py-0.5 rounded-full">
+                    จำเป็นต้องแนบ *
+                  </span>
+                </div>
+
+                <!-- กราฟิกตัวอย่างการถ่ายรูปรถยนต์ -->
+                <div class="bg-slate-900 rounded-xl p-3.5 text-white border border-slate-800 space-y-2">
+                  <div class="flex items-center justify-between text-[10px] text-amber-300 font-bold">
+                    <span><i class="fa-solid fa-image mr-1"></i> ตัวอย่างการถ่ายรูปรถที่ถูกต้อง</span>
+                    <span class="text-emerald-400">เห็นตัวรถ + ป้ายทะเบียน</span>
+                  </div>
+                  <div class="bg-gradient-to-b from-slate-800 to-slate-950 rounded-lg p-3 border border-slate-700/80 flex flex-col items-center justify-center gap-2">
+                    <div class="relative flex items-center justify-center">
+                      <i class="fa-solid fa-car-side text-4xl text-amber-400"></i>
+                      <span class="ml-2 bg-white text-slate-950 font-mono font-black text-[10px] px-2 py-0.5 rounded border-2 border-slate-950 shadow">
+                        1กข 1234
+                      </span>
+                    </div>
+                    <p class="text-[10px] text-slate-300 text-center leading-snug">
+                      ถ่ายมุมเฉียงด้านหน้าหรือด้านหลัง ให้เห็นสภาพรถยนต์และแผ่นป้ายทะเบียนชัดเจนตรงกับที่กรอก
+                    </p>
+                  </div>
+                </div>
+
+                <div class="text-center space-y-1">
+                  <p class="text-xs sm:text-sm font-bold text-slate-900">
+                    รูปถ่ายรถของคุณ (ตรงกับข้อมูลที่ลงทะเบียน) <span id="car-photo-star" class="text-rose-500">*</span>
+                  </p>
+                  <p id="car-photo-helper-text" class="text-[11px] text-slate-500">
+                    ถ่ายให้เห็นตัวรถและแผ่นป้ายทะเบียนชัดเจน (ไฟล์ JPG หรือ PNG)
+                  </p>
+                </div>
+              </div>
+
+              <div class="text-center space-y-2">
+                <label class="inline-flex items-center justify-center bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-600 text-white font-semibold text-xs sm:text-sm px-5 py-2.5 rounded-xl cursor-pointer transition shadow-sm">
+                  <i class="fa-solid fa-upload mr-1.5"></i> เลือกรูปถ่ายรถ
+                  <input type="file" id="car_photo_file" accept="image/*" required onchange="handlePhotoUpload(this, 'car')" class="hidden">
+                </label>
+                <div id="preview-car-photo" class="hidden pt-1"></div>
+              </div>
             </div>
 
-            <div class="border-2 border-dashed border-slate-300 bg-white rounded-2xl p-5 text-center hover:border-amber-500 transition space-y-2">
-              <i class="fa-solid fa-id-card-clip text-3xl text-amber-500 icon-bounce-hover"></i>
-              <p class="text-xs sm:text-sm font-bold text-slate-900">
-                12. แนบรูปคู่กับกระดาษดังรูปตัวอย่างด้านบน <span class="text-rose-500">*</span>
-              </p>
-              <p class="text-[11px] text-slate-500">เขียนข้อความด้วยลายมือจริงลงบนกระดาษและถ่ายคู่ใบหน้าชัดเจน (ห้ามถือบัตรประชาชน)</p>
-              <label class="inline-block bg-slate-950 hover:bg-slate-800 text-amber-400 border border-amber-400/30 font-semibold text-xs sm:text-sm px-4 py-2 rounded-xl cursor-pointer transition">
-                <i class="fa-solid fa-upload mr-1.5"></i> เลือกรูปคู่กระดาษ
-                <input type="file" id="selfie_proof_file" accept="image/*" required onchange="handlePhotoUpload(this, 'selfie')" class="hidden">
-              </label>
-              <div id="preview-selfie-proof" class="hidden pt-2"></div>
+            <!-- กล่องอัปโหลดรูปคู่กระดาษ + ตัวอย่างภาพถ่ายคู่กระดาษเขียนลายมือ -->
+            <div class="border-2 border-dashed border-slate-300 bg-white rounded-2xl p-5 hover:border-amber-500 transition flex flex-col justify-between space-y-4">
+              <div class="space-y-3">
+                <div class="flex items-center justify-between gap-2">
+                  <span class="text-xs font-extrabold text-amber-900 bg-amber-50 border border-amber-300 px-2.5 py-1 rounded-lg">
+                    <i class="fa-solid fa-id-card-clip mr-1"></i> รูปยืนยันตัวตน
+                  </span>
+                  <span class="text-[11px] font-bold text-rose-600 bg-rose-50 border border-rose-200 px-2.5 py-0.5 rounded-full">
+                    จำเป็นต้องแนบ *
+                  </span>
+                </div>
+
+                <!-- กราฟิกตัวอย่างการถ่ายรูปถือกระดาษเขียนด้วยลายมือ -->
+                <div class="bg-slate-950 rounded-xl p-3.5 text-white border border-amber-400/40 space-y-2">
+                  <div class="flex items-center justify-between text-[10px] text-amber-300 font-bold">
+                    <span><i class="fa-solid fa-camera mr-1"></i> ตัวอย่างภาพถ่ายคู่กระดาษ</span>
+                    <span class="text-emerald-400">ลายมือจริงเท่านั้น</span>
+                  </div>
+                  <div class="bg-slate-900 rounded-lg p-2.5 border border-slate-800 grid grid-cols-12 gap-2.5 items-center">
+                    <div class="col-span-4 flex flex-col items-center justify-center text-center">
+                      <div class="w-12 h-12 rounded-full bg-slate-800 border-2 border-amber-400/70 flex items-center justify-center text-amber-300 text-xl">
+                        <i class="fa-solid fa-user-check"></i>
+                      </div>
+                      <span class="text-[9px] text-slate-300 mt-1 leading-tight">ใบหน้าจริงชัดเจน</span>
+                    </div>
+                    <div class="col-span-8 bg-amber-50 text-slate-900 rounded-lg p-2 border border-dashed border-amber-500 text-left space-y-0.5">
+                      <p class="text-[9px] font-extrabold text-amber-800">กระดาษเขียนด้วยลายมือ:</p>
+                      <p class="text-[10px] font-bold leading-tight">“สมัครสมาชิก The Driver Thailand”</p>
+                      <p class="text-[9px] text-slate-700">ชื่อ : ...................................</p>
+                      <p class="text-[9px] text-slate-700">ทะเบียน / วันที่ : ....................</p>
+                    </div>
+                  </div>
+                  <p class="text-[10px] text-slate-300 text-center leading-snug">
+                    ถือกระดาษระดับอกคู่กับใบหน้าจริง ห้ามตัดต่อ ห้ามใช้ AI และห้ามถือบัตรประชาชน
+                  </p>
+                </div>
+
+                <div class="text-center space-y-1">
+                  <p class="text-xs sm:text-sm font-bold text-slate-900">
+                    แนบรูปคู่กับกระดาษดังรูปตัวอย่างด้านบน <span class="text-rose-500">*</span>
+                  </p>
+                  <p class="text-[11px] text-slate-500">
+                    เขียนข้อความด้วยลายมือจริงลงบนกระดาษและถ่ายคู่ใบหน้าให้เห็นตัวหนังสือชัดเจน
+                  </p>
+                </div>
+              </div>
+
+              <div class="text-center space-y-2">
+                <label class="inline-flex items-center justify-center bg-slate-950 hover:bg-slate-800 text-amber-400 border border-amber-400/30 font-semibold text-xs sm:text-sm px-5 py-2.5 rounded-xl cursor-pointer transition shadow-sm">
+                  <i class="fa-solid fa-upload mr-1.5"></i> เลือกรูปคู่กระดาษ
+                  <input type="file" id="selfie_proof_file" accept="image/*" required onchange="handlePhotoUpload(this, 'selfie')" class="hidden">
+                </label>
+                <div id="preview-selfie-proof" class="hidden pt-1"></div>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- หมวดที่ 5: ยินยอมนโยบายความเป็นส่วนตัวและเงื่อนไข -->
+        <!-- หมวดประกาศความเป็นส่วนตัว: ต้องกดเปิดอ่านหน้าประกาศความเป็นส่วนตัวก่อนจึงจะติ๊กยอมรับและยืนยันได้ -->
         <div class="bg-amber-50/70 border border-amber-200 rounded-2xl p-4 sm:p-5 space-y-4">
-          <div class="bg-white/90 border border-amber-200/80 rounded-xl p-3.5 text-xs text-slate-700 space-y-1.5 leading-relaxed">
-            <p class="font-bold text-slate-900"><i class="fa-solid fa-shield-halved text-amber-600 mr-1.5"></i>13. นโยบายความเป็นส่วนตัว และ ข้อกำหนดเงื่อนไขของกลุ่ม The Driver Thailand</p>
-            <p>
-              ข้าพเจ้าขอรับรองว่าข้อมูลส่วนตัว ข้อมูลยานพาหนะ และรูปถ่ายยืนยันตัวตนทั้งหมดเป็นความจริงทุกประการ และยินยอมให้กลุ่ม <strong>The Driver Thailand</strong> จัดเก็บและตรวจสอบข้อมูลเพื่อยืนยันตัวตนและดูแลความปลอดภัยภายในเครือข่ายตามนโยบายคุ้มครองข้อมูลส่วนบุคคล (PDPA)
-            </p>
+          <div class="bg-white/95 border border-amber-200 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div class="space-y-1 min-w-0">
+              <p class="font-extrabold text-slate-900 text-xs sm:text-sm flex items-center gap-2">
+                <i class="fa-solid fa-shield-halved text-amber-600"></i>
+                <span>ประกาศความเป็นส่วนตัว สำหรับสมาชิก กลุ่ม The Driver TH Premium Service</span>
+              </p>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                กรุณากดอ่านประกาศความเป็นส่วนตัวฉบับเต็มในหน้าถัดไปก่อน จึงจะสามารถติ๊กช่อง <strong>“ยอมรับและยืนยัน”</strong> ด้านล่างได้
+              </p>
+              <div id="privacy-read-status" class="text-[11px] font-bold text-amber-800 inline-flex items-center gap-1.5 pt-0.5">
+                <i class="fa-solid fa-lock text-amber-600"></i>
+                <span>สถานะ: ยังไม่ได้เปิดอ่านประกาศความเป็นส่วนตัว</span>
+              </div>
+            </div>
+
+            <a href="privacy_policy.html" target="_blank" rel="noopener noreferrer" onclick="markPrivacyPolicyOpened()"
+              class="shrink-0 inline-flex items-center justify-center gap-2 bg-slate-950 hover:bg-slate-800 text-amber-400 border border-amber-400/40 font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow transition">
+              <i class="fa-solid fa-book-open-reader"></i>
+              <span>เปิดอ่านประกาศความเป็นส่วนตัว</span>
+              <i class="fa-solid fa-arrow-up-right-from-square text-[11px]"></i>
+            </a>
           </div>
 
-          <label class="flex items-start gap-3 cursor-pointer text-xs sm:text-sm text-slate-800">
-            <input type="checkbox" id="accept_rules" required class="mt-1 w-4 h-4 text-amber-600 rounded border-slate-300 focus:ring-amber-500 shrink-0">
+          <label onclick="handleAcceptCheckboxClick(event)" class="flex items-start gap-3 cursor-pointer text-xs sm:text-sm text-slate-800 select-none">
+            <input type="checkbox" id="accept_rules" required onchange="handleAcceptCheckboxChange(this)"
+              class="mt-1 w-4 h-4 text-amber-600 rounded border-slate-300 focus:ring-amber-500 shrink-0">
             <span>
-              <strong>ยอมรับ</strong> — ท่านยอมรับนโยบายความเป็นส่วนตัว และ ข้อกำหนดเงื่อนไขของกลุ่ม <strong>The Driver Thailand</strong> <span class="text-rose-500 font-bold">*</span>
+              <strong>ยอมรับและยืนยัน</strong> — ข้าพเจ้าได้อ่านและยอมรับประกาศความเป็นส่วนตัว และข้อกำหนดเงื่อนไขของกลุ่ม <strong>The Driver Thailand</strong> <span class="text-rose-500 font-bold">*</span>
             </span>
           </label>
 
@@ -609,18 +687,18 @@
   </footer>
 
   <script>
-    // ตั้งค่า URL ของ Google Form อ้างอิง และ Web App URL จากสคริปต์ upload_member_database.gs
+    // ตั้งค่า URL ของ Web App จากสคริปต์ upload_member_database.gs และหน้าประกาศความเป็นส่วนตัว
     const FORM_CONFIG = {
-      sourceFormUrl: 'https://forms.gle/jW12E3QxqGKkZ1dz8',
+      privacyPolicyUrl: 'privacy_policy.html',
+      privacyReadStorageKey: 'tdt_privacy_policy_read_v1',
       submitEndpointUrl: '', // วาง Web App URL ที่ได้จากการ Deploy สคริปต์ upload_member_database.gs ที่นี่
       memberSystemUrl: 'register.html',
-      draftStorageKey: 'tdt_member_registration_draft_v2',
-      submissionsStorageKey: 'tdt_member_registration_submissions_v2'
+      draftStorageKey: 'tdt_member_registration_draft_v3',
+      submissionsStorageKey: 'tdt_member_registration_submissions_v3'
     };
 
     const DRAFT_INPUT_IDS = [
       'member_chat_name',
-      'member_profile_changed',
       'member_first_name',
       'member_last_name',
       'member_phone',
@@ -675,6 +753,152 @@
         toast.classList.add('opacity-0');
         setTimeout(() => toast.remove(), 300);
       }, 4200);
+    }
+
+    function isDispatcherSelected() {
+      const selected = document.querySelector('input[name="dispatcherRole"]:checked');
+      return Boolean(selected && selected.value.startsWith('ใช่'));
+    }
+
+    // ปรับป้ายกำกับและเงื่อนไขการบังคับกรอกเมื่อเลือก "เป็นผู้ปล่อยงานเป็นหลัก / บริษัทปล่อยงาน"
+    function handleDispatcherRoleChange() {
+      const isDispatcher = isDispatcherSelected();
+      const labelDispatcher = document.getElementById('label-role-dispatcher');
+      const labelDriver = document.getElementById('label-role-driver');
+      const personalTitle = document.getElementById('personal-section-title');
+      const firstNameLabel = document.getElementById('label-first-name-text');
+      const firstNameInput = document.getElementById('member_first_name');
+      const lastNameStar = document.getElementById('last-name-required-star');
+      const lastNameInput = document.getElementById('member_last_name');
+      const addressLabel = document.getElementById('label-address-text');
+
+      const vehicleBadge = document.getElementById('vehicle-optional-badge');
+      const vehicleStars = document.querySelectorAll('.vehicle-req-star');
+      const carBrandInput = document.getElementById('car_brand');
+      const carModelInput = document.getElementById('car_model');
+      const plateInput = document.getElementById('license_plate');
+
+      const carPhotoInput = document.getElementById('car_photo_file');
+      const carPhotoStar = document.getElementById('car-photo-star');
+      const carPhotoBadge = document.getElementById('car-photo-req-badge');
+      const carPhotoHelper = document.getElementById('car-photo-helper-text');
+
+      if (isDispatcher) {
+        if (labelDispatcher) labelDispatcher.className = 'border-2 border-amber-500 bg-amber-50/70 rounded-2xl p-4 cursor-pointer hover:border-amber-600 transition flex items-start gap-3 shadow-sm';
+        if (labelDriver) labelDriver.className = 'border-2 border-slate-200 bg-white rounded-2xl p-4 cursor-pointer hover:border-amber-500 transition flex items-start gap-3 shadow-sm';
+        if (personalTitle) personalTitle.textContent = 'ข้อมูลส่วนตัว [ฉันเป็นผู้ปล่อยงานเป็นหลัก / บริษัทปล่อยงาน]';
+        if (firstNameLabel) firstNameLabel.textContent = 'ชื่อ / ชื่อตัวแทนบริษัท / ชื่อบริษัท';
+        if (firstNameInput) firstNameInput.placeholder = 'ระบุชื่อ / ชื่อตัวแทนบริษัท / ชื่อบริษัท';
+        if (lastNameStar) lastNameStar.classList.add('hidden');
+        if (lastNameInput) {
+          lastNameInput.removeAttribute('required');
+          lastNameInput.placeholder = 'ระบุนามสกุล (หากสมัครในนามบริษัทสามารถเว้นว่างได้)';
+        }
+        if (addressLabel) addressLabel.textContent = 'ที่อยู่ของคุณ / บริษัทของคุณ';
+
+        vehicleBadge?.classList.remove('hidden');
+        vehicleStars.forEach(s => s.classList.add('hidden'));
+        carBrandInput?.removeAttribute('required');
+        carModelInput?.removeAttribute('required');
+        plateInput?.removeAttribute('required');
+
+        // กรณีเป็นผู้ปล่อยงาน ไม่จำเป็นต้องอัปโหลดรูปถ่ายรถของคุณ
+        carPhotoInput?.removeAttribute('required');
+        carPhotoStar?.classList.add('hidden');
+        if (carPhotoBadge) {
+          carPhotoBadge.className = 'text-[11px] font-bold text-slate-600 bg-slate-100 border border-slate-300 px-2.5 py-0.5 rounded-full';
+          carPhotoBadge.textContent = 'ไม่บังคับ (สำหรับผู้ปล่อยงาน)';
+        }
+        if (carPhotoHelper) {
+          carPhotoHelper.textContent = 'สำหรับผู้ปล่อยงานเป็นหลัก / บริษัทปล่อยงาน ไม่จำเป็นต้องอัปโหลดรูปถ่ายรถ';
+        }
+      } else {
+        if (labelDriver) labelDriver.className = 'border-2 border-amber-500 bg-amber-50/70 rounded-2xl p-4 cursor-pointer hover:border-amber-600 transition flex items-start gap-3 shadow-sm';
+        if (labelDispatcher) labelDispatcher.className = 'border-2 border-slate-200 bg-white rounded-2xl p-4 cursor-pointer hover:border-amber-500 transition flex items-start gap-3 shadow-sm';
+        if (personalTitle) personalTitle.textContent = 'ข้อมูลส่วนตัว [ไม่ใช่ ฉันเป็นสมาชิกทั่วไป / ปล่อยงานเป็นบางครั้ง]';
+        if (firstNameLabel) firstNameLabel.textContent = 'ชื่อ';
+        if (firstNameInput) firstNameInput.placeholder = 'ระบุชื่อจริง';
+        if (lastNameStar) lastNameStar.classList.remove('hidden');
+        if (lastNameInput) {
+          lastNameInput.setAttribute('required', 'true');
+          lastNameInput.placeholder = 'ระบุนามสกุลจริง';
+        }
+        if (addressLabel) addressLabel.textContent = 'ที่อยู่ของคุณ';
+
+        vehicleBadge?.classList.add('hidden');
+        vehicleStars.forEach(s => s.classList.remove('hidden'));
+        carBrandInput?.setAttribute('required', 'true');
+        carModelInput?.setAttribute('required', 'true');
+        plateInput?.setAttribute('required', 'true');
+
+        carPhotoInput?.setAttribute('required', 'true');
+        carPhotoStar?.classList.remove('hidden');
+        if (carPhotoBadge) {
+          carPhotoBadge.className = 'text-[11px] font-bold text-rose-600 bg-rose-50 border border-rose-200 px-2.5 py-0.5 rounded-full';
+          carPhotoBadge.textContent = 'จำเป็นต้องแนบ *';
+        }
+        if (carPhotoHelper) {
+          carPhotoHelper.textContent = 'ถ่ายให้เห็นตัวรถและแผ่นป้ายทะเบียนชัดเจน (ไฟล์ JPG หรือ PNG)';
+        }
+      }
+    }
+
+    function hasReadPrivacyPolicy() {
+      try {
+        return localStorage.getItem(FORM_CONFIG.privacyReadStorageKey) === 'true';
+      } catch (_) {
+        return false;
+      }
+    }
+
+    function updatePrivacyReadBadge() {
+      const statusEl = document.getElementById('privacy-read-status');
+      if (!statusEl) return;
+      if (hasReadPrivacyPolicy()) {
+        statusEl.className = 'text-[11px] font-bold text-emerald-700 inline-flex items-center gap-1.5 pt-0.5';
+        statusEl.innerHTML = '<i class="fa-solid fa-circle-check text-emerald-600"></i><span>สถานะ: เปิดอ่านประกาศความเป็นส่วนตัวแล้ว สามารถติ๊กยอมรับและยืนยันได้</span>';
+      } else {
+        statusEl.className = 'text-[11px] font-bold text-amber-800 inline-flex items-center gap-1.5 pt-0.5';
+        statusEl.innerHTML = '<i class="fa-solid fa-lock text-amber-600"></i><span>สถานะ: ยังไม่ได้เปิดอ่านประกาศความเป็นส่วนตัว</span>';
+      }
+    }
+
+    function markPrivacyPolicyOpened() {
+      try {
+        localStorage.setItem(FORM_CONFIG.privacyReadStorageKey, 'true');
+      } catch (_) {}
+      updatePrivacyReadBadge();
+    }
+
+    // หากยังไม่ได้เปิดอ่านประกาศความเป็นส่วนตัว เมื่อกดติ๊กจะเด้งหน้าประกาศความเป็นส่วนตัวขึ้นมาให้อ่านก่อน
+    function handleAcceptCheckboxClick(event) {
+      const checkbox = document.getElementById('accept_rules');
+      if (!checkbox) return;
+      if (!hasReadPrivacyPolicy()) {
+        event.preventDefault();
+        checkbox.checked = false;
+        markPrivacyPolicyOpened();
+        window.open(FORM_CONFIG.privacyPolicyUrl, '_blank', 'noopener,noreferrer');
+        showToast(
+          'กรุณาอ่านประกาศความเป็นส่วนตัว',
+          'ระบบเปิดหน้าประกาศความเป็นส่วนตัวให้แล้ว กรุณาอ่านรายละเอียดให้ครบถ้วนแล้วกลับมาติ๊กยอมรับครับ',
+          'info'
+        );
+      }
+    }
+
+    function handleAcceptCheckboxChange(checkboxEl) {
+      if (!checkboxEl) return;
+      if (checkboxEl.checked && !hasReadPrivacyPolicy()) {
+        checkboxEl.checked = false;
+        markPrivacyPolicyOpened();
+        window.open(FORM_CONFIG.privacyPolicyUrl, '_blank', 'noopener,noreferrer');
+        showToast(
+          'กรุณาอ่านประกาศความเป็นส่วนตัว',
+          'ระบบเปิดหน้าประกาศความเป็นส่วนตัวให้แล้ว กรุณาอ่านรายละเอียดก่อนกดติ๊กยอมรับครับ',
+          'info'
+        );
+      }
     }
 
     function compressImageFile(file, maxWidth = 900, quality = 0.78) {
@@ -742,6 +966,8 @@
           const el = document.getElementById(id);
           if (el) draft[id] = el.value;
         });
+        const roleChecked = document.querySelector('input[name="dispatcherRole"]:checked');
+        if (roleChecked) draft.dispatcherRole = roleChecked.value;
         localStorage.setItem(FORM_CONFIG.draftStorageKey, JSON.stringify(draft));
         const badge = document.getElementById('draft-status-badge');
         if (badge) {
@@ -764,6 +990,13 @@
             restored = true;
           }
         });
+        if (draft.dispatcherRole) {
+          const radios = document.querySelectorAll('input[name="dispatcherRole"]');
+          radios.forEach(r => {
+            if (r.value === draft.dispatcherRole) r.checked = true;
+          });
+          handleDispatcherRoleChange();
+        }
         if (restored) {
           showToast('กู้คืนแบบร่างแล้ว', 'ระบบดึงข้อมูลที่พิมพ์ค้างไว้กลับมาให้อัตโนมัติแล้วครับ', 'info');
         }
@@ -780,6 +1013,7 @@
         };
         document.getElementById('preview-selfie-proof')?.classList.add('hidden');
         document.getElementById('preview-car-photo')?.classList.add('hidden');
+        handleDispatcherRoleChange();
         const badge = document.getElementById('draft-status-badge');
         if (badge) {
           badge.className = 'text-xs font-semibold text-slate-600 bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200';
@@ -793,10 +1027,19 @@
       event.preventDefault();
       const btn = document.getElementById('btn-submit-member-form');
       const originalHtml = btn.innerHTML;
+      const isDispatcher = isDispatcherSelected();
 
       try {
-        if (!uploadedPhotos.selfie.base64 || !uploadedPhotos.car.base64) {
-          showToast('ข้อมูลไม่ครบถ้วน', 'กรุณาแนบรูปถ่ายยืนยันตัวตนและรูปรถยนต์ให้ครบถ้วนครับ', 'error');
+        if (!uploadedPhotos.selfie.base64) {
+          showToast('ข้อมูลไม่ครบถ้วน', 'กรุณาแนบรูปถ่ายคู่กับกระดาษยืนยันตัวตนครับ', 'error');
+          return;
+        }
+        if (!isDispatcher && !uploadedPhotos.car.base64) {
+          showToast('ข้อมูลไม่ครบถ้วน', 'กรุณาแนบรูปถ่ายรถยนต์ของคุณให้ครบถ้วนครับ', 'error');
+          return;
+        }
+        if (!hasReadPrivacyPolicy() || !document.getElementById('accept_rules')?.checked) {
+          showToast('กรุณายืนยันประกาศความเป็นส่วนตัว', 'กรุณาเปิดอ่านประกาศความเป็นส่วนตัวและติ๊กยอมรับก่อนส่งใบสมัครครับ', 'error');
           return;
         }
 
@@ -812,10 +1055,10 @@
           String(now.getMinutes()).padStart(2, '0') +
           String(now.getSeconds()).padStart(2, '0');
 
+        const dispatcherRole = document.querySelector('input[name="dispatcherRole"]:checked')?.value || '';
         const firstName = document.getElementById('member_first_name').value.trim();
         const lastName = document.getElementById('member_last_name').value.trim();
         const chatName = document.getElementById('member_chat_name').value.trim();
-        const profileChanged = document.getElementById('member_profile_changed').value;
         const phone = document.getElementById('member_phone').value.trim();
         const lineId = document.getElementById('member_line_id').value.trim();
         const address = document.getElementById('member_address').value.trim();
@@ -825,10 +1068,9 @@
 
         const formData = {
           refCode,
-          sourceForm: FORM_CONFIG.sourceFormUrl,
           submittedAt: now.toISOString(),
+          dispatcherRole,
           chatName,
-          profileChanged,
           firstName,
           lastName,
           fullname: `${firstName} ${lastName}`.trim(),
@@ -838,8 +1080,8 @@
           carBrand,
           carModel,
           licensePlate,
-          acceptedPolicy: 'ยอมรับ',
-          carPhotoName: uploadedPhotos.car.name,
+          acceptedPolicy: 'ยอมรับและยืนยัน',
+          carPhotoName: uploadedPhotos.car.name || '',
           selfiePhotoName: uploadedPhotos.selfie.name
         };
 
@@ -868,11 +1110,14 @@
         const successDetails = document.getElementById('success-summary-details');
         if (successRef) successRef.textContent = refCode;
         if (successDetails) {
+          const vehicleText = (carBrand || carModel || licensePlate)
+            ? `${escapeHtml(carBrand)} ${escapeHtml(carModel)} · ${escapeHtml(licensePlate)}`
+            : 'ผู้ปล่อยงาน / บริษัทปล่อยงาน (ไม่ระบุรถ)';
           successDetails.innerHTML = `
-            <div><span class="text-emerald-400">ชื่อ - นามสกุล:</span> <strong>${escapeHtml(firstName)} ${escapeHtml(lastName)}</strong></div>
+            <div><span class="text-emerald-400">ชื่อ - นามสกุล / บริษัท:</span> <strong>${escapeHtml(firstName)} ${escapeHtml(lastName)}</strong></div>
             <div><span class="text-emerald-400">ชื่อในห้อง Open Chat / Line ID:</span> <strong>${escapeHtml(chatName)}</strong> (${escapeHtml(lineId)})</div>
             <div><span class="text-emerald-400">เบอร์ติดต่อ:</span> <strong class="font-mono">${escapeHtml(phone)}</strong></div>
-            <div><span class="text-emerald-400">รถและทะเบียน:</span> <strong>${escapeHtml(carBrand)} ${escapeHtml(carModel)}</strong> · <strong>${escapeHtml(licensePlate)}</strong></div>
+            <div><span class="text-emerald-400">ข้อมูลรถ / สถานะ:</span> <strong>${vehicleText}</strong></div>
           `;
         }
         successBox?.classList.remove('hidden');
@@ -885,6 +1130,7 @@
         };
         document.getElementById('preview-selfie-proof')?.classList.add('hidden');
         document.getElementById('preview-car-photo')?.classList.add('hidden');
+        handleDispatcherRoleChange();
         showToast('ส่งใบสมัครสำเร็จ', `บันทึกข้อมูลเรียบร้อยแล้ว รหัสอ้างอิง: ${refCode}`, 'success');
       } catch (err) {
         showToast('เกิดข้อผิดพลาด', err.message || 'ไม่สามารถส่งข้อมูลได้ กรุณาลองใหม่อีกครั้ง', 'error');
@@ -894,12 +1140,23 @@
       }
     }
 
+    window.addEventListener('storage', e => {
+      if (e.key === FORM_CONFIG.privacyReadStorageKey) {
+        updatePrivacyReadBadge();
+      }
+    });
+
     document.addEventListener('DOMContentLoaded', () => {
+      updatePrivacyReadBadge();
+      handleDispatcherRoleChange();
       restoreFormDraft();
       DRAFT_INPUT_IDS.forEach(id => {
         const el = document.getElementById(id);
         el?.addEventListener('input', saveFormDraft);
         el?.addEventListener('change', saveFormDraft);
+      });
+      document.querySelectorAll('input[name="dispatcherRole"]').forEach(r => {
+        r.addEventListener('change', saveFormDraft);
       });
     });
   </script>

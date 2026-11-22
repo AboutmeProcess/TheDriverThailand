@@ -735,31 +735,20 @@
     const GEO_CACHE_KEY = "pramest_thai_geo_tree_v2";
     const GEO_CACHE_TTL_MS = 30 * 24 * 60 * 60 * 1000;
 
-    const SHIPPING_ROUNDS = [
-      "รอบวันที่ 11 ธันวาคม 2569",
-      "รอบวันที่ 10 พฤศจิกายน 2569",
-      "รอบวันที่ 09 ตุลาคม 2569",
-      "รอบวันที่ 05 กันยายน 2569",
-      "รอบวันที่ 05 สิงหาคม 2569",
-      "รอบวันที่ 21 กรกฎาคม 2569",
-      "รอบวันที่ 03 กรกฎาคม 2569",
-      "รอบวันที่ 10 มิถุนายน 2569",
-      "รอบวันที่ 08 พฤษภาคม 2569",
-      "รอบวันที่ 03 เมษายน 2569",
-      "รอบวันที่ 10 มีนาคม 2569",
-      "รอบวันที่ 11 กุมภาพันธ์ 2569",
-      "รอบวันที่ 18 มกราคม 2569",
-      "รอบวันที่ 24 ธันวาคม 2568",
-      "รอบวันที่ 06 ธันวาคม 2568",
-      "รอบวันที่ 18 พฤศจิกายน 2568",
-      "รอบวันที่ 05 พฤศจิกายน 2568",
-      "รอบวันที่ 18 ตุลาคม 2568",
-      "รอบวันที่ 03 ตุลาคม 2568",
-      "รอบวันที่ 18 กันยายน 2568",
-      "รอบวันที่ 18 สิงหาคม 2568",
-      "รอบวันที่ 03 สิงหาคม 2568",
-      "รอบวันที่ 12 กรกฎาคม 2568"
-    ];
+    const THAI_MONTH_MAP = {
+      "มกราคม": 1, "ม.ค.": 1, "มค": 1,
+      "กุมภาพันธ์": 2, "ก.พ.": 2, "กพ": 2,
+      "มีนาคม": 3, "มี.ค.": 3, "มีค": 3,
+      "เมษายน": 4, "เม.ย.": 4, "เมย": 4,
+      "พฤษภาคม": 5, "พ.ค.": 5, "พค": 5,
+      "มิถุนายน": 6, "มิ.ย.": 6, "มิย": 6,
+      "กรกฎาคม": 7, "ก.ค.": 7, "กค": 7,
+      "สิงหาคม": 8, "ส.ค.": 8, "สค": 8,
+      "กันยายน": 9, "ก.ย.": 9, "กย": 9,
+      "ตุลาคม": 10, "ต.ค.": 10, "ตค": 10,
+      "พฤศจิกายน": 11, "พ.ย.": 11, "พย": 11,
+      "ธันวาคม": 12, "ธ.ค.": 12, "ธค": 12
+    };
 
     const FALLBACK_GEO_ROWS = [
       { province: "กรุงเทพมหานคร", amphoe: "เขตคลองเตย", district: "คลองเตย", zipcode: "10110" },
@@ -1418,99 +1407,50 @@
       const sel = document.getElementById("shipping-round-filter");
       if (!sel) return;
       sel.innerHTML = '<option value="ALL">แสดงทุกรอบการจัดส่ง</option>';
-      SHIPPING_ROUNDS.forEach((r) => {
-        const opt = document.createElement("option");
-        opt.value = r;
-        opt.textContent = r;
-        sel.appendChild(opt);
-      });
     }
 
-    function maskPhoneNumber(phone) {
-      const raw = String(phone ?? "").trim();
-      const digits = raw.replace(/\D/g, "");
-      if (digits.length >= 7) {
-        return `${digits.slice(0, 3)}xxx${digits.slice(-3)}`;
+    function parseThaiRoundTimestamp(roundLabel) {
+      const raw = String(roundLabel || "").trim();
+      if (!raw) return 0;
+
+      // รองรับรูปแบบไทย เช่น "รอบวันที่ 11 ธันวาคม 69" หรือ "รอบวันที่ 11 ธันวาคม 2569"
+      const thaiMatch = raw.match(/(\d{1,2})\s+([ก-์\.]+)\s+(\d{2,4})/);
+      if (thaiMatch) {
+        const day = parseInt(thaiMatch[1], 10);
+        const monthStr = thaiMatch[2].replace(/\s+/g, "");
+        const month = THAI_MONTH_MAP[monthStr] || 0;
+        let year = parseInt(thaiMatch[3], 10);
+        if (year < 100) year += 2500;
+        if (year > 2400) year -= 543;
+        if (day && month && year) {
+          return new Date(year, month - 1, day).getTime();
+        }
       }
-      if (digits.length >= 4) {
-        return `${digits.slice(0, 2)}xx${digits.slice(-2)}`;
+
+      // รองรับรูปแบบวันที่ตัวเลข เช่น 11/12/2569 หรือ 2026-12-11
+      const dateMatch = raw.match(/(\d{1,4})[\/\-](\d{1,2})[\/\-](\d{2,4})/);
+      if (dateMatch) {
+        let p1 = parseInt(dateMatch[1], 10);
+        const p2 = parseInt(dateMatch[2], 10);
+        let p3 = parseInt(dateMatch[3], 10);
+        let year = p1 > 31 ? p1 : p3;
+        const day = p1 > 31 ? p3 : p1;
+        if (year < 100) year += 2500;
+        if (year > 2400) year -= 543;
+        if (day && p2 && year) {
+          return new Date(year, p2 - 1, day).getTime();
+        }
       }
-      return raw ? "xxx-xxx-xxxx" : "-";
+
+      const parsedFallback = Date.parse(raw);
+      return Number.isNaN(parsedFallback) ? 0 : parsedFallback;
     }
 
-    function extractFieldValue(row, keys = []) {
-      if (!row || typeof row !== "object") return "";
-      for (const k of keys) {
-        if (row[k] !== undefined && row[k] !== null && String(row[k]).trim() !== "") {
-          return String(row[k]).trim();
-        }
-      }
-      const lowerMap = {};
-      Object.keys(row).forEach((rk) => {
-        lowerMap[String(rk).trim().toLowerCase()] = row[rk];
-      });
-      for (const k of keys) {
-        const found = lowerMap[String(k).trim().toLowerCase()];
-        if (found !== undefined && found !== null && String(found).trim() !== "") {
-          return String(found).trim();
-        }
-      }
-      return "";
-    }
-
-    function extractPhoneFromRow(row) {
-      const direct = extractFieldValue(row, [
-        "เบอร์โทรศัพท์",
-        "เบอร์โทร",
-        "เบอร์ติดต่อ",
-        "โทร",
-        "phone",
-        "Phone",
-        "tel",
-        "telephone",
-        "mobile"
-      ]);
-      if (direct) return direct;
-
-      for (const [key, val] of Object.entries(row || {})) {
-        const kLower = String(key).toLowerCase();
-        const sVal = String(val ?? "").trim();
-        if (!sVal) continue;
-        if (kLower.includes("phone") || kLower.includes("tel") || kLower.includes("โทร") || kLower.includes("เบอร์")) {
-          return sVal;
-        }
-        const digits = sVal.replace(/\D/g, "");
-        if (/^0[689]\d{7,8}$/.test(digits)) {
-          return sVal;
-        }
-      }
-      return "";
-    }
-
-    function extractRoundFromRow(row) {
-      const direct = extractFieldValue(row, [
-        "รอบการจัดส่ง",
-        "รอบจัดส่ง",
-        "รอบส่งบัตร",
-        "รอบส่ง",
-        "วันที่จัดส่ง",
-        "roundDate",
-        "round_date",
-        "round",
-        "shippingRound",
-        "shipping_round"
-      ]);
-      if (direct) return direct;
-
-      for (const [key, val] of Object.entries(row || {})) {
-        const kLower = String(key).toLowerCase();
-        const sVal = String(val ?? "").trim();
-        if (!sVal) continue;
-        if (kLower.includes("round") || kLower.includes("รอบ") || kLower.includes("จัดส่ง")) {
-          return sVal;
-        }
-      }
-      return "";
+    function normalizeRoundKey(text) {
+      return String(text || "")
+        .replace(/\s+/g, " ")
+        .trim()
+        .toLowerCase();
     }
 
     function syncRoundFilterWithRecords() {
@@ -1518,27 +1458,32 @@
       if (!sel) return;
       const prevVal = sel.value || "ALL";
 
-      const dynamicRounds = [];
-      const seenNorm = new Set();
+      const roundMap = new Map();
 
-      const addRoundOption = (label) => {
-        const clean = String(label || "").trim();
-        if (!clean) return;
-        const norm = normalizeRoundKey(clean);
-        if (!seenNorm.has(norm)) {
-          seenNorm.add(norm);
-          dynamicRounds.push(clean);
+      shippingRecords.forEach((row, index) => {
+        const exactRound = extractRoundFromRow(row).replace(/\s+/g, " ").trim();
+        if (!exactRound) return;
+        const normKey = normalizeRoundKey(exactRound);
+        if (!roundMap.has(normKey)) {
+          roundMap.set(normKey, {
+            label: exactRound,
+            ts: parseThaiRoundTimestamp(exactRound),
+            orderIndex: index
+          });
         }
-      };
+      });
 
-      shippingRecords.forEach((row) => addRoundOption(extractRoundFromRow(row)));
-      SHIPPING_ROUNDS.forEach((r) => addRoundOption(r));
+      // เรียงลำดับจากรอบใหม่ล่าสุดอยู่บนสุด ลงไปหารอบเก่าด้านล่างสุด
+      const sortedRounds = Array.from(roundMap.values()).sort((a, b) => {
+        if (b.ts !== a.ts) return b.ts - a.ts;
+        return a.orderIndex - b.orderIndex;
+      });
 
       sel.innerHTML = '<option value="ALL">แสดงทุกรอบการจัดส่ง</option>';
-      dynamicRounds.forEach((r) => {
+      sortedRounds.forEach((item) => {
         const opt = document.createElement("option");
-        opt.value = r;
-        opt.textContent = r;
+        opt.value = item.label;
+        opt.textContent = item.label;
         sel.appendChild(opt);
       });
 
@@ -1622,33 +1567,126 @@
 
       container.innerHTML = `
         <div class="space-y-4">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-3">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-3">
             <div>
-              <p class="text-sm font-extrabold text-slate-900">${fullName}</p>
-              <p class="text-xs text-slate-600">รอบการจัดส่ง: <strong>${roundText}</strong> | เลขพัสดุ: <strong class="font-mono">${trackingNo}</strong></p>
-              ${copyButtonsHtml}
+              <span class="text-xs text-slate-500 block">ชื่อผู้สมัคร</span>
+              <strong class="text-sm sm:text-base text-slate-900">${fullName}</strong>
             </div>
-            <span class="text-xs font-bold px-3 py-1 rounded-full bg-amber-100 text-amber-900 w-fit">${status}</span>
+            <span class="text-xs font-extrabold bg-amber-100 text-amber-900 border border-amber-300 px-3 py-1 rounded-full">${status}</span>
           </div>
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">${stepsHtml}</div>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
+            ${stepsHtml}
+          </div>
+          <div class="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-600 pt-1">
+            <span>รอบการจัดส่ง: <strong class="text-slate-900">${roundText}</strong></span>
+            <span>เลขพัสดุ: <strong class="font-mono text-slate-900">${trackingNo}</strong></span>
+          </div>
+          ${copyButtonsHtml}
         </div>
       `;
     }
 
+    function extractFieldValue(row, keys) {
+      if (!row || typeof row !== "object") return "";
+      for (const key of keys) {
+        if (row[key] !== undefined && row[key] !== null && String(row[key]).trim() !== "") {
+          return String(row[key]).trim();
+        }
+      }
+      const lowerMap = {};
+      Object.keys(row).forEach((k) => {
+        lowerMap[String(k).trim().toLowerCase()] = row[k];
+      });
+      for (const key of keys) {
+        const val = lowerMap[String(key).trim().toLowerCase()];
+        if (val !== undefined && val !== null && String(val).trim() !== "") {
+          return String(val).trim();
+        }
+      }
+      return "";
+    }
+
+    function extractPhoneFromRow(row) {
+      const direct = extractFieldValue(row, [
+        "เบอร์โทรศัพท์",
+        "เบอร์โทร",
+        "เบอร์ติดต่อ",
+        "โทรศัพท์",
+        "phone",
+        "tel",
+        "mobile"
+      ]);
+      if (direct) return direct;
+
+      if (row && typeof row === "object") {
+        for (const [key, val] of Object.entries(row)) {
+          const kLower = String(key).toLowerCase();
+          if (kLower.includes("เบอร์") || kLower.includes("โทร") || kLower.includes("phone") || kLower.includes("tel")) {
+            const s = String(val ?? "").trim();
+            if (s) return s;
+          }
+        }
+      }
+      return "";
+    }
+
+    function extractRoundFromRow(row) {
+      const direct = extractFieldValue(row, [
+        "รอบการจัดส่ง",
+        "รอบส่ง",
+        "รอบวันที่",
+        "รอบ",
+        "roundDate",
+        "round_date",
+        "round"
+      ]);
+      if (direct) return direct;
+
+      if (row && typeof row === "object") {
+        for (const [key, val] of Object.entries(row)) {
+          const kLower = String(key).toLowerCase();
+          if (kLower.includes("รอบ")) {
+            const s = String(val ?? "").trim();
+            if (s) return s;
+          }
+        }
+      }
+      return "";
+    }
+
+    function maskPhoneNumber(phoneRaw) {
+      const cleaned = String(phoneRaw || "").trim();
+      if (!cleaned) return "-";
+      const digits = cleaned.replace(/\D/g, "");
+      if (digits.length >= 9) {
+        return `${digits.slice(0, 3)}xxx${digits.slice(-4)}`;
+      }
+      if (digits.length >= 6) {
+        return `${digits.slice(0, 2)}xxx${digits.slice(-2)}`;
+      }
+      return cleaned;
+    }
+
     async function fetchShippingDataFromSheet() {
       const badge = document.getElementById("sheet-sync-status-badge");
+      if (badge) {
+        badge.textContent = "กำลังซิงค์ข้อมูลชีต...";
+        badge.className = "bg-slate-100 text-slate-700 text-xs font-semibold px-3 py-0.5 rounded-full";
+      }
+
       try {
-        if (badge) badge.textContent = "กำลังซิงค์ข้อมูลชีต...";
-        const res = await fetch(GAS_WEB_APP_URL);
+        const res = await fetch(`${GAS_WEB_APP_URL}?action=shipping&t=${Date.now()}`, { method: "GET" });
+        if (!res.ok) throw new Error("Network response was not ok");
         const data = await res.json();
-        const list = Array.isArray(data) ? data : (data.data || data.records || data.rows || []);
-        shippingRecords = list.filter((item) => {
-          if (!item || typeof item !== "object") return false;
-          const n = extractFieldValue(item, ["ชื่อและนามสกุล", "ชื่อ-นามสกุล", "fullname", "fullName", "name"]);
-          const t = extractFieldValue(item, ["เลขพัสดุ", "trackingNo", "tracking_no", "tracking"]);
-          const r = extractRoundFromRow(item);
-          return Boolean(n || t || r);
+        const rows = Array.isArray(data) ? data : (Array.isArray(data?.rows) ? data.rows : (Array.isArray(data?.data) ? data.data : []));
+
+        shippingRecords = rows.filter((r) => r && typeof r === "object" && Object.values(r).some((v) => String(v ?? "").trim() !== ""));
+        shippingRecords.sort((a, b) => {
+          const tsA = parseThaiRoundTimestamp(extractRoundFromRow(a));
+          const tsB = parseThaiRoundTimestamp(extractRoundFromRow(b));
+          return tsB - tsA;
         });
+
         syncRoundFilterWithRecords();
         if (badge) {
           badge.textContent = `อัปเดตแล้ว (${shippingRecords.length} รายการ)`;

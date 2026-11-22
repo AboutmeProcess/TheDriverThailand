@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Driver TH 🇹🇭 Premium Service</title>
+<title>The Driver TH 🇹🇭 Premium Service | ระบบสมาชิก</title>
 <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
@@ -11,24 +11,40 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body {
     font-family: 'Prompt', sans-serif;
-    background: #FFFFFF;
-    color: #1E293B;
+    background: #F8FAFC;
+    color: #0F172A;
     width: 100%;
     max-width: 100%;
     overflow-x: hidden;
   }
 
+  @keyframes floatSlow {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-4px); }
+  }
+  @keyframes iconBouncePop {
+    0%, 100% { transform: translateY(0) scale(1); }
+    40% { transform: translateY(-5px) scale(1.12) rotate(-4deg); }
+    70% { transform: translateY(-2px) scale(1.04) rotate(3deg); }
+  }
+  @keyframes goldShimmer {
+    to { background-position: 200% center; }
+  }
+
+  .icon-float { animation: floatSlow 3.2s ease-in-out infinite; }
+  .icon-bounce-hover:hover { animation: iconBouncePop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); }
+
   /* UNIFIED TOPMOST GLOBAL SITE NAVIGATION BAR (EXACT SAME SIZE & POSITION ACROSS ALL 4 PAGES) */
   .tdt-global-nav {
     box-sizing: border-box;
     font-family: 'Prompt', sans-serif;
-    background-color: #020617;
+    background: linear-gradient(90deg, #060911 0%, #0d1322 50%, #060911 100%);
     color: #e2e8f0;
-    border-bottom: 1px solid #1e293b;
+    border-bottom: 1px solid rgba(251, 191, 36, 0.25);
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.35);
     width: 100%;
   }
   .tdt-global-nav *, .tdt-global-nav *::before, .tdt-global-nav *::after {
@@ -68,7 +84,10 @@
     }
   }
   .tdt-global-brand:hover {
-    color: #fcd34d;
+    color: #fde68a;
+  }
+  .tdt-global-brand:hover i {
+    animation: iconBouncePop 0.6s ease;
   }
   .tdt-global-links {
     display: flex;
@@ -95,13 +114,18 @@
     text-decoration: none;
     white-space: nowrap;
     flex-shrink: 0;
-    background-color: #0f172a;
-    border: 1px solid #334155;
+    background-color: rgba(15, 23, 42, 0.85);
+    border: 1px solid rgba(148, 163, 184, 0.25);
     color: #e2e8f0;
-    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    transition: all 0.2s ease;
   }
   .tdt-nav-btn:hover {
     background-color: #1e293b;
+    border-color: rgba(251, 191, 36, 0.45);
+    transform: translateY(-1px);
+  }
+  .tdt-nav-btn:hover i {
+    animation: iconBouncePop 0.55s ease;
   }
   .tdt-nav-btn.is-home i { color: #94a3b8; }
   .tdt-nav-btn.is-pcard { color: #fcd34d; }
@@ -109,10 +133,10 @@
   .tdt-nav-btn.is-blacklist { color: #fda4af; }
   .tdt-nav-btn.is-blacklist i { color: #fb7185; }
   .tdt-nav-btn.active-register {
-    background-color: #10b981;
-    border-color: #10b981;
+    background: linear-gradient(135deg, #34d399 0%, #059669 100%);
+    border-color: #6ee7b7;
     color: #020617;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
   }
   .tdt-nav-btn.active-register i { color: #020617; }
 
@@ -123,7 +147,7 @@
     padding: 24px 16px;
     display: flex;
     flex-direction: column;
-    gap: 22px;
+    gap: 24px;
   }
   @media (min-width: 640px) {
     .page-wrap {
@@ -131,79 +155,106 @@
     }
   }
 
-  /* 1. Hero Banner (โทนสว่างพรีเมียม ขาว-ครีม-ทอง) */
+  /* 1. Executive Obsidian & Gold Hero Banner */
   .hero-card {
-    background: linear-gradient(135deg, #FFFBEB 0%, #FFFFFF 55%, #FEF3C7 100%);
-    border-radius: 16px;
-    padding: 24px 22px;
-    color: #0F172A;
-    border: 1px solid #FDE68A;
-    box-shadow: 0 4px 16px rgba(217, 119, 6, 0.08);
+    background:
+      radial-gradient(circle at 15% 20%, rgba(245, 158, 11, 0.24) 0%, transparent 45%),
+      radial-gradient(circle at 85% 80%, rgba(16, 185, 129, 0.16) 0%, transparent 50%),
+      linear-gradient(135deg, #070a12 0%, #0f172a 55%, #172033 100%);
+    border-radius: 24px;
+    padding: 28px 26px;
+    color: #FFFFFF;
+    border: 1px solid rgba(251, 191, 36, 0.3);
+    box-shadow: 0 20px 35px -10px rgba(7, 10, 18, 0.28);
     width: 100%;
+    position: relative;
+    overflow: hidden;
   }
   .badge {
-    display: inline-block;
-    background: #FEF3C7;
-    border: 1px solid #F59E0B;
-    color: #92400E;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(245, 158, 11, 0.16);
+    border: 1px solid rgba(251, 191, 36, 0.45);
+    color: #FDE68A;
     font-size: 12px;
-    font-weight: 500;
-    padding: 4px 12px;
+    font-weight: 700;
+    padding: 5px 14px;
     border-radius: 50px;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
   }
   .hero-title {
-    font-size: 24px;
-    font-weight: 700;
-    color: #0F172A;
-    margin-bottom: 6px;
+    font-size: 26px;
+    font-weight: 800;
+    background: linear-gradient(90deg, #ffffff 0%, #fde68a 50%, #fbbf24 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: goldShimmer 6s linear infinite;
+    margin-bottom: 8px;
     line-height: 1.3;
   }
   .hero-subtitle {
     font-size: 14px;
-    color: #475569;
-    font-weight: 400;
-    margin-bottom: 18px;
-    line-height: 1.5;
+    color: #CBD5E1;
+    font-weight: 300;
+    margin-bottom: 20px;
+    line-height: 1.6;
   }
   .stats-box {
-    background: #FFFFFF;
-    border: 1px solid #FDE68A;
-    border-radius: 12px;
-    padding: 14px 18px;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(251, 191, 36, 0.25);
+    border-radius: 16px;
+    padding: 16px 20px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
   }
-  .stat-label { font-size: 12.5px; color: #64748B; }
-  .stat-number { font-size: 26px; font-weight: 700; color: #B45309; }
+  .stat-label { font-size: 12.5px; color: #94A3B8; }
+  .stat-number { font-size: 28px; font-weight: 800; color: #FBBF24; }
   .stat-update {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     font-size: 12px;
-    color: #065F46;
-    background: #ECFDF5;
-    border: 1px solid #A7F3D0;
-    padding: 5px 12px;
-    border-radius: 8px;
+    font-weight: 600;
+    color: #6EE7B7;
+    background: rgba(16, 185, 129, 0.14);
+    border: 1px solid rgba(52, 211, 153, 0.35);
+    padding: 6px 14px;
+    border-radius: 999px;
   }
 
-  /* Card Base (โทนสว่าง) */
+  /* Card Base */
   .card {
     background: #FFFFFF;
     border: 1px solid #E2E8F0;
-    border-radius: 16px;
-    padding: 22px 20px;
-    box-shadow: 0 3px 12px rgba(15, 23, 42, 0.03);
+    border-radius: 22px;
+    padding: 24px 22px;
+    box-shadow: 0 6px 20px -4px rgba(15, 23, 42, 0.04);
     width: 100%;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+  .card:hover {
+    border-color: rgba(245, 158, 11, 0.4);
   }
   .sec-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
     font-size: 19px;
-    font-weight: 700;
+    font-weight: 800;
     color: #0F172A;
     margin-bottom: 14px;
-    padding-left: 10px;
-    border-left: 4px solid #D97706;
+    padding-left: 12px;
+    border-left: 4px solid #F59E0B;
+  }
+  .sec-title i {
+    color: #D97706;
   }
 
   /* 2. Search Box */
@@ -213,36 +264,47 @@
     align-items: center;
     flex-wrap: wrap;
     gap: 8px;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
   }
   .result-count {
     font-size: 12px;
-    font-weight: 500;
+    font-weight: 700;
     color: #92400E;
     background: #FFFBEB;
-    border: 1px solid #FDE68A;
-    padding: 4px 12px;
+    border: 1px solid #FCD34D;
+    padding: 5px 14px;
     border-radius: 50px;
   }
   .search-wrapper {
     position: relative;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
     width: 100%;
+  }
+  .search-icon-left {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94A3B8;
+    font-size: 14px;
+    pointer-events: none;
   }
   #search {
     width: 100%;
-    padding: 12px 40px 12px 14px;
+    padding: 13px 40px 13px 40px;
     font-family: 'Prompt', sans-serif;
     font-size: 14px;
     color: #0F172A;
     border: 1.5px solid #CBD5E1;
-    border-radius: 10px;
+    border-radius: 14px;
     background: #F8FAFC;
+    transition: all 0.2s ease;
   }
   #search:focus {
     outline: none;
-    border-color: #D97706;
+    border-color: #F59E0B;
     background: #FFFFFF;
+    box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15);
   }
   .clear-btn {
     position: absolute;
@@ -252,8 +314,8 @@
     background: #E2E8F0;
     color: #334155;
     border: none;
-    width: 24px;
-    height: 24px;
+    width: 26px;
+    height: 26px;
     border-radius: 50%;
     font-size: 12px;
     cursor: pointer;
@@ -262,27 +324,27 @@
   .clear-btn.visible { display: block; }
   .table-container {
     width: 100%;
-    max-height: 400px;
+    max-height: 420px;
     overflow: auto;
     border: 1px solid #E2E8F0;
-    border-radius: 10px;
+    border-radius: 14px;
     background: #FFFFFF;
   }
   table { width: 100%; border-collapse: collapse; min-width: 360px; }
   th {
     position: sticky;
     top: 0;
-    background: #FEF3C7;
-    color: #78350F;
-    font-weight: 600;
+    background: #0F172A;
+    color: #FBBF24;
+    font-weight: 700;
     font-size: 13px;
-    padding: 11px 14px;
+    padding: 12px 16px;
     text-align: left;
     white-space: nowrap;
     border-bottom: 2px solid #F59E0B;
   }
   td {
-    padding: 10px 14px;
+    padding: 11px 16px;
     font-size: 13px;
     color: #334155;
     border-bottom: 1px solid #F1F5F9;
@@ -292,43 +354,51 @@
   tbody tr:hover td { background: #FFFBEB; color: #0F172A; }
 
   /* 3. Steps & CTA */
-  .section-header { text-align: center; margin-bottom: 20px; }
-  .section-title { font-size: 22px; font-weight: 700; color: #0F172A; margin-bottom: 6px; }
+  .section-header { text-align: center; margin-bottom: 22px; }
+  .section-title { font-size: 22px; font-weight: 800; color: #0F172A; margin-bottom: 6px; display: inline-flex; align-items: center; gap: 8px; }
+  .section-title i { color: #D97706; }
   .section-desc { font-size: 14px; color: #64748B; }
   .steps-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 16px;
-    margin-bottom: 20px;
+    margin-bottom: 22px;
     width: 100%;
   }
   .step-card {
     background: #F8FAFC;
     border: 1px solid #E2E8F0;
-    border-top: 4px solid #D97706;
-    border-radius: 14px;
+    border-top: 4px solid #F59E0B;
+    border-radius: 16px;
     padding: 20px 18px;
-    box-shadow: 0 3px 10px rgba(15, 23, 42, 0.03);
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .step-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px -8px rgba(15, 23, 42, 0.1);
   }
   .step-num {
-    display: inline-block;
-    background: #FEF3C7;
-    color: #92400E;
-    border: 1px solid #FCD34D;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #0F172A;
+    color: #FBBF24;
+    border: 1px solid rgba(251, 191, 36, 0.4);
     font-size: 12px;
-    font-weight: 600;
+    font-weight: 700;
     padding: 4px 12px;
     border-radius: 50px;
     margin-bottom: 10px;
   }
-  .step-title { font-size: 16px; font-weight: 600; color: #0F172A; margin-bottom: 8px; }
+  .step-title { font-size: 16px; font-weight: 700; color: #0F172A; margin-bottom: 8px; }
   .step-text { font-size: 13.5px; color: #475569; line-height: 1.6; }
   .example-tag {
     margin-top: 10px;
-    background: #FFFFFF;
-    border: 1px dashed #CBD5E1;
-    border-radius: 8px;
-    padding: 8px 10px;
+    background: #FFFBEB;
+    border: 1px dashed #F59E0B;
+    border-radius: 10px;
+    padding: 8px 12px;
     font-size: 12.5px;
     color: #0F172A;
   }
@@ -340,37 +410,51 @@
     align-items: center;
     gap: 10px;
     width: 100%;
-    background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
-    color: #FFFFFF;
+    background: linear-gradient(135deg, #FBBF24 0%, #D97706 100%);
+    color: #090D16;
     text-decoration: none;
     font-size: 16px;
-    font-weight: 600;
-    padding: 14px 28px;
-    border-radius: 12px;
-    box-shadow: 0 6px 16px rgba(217, 119, 6, 0.25);
+    font-weight: 800;
+    padding: 15px 28px;
+    border-radius: 14px;
+    box-shadow: 0 8px 20px rgba(217, 119, 6, 0.28);
     transition: transform 0.2s, box-shadow 0.2s;
   }
   .cta-btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 8px 20px rgba(217, 119, 6, 0.32);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 26px rgba(217, 119, 6, 0.36);
   }
-  .cta-note { font-size: 12px; color: #64748B; margin-top: 8px; }
+  .cta-btn:hover i {
+    animation: iconBouncePop 0.6s ease;
+  }
+  .cta-note { font-size: 12px; color: #64748B; margin-top: 10px; display: inline-flex; align-items: center; gap: 6px; }
 
   /* 4. Rules */
   .alert-banner {
     background: #FFFBEB;
     border: 1px solid #FDE68A;
     border-left: 5px solid #D97706;
-    border-radius: 12px;
-    padding: 14px 18px;
-    margin-bottom: 16px;
+    border-radius: 14px;
+    padding: 16px 18px;
+    margin-bottom: 18px;
     display: flex;
     align-items: flex-start;
     gap: 12px;
   }
-  .alert-icon { font-size: 20px; line-height: 1.2; }
-  .alert-title { font-size: 15px; font-weight: 600; color: #92400E; margin-bottom: 3px; }
-  .alert-desc { font-size: 13.5px; color: #78350F; line-height: 1.5; }
+  .alert-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: rgba(245, 158, 11, 0.15);
+    color: #D97706;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .alert-title { font-size: 15px; font-weight: 700; color: #92400E; margin-bottom: 3px; }
+  .alert-desc { font-size: 13.5px; color: #78350F; line-height: 1.55; }
   .compare-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -378,8 +462,8 @@
     width: 100%;
   }
   .rule-box {
-    border-radius: 14px;
-    padding: 18px 20px;
+    border-radius: 16px;
+    padding: 20px 20px;
   }
   .rule-do {
     background: #F0FDF4;
@@ -391,7 +475,7 @@
   }
   .rule-header {
     font-size: 15.5px;
-    font-weight: 700;
+    font-weight: 800;
     margin-bottom: 12px;
     display: flex;
     align-items: center;
@@ -402,7 +486,7 @@
   .rule-list { list-style: none; }
   .rule-list li {
     font-size: 13.5px;
-    line-height: 1.55;
+    line-height: 1.6;
     margin-bottom: 8px;
     padding-left: 22px;
     position: relative;
@@ -420,38 +504,42 @@
     color: #DC2626; font-weight: 700;
   }
   .highlight-box {
-    margin-top: 14px;
-    background: #FFFBEB;
-    border: 1px solid #FCD34D;
-    color: #1E293B;
+    margin-top: 16px;
+    background: #0F172A;
+    border: 1px solid rgba(251, 191, 36, 0.4);
+    color: #F8FAFC;
     text-align: center;
-    padding: 13px 16px;
-    border-radius: 12px;
+    padding: 14px 16px;
+    border-radius: 14px;
     font-size: 14px;
   }
-  .highlight-box span { color: #B45309; font-weight: 700; }
+  .highlight-box span { color: #FBBF24; font-weight: 700; }
 
-  /* 5. FAQ & PDPA (โทนสว่าง) */
-  .faq-header { text-align: center; margin-bottom: 18px; }
+  /* 5. FAQ & PDPA */
+  .faq-header { text-align: center; margin-bottom: 20px; }
   .faq-badge {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     background: #FFFBEB;
     color: #B45309;
-    border: 1px solid #FDE68A;
+    border: 1px solid #FCD34D;
     font-size: 12px;
-    font-weight: 600;
-    padding: 4px 12px;
+    font-weight: 700;
+    padding: 4px 14px;
     border-radius: 50px;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
   }
-  .faq-title { font-size: 21px; font-weight: 700; color: #0F172A; margin-bottom: 4px; }
+  .faq-title { font-size: 21px; font-weight: 800; color: #0F172A; margin-bottom: 4px; display: inline-flex; align-items: center; gap: 8px; }
+  .faq-title i { color: #D97706; }
   .faq-subtitle { font-size: 13.5px; color: #64748B; }
   .faq-list { display: flex; flex-direction: column; gap: 10px; }
   details.faq-item {
     background: #FFFFFF;
     border: 1px solid #E2E8F0;
-    border-radius: 12px;
+    border-radius: 14px;
     overflow: hidden;
+    transition: border-color 0.2s ease;
   }
   details.faq-item[open] {
     border-color: #F59E0B;
@@ -460,7 +548,7 @@
     list-style: none;
     padding: 15px 18px;
     font-size: 15px;
-    font-weight: 600;
+    font-weight: 700;
     color: #0F172A;
     cursor: pointer;
     display: flex;
@@ -479,19 +567,19 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: 24px;
-    height: 24px;
-    background: #FEF3C7;
-    color: #B45309;
-    border: 1px solid #FCD34D;
+    min-width: 26px;
+    height: 26px;
+    background: #0F172A;
+    color: #FBBF24;
+    border: 1px solid rgba(251, 191, 36, 0.4);
     font-size: 12.5px;
-    font-weight: 700;
-    border-radius: 7px;
+    font-weight: 800;
+    border-radius: 8px;
   }
   .chevron { font-size: 12px; color: #64748B; transition: transform 0.2s ease; }
   details.faq-item[open] .chevron { transform: rotate(180deg); color: #B45309; }
   .faq-answer {
-    padding: 14px 18px 16px 52px;
+    padding: 14px 18px 16px 54px;
     font-size: 13.5px;
     color: #334155;
     line-height: 1.65;
@@ -501,29 +589,34 @@
   .highlight-pill {
     display: inline-block;
     background: #FFFBEB;
-    border: 1px solid #FDE68A;
+    border: 1px solid #FCD34D;
     color: #92400E;
     padding: 2px 8px;
     border-radius: 6px;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 13px;
   }
   .pdpa-footer {
     margin-top: 18px;
     background: #F8FAFC;
     border: 1px solid #E2E8F0;
-    border-left: 4px solid #D97706;
-    border-radius: 12px;
-    padding: 14px 18px;
+    border-left: 4px solid #F59E0B;
+    border-radius: 14px;
+    padding: 16px 18px;
     font-size: 13px;
     color: #475569;
     line-height: 1.6;
   }
   .pdpa-footer strong {
     color: #0F172A;
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 6px;
     margin-bottom: 4px;
     font-size: 14px;
+  }
+  .pdpa-footer strong i {
+    color: #D97706;
   }
 
   @media (max-width: 768px) {
@@ -567,32 +660,33 @@
 <div class="page-wrap">
   <!-- 1. แบนเนอร์ -->
   <div class="hero-card">
-    <div class="badge">✨ เครือข่ายคนขับรถบริการมืออาชีพ</div>
-    <h1 class="hero-title">🚖 The Driver TH 🇹🇭 Premium Service</h1>
+    <div class="badge"><i class="fa-solid fa-crown icon-float"></i> เครือข่ายคนขับรถบริการมืออาชีพ</div>
+    <h1 class="hero-title"><i class="fa-solid fa-taxi"></i> The Driver TH Premium Service</h1>
     <p class="hero-subtitle">ศูนย์กลางลงทะเบียนยืนยันตัวตนและตรวจสอบรหัสสมาชิก มาตรฐานความปลอดภัยระดับพรีเมียม</p>
     <div class="stats-box">
       <div>
         <div class="stat-label">สถานะจำนวนสมาชิกปัจจุบัน</div>
         <div class="stat-number" id="memberCount">กำลังนับ...</div>
       </div>
-      <div class="stat-update" id="lastSync">🟢 ซิงก์ข้อมูลอัตโนมัติจากระบบ</div>
+      <div class="stat-update" id="lastSync"><i class="fa-solid fa-circle-check"></i> ซิงก์ข้อมูลอัตโนมัติจากระบบ</div>
     </div>
   </div>
 
   <!-- 2. ค้นหารหัสสมาชิก -->
   <div class="card">
     <div class="search-top">
-      <div class="sec-title" style="margin-bottom:0;">🔍 ค้นหารหัสสมาชิกของคุณ</div>
+      <div class="sec-title" style="margin-bottom:0;"><i class="fa-solid fa-magnifying-glass icon-bounce-hover"></i> ค้นหารหัสสมาชิกของคุณ</div>
       <div class="result-count" id="resultCount">กำลังโหลด...</div>
     </div>
     <div class="search-wrapper">
+      <i class="fa-solid fa-search search-icon-left"></i>
       <input type="text" id="search" placeholder="พิมพ์ชื่อในห้อง, เลขท้ายเบอร์โทร 4 หลัก หรือทะเบียนรถ..." oninput="filterTable()">
-      <button type="button" class="clear-btn" id="clearBtn" onclick="clearSearch()">✕</button>
+      <button type="button" class="clear-btn" id="clearBtn" onclick="clearSearch()"><i class="fa-solid fa-xmark"></i></button>
     </div>
     <div class="table-container">
       <table>
         <thead><tr id="thead"></tr></thead>
-        <tbody id="tbody"><tr><td colspan="5" style="text-align:center;padding:24px;">⏳ กำลังโหลดข้อมูล...</td></tr></tbody>
+        <tbody id="tbody"><tr><td colspan="5" style="text-align:center;padding:24px;"><i class="fa-solid fa-spinner fa-spin"></i> กำลังโหลดข้อมูล...</td></tr></tbody>
       </table>
     </div>
   </div>
@@ -600,25 +694,25 @@
   <!-- 3. ขั้นตอนการลงทะเบียน -->
   <div class="card">
     <div class="section-header">
-      <h2 class="section-title">📑 ขั้นตอนการลงทะเบียนรับรหัสสมาชิก</h2>
+      <h2 class="section-title"><i class="fa-solid fa-list-check icon-bounce-hover"></i> ขั้นตอนการลงทะเบียนรับรหัสสมาชิก</h2>
       <p class="section-desc">ดำเนินการครบทั้ง 3 ขั้นตอน เพื่อรับรหัสสมาชิกอย่างเป็นทางการ</p>
     </div>
 
     <div class="steps-grid">
       <div class="step-card">
-        <span class="step-num">ขั้นตอนที่ 1</span>
+        <span class="step-num"><i class="fa-solid fa-1"></i> ขั้นตอนที่ 1</span>
         <h3 class="step-title">กรอกแบบฟอร์มลงทะเบียน</h3>
         <p class="step-text">กดปุ่มลงทะเบียนด้านล่าง กรอกข้อมูลส่วนตัว ข้อมูลรถ และอัปโหลดรูปถ่ายยืนยันตัวตนให้ครบถ้วนตามเงื่อนไข</p>
       </div>
 
       <div class="step-card">
-        <span class="step-num">ขั้นตอนที่ 2</span>
+        <span class="step-num"><i class="fa-solid fa-2"></i> ขั้นตอนที่ 2</span>
         <h3 class="step-title">รอตรวจสอบภายใน 14 วัน</h3>
         <p class="step-text">เจ้าหน้าที่ตรวจสอบความถูกต้องของข้อมูลและรูปถ่าย หากสมบูรณ์ระบบจะออกหมายเลขสมาชิกให้ท่านทันที</p>
       </div>
 
       <div class="step-card">
-        <span class="step-num">ขั้นตอนที่ 3</span>
+        <span class="step-num"><i class="fa-solid fa-3"></i> ขั้นตอนที่ 3</span>
         <h3 class="step-title">ตั้งชื่อโปรไฟล์ในห้องแชท</h3>
         <p class="step-text">นำรหัสที่ได้รับมาเปลี่ยนชื่อในห้อง (ห้ามใส่เบอร์โทรศัพท์ในชื่อ)</p>
         <div class="example-tag">
@@ -629,16 +723,16 @@
 
     <div class="cta-wrap">
       <a href="https://forms.gle/2cKjfa1xqQKqkrrx7" target="_blank" rel="noopener" class="cta-btn">
-        📝 คลิกที่นี่เพื่อลงทะเบียนสมาชิกใหม่
+        <i class="fa-solid fa-file-signature"></i> คลิกที่นี่เพื่อลงทะเบียนสมาชิกใหม่
       </a>
-      <p class="cta-note">🔐 ข้อมูลของท่านจะถูกเก็บรักษาเป็นความลับตามประกาศความเป็นส่วนตัวของกลุ่ม</p>
+      <p class="cta-note"><i class="fa-solid fa-lock" style="color:#D97706;"></i> ข้อมูลของท่านจะถูกเก็บรักษาเป็นความลับตามประกาศความเป็นส่วนตัวของกลุ่ม</p>
     </div>
   </div>
 
   <!-- 4. กฎการถ่ายรูปยืนยันตัวตน -->
   <div class="card">
     <div class="alert-banner">
-      <div class="alert-icon">🚨</div>
+      <div class="alert-icon"><i class="fa-solid fa-triangle-exclamation icon-float"></i></div>
       <div>
         <div class="alert-title">สมาชิกที่ค้นหาหมายเลขสมาชิกไม่พบ?</div>
         <div class="alert-desc">มักเกิดจากการส่งรูปถ่ายยืนยันตัวตนไม่ตรงตามมาตรฐานความปลอดภัยของกลุ่ม กรุณาตรวจสอบเกณฑ์ด้านล่างและส่งแบบฟอร์มเข้ามาใหม่อีกครั้ง</div>
@@ -647,7 +741,7 @@
 
     <div class="compare-grid">
       <div class="rule-box rule-do">
-        <div class="rule-header">✅ สิ่งที่ต้องปฏิบัติ (ผ่านการอนุมัติ)</div>
+        <div class="rule-header"><i class="fa-solid fa-circle-check" style="color:#16A34A;"></i> สิ่งที่ต้องปฏิบัติ (ผ่านการอนุมัติ)</div>
         <ul class="rule-list">
           <li><strong>เขียนด้วยลายมือเท่านั้น:</strong> เขียนข้อความตามเงื่อนไขลงบนกระดาษจริงด้วยลายมือตนเอง</li>
           <li><strong>ถ่ายคู่ใบหน้าชัดเจน:</strong> ถือกระดาษที่เขียนแล้วถ่ายรูปคู่กับใบหน้าของตนเองให้เห็นชัดเจน</li>
@@ -656,7 +750,7 @@
       </div>
 
       <div class="rule-box rule-dont">
-        <div class="rule-header">⛔ ข้อห้าม (ไม่ผ่านการอนุมัติ)</div>
+        <div class="rule-header"><i class="fa-solid fa-circle-xmark" style="color:#DC2626;"></i> ข้อห้าม (ไม่ผ่านการอนุมัติ)</div>
         <ul class="rule-list">
           <li>ห้ามพิมพ์ข้อความจากคอมพิวเตอร์แล้วปริ้นท์ใส่กระดาษ</li>
           <li>ห้ามใช้โปรแกรมตัดต่อ แอปแต่งภาพ หรือพิมพ์ข้อความแปะทับลงบนรูป</li>
@@ -667,15 +761,17 @@
     </div>
 
     <div class="highlight-box">
-      ✍️ ย้ำอีกครั้ง: <span>“เน้นใช้มือเขียนข้อความลงกระดาษจริงเท่านั้น ห้ามตัดต่อและห้ามใช้ AI”</span> เพื่อยืนยันตัวตนสมาชิกตัวจริง 100%
+      <i class="fa-solid fa-pen-nib" style="color:#FBBF24; margin-right:6px;"></i> ย้ำอีกครั้ง: <span>“เน้นใช้มือเขียนข้อความลงกระดาษจริงเท่านั้น ห้ามตัดต่อและห้ามใช้ AI”</span> เพื่อยืนยันตัวตนสมาชิกตัวจริง 100%
     </div>
   </div>
 
   <!-- 5. คำถามที่พบบ่อย (FAQ) และ PDPA -->
   <div class="card">
     <div class="faq-header">
-      <span class="faq-badge">HELP &amp; SUPPORT</span>
-      <h2 class="faq-title">❓ คำถามที่พบบ่อย (FAQ)</h2>
+      <span class="faq-badge"><i class="fa-solid fa-headset"></i> HELP &amp; SUPPORT</span>
+      <div>
+        <h2 class="faq-title"><i class="fa-solid fa-circle-question icon-bounce-hover"></i> คำถามที่พบบ่อย (FAQ)</h2>
+      </div>
       <p class="faq-subtitle">คลิกที่หัวข้อคำถามเพื่อดูรายละเอียดและแนวทางแก้ไข</p>
     </div>
 
@@ -683,7 +779,7 @@
       <details class="faq-item" open>
         <summary class="faq-question">
           <span class="q-text"><span class="q-num">1</span>ลงทะเบียนเกิน 14 วันแล้ว แต่ค้นหาหมายเลขสมาชิกไม่พบ?</span>
-          <span class="chevron">▼</span>
+          <span class="chevron"><i class="fa-solid fa-chevron-down"></i></span>
         </summary>
         <div class="faq-answer">
           สาเหตุหลักมักเกิดจาก <strong>รูปถ่ายยืนยันตัวตนไม่ผ่านเกณฑ์ความปลอดภัย</strong> เช่น ใช้การพิมพ์ตัวอักษร/ตัดต่อรูปแทนการเขียนด้วยลายมือ ถ่ายรูปคู่กับบัตรประชาชน หรือกรอกเลขทะเบียนรถไม่ตรงกับภาพถ่าย แนะนำให้ตรวจสอบกฎด้านบนและ <strong>กดส่งแบบฟอร์มลงทะเบียนเข้ามาใหม่อีกครั้ง</strong> ครับ
@@ -693,17 +789,17 @@
       <details class="faq-item">
         <summary class="faq-question">
           <span class="q-text"><span class="q-num">2</span>ทำไมต้องเขียนข้อความลงกระดาษด้วยลายมือ ห้ามใช้ AI หรือพิมพ์?</span>
-          <span class="chevron">▼</span>
+          <span class="chevron"><i class="fa-solid fa-chevron-down"></i></span>
         </summary>
         <div class="faq-answer">
-          เพื่อป้องกันมิจฉาชีพแอบอ้างนำรูปภาพของผู้อื่นมาตัดต่อใส่ข้อความสมัครแทนตัวจริง การเขียนด้วยลายมือลงบนกระดาษจริงแล้วถ่ายคู่กับใบหน้า ช่วยยืนยันตัวตนได้ชัดเจน 100% ทำให้สมาชิกและผู้โดยสารในเครือข่าย <strong>The Driver TH 🇹🇭 Premium Service</strong> มั่นใจในความปลอดภัยสูงสุด
+          เพื่อป้องกันมิจฉาชีพแอบอ้างนำรูปภาพของผู้อื่นมาตัดต่อใส่ข้อความสมัครแทนตัวจริง การเขียนด้วยลายมือลงบนกระดาษจริงแล้วถ่ายคู่กับใบหน้า ช่วยยืนยันตัวตนได้ชัดเจน 100% ทำให้สมาชิกและผู้โดยสารในเครือข่าย <strong>The Driver TH Premium Service</strong> มั่นใจในความปลอดภัยสูงสุด
         </div>
       </details>
 
       <details class="faq-item">
         <summary class="faq-question">
           <span class="q-text"><span class="q-num">3</span>ได้รับหมายเลขสมาชิกแล้ว ต้องตั้งชื่อในห้องแชทอย่างไร?</span>
-          <span class="chevron">▼</span>
+          <span class="chevron"><i class="fa-solid fa-chevron-down"></i></span>
         </summary>
         <div class="faq-answer">
           ให้นำรหัสสมาชิกใส่ในวงเล็บเหลี่ยมไว้หน้าชื่อ ตามด้วยชื่อเล่นและรุ่นรถ เช่น <span class="highlight-pill">[B999] แทนไทย Camry</span> โดย <strong>ห้ามใส่เบอร์โทรศัพท์ลงในชื่อโปรไฟล์</strong> เพื่อความเป็นระเบียบและปกป้องข้อมูลส่วนตัวของท่านเอง
@@ -713,7 +809,7 @@
       <details class="faq-item">
         <summary class="faq-question">
           <span class="q-text"><span class="q-num">4</span>เปลี่ยนรถคันใหม่ หรือเปลี่ยนชื่อที่ใช้ในกลุ่ม ต้องลงทะเบียนใหม่ไหม?</span>
-          <span class="chevron">▼</span>
+          <span class="chevron"><i class="fa-solid fa-chevron-down"></i></span>
         </summary>
         <div class="faq-answer">
           <strong>ไม่ต้องขอรหัสสมาชิกใหม่ครับ</strong> สามารถใช้รหัสสมาชิกเดิมได้ตลอด แต่กรุณาทักแจ้งแอดมินประจำห้องแชทพร้อมส่งรูปรถคันใหม่ เพื่ออัปเดตฐานข้อมูลทะเบียนรถให้ตรงกับปัจจุบัน
@@ -723,7 +819,7 @@
       <details class="faq-item">
         <summary class="faq-question">
           <span class="q-text"><span class="q-num">5</span>ค้นหารหัสสมาชิกในช่องค้นหาด้านบนไม่เจอ ควรพิมพ์ค้นหาอย่างไร?</span>
-          <span class="chevron">▼</span>
+          <span class="chevron"><i class="fa-solid fa-chevron-down"></i></span>
         </summary>
         <div class="faq-answer">
           แนะนำให้ค้นหาด้วย <strong>เบอร์โทรศัพท์ 4 หลักสุดท้าย</strong> หรือ <strong>เลขทะเบียนรถ (เฉพาะตัวเลข)</strong> แทนการพิมพ์ชื่อ เนื่องจากบางครั้งอาจมีเว้นวรรคหรือตัวสะกดไม่ตรงกับตอนกรอกฟอร์ม
@@ -732,8 +828,8 @@
     </div>
 
     <div class="pdpa-footer">
-      <strong>🔐 นโยบายคุ้มครองข้อมูลส่วนบุคคล (PDPA)</strong>
-      ข้อมูลส่วนบุคคล รูปถ่ายยืนยันตัวตน ข้อมูลยานพาหนะ และเบอร์โทรศัพท์ของสมาชิกทั้งหมด จะถูกจัดเก็บเป็นความลับอย่างปลอดภัย เพื่อใช้สำหรับการยืนยันตัวตนและการบริหารจัดการภายในเครือข่าย The Driver TH 🇹🇭 Premium Service เท่านั้น ไม่มีการนำไปเปิดเผยต่อสาธารณะหรือบุคคลภายนอก
+      <strong><i class="fa-solid fa-shield-halved"></i> นโยบายคุ้มครองข้อมูลส่วนบุคคล (PDPA)</strong>
+      ข้อมูลส่วนบุคคล รูปถ่ายยืนยันตัวตน ข้อมูลยานพาหนะ และเบอร์โทรศัพท์ของสมาชิกทั้งหมด จะถูกจัดเก็บเป็นความลับอย่างปลอดภัย เพื่อใช้สำหรับการยืนยันตัวตนและการบริหารจัดการภายในเครือข่าย The Driver TH Premium Service เท่านั้น ไม่มีการนำไปเปิดเผยต่อสาธารณะหรือบุคคลภายนอก
     </div>
   </div>
 </div>
@@ -764,7 +860,7 @@
       hour: "2-digit",
       minute: "2-digit"
     });
-    syncEl.textContent = `🟢 นับจากฐานข้อมูลล่าสุด (${formatted} น.)`;
+    syncEl.innerHTML = `<i class="fa-solid fa-circle-check"></i> นับจากฐานข้อมูลล่าสุด (${formatted} น.)`;
   }
 
   Papa.parse(csvFile, {
@@ -781,7 +877,7 @@
     },
     error: function() {
       document.getElementById("memberCount").textContent = "ไม่พร้อมใช้งาน";
-      document.getElementById("lastSync").textContent = "⚠️ โหลดข้อมูล CSV ไม่สำเร็จ";
+      document.getElementById("lastSync").innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> โหลดข้อมูล CSV ไม่สำเร็จ`;
     }
   });
 

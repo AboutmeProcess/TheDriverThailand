@@ -248,15 +248,23 @@
       margin: 0 auto;
       padding: 10px 16px;
       display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 8px;
     }
     @media (min-width: 640px) {
       .tdt-global-nav-inner {
         padding: 12px 24px;
       }
+    }
+    .tdt-nav-top-row {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
     }
     .tdt-global-brand {
       display: inline-flex;
@@ -264,24 +272,56 @@
       gap: 12px;
       font-size: 16px;
       line-height: 1.25;
-      font-weight: 500;
+      font-weight: 400;
       color: #fbbf24;
       text-decoration: none;
-      flex-shrink: 0;
+      text-align: left;
       transition: color 0.15s ease;
     }
+    .tdt-brand-text-stack {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      line-height: 1.2;
+      font-weight: 400;
+    }
+    .tdt-brand-subline-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 6px;
+      margin-top: 3px;
+      font-size: 11.5px;
+      font-weight: 400;
+      color: #cbd5e1;
+      text-align: left;
+    }
+    .tdt-brand-exec-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(251, 191, 36, 0.18);
+      border: 1px solid rgba(251, 191, 36, 0.45);
+      color: #fde68a;
+      font-size: 10px;
+      font-weight: 400;
+      padding: 1.5px 7px;
+      border-radius: 999px;
+      line-height: 1.2;
+    }
     .tdt-brand-logo-img {
-      width: 48px;
-      height: 48px;
-      border-radius: 14px;
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
       object-fit: cover;
       object-position: center;
       background: #ffffff;
       padding: 0;
-      border: 1.5px solid rgba(251, 191, 36, 0.85);
+      border: 1.5px solid rgba(251, 191, 36, 0.9);
       box-shadow:
-        0 4px 12px rgba(0, 0, 0, 0.45),
-        0 0 0 2px rgba(251, 191, 36, 0.16);
+        0 8px 20px -4px rgba(0, 0, 0, 0.55),
+        0 0 0 2px rgba(251, 191, 36, 0.18);
       flex-shrink: 0;
       transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
     }
@@ -289,18 +329,18 @@
       transform: scale(1.06);
       border-color: #fde68a;
       box-shadow:
-        0 6px 16px rgba(0, 0, 0, 0.55),
-        0 0 12px rgba(251, 191, 36, 0.35);
+        0 10px 24px -4px rgba(0, 0, 0, 0.65),
+        0 0 14px rgba(251, 191, 36, 0.35);
     }
     @media (min-width: 640px) {
       .tdt-global-brand {
         gap: 14px;
-        font-size: 20px;
+        font-size: 19px;
       }
       .tdt-brand-logo-img {
-        width: 54px;
-        height: 54px;
-        border-radius: 16px;
+        width: 58px;
+        height: 58px;
+        border-radius: 18px;
       }
     }
     .tdt-global-brand:hover {
@@ -313,9 +353,9 @@
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      justify-content: flex-end;
+      justify-content: flex-start;
       gap: 8px;
-      margin-left: auto;
+      width: 100%;
     }
     .tdt-cat-dropdown-wrap {
       position: relative;
@@ -324,7 +364,7 @@
     .tdt-cat-menu-panel {
       display: none;
       position: absolute;
-      right: 0;
+      left: 0;
       top: calc(100% + 8px);
       width: 310px;
       max-width: calc(100vw - 32px);
@@ -334,6 +374,7 @@
       border: 1px solid rgba(251, 191, 36, 0.45);
       box-shadow: 0 24px 54px -10px rgba(0, 0, 0, 0.92), 0 0 0 1px rgba(15, 23, 42, 0.9);
       z-index: 1060;
+      text-align: left;
     }
     .tdt-cat-menu-panel.is-open {
       display: block;
@@ -343,7 +384,7 @@
       margin-bottom: 6px;
       border-radius: 11px;
       font-size: 11px;
-      font-weight: 800;
+      font-weight: 400;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -382,12 +423,13 @@
     .tdt-cat-menu-title {
       display: block;
       font-size: 12px;
-      font-weight: 700;
+      font-weight: 400;
       line-height: 1.3;
     }
     .tdt-cat-menu-sub {
       display: block;
       font-size: 10px;
+      font-weight: 400;
       color: #94a3b8;
       line-height: 1.25;
     }
@@ -399,7 +441,7 @@
       border-radius: 11px;
       font-size: 12px;
       line-height: 16px;
-      font-weight: 700;
+      font-weight: 400;
       text-decoration: none;
       white-space: nowrap;
       background-color: rgba(15, 23, 42, 0.9);
@@ -453,7 +495,7 @@
       padding: 0 9px;
       border-radius: 9px;
       font-size: 12px;
-      font-weight: 700;
+      font-weight: 400;
       color: #e2e8f0;
       background: transparent;
       border: none;
@@ -471,7 +513,7 @@
   <!-- กล่องแจ้งเตือน Toast -->
   <div id="toast-box" class="hidden fixed bottom-5 right-5 z-[1100] bg-slate-950 text-amber-300 border border-amber-400/50 px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-3 text-xs sm:text-sm max-w-sm">
     <i class="fa-solid fa-circle-check text-emerald-400 text-base shrink-0"></i>
-    <span id="toast-text" class="font-semibold text-white"></span>
+    <span id="toast-text" class="font-normal text-white"></span>
     <button type="button" onclick="hideToast()" class="text-slate-400 hover:text-white ml-1">
       <i class="fa-solid fa-xmark"></i>
     </button>
@@ -480,16 +522,38 @@
   <!-- GLOBAL NAVIGATION BAR -->
   <nav class="tdt-global-nav">
     <div class="tdt-global-nav-inner">
-      <!-- ฝั่งซ้าย: โลโก้ + ชื่อกลุ่ม -->
-      <a href="index.html" class="tdt-global-brand">
-        <img src="TheDriverTH.jpg" alt="โลโก้ 🚖 The Driver TH 🇹🇭 Premium Service"
-          onerror="this.onerror=null;this.src='https://placehold.co/80x80/0f172a/fbbf24?text=TDT';"
-          class="tdt-brand-logo-img">
-        <span class="tracking-tight font-medium">🚖 The Driver TH 🇹🇭 Premium Service</span>
-      </a>
+      <div class="tdt-nav-top-row">
+        <!-- โลโก้เต็มกรอบแบบเรียบหรู + ข้อความหัวเรื่องแบบชิดซ้าย ตัวหนังสือไม่หนา -->
+        <a href="index.html" class="tdt-global-brand">
+          <img src="TheDriverTH.jpg" alt="โลโก้ The Driver Thailand"
+            onerror="this.onerror=null;this.src='https://placehold.co/80x80/0f172a/fbbf24?text=TDT';"
+            class="tdt-brand-logo-img">
+          <span class="tdt-brand-text-stack">
+            <span>🚖 The Driver TH 🇹🇭 Premium Service</span>
+            <span class="tdt-brand-subline-row">
+              <span class="tdt-brand-exec-pill"><i class="fa-solid fa-crown text-[9px]"></i> EXECUTIVE NETWORK</span>
+              <span>เครือข่ายคนขับรถรับส่งผู้โดยสารและบริการมืออาชีพแห่งประเทศไทย</span>
+            </span>
+          </span>
+        </a>
 
-      <!-- ฝั่งขวา: เมนูแยกหมวดหมู่ + ปุ่มเพิ่ม/ลดตัวอักษร + ปุ่มโหมดสี ในแถวเดียวกัน -->
-      <div class="tdt-global-right-controls" aria-label="เมนูหลักและตัวช่วยปรับแต่งหน้าเว็บ">
+        <!-- ปุ่มสำหรับปรับตัวอักษร และ ปรับสีหน้าเว็บ วางชิดขวา -->
+        <div class="tdt-util-group ml-auto" title="ปรับขนาดตัวอักษรและโหมดหน้าเว็บ">
+          <button type="button" onclick="changeFontScale(-1)" aria-label="ลดขนาดตัวอักษร" class="tdt-util-btn" title="ลดขนาดตัวอักษร">
+            <span>A-</span>
+          </button>
+          <span id="font-scale-label" class="text-[11px] font-normal text-amber-300 px-1 select-none">100%</span>
+          <button type="button" onclick="changeFontScale(1)" aria-label="เพิ่มขนาดตัวอักษร" class="tdt-util-btn" title="เพิ่มขนาดตัวอักษร">
+            <span>A+</span>
+          </button>
+          <button type="button" onclick="toggleThemeMode()" id="btn-theme-toggle-desktop" aria-label="สลับโหมดสีสว่างหรือสีเข้ม" class="tdt-util-btn" title="สลับโหมดสีสว่าง / สีเข้ม">
+            <i id="theme-icon-desktop" class="fa-solid fa-moon text-amber-300"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- เมนูหมวดหมู่แบบชิดซ้าย ตัวหนังสือไม่หนา -->
+      <div class="tdt-global-right-controls" aria-label="เมนูหลักของหน้าเว็บ">
         <a href="index.html" class="tdt-nav-btn active-home">
           <i class="fa-solid fa-house"></i>
           <span>หน้าหลัก</span>
@@ -548,7 +612,7 @@
             </a>
             <a href="vip_referral_guide.html" class="tdt-cat-menu-link">
               <span class="tdt-cat-menu-icon" style="background:rgba(168,85,247,0.16);color:#c084fc;border:1px solid rgba(192,132,252,0.3);"><i class="fa-solid fa-map-location-dot"></i></span>
-              <span><span class="tdt-cat-menu-title">[VIP] ลายแทงสถานที่ท่องเที่ยว</span><span class="tdt-cat-link-sub">ขอรับลายแทงร้านค้า/สถานที่เพื่อรับค่าแนะนำ</span></span>
+              <span><span class="tdt-cat-menu-title">[VIP] ลายแทงสถานที่ท่องเที่ยว</span><span class="tdt-cat-menu-sub">ขอรับลายแทงร้านค้า/สถานที่เพื่อรับค่าแนะนำ</span></span>
             </a>
             <a href="rtaf_pass_register.html" class="tdt-cat-menu-link">
               <span class="tdt-cat-menu-icon" style="background:rgba(59,130,246,0.16);color:#60a5fa;border:1px solid rgba(96,165,250,0.3);"><i class="fa-solid fa-plane-departure"></i></span>
@@ -569,19 +633,6 @@
           <i class="fa-solid fa-user-shield"></i>
           <span>ตรวจสอบ Blacklist</span>
         </a>
-
-        <div class="tdt-util-group" title="ปรับขนาดตัวอักษรและโหมดหน้าเว็บ">
-          <button type="button" onclick="changeFontScale(-1)" aria-label="ลดขนาดตัวอักษร" class="tdt-util-btn" title="ลดขนาดตัวอักษร">
-            <span>A-</span>
-          </button>
-          <span id="font-scale-label" class="text-[11px] font-bold text-amber-300 px-1 select-none">100%</span>
-          <button type="button" onclick="changeFontScale(1)" aria-label="เพิ่มขนาดตัวอักษร" class="tdt-util-btn" title="เพิ่มขนาดตัวอักษร">
-            <span>A+</span>
-          </button>
-          <button type="button" onclick="toggleThemeMode()" id="btn-theme-toggle-desktop" aria-label="สลับโหมดสีสว่างหรือสีเข้ม" class="tdt-util-btn" title="สลับโหมดสีสว่าง / สีเข้ม">
-            <i id="theme-icon-desktop" class="fa-solid fa-moon text-amber-300"></i>
-          </button>
-        </div>
       </div>
     </div>
   </nav>
@@ -591,9 +642,9 @@
     <div class="max-w-6xl mx-auto flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
       <div class="flex items-center gap-2 flex-wrap">
         <span class="bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-extrabold px-2.5 py-0.5 rounded-full text-[11px] shadow-sm">
-          <i class="fa-solid fa-crown mr-1"></i> EXECUTIVE NETWORK
+          <i class="fa-solid fa-bullhorn mr-1"></i> OFFICIAL ANNOUNCEMENT
         </span>
-        <span class="text-slate-300 font-medium">เครือข่ายคนขับรถรับส่งผู้โดยสารและบริการมืออาชีพแห่งประเทศไทย</span>
+        <span class="text-slate-300 font-medium">ประกาศและรอบการจัดส่งบริการสำหรับสมาชิกเครือข่าย</span>
       </div>
       <div class="flex items-center gap-3 text-xs">
         <span class="text-amber-300 font-semibold">

@@ -508,12 +508,12 @@
           <div class="border-b border-slate-200 pb-3 flex flex-wrap items-center justify-between gap-2">
             <h3 class="font-extrabold text-slate-900 text-sm sm:text-base flex items-center gap-2">
               <i class="fa-solid fa-camera-retro text-amber-600"></i>
-              <span>แนบรูปถ่ายยืนยันตัวตนและรูปถ่ายรถ</span>
+              <span id="photo-section-title">แนบรูปถ่ายยืนยันตัวตนและรูปถ่ายรถ</span>
             </h3>
             <span class="text-xs text-slate-500">ดูตัวอย่างรูปแบบการถ่ายภาพที่ถูกต้องได้ในแต่ละกล่องด้านล่าง</span>
           </div>
 
-          <div class="grid md:grid-cols-2 gap-5">
+          <div id="photo-upload-grid" class="grid md:grid-cols-2 gap-5">
             <!-- กล่องอัปโหลดรูปถ่ายรถ + ตัวอย่างภาพถ่ายรถ -->
             <div id="car-photo-upload-card" class="border-2 border-dashed border-slate-300 bg-white rounded-2xl p-5 hover:border-amber-500 transition flex flex-col justify-between space-y-4">
               <div class="space-y-3">
@@ -778,6 +778,9 @@
       const carModelInput = document.getElementById('car_model');
       const plateInput = document.getElementById('license_plate');
 
+      const photoSectionTitle = document.getElementById('photo-section-title');
+      const photoUploadGrid = document.getElementById('photo-upload-grid');
+      const carPhotoCard = document.getElementById('car-photo-upload-card');
       const carPhotoInput = document.getElementById('car_photo_file');
       const carPhotoStar = document.getElementById('car-photo-star');
       const carPhotoBadge = document.getElementById('car-photo-req-badge');
@@ -802,16 +805,12 @@
         carModelInput?.removeAttribute('required');
         plateInput?.removeAttribute('required');
 
-        // กรณีเป็นผู้ปล่อยงาน ไม่จำเป็นต้องอัปโหลดรูปถ่ายรถของคุณ
+        // กรณีเป็นผู้ปล่อยงาน ซ่อนกล่องอัปโหลดรูปถ่ายรถยนต์ และแสดงเฉพาะกล่องรูปยืนยันตัวตนแบบ 1 คอลัมน์เต็ม
+        if (photoSectionTitle) photoSectionTitle.textContent = 'แนบรูปถ่ายยืนยันตัวตน';
+        if (photoUploadGrid) photoUploadGrid.className = 'grid grid-cols-1 gap-5';
+        carPhotoCard?.classList.add('hidden');
         carPhotoInput?.removeAttribute('required');
         carPhotoStar?.classList.add('hidden');
-        if (carPhotoBadge) {
-          carPhotoBadge.className = 'text-[11px] font-bold text-slate-600 bg-slate-100 border border-slate-300 px-2.5 py-0.5 rounded-full';
-          carPhotoBadge.textContent = 'ไม่บังคับ (สำหรับผู้ปล่อยงาน)';
-        }
-        if (carPhotoHelper) {
-          carPhotoHelper.textContent = 'สำหรับผู้ปล่อยงานเป็นหลัก / บริษัทปล่อยงาน ไม่จำเป็นต้องอัปโหลดรูปถ่ายรถ';
-        }
       } else {
         if (labelDriver) labelDriver.className = 'border-2 border-amber-500 bg-amber-50/70 rounded-2xl p-4 cursor-pointer hover:border-amber-600 transition flex items-start gap-3 shadow-sm';
         if (labelDispatcher) labelDispatcher.className = 'border-2 border-slate-200 bg-white rounded-2xl p-4 cursor-pointer hover:border-amber-500 transition flex items-start gap-3 shadow-sm';
@@ -831,6 +830,9 @@
         carModelInput?.setAttribute('required', 'true');
         plateInput?.setAttribute('required', 'true');
 
+        if (photoSectionTitle) photoSectionTitle.textContent = 'แนบรูปถ่ายยืนยันตัวตนและรูปถ่ายรถ';
+        if (photoUploadGrid) photoUploadGrid.className = 'grid md:grid-cols-2 gap-5';
+        carPhotoCard?.classList.remove('hidden');
         carPhotoInput?.setAttribute('required', 'true');
         carPhotoStar?.classList.remove('hidden');
         if (carPhotoBadge) {

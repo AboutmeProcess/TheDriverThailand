@@ -1640,20 +1640,20 @@
       return "";
     }
 
-    // ดึงข้อมูลเบอร์โทรศัพท์จากแถวข้อมูลในชีตให้รองรับหลายชื่อคอลัมน์หรือตำแหน่งข้อมูล
+    // ดึงข้อมูลเบอร์โทรศัพท์จากแถวข้อมูลในชีตให้ตรงกับคอลัมน์เบอร์โทรในชีต "ฐานข้อมูลสมัครทำบัตรสมาชิกประเมศฐ์ - The Driver Thailand"
     function extractPhoneFromRow(row) {
       if (!row || typeof row !== "object") return "";
 
       const candidateValues = [];
 
       const directKeys = [
+        "เบอร์โทรศัพท์ที่ติดต่อได้",
         "เบอร์โทรศัพท์",
         "เบอร์โทร",
         "เบอร์ติดต่อ",
         "โทรศัพท์",
         "หมายเลขโทรศัพท์",
         "เบอร์โทรติดต่อ",
-        "เบอร์โทรที่ติดต่อได้",
         "เบอร์",
         "โทร",
         "phone",
@@ -1678,19 +1678,23 @@
           kLower.includes("mobile")
         ) {
           const s = String(val ?? "").trim();
-          if (s) candidateValues.push(s);
+          if (s && !candidateValues.includes(s)) candidateValues.push(s);
         }
       }
 
-      const allVals = Array.isArray(row) ? row : Object.values(row);
-      allVals.forEach((val) => {
-        if (val === null || val === undefined) return;
-        const text = String(val).trim();
-        const digits = text.replace(/\D/g, "");
-        if (/^(06|08|09)\d{7,8}$/.test(digits) || /^0\d{8,9}$/.test(digits) || /^[689]\d{8}$/.test(digits)) {
-          candidateValues.push(text);
-        }
-      });
+      // หากไม่พบคอลัมน์ชื่อเบอร์โทรโดยตรง ให้ตรวจหาค่าที่เข้าข่ายเบอร์โทรศัพท์มือถือไทย (06/08/09 หรือ 9-10 หลัก)
+      if (!candidateValues.length) {
+        const allVals = Array.isArray(row) ? row : Object.values(row);
+        allVals.forEach((val) => {
+          if (val === null || val === undefined) return;
+          const text = String(val).trim();
+          if (/^(PRM-|KEX|TH|FLASH)/i.test(text)) return;
+          const digits = text.replace(/\D/g, "");
+          if (/^(06|08|09)\d{7,8}$/.test(digits) || /^66[689]\d{8}$/.test(digits) || /^[689]\d{8}$/.test(digits)) {
+            candidateValues.push(text);
+          }
+        });
+      }
 
       for (const raw of candidateValues) {
         const formatted = normalizePhoneFromSheet(raw);
@@ -1700,7 +1704,7 @@
       return "";
     }
 
-    // แสดงเบอร์โทรศัพท์ให้ครบทั้ง 10 หลักจากข้อมูลในชีตโดยไม่เซ็นเซอร์
+    // แสดงเบอร์โทรศัพท์ให้ครบทั้ง 10 หลักจากข้อมูลในชีตโดยไม่เซ็นเซอร์และรักษาตัวเลขให้ตรงต้นฉบับ
     function normalizePhoneFromSheet(phoneRaw) {
       if (phoneRaw === null || phoneRaw === undefined) return "";
       const rawText = String(phoneRaw)
@@ -1720,7 +1724,7 @@
         return "0" + digitsOnly.slice(2);
       }
 
-      // กรณีมีตัวเลข 10 หลักเต็ม -> คืนค่าเลข 10 หลักตรงๆ
+      // กรณีมีตัวเลข 10 หลักเต็ม -> คืนค่าเลข 10 หลักตรงตามชีต
       if (digitsOnly.length === 10) {
         return digitsOnly;
       }
@@ -1757,6 +1761,53 @@
       return cleaned || "-";
     }
 
+    function extractNameFromRow(row) {
+      const direct = extractFieldValue(row, [
+        "ชื่อและนามสกุล",
+        "ชื่อ-นามสกุล",
+        "ชื่อ - นามสกุล",
+        "ชื่อนามสกุล",
+        "ชื่อสมาชิก",
+        "ผู้สมัคร",
+        "fullname",
+        "fullName",
+        "name"
+      ]);
+      if (direct) return direct;
+
+      const firstName = extractFieldValue(row, ["ชื่อจริง", "ชื่อ", "firstName", "first_name"]);
+      const lastName = extractFieldValue(row, ["นามสกุล", "lastName", "last_name"]);
+      const combined = [firstName, lastName].filter(Boolean).join(" ").trim();
+      return combined;
+    }
+
+    function extractStatusFromRow(row) {
+      const direct = extractFieldValue(row, [
+        "สถานะการดำเนินการ",
+        "สถานะการจัดส่ง",
+        "สถานะทำบัตร",
+        "สถานะ",
+        "status",
+        "shippingStatus",
+        "shipping_status"
+      ]);
+      return direct || "ทำรายการแล้ว";
+    }
+
+    function extractTrackingFromRow(row) {
+      const direct = extractFieldValue(row, [
+        "เลขพัสดุ",
+        "เลขติดตามพัสดุ",
+        "หมายเลขพัสดุ",
+        "trackingNo",
+        "tracking_no",
+        "trackingNumber",
+        "tracking_number",
+        "tracking"
+      ]);
+      return direct;
+    }
+
     function getStatusBadgeClass(statusText) {
       const s = String(statusText || "").trim();
       if (s.includes("จัดส่งแล้ว")) {
@@ -1774,6 +1825,24 @@
       return "bg-sky-100 text-sky-800 border-sky-300";
     }
 
+    function parseSheetRowsResponse(data) {
+      if (Array.isArray(data)) return data;
+      if (Array.isArray(data?.rows)) return data.rows;
+      if (Array.isArray(data?.data)) return data.data;
+      if (Array.isArray(data?.records)) return data.records;
+      return [];
+    }
+
+    function isValidShippingSheetRow(row) {
+      if (!row || typeof row !== "object") return false;
+      const hasName = Boolean(extractNameFromRow(row));
+      const hasPhone = Boolean(extractPhoneFromRow(row));
+      const hasRound = Boolean(extractRoundFromRow(row));
+      const hasTracking = Boolean(extractTrackingFromRow(row));
+      const hasAnyText = Object.values(row).some((v) => String(v ?? "").trim() !== "");
+      return hasAnyText && (hasName || hasPhone || hasRound || hasTracking);
+    }
+
     async function fetchShippingDataFromSheet() {
       const badge = document.getElementById("sheet-sync-status-badge");
       if (badge) {
@@ -1785,18 +1854,22 @@
         const res = await fetch(`${GAS_WEB_APP_URL}?action=shipping&t=${Date.now()}`, { method: "GET" });
         if (!res.ok) throw new Error("Network response was not ok");
         const data = await res.json();
-        const rows = Array.isArray(data) ? data : (Array.isArray(data?.rows) ? data.rows : (Array.isArray(data?.data) ? data.data : []));
+        const rows = parseSheetRowsResponse(data);
 
-        shippingRecords = rows.filter((r) => r && typeof r === "object" && Object.values(r).some((v) => String(v ?? "").trim() !== ""));
+        shippingRecords = rows
+          .filter(isValidShippingSheetRow)
+          .map((row, idx) => ({ ...row, __sheetRowIndex: idx }));
+
         shippingRecords.sort((a, b) => {
           const tsA = parseThaiRoundTimestamp(extractRoundFromRow(a));
           const tsB = parseThaiRoundTimestamp(extractRoundFromRow(b));
-          return tsB - tsA;
+          if (tsB !== tsA) return tsB - tsA;
+          return (a.__sheetRowIndex || 0) - (b.__sheetRowIndex || 0);
         });
 
         syncRoundFilterWithRecords();
         if (badge) {
-          badge.textContent = `อัปเดตแล้ว (${shippingRecords.length} รายการ)`;
+          badge.textContent = `อัปเดตแล้ว (${shippingRecords.length.toLocaleString("th-TH")} รายการ)`;
           badge.className = "bg-emerald-100 text-emerald-800 text-xs font-semibold px-3 py-0.5 rounded-full";
         }
         renderShippingTable();
@@ -1820,10 +1893,10 @@
       const selectedRoundNorm = normalizeRoundKey(selectedRound);
 
       const filtered = shippingRecords.filter((row) => {
-        const name = extractFieldValue(row, ["ชื่อและนามสกุล", "ชื่อ-นามสกุล", "fullname", "fullName", "name"]).toLowerCase();
+        const name = extractNameFromRow(row).toLowerCase();
         const phoneRaw = extractPhoneFromRow(row).toLowerCase();
         const phoneDigits = phoneRaw.replace(/\D/g, "");
-        const tracking = extractFieldValue(row, ["เลขพัสดุ", "trackingNo", "tracking_no", "tracking"]).toLowerCase();
+        const tracking = extractTrackingFromRow(row).toLowerCase();
         const roundVal = extractRoundFromRow(row);
         const roundNorm = normalizeRoundKey(roundVal);
 
@@ -1850,15 +1923,15 @@
       }
 
       tbody.innerHTML = filtered.slice(0, 150).map((row) => {
-        const rawFullName = extractFieldValue(row, ["ชื่อและนามสกุล", "ชื่อ-นามสกุล", "fullname", "fullName", "name"]) || "-";
+        const rawFullName = extractNameFromRow(row) || "-";
         const fullNameDisplay = escapeHtml(formatFullNameDisplay(rawFullName));
         const phoneRaw = extractPhoneFromRow(row);
         const phoneDisplay = escapeHtml(formatFullPhoneDisplay(phoneRaw));
-        const rawStatus = extractFieldValue(row, ["สถานะการดำเนินการ", "สถานะ", "status"]) || "ทำรายการแล้ว";
+        const rawStatus = extractStatusFromRow(row);
         const statusEscaped = escapeHtml(rawStatus);
         const statusBadgeClass = getStatusBadgeClass(rawStatus);
         const roundVal = escapeHtml(extractRoundFromRow(row) || "-");
-        const rawTracking = extractFieldValue(row, ["เลขพัสดุ", "trackingNo", "tracking_no", "tracking"]);
+        const rawTracking = extractTrackingFromRow(row);
         const trackingEscaped = escapeHtml(rawTracking || "-");
 
         const hasCopyableTracking = Boolean(rawTracking && rawTracking !== "-" && rawTracking !== "รอจัดส่ง");

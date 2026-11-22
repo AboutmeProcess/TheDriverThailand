@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Driver TH 🇹🇭 Premium Service</title>
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    font-family: 'Prompt', sans-serif;
+    background: #FFFFFF;
+    color: #1E293B;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+  .page-wrap {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  /* 1. Hero Banner (โทนสว่างพรีเมียม ขาว-ครีม-ทอง) */
+  .hero-card {
+    background: linear-gradient(135deg, #FFFBEB 0%, #FFFFFF 55%, #FEF3C7 100%);
+    border-radius: 16px;
+    padding: 24px 22px;
+    color: #0F172A;
+    border: 1px solid #FDE68A;
+    box-shadow: 0 4px 16px rgba(217, 119, 6, 0.08);
+    width: 100%;
+  }
+  .badge {
+    display: inline-block;
+    background: #FEF3C7;
+    border: 1px solid #F59E0B;
+    color: #92400E;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 50px;
+    margin-bottom: 10px;
+  }
+  .hero-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #0F172A;
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+  .hero-subtitle {
+    font-size: 14px;
+    color: #475569;
+    font-weight: 400;
+    margin-bottom: 18px;
+    line-height: 1.5;
+  }
+  .stats-box {
+    background: #FFFFFF;
+    border: 1px solid #FDE68A;
+    border-radius: 12px;
+    padding: 14px 18px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+  .stat-label { font-size: 12.5px; color: #64748B; }
+  .stat-number { font-size: 26px; font-weight: 700; color: #B45309; }
+  .stat-update {
+    font-size: 12px;
+    color: #065F46;
+    background: #ECFDF5;
+    border: 1px solid #A7F3D0;
+    padding: 5px 12px;
+    border-radius: 8px;
+  }
+
+  /* Card Base (โทนสว่าง) */
+  .card {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 16px;
+    padding: 22px 20px;
+    box-shadow: 0 3px 12px rgba(15, 23, 42, 0.03);
+    width: 100%;
+  }
+  .sec-title {
+    font-size: 19px;
+    font-weight: 700;
+    color: #0F172A;
+    margin-bottom: 14px;
+    padding-left: 10px;
+    border-left: 4px solid #D97706;
+  }
+
+  /* 2. Search Box */
+  .search-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .result-count {
+    font-size: 12px;
+    font-weight: 500;
+    color: #92400E;
+    background: #FFFBEB;
+    border: 1px solid #FDE68A;
+    padding: 4px 12px;
+    border-radius: 50px;
+  }
+  .search-wrapper {
+    position: relative;
+    margin-bottom: 12px;
+    width: 100%;
+  }
+  #search {
+    width: 100%;
+    padding: 12px 40px 12px 14px;
+    font-family: 'Prompt', sans-serif;
+    font-size: 14px;
+    color: #0F172A;
+    border: 1.5px solid #CBD5E1;
+    border-radius: 10px;
+    background: #F8FAFC;
+  }
+  #search:focus {
+    outline: none;
+    border-color: #D97706;
+    background: #FFFFFF;
+  }
+  .clear-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #E2E8F0;
+    color: #334155;
+    border: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    font-size: 12px;
+    cursor: pointer;
+    display: none;
+  }
+  .clear-btn.visible { display: block; }
+  .table-container {
+    width: 100%;
+    max-height: 400px;
+    overflow: auto;
+    border: 1px solid #E2E8F0;
+    border-radius: 10px;
+    background: #FFFFFF;
+  }
+  table { width: 100%; border-collapse: collapse; min-width: 360px; }
+  th {
+    position: sticky;
+    top: 0;
+    background: #FEF3C7;
+    color: #78350F;
+    font-weight: 600;
+    font-size: 13px;
+    padding: 11px 14px;
+    text-align: left;
+    white-space: nowrap;
+    border-bottom: 2px solid #F59E0B;
+  }
+  td {
+    padding: 10px 14px;
+    font-size: 13px;
+    color: #334155;
+    border-bottom: 1px solid #F1F5F9;
+    white-space: nowrap;
+  }
+  tbody tr:nth-child(even) td { background: #F8FAFC; }
+  tbody tr:hover td { background: #FFFBEB; color: #0F172A; }
+
+  /* 3. Steps & CTA */
+  .section-header { text-align: center; margin-bottom: 20px; }
+  .section-title { font-size: 22px; font-weight: 700; color: #0F172A; margin-bottom: 6px; }
+  .section-desc { font-size: 14px; color: #64748B; }
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+  .step-card {
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-top: 4px solid #D97706;
+    border-radius: 14px;
+    padding: 20px 18px;
+    box-shadow: 0 3px 10px rgba(15, 23, 42, 0.03);
+  }
+  .step-num {
+    display: inline-block;
+    background: #FEF3C7;
+    color: #92400E;
+    border: 1px solid #FCD34D;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 50px;
+    margin-bottom: 10px;
+  }
+  .step-title { font-size: 16px; font-weight: 600; color: #0F172A; margin-bottom: 8px; }
+  .step-text { font-size: 13.5px; color: #475569; line-height: 1.6; }
+  .example-tag {
+    margin-top: 10px;
+    background: #FFFFFF;
+    border: 1px dashed #CBD5E1;
+    border-radius: 8px;
+    padding: 8px 10px;
+    font-size: 12.5px;
+    color: #0F172A;
+  }
+  .example-tag strong { color: #B45309; }
+  .cta-wrap { text-align: center; width: 100%; }
+  .cta-btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 14px 28px;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(217, 119, 6, 0.25);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .cta-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(217, 119, 6, 0.32);
+  }
+  .cta-note { font-size: 12px; color: #64748B; margin-top: 8px; }
+
+  /* 4. Rules */
+  .alert-banner {
+    background: #FFFBEB;
+    border: 1px solid #FDE68A;
+    border-left: 5px solid #D97706;
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .alert-icon { font-size: 20px; line-height: 1.2; }
+  .alert-title { font-size: 15px; font-weight: 600; color: #92400E; margin-bottom: 3px; }
+  .alert-desc { font-size: 13.5px; color: #78350F; line-height: 1.5; }
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    width: 100%;
+  }
+  .rule-box {
+    border-radius: 14px;
+    padding: 18px 20px;
+  }
+  .rule-do {
+    background: #F0FDF4;
+    border: 1px solid #BBF7D0;
+  }
+  .rule-dont {
+    background: #FEF2F2;
+    border: 1px solid #FECACA;
+  }
+  .rule-header {
+    font-size: 15.5px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .rule-do .rule-header { color: #166534; }
+  .rule-dont .rule-header { color: #991B1B; }
+  .rule-list { list-style: none; }
+  .rule-list li {
+    font-size: 13.5px;
+    line-height: 1.55;
+    margin-bottom: 8px;
+    padding-left: 22px;
+    position: relative;
+  }
+  .rule-do .rule-list li { color: #14532D; }
+  .rule-do .rule-list li::before {
+    content: "✔";
+    position: absolute; left: 0; top: 0;
+    color: #16A34A; font-weight: 700;
+  }
+  .rule-dont .rule-list li { color: #7F1D1D; }
+  .rule-dont .rule-list li::before {
+    content: "✖";
+    position: absolute; left: 0; top: 0;
+    color: #DC2626; font-weight: 700;
+  }
+  .highlight-box {
+    margin-top: 14px;
+    background: #FFFBEB;
+    border: 1px solid #FCD34D;
+    color: #1E293B;
+    text-align: center;
+    padding: 13px 16px;
+    border-radius: 12px;
+    font-size: 14px;
+  }
+  .highlight-box span { color: #B45309; font-weight: 700; }
+
+  /* 5. FAQ & PDPA (โทนสว่าง) */
+  .faq-header { text-align: center; margin-bottom: 18px; }
+  .faq-badge {
+    display: inline-block;
+    background: #FFFBEB;
+    color: #B45309;
+    border: 1px solid #FDE68A;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 50px;
+    margin-bottom: 6px;
+  }
+  .faq-title { font-size: 21px; font-weight: 700; color: #0F172A; margin-bottom: 4px; }
+  .faq-subtitle { font-size: 13.5px; color: #64748B; }
+  .faq-list { display: flex; flex-direction: column; gap: 10px; }
+  details.faq-item {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  details.faq-item[open] {
+    border-color: #F59E0B;
+  }
+  summary.faq-question {
+    list-style: none;
+    padding: 15px 18px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #0F172A;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    background: #F8FAFC;
+  }
+  summary.faq-question::-webkit-details-marker { display: none; }
+  details.faq-item[open] summary.faq-question {
+    background: #FFFBEB;
+    color: #92400E;
+  }
+  .q-text { display: flex; align-items: center; gap: 10px; }
+  .q-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 24px;
+    height: 24px;
+    background: #FEF3C7;
+    color: #B45309;
+    border: 1px solid #FCD34D;
+    font-size: 12.5px;
+    font-weight: 700;
+    border-radius: 7px;
+  }
+  .chevron { font-size: 12px; color: #64748B; transition: transform 0.2s ease; }
+  details.faq-item[open] .chevron { transform: rotate(180deg); color: #B45309; }
+  .faq-answer {
+    padding: 14px 18px 16px 52px;
+    font-size: 13.5px;
+    color: #334155;
+    line-height: 1.65;
+    border-top: 1px solid #F1F5F9;
+    background: #FFFFFF;
+  }
+  .highlight-pill {
+    display: inline-block;
+    background: #FFFBEB;
+    border: 1px solid #FDE68A;
+    color: #92400E;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 13px;
+  }
+  .pdpa-footer {
+    margin-top: 18px;
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-left: 4px solid #D97706;
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-size: 13px;
+    color: #475569;
+    line-height: 1.6;
+  }
+  .pdpa-footer strong {
+    color: #0F172A;
+    display: block;
+    margin-bottom: 4px;
+    font-size: 14px;
+  }
+
+  @media (max-width: 768px) {
+    .steps-grid, .compare-grid { grid-template-columns: 1fr; }
+    .hero-title, .section-title, .faq-title { font-size: 20px; }
+    .page-wrap { padding: 10px 12px; }
+    .faq-answer { padding: 12px 14px 14px 14px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-wrap">
+  <!-- 1. แบนเนอร์ -->
+  <div class="hero-card">
+    <div class="badge">✨ เครือข่ายคนขับรถบริการมืออาชีพ</div>
+    <h1 class="hero-title">🚖 The Driver TH 🇹🇭 Premium Service</h1>
+    <p class="hero-subtitle">ศูนย์กลางลงทะเบียนยืนยันตัวตนและตรวจสอบรหัสสมาชิก มาตรฐานความปลอดภัยระดับพรีเมียม</p>
+    <div class="stats-box">
+      <div>
+        <div class="stat-label">สถานะจำนวนสมาชิกปัจจุบัน</div>
+        <div class="stat-number" id="memberCount">กำลังนับ...</div>
+      </div>
+      <div class="stat-update" id="lastSync">🟢 ซิงก์ข้อมูลอัตโนมัติจากระบบ</div>
+    </div>
+  </div>
+
+  <!-- 2. ค้นหารหัสสมาชิก -->
+  <div class="card">
+    <div class="search-top">
+      <div class="sec-title" style="margin-bottom:0;">🔍 ค้นหารหัสสมาชิกของคุณ</div>
+      <div class="result-count" id="resultCount">กำลังโหลด...</div>
+    </div>
+    <div class="search-wrapper">
+      <input type="text" id="search" placeholder="พิมพ์ชื่อในห้อง, เลขท้ายเบอร์โทร 4 หลัก หรือทะเบียนรถ..." oninput="filterTable()">
+      <button type="button" class="clear-btn" id="clearBtn" onclick="clearSearch()">✕</button>
+    </div>
+    <div class="table-container">
+      <table>
+        <thead><tr id="thead"></tr></thead>
+        <tbody id="tbody"><tr><td colspan="5" style="text-align:center;padding:24px;">⏳ กำลังโหลดข้อมูล...</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 3. ขั้นตอนการลงทะเบียน -->
+  <div class="card">
+    <div class="section-header">
+      <h2 class="section-title">📑 ขั้นตอนการลงทะเบียนรับรหัสสมาชิก</h2>
+      <p class="section-desc">ดำเนินการครบทั้ง 3 ขั้นตอน เพื่อรับรหัสสมาชิกอย่างเป็นทางการ</p>
+    </div>
+
+    <div class="steps-grid">
+      <div class="step-card">
+        <span class="step-num">ขั้นตอนที่ 1</span>
+        <h3 class="step-title">กรอกแบบฟอร์มลงทะเบียน</h3>
+        <p class="step-text">กดปุ่มลงทะเบียนด้านล่าง กรอกข้อมูลส่วนตัว ข้อมูลรถ และอัปโหลดรูปถ่ายยืนยันตัวตนให้ครบถ้วนตามเงื่อนไข</p>
+      </div>
+
+      <div class="step-card">
+        <span class="step-num">ขั้นตอนที่ 2</span>
+        <h3 class="step-title">รอตรวจสอบภายใน 14 วัน</h3>
+        <p class="step-text">เจ้าหน้าที่ตรวจสอบความถูกต้องของข้อมูลและรูปถ่าย หากสมบูรณ์ระบบจะออกหมายเลขสมาชิกให้ท่านทันที</p>
+      </div>
+
+      <div class="step-card">
+        <span class="step-num">ขั้นตอนที่ 3</span>
+        <h3 class="step-title">ตั้งชื่อโปรไฟล์ในห้องแชท</h3>
+        <p class="step-text">นำรหัสที่ได้รับมาเปลี่ยนชื่อในห้อง (ห้ามใส่เบอร์โทรศัพท์ในชื่อ)</p>
+        <div class="example-tag">
+          ตัวอย่าง: <strong>[B999] แทนไทย Camry</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-wrap">
+      <a href="https://forms.gle/2cKjfa1xqQKqkrrx7" target="_blank" rel="noopener" class="cta-btn">
+        📝 คลิกที่นี่เพื่อลงทะเบียนสมาชิกใหม่
+      </a>
+      <p class="cta-note">🔐 ข้อมูลของท่านจะถูกเก็บรักษาเป็นความลับตามประกาศความเป็นส่วนตัวของกลุ่ม</p>
+    </div>
+  </div>
+
+  <!-- 4. กฎการถ่ายรูปยืนยันตัวตน -->
+  <div class="card">
+    <div class="alert-banner">
+      <div class="alert-icon">🚨</div>
+      <div>
+        <div class="alert-title">สมาชิกที่ค้นหาหมายเลขสมาชิกไม่พบ?</div>
+        <div class="alert-desc">มักเกิดจากการส่งรูปถ่ายยืนยันตัวตนไม่ตรงตามมาตรฐานความปลอดภัยของกลุ่ม กรุณาตรวจสอบเกณฑ์ด้านล่างและส่งแบบฟอร์มเข้ามาใหม่อีกครั้ง</div>
+      </div>
+    </div>
+
+    <div class="compare-grid">
+      <div class="rule-box rule-do">
+        <div class="rule-header">✅ สิ่งที่ต้องปฏิบัติ (ผ่านการอนุมัติ)</div>
+        <ul class="rule-list">
+          <li><strong>เขียนด้วยลายมือเท่านั้น:</strong> เขียนข้อความตามเงื่อนไขลงบนกระดาษจริงด้วยลายมือตนเอง</li>
+          <li><strong>ถ่ายคู่ใบหน้าชัดเจน:</strong> ถือกระดาษที่เขียนแล้วถ่ายรูปคู่กับใบหน้าของตนเองให้เห็นชัดเจน</li>
+          <li><strong>ข้อมูลรถตรงความจริง:</strong> รูปรถและแผ่นป้ายทะเบียนต้องตรงกับข้อมูลที่กรอกในฟอร์ม</li>
+        </ul>
+      </div>
+
+      <div class="rule-box rule-dont">
+        <div class="rule-header">⛔ ข้อห้าม (ไม่ผ่านการอนุมัติ)</div>
+        <ul class="rule-list">
+          <li>ห้ามพิมพ์ข้อความจากคอมพิวเตอร์แล้วปริ้นท์ใส่กระดาษ</li>
+          <li>ห้ามใช้โปรแกรมตัดต่อ แอปแต่งภาพ หรือพิมพ์ข้อความแปะทับลงบนรูป</li>
+          <li>ห้ามใช้ AI สร้างภาพหรือเติมข้อความลงในรูปถ่าย</li>
+          <li>ห้ามถือคู่กับบัตรประชาชนหรือใบขับขี่ (เพื่อความปลอดภัยของข้อมูลส่วนตัว)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      ✍️ ย้ำอีกครั้ง: <span>“เน้นใช้มือเขียนข้อความลงกระดาษจริงเท่านั้น ห้ามตัดต่อและห้ามใช้ AI”</span> เพื่อยืนยันตัวตนสมาชิกตัวจริง 100%
+    </div>
+  </div>
+
+  <!-- 5. คำถามที่พบบ่อย (FAQ) และ PDPA -->
+  <div class="card">
+    <div class="faq-header">
+      <span class="faq-badge">HELP &amp; SUPPORT</span>
+      <h2 class="faq-title">❓ คำถามที่พบบ่อย (FAQ)</h2>
+      <p class="faq-subtitle">คลิกที่หัวข้อคำถามเพื่อดูรายละเอียดและแนวทางแก้ไข</p>
+    </div>
+
+    <div class="faq-list">
+      <details class="faq-item" open>
+        <summary class="faq-question">
+          <span class="q-text"><span class="q-num">1</span>ลงทะเบียนเกิน 14 วันแล้ว แต่ค้นหาหมายเลขสมาชิกไม่พบ?</span>
+          <span class="chevron">▼</span>
+        </summary>
+        <div class="faq-answer">
+          สาเหตุหลักมักเกิดจาก <strong>รูปถ่ายยืนยันตัวตนไม่ผ่านเกณฑ์ความปลอดภัย</strong> เช่น ใช้การพิมพ์ตัวอักษร/ตัดต่อรูปแทนการเขียนด้วยลายมือ ถ่ายรูปคู่กับบัตรประชาชน หรือกรอกเลขทะเบียนรถไม่ตรงกับภาพถ่าย แนะนำให้ตรวจสอบกฎด้านบนและ <strong>กดส่งแบบฟอร์มลงทะเบียนเข้ามาใหม่อีกครั้ง</strong> ครับ
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span class="q-text"><span class="q-num">2</span>ทำไมต้องเขียนข้อความลงกระดาษด้วยลายมือ ห้ามใช้ AI หรือพิมพ์?</span>
+          <span class="chevron">▼</span>
+        </summary>
+        <div class="faq-answer">
+          เพื่อป้องกันมิจฉาชีพแอบอ้างนำรูปภาพของผู้อื่นมาตัดต่อใส่ข้อความสมัครแทนตัวจริง การเขียนด้วยลายมือลงบนกระดาษจริงแล้วถ่ายคู่กับใบหน้า ช่วยยืนยันตัวตนได้ชัดเจน 100% ทำให้สมาชิกและผู้โดยสารในเครือข่าย <strong>The Driver TH 🇹🇭 Premium Service</strong> มั่นใจในความปลอดภัยสูงสุด
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span class="q-text"><span class="q-num">3</span>ได้รับหมายเลขสมาชิกแล้ว ต้องตั้งชื่อในห้องแชทอย่างไร?</span>
+          <span class="chevron">▼</span>
+        </summary>
+        <div class="faq-answer">
+          ให้นำรหัสสมาชิกใส่ในวงเล็บเหลี่ยมไว้หน้าชื่อ ตามด้วยชื่อเล่นและรุ่นรถ เช่น <span class="highlight-pill">[B999] แทนไทย Camry</span> โดย <strong>ห้ามใส่เบอร์โทรศัพท์ลงในชื่อโปรไฟล์</strong> เพื่อความเป็นระเบียบและปกป้องข้อมูลส่วนตัวของท่านเอง
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span class="q-text"><span class="q-num">4</span>เปลี่ยนรถคันใหม่ หรือเปลี่ยนชื่อที่ใช้ในกลุ่ม ต้องลงทะเบียนใหม่ไหม?</span>
+          <span class="chevron">▼</span>
+        </summary>
+        <div class="faq-answer">
+          <strong>ไม่ต้องขอรหัสสมาชิกใหม่ครับ</strong> สามารถใช้รหัสสมาชิกเดิมได้ตลอด แต่กรุณาทักแจ้งแอดมินประจำห้องแชทพร้อมส่งรูปรถคันใหม่ เพื่ออัปเดตฐานข้อมูลทะเบียนรถให้ตรงกับปัจจุบัน
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span class="q-text"><span class="q-num">5</span>ค้นหารหัสสมาชิกในช่องค้นหาด้านบนไม่เจอ ควรพิมพ์ค้นหาอย่างไร?</span>
+          <span class="chevron">▼</span>
+        </summary>
+        <div class="faq-answer">
+          แนะนำให้ค้นหาด้วย <strong>เบอร์โทรศัพท์ 4 หลักสุดท้าย</strong> หรือ <strong>เลขทะเบียนรถ (เฉพาะตัวเลข)</strong> แทนการพิมพ์ชื่อ เนื่องจากบางครั้งอาจมีเว้นวรรคหรือตัวสะกดไม่ตรงกับตอนกรอกฟอร์ม
+        </div>
+      </details>
+    </div>
+
+    <div class="pdpa-footer">
+      <strong>🔐 นโยบายคุ้มครองข้อมูลส่วนบุคคล (PDPA)</strong>
+      ข้อมูลส่วนบุคคล รูปถ่ายยืนยันตัวตน ข้อมูลยานพาหนะ และเบอร์โทรศัพท์ของสมาชิกทั้งหมด จะถูกจัดเก็บเป็นความลับอย่างปลอดภัย เพื่อใช้สำหรับการยืนยันตัวตนและการบริหารจัดการภายในเครือข่าย The Driver TH 🇹🇭 Premium Service เท่านั้น ไม่มีการนำไปเปิดเผยต่อสาธารณะหรือบุคคลภายนอก
+    </div>
+  </div>
+</div>
+
+<script>
+  const csvFile = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRTvooz5EilsOQ9QuZqIB2o_1xIs_BwmOnyXk-21mIJezzpYqT1T9P_u-o49t_QMuyVV7zVlDe5iN80/pub?output=csv";
+  let allData = [];
+  let headers = [];
+
+  function escapeHtml(val) {
+    return String(val ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+  }
+
+  function hasAnyValue(row) {
+    return Object.values(row).some(v => String(v ?? "").trim() !== "");
+  }
+
+  function updateMemberCounter(totalRows) {
+    const el = document.getElementById("memberCount");
+    const syncEl = document.getElementById("lastSync");
+    el.textContent = `${totalRows.toLocaleString()} ท่าน`;
+
+    const now = new Date();
+    const formatted = now.toLocaleString("th-TH", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit"
+    });
+    syncEl.textContent = `🟢 นับจากฐานข้อมูลล่าสุด (${formatted} น.)`;
+  }
+
+  Papa.parse(csvFile, {
+    download: true,
+    header: true,
+    skipEmptyLines: true,
+    complete: function(res) {
+      allData = (res.data || []).filter(hasAnyValue);
+      headers = allData.length ? Object.keys(allData[0]) : [];
+      const thead = document.getElementById("thead");
+      thead.innerHTML = headers.map(h => `<th>${escapeHtml(h)}</th>`).join("");
+      updateMemberCounter(allData.length);
+      render(allData);
+    },
+    error: function() {
+      document.getElementById("memberCount").textContent = "ไม่พร้อมใช้งาน";
+      document.getElementById("lastSync").textContent = "⚠️ โหลดข้อมูล CSV ไม่สำเร็จ";
+    }
+  });
+
+  function render(data) {
+    document.getElementById("resultCount").textContent = `${data.length.toLocaleString()} / ${allData.length.toLocaleString()} รายการ`;
+    const tbody = document.getElementById("tbody");
+    if (!data.length) {
+      tbody.innerHTML = `<tr><td colspan="${Math.max(headers.length,1)}" style="text-align:center;padding:20px;color:#64748B;">ไม่พบข้อมูล ลองค้นหาด้วยเลขท้ายเบอร์โทร 4 หลักหรือทะเบียนรถ</td></tr>`;
+      return;
+    }
+    tbody.innerHTML = data.map(row =>
+      `<tr>${headers.map(h => `<td>${escapeHtml(row[h])}</td>`).join("")}</tr>`
+    ).join("");
+  }
+
+  function filterTable() {
+    const input = document.getElementById("search");
+    const kw = input.value.trim().toLowerCase();
+    document.getElementById("clearBtn").classList.toggle("visible", input.value.length > 0);
+    if (!kw) return render(allData);
+    render(allData.filter(r => Object.values(r).some(v => String(v ?? "").toLowerCase().includes(kw))));
+  }
+
+  function clearSearch() {
+    const input = document.getElementById("search");
+    input.value = "";
+    filterTable();
+    input.focus();
+  }
+</script>
+</body>
+</html>

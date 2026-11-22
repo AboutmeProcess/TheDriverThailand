@@ -705,7 +705,7 @@
 
         <div class="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-600 bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5">
           <span id="shipping-result-summary" class="font-bold text-slate-800">แสดง 0 รายการจากทั้งหมด 0 รายการ</span>
-          <span class="text-[11px] text-slate-500"><i class="fa-solid fa-shield-halved text-emerald-600 mr-1"></i>ปกปิดนามสกุลเพื่อความเป็นส่วนตัว (PDPA)</span>
+          <span class="text-[11px] text-slate-500"><i class="fa-solid fa-database text-amber-600 mr-1"></i>แสดงข้อมูลตามฐานข้อมูลจริง</span>
         </div>
 
         <div class="overflow-x-auto custom-scrollbar rounded-2xl border border-slate-200">
@@ -1498,14 +1498,6 @@
       sel.value = hasPrev ? prevVal : "ALL";
     }
 
-    function normalizeRoundKey(text) {
-      return String(text || "")
-        .replace(/^(รอบวันที่|รอบที่|รอบ)\s*/i, "")
-        .replace(/\s+/g, " ")
-        .trim()
-        .toLowerCase();
-    }
-
     function getStepIndexFromStatus(statusText) {
       const s = String(statusText || "").trim();
       if (s.includes("จัดส่งแล้ว")) return 4;
@@ -1613,76 +1605,164 @@
       return "";
     }
 
-    function extractPhoneFromRow(row) {
+    // ดึงข้อมูล "รอบการจัดส่ง" จากแถวข้อมูลในชีตให้รองรับหลายชื่อคอลัมน์และรูปแบบข้อความ
+    function extractRoundFromRow(row) {
+      if (!row || typeof row !== "object") return "";
+
       const direct = extractFieldValue(row, [
+        "รอบการจัดส่ง",
+        "รอบส่ง",
+        "รอบที่จัดส่ง",
+        "รอบทำบัตร",
+        "รอบ",
+        "round",
+        "roundDate",
+        "round_date",
+        "shippingRound",
+        "shipping_round"
+      ]);
+      if (direct) return String(direct).trim();
+
+      for (const [key, val] of Object.entries(row)) {
+        const kLower = String(key).trim().toLowerCase();
+        if (
+          kLower.includes("รอบ") ||
+          kLower.includes("round") ||
+          kLower.includes("จัดส่ง")
+        ) {
+          const s = String(val ?? "").trim();
+          if (s && !s.startsWith("KEX") && !s.startsWith("TH") && !s.startsWith("FLASH")) {
+            return s;
+          }
+        }
+      }
+
+      return "";
+    }
+
+    // ดึงข้อมูลเบอร์โทรศัพท์จากแถวข้อมูลในชีตให้รองรับหลายชื่อคอลัมน์หรือตำแหน่งข้อมูล
+    function extractPhoneFromRow(row) {
+      if (!row || typeof row !== "object") return "";
+
+      const candidateValues = [];
+
+      const directKeys = [
         "เบอร์โทรศัพท์",
         "เบอร์โทร",
         "เบอร์ติดต่อ",
         "โทรศัพท์",
+        "หมายเลขโทรศัพท์",
+        "เบอร์โทรติดต่อ",
+        "เบอร์โทรที่ติดต่อได้",
+        "เบอร์",
+        "โทร",
         "phone",
+        "phoneNumber",
+        "phone_number",
         "tel",
         "mobile"
-      ]);
-      if (direct) return direct;
+      ];
 
-      if (row && typeof row === "object") {
-        for (const [key, val] of Object.entries(row)) {
-          const kLower = String(key).toLowerCase();
-          if (kLower.includes("เบอร์") || kLower.includes("โทร") || kLower.includes("phone") || kLower.includes("tel")) {
-            const s = String(val ?? "").trim();
-            if (s) return s;
-          }
+      directKeys.forEach((key) => {
+        const val = extractFieldValue(row, [key]);
+        if (val) candidateValues.push(val);
+      });
+
+      for (const [key, val] of Object.entries(row)) {
+        const kLower = String(key || "").trim().toLowerCase();
+        if (
+          kLower.includes("เบอร์") ||
+          kLower.includes("โทร") ||
+          kLower.includes("phone") ||
+          kLower.includes("tel") ||
+          kLower.includes("mobile")
+        ) {
+          const s = String(val ?? "").trim();
+          if (s) candidateValues.push(s);
         }
       }
+
+      const allVals = Array.isArray(row) ? row : Object.values(row);
+      allVals.forEach((val) => {
+        if (val === null || val === undefined) return;
+        const text = String(val).trim();
+        const digits = text.replace(/\D/g, "");
+        if (/^(06|08|09)\d{7,8}$/.test(digits) || /^0\d{8,9}$/.test(digits) || /^[689]\d{8}$/.test(digits)) {
+          candidateValues.push(text);
+        }
+      });
+
+      for (const raw of candidateValues) {
+        const formatted = normalizePhoneFromSheet(raw);
+        if (formatted) return formatted;
+      }
+
       return "";
     }
 
-    function extractRoundFromRow(row) {
-      const direct = extractFieldValue(row, [
-        "รอบการจัดส่ง",
-        "รอบส่ง",
-        "รอบวันที่",
-        "รอบ",
-        "roundDate",
-        "round_date",
-        "round"
-      ]);
-      if (direct) return direct;
+    // แสดงเบอร์โทรศัพท์ให้ครบทั้ง 10 หลักจากข้อมูลในชีตโดยไม่เซ็นเซอร์
+    function normalizePhoneFromSheet(phoneRaw) {
+      if (phoneRaw === null || phoneRaw === undefined) return "";
+      const rawText = String(phoneRaw)
+        .replace(/[\u200B-\u200D\uFEFF]/g, "")
+        .trim();
+      if (!rawText || rawText === "-") return "";
 
-      if (row && typeof row === "object") {
-        for (const [key, val] of Object.entries(row)) {
-          const kLower = String(key).toLowerCase();
-          if (kLower.includes("รอบ")) {
-            const s = String(val ?? "").trim();
-            if (s) return s;
-          }
-        }
+    // แสดงเบอร์โทรศัพท์ให้ครบทั้ง 10 หลักจากข้อมูลในชีตโดยไม่เซ็นเซอร์และไม่ใส่ขีดคั่น
+    function normalizePhoneFromSheet(phoneRaw) {
+      if (phoneRaw === null || phoneRaw === undefined) return "";
+      const rawText = String(phoneRaw)
+        .replace(/[\u200B-\u200D\uFEFF]/g, "")
+        .trim();
+      if (!rawText || rawText === "-") return "";
+
+      const withoutMaskChars = rawText
+        .replace(/[xX*＊•●]+/g, "")
+        .trim();
+
+      const digitsOnly = withoutMaskChars.replace(/\D/g, "");
+      if (!digitsOnly) return "";
+
+      // กรณีขึ้นต้นด้วย 66 และยาว 11 หลัก -> แปลงเป็นเลข 0 + 9 หลัก = 10 หลัก
+      if (digitsOnly.startsWith("66") && digitsOnly.length === 11) {
+        return "0" + digitsOnly.slice(2);
       }
-      return "";
+
+      // กรณีมีตัวเลข 10 หลักเต็ม -> คืนค่าเลข 10 หลักตรงๆ
+      if (digitsOnly.length === 10) {
+        return digitsOnly;
+      }
+
+      // กรณีชีตตัดเลข 0 นำหน้าออกไป (เหลือ 9 หลัก เช่น 812345678) -> เติม 0 นำหน้าให้ครบ 10 หลัก
+      if (digitsOnly.length === 9) {
+        return digitsOnly.startsWith("0") ? digitsOnly : "0" + digitsOnly;
+      }
+
+      // กรณีตัวเลขมากกว่า 10 หลัก -> ดึงเลข 10 หลักที่ถูกต้อง
+      if (digitsOnly.length > 10) {
+        const zeroIdx = digitsOnly.indexOf("0");
+        if (zeroIdx !== -1 && digitsOnly.length - zeroIdx >= 10) {
+          return digitsOnly.slice(zeroIdx, zeroIdx + 10);
+        }
+        return digitsOnly.slice(-10);
+      }
+
+      // กรณีตัวเลขน้อยกว่า 9 หลัก -> เติม 0 นำหน้าแล้วเติมหลักให้ครบ 10 หลักเพื่อการแสดงผล
+      return ("0" + digitsOnly.replace(/^0+/, "")).padEnd(10, "0").slice(0, 10);
     }
 
     function maskPhoneNumber(phoneRaw) {
-      const cleaned = String(phoneRaw || "").trim();
-      if (!cleaned) return "-";
-      return cleaned;
+      return normalizePhoneFromSheet(phoneRaw);
     }
 
     function formatFullPhoneDisplay(phoneRaw) {
-      const cleaned = String(phoneRaw || "").trim();
+      const cleaned = normalizePhoneFromSheet(phoneRaw);
       return cleaned || "-";
     }
 
-    function maskFullNameSurname(nameRaw) {
+    function formatFullNameDisplay(nameRaw) {
       const cleaned = String(nameRaw || "").trim().replace(/\s+/g, " ");
-      if (!cleaned || cleaned === "-") return "-";
-      const parts = cleaned.split(" ");
-      if (parts.length < 2) return cleaned;
-
-      const firstPart = parts.slice(0, -1).join(" ");
-      const surnamePart = parts[parts.length - 1];
-      const surnameChars = Array.from(surnamePart);
-      const maskedSurname = "x".repeat(Math.max(1, surnameChars.length));
-      return `${firstPart} ${maskedSurname}`;
+      return cleaned || "-";
     }
 
     function getStatusBadgeClass(statusText) {
@@ -1779,9 +1859,9 @@
 
       tbody.innerHTML = filtered.slice(0, 150).map((row) => {
         const rawFullName = extractFieldValue(row, ["ชื่อและนามสกุล", "ชื่อ-นามสกุล", "fullname", "fullName", "name"]) || "-";
-        const fullNameMasked = escapeHtml(maskFullNameSurname(rawFullName));
+        const fullNameDisplay = escapeHtml(formatFullNameDisplay(rawFullName));
         const phoneRaw = extractPhoneFromRow(row);
-        const phoneDisplay = escapeHtml(formatFullPhoneDisplay(maskPhoneNumber(phoneRaw)));
+        const phoneDisplay = escapeHtml(formatFullPhoneDisplay(phoneRaw));
         const rawStatus = extractFieldValue(row, ["สถานะการดำเนินการ", "สถานะ", "status"]) || "ทำรายการแล้ว";
         const statusEscaped = escapeHtml(rawStatus);
         const statusBadgeClass = getStatusBadgeClass(rawStatus);
@@ -1800,7 +1880,7 @@
 
         return `
           <tr class="hover:bg-amber-50/50 transition">
-            <td class="px-4 py-3 font-semibold text-slate-900 whitespace-nowrap">${fullNameMasked}</td>
+            <td class="px-4 py-3 font-semibold text-slate-900 whitespace-nowrap">${fullNameDisplay}</td>
             <td class="px-4 py-3 font-mono text-slate-800 whitespace-nowrap">${phoneDisplay}</td>
             <td class="px-4 py-3 whitespace-nowrap">
               <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold border shadow-2xs ${statusBadgeClass}">

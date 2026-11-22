@@ -547,7 +547,7 @@
                             <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </span>
-                            <input type="text" id="searchInput" onkeyup="onSearchOrFilterChange()" placeholder="ค้นหาชื่อ, เบอร์โทร, เลขบัญชี, รหัสเคส..." 
+                            <input type="text" id="searchInput" onkeyup="onSearchOrFilterChange()" placeholder="ค้นหาชื่อ, เบอร์โทร (มี/ไม่มีขีดก็เจอ), เลขบัญชี..." 
                                 class="w-full pl-9 pr-8 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 focus:bg-white text-slate-900 placeholder-slate-400 outline-none transition">
                             <button type="button" id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600">
                                 <i class="fa-solid fa-xmark"></i>
@@ -566,6 +566,9 @@
                             </select>
                         </div>
                     </div>
+
+                    <!-- Quick Risk Check Result Banner -->
+                    <div id="quickRiskBanner" class="hidden rounded-xl p-3 sm:p-3.5 border text-xs sm:text-sm transition-all"></div>
                 </div>
 
                 <!-- Feed Cards Dynamic Container -->
@@ -686,9 +689,14 @@
                         <span class="mx-1.5">•</span>
                         <span>ผู้แจ้ง: <strong id="detailReporter" class="text-slate-700"></strong></span>
                     </div>
-                    <button type="button" id="btnDetailRequestDelete" class="text-amber-800 hover:text-amber-900 bg-amber-50 hover:bg-amber-100 border border-amber-300 px-3 py-1.5 rounded-lg font-semibold transition flex items-center justify-center gap-1.5 shrink-0 whitespace-nowrap">
-                        <i class="fa-solid fa-flag"></i> แจ้งขอลบเคสนี้
-                    </button>
+                    <div class="flex items-center gap-2 shrink-0">
+                        <button type="button" id="btnDetailShareOpenChat" class="text-emerald-800 hover:text-emerald-950 bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 px-3 py-1.5 rounded-lg font-semibold transition flex items-center justify-center gap-1.5 whitespace-nowrap">
+                            <i class="fa-brands fa-line"></i> คัดลอกแชร์ OpenChat
+                        </button>
+                        <button type="button" id="btnDetailRequestDelete" class="text-amber-800 hover:text-amber-900 bg-amber-50 hover:bg-amber-100 border border-amber-300 px-3 py-1.5 rounded-lg font-semibold transition flex items-center justify-center gap-1.5 whitespace-nowrap">
+                            <i class="fa-solid fa-flag"></i> แจ้งขอลบเคสนี้
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -804,6 +812,7 @@
         // ==========================================
         const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbx0jk2GOWTMAILomX47Ur0-y1gvc_H9Bz_wfANcBqiJcm_vd9DmSGs8XDpofEsx-5IHoA/exec';
         const LOCAL_STORAGE_KEY = 'driver_guard_reports_v2';
+        const DRAFT_STORAGE_KEY = 'driver_guard_report_draft_v1';
         const MAX_IMAGES = 10;
 
         let allReports = [];
@@ -829,6 +838,11 @@
             document.getElementById('scamForm').addEventListener('submit', handleReportSubmit);
             document.getElementById('deleteRequestForm').addEventListener('submit', handleDeleteRequestSubmit);
 
+            // Bind auto-save draft listeners on form inputs
+            bindFormDraftAutoSave();
+            restoreFormDraft();
+
+            // Load initial data
             fetchDataFromCloud();
         });
 
@@ -1075,6 +1089,72 @@
         }
 
         // ==========================================
+        // AUTO-SAVE FORM DRAFT IN LOCALSTORAGE
+        // ==========================================
+        const DRAFT_FIELD_IDS = [
+            'scammerName',
+            'contactPhone',
+            'bankAccount',
+            'scamType',
+            'damageAmount',
+            'incidentDate',
+            'incidentLocation',
+            'description',
+            'reporterName'
+        ];
+
+        function bindFormDraftAutoSave() {
+            DRAFT_FIELD_IDS.forEach(id => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                el.addEventListener('input', saveFormDraft);
+                el.addEventListener('change', saveFormDraft);
+            });
+        }
+
+        function saveFormDraft() {
+            try {
+                const draft = {};
+                DRAFT_FIELD_IDS.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) draft[id] = el.value;
+                });
+                localStorage.setItem(DRAFT_STORAGE_KEY, JSON.stringify(draft));
+            } catch (_) {}
+        }
+
+        function restoreFormDraft() {
+            try {
+                const raw = localStorage.getItem(DRAFT_STORAGE_KEY);
+                if (!raw) return;
+                const draft = JSON.parse(raw);
+                if (!draft || typeof draft !== 'object') return;
+
+                let hasRestoredAny = false;
+                DRAFT_FIELD_IDS.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el && typeof draft[id] === 'string' && draft[id].trim() !== '') {
+                        if (id === 'incidentDate' && draft[id] === new Date().toISOString().split('T')[0]) {
+                            return;
+                        }
+                        el.value = draft[id];
+                        hasRestoredAny = true;
+                    }
+                });
+
+                if (hasRestoredAny) {
+                    showToast('กู้คืนข้อมูลฟอร์มที่พิมพ์ค้างไว้ให้อัตโนมัติแล้วครับ', 'info');
+                }
+            } catch (_) {}
+        }
+
+        function clearFormDraft() {
+            try {
+                localStorage.removeItem(DRAFT_STORAGE_KEY);
+            } catch (_) {}
+        }
+
+        // ==========================================
         // FORM SUBMISSION (ADD NEW REPORT)
         // ==========================================
         async function handleReportSubmit(e) {
@@ -1139,6 +1219,7 @@
 
                 showToast('บันทึกข้อมูลเตือนภัยเรียบร้อยแล้ว!', 'success');
 
+                clearFormDraft();
                 document.getElementById('scamForm').reset();
                 document.getElementById('incidentDate').value = new Date().toISOString().split('T')[0];
                 removeAllImages();
@@ -1173,9 +1254,12 @@
         }
 
         function onSearchOrFilterChange() {
-            const query = document.getElementById('searchInput').value.trim().toLowerCase();
+            const rawQuery = document.getElementById('searchInput').value.trim();
+            const query = rawQuery.toLowerCase();
+            const queryDigits = rawQuery.replace(/\D/g, '');
             const typeFilter = document.getElementById('filterType').value;
             const clearBtn = document.getElementById('clearSearchBtn');
+            const riskBanner = document.getElementById('quickRiskBanner');
 
             if (query.length > 0) {
                 clearBtn.classList.remove('hidden');
@@ -1198,8 +1282,54 @@
                     item.reporter
                 ].join(' ').toLowerCase();
 
-                return searchable.includes(query);
+                if (searchable.includes(query)) return true;
+
+                // Digit-normalized search (matches phone/bank regardless of dashes or spaces)
+                if (queryDigits.length >= 4) {
+                    const phoneDigits = String(item.phone || '').replace(/\D/g, '');
+                    const bankDigits = String(item.bankAccount || '').replace(/\D/g, '');
+                    if (phoneDigits.includes(queryDigits) || bankDigits.includes(queryDigits)) {
+                        return true;
+                    }
+                }
+
+                return false;
             });
+
+            // Update Quick Risk Check Banner when user types a search term
+            if (riskBanner) {
+                if (!rawQuery) {
+                    riskBanner.classList.add('hidden');
+                } else {
+                    riskBanner.classList.remove('hidden');
+                    if (filteredReports.length > 0) {
+                        const sumDamage = filteredReports.reduce((s, r) => s + (Number(r.amount) || 0), 0);
+                        riskBanner.className = 'rounded-xl p-3 sm:p-3.5 border border-rose-300 bg-rose-50 text-rose-950 text-xs sm:text-sm flex items-center justify-between gap-2';
+                        riskBanner.innerHTML = `
+                            <div class="flex items-center gap-2.5 min-w-0">
+                                <i class="fa-solid fa-triangle-exclamation text-rose-600 text-base shrink-0"></i>
+                                <div class="min-w-0">
+                                    <span class="font-extrabold text-rose-700">พบประวัติเตือนภัย ${filteredReports.length} เคส!</span>
+                                    <span class="text-rose-800 block sm:inline sm:ml-1.5 text-xs">(ยอดเสียหายรวมประมาณ ฿${sumDamage.toLocaleString('th-TH')}) โปรดระมัดระวังก่อนรับงาน</span>
+                                </div>
+                            </div>
+                            <span class="bg-rose-600 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full shrink-0">เฝ้าระวัง</span>
+                        `;
+                    } else {
+                        riskBanner.className = 'rounded-xl p-3 sm:p-3.5 border border-emerald-300 bg-emerald-50 text-emerald-950 text-xs sm:text-sm flex items-center justify-between gap-2';
+                        riskBanner.innerHTML = `
+                            <div class="flex items-center gap-2.5 min-w-0">
+                                <i class="fa-solid fa-circle-check text-emerald-600 text-base shrink-0"></i>
+                                <div class="min-w-0">
+                                    <span class="font-extrabold text-emerald-800">ยังไม่พบประวัติ "${escapeHtml(rawQuery)}" ในระบบ</span>
+                                    <span class="text-emerald-700 block sm:inline sm:ml-1.5 text-xs">แนะนำให้เก็บมัดจำหรือตรวจสลิปทุกครั้งก่อนเดินทาง</span>
+                                </div>
+                            </div>
+                            <span class="bg-emerald-600 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full shrink-0">ไม่พบประวัติ</span>
+                        `;
+                    }
+                }
+            }
 
             currentPage = 1;
             renderFeed();
@@ -1396,12 +1526,15 @@
 
                     <!-- Footer Actions -->
                     <div class="mt-3 pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2 text-xs">
-                        <div class="text-slate-400 truncate max-w-[55%]">
+                        <div class="text-slate-400 truncate max-w-[45%]">
                             <i class="fa-solid fa-location-dot text-rose-500 mr-1 shrink-0"></i>
                             ${escapeHtml(item.location || 'ไม่ระบุเส้นทาง')}
                         </div>
 
-                        <div class="flex items-center gap-2 shrink-0">
+                        <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
+                            <button type="button" onclick="shareCaseToOpenChat('${safeId}')" title="คัดลอกข้อความเตือนภัยแชร์ลง LINE OpenChat" class="text-emerald-700 hover:text-emerald-900 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 px-2.5 py-1.5 rounded-lg transition font-semibold whitespace-nowrap">
+                                <i class="fa-brands fa-line text-[12px]"></i> แชร์เตือนภัย
+                            </button>
                             <button type="button" onclick="openDeleteRequestModal('${safeId}')" class="text-slate-500 hover:text-amber-700 px-2.5 py-1.5 rounded-lg hover:bg-amber-50 border border-transparent hover:border-amber-200 transition font-medium whitespace-nowrap">
                                 <i class="fa-solid fa-flag text-[11px]"></i> ขอลบ
                             </button>
@@ -1525,6 +1658,11 @@
                 openDeleteRequestModal(item.id);
             };
 
+            const btnShare = document.getElementById('btnDetailShareOpenChat');
+            if (btnShare) {
+                btnShare.onclick = () => shareCaseToOpenChat(item.id);
+            }
+
             const imgSection = document.getElementById('detailImagesSection');
             const imgGrid = document.getElementById('detailImagesGrid');
             if (item.images && item.images.length > 0) {
@@ -1641,6 +1779,27 @@
 
         function closeLightbox() {
             document.getElementById('lightboxModal').classList.add('hidden');
+        }
+
+        // ==========================================
+        // SHARE WARNING TO LINE OPENCHAT
+        // ==========================================
+        function shareCaseToOpenChat(caseId) {
+            const item = allReports.find(r => r.id === caseId);
+            if (!item) return;
+
+            const damageStr = item.amount > 0 ? `฿${Number(item.amount).toLocaleString('th-TH')}` : 'ไม่ระบุยอด';
+            const shareText = [
+                `🚨 แจ้งเตือนภัยกลุ่มคนขับรถรับจ้าง (${item.scamType})`,
+                `• ชื่อ/โปรไฟล์: ${item.name}`,
+                `• เบอร์โทร: ${item.phone || 'ไม่ระบุ'}`,
+                `• เลขบัญชี: ${item.bankAccount || 'ไม่ระบุ'}`,
+                `• ยอดเสียหาย: ${damageStr}`,
+                `• พฤติการณ์: ${item.details}`,
+                `🔍 เช็กประวัติเพิ่มเติม: https://aboutmeprocess.github.io/TheDriverThailand/blacklist.html`
+            ].join('\n');
+
+            copyText(shareText, 'คัดลอกข้อความเตือนภัยแล้ว! นำไปวางในห้อง OpenChat ได้เลยครับ');
         }
 
         // ==========================================

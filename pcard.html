@@ -1708,14 +1708,6 @@
         .trim();
       if (!rawText || rawText === "-") return "";
 
-    // แสดงเบอร์โทรศัพท์ให้ครบทั้ง 10 หลักจากข้อมูลในชีตโดยไม่เซ็นเซอร์และไม่ใส่ขีดคั่น
-    function normalizePhoneFromSheet(phoneRaw) {
-      if (phoneRaw === null || phoneRaw === undefined) return "";
-      const rawText = String(phoneRaw)
-        .replace(/[\u200B-\u200D\uFEFF]/g, "")
-        .trim();
-      if (!rawText || rawText === "-") return "";
-
       const withoutMaskChars = rawText
         .replace(/[xX*＊•●]+/g, "")
         .trim();

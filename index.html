@@ -271,20 +271,25 @@
       transition: color 0.15s ease;
     }
     .tdt-brand-logo-img {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
       object-fit: contain;
-      background-color: transparent;
-      border: none;
-      box-shadow: none;
+      background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+      padding: 2px;
+      border: 1.5px solid rgba(251, 191, 36, 0.75);
+      box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.45),
+        0 0 0 2px rgba(251, 191, 36, 0.16);
       flex-shrink: 0;
-      filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.45));
-      transition: transform 0.2s ease, filter 0.2s ease;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
     }
     .tdt-global-brand:hover .tdt-brand-logo-img {
       transform: scale(1.06);
-      filter: drop-shadow(0 5px 12px rgba(251, 191, 36, 0.35));
+      border-color: #fde68a;
+      box-shadow:
+        0 6px 16px rgba(0, 0, 0, 0.55),
+        0 0 12px rgba(251, 191, 36, 0.35);
     }
     @media (min-width: 640px) {
       .tdt-global-brand {
@@ -1507,123 +1512,7 @@
     document.addEventListener("DOMContentLoaded", function () {
       renderBillboardSlide(0);
       syncBillboardTimer();
-      removeWhiteBackgroundFromLogos();
     });
-
-    /**
-     * ลบพื้นหลังสีขาวรอบนอกของไฟล์รูปโลโก้ (TheDriverTH.jpg) แบบ Flood-Fill จากขอบภาพ
-     * เพื่อให้ได้โลโก้พื้นหลังโปร่งใส (Transparent) โดยไม่เจาะพื้นที่สีขาวภายในตัวโลโก้
-     */
-    function removeWhiteBackgroundFromLogos() {
-      const logoImgs = document.querySelectorAll('img[src*="TheDriverTH.jpg"]');
-      logoImgs.forEach((imgEl) => {
-        if (imgEl.dataset.bgRemoved === "true") return;
-
-        const sourceUrl = imgEl.getAttribute("src");
-        if (!sourceUrl) return;
-
-        const loader = new Image();
-        loader.crossOrigin = "anonymous";
-        loader.onload = function () {
-          try {
-            const width = loader.naturalWidth || loader.width;
-            const height = loader.naturalHeight || loader.height;
-            if (!width || !height) return;
-
-            const canvas = document.createElement("canvas");
-            canvas.width = width;
-            canvas.height = height;
-            const ctx = canvas.getContext("2d", { willReadFrequently: true });
-            if (!ctx) return;
-
-            ctx.drawImage(loader, 0, 0, width, height);
-            const imgData = ctx.getImageData(0, 0, width, height);
-            const data = imgData.data;
-
-            const isNearWhite = (pixelIdx) => {
-              const r = data[pixelIdx];
-              const g = data[pixelIdx + 1];
-              const b = data[pixelIdx + 2];
-              const a = data[pixelIdx + 3];
-              return a > 0 && r >= 232 && g >= 232 && b >= 232;
-            };
-
-            const totalPixels = width * height;
-            const visited = new Uint8Array(totalPixels);
-            const queue = new Int32Array(totalPixels);
-            let head = 0;
-            let tail = 0;
-
-            const enqueueIfWhite = (x, y) => {
-              if (x < 0 || x >= width || y < 0 || y >= height) return;
-              const pIdx = y * width + x;
-              if (visited[pIdx]) return;
-              if (isNearWhite(pIdx * 4)) {
-                visited[pIdx] = 1;
-                queue[tail++] = pIdx;
-              }
-            };
-
-            // เริ่ม Flood-Fill จากขอบภาพทั้ง 4 ด้าน
-            for (let x = 0; x < width; x++) {
-              enqueueIfWhite(x, 0);
-              enqueueIfWhite(x, height - 1);
-            }
-            for (let y = 0; y < height; y++) {
-              enqueueIfWhite(0, y);
-              enqueueIfWhite(width - 1, y);
-            }
-
-            while (head < tail) {
-              const curr = queue[head++];
-              const cx = curr % width;
-              const cy = (curr - cx) / width;
-
-              enqueueIfWhite(cx + 1, cy);
-              enqueueIfWhite(cx - 1, cy);
-              enqueueIfWhite(cx, cy + 1);
-              enqueueIfWhite(cx, cy - 1);
-            }
-
-            // ทำให้พิกเซลพื้นหลังสีขาวที่เชื่อมต่อกับขอบภาพโปร่งใส และทำขอบเรียบเนียน (Anti-alias)
-            for (let pIdx = 0; pIdx < totalPixels; pIdx++) {
-              if (visited[pIdx]) {
-                data[pIdx * 4 + 3] = 0;
-              } else {
-                const x = pIdx % width;
-                const y = (pIdx - x) / width;
-                const bIdx = pIdx * 4;
-                const r = data[bIdx];
-                const g = data[bIdx + 1];
-                const b = data[bIdx + 2];
-
-                if (r >= 205 && g >= 205 && b >= 205) {
-                  const touchesTransparentEdge =
-                    (x > 0 && visited[pIdx - 1]) ||
-                    (x < width - 1 && visited[pIdx + 1]) ||
-                    (y > 0 && visited[pIdx - width]) ||
-                    (y < height - 1 && visited[pIdx + width]);
-
-                  if (touchesTransparentEdge) {
-                    const brightness = (r + g + b) / 3;
-                    const alphaFactor = Math.max(0, Math.min(1, (242 - brightness) / 38));
-                    data[bIdx + 3] = Math.round(data[bIdx + 3] * alphaFactor);
-                  }
-                }
-              }
-            }
-
-            ctx.putImageData(imgData, 0, 0);
-            const transparentDataUrl = canvas.toDataURL("image/png");
-            imgEl.dataset.bgRemoved = "true";
-            imgEl.src = transparentDataUrl;
-          } catch (_) {
-            // หากติดข้อจำกัดของเบราว์เซอร์ขณะเปิดไฟล์โดยตรง ให้ซ่อนกรอบขาวไว้ตามเดิม
-          }
-        };
-        loader.src = sourceUrl;
-      });
-    }
   </script>
 </body>
 </html>

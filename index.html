@@ -50,60 +50,6 @@
       color: #0f172a;
       max-width: 100%;
       overflow-x: clip;
-      transition: background-color 0.25s ease, color 0.25s ease;
-    }
-
-    /* Dark Mode Overrides for Page Body & Main Cards */
-    html.tdt-dark-mode,
-    html.tdt-dark-mode body {
-      background-color: #060911;
-      color: #f1f5f9;
-    }
-    html.tdt-dark-mode main .bg-white {
-      background-color: #0f172a;
-      border-color: rgba(251, 191, 36, 0.22);
-      color: #f1f5f9;
-    }
-    html.tdt-dark-mode main .text-slate-900 {
-      color: #f8fafc;
-    }
-    html.tdt-dark-mode main .text-slate-600,
-    html.tdt-dark-mode main .text-slate-500 {
-      color: #cbd5e1;
-    }
-    html.tdt-dark-mode main .border-slate-200,
-    html.tdt-dark-mode main .border-slate-200\/90 {
-      border-color: #1e293b;
-    }
-    html.tdt-dark-mode main .from-emerald-50 {
-      --tw-gradient-from: rgba(16, 185, 129, 0.16);
-      --tw-gradient-to: rgba(16, 185, 129, 0.08);
-    }
-    html.tdt-dark-mode main .from-teal-50 {
-      --tw-gradient-from: rgba(20, 184, 166, 0.16);
-      --tw-gradient-to: rgba(20, 184, 166, 0.08);
-    }
-    html.tdt-dark-mode main .from-amber-50,
-    html.tdt-dark-mode main .from-yellow-50 {
-      --tw-gradient-from: rgba(245, 158, 11, 0.18);
-      --tw-gradient-to: rgba(217, 119, 6, 0.08);
-    }
-    html.tdt-dark-mode main .from-sky-50,
-    html.tdt-dark-mode main .from-blue-50 {
-      --tw-gradient-from: rgba(14, 165, 233, 0.16);
-      --tw-gradient-to: rgba(59, 130, 246, 0.08);
-    }
-    html.tdt-dark-mode main .from-rose-50 {
-      --tw-gradient-from: rgba(244, 63, 94, 0.16);
-      --tw-gradient-to: rgba(225, 29, 72, 0.08);
-    }
-    html.tdt-dark-mode main .from-purple-50 {
-      --tw-gradient-from: rgba(168, 85, 247, 0.16);
-      --tw-gradient-to: rgba(99, 102, 241, 0.08);
-    }
-    html.tdt-dark-mode main .from-slate-100 {
-      --tw-gradient-from: rgba(51, 65, 85, 0.45);
-      --tw-gradient-to: rgba(30, 41, 59, 0.35);
     }
 
     /* Executive Obsidian & Champagne Gold Mesh (Always High Contrast for Hero Banner) */
@@ -551,17 +497,14 @@
           </span>
         </a>
 
-        <!-- ปุ่มสำหรับปรับตัวอักษร และ ปรับสีหน้าเว็บ วางชิดขวา -->
-        <div class="tdt-util-group ml-auto" title="ปรับขนาดตัวอักษรและโหมดหน้าเว็บ">
+        <!-- ปุ่มสำหรับปรับตัวอักษร วางชิดขวา -->
+        <div class="tdt-util-group ml-auto" title="ปรับขนาดตัวอักษร">
           <button type="button" onclick="changeFontScale(-1)" aria-label="ลดขนาดตัวอักษร" class="tdt-util-btn" title="ลดขนาดตัวอักษร">
             <span>A-</span>
           </button>
           <span id="font-scale-label" class="text-[11px] font-normal text-amber-300 px-1 select-none">100%</span>
           <button type="button" onclick="changeFontScale(1)" aria-label="เพิ่มขนาดตัวอักษร" class="tdt-util-btn" title="เพิ่มขนาดตัวอักษร">
             <span>A+</span>
-          </button>
-          <button type="button" onclick="toggleThemeMode()" id="btn-theme-toggle-desktop" aria-label="สลับโหมดสีสว่างหรือสีเข้ม" class="tdt-util-btn" title="สลับโหมดสีสว่าง / สีเข้ม">
-            <i id="theme-icon-desktop" class="fa-solid fa-moon text-amber-300"></i>
           </button>
         </div>
       </div>
@@ -1164,7 +1107,6 @@
 
   <script>
     const FONT_SCALE_KEY = "tdt_font_scale_pct";
-    const THEME_MODE_KEY = "tdt_theme_mode";
     let currentFontScale = 100;
 
     function applyFontScale(pct) {
@@ -1183,34 +1125,10 @@
       showToast(`ขนาดตัวอักษร: ${currentFontScale}%`);
     }
 
-    function applyThemeMode(mode) {
-      const isDark = mode === "dark";
-      document.documentElement.classList.toggle("tdt-dark-mode", isDark);
-      const desktopIcon = document.getElementById("theme-icon-desktop");
-      const mobileIcon = document.getElementById("theme-icon-mobile");
-      const iconClass = isDark
-        ? "fa-solid fa-sun text-amber-300"
-        : "fa-solid fa-moon text-amber-300";
-      if (desktopIcon) desktopIcon.className = iconClass;
-      if (mobileIcon) mobileIcon.className = iconClass;
-      try {
-        localStorage.setItem(THEME_MODE_KEY, isDark ? "dark" : "light");
-      } catch (_) {}
-    }
-
-    function toggleThemeMode() {
-      const currentlyDark = document.documentElement.classList.contains("tdt-dark-mode");
-      const nextMode = currentlyDark ? "light" : "dark";
-      applyThemeMode(nextMode);
-      showToast(nextMode === "dark" ? "เปิดโหมดหน้าเว็บสีเข้มแล้วครับ" : "เปิดโหมดหน้าเว็บสีสว่างแล้วครับ");
-    }
-
     (function initAccessibilityPreferences() {
       try {
         const savedScale = localStorage.getItem(FONT_SCALE_KEY);
         if (savedScale) applyFontScale(Number(savedScale));
-        const savedTheme = localStorage.getItem(THEME_MODE_KEY);
-        if (savedTheme === "dark" || savedTheme === "light") applyThemeMode(savedTheme);
       } catch (_) {}
     })();
 

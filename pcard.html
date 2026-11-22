@@ -1458,6 +1458,94 @@
       return "";
     }
 
+    function extractPhoneFromRow(row) {
+      const direct = extractFieldValue(row, [
+        "เบอร์โทรศัพท์",
+        "เบอร์โทร",
+        "เบอร์ติดต่อ",
+        "โทร",
+        "phone",
+        "Phone",
+        "tel",
+        "telephone",
+        "mobile"
+      ]);
+      if (direct) return direct;
+
+      for (const [key, val] of Object.entries(row || {})) {
+        const kLower = String(key).toLowerCase();
+        const sVal = String(val ?? "").trim();
+        if (!sVal) continue;
+        if (kLower.includes("phone") || kLower.includes("tel") || kLower.includes("โทร") || kLower.includes("เบอร์")) {
+          return sVal;
+        }
+        const digits = sVal.replace(/\D/g, "");
+        if (/^0[689]\d{7,8}$/.test(digits)) {
+          return sVal;
+        }
+      }
+      return "";
+    }
+
+    function extractRoundFromRow(row) {
+      const direct = extractFieldValue(row, [
+        "รอบการจัดส่ง",
+        "รอบจัดส่ง",
+        "รอบส่งบัตร",
+        "รอบส่ง",
+        "วันที่จัดส่ง",
+        "roundDate",
+        "round_date",
+        "round",
+        "shippingRound",
+        "shipping_round"
+      ]);
+      if (direct) return direct;
+
+      for (const [key, val] of Object.entries(row || {})) {
+        const kLower = String(key).toLowerCase();
+        const sVal = String(val ?? "").trim();
+        if (!sVal) continue;
+        if (kLower.includes("round") || kLower.includes("รอบ") || kLower.includes("จัดส่ง")) {
+          return sVal;
+        }
+      }
+      return "";
+    }
+
+    function syncRoundFilterWithRecords() {
+      const sel = document.getElementById("shipping-round-filter");
+      if (!sel) return;
+      const prevVal = sel.value || "ALL";
+
+      const dynamicRounds = [];
+      const seenNorm = new Set();
+
+      const addRoundOption = (label) => {
+        const clean = String(label || "").trim();
+        if (!clean) return;
+        const norm = normalizeRoundKey(clean);
+        if (!seenNorm.has(norm)) {
+          seenNorm.add(norm);
+          dynamicRounds.push(clean);
+        }
+      };
+
+      shippingRecords.forEach((row) => addRoundOption(extractRoundFromRow(row)));
+      SHIPPING_ROUNDS.forEach((r) => addRoundOption(r));
+
+      sel.innerHTML = '<option value="ALL">แสดงทุกรอบการจัดส่ง</option>';
+      dynamicRounds.forEach((r) => {
+        const opt = document.createElement("option");
+        opt.value = r;
+        opt.textContent = r;
+        sel.appendChild(opt);
+      });
+
+      const hasPrev = Array.from(sel.options).some((o) => o.value === prevVal);
+      sel.value = hasPrev ? prevVal : "ALL";
+    }
+
     function normalizeRoundKey(text) {
       return String(text || "")
         .replace(/^(รอบวันที่|รอบที่|รอบ)\s*/i, "")
@@ -1488,7 +1576,7 @@
       const found = shippingRecords.find((r) => {
         const refCode = extractFieldValue(r, ["รหัสอ้างอิง", "refCode", "ref_code", "id"]).toLowerCase();
         const name = extractFieldValue(r, ["ชื่อและนามสกุล", "ชื่อ-นามสกุล", "fullname", "fullName", "name"]).toLowerCase();
-        const phone = extractFieldValue(r, ["เบอร์โทรศัพท์", "เบอร์โทร", "phone", "tel"]).toLowerCase();
+        const phone = extractPhoneFromRow(r).toLowerCase();
         return refCode.includes(q) || name.includes(q) || phone.includes(q);
       });
 
@@ -1501,7 +1589,7 @@
       const rawRefCode = extractFieldValue(found, ["รหัสอ้างอิง", "refCode", "ref_code", "id"]);
       const fullName = escapeHtml(extractFieldValue(found, ["ชื่อและนามสกุล", "ชื่อ-นามสกุล", "fullname", "fullName", "name"]) || "-");
       const status = escapeHtml(extractFieldValue(found, ["สถานะการดำเนินการ", "สถานะ", "status"]) || "ทำรายการแล้ว");
-      const roundText = escapeHtml(extractFieldValue(found, ["รอบการจัดส่ง", "รอบจัดส่ง", "roundDate", "round_date", "round"]) || "-");
+      const roundText = escapeHtml(extractRoundFromRow(found) || "-");
       const rawTrackingNo = extractFieldValue(found, ["เลขพัสดุ", "trackingNo", "tracking_no", "tracking"]);
       const trackingNo = escapeHtml(rawTrackingNo || "รอจัดส่ง");
       const step = getStepIndexFromStatus(status);
@@ -1558,9 +1646,10 @@
           if (!item || typeof item !== "object") return false;
           const n = extractFieldValue(item, ["ชื่อและนามสกุล", "ชื่อ-นามสกุล", "fullname", "fullName", "name"]);
           const t = extractFieldValue(item, ["เลขพัสดุ", "trackingNo", "tracking_no", "tracking"]);
-          const r = extractFieldValue(item, ["รอบการจัดส่ง", "รอบจัดส่ง", "roundDate", "round_date", "round"]);
+          const r = extractRoundFromRow(item);
           return Boolean(n || t || r);
         });
+        syncRoundFilterWithRecords();
         if (badge) {
           badge.textContent = `อัปเดตแล้ว (${shippingRecords.length} รายการ)`;
           badge.className = "bg-emerald-100 text-emerald-800 text-xs font-semibold px-3 py-0.5 rounded-full";
@@ -1587,10 +1676,10 @@
 
       const filtered = shippingRecords.filter((row) => {
         const name = extractFieldValue(row, ["ชื่อและนามสกุล", "ชื่อ-นามสกุล", "fullname", "fullName", "name"]).toLowerCase();
-        const phoneRaw = extractFieldValue(row, ["เบอร์โทรศัพท์", "เบอร์โทร", "phone", "tel"]).toLowerCase();
+        const phoneRaw = extractPhoneFromRow(row).toLowerCase();
         const phoneDigits = phoneRaw.replace(/\D/g, "");
         const tracking = extractFieldValue(row, ["เลขพัสดุ", "trackingNo", "tracking_no", "tracking"]).toLowerCase();
-        const roundVal = extractFieldValue(row, ["รอบการจัดส่ง", "รอบจัดส่ง", "roundDate", "round_date", "round"]);
+        const roundVal = extractRoundFromRow(row);
         const roundNorm = normalizeRoundKey(roundVal);
 
         const matchKw = !kw
@@ -1617,10 +1706,10 @@
 
       tbody.innerHTML = filtered.slice(0, 150).map((row) => {
         const fullName = escapeHtml(extractFieldValue(row, ["ชื่อและนามสกุล", "ชื่อ-นามสกุล", "fullname", "fullName", "name"]) || "-");
-        const phoneRaw = extractFieldValue(row, ["เบอร์โทรศัพท์", "เบอร์โทร", "phone", "tel"]);
+        const phoneRaw = extractPhoneFromRow(row);
         const phoneMasked = escapeHtml(maskPhoneNumber(phoneRaw));
         const status = escapeHtml(extractFieldValue(row, ["สถานะการดำเนินการ", "สถานะ", "status"]) || "ทำรายการแล้ว");
-        const roundVal = escapeHtml(extractFieldValue(row, ["รอบการจัดส่ง", "รอบจัดส่ง", "roundDate", "round_date", "round"]) || "-");
+        const roundVal = escapeHtml(extractRoundFromRow(row) || "-");
         const rawTracking = extractFieldValue(row, ["เลขพัสดุ", "trackingNo", "tracking_no", "tracking"]);
         const trackingEscaped = escapeHtml(rawTracking || "-");
 

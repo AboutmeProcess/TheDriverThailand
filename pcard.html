@@ -104,6 +104,2318 @@
         <!-- Logo Collaboration Badge -->
         <div class="flex items-center justify-between gap-3 min-w-0">
           <div class="flex items-center gap-3 min-w-0">
+            <a href="index.html" class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-slate-900 text-amber-400 flex items-center justify-center font-bold text-lg sm:text-xl shadow-lg border-2 border-amber-400/40 shrink-0 hover:scale-105 transition">
+              <i class="fa-solid fa-id-badge"></i>
+            </a>
+            <div class="min-w-0">
+              <div class="flex items-center gap-2 flex-wrap">
+                <span class="font-extrabold text-slate-900 text-sm sm:text-base tracking-wide">บัตรสมาชิกประเมศฐ์</span>
+                <span class="text-xs bg-amber-100 text-amber-800 px-2 py-0.5 rounded-md font-bold border border-amber-300 shrink-0">Official</span>
+              </div>
+              <p class="text-xs text-amber-600 font-semibold mt-0.5">ดำเนินการโดย กลุ่ม The Driver Thailand</p>
+            </div>
+          </div>
+
+          <!-- Quick Back to Main Site Links (Mobile) -->
+          <div class="flex lg:hidden items-center gap-1.5 shrink-0">
+            <a href="index.html" class="px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition" title="หน้าหลักเว็บไซต์">
+              <i class="fa-solid fa-house"></i>
+            </a>
+            <a href="register.html" class="px-2.5 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 text-xs font-bold transition" title="ระบบสมาชิก">
+              <i class="fa-solid fa-user-plus"></i>
+            </a>
+            <a href="pcard.html" class="px-2.5 py-1.5 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 text-xs font-bold transition" title="ทำบัตรสมาชิกประเมศฐ์">
+              <i class="fa-solid fa-id-badge"></i>
+            </a>
+            <a href="blacklist.html" class="px-2.5 py-1.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 text-xs font-bold transition" title="ตรวจสอบ Blacklist">
+              <i class="fa-solid fa-user-shield"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="flex flex-wrap items-center gap-2 sm:gap-2.5 text-xs sm:text-sm font-bold w-full lg:w-auto">
+          <a href="index.html"
+             class="hidden lg:inline-flex px-3.5 py-2.5 rounded-2xl transition-all items-center justify-center gap-1.5 text-slate-700 hover:bg-slate-100 border border-slate-200">
+            <i class="fa-solid fa-house text-slate-500"></i>
+            <span>หน้าหลัก</span>
+          </a>
+          <a href="register.html"
+             class="hidden lg:inline-flex px-3.5 py-2.5 rounded-2xl transition-all items-center justify-center gap-1.5 text-emerald-700 bg-emerald-50/70 hover:bg-emerald-100 border border-emerald-200">
+            <i class="fa-solid fa-user-plus text-emerald-600"></i>
+            <span>ระบบสมาชิก</span>
+          </a>
+          <a href="pcard.html"
+             class="hidden lg:inline-flex px-3.5 py-2.5 rounded-2xl transition-all items-center justify-center gap-1.5 text-amber-900 bg-amber-100/80 border border-amber-300">
+            <i class="fa-solid fa-id-badge text-amber-600"></i>
+            <span>ทำบัตรประเมศฐ์</span>
+          </a>
+          <a href="blacklist.html"
+             class="hidden lg:inline-flex px-3.5 py-2.5 rounded-2xl transition-all items-center justify-center gap-1.5 text-rose-700 bg-rose-50/70 hover:bg-rose-100 border border-rose-200">
+            <i class="fa-solid fa-user-shield text-rose-600"></i>
+            <span>Blacklist</span>
+          </a>
+          <button type="button" id="btn-nav-register" onclick="switchNavTab('register')"
+                  class="flex-1 sm:flex-initial px-3.5 py-2.5 sm:px-5 sm:py-3 rounded-2xl transition-all flex items-center justify-center gap-2 bg-slate-900 text-amber-400 shadow-md hover:bg-slate-800">
+            <i class="fa-solid fa-pen-to-square text-sm sm:text-base shrink-0"></i>
+            <span class="truncate">ลงทะเบียนทำบัตร</span>
+          </button>
+          <button type="button" id="btn-nav-shipping" onclick="switchNavTab('shipping')"
+                  class="flex-1 sm:flex-initial px-3.5 py-2.5 sm:px-5 sm:py-3 rounded-2xl transition-all flex items-center justify-center gap-2 text-slate-700 hover:bg-slate-100 border border-slate-200 hover:border-slate-300">
+            <i class="fa-solid fa-truck-fast text-blue-600 text-sm sm:text-base shrink-0"></i>
+            <span class="truncate">เช็คเลขพัสดุย้อนหลัง</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTAINER -->
+  <main class="flex-grow max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-6 sm:space-y-8">
+
+    <!-- ============================================ -->
+    <!-- SECTION 1: REGISTRATION FORM & TRACK STATUS  -->
+    <!-- ============================================ -->
+    <div id="section-register" class="space-y-6 sm:space-y-8">
+
+      <!-- DIMENSIONAL ENHANCED HERO BANNER -->
+      <div class="hero-glow-bg rounded-3xl p-5 sm:p-10 text-white shadow-2xl relative overflow-hidden border border-slate-700/60">
+        <div class="absolute -right-10 -bottom-10 w-72 h-72 bg-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -left-10 -top-10 w-72 h-72 bg-amber-500/15 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="grid lg:grid-cols-12 gap-6 sm:gap-8 items-center relative z-10">
+          <div class="lg:col-span-7 space-y-4 min-w-0">
+            <div class="flex flex-wrap items-center gap-2.5">
+              <span class="bg-gradient-to-r from-amber-500/30 to-amber-600/20 text-amber-300 border border-amber-400/40 text-xs font-bold px-3.5 py-1.5 rounded-full shadow-inner">
+                <i class="fa-solid fa-handshake mr-1.5"></i> ความร่วมมืออย่างเป็นทางการ
+              </span>
+              <span class="bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 text-xs font-bold px-3.5 py-1.5 rounded-full inline-flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> เปิดรับสมัคร 24 ชม.
+              </span>
+            </div>
+
+            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight drop-shadow-md break-words">
+              ลงทะเบียนจัดทำบัตรสมาชิกประเมศฐ์
+            </h2>
+            <p class="text-slate-300 text-xs sm:text-sm leading-relaxed font-light">
+              ระบบลงทะเบียนทำบัตรสมาชิกอย่างเป็นทางการ ติดรูปถ่ายหน้าตรงพร้อมเคลือบใสกันน้ำอย่างดี
+              เพื่อใช้แสดงตนและเพิ่มความมั่นใจในการปฏิบัติงานผ่านเครือข่ายกลุ่ม The Driver Thailand
+            </p>
+
+            <div class="flex sm:inline-flex items-center gap-3.5 glass-card border border-white/20 px-4 sm:px-5 py-3 rounded-2xl text-xs sm:text-sm text-amber-300 shadow-xl">
+              <div class="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-400/40 flex items-center justify-center text-amber-400 text-lg shrink-0">
+                <i class="fa-solid fa-calendar-check"></i>
+              </div>
+              <div class="min-w-0">
+                <span class="text-slate-300 block text-xs font-medium">รอบจัดทำและจัดส่งบัตรถัดไป:</span>
+                <strong id="banner-next-round-text" class="text-amber-400 text-sm sm:text-base font-bold break-words">รอบวันที่ 11 ธันวาคม 2569</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sample Member Card Mockup -->
+          <div class="lg:col-span-5 flex justify-center">
+            <div class="w-full max-w-xs bg-gradient-to-br from-slate-900 via-slate-800 to-blue-950 border-2 border-amber-400/80 rounded-2xl p-5 shadow-2xl relative text-slate-100 transform hover:scale-105 transition duration-300">
+              <div class="flex justify-between items-start gap-2 border-b border-slate-700/80 pb-2.5 mb-3">
+                <div class="min-w-0">
+                  <p class="text-[9px] uppercase tracking-wider text-amber-400 font-extrabold">MEMBER CARD</p>
+                  <p class="text-xs font-bold text-white truncate">ประเมศฐ์ ทราเวล &amp; เซอร์วิส</p>
+                </div>
+                <span class="text-[9px] bg-amber-400 text-slate-950 font-black px-2 py-0.5 rounded shadow shrink-0">OFFICIAL</span>
+              </div>
+              <div class="flex gap-3.5 items-center mb-3">
+                <div class="w-14 h-16 rounded-xl bg-slate-800 border border-slate-700 flex flex-col items-center justify-center text-slate-400 shrink-0 shadow-inner">
+                  <i class="fa-solid fa-user text-2xl text-amber-400/80"></i>
+                  <span class="text-[8px] mt-1 text-slate-400">รูปหน้าตรง</span>
+                </div>
+                <div class="space-y-1 text-[11px] min-w-0">
+                  <p class="font-bold text-amber-300 text-xs">ตัวอย่างบัตรสมาชิก</p>
+                  <p class="text-slate-400 font-mono text-[10px]">ID: PRM-2026-XXXX</p>
+                  <p class="text-[10px] text-emerald-400 font-medium"><i class="fa-solid fa-shield-halved mr-1"></i>เคลือบใสกันน้ำ 100%</p>
+                </div>
+              </div>
+              <div class="pt-2.5 border-t border-slate-700/80 flex justify-between items-center gap-2 text-[10px] text-slate-400">
+                <span class="font-medium text-slate-300 truncate">The Driver Thailand</span>
+                <span class="text-amber-400 font-semibold shrink-0"><i class="fa-solid fa-circle-check mr-1"></i>ออกบัตรเรียบร้อย</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STATUS TRACKING SEARCH BAR -->
+      <div id="search-status-anchor" class="bg-white rounded-3xl p-5 sm:p-8 shadow-sm border border-slate-200">
+        <div class="max-w-2xl mx-auto space-y-4">
+          <div class="text-center space-y-1">
+            <h3 class="text-lg sm:text-xl font-bold text-slate-900"><i class="fa-solid fa-magnifying-glass text-amber-500 mr-2"></i>ค้นหาสถานะการทำบัตร</h3>
+            <p class="text-xs sm:text-sm text-slate-500">กรอกรหัสอ้างอิง (เช่น PRM-20261121-164900), ชื่อ-นามสกุล หรือ เบอร์โทรศัพท์ เพื่อติดตามสถานะ</p>
+          </div>
+
+          <div class="flex flex-col sm:flex-row gap-2.5">
+            <div class="relative flex-1 min-w-0">
+              <i class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+              <input type="text" id="input-search-track" placeholder="พิมพ์รหัสอ้างอิง / ชื่อ-นามสกุล / เบอร์โทรศัพท์..."
+                     class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-300 rounded-2xl text-xs sm:text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
+            </div>
+            <button type="button" onclick="searchStatusTrack()" class="w-full sm:w-auto bg-slate-900 hover:bg-slate-800 text-white font-bold px-6 py-3 rounded-2xl text-xs sm:text-sm transition shrink-0 shadow">
+              ตรวจสอบ
+            </button>
+          </div>
+
+          <div id="tracking-result-container" class="hidden mt-4 bg-slate-50 border border-slate-200 rounded-2xl p-5 sm:p-6 transition-all"></div>
+        </div>
+      </div>
+
+      <!-- MAIN REGISTRATION FORM -->
+      <div class="bg-white rounded-3xl p-5 sm:p-10 shadow-sm border border-slate-200 space-y-6 sm:space-y-8">
+        <div class="border-b border-slate-200 pb-5 flex justify-between items-start sm:items-center flex-wrap gap-2">
+          <div>
+            <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900">แบบฟอร์มลงทะเบียนสมัครทำบัตร</h3>
+            <p class="text-xs sm:text-sm text-slate-500 mt-0.5">กรอกข้อมูลให้ครบถ้วน ข้อมูลจะถูกจัดเก็บเข้าสู่ระบบชีตอัตโนมัติ</p>
+          </div>
+          <span class="text-xs font-semibold text-slate-600 bg-slate-100 px-3.5 py-1.5 rounded-full border border-slate-200 shrink-0">
+            <i class="fa-solid fa-shield-halved text-emerald-600 mr-1"></i> ปลอดภัย 100%
+          </span>
+        </div>
+
+        <form id="form-registration" onsubmit="submitRegistrationForm(event)" class="space-y-6">
+
+          <!-- 1. CARD TYPE -->
+          <div class="space-y-3">
+            <label class="block font-bold text-slate-900 text-sm sm:text-base">
+1. ประเภทการทำบัตร <span class="text-red-500">*</span>
+            </label>
+
+            <div class="grid md:grid-cols-2 gap-4">
+              <label id="label-card-new" class="border-2 border-amber-500 bg-amber-50/40 rounded-2xl p-4 cursor-pointer hover:border-amber-600 transition flex items-center justify-between gap-3">
+                <div class="flex items-center gap-3 min-w-0">
+                  <input type="radio" name="card_type" value="สมัครสมาชิกใหม่ 769 บาท" checked onchange="handleCardTypeChange()" class="w-4 h-4 text-amber-600 focus:ring-amber-500 shrink-0">
+                  <span class="font-bold text-slate-900 text-sm sm:text-base">สมัครสมาชิกใหม่ 769 บาท</span>
+                </div>
+                <span class="bg-amber-500 text-slate-950 font-extrabold px-3 py-1 rounded-lg text-xs shrink-0">769 บาท</span>
+              </label>
+
+              <label id="label-card-lost" class="border-2 border-slate-200 bg-white rounded-2xl p-4 cursor-pointer hover:border-amber-500 transition flex items-center justify-between gap-3">
+                <div class="flex items-center gap-3 min-w-0">
+                  <input type="radio" name="card_type" value="บัตรหาย / ชำรุด 200 บาท" onchange="handleCardTypeChange()" class="w-4 h-4 text-amber-600 focus:ring-amber-500 shrink-0">
+                  <span class="font-bold text-slate-900 text-sm sm:text-base">บัตรหาย / ชำรุด 200 บาท</span>
+                </div>
+                <span class="bg-slate-200 text-slate-800 font-extrabold px-3 py-1 rounded-lg text-xs shrink-0">200 บาท</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- 2. REFERRER -->
+          <div class="space-y-2">
+            <label for="referrer" class="block font-bold text-slate-900 text-sm sm:text-base">
+2. ผู้แนะนำในการสมัครบัตรของคุณ <span class="text-red-500">*</span>
+            </label>
+            <select id="referrer" name="referrer" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:bg-white focus:ring-2 focus:ring-amber-500 focus:outline-none transition">
+              <option value="" disabled selected>-- เลือกผู้แนะนำ --</option>
+              <option value="[MD]👑 Moderator ✅">[MD]👑 Moderator ✅</option>
+              <option value="[GM7]𝕋𝕄𝕄𝕎ℕツ🇹🇭">[GM7]𝕋𝕄𝕄𝕎ℕツ🇹🇭</option>
+              <option value="[GM44]สงกรานต์BYDM6">[GM44]สงกรานต์BYDM6</option>
+              <option value="[GM62]P'Lek อัลติส">[GM62]P'Lek อัลติส</option>
+              <option value="[GM128] Patto Swift">[GM128] Patto Swift</option>
+              <option value="[GM203] JohN EX40">[GM203] JohN EX40</option>
+              <option value="[GM620]Oui/GLC250">[GM620]Oui/GLC250</option>
+              <option value="[GM666]MeaD Attrage">[GM666]MeaD Attrage</option>
+              <option value="[GM888]Tle_Alphard">[GM888]Tle_Alphard</option>
+              <option value="อื่นๆ / ไม่มีผู้แนะนำ">อื่นๆ / ไม่มีผู้แนะนำ</option>
+            </select>
+          </div>
+
+          <!-- 3. PERSONAL INFORMATION & SEQUENTIAL CASCADING ADDRESS -->
+          <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 sm:p-6 space-y-5">
+            <h4 class="font-bold text-slate-900 text-sm sm:text-base border-b border-slate-200 pb-2.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <span>3. ข้อมูลผู้สมัครและที่อยู่จัดส่ง</span>
+              <span id="address-dataset-badge" class="text-xs text-amber-700 bg-amber-100 font-semibold px-2.5 py-0.5 rounded-md w-fit">
+                <i class="fa-solid fa-location-dot mr-1"></i>กำลังเตรียมฐานข้อมูลที่อยู่ทั่วประเทศ (77 จังหวัด)...
+              </span>
+            </h4>
+
+            <div class="grid md:grid-cols-12 gap-4">
+              <div class="md:col-span-3 space-y-1">
+                <label for="prefix" class="block text-xs font-bold text-slate-700">คำนำหน้าชื่อ <span class="text-red-500">*</span></label>
+                <select id="prefix" name="prefix" required class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-xs sm:text-sm focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                  <option value="นาย">นาย</option>
+                  <option value="นางสาว">นางสาว</option>
+                  <option value="นาง">นาง</option>
+                </select>
+              </div>
+
+              <div class="md:col-span-9 space-y-1">
+                <label for="fullname" class="block text-xs font-bold text-slate-700">ชื่อ และ นามสกุล <span class="text-red-500">* (ภาษาไทยเท่านั้น)</span></label>
+                <input type="text" id="fullname" name="fullname" required placeholder="เช่น สมศักดิ์ มั่นใจดี"
+                       class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-xs sm:text-sm focus:ring-2 focus:ring-amber-500 focus:outline-none">
+              </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-4">
+              <div class="space-y-1">
+                <label for="phone" class="block text-xs font-bold text-slate-700">เบอร์โทรศัพท์ที่ติดต่อได้ <span class="text-red-500">*</span></label>
+                <input type="tel" id="phone" name="phone" required placeholder="08XXXXXXXX"
+                       class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-xs sm:text-sm focus:ring-2 focus:ring-amber-500 focus:outline-none">
+              </div>
+
+              <div class="space-y-1">
+                <label for="openchat_name" class="block text-xs font-bold text-slate-700">ชื่อในห้อง OpenChat ใช้กรณีติดต่อฉุกเฉิน <span class="text-red-500">*</span></label>
+                <input type="text" id="openchat_name" name="openchat_name" required placeholder="เช่น Somsak_TheDriver"
+                       class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-xs sm:text-sm focus:ring-2 focus:ring-amber-500 focus:outline-none">
+              </div>
+            </div>
+
+            <!-- DETAILED SEQUENTIAL ADDRESS FIELDS -->
+            <div class="bg-white p-4 sm:p-5 rounded-xl border border-slate-200 space-y-4">
+              <div class="border-b border-slate-100 pb-2 flex flex-wrap items-center justify-between gap-2">
+                <span class="text-xs font-bold text-slate-900"><i class="fa-solid fa-house-chimney text-amber-500 mr-1.5"></i>กรอกข้อมูลที่อยู่จัดส่งเอกสาร/บัตรสมาชิกอย่างละเอียด</span>
+                <span id="geo-cache-source-note" class="text-[11px] text-slate-500">Multi-CDN + LocalStorage Lookup</span>
+              </div>
+
+              <div class="grid md:grid-cols-12 gap-3">
+                <div class="md:col-span-4 space-y-1">
+                  <label for="addr_house_no" class="block text-xs font-bold text-slate-700">เลขที่บ้าน / หมู่ <span class="text-red-500">*</span></label>
+                  <input type="text" id="addr_house_no" required placeholder="เช่น 123/45 หมู่ 5" oninput="updateFullAddressPreview()"
+                         class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm focus:bg-white focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                </div>
+
+                <div class="md:col-span-8 space-y-1">
+                  <label for="addr_details" class="block text-xs font-bold text-slate-700">รายละเอียดที่อยู่ (หมู่บ้าน / อาคาร / ชั้น / ซอย / ถนน)</label>
+                  <input type="text" id="addr_details" placeholder="เช่น หมู่บ้านพรประเสริฐ ซอย 8 ถนนพหลโยธิน" oninput="updateFullAddressPreview()"
+                         class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm focus:bg-white focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                </div>
+              </div>
+
+              <!-- Linear Sequential Dropdowns: Province -> District -> Subdistrict -> Zipcode -->
+              <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                <!-- 1. Province Dropdown -->
+                <div class="space-y-1 min-w-0">
+                  <label for="addr_province" class="block text-xs font-bold text-slate-700">1. จังหวัด <span class="text-red-500">*</span></label>
+                  <select id="addr_province" required onchange="handleProvinceChange()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-xs sm:text-sm focus:bg-white focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                    <option value="" disabled selected>-- เลือกจังหวัด --</option>
+                  </select>
+                </div>
+
+                <!-- 2. District Dropdown -->
+                <div class="space-y-1 min-w-0">
+                  <label for="addr_district" class="block text-xs font-bold text-slate-700">2. เขต / อำเภอ <span class="text-red-500">*</span></label>
+                  <select id="addr_district" required onchange="handleDistrictChange()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-xs sm:text-sm focus:bg-white focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                    <option value="" disabled selected>-- เลือกเขต/อำเภอ --</option>
+                  </select>
+                </div>
+
+                <!-- 3. Subdistrict Dropdown -->
+                <div class="space-y-1 min-w-0">
+                  <label for="addr_subdistrict" class="block text-xs font-bold text-slate-700">3. แขวง / ตำบล <span class="text-red-500">*</span></label>
+                  <select id="addr_subdistrict" required onchange="handleSubdistrictChange()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-xs sm:text-sm focus:bg-white focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                    <option value="" disabled selected>-- เลือกแขวง/ตำบล --</option>
+                  </select>
+                  <input type="text" id="addr_subdistrict_manual" placeholder="ไม่พบแขวง/ตำบล ให้พิมพ์ระบุที่นี่..." oninput="handleManualSubdistrictInput()"
+                         class="hidden mt-1.5 w-full bg-amber-50/60 border border-amber-300 rounded-xl px-3 py-2 text-xs focus:bg-white focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                </div>
+
+                <!-- 4. Zipcode Select / Field -->
+                <div class="space-y-1 min-w-0">
+                  <label for="addr_zipcode_select" class="block text-xs font-bold text-slate-700">4. รหัสไปรษณีย์ <span class="text-red-500">*</span></label>
+                  <select id="addr_zipcode_select" onchange="handleZipcodeSelectChange()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-xs sm:text-sm font-mono font-bold text-slate-900 focus:bg-white focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                    <option value="" disabled selected>-- เลือกรหัสไปรษณีย์ --</option>
+                  </select>
+                  <input type="text" id="addr_zipcode_manual" maxlength="5" inputmode="numeric" placeholder="พิมพ์รหัสไปรษณีย์ 5 หลัก..." oninput="handleManualZipcodeInput()"
+                         class="hidden mt-1.5 w-full bg-amber-50/60 border border-amber-300 rounded-xl px-3 py-2 text-xs font-mono font-bold focus:bg-white focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                  <input type="hidden" id="addr_zipcode" name="zipcode" required>
+                </div>
+              </div>
+
+              <div class="flex flex-wrap items-center justify-between gap-2 text-[11px] text-slate-500">
+                <span>หากเลือกแขวง/ตำบลจากรายการไม่พบ สามารถเปิดช่องพิมพ์ระบุเองได้ทันที</span>
+                <button type="button" id="btn-toggle-manual-geo" onclick="toggleManualGeoFields()" class="text-amber-700 hover:text-amber-900 font-bold underline">
+                  พิมพ์ระบุแขวง/ตำบล และรหัสไปรษณีย์เอง
+                </button>
+              </div>
+
+              <!-- Full Address Preview Box -->
+              <div class="bg-amber-50/70 border border-amber-200/80 rounded-xl p-3 text-xs text-amber-950 flex items-start gap-2.5">
+                <i class="fa-solid fa-map-location-dot text-amber-600 text-sm mt-0.5 shrink-0"></i>
+                <div class="w-full min-w-0">
+                  <span class="font-bold block text-amber-900">ตัวอย่างที่อยู่จัดส่งเต็มสำหรับพิมพ์จ่าหน้าซอง:</span>
+                  <p id="full-address-preview" class="text-slate-800 font-medium mt-0.5 italic break-words">-- กรุณากรอกข้อมูลที่อยู่ด้านบนให้ครบถ้วน --</p>
+                </div>
+              </div>
+
+              <input type="hidden" id="address" name="address" required>
+            </div>
+          </div>
+
+          <!-- 4. FILE UPLOADS -->
+          <div class="space-y-4">
+            <h4 class="font-bold text-slate-900 text-sm sm:text-base">4. แนบไฟล์รูปภาพประกอบ</h4>
+
+            <div class="border-2 border-dashed border-slate-300 bg-white rounded-2xl p-5 text-center hover:border-amber-500 transition">
+              <label class="block cursor-pointer">
+                <div class="space-y-1.5">
+                  <i class="fa-solid fa-user-circle text-3xl text-amber-500"></i>
+                  <p class="text-xs sm:text-sm font-bold text-slate-900">รูปภาพของคุณ (รูปหน้าตรง,ไม่ใส่แว่นดำ,สุภาพเท่านั้น) <span class="text-red-500">*</span></p>
+                  <p class="text-[11px] text-slate-500">ใช้พิมพ์ติดหน้าบัตรสมาชิก (ไฟล์ JPG หรือ PNG)</p>
+                  <input type="file" id="user_photo" accept="image/*" required onchange="renderFilePreview(this, 'preview-user-photo')" class="hidden">
+                  <span class="inline-block bg-slate-900 text-white font-semibold text-xs px-4 py-2 rounded-xl mt-1 shadow-sm">
+                    <i class="fa-solid fa-upload mr-1.5"></i> เลือกรูปถ่าย
+                  </span>
+                </div>
+              </label>
+              <div id="preview-user-photo" class="hidden mt-2"></div>
+            </div>
+
+            <div id="box-lost-proof" class="hidden border-2 border-dashed border-amber-300 bg-amber-50/30 rounded-2xl p-5 text-center hover:border-amber-500 transition">
+              <label class="block cursor-pointer">
+                <div class="space-y-1.5">
+                  <i class="fa-solid fa-id-card-clip text-3xl text-amber-600"></i>
+                  <p class="text-xs sm:text-sm font-bold text-slate-900">รูปบัตรสมาชิกที่สูญหาย หรือ เขียนรหัสสมาชิกในบัตรใส่กระดาษแนบรูปมา <span class="text-red-500">*</span></p>
+                  <p class="text-[11px] text-slate-500">หลักฐานยืนยันสำหรับการทำบัตรทดแทน</p>
+                  <input type="file" id="lost_proof" accept="image/*" onchange="renderFilePreview(this, 'preview-lost-proof')" class="hidden">
+                  <span class="inline-block bg-amber-500 text-slate-950 font-bold text-xs px-4 py-2 rounded-xl mt-1 shadow-sm">
+                    <i class="fa-solid fa-upload mr-1.5"></i> แนบหลักฐานบัตรเดิม
+                  </span>
+                </div>
+              </label>
+              <div id="preview-lost-proof" class="hidden mt-2"></div>
+            </div>
+          </div>
+
+          <!-- 5. PAYMENT & SLIP SECTION -->
+          <div class="bg-amber-50/60 border border-amber-200 rounded-2xl p-4 sm:p-6 space-y-4">
+            <div class="flex items-center justify-between border-b border-amber-200 pb-3.5 flex-wrap gap-2">
+              <div class="flex items-center gap-2.5 min-w-0">
+                <div class="w-9 h-9 rounded-xl bg-amber-500 text-slate-950 flex items-center justify-center font-bold text-base shadow-sm shrink-0">
+                  <i class="fa-solid fa-receipt"></i>
+                </div>
+                <div class="min-w-0">
+                  <h4 class="font-bold text-slate-900 text-sm sm:text-base">5. ช่องทางชำระเงิน และแนบสลิปโอนเงิน</h4>
+                  <p class="text-xs text-slate-600">กรุณาโอนเงินตามยอดที่ระบุ และแนบสลิปเพื่อยืนยันรายการ</p>
+                </div>
+              </div>
+              <span id="payment-amount-badge" class="bg-amber-500 text-slate-950 font-extrabold text-sm px-4 py-1.5 rounded-full shadow-sm shrink-0">
+                ยอดโอน: 769 บาท
+              </span>
+            </div>
+
+            <div class="bg-white p-4 sm:p-5 rounded-2xl border border-amber-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+              <div class="space-y-1.5 min-w-0">
+                <span class="text-[11px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-md inline-block">
+                  <i class="fa-solid fa-building-columns mr-1"></i> ธนาคารกสิกรไทย (KBANK)
+                </span>
+                <p class="text-xs sm:text-sm text-slate-700 font-semibold mt-1">ชื่อบัญชี: <strong class="text-slate-900">นาย ชัยรัตน์ วิทวัสโกศล</strong></p>
+                <div class="flex flex-wrap items-center gap-2.5">
+                  <span class="text-base font-bold font-mono text-slate-900">773-2-29853-5</span>
+                  <button type="button" onclick="copyBankAccount('7732298535')" class="text-xs text-amber-800 bg-amber-100 hover:bg-amber-200 px-3 py-1 rounded-lg font-bold transition inline-flex items-center gap-1">
+                    <i class="fa-solid fa-copy"></i> คัดลอกเลขบัญชี
+                  </button>
+                </div>
+              </div>
+              <div class="text-left sm:text-right text-xs text-slate-500">
+                <i class="fa-solid fa-circle-check text-emerald-500 text-base sm:text-lg mb-0.5"></i>
+                <p>โอนแล้วระบบจะตรวจสอบสลิปอัตโนมัติ</p>
+              </div>
+            </div>
+
+            <div class="border-2 border-dashed border-slate-300 bg-white rounded-2xl p-5 text-center hover:border-amber-500 transition">
+              <label class="block cursor-pointer">
+                <div class="space-y-1.5">
+                  <i class="fa-solid fa-file-invoice-dollar text-3xl text-emerald-600"></i>
+                  <p class="text-xs sm:text-sm font-bold text-slate-900">แนบสลิปหลักฐานการโอนเงิน <span class="text-red-500">*</span></p>
+                  <p class="text-[11px] text-slate-500">ไฟล์ภาพสลิปสแกนชำระเงิน (ไฟล์ JPG หรือ PNG)</p>
+                  <input type="file" id="slip_photo" accept="image/*" required onchange="renderFilePreview(this, 'preview-slip-photo')" class="hidden">
+                  <span class="inline-block bg-emerald-700 text-white font-semibold text-xs px-4 py-2 rounded-xl mt-1 shadow-sm">
+                    <i class="fa-solid fa-upload mr-1.5"></i> แนบไฟล์สลิปโอนเงิน
+                  </span>
+                </div>
+              </label>
+              <div id="preview-slip-photo" class="hidden mt-2"></div>
+            </div>
+          </div>
+
+          <!-- SUMMARY & SUBMIT BUTTON -->
+          <div class="bg-slate-900 text-white rounded-2xl p-5 sm:p-6 flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-4 shadow-xl">
+            <div class="min-w-0">
+              <span class="text-xs text-amber-400 font-bold block uppercase tracking-wider">สรุปรายการสมัครทำบัตร</span>
+              <h5 id="summary-card-text" class="font-bold text-sm sm:text-base text-white mt-0.5">สมัครสมาชิกใหม่ 769 บาท (รวมค่าเคลือบใส &amp; จัดส่ง)</h5>
+            </div>
+            <button type="submit" id="btn-submit-form" class="w-full sm:w-auto bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-sm sm:text-base px-8 py-3.5 rounded-xl shadow-lg transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2 shrink-0">
+              <i class="fa-solid fa-paper-plane"></i> <span>ส่งข้อมูลลงทะเบียนเข้าชีต</span>
+            </button>
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+
+    <!-- ============================================ -->
+    <!-- SECTION 2: PUBLIC SHIPPING HISTORY LIST      -->
+    <!-- ============================================ -->
+    <div id="section-shipping" class="hidden space-y-6">
+      <div class="bg-white rounded-3xl p-5 sm:p-8 shadow-sm border border-slate-200 space-y-6">
+        <div class="flex flex-col md:flex-row justify-between md:items-center gap-4 border-b border-slate-200 pb-5">
+          <div>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-0.5 rounded-full">Public Shipping History</span>
+              <span id="sheet-sync-status-badge" class="bg-slate-100 text-slate-700 text-xs font-semibold px-3 py-0.5 rounded-full">กำลังซิงค์ข้อมูลชีต...</span>
+            </div>
+            <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900 mt-1">ประวัติการจัดส่งและเลขพัสดุย้อนหลัง</h3>
+            <p class="text-xs sm:text-sm text-slate-500">ตรวจสอบรอบการจัดส่งและเลขพัสดุของสมาชิก</p>
+          </div>
+          <button type="button" onclick="fetchShippingDataFromSheet()" class="w-full md:w-auto bg-slate-900 hover:bg-slate-800 text-white text-xs sm:text-sm font-bold px-4 py-2.5 rounded-xl transition">
+            <i class="fa-solid fa-rotate mr-1.5"></i> รีเฟรชข้อมูล
+          </button>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-3">
+          <input type="text" id="shipping-search-input" oninput="renderShippingTable()" placeholder="ค้นหาชื่อ-นามสกุล หรือเลขพัสดุ..."
+                 class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-2.5 text-xs sm:text-sm focus:bg-white focus:ring-2 focus:ring-amber-500 focus:outline-none">
+          <select id="shipping-round-filter" onchange="renderShippingTable()"
+                  class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-2.5 text-xs sm:text-sm focus:bg-white focus:ring-2 focus:ring-amber-500 focus:outline-none">
+            <option value="ALL">แสดงทุกรอบการจัดส่ง</option>
+          </select>
+        </div>
+
+        <div class="overflow-x-auto custom-scrollbar rounded-2xl border border-slate-200">
+          <table class="min-w-full text-left text-xs sm:text-sm">
+            <thead class="bg-slate-900 text-white">
+              <tr>
+                <th class="px-4 py-3 font-semibold whitespace-nowrap">ชื่อและนามสกุล</th>
+                <th class="px-4 py-3 font-semibold whitespace-nowrap">เบอร์โทร</th>
+                <th class="px-4 py-3 font-semibold whitespace-nowrap">สถานะ</th>
+                <th class="px-4 py-3 font-semibold whitespace-nowrap">รอบการจัดส่ง</th>
+                <th class="px-4 py-3 font-semibold whitespace-nowrap">เลขพัสดุ</th>
+              </tr>
+            </thead>
+            <tbody id="shipping-table-body" class="divide-y divide-slate-200 bg-white">
+              <tr>
+                <td colspan="5" class="px-4 py-6 text-center text-slate-500">กำลังโหลดข้อมูลการจัดส่ง...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbx-D98KtPqdw-0tbZ6V8_WQGkm6UpLZmlfNvhhcVk4M_GW3tjM4pIz6-mNSDVyWukg_/exec";
+    const THAI_GEO_URLS = [
+      "https://cdn.jsdelivr.net/gh/earthchie/thai-geography-database@master/src/raw_database/raw_database.json",
+      "https://raw.githubusercontent.com/earthchie/thai-geography-database/master/src/raw_database/raw_database.json",
+      "https://fastly.jsdelivr.net/gh/earthchie/thai-geography-database@master/src/raw_database/raw_database.json"
+    ];
+    const GEO_CACHE_KEY = "pramest_thai_geo_tree_v2";
+    const GEO_CACHE_TTL_MS = 30 * 24 * 60 * 60 * 1000;
+
+    const SHIPPING_ROUNDS = [
+      "รอบวันที่ 11 ธันวาคม 2569",
+      "รอบวันที่ 10 พฤศจิกายน 2569",
+      "รอบวันที่ 09 ตุลาคม 2569",
+      "รอบวันที่ 05 กันยายน 2569",
+      "รอบวันที่ 05 สิงหาคม 2569",
+      "รอบวันที่ 21 กรกฎาคม 2569",
+      "รอบวันที่ 03 กรกฎาคม 2569",
+      "รอบวันที่ 10 มิถุนายน 2569",
+      "รอบวันที่ 08 พฤษภาคม 2569",
+      "รอบวันที่ 03 เมษายน 2569",
+      "รอบวันที่ 10 มีนาคม 2569",
+      "รอบวันที่ 11 กุมภาพันธ์ 2569",
+      "รอบวันที่ 18 มกราคม 2569",
+      "รอบวันที่ 24 ธันวาคม 2568",
+      "รอบวันที่ 06 ธันวาคม 2568",
+      "รอบวันที่ 18 พฤศจิกายน 2568",
+      "รอบวันที่ 05 พฤศจิกายน 2568",
+      "รอบวันที่ 18 ตุลาคม 2568",
+      "รอบวันที่ 03 ตุลาคม 2568",
+      "รอบวันที่ 18 กันยายน 2568",
+      "รอบวันที่ 18 สิงหาคม 2568",
+      "รอบวันที่ 03 สิงหาคม 2568",
+      "รอบวันที่ 12 กรกฎาคม 2568"
+    ];
+
+    const FALLBACK_GEO_ROWS = [
+      { province: "กรุงเทพมหานคร", amphoe: "เขตคลองเตย", district: "คลองเตย", zipcode: "10110" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตคลองเตย", district: "คลองตัน", zipcode: "10110" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตคลองเตย", district: "พระโขนง", zipcode: "10110" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตจตุจักร", district: "จตุจักร", zipcode: "10900" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตจตุจักร", district: "ลาดยาว", zipcode: "10900" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตจตุจักร", district: "เสนานิคม", zipcode: "10900" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตจตุจักร", district: "จันทรเกษม", zipcode: "10900" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตจตุจักร", district: "จอมพล", zipcode: "10900" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตลาดกระบัง", district: "ลาดกระบัง", zipcode: "10520" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตลาดกระบัง", district: "คลองสองต้นนุ่น", zipcode: "10520" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตลาดกระบัง", district: "คลองสามประเวศ", zipcode: "10520" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตลาดกระบัง", district: "ลำปลาทิว", zipcode: "10520" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตลาดกระบัง", district: "ทับยาว", zipcode: "10520" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตลาดกระบัง", district: "ขุมทอง", zipcode: "10520" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตบางกะปิ", district: "คลองจั่น", zipcode: "10240" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตบางกะปิ", district: "หัวหมาก", zipcode: "10240" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตวัฒนา", district: "คลองเตยเหนือ", zipcode: "10110" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตวัฒนา", district: "คลองตันเหนือ", zipcode: "10110" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตวัฒนา", district: "พระโขนงเหนือ", zipcode: "10110" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตห้วยขวาง", district: "ห้วยขวาง", zipcode: "10310" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตห้วยขวาง", district: "บางกะปิ", zipcode: "10310" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตห้วยขวาง", district: "สามเสนนอก", zipcode: "10310" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตดินแดง", district: "ดินแดง", zipcode: "10400" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตดินแดง", district: "รัชดาภิเษก", zipcode: "10400" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตบางนา", district: "บางนาเหนือ", zipcode: "10260" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตบางนา", district: "บางนาใต้", zipcode: "10260" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตพระโขนง", district: "พระโขนงใต้", zipcode: "10260" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตพระโขนง", district: "บางจาก", zipcode: "10260" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตสวนหลวง", district: "สวนหลวง", zipcode: "10250" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตสวนหลวง", district: "อ่อนนุช", zipcode: "10250" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตสวนหลวง", district: "พัฒนาการ", zipcode: "10250" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตพระนคร", district: "พระบรมมหาราชวัง", zipcode: "10200" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตป้อมปราบศัตรูพ่าย", district: "วัดเทพศิรินทร์", zipcode: "10100" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตสัมพันธวงศ์", district: "สัมพันธวงศ์", zipcode: "10100" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตพญาไท", district: "สามเสนใน", zipcode: "10400" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตราชเทวี", district: "ถนนพญาไท", zipcode: "10400" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตสาทร", district: "ยานนาวา", zipcode: "10120" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตบางรัก", district: "สีลม", zipcode: "10500" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตปทุมวัน", district: "ลุมพินี", zipcode: "10330" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตบางซื่อ", district: "บางซื่อ", zipcode: "10800" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตดุสิต", district: "ดุสิต", zipcode: "10300" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตบางเขน", district: "อนุสาวรีย์", zipcode: "10220" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตหลักสี่", district: "ทุ่งสองห้อง", zipcode: "10210" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตดอนเมือง", district: "สีกัน", zipcode: "10210" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตสายไหม", district: "สายไหม", zipcode: "10220" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตคันนายาว", district: "คันนายาว", zipcode: "10230" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตบึงกุ่ม", district: "คลองกุ่ม", zipcode: "10240" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตสะพานสูง", district: "สะพานสูง", zipcode: "10240" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตมีนบุรี", district: "มีนบุรี", zipcode: "10510" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตหนองจอก", district: "กระทุ่มราย", zipcode: "10530" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตประเวศ", district: "ประเวศ", zipcode: "10250" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตบางคอแหลม", district: "บางคอแหลม", zipcode: "10120" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตยานนาวา", district: "ช่องนนทรี", zipcode: "10120" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตธนบุรี", district: "วัดกัลยาณ์", zipcode: "10600" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตคลองสาน", district: "คลองสาน", zipcode: "10600" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตบางกอกน้อย", district: "ศิริราช", zipcode: "10700" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตบางกอกใหญ่", district: "วัดอรุณ", zipcode: "10600" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตตลิ่งชัน", district: "ตลิ่งชัน", zipcode: "10170" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตทวีวัฒนา", district: "ทวีวัฒนา", zipcode: "10170" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตภาษีเจริญ", district: "บางหว้า", zipcode: "10160" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตหนองแขม", district: "หนองแขม", zipcode: "10160" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตบางแค", district: "บางแค", zipcode: "10160" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตบางขุนเทียน", district: "ท่าข้าม", zipcode: "10150" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตทุ่งครุ", district: "บางมด", zipcode: "10140" },
+      { province: "กรุงเทพมหานคร", amphoe: "เขตราษฎร์บูรณะ", district: "ราษฎร์บูรณะ", zipcode: "10140" },
+      { province: "กระบี่", amphoe: "เมืองกระบี่", district: "ปากน้ำ", zipcode: "81000" },
+      { province: "กระบี่", amphoe: "เมืองกระบี่", district: "กระบี่น้อย", zipcode: "81000" },
+      { province: "กระบี่", amphoe: "เมืองกระบี่", district: "กระบี่ใหญ่", zipcode: "81000" },
+      { province: "กระบี่", amphoe: "เมืองกระบี่", district: "อ่าวนาง", zipcode: "81180" },
+      { province: "กระบี่", amphoe: "เขาพนม", district: "เขาพนม", zipcode: "81140" },
+      { province: "กระบี่", amphoe: "เกาะลันตา", district: "ศาลาด่าน", zipcode: "81150" },
+      { province: "กระบี่", amphoe: "คลองท่อม", district: "คลองท่อมใต้", zipcode: "81120" },
+      { province: "กระบี่", amphoe: "คลองท่อม", district: "ห้วยน้ำขาว", zipcode: "81120" },
+      { province: "กระบี่", amphoe: "ปลายพระยา", district: "ปลายพระยา", zipcode: "81160" },
+      { province: "กระบี่", amphoe: "ลำทับ", district: "ลำทับ", zipcode: "81120" },
+      { province: "กระบี่", amphoe: "เหนือคลอง", district: "เหนือคลอง", zipcode: "81130" },
+      { province: "กระบี่", amphoe: "อ่าวลึก", district: "อ่าวลึกเหนือ", zipcode: "81110" },
+      { province: "กาญจนบุรี", amphoe: "เมืองกาญจนบุรี", district: "บ้านเหนือ", zipcode: "71000" },
+      { province: "กาญจนบุรี", amphoe: "เมืองกาญจนบุรี", district: "บ้านใต้", zipcode: "71000" },
+      { province: "กาญจนบุรี", amphoe: "เมืองกาญจนบุรี", district: "ปากแพรก", zipcode: "71000" },
+      { province: "กาญจนบุรี", amphoe: "ทองผาภูมิ", district: "ท่าขนุน", zipcode: "71180" },
+      { province: "กาญจนบุรี", amphoe: "ท่าม่วง", district: "ท่าม่วง", zipcode: "71110" },
+      { province: "กาญจนบุรี", amphoe: "ท่าม่วง", district: "วังศาลา", zipcode: "71110" },
+      { province: "กาญจนบุรี", amphoe: "ท่ามะกา", district: "ท่ามะกา", zipcode: "71120" },
+      { province: "กาญจนบุรี", amphoe: "ไทรโยค", district: "วังกระแจะ", zipcode: "71150" },
+      { province: "กาญจนบุรี", amphoe: "บ่อพลอย", district: "บ่อพลอย", zipcode: "71160" },
+      { province: "กาญจนบุรี", amphoe: "พนมทวน", district: "พนมทวน", zipcode: "71140" },
+      { province: "กาญจนบุรี", amphoe: "ศรีสวัสดิ์", district: "ท่ากระดาน", zipcode: "71250" },
+      { province: "กาญจนบุรี", amphoe: "สังขละบุรี", district: "หนองลู", zipcode: "71240" },
+      { province: "กาญจนบุรี", amphoe: "หนองปรือ", district: "หนองปรือ", zipcode: "71220" },
+      { province: "กาญจนบุรี", amphoe: "ห้วยกระเจา", district: "สระลงเรือ", zipcode: "71170" },
+      { province: "กาญจนบุรี", amphoe: "เลาขวัญ", district: "เลาขวัญ", zipcode: "71210" },
+      { province: "กาฬสินธุ์", amphoe: "เมืองกาฬสินธุ์", district: "กาฬสินธุ์", zipcode: "46000" },
+      { province: "กาฬสินธุ์", amphoe: "เมืองกาฬสินธุ์", district: "เหนือ", zipcode: "46000" },
+      { province: "กาฬสินธุ์", amphoe: "กมลาไสย", district: "กมลาไสย", zipcode: "46130" },
+      { province: "กาฬสินธุ์", amphoe: "กุฉินารายณ์", district: "บัวขาว", zipcode: "46110" },
+      { province: "กาฬสินธุ์", amphoe: "เขาวง", district: "คุ้มเก่า", zipcode: "46160" },
+      { province: "กาฬสินธุ์", amphoe: "คำม่วง", district: "ทุ่งคลอง", zipcode: "46180" },
+      { province: "กาฬสินธุ์", amphoe: "ฆ้องชัย", district: "ฆ้องชัยพัฒนา", zipcode: "46130" },
+      { province: "กาฬสินธุ์", amphoe: "ดอนจาน", district: "ดอนจาน", zipcode: "46000" },
+      { province: "กาฬสินธุ์", amphoe: "ท่าคันโท", district: "กุงเก่า", zipcode: "46190" },
+      { province: "กาฬสินธุ์", amphoe: "นาคู", district: "นาคู", zipcode: "46160" },
+      { province: "กาฬสินธุ์", amphoe: "นามน", district: "นามน", zipcode: "46230" },
+      { province: "กาฬสินธุ์", amphoe: "ร่องคำ", district: "ร่องคำ", zipcode: "46210" },
+      { province: "กาฬสินธุ์", amphoe: "ยางตลาด", district: "ยางตลาด", zipcode: "46120" },
+      { province: "กาฬสินธุ์", amphoe: "สมเด็จ", district: "สมเด็จ", zipcode: "46150" },
+      { province: "กาฬสินธุ์", amphoe: "สหัสขันธ์", district: "โนนบุรี", zipcode: "46140" },
+      { province: "กาฬสินธุ์", amphoe: "สามชัย", district: "สำราญ", zipcode: "46180" },
+      { province: "กาฬสินธุ์", amphoe: "หนองกุงศรี", district: "หนองกุงศรี", zipcode: "46220" },
+      { province: "กาฬสินธุ์", amphoe: "ห้วยผึ้ง", district: "นิคมห้วยผึ้ง", zipcode: "46240" },
+      { province: "กำแพงเพชร", amphoe: "เมืองกำแพงเพชร", district: "ในเมือง", zipcode: "62000" },
+      { province: "กำแพงเพชร", amphoe: "เมืองกำแพงเพชร", district: "นครชุม", zipcode: "62000" },
+      { province: "กำแพงเพชร", amphoe: "คลองขลุง", district: "คลองขลุง", zipcode: "62120" },
+      { province: "กำแพงเพชร", amphoe: "คลองลาน", district: "คลองลานพัฒนา", zipcode: "62180" },
+      { province: "กำแพงเพชร", amphoe: "โกสัมพีนคร", district: "โกสัมพี", zipcode: "62130" },
+      { province: "กำแพงเพชร", amphoe: "ทรายทองวัฒนา", district: "ทุ่งทราย", zipcode: "62190" },
+      { province: "กำแพงเพชร", amphoe: "ไทรงาม", district: "ไทรงาม", zipcode: "62150" },
+      { province: "กำแพงเพชร", amphoe: "ปางศิลาทอง", district: "หินดาต", zipcode: "62120" },
+      { province: "กำแพงเพชร", amphoe: "พรานกระต่าย", district: "วังควง", zipcode: "62110" },
+      { province: "กำแพงเพชร", amphoe: "ลานกระบือ", district: "ลานกระบือ", zipcode: "62170" },
+      { province: "กำแพงเพชร", amphoe: "บึงสามัคคี", district: "วังชะโอน", zipcode: "62210" },
+      { province: "ขอนแก่น", amphoe: "เมืองขอนแก่น", district: "ในเมือง", zipcode: "40000" },
+      { province: "ขอนแก่น", amphoe: "เมืองขอนแก่น", district: "ศิลา", zipcode: "40000" },
+      { province: "ขอนแก่น", amphoe: "เมืองขอนแก่น", district: "บ้านเป็ด", zipcode: "40000" },
+      { province: "ขอนแก่น", amphoe: "เมืองขอนแก่น", district: "พระลับ", zipcode: "40000" },
+      { province: "ขอนแก่น", amphoe: "กระนวน", district: "หนองโก", zipcode: "40170" },
+      { province: "ขอนแก่น", amphoe: "เขาสวนกวาง", district: "คำม่วง", zipcode: "40280" },
+      { province: "ขอนแก่น", amphoe: "โคกโพธิ์ไชย", district: "บ้านโคก", zipcode: "40160" },
+      { province: "ขอนแก่น", amphoe: "ชนบท", district: "ชนบท", zipcode: "40180" },
+      { province: "ขอนแก่น", amphoe: "ชุมแพ", district: "ชุมแพ", zipcode: "40130" },
+      { province: "ขอนแก่น", amphoe: "ซำสูง", district: "กระนวน", zipcode: "40170" },
+      { province: "ขอนแก่น", amphoe: "น้ำพอง", district: "น้ำพอง", zipcode: "40140" },
+      { province: "ขอนแก่น", amphoe: "โนนศิลา", district: "โนนศิลา", zipcode: "40110" },
+      { province: "ขอนแก่น", amphoe: "บ้านไผ่", district: "บ้านไผ่", zipcode: "40110" },
+      { province: "ขอนแก่น", amphoe: "บ้านฝาง", district: "บ้านฝาง", zipcode: "40270" },
+      { province: "ขอนแก่น", amphoe: "บ้านแฮด", district: "บ้านแฮด", zipcode: "40110" },
+      { province: "ขอนแก่น", amphoe: "เปือยน้อย", district: "เปือยน้อย", zipcode: "40340" },
+      { province: "ขอนแก่น", amphoe: "พล", district: "เมืองพล", zipcode: "40120" },
+      { province: "ขอนแก่น", amphoe: "พระยืน", district: "พระยืน", zipcode: "40320" },
+      { province: "ขอนแก่น", amphoe: "ภูผาม่าน", district: "ภูผาม่าน", zipcode: "40350" },
+      { province: "ขอนแก่น", amphoe: "ภูเวียง", district: "ภูเวียง", zipcode: "40150" },
+      { province: "ขอนแก่น", amphoe: "มัญจาคีรี", district: "กุดเค้า", zipcode: "40160" },
+      { province: "ขอนแก่น", amphoe: "วังใหญ่", district: "วังใหญ่", zipcode: "40250" },
+      { province: "ขอนแก่น", amphoe: "เวียงเก่า", district: "ในเมือง", zipcode: "40150" },
+      { province: "ขอนแก่น", amphoe: "สีชมพู", district: "วังเพิ่ม", zipcode: "40220" },
+      { province: "ขอนแก่น", amphoe: "หนองนาคำ", district: "ขอนยูง", zipcode: "40150" },
+      { province: "ขอนแก่น", amphoe: "หนองเรือ", district: "หนองเรือ", zipcode: "40210" },
+      { province: "ขอนแก่น", amphoe: "หนองสองห้อง", district: "หนองสองห้อง", zipcode: "40190" },
+      { province: "ขอนแก่น", amphoe: "อุบลรัตน์", district: "เขื่อนอุบลรัตน์", zipcode: "40250" },
+      { province: "จันทบุรี", amphoe: "เมืองจันทบุรี", district: "ตลาด", zipcode: "22000" },
+      { province: "จันทบุรี", amphoe: "เมืองจันทบุรี", district: "วัดใหม่", zipcode: "22000" },
+      { province: "จันทบุรี", amphoe: "เขาคิชฌกูฏ", district: "ชากไทย", zipcode: "22210" },
+      { province: "จันทบุรี", amphoe: "ขลุง", district: "ขลุง", zipcode: "22110" },
+      { province: "จันทบุรี", amphoe: "ท่าใหม่", district: "ท่าใหม่", zipcode: "22120" },
+      { province: "จันทบุรี", amphoe: "นายายอาม", district: "นายายอาม", zipcode: "22160" },
+      { province: "จันทบุรี", amphoe: "โป่งน้ำร้อน", district: "ทับไทร", zipcode: "22140" },
+      { province: "จันทบุรี", amphoe: "มะขาม", district: "มะขาม", zipcode: "22150" },
+      { province: "จันทบุรี", amphoe: "แหลมสิงห์", district: "ปากน้ำแหลมสิงห์", zipcode: "22130" },
+      { province: "จันทบุรี", amphoe: "สอยดาว", district: "ปะตง", zipcode: "22180" },
+      { province: "ฉะเชิงเทรา", amphoe: "เมืองฉะเชิงเทรา", district: "หน้าเมือง", zipcode: "24000" },
+      { province: "ฉะเชิงเทรา", amphoe: "เมืองฉะเชิงเทรา", district: "บ้านใหม่", zipcode: "24000" },
+      { province: "ฉะเชิงเทรา", amphoe: "คลองเขื่อน", district: "คลองเขื่อน", zipcode: "24000" },
+      { province: "ฉะเชิงเทรา", amphoe: "ท่าตะเกียบ", district: "คลองตะเกรา", zipcode: "24160" },
+      { province: "ฉะเชิงเทรา", amphoe: "บางคล้า", district: "บางคล้า", zipcode: "24110" },
+      { province: "ฉะเชิงเทรา", amphoe: "บางน้ำเปรี้ยว", district: "บางน้ำเปรี้ยว", zipcode: "24150" },
+      { province: "ฉะเชิงเทรา", amphoe: "บางปะกง", district: "บางปะกง", zipcode: "24130" },
+      { province: "ฉะเชิงเทรา", amphoe: "บ้านโพธิ์", district: "แสนภูดาษ", zipcode: "24140" },
+      { province: "ฉะเชิงเทรา", amphoe: "พนมสารคาม", district: "พนมสารคาม", zipcode: "24120" },
+      { province: "ฉะเชิงเทรา", amphoe: "แปลงยาว", district: "หัวสำโรง", zipcode: "24190" },
+      { province: "ฉะเชิงเทรา", amphoe: "ราชสาส์น", district: "บางคา", zipcode: "24120" },
+      { province: "ชลบุรี", amphoe: "เมืองชลบุรี", district: "เสม็ด", zipcode: "20130" },
+      { province: "ชลบุรี", amphoe: "เมืองชลบุรี", district: "แสนสุข", zipcode: "20130" },
+      { province: "ชลบุรี", amphoe: "เมืองชลบุรี", district: "บางปลาสร้อย", zipcode: "20000" },
+      { province: "ชลบุรี", amphoe: "เมืองชลบุรี", district: "บ้านสวน", zipcode: "20000" },
+      { province: "ชลบุรี", amphoe: "เกาะจันทร์", district: "เกาะจันทร์", zipcode: "20270" },
+      { province: "ชลบุรี", amphoe: "เกาะสีชัง", district: "ท่าเทววงษ์", zipcode: "20120" },
+      { province: "ชลบุรี", amphoe: "บางละมุง", district: "หนองปรือ", zipcode: "20150" },
+      { province: "ชลบุรี", amphoe: "บางละมุง", district: "นาเกลือ", zipcode: "20150" },
+      { province: "ชลบุรี", amphoe: "บางละมุง", district: "ตะเคียนเตี้ย", zipcode: "20150" },
+      { province: "ชลบุรี", amphoe: "บ้านบึง", district: "บ้านบึง", zipcode: "20170" },
+      { province: "ชลบุรี", amphoe: "บ่อทอง", district: "บ่อทอง", zipcode: "20270" },
+      { province: "ชลบุรี", amphoe: "พนัสนิคม", district: "พนัสนิคม", zipcode: "20140" },
+      { province: "ชลบุรี", amphoe: "พานทอง", district: "พานทอง", zipcode: "20160" },
+      { province: "ชลบุรี", amphoe: "ศรีราชา", district: "ศรีราชา", zipcode: "20110" },
+      { province: "ชลบุรี", amphoe: "ศรีราชา", district: "บึง", zipcode: "20230" },
+      { province: "ชลบุรี", amphoe: "ศรีราชา", district: "ทุ่งสุขลา", zipcode: "20230" },
+      { province: "ชลบุรี", amphoe: "สัตหีบ", district: "สัตหีบ", zipcode: "20180" },
+      { province: "ชลบุรี", amphoe: "หนองใหญ่", district: "หนองใหญ่", zipcode: "20190" },
+      { province: "ชัยนาท", amphoe: "เมืองชัยนาท", district: "ในเมือง", zipcode: "17000" },
+      { province: "ชัยนาท", amphoe: "มโนรมย์", district: "คุ้งสำเภา", zipcode: "17110" },
+      { province: "ชัยนาท", amphoe: "วัดสิงห์", district: "วัดสิงห์", zipcode: "17120" },
+      { province: "ชัยนาท", amphoe: "สรรคบุรี", district: "แพรกศรีราชา", zipcode: "17140" },
+      { province: "ชัยนาท", amphoe: "สรรพยา", district: "สรรพยา", zipcode: "17150" },
+      { province: "ชัยนาท", amphoe: "หนองมะโมง", district: "หนองมะโมง", zipcode: "17120" },
+      { province: "ชัยนาท", amphoe: "หันคา", district: "หันคา", zipcode: "17130" },
+      { province: "ชัยนาท", amphoe: "เนินขาม", district: "เนินขาม", zipcode: "17130" },
+      { province: "ชัยภูมิ", amphoe: "เมืองชัยภูมิ", district: "ในเมือง", zipcode: "36000" },
+      { province: "ชัยภูมิ", amphoe: "เมืองชัยภูมิ", district: "รอบเมือง", zipcode: "36000" },
+      { province: "ชัยภูมิ", amphoe: "แก้งคร้อ", district: "ช่องสามหมอ", zipcode: "36150" },
+      { province: "ชัยภูมิ", amphoe: "คอนสวรรค์", district: "บ้านโสก", zipcode: "36140" },
+      { province: "ชัยภูมิ", amphoe: "คอนสาร", district: "ทุ่งพระ", zipcode: "36180" },
+      { province: "ชัยภูมิ", amphoe: "เกษตรสมบูรณ์", district: "บ้านเดี่ยว", zipcode: "36120" },
+      { province: "ชัยภูมิ", amphoe: "จัตุรัส", district: "บ้านกอก", zipcode: "36130" },
+      { province: "ชัยภูมิ", amphoe: "ซับใหญ่", district: "ซับใหญ่", zipcode: "36130" },
+      { province: "ชัยภูมิ", amphoe: "เทพสถิต", district: "วะตะแบก", zipcode: "36230" },
+      { province: "ชัยภูมิ", amphoe: "เนินสง่า", district: "ตาเนิน", zipcode: "36130" },
+      { province: "ชัยภูมิ", amphoe: "บ้านเขว้า", district: "บ้านเขว้า", zipcode: "36170" },
+      { province: "ชัยภูมิ", amphoe: "บ้านแท่น", district: "บ้านแท่น", zipcode: "36240" },
+      { province: "ชัยภูมิ", amphoe: "บำเหน็จณรงค์", district: "บ้านชวน", zipcode: "36160" },
+      { province: "ชัยภูมิ", amphoe: "ภักดีชุมพล", district: "เจาทอง", zipcode: "36260" },
+      { province: "ชัยภูมิ", amphoe: "ภูเขียว", district: "ผักปัง", zipcode: "36110" },
+      { province: "ชัยภูมิ", amphoe: "หนองบัวแดง", district: "หนองบัวแดง", zipcode: "36210" },
+      { province: "ชุมพร", amphoe: "เมืองชุมพร", district: "ท่าตะเภา", zipcode: "86000" },
+      { province: "ชุมพร", amphoe: "เมืองชุมพร", district: "วังไผ่", zipcode: "86000" },
+      { province: "ชุมพร", amphoe: "ท่าแซะ", district: "ท่าแซะ", zipcode: "86140" },
+      { province: "ชุมพร", amphoe: "ทุ่งตะโก", district: "ทุ่งตะโก", zipcode: "86220" },
+      { province: "ชุมพร", amphoe: "ปะทิว", district: "บางสน", zipcode: "86160" },
+      { province: "ชุมพร", amphoe: "พะโต๊ะ", district: "ปังหวาน", zipcode: "86180" },
+      { province: "ชุมพร", amphoe: "ละแม", district: "ละแม", zipcode: "86170" },
+      { province: "ชุมพร", amphoe: "สวี", district: "นาโพธิ์", zipcode: "86130" },
+      { province: "ชุมพร", amphoe: "หลังสวน", district: "ขันเงิน", zipcode: "86110" },
+      { province: "เชียงราย", amphoe: "เมืองเชียงราย", district: "เวียง", zipcode: "57000" },
+      { province: "เชียงราย", amphoe: "เมืองเชียงราย", district: "รอบเวียง", zipcode: "57000" },
+      { province: "เชียงราย", amphoe: "เมืองเชียงราย", district: "ริมกก", zipcode: "57100" },
+      { province: "เชียงราย", amphoe: "ขุนตาล", district: "ป่าตาล", zipcode: "57340" },
+      { province: "เชียงราย", amphoe: "เชียงของ", district: "เวียง", zipcode: "57140" },
+      { province: "เชียงราย", amphoe: "เชียงแสน", district: "เวียง", zipcode: "57150" },
+      { province: "เชียงราย", amphoe: "ดอยหลวง", district: "หนองป่าก่อ", zipcode: "57110" },
+      { province: "เชียงราย", amphoe: "เทิง", district: "เวียง", zipcode: "57160" },
+      { province: "เชียงราย", amphoe: "ป่าแดด", district: "ป่าแดด", zipcode: "57190" },
+      { province: "เชียงราย", amphoe: "พญาเม็งราย", district: "แม่เปา", zipcode: "57290" },
+      { province: "เชียงราย", amphoe: "พาน", district: "เมืองพาน", zipcode: "57120" },
+      { province: "เชียงราย", amphoe: "แม่จัน", district: "แม่จัน", zipcode: "57110" },
+      { province: "เชียงราย", amphoe: "แม่ฟ้าหลวง", district: "แม่ฟ้าหลวง", zipcode: "57240" },
+      { province: "เชียงราย", amphoe: "แม่ลาว", district: "ดงมะดะ", zipcode: "57250" },
+      { province: "เชียงราย", amphoe: "แม่สาย", district: "แม่สาย", zipcode: "57130" },
+      { province: "เชียงราย", amphoe: "แม่สรวย", district: "แม่สรวย", zipcode: "57180" },
+      { province: "เชียงราย", amphoe: "เวียงแก่น", district: "ม่วงยาย", zipcode: "57310" },
+      { province: "เชียงราย", amphoe: "เวียงชัย", district: "เวียงชัย", zipcode: "57210" },
+      { province: "เชียงราย", amphoe: "เวียงป่าเป้า", district: "เวียง", zipcode: "57170" },
+      { province: "เชียงใหม่", amphoe: "เมืองเชียงใหม่", district: "ศรีภูมิ", zipcode: "50200" },
+      { province: "เชียงใหม่", amphoe: "เมืองเชียงใหม่", district: "ช้างม่อย", zipcode: "50300" },
+      { province: "เชียงใหม่", amphoe: "เมืองเชียงใหม่", district: "สุเทพ", zipcode: "50200" },
+      { province: "เชียงใหม่", amphoe: "เมืองเชียงใหม่", district: "ช้างเผือก", zipcode: "50300" },
+      { province: "เชียงใหม่", amphoe: "เมืองเชียงใหม่", district: "ป่าแดด", zipcode: "50100" },
+      { province: "เชียงใหม่", amphoe: "กัลยาณิวัฒนา", district: "บ้านจันทร์", zipcode: "58130" },
+      { province: "เชียงใหม่", amphoe: "จอมทอง", district: "บ้านหลวง", zipcode: "50160" },
+      { province: "เชียงใหม่", amphoe: "เชียงดาว", district: "เชียงดาว", zipcode: "50170" },
+      { province: "เชียงใหม่", amphoe: "ไชยปราการ", district: "ปงตำ", zipcode: "50320" },
+      { province: "เชียงใหม่", amphoe: "ดอยเต่า", district: "ดอยเต่า", zipcode: "50260" },
+      { province: "เชียงใหม่", amphoe: "ดอยสะเก็ด", district: "เชิงดอย", zipcode: "50220" },
+      { province: "เชียงใหม่", amphoe: "ดอยหล่อ", district: "ดอยหล่อ", zipcode: "50160" },
+      { province: "เชียงใหม่", amphoe: "ฝาง", district: "เวียง", zipcode: "50110" },
+      { province: "เชียงใหม่", amphoe: "พร้าว", district: "เวียง", zipcode: "50190" },
+      { province: "เชียงใหม่", amphoe: "แม่แจ่ม", district: "ช่างเคิ่ง", zipcode: "50270" },
+      { province: "เชียงใหม่", amphoe: "แม่แตง", district: "สันมหาพลง", zipcode: "50150" },
+      { province: "เชียงใหม่", amphoe: "แม่ริม", district: "ริมใต้", zipcode: "50180" },
+      { province: "เชียงใหม่", amphoe: "แม่วาง", district: "บ้านกาด", zipcode: "50360" },
+      { province: "เชียงใหม่", amphoe: "แม่สะเรียง", district: "แม่สะเรียง", zipcode: "58110" },
+      { province: "เชียงใหม่", amphoe: "แม่ออน", district: "ออนเหนือ", zipcode: "50130" },
+      { province: "เชียงใหม่", amphoe: "เวียงแหง", district: "เมืองแหง", zipcode: "50350" },
+      { province: "เชียงใหม่", amphoe: "สะเมิง", district: "สะเมิงใต้", zipcode: "50250" },
+      { province: "เชียงใหม่", amphoe: "สันกำแพง", district: "สันกำแพง", zipcode: "50130" },
+      { province: "เชียงใหม่", amphoe: "สันทราย", district: "สันทรายน้อย", zipcode: "50210" },
+      { province: "เชียงใหม่", amphoe: "สันป่าตอง", district: "ยุหว่า", zipcode: "50120" },
+      { province: "เชียงใหม่", amphoe: "สารภี", district: "ยางเนิ้ง", zipcode: "50140" },
+      { province: "เชียงใหม่", amphoe: "หางดง", district: "หางดง", zipcode: "50230" },
+      { province: "เชียงใหม่", amphoe: "อมก๋อย", district: "อมก๋อย", zipcode: "50310" },
+      { province: "ตรัง", amphoe: "เมืองตรัง", district: "ทับเที่ยง", zipcode: "92000" },
+      { province: "ตรัง", amphoe: "เมืองตรัง", district: "นาตาล่วง", zipcode: "92000" },
+      { province: "ตรัง", amphoe: "กันตัง", district: "กันตัง", zipcode: "92110" },
+      { province: "ตรัง", amphoe: "นาโยง", district: "นาโยงเหนือ", zipcode: "92170" },
+      { province: "ตรัง", amphoe: "ปะเหลียน", district: "ท่าข้าม", zipcode: "92180" },
+      { province: "ตรัง", amphoe: "ย่านตาขาว", district: "ย่านตาขาว", zipcode: "92140" },
+      { province: "ตรัง", amphoe: "รัษฎา", district: "คลองปาง", zipcode: "92160" },
+      { province: "ตรัง", amphoe: "วังวิเศษ", district: "วังมะปราง", zipcode: "92220" },
+      { province: "ตรัง", amphoe: "สิเกา", district: "บ่อหิน", zipcode: "92150" },
+      { province: "ตรัง", amphoe: "ห้วยยอด", district: "หนองช้างแล่น", zipcode: "92130" },
+      { province: "ตราด", amphoe: "เมืองตราด", district: "บางพระ", zipcode: "23000" },
+      { province: "ตราด", amphoe: "เมืองตราด", district: "วังกระแจะ", zipcode: "23000" },
+      { province: "ตราด", amphoe: "เขาสมิง", district: "เขาสมิง", zipcode: "23130" },
+      { province: "ตราด", amphoe: "คลองใหญ่", district: "คลองใหญ่", zipcode: "23110" },
+      { province: "ตราด", amphoe: "เกาะกูด", district: "เกาะกูด", zipcode: "23000" },
+      { province: "ตราด", amphoe: "เกาะช้าง", district: "เกาะช้าง", zipcode: "23170" },
+      { province: "ตราด", amphoe: "บ่อไร่", district: "บ่อพลอย", zipcode: "23140" },
+      { province: "ตราด", amphoe: "แหลมงอบ", district: "แหลมงอบ", zipcode: "23120" },
+      { province: "ตาก", amphoe: "เมืองตาก", district: "ระแหง", zipcode: "63000" },
+      { province: "ตาก", amphoe: "เมืองตาก", district: "หนองหลวง", zipcode: "63000" },
+      { province: "ตาก", amphoe: "ท่าสองยาง", district: "แม่ต้าน", zipcode: "63150" },
+      { province: "ตาก", amphoe: "พบพระ", district: "พบพระ", zipcode: "63160" },
+      { province: "ตาก", amphoe: "แม่ระมาด", district: "แม่ระมาด", zipcode: "63140" },
+      { province: "ตาก", amphoe: "แม่สอด", district: "แม่สอด", zipcode: "63110" },
+      { province: "ตาก", amphoe: "วังเจ้า", district: "เชียงทอง", zipcode: "63000" },
+      { province: "ตาก", amphoe: "สามเงา", district: "สามเงา", zipcode: "63130" },
+      { province: "ตาก", amphoe: "อุ้มผาง", district: "อุ้มผาง", zipcode: "63170" },
+      { province: "นครนายก", amphoe: "เมืองนครนายก", district: "นครนายก", zipcode: "26000" },
+      { province: "นครนายก", amphoe: "เมืองนครนายก", district: "พรหมณี", zipcode: "26000" },
+      { province: "นครนายก", amphoe: "บ้านนา", district: "บ้านนา", zipcode: "26110" },
+      { province: "นครนายก", amphoe: "ปากพลี", district: "เกาะหวาย", zipcode: "26130" },
+      { province: "นครนายก", amphoe: "องครักษ์", district: "องครักษ์", zipcode: "26120" },
+      { province: "นครปฐม", amphoe: "เมืองนครปฐม", district: "พระปฐมเจดีย์", zipcode: "73000" },
+      { province: "นครปฐม", amphoe: "เมืองนครปฐม", district: "สนามจันทร์", zipcode: "73000" },
+      { province: "นครปฐม", amphoe: "กำแพงแสน", district: "กำแพงแสน", zipcode: "73140" },
+      { province: "นครปฐม", amphoe: "ดอนตูม", district: "สามง่าม", zipcode: "73150" },
+      { province: "นครปฐม", amphoe: "นครชัยศรี", district: "นครชัยศรี", zipcode: "73120" },
+      { province: "นครปฐม", amphoe: "บางเลน", district: "บางเลน", zipcode: "73130" },
+      { province: "นครปฐม", amphoe: "พุทธมณฑล", district: "ศาลายา", zipcode: "73170" },
+      { province: "นครปฐม", amphoe: "สามพราน", district: "สามพราน", zipcode: "73110" },
+      { province: "นครปฐม", amphoe: "สามพราน", district: "อ้อมใหญ่", zipcode: "73160" },
+      { province: "นครพนม", amphoe: "เมืองนครพนม", district: "ในเมือง", zipcode: "48000" },
+      { province: "นครพนม", amphoe: "เมืองนครพนม", district: "หนองแสง", zipcode: "48000" },
+      { province: "นครพนม", amphoe: "ธาตุพนม", district: "ธาตุพนม", zipcode: "48110" },
+      { province: "นครพนม", amphoe: "นาแก", district: "นาแก", zipcode: "48130" },
+      { province: "นครพนม", amphoe: "นาทม", district: "นาทม", zipcode: "48140" },
+      { province: "นครพนม", amphoe: "นาหว้า", district: "นาหว้า", zipcode: "48180" },
+      { province: "นครพนม", amphoe: "บ้านแพง", district: "บ้านแพง", zipcode: "48140" },
+      { province: "นครพนม", amphoe: "ปลาปาก", district: "ปลาปาก", zipcode: "48160" },
+      { province: "นครพนม", amphoe: "โพนสวรรค์", district: "โพนสวรรค์", zipcode: "48190" },
+      { province: "นครพนม", amphoe: "เรณูนคร", district: "เรณู", zipcode: "48170" },
+      { province: "นครพนม", amphoe: "วังยาง", district: "วังยาง", zipcode: "48130" },
+      { province: "นครพนม", amphoe: "ศรีสงคราม", district: "ศรีสงคราม", zipcode: "48150" },
+      { province: "นครราชสีมา", amphoe: "เมืองนครราชสีมา", district: "ในเมือง", zipcode: "30000" },
+      { province: "นครราชสีมา", amphoe: "เมืองนครราชสีมา", district: "โพธิ์กลาง", zipcode: "30000" },
+      { province: "นครราชสีมา", amphoe: "เมืองนครราชสีมา", district: "สุรนารี", zipcode: "30000" },
+      { province: "นครราชสีมา", amphoe: "แก้งสนามนาง", district: "แก้งสนามนาง", zipcode: "30440" },
+      { province: "นครราชสีมา", amphoe: "ขามทะเลสอ", district: "ขามทะเลสอ", zipcode: "30280" },
+      { province: "นครราชสีมา", amphoe: "ขามสะแกแสง", district: "ขามสะแกแสง", zipcode: "30290" },
+      { province: "นครราชสีมา", amphoe: "คง", district: "เมืองคง", zipcode: "30260" },
+      { province: "นครราชสีมา", amphoe: "จักราช", district: "จักราช", zipcode: "30230" },
+      { province: "นครราชสีมา", amphoe: "เฉลิมพระเกียรติ", district: "ช้างทอง", zipcode: "30240" },
+      { province: "นครราชสีมา", amphoe: "โชคชัย", district: "กระโทก", zipcode: "30190" },
+      { province: "นครราชสีมา", amphoe: "ด่านขุนทด", district: "ด่านขุนทด", zipcode: "30210" },
+      { province: "นครราชสีมา", amphoe: "เทพารักษ์", district: "วังยายทอง", zipcode: "30210" },
+      { province: "นครราชสีมา", amphoe: "โนนแดง", district: "โนนแดง", zipcode: "30470" },
+      { province: "นครราชสีมา", amphoe: "โนนสูง", district: "ธารปราสาท", zipcode: "30160" },
+      { province: "นครราชสีมา", amphoe: "โนนไทย", district: "โนนไทย", zipcode: "30220" },
+      { province: "นครราชสีมา", amphoe: "บัวลาย", district: "บัวลาย", zipcode: "30120" },
+      { province: "นครราชสีมา", amphoe: "บัวใหญ่", district: "บัวใหญ่", zipcode: "30120" },
+      { province: "นครราชสีมา", amphoe: "บ้านเหลื่อม", district: "บ้านเหลื่อม", zipcode: "30350" },
+      { province: "นครราชสีมา", amphoe: "ประทาย", district: "ประทาย", zipcode: "30180" },
+      { province: "นครราชสีมา", amphoe: "ปักธงชัย", district: "เมืองปัก", zipcode: "30150" },
+      { province: "นครราชสีมา", amphoe: "ปากช่อง", district: "ปากช่อง", zipcode: "30130" },
+      { province: "นครราชสีมา", amphoe: "ปากช่อง", district: "หนองน้ำแดง", zipcode: "30130" },
+      { province: "นครราชสีมา", amphoe: "พระทองคำ", district: "ทัพรั้ง", zipcode: "30220" },
+      { province: "นครราชสีมา", amphoe: "พิมาย", district: "ในเมือง", zipcode: "30110" },
+      { province: "นครราชสีมา", amphoe: "เมืองยาง", district: "เมืองยาง", zipcode: "30270" },
+      { province: "นครราชสีมา", amphoe: "ลำทะเมนชัย", district: "ขุย", zipcode: "30270" },
+      { province: "นครราชสีมา", amphoe: "วังน้ำเขียว", district: "วังน้ำเขียว", zipcode: "30370" },
+      { province: "นครราชสีมา", amphoe: "สีคิ้ว", district: "มิตรภาพ", zipcode: "30140" },
+      { province: "นครราชสีมา", amphoe: "สูงเนิน", district: "สูงเนิน", zipcode: "30170" },
+      { province: "นครราชสีมา", amphoe: "เสิงสาง", district: "เสิงสาง", zipcode: "30330" },
+      { province: "นครราชสีมา", amphoe: "หนองบุญมาก", district: "หนองบุญมาก", zipcode: "30410" },
+      { province: "นครราชสีมา", amphoe: "ห้วยแถลง", district: "ห้วยแถลง", zipcode: "30240" },
+      { province: "นครศรีธรรมราช", amphoe: "เมืองนครศรีธรรมราช", district: "ในเมือง", zipcode: "80000" },
+      { province: "นครศรีธรรมราช", amphoe: "เมืองนครศรีธรรมราช", district: "ท่าวัง", zipcode: "80000" },
+      { province: "นครศรีธรรมราช", amphoe: "ขนอม", district: "ขนอม", zipcode: "80210" },
+      { province: "นครศรีธรรมราช", amphoe: "จุฬาภรณ์", district: "ควนหนองหงษ์", zipcode: "80130" },
+      { province: "นครศรีธรรมราช", amphoe: "ฉวาง", district: "ฉวาง", zipcode: "80250" },
+      { province: "นครศรีธรรมราช", amphoe: "ชะอวด", district: "ชะอวด", zipcode: "80180" },
+      { province: "นครศรีธรรมราช", amphoe: "ช้างกลาง", district: "ช้างกลาง", zipcode: "80250" },
+      { province: "นครศรีธรรมราช", amphoe: "ถ้ำพรรณรา", district: "ถ้ำพรรณรา", zipcode: "80260" },
+      { province: "นครศรีธรรมราช", amphoe: "ทุ่งสง", district: "ปากแพรก", zipcode: "80110" },
+      { province: "นครศรีธรรมราช", amphoe: "ทุ่งใหญ่", district: "ท่ายาง", zipcode: "80240" },
+      { province: "นครศรีธรรมราช", amphoe: "นบพิตำ", district: "นบพิตำ", zipcode: "80160" },
+      { province: "นครศรีธรรมราช", amphoe: "นาบอน", district: "นาบอน", zipcode: "80220" },
+      { province: "นครศรีธรรมราช", amphoe: "บางขัน", district: "บางขัน", zipcode: "80360" },
+      { province: "นครศรีธรรมราช", amphoe: "ปากพนัง", district: "ปากพนัง", zipcode: "80140" },
+      { province: "นครศรีธรรมราช", amphoe: "พรหมคีรี", district: "ทอนหงส์", zipcode: "80320" },
+      { province: "นครศรีธรรมราช", amphoe: "พระพรหม", district: "นาสาร", zipcode: "80000" },
+      { province: "นครศรีธรรมราช", amphoe: "พิปูน", district: "พิปูน", zipcode: "80270" },
+      { province: "นครศรีธรรมราช", amphoe: "ร่อนพิบูลย์", district: "ร่อนพิบูลย์", zipcode: "80130" },
+      { province: "นครศรีธรรมราช", amphoe: "ลานสกา", district: "เขาแก้ว", zipcode: "80230" },
+      { province: "นครศรีธรรมราช", amphoe: "สิชล", district: "สิชล", zipcode: "80120" },
+      { province: "นครศรีธรรมราช", amphoe: "หัวไทร", district: "หัวไทร", zipcode: "80170" },
+      { province: "นครศรีธรรมราช", amphoe: "เฉลิมพระเกียรติ", district: "ทางพูน", zipcode: "80240" },
+      { province: "นครสวรรค์", amphoe: "เมืองนครสวรรค์", district: "ปากน้ำโพ", zipcode: "60000" },
+      { province: "นครสวรรค์", amphoe: "เมืองนครสวรรค์", district: "นครสวรรค์ตก", zipcode: "60000" },
+      { province: "นครสวรรค์", amphoe: "เก้าเลี้ยว", district: "เก้าเลี้ยว", zipcode: "60230" },
+      { province: "นครสวรรค์", amphoe: "โกรกพระ", district: "โกรกพระ", zipcode: "60170" },
+      { province: "นครสวรรค์", amphoe: "ชุมแสง", district: "ชุมแสง", zipcode: "60160" },
+      { province: "นครสวรรค์", amphoe: "ตากฟ้า", district: "ตากฟ้า", zipcode: "60190" },
+      { province: "นครสวรรค์", amphoe: "ตาคลี", district: "ตาคลี", zipcode: "60140" },
+      { province: "นครสวรรค์", amphoe: "ท่าตะโก", district: "ท่าตะโก", zipcode: "60160" },
+      { province: "นครสวรรค์", amphoe: "บรรพตพิสัย", district: "ท่างิ้ว", zipcode: "60180" },
+      { province: "นครสวรรค์", amphoe: "พยุหะคีรี", district: "พยุหะ", zipcode: "60130" },
+      { province: "นครสวรรค์", amphoe: "ไพศาลี", district: "ไพศาลี", zipcode: "60220" },
+      { province: "นครสวรรค์", amphoe: "ลาดยาว", district: "ลาดยาว", zipcode: "60150" },
+      { province: "นครสวรรค์", amphoe: "หนองบัว", district: "หนองบัว", zipcode: "60110" },
+      { province: "นครสวรรค์", amphoe: "แม่วงก์", district: "แม่วงก์", zipcode: "60150" },
+      { province: "นครสวรรค์", amphoe: "แม่เปิน", district: "แม่เปิน", zipcode: "60150" },
+      { province: "นนทบุรี", amphoe: "เมืองนนทบุรี", district: "ตลาดขวัญ", zipcode: "11000" },
+      { province: "นนทบุรี", amphoe: "เมืองนนทบุรี", district: "สวนใหญ่", zipcode: "11000" },
+      { province: "นนทบุรี", amphoe: "เมืองนนทบุรี", district: "บางเขน", zipcode: "11000" },
+      { province: "นนทบุรี", amphoe: "เมืองนนทบุรี", district: "ท่าทราย", zipcode: "11000" },
+      { province: "นนทบุรี", amphoe: "บางกรวย", district: "บางกรวย", zipcode: "11130" },
+      { province: "นนทบุรี", amphoe: "บางบัวทอง", district: "บางบัวทอง", zipcode: "11110" },
+      { province: "นนทบุรี", amphoe: "บางบัวทอง", district: "บางคูรัด", zipcode: "11110" },
+      { province: "นนทบุรี", amphoe: "บางบัวทอง", district: "พิมลราช", zipcode: "11110" },
+      { province: "นนทบุรี", amphoe: "บางใหญ่", district: "เสาธงหิน", zipcode: "11140" },
+      { province: "นนทบุรี", amphoe: "บางใหญ่", district: "บางแม่นาง", zipcode: "11140" },
+      { province: "นนทบุรี", amphoe: "ปากเกร็ด", district: "ปากเกร็ด", zipcode: "11120" },
+      { province: "นนทบุรี", amphoe: "ปากเกร็ด", district: "บางพูด", zipcode: "11120" },
+      { province: "นนทบุรี", amphoe: "ปากเกร็ด", district: "บ้านใหม่", zipcode: "11120" },
+      { province: "นนทบุรี", amphoe: "ไทรน้อย", district: "ไทรน้อย", zipcode: "11150" },
+      { province: "นราธิวาส", amphoe: "เมืองนราธิวาส", district: "บางนาค", zipcode: "96000" },
+      { province: "นราธิวาส", amphoe: "เมืองนราธิวาส", district: "โคกเคียน", zipcode: "96000" },
+      { province: "นราธิวาส", amphoe: "จะแนะ", district: "ดุซงญอ", zipcode: "96220" },
+      { province: "นราธิวาส", amphoe: "เจาะไอร้อง", district: "จวบ", zipcode: "96130" },
+      { province: "นราธิวาส", amphoe: "ตากใบ", district: "เจ๊ะเห", zipcode: "96110" },
+      { province: "นราธิวาส", amphoe: "บาเจาะ", district: "บาเจาะ", zipcode: "96170" },
+      { province: "นราธิวาส", amphoe: "ยี่งอ", district: "ยี่งอ", zipcode: "96180" },
+      { province: "นราธิวาส", amphoe: "ระแงะ", district: "ตันหยงมัส", zipcode: "96130" },
+      { province: "นราธิวาส", amphoe: "รือเสาะ", district: "รือเสาะ", zipcode: "96150" },
+      { province: "นราธิวาส", amphoe: "แว้ง", district: "แว้ง", zipcode: "96160" },
+      { province: "นราธิวาส", amphoe: "ศรีสาคร", district: "ศรีสาคร", zipcode: "96210" },
+      { province: "นราธิวาส", amphoe: "สุคิริน", district: "สุคิริน", zipcode: "96190" },
+      { province: "นราธิวาส", amphoe: "สุไหงโก-ลก", district: "สุไหงโก-ลก", zipcode: "96120" },
+      { province: "นราธิวาส", amphoe: "สุไหงปาดี", district: "ปะลุรู", zipcode: "96250" },
+      { province: "น่าน", amphoe: "เมืองน่าน", district: "ในเมือง", zipcode: "55000" },
+      { province: "น่าน", amphoe: "เมืองน่าน", district: "ดู่ใต้", zipcode: "55000" },
+      { province: "น่าน", amphoe: "เฉลิมพระเกียรติ", district: "ขุนน่าน", zipcode: "55130" },
+      { province: "น่าน", amphoe: "เชียงกลาง", district: "เปือ", zipcode: "55160" },
+      { province: "น่าน", amphoe: "ทุ่งช้าง", district: "งอบ", zipcode: "55120" },
+      { province: "น่าน", amphoe: "นาหมื่น", district: "นาทะนุง", zipcode: "55180" },
+      { province: "น่าน", amphoe: "นาน้อย", district: "นาน้อย", zipcode: "55150" },
+      { province: "น่าน", amphoe: "บ้านหลวง", district: "บ้านฟ้า", zipcode: "55190" },
+      { province: "น่าน", amphoe: "ปัว", district: "วรนคร", zipcode: "55120" },
+      { province: "น่าน", amphoe: "ภูเพียง", district: "ม่วงตึ๊ด", zipcode: "55000" },
+      { province: "น่าน", amphoe: "แม่จริม", district: "หนองแดง", zipcode: "55170" },
+      { province: "น่าน", amphoe: "เวียงสา", district: "กลางเวียง", zipcode: "55110" },
+      { province: "น่าน", amphoe: "สันติสุข", district: "ป่าแลวหลวง", zipcode: "55210" },
+      { province: "น่าน", amphoe: "สองแคว", district: "นาไร่หลวง", zipcode: "55160" },
+      { province: "น่าน", amphoe: "อูน", district: "อูน", zipcode: "55160" },
+      { province: "บึงกาฬ", amphoe: "เมืองบึงกาฬ", district: "บึงกาฬ", zipcode: "38000" },
+      { province: "บึงกาฬ", amphoe: "เมืองบึงกาฬ", district: "วิศิษฐ์", zipcode: "38000" },
+      { province: "บึงกาฬ", amphoe: "คำชะอี", district: "คำชะอี", zipcode: "38110" },
+      { province: "บึงกาฬ", amphoe: "โซ่พิสัย", district: "โซ่", zipcode: "38170" },
+      { province: "บึงกาฬ", amphoe: "เซกา", district: "เซกา", zipcode: "38150" },
+      { province: "บึงกาฬ", amphoe: "ปากคาด", district: "ปากคาด", zipcode: "38190" },
+      { province: "บึงกาฬ", amphoe: "พรเจริญ", district: "พรเจริญ", zipcode: "38180" },
+      { province: "บึงกาฬ", amphoe: "ศรีวิไล", district: "ศรีวิไล", zipcode: "38140" },
+      { province: "บึงกาฬ", amphoe: "บุ่งคล้า", district: "บุ่งคล้า", zipcode: "38230" },
+      { province: "บุรีรัมย์", amphoe: "เมืองบุรีรัมย์", district: "ในเมือง", zipcode: "31000" },
+      { province: "บุรีรัมย์", amphoe: "เมืองบุรีรัมย์", district: "อิสาณ", zipcode: "31000" },
+      { province: "บุรีรัมย์", amphoe: "กระสัง", district: "กระสัง", zipcode: "31160" },
+      { province: "บุรีรัมย์", amphoe: "คูเมือง", district: "คูเมือง", zipcode: "31190" },
+      { province: "บุรีรัมย์", amphoe: "แคนดง", district: "แคนดง", zipcode: "31150" },
+      { province: "บุรีรัมย์", amphoe: "เฉลิมพระเกียรติ", district: "ถาวร", zipcode: "31170" },
+      { province: "บุรีรัมย์", amphoe: "ชำนิ", district: "ชำนิ", zipcode: "31110" },
+      { province: "บุรีรัมย์", amphoe: "นางรอง", district: "นางรอง", zipcode: "31110" },
+      { province: "บุรีรัมย์", amphoe: "นาโพธิ์", district: "นาโพธิ์", zipcode: "31230" },
+      { province: "บุรีรัมย์", amphoe: "โนนดินแดง", district: "โนนดินแดง", zipcode: "31260" },
+      { province: "บุรีรัมย์", amphoe: "โนนสุวรรณ", district: "โนนสุวรรณ", zipcode: "31110" },
+      { province: "บุรีรัมย์", amphoe: "ประโคนชัย", district: "ประโคนชัย", zipcode: "31140" },
+      { province: "บุรีรัมย์", amphoe: "ปะคำ", district: "ปะคำ", zipcode: "31220" },
+      { province: "บุรีรัมย์", amphoe: "พลับพลาชัย", district: "สะเดา", zipcode: "31250" },
+      { province: "บุรีรัมย์", amphoe: "พุทไธสง", district: "พุทไธสง", zipcode: "31120" },
+      { province: "บุรีรัมย์", amphoe: "ลำปลายมาศ", district: "ลำปลายมาศ", zipcode: "31130" },
+      { province: "บุรีรัมย์", amphoe: "ละหานทราย", district: "ละหานทราย", zipcode: "31170" },
+      { province: "บุรีรัมย์", amphoe: "สตึก", district: "นิคม", zipcode: "31150" },
+      { province: "บุรีรัมย์", amphoe: "หนองกี่", district: "หนองกี่", zipcode: "31210" },
+      { province: "บุรีรัมย์", amphoe: "หนองหงส์", district: "สระแก้ว", zipcode: "31240" },
+      { province: "บุรีรัมย์", amphoe: "ห้วยราช", district: "ห้วยราช", zipcode: "31000" },
+      { province: "ปทุมธานี", amphoe: "เมืองปทุมธานี", district: "บางปรอก", zipcode: "12000" },
+      { province: "ปทุมธานี", amphoe: "เมืองปทุมธานี", district: "บ้านใหม่", zipcode: "12000" },
+      { province: "ปทุมธานี", amphoe: "คลองหลวง", district: "คลองหนึ่ง", zipcode: "12120" },
+      { province: "ปทุมธานี", amphoe: "คลองหลวง", district: "คลองสอง", zipcode: "12120" },
+      { province: "ปทุมธานี", amphoe: "คลองหลวง", district: "คลองสาม", zipcode: "12120" },
+      { province: "ปทุมธานี", amphoe: "ธัญบุรี", district: "ประชาธิปัตย์", zipcode: "12130" },
+      { province: "ปทุมธานี", amphoe: "ธัญบุรี", district: "รังสิต", zipcode: "12110" },
+      { province: "ปทุมธานี", amphoe: "ลาดหลุมแก้ว", district: "ระแหง", zipcode: "12140" },
+      { province: "ปทุมธานี", amphoe: "ลำลูกกา", district: "คูคต", zipcode: "12130" },
+      { province: "ปทุมธานี", amphoe: "ลำลูกกา", district: "ลาดสวาย", zipcode: "12150" },
+      { province: "ปทุมธานี", amphoe: "สามโคก", district: "เชียงรากใหญ่", zipcode: "12160" },
+      { province: "ปทุมธานี", amphoe: "หนองเสือ", district: "บึงบา", zipcode: "12170" },
+      { province: "ประจวบคีรีขันธ์", amphoe: "เมืองประจวบคีรีขันธ์", district: "ประจวบคีรีขันธ์", zipcode: "77000" },
+      { province: "ประจวบคีรีขันธ์", amphoe: "กุยบุรี", district: "กุยบุรี", zipcode: "77150" },
+      { province: "ประจวบคีรีขันธ์", amphoe: "ทับสะแก", district: "ทับสะแก", zipcode: "77130" },
+      { province: "ประจวบคีรีขันธ์", amphoe: "บางสะพาน", district: "กำเนิดนพคุณ", zipcode: "77140" },
+      { province: "ประจวบคีรีขันธ์", amphoe: "บางสะพานน้อย", district: "บางสะพาน", zipcode: "77170" },
+      { province: "ประจวบคีรีขันธ์", amphoe: "ปราณบุรี", district: "ปราณบุรี", zipcode: "77120" },
+      { province: "ประจวบคีรีขันธ์", amphoe: "สามร้อยยอด", district: "ศาลาลัย", zipcode: "77180" },
+      { province: "ประจวบคีรีขันธ์", amphoe: "หัวหิน", district: "หัวหิน", zipcode: "77110" },
+      { province: "ประจวบคีรีขันธ์", amphoe: "หัวหิน", district: "หนองแก", zipcode: "77110" },
+      { province: "ปราจีนบุรี", amphoe: "เมืองปราจีนบุรี", district: "หน้าเมือง", zipcode: "25000" },
+      { province: "ปราจีนบุรี", amphoe: "เมืองปราจีนบุรี", district: "ดงพระราม", zipcode: "25000" },
+      { province: "ปราจีนบุรี", amphoe: "กบินทร์บุรี", district: "กบินทร์", zipcode: "25110" },
+      { province: "ปราจีนบุรี", amphoe: "นาดี", district: "นาดี", zipcode: "25220" },
+      { province: "ปราจีนบุรี", amphoe: "บ้านสร้าง", district: "บางกระเบา", zipcode: "25150" },
+      { province: "ปราจีนบุรี", amphoe: "ประจันตคาม", district: "ประจันตคาม", zipcode: "25130" },
+      { province: "ปราจีนบุรี", amphoe: "ศรีมโหสถ", district: "โคกปีบ", zipcode: "25190" },
+      { province: "ปราจีนบุรี", amphoe: "ศรีมหาโพธิ", district: "กรอกสมบูรณ์", zipcode: "25140" },
+      { province: "ปัตตานี", amphoe: "เมืองปัตตานี", district: "สะบารัง", zipcode: "94000" },
+      { province: "ปัตตานี", amphoe: "เมืองปัตตานี", district: "อาเนาะรู", zipcode: "94000" },
+      { province: "ปัตตานี", amphoe: "กะพ้อ", district: "กะรุบี", zipcode: "94230" },
+      { province: "ปัตตานี", amphoe: "โคกโพธิ์", district: "โคกโพธิ์", zipcode: "94180" },
+      { province: "ปัตตานี", amphoe: "ทุ่งยางแดง", district: "ปากู", zipcode: "94140" },
+      { province: "ปัตตานี", amphoe: "ปะนาเระ", district: "ปะนาเระ", zipcode: "94130" },
+      { province: "ปัตตานี", amphoe: "มายอ", district: "มายอ", zipcode: "94140" },
+      { province: "ปัตตานี", amphoe: "แม่ลาน", district: "แม่ลาน", zipcode: "94180" },
+      { province: "ปัตตานี", amphoe: "ไม้แก่น", district: "ไม้แก่น", zipcode: "94220" },
+      { province: "ปัตตานี", amphoe: "ยะรัง", district: "ยะรัง", zipcode: "94160" },
+      { province: "ปัตตานี", amphoe: "ยะหริ่ง", district: "ยามู", zipcode: "94150" },
+      { province: "ปัตตานี", amphoe: "สายบุรี", district: "ตะลุบัน", zipcode: "94110" },
+      { province: "ปัตตานี", amphoe: "หนองจิก", district: "ตุยง", zipcode: "94170" },
+      { province: "พระนครศรีอยุธยา", amphoe: "พระนครศรีอยุธยา", district: "ประตูชัย", zipcode: "13000" },
+      { province: "พระนครศรีอยุธยา", amphoe: "พระนครศรีอยุธยา", district: "หัวรอ", zipcode: "13000" },
+      { province: "พระนครศรีอยุธยา", amphoe: "ท่าเรือ", district: "ท่าหลวง", zipcode: "13130" },
+      { province: "พระนครศรีอยุธยา", amphoe: "นครหลวง", district: "นครหลวง", zipcode: "13260" },
+      { province: "พระนครศรีอยุธยา", amphoe: "บางซ้าย", district: "บางซ้าย", zipcode: "13270" },
+      { province: "พระนครศรีอยุธยา", amphoe: "บางไทร", district: "บางไทร", zipcode: "13190" },
+      { province: "พระนครศรีอยุธยา", amphoe: "บางบาล", district: "บางบาล", zipcode: "13250" },
+      { province: "พระนครศรีอยุธยา", amphoe: "บางปะอิน", district: "บ้านเลน", zipcode: "13160" },
+      { province: "พระนครศรีอยุธยา", amphoe: "บางปะหัน", district: "บางปะหัน", zipcode: "13220" },
+      { province: "พระนครศรีอยุธยา", amphoe: "บ้านแพรก", district: "บ้านแพรก", zipcode: "13240" },
+      { province: "พระนครศรีอยุธยา", amphoe: "ผักไห่", district: "ผักไห่", zipcode: "13120" },
+      { province: "พระนครศรีอยุธยา", amphoe: "ภาชี", district: "ภาชี", zipcode: "13140" },
+      { province: "พระนครศรีอยุธยา", amphoe: "มหาราช", district: "มหาราช", zipcode: "13150" },
+      { province: "พระนครศรีอยุธยา", amphoe: "ลาดบัวหลวง", district: "ลาดบัวหลวง", zipcode: "13230" },
+      { province: "พระนครศรีอยุธยา", amphoe: "วังน้อย", district: "ลำไทร", zipcode: "13170" },
+      { province: "พระนครศรีอยุธยา", amphoe: "เสนา", district: "เสนา", zipcode: "13110" },
+      { province: "พะเยา", amphoe: "เมืองพะเยา", district: "เวียง", zipcode: "56000" },
+      { province: "พะเยา", amphoe: "เมืองพะเยา", district: "แม่กา", zipcode: "56000" },
+      { province: "พะเยา", amphoe: "จุน", district: "ห้วยข้าวก่ำ", zipcode: "56150" },
+      { province: "พะเยา", amphoe: "เชียงคำ", district: "หย่วน", zipcode: "56110" },
+      { province: "พะเยา", amphoe: "เชียงม่วน", district: "เชียงม่วน", zipcode: "56160" },
+      { province: "พะเยา", amphoe: "ดอกคำใต้", district: "ดอกคำใต้", zipcode: "56120" },
+      { province: "พะเยา", amphoe: "ปง", district: "งิม", zipcode: "56140" },
+      { province: "พะเยา", amphoe: "ภูกามยาว", district: "ห้วยแก้ว", zipcode: "56000" },
+      { province: "พะเยา", amphoe: "ภูซาง", district: "ภูซาง", zipcode: "56110" },
+      { province: "พังงา", amphoe: "เมืองพังงา", district: "ท้ายช้าง", zipcode: "82000" },
+      { province: "พังงา", amphoe: "เมืองพังงา", district: "ถ้ำน้ำผุด", zipcode: "82000" },
+      { province: "พังงา", amphoe: "กะปง", district: "กะปง", zipcode: "82170" },
+      { province: "พังงา", amphoe: "เกาะยาว", district: "เกาะยาวใหญ่", zipcode: "82160" },
+      { province: "พังงา", amphoe: "คุระบุรี", district: "คุระ", zipcode: "82150" },
+      { province: "พังงา", amphoe: "ตะกั่วทุ่ง", district: "โคกกลอย", zipcode: "82140" },
+      { province: "พังงา", amphoe: "ตะกั่วป่า", district: "ตะกั่วป่า", zipcode: "82110" },
+      { province: "พังงา", amphoe: "ทับปุด", district: "ทับปุด", zipcode: "82180" },
+      { province: "พัทลุง", amphoe: "เมืองพัทลุง", district: "คูหาสวรรค์", zipcode: "93000" },
+      { province: "พัทลุง", amphoe: "เมืองพัทลุง", district: "ลำปำ", zipcode: "93000" },
+      { province: "พัทลุง", amphoe: "กงหรา", district: "กงหรา", zipcode: "93180" },
+      { province: "พัทลุง", amphoe: "เขาชัยสน", district: "เขาชัยสน", zipcode: "93130" },
+      { province: "พัทลุง", amphoe: "ควนขนุน", district: "ควนขนุน", zipcode: "93110" },
+      { province: "พัทลุง", amphoe: "ตะโหมด", district: "แม่ขรี", zipcode: "93160" },
+      { province: "พัทลุง", amphoe: "บางแก้ว", district: "โคกสัก", zipcode: "93140" },
+      { province: "พัทลุง", amphoe: "ปากพะยูน", district: "ฝาละมี", zipcode: "93120" },
+      { province: "พัทลุง", amphoe: "ป่าบอน", district: "ป่าบอน", zipcode: "93170" },
+      { province: "พัทลุง", amphoe: "ป่าพะยอม", district: "ป่าพะยอม", zipcode: "93210" },
+      { province: "พัทลุง", amphoe: "ศรีนครินทร์", district: "บ้านนา", zipcode: "93000" },
+      { province: "พัทลุง", amphoe: "ศรีบรรพต", district: "เขาย่า", zipcode: "93190" },
+      { province: "พิจิตร", amphoe: "เมืองพิจิตร", district: "ในเมือง", zipcode: "66000" },
+      { province: "พิจิตร", amphoe: "เมืองพิจิตร", district: "คลองคะเชนทร์", zipcode: "66000" },
+      { province: "พิจิตร", amphoe: "ตะพานหิน", district: "ตะพานหิน", zipcode: "66110" },
+      { province: "พิจิตร", amphoe: "ทับคล้อ", district: "ทับคล้อ", zipcode: "66150" },
+      { province: "พิจิตร", amphoe: "บางมูลนาก", district: "บางมูลนาก", zipcode: "66120" },
+      { province: "พิจิตร", amphoe: "บึงนาราง", district: "บึงนาราง", zipcode: "66130" },
+      { province: "พิจิตร", amphoe: "โพทะเล", district: "ท่าบัว", zipcode: "66130" },
+      { province: "พิจิตร", amphoe: "โพธิ์ประทับช้าง", district: "ไผ่ท่าโพ", zipcode: "66190" },
+      { province: "พิจิตร", amphoe: "วชิรบารมี", district: "บึงบัว", zipcode: "66140" },
+      { province: "พิจิตร", amphoe: "วังทรายพูน", district: "วังทรายพูน", zipcode: "66180" },
+      { province: "พิจิตร", amphoe: "สากเหล็ก", district: "สากเหล็ก", zipcode: "66160" },
+      { province: "พิจิตร", amphoe: "สามง่าม", district: "สามง่าม", zipcode: "66140" },
+      { province: "พิษณุโลก", amphoe: "เมืองพิษณุโลก", district: "ในเมือง", zipcode: "65000" },
+      { province: "พิษณุโลก", amphoe: "เมืองพิษณุโลก", district: "อรัญญิก", zipcode: "65000" },
+      { province: "พิษณุโลก", amphoe: "เมืองพิษณุโลก", district: "พลายชุมพล", zipcode: "65000" },
+      { province: "พิษณุโลก", amphoe: "ชาติตระการ", district: "ป่าแดง", zipcode: "65170" },
+      { province: "พิษณุโลก", amphoe: "นครไทย", district: "นครไทย", zipcode: "65120" },
+      { province: "พิษณุโลก", amphoe: "เนินมะปราง", district: "ชมพู", zipcode: "65190" },
+      { province: "พิษณุโลก", amphoe: "บางกระทุ่ม", district: "บางกระทุ่ม", zipcode: "65110" },
+      { province: "พิษณุโลก", amphoe: "บางระกำ", district: "บางระกำ", zipcode: "65140" },
+      { province: "พิษณุโลก", amphoe: "พรหมพิราม", district: "พรหมพิราม", zipcode: "65150" },
+      { province: "พิษณุโลก", amphoe: "วังทอง", district: "วังทอง", zipcode: "65130" },
+      { province: "พิษณุโลก", amphoe: "วัดโบสถ์", district: "วัดโบสถ์", zipcode: "65160" },
+      { province: "เพชรบุรี", amphoe: "เมืองเพชรบุรี", district: "ท่าราบ", zipcode: "76000" },
+      { province: "เพชรบุรี", amphoe: "เมืองเพชรบุรี", district: "คลองกระแชง", zipcode: "76000" },
+      { province: "เพชรบุรี", amphoe: "แก่งกระจาน", district: "แก่งกระจาน", zipcode: "76170" },
+      { province: "เพชรบุรี", amphoe: "เขาย้อย", district: "เขาย้อย", zipcode: "76140" },
+      { province: "เพชรบุรี", amphoe: "ชะอำ", district: "ชะอำ", zipcode: "76120" },
+      { province: "เพชรบุรี", amphoe: "ท่ายาง", district: "ท่ายาง", zipcode: "76130" },
+      { province: "เพชรบุรี", amphoe: "บ้านลาด", district: "บ้านลาด", zipcode: "76150" },
+      { province: "เพชรบุรี", amphoe: "บ้านแหลม", district: "บ้านแหลม", zipcode: "76110" },
+      { province: "เพชรบุรี", amphoe: "หนองหญ้าปล้อง", district: "หนองหญ้าปล้อง", zipcode: "76160" },
+      { province: "เพชรบูรณ์", amphoe: "เมืองเพชรบูรณ์", district: "ในเมือง", zipcode: "67000" },
+      { province: "เพชรบูรณ์", amphoe: "เมืองเพชรบูรณ์", district: "สะเดียง", zipcode: "67000" },
+      { province: "เพชรบูรณ์", amphoe: "เขาค้อ", district: "แคมป์สน", zipcode: "67280" },
+      { province: "เพชรบูรณ์", amphoe: "ชนแดน", district: "ชนแดน", zipcode: "67150" },
+      { province: "เพชรบูรณ์", amphoe: "น้ำหนาว", district: "น้ำหนาว", zipcode: "67260" },
+      { province: "เพชรบูรณ์", amphoe: "บึงสามพัน", district: "ซับสมอทอด", zipcode: "67160" },
+      { province: "เพชรบูรณ์", amphoe: "วังโป่ง", district: "วังโป่ง", zipcode: "67240" },
+      { province: "เพชรบูรณ์", amphoe: "วิเชียรบุรี", district: "ท่าโรง", zipcode: "67130" },
+      { province: "เพชรบูรณ์", amphoe: "ศรีเทพ", district: "ศรีเทพ", zipcode: "67170" },
+      { province: "เพชรบูรณ์", amphoe: "หนองไผ่", district: "หนองไผ่", zipcode: "67140" },
+      { province: "เพชรบูรณ์", amphoe: "หล่มสัก", district: "หล่มสัก", zipcode: "67110" },
+      { province: "เพชรบูรณ์", amphoe: "หล่มเก่า", district: "หล่มเก่า", zipcode: "67120" },
+      { province: "แพร่", amphoe: "เมืองแพร่", district: "ในเมือง", zipcode: "54000" },
+      { province: "แพร่", amphoe: "เมืองแพร่", district: "นาจักร", zipcode: "54000" },
+      { province: "แพร่", amphoe: "เด่นชัย", district: "เด่นชัย", zipcode: "54110" },
+      { province: "แพร่", amphoe: "ลอง", district: "ห้วยอ้อ", zipcode: "54150" },
+      { province: "แพร่", amphoe: "วังชิ้น", district: "วังชิ้น", zipcode: "54160" },
+      { province: "แพร่", amphoe: "สอง", district: "บ้านกลาง", zipcode: "54120" },
+      { province: "แพร่", amphoe: "สูงเม่น", district: "สูงเม่น", zipcode: "54130" },
+      { province: "แพร่", amphoe: "หนองม่วงไข่", district: "หนองม่วงไข่", zipcode: "54170" },
+      { province: "ภูเก็ต", amphoe: "เมืองภูเก็ต", district: "ตลาดใหญ่", zipcode: "83000" },
+      { province: "ภูเก็ต", amphoe: "เมืองภูเก็ต", district: "ตลาดเหนือ", zipcode: "83000" },
+      { province: "ภูเก็ต", amphoe: "เมืองภูเก็ต", district: "รัษฎา", zipcode: "83000" },
+      { province: "ภูเก็ต", amphoe: "กะทู้", district: "กะทู้", zipcode: "83120" },
+      { province: "ภูเก็ต", amphoe: "กะทู้", district: "ป่าตอง", zipcode: "83150" },
+      { province: "ภูเก็ต", amphoe: "ถลาง", district: "เทพกระษัตรี", zipcode: "83110" },
+      { province: "มหาสารคาม", amphoe: "เมืองมหาสารคาม", district: "ตลาด", zipcode: "44000" },
+      { province: "มหาสารคาม", amphoe: "เมืองมหาสารคาม", district: "แวงน่าง", zipcode: "44000" },
+      { province: "มหาสารคาม", amphoe: "กุดรัง", district: "กุดรัง", zipcode: "44130" },
+      { province: "มหาสารคาม", amphoe: "แกดำ", district: "แกดำ", zipcode: "44190" },
+      { province: "มหาสารคาม", amphoe: "โกสุมพิสัย", district: "หัวขวาง", zipcode: "44140" },
+      { province: "มหาสารคาม", amphoe: "กันทรวิชัย", district: "ท่าขอนยาง", zipcode: "44150" },
+      { province: "มหาสารคาม", amphoe: "เชียงยืน", district: "เชียงยืน", zipcode: "44160" },
+      { province: "มหาสารคาม", amphoe: "นาเชือก", district: "นาเชือก", zipcode: "44170" },
+      { province: "มหาสารคาม", amphoe: "นาดูน", district: "นาดูน", zipcode: "44180" },
+      { province: "มหาสารคาม", amphoe: "บรบือ", district: "บรบือ", zipcode: "44130" },
+      { province: "มหาสารคาม", amphoe: "พยัคฆภูมิพิสัย", district: "ปะหลาน", zipcode: "44110" },
+      { province: "มหาสารคาม", amphoe: "ยางสีสุราช", district: "ยางสีสุราช", zipcode: "44210" },
+      { province: "มหาสารคาม", amphoe: "วาปีปทุม", district: "หนองแสง", zipcode: "44120" },
+      { province: "มุกดาหาร", amphoe: "เมืองมุกดาหาร", district: "มุกดาหาร", zipcode: "49000" },
+      { province: "มุกดาหาร", amphoe: "เมืองมุกดาหาร", district: "ศรีบุญเรือง", zipcode: "49000" },
+      { province: "มุกดาหาร", amphoe: "คำชะอี", district: "คำชะอี", zipcode: "49110" },
+      { province: "มุกดาหาร", amphoe: "ดงหลวง", district: "หนองแคน", zipcode: "49140" },
+      { province: "มุกดาหาร", amphoe: "ดอนตาล", district: "ดอนตาล", zipcode: "49120" },
+      { province: "มุกดาหาร", amphoe: "นิคมคำสร้อย", district: "นิคมคำสร้อย", zipcode: "49130" },
+      { province: "มุกดาหาร", amphoe: "หนองสูง", district: "หนองสูง", zipcode: "49150" },
+      { province: "แม่ฮ่องสอน", amphoe: "เมืองแม่ฮ่องสอน", district: "จองคำ", zipcode: "58000" },
+      { province: "แม่ฮ่องสอน", amphoe: "เมืองแม่ฮ่องสอน", district: "ปางหมู", zipcode: "58000" },
+      { province: "แม่ฮ่องสอน", amphoe: "ขุนยวม", district: "ขุนยวม", zipcode: "58140" },
+      { province: "แม่ฮ่องสอน", amphoe: "ปางมะผ้า", district: "สบป่อง", zipcode: "58150" },
+      { province: "แม่ฮ่องสอน", amphoe: "ปาย", district: "เวียงใต้", zipcode: "58130" },
+      { province: "แม่ฮ่องสอน", amphoe: "แม่ลาน้อย", district: "แม่ลาน้อย", zipcode: "58120" },
+      { province: "แม่ฮ่องสอน", amphoe: "แม่สะเรียง", district: "แม่สะเรียง", zipcode: "58110" },
+      { province: "แม่ฮ่องสอน", amphoe: "สบเมย", district: "สบเมย", zipcode: "58110" },
+      { province: "ยโสธร", amphoe: "เมืองยโสธร", district: "ในเมือง", zipcode: "35000" },
+      { province: "ยโสธร", amphoe: "เมืองยโสธร", district: "สำราญ", zipcode: "35000" },
+      { province: "ยโสธร", amphoe: "กุดชุม", district: "กุดชุม", zipcode: "35140" },
+      { province: "ยโสธร", amphoe: "ค้อวัง", district: "ค้อวัง", zipcode: "35160" },
+      { province: "ยโสธร", amphoe: "คำเขื่อนแก้ว", district: "ย่อ", zipcode: "35110" },
+      { province: "ยโสธร", amphoe: "ทรายมูล", district: "ทรายมูล", zipcode: "35170" },
+      { province: "ยโสธร", amphoe: "ป่าติ้ว", district: "โพธิ์ไทร", zipcode: "35150" },
+      { province: "ยโสธร", amphoe: "มหาชนะชัย", district: "ฟ้าหยาด", zipcode: "35130" },
+      { province: "ยโสธร", amphoe: "เลิงนกทา", district: "สวาท", zipcode: "35120" },
+      { province: "ยะลา", amphoe: "เมืองยะลา", district: "สะเตง", zipcode: "95000" },
+      { province: "ยะลา", amphoe: "เมืองยะลา", district: "บุดี", zipcode: "95000" },
+      { province: "ยะลา", amphoe: "กรงปินัง", district: "กรงปินัง", zipcode: "95130" },
+      { province: "ยะลา", amphoe: "กาบัง", district: "กาบัง", zipcode: "95140" },
+      { province: "ยะลา", amphoe: "ธารโต", district: "ธารโต", zipcode: "95150" },
+      { province: "ยะลา", amphoe: "บันนังสตา", district: "บันนังสตา", zipcode: "95130" },
+      { province: "ยะลา", amphoe: "เบตง", district: "เบตง", zipcode: "95110" },
+      { province: "ยะลา", amphoe: "รามัน", district: "กายูบอเกาะ", zipcode: "95140" },
+      { province: "ร้อยเอ็ด", amphoe: "เมืองร้อยเอ็ด", district: "ในเมือง", zipcode: "45000" },
+      { province: "ร้อยเอ็ด", amphoe: "เมืองร้อยเอ็ด", district: "รอบเมือง", zipcode: "45000" },
+      { province: "ร้อยเอ็ด", amphoe: "เกษตรวิสัย", district: "เกษตรวิสัย", zipcode: "45150" },
+      { province: "ร้อยเอ็ด", amphoe: "จตุรพักตรพิมาน", district: "หัวช้าง", zipcode: "45180" },
+      { province: "ร้อยเอ็ด", amphoe: "เชียงขวัญ", district: "พระเจ้า", zipcode: "45000" },
+      { province: "ร้อยเอ็ด", amphoe: "ทุ่งเขาหลวง", district: "ทุ่งเขาหลวง", zipcode: "45170" },
+      { province: "ร้อยเอ็ด", amphoe: "ธวัชบุรี", district: "นิเวศน์", zipcode: "45170" },
+      { province: "ร้อยเอ็ด", amphoe: "ปทุมรัตต์", district: "บัวแดง", zipcode: "45190" },
+      { province: "ร้อยเอ็ด", amphoe: "พนมไพร", district: "พนมไพร", zipcode: "45140" },
+      { province: "ร้อยเอ็ด", amphoe: "โพธิ์ชัย", district: "เชียงใหม่", zipcode: "45230" },
+      { province: "ร้อยเอ็ด", amphoe: "โพนทอง", district: "แวง", zipcode: "45110" },
+      { province: "ร้อยเอ็ด", amphoe: "เมยวดี", district: "เมยวดี", zipcode: "45250" },
+      { province: "ร้อยเอ็ด", amphoe: "เมืองสรวง", district: "เมืองสรวง", zipcode: "45220" },
+      { province: "ร้อยเอ็ด", amphoe: "โมกข์", district: "โมกข์", zipcode: "45170" },
+      { province: "ร้อยเอ็ด", amphoe: "ศรีสมเด็จ", district: "ศรีสมเด็จ", zipcode: "45000" },
+      { province: "ร้อยเอ็ด", amphoe: "เสลภูมิ", district: "กลาง", zipcode: "45120" },
+      { province: "ร้อยเอ็ด", amphoe: "สุวรรณภูมิ", district: "สระคู", zipcode: "45130" },
+      { province: "ร้อยเอ็ด", amphoe: "หนองพอก", district: "หนองพอก", zipcode: "45210" },
+      { province: "ร้อยเอ็ด", amphoe: "อาจสามารถ", district: "อาจสามารถ", zipcode: "45160" },
+      { province: "ระนอง", amphoe: "เมืองระนอง", district: "เขานิเวศน์", zipcode: "85000" },
+      { province: "ระนอง", amphoe: "เมืองระนอง", district: "บางนอน", zipcode: "85000" },
+      { province: "ระนอง", amphoe: "กะเปอร์", district: "กะเปอร์", zipcode: "85120" },
+      { province: "ระนอง", amphoe: "กระบุรี", district: "น้ำจืด", zipcode: "85110" },
+      { province: "ระนอง", amphoe: "ละอุ่น", district: "ละอุ่นเหนือ", zipcode: "85130" },
+      { province: "ระนอง", amphoe: "สุขสำราญ", district: "กำพวน", zipcode: "85120" },
+      { province: "ระยอง", amphoe: "เมืองระยอง", district: "ท่าประดู่", zipcode: "21000" },
+      { province: "ระยอง", amphoe: "เมืองระยอง", district: "เชิงเนิน", zipcode: "21000" },
+      { province: "ระยอง", amphoe: "เมืองระยอง", district: "มาบตาพุด", zipcode: "21150" },
+      { province: "ระยอง", amphoe: "แกลง", district: "ทางเกวียน", zipcode: "21110" },
+      { province: "ระยอง", amphoe: "เขาชะเมา", district: "ห้วยทับมอญ", zipcode: "21110" },
+      { province: "ระยอง", amphoe: "นิคมพัฒนา", district: "นิคมพัฒนา", zipcode: "21180" },
+      { province: "ระยอง", amphoe: "บ้านค่าย", district: "บ้านค่าย", zipcode: "21120" },
+      { province: "ระยอง", amphoe: "บ้านฉาง", district: "บ้านฉาง", zipcode: "21130" },
+      { province: "ระยอง", amphoe: "ปลวกแดง", district: "ปลวกแดง", zipcode: "21140" },
+      { province: "ระยอง", amphoe: "วังจันทร์", district: "วังจันทร์", zipcode: "21210" },
+      { province: "ราชบุรี", amphoe: "เมืองราชบุรี", district: "หน้าเมือง", zipcode: "70000" },
+      { province: "ราชบุรี", amphoe: "เมืองราชบุรี", district: "พงสวาย", zipcode: "70000" },
+      { province: "ราชบุรี", amphoe: "จอมบึง", district: "จอมบึง", zipcode: "70150" },
+      { province: "ราชบุรี", amphoe: "ดำเนินสะดวก", district: "ดำเนินสะดวก", zipcode: "70130" },
+      { province: "ราชบุรี", amphoe: "บางแพ", district: "บางแพ", zipcode: "70160" },
+      { province: "ราชบุรี", amphoe: "บ้านคา", district: "บ้านคา", zipcode: "70180" },
+      { province: "ราชบุรี", amphoe: "บ้านโป่ง", district: "บ้านโป่ง", zipcode: "70110" },
+      { province: "ราชบุรี", amphoe: "ปากท่อ", district: "ปากท่อ", zipcode: "70140" },
+      { province: "ราชบุรี", amphoe: "โพธาราม", district: "โพธาราม", zipcode: "70120" },
+      { province: "ราชบุรี", amphoe: "วัดเพลง", district: "วัดเพลง", zipcode: "70170" },
+      { province: "ราชบุรี", amphoe: "สวนผึ้ง", district: "สวนผึ้ง", zipcode: "70180" },
+      { province: "ลพบุรี", amphoe: "เมืองลพบุรี", district: "ทะเลชุบศร", zipcode: "15000" },
+      { province: "ลพบุรี", amphoe: "เมืองลพบุรี", district: "ท่าหิน", zipcode: "15000" },
+      { province: "ลพบุรี", amphoe: "โคกสำโรง", district: "โคกสำโรง", zipcode: "15120" },
+      { province: "ลพบุรี", amphoe: "โคกเจริญ", district: "โคกเจริญ", zipcode: "15250" },
+      { province: "ลพบุรี", amphoe: "ชัยบาดาล", district: "ลำนารายณ์", zipcode: "15130" },
+      { province: "ลพบุรี", amphoe: "ท่าวุ้ง", district: "ท่าวุ้ง", zipcode: "15150" },
+      { province: "ลพบุรี", amphoe: "บ้านหมี่", district: "บ้านหมี่", zipcode: "15110" },
+      { province: "ลพบุรี", amphoe: "พัฒนานิคม", district: "พัฒนานิคม", zipcode: "15140" },
+      { province: "ลพบุรี", amphoe: "ลำสนธิ", district: "ลำสนธิ", zipcode: "15190" },
+      { province: "ลพบุรี", amphoe: "สระโบสถ์", district: "สระโบสถ์", zipcode: "15240" },
+      { province: "ลพบุรี", amphoe: "หนองม่วง", district: "หนองม่วง", zipcode: "15170" },
+      { province: "ลำปาง", amphoe: "เมืองลำปาง", district: "เวียงเหนือ", zipcode: "52000" },
+      { province: "ลำปาง", amphoe: "เมืองลำปาง", district: "สบตุ๋ย", zipcode: "52100" },
+      { province: "ลำปาง", amphoe: "เมืองลำปาง", district: "พระบาท", zipcode: "52000" },
+      { province: "ลำปาง", amphoe: "เกาะคา", district: "เกาะคา", zipcode: "52130" },
+      { province: "ลำปาง", amphoe: "งาว", district: "หลวงใต้", zipcode: "52110" },
+      { province: "ลำปาง", amphoe: "แจ้ห่ม", district: "แจ้ห่ม", zipcode: "52120" },
+      { province: "ลำปาง", amphoe: "เถิน", district: "อ้อมแก้ว", zipcode: "52160" },
+      { province: "ลำปาง", amphoe: "แม่ทะ", district: "แม่ทะ", zipcode: "52150" },
+      { province: "ลำปาง", amphoe: "แม่พริก", district: "แม่พริก", zipcode: "52180" },
+      { province: "ลำปาง", amphoe: "แม่เมาะ", district: "แม่เมาะ", zipcode: "52220" },
+      { province: "ลำปาง", amphoe: "เมืองปาน", district: "เมืองปาน", zipcode: "52240" },
+      { province: "ลำปาง", amphoe: "วังเหนือ", district: "วังเหนือ", zipcode: "52140" },
+      { province: "ลำปาง", amphoe: "สบปราบ", district: "สบปราบ", zipcode: "52170" },
+      { province: "ลำปาง", amphoe: "เสริมงาม", district: "เสริมขวา", zipcode: "52210" },
+      { province: "ลำปาง", amphoe: "ห้างฉัตร", district: "ห้างฉัตร", zipcode: "52190" },
+      { province: "ลำพูน", amphoe: "เมืองลำพูน", district: "ในเมือง", zipcode: "51000" },
+      { province: "ลำพูน", amphoe: "เมืองลำพูน", district: "ต้นธง", zipcode: "51000" },
+      { province: "ลำพูน", amphoe: "ทุ่งหัวช้าง", district: "ทุ่งหัวช้าง", zipcode: "51160" },
+      { province: "ลำพูน", amphoe: "ป่าซาง", district: "ป่าซาง", zipcode: "51120" },
+      { province: "ลำพูน", amphoe: "บ้านโฮ่ง", district: "บ้านโฮ่ง", zipcode: "51130" },
+      { province: "ลำพูน", amphoe: "บ้านธิ", district: "บ้านธิ", zipcode: "51180" },
+      { province: "ลำพูน", amphoe: "แม่ทา", district: "ทาสบเสา", zipcode: "51140" },
+      { province: "ลำพูน", amphoe: "ลี้", district: "ลี้", zipcode: "51110" },
+      { province: "ลำพูน", amphoe: "เวียงหนองล่อง", district: "วังผาง", zipcode: "51120" },
+      { province: "เลย", amphoe: "เมืองเลย", district: "กุดป่อง", zipcode: "42000" },
+      { province: "เลย", amphoe: "เมืองเลย", district: "นาอาน", zipcode: "42000" },
+      { province: "เลย", amphoe: "เชียงคาน", district: "เชียงคาน", zipcode: "42110" },
+      { province: "เลย", amphoe: "ด่านซ้าย", district: "ด่านซ้าย", zipcode: "42120" },
+      { province: "เลย", amphoe: "ท่าลี่", district: "ท่าลี่", zipcode: "42140" },
+      { province: "เลย", amphoe: "นาด้วง", district: "นาด้วง", zipcode: "42210" },
+      { province: "เลย", amphoe: "นาแห้ว", district: "นาแห้ว", zipcode: "42170" },
+      { province: "เลย", amphoe: "ปากชม", district: "ปากชม", zipcode: "42150" },
+      { province: "เลย", amphoe: "ภูกระดึง", district: "ภูกระดึง", zipcode: "42180" },
+      { province: "เลย", amphoe: "ภูเรือ", district: "หนองบัว", zipcode: "42160" },
+      { province: "เลย", amphoe: "ภูหลวง", district: "ภูหอ", zipcode: "42230" },
+      { province: "เลย", amphoe: "วังสะพุง", district: "วังสะพุง", zipcode: "42130" },
+      { province: "เลย", amphoe: "หนองหิน", district: "หนองหิน", zipcode: "42190" },
+      { province: "เลย", amphoe: "เอราวัณ", district: "เอราวัณ", zipcode: "42220" },
+      { province: "ศรีสะเกษ", amphoe: "เมืองศรีสะเกษ", district: "เมืองเหนือ", zipcode: "33000" },
+      { province: "ศรีสะเกษ", amphoe: "เมืองศรีสะเกษ", district: "เมืองใต้", zipcode: "33000" },
+      { province: "ศรีสะเกษ", amphoe: "กันทรลักษ์", district: "น้ำอ้อม", zipcode: "33110" },
+      { province: "ศรีสะเกษ", amphoe: "กันทรารมย์", district: "ดูน", zipcode: "33130" },
+      { province: "ศรีสะเกษ", amphoe: "ขุขันธ์", district: "ห้วยเหนือ", zipcode: "33140" },
+      { province: "ศรีสะเกษ", amphoe: "ขุนหาญ", district: "สิ", zipcode: "33150" },
+      { province: "ศรีสะเกษ", amphoe: "โนนคูณ", district: "บก", zipcode: "33250" },
+      { province: "ศรีสะเกษ", amphoe: "น้ำเกลี้ยง", district: "น้ำเกลี้ยง", zipcode: "33260" },
+      { province: "ศรีสะเกษ", amphoe: "บึงบูรพ์", district: "เป๊าะ", zipcode: "33220" },
+      { province: "ศรีสะเกษ", amphoe: "เบญจลักษ์", district: "เสียว", zipcode: "33110" },
+      { province: "ศรีสะเกษ", amphoe: "ปรางค์กู่", district: "พิมาย", zipcode: "33170" },
+      { province: "ศรีสะเกษ", amphoe: "พยุห์", district: "พยุห์", zipcode: "33230" },
+      { province: "ศรีสะเกษ", amphoe: "โพธิ์ศรีสุวรรณ", district: "โดด", zipcode: "33120" },
+      { province: "ศรีสะเกษ", amphoe: "ภูสิงห์", district: "ห้วยตึ๊กชู", zipcode: "33140" },
+      { province: "ศรีสะเกษ", amphoe: "เมืองจันทร์", district: "เมืองจันทร์", zipcode: "33120" },
+      { province: "ศรีสะเกษ", amphoe: "ยางชุมน้อย", district: "ยางชุมน้อย", zipcode: "33190" },
+      { province: "ศรีสะเกษ", amphoe: "ราษีไศล", district: "เมืองคง", zipcode: "33160" },
+      { province: "ศรีสะเกษ", amphoe: "วังหิน", district: "บุ่งขี้เหล็ก", zipcode: "33270" },
+      { province: "ศรีสะเกษ", amphoe: "ศรีรัตนะ", district: "สระเยาว์", zipcode: "33240" },
+      { province: "ศรีสะเกษ", amphoe: "ศิลาลาด", district: "กุง", zipcode: "33160" },
+      { province: "ศรีสะเกษ", amphoe: "ห้วยทับทัน", district: "ผักไหม", zipcode: "33210" },
+      { province: "ศรีสะเกษ", amphoe: "อุทุมพรพิสัย", district: "กำแพง", zipcode: "33120" },
+      { province: "สกลนคร", amphoe: "เมืองสกลนคร", district: "ธาตุเชิงชุม", zipcode: "47000" },
+      { province: "สกลนคร", amphoe: "เมืองสกลนคร", district: "ฮางโฮง", zipcode: "47000" },
+      { province: "สกลนคร", amphoe: "กุดบาก", district: "กุดบาก", zipcode: "47180" },
+      { province: "สกลนคร", amphoe: "กุสุมาลย์", district: "กุสุมาลย์", zipcode: "47210" },
+      { province: "สกลนคร", amphoe: "คำตากล้า", district: "คำตากล้า", zipcode: "47250" },
+      { province: "สกลนคร", amphoe: "โคกศรีสุพรรณ", district: "ตองโขบ", zipcode: "47280" },
+      { province: "สกลนคร", amphoe: "เจริญศิลป์", district: "เจริญศิลป์", zipcode: "47290" },
+      { province: "สกลนคร", amphoe: "เต่างอย", district: "เต่างอย", zipcode: "47260" },
+      { province: "สกลนคร", amphoe: "นิคมน้ำอูน", district: "นิคมน้ำอูน", zipcode: "47270" },
+      { province: "สกลนคร", amphoe: "พรรณานิคม", district: "พอกใหญ่", zipcode: "47130" },
+      { province: "สกลนคร", amphoe: "พังโคน", district: "พังโคน", zipcode: "47160" },
+      { province: "สกลนคร", amphoe: "ภูพาน", district: "สร้างค้อ", zipcode: "47180" },
+      { province: "สกลนคร", amphoe: "วานรนิวาส", district: "วานรนิวาส", zipcode: "47120" },
+      { province: "สกลนคร", amphoe: "วาริชภูมิ", district: "วาริชภูมิ", zipcode: "47150" },
+      { province: "สกลนคร", amphoe: "สว่างแดนดิน", district: "สว่างแดนดิน", zipcode: "47110" },
+      { province: "สกลนคร", amphoe: "อากาศอำนวย", district: "อากาศ", zipcode: "47170" },
+      { province: "สงขลา", amphoe: "เมืองสงขลา", district: "บ่อยาง", zipcode: "90000" },
+      { province: "สงขลา", amphoe: "เมืองสงขลา", district: "เขารูปช้าง", zipcode: "90000" },
+      { province: "สงขลา", amphoe: "กระแสสินธุ์", district: "เกาะใหญ่", zipcode: "90270" },
+      { province: "สงขลา", amphoe: "คลองหอยโข่ง", district: "คลองหอยโข่ง", zipcode: "90230" },
+      { province: "สงขลา", amphoe: "ควนเนียง", district: "รัตภูมิ", zipcode: "90220" },
+      { province: "สงขลา", amphoe: "จะนะ", district: "บ้านนา", zipcode: "90130" },
+      { province: "สงขลา", amphoe: "เทพา", district: "เทพา", zipcode: "90150" },
+      { province: "สงขลา", amphoe: "นาทวี", district: "นาทวี", zipcode: "90160" },
+      { province: "สงขลา", amphoe: "นาหม่อม", district: "นาหม่อม", zipcode: "90310" },
+      { province: "สงขลา", amphoe: "บางกล่ำ", district: "บางกล่ำ", zipcode: "90110" },
+      { province: "สงขลา", amphoe: "ระโนด", district: "ระโนด", zipcode: "90140" },
+      { province: "สงขลา", amphoe: "รัตภูมิ", district: "กำแพงเพชร", zipcode: "90180" },
+      { province: "สงขลา", amphoe: "สะเดา", district: "สะเดา", zipcode: "90120" },
+      { province: "สงขลา", amphoe: "สะบ้าย้อย", district: "สะบ้าย้อย", zipcode: "90210" },
+      { province: "สงขลา", amphoe: "สิงหนคร", district: "ชิงโค", zipcode: "90280" },
+      { province: "สงขลา", amphoe: "หาดใหญ่", district: "หาดใหญ่", zipcode: "90110" },
+      { province: "สงขลา", amphoe: "หาดใหญ่", district: "คอหงส์", zipcode: "90110" },
+      { province: "สงขลา", amphoe: "หาดใหญ่", district: "คลองแห", zipcode: "90110" },
+      { province: "สตูล", amphoe: "เมืองสตูล", district: "พิมาน", zipcode: "91000" },
+      { province: "สตูล", amphoe: "เมืองสตูล", district: "คลองขุด", zipcode: "91000" },
+      { province: "สตูล", amphoe: "ควนโดน", district: "ควนโดน", zipcode: "91160" },
+      { province: "สตูล", amphoe: "ควนกาหลง", district: "ควนกาหลง", zipcode: "91130" },
+      { province: "สตูล", amphoe: "ท่าแพ", district: "ท่าแพ", zipcode: "91150" },
+      { province: "สตูล", amphoe: "ทุ่งหว้า", district: "ทุ่งหว้า", zipcode: "91120" },
+      { province: "สตูล", amphoe: "มะนัง", district: "ปาล์มพัฒนา", zipcode: "91130" },
+      { province: "สตูล", amphoe: "ละงู", district: "กำแพง", zipcode: "91110" },
+      { province: "สมุทรปราการ", amphoe: "เมืองสมุทรปราการ", district: "ปากน้ำ", zipcode: "10270" },
+      { province: "สมุทรปราการ", amphoe: "เมืองสมุทรปราการ", district: "สำโรงเหนือ", zipcode: "10270" },
+      { province: "สมุทรปราการ", amphoe: "เมืองสมุทรปราการ", district: "ท้ายบ้าน", zipcode: "10280" },
+      { province: "สมุทรปราการ", amphoe: "บางบ่อ", district: "บางบ่อ", zipcode: "10560" },
+      { province: "สมุทรปราการ", amphoe: "บางพลี", district: "บางพลีใหญ่", zipcode: "10540" },
+      { province: "สมุทรปราการ", amphoe: "บางพลี", district: "บางแก้ว", zipcode: "10540" },
+      { province: "สมุทรปราการ", amphoe: "บางพลี", district: "ราชาเทวะ", zipcode: "10540" },
+      { province: "สมุทรปราการ", amphoe: "บางเสาธง", district: "บางเสาธง", zipcode: "10570" },
+      { province: "สมุทรปราการ", amphoe: "พระประแดง", district: "ตลาด", zipcode: "10130" },
+      { province: "สมุทรปราการ", amphoe: "พระสมุทรเจดีย์", district: "ปากคลองบางปลากด", zipcode: "10290" },
+      { province: "สมุทรสงคราม", amphoe: "เมืองสมุทรสงคราม", district: "แม่กลอง", zipcode: "75000" },
+      { province: "สมุทรสงคราม", amphoe: "เมืองสมุทรสงคราม", district: "ลาดใหญ่", zipcode: "75000" },
+      { province: "สมุทรสงคราม", amphoe: "บางคนที", district: "บางคนที", zipcode: "75120" },
+      { province: "สมุทรสงคราม", amphoe: "อัมพวา", district: "อัมพวา", zipcode: "75110" },
+      { province: "สมุทรสาคร", amphoe: "เมืองสมุทรสาคร", district: "มหาชัย", zipcode: "74000" },
+      { province: "สมุทรสาคร", amphoe: "เมืองสมุทรสาคร", district: "ท่าฉลอม", zipcode: "74000" },
+      { province: "สมุทรสาคร", amphoe: "กระทุ่มแบน", district: "ตลาดกระทุ่มแบน", zipcode: "74110" },
+      { province: "สมุทรสาคร", amphoe: "บ้านแพ้ว", district: "บ้านแพ้ว", zipcode: "74120" },
+      { province: "สระแก้ว", amphoe: "เมืองสระแก้ว", district: "สระแก้ว", zipcode: "27000" },
+      { province: "สระแก้ว", amphoe: "เมืองสระแก้ว", district: "ท่าเกษม", zipcode: "27000" },
+      { province: "สระแก้ว", amphoe: "เขาฉกรรจ์", district: "เขาฉกรรจ์", zipcode: "27000" },
+      { province: "สระแก้ว", amphoe: "คลองหาด", district: "คลองหาด", zipcode: "27260" },
+      { province: "สระแก้ว", amphoe: "โคกสูง", district: "โคกสูง", zipcode: "27120" },
+      { province: "สระแก้ว", amphoe: "ตาพระยา", district: "ตาพระยา", zipcode: "27180" },
+      { province: "สระแก้ว", amphoe: "วังน้ำเย็น", district: "วังน้ำเย็น", zipcode: "27210" },
+      { province: "สระแก้ว", amphoe: "วังสมบูรณ์", district: "วังสมบูรณ์", zipcode: "27250" },
+      { province: "สระแก้ว", amphoe: "วัฒนานคร", district: "วัฒนานคร", zipcode: "27160" },
+      { province: "สระแก้ว", amphoe: "อรัญประเทศ", district: "อรัญประเทศ", zipcode: "27120" },
+      { province: "สระบุรี", amphoe: "เมืองสระบุรี", district: "ปากเพรียว", zipcode: "18000" },
+      { province: "สระบุรี", amphoe: "เมืองสระบุรี", district: "ดาวเรือง", zipcode: "18000" },
+      { province: "สระบุรี", amphoe: "แก่งคอย", district: "แก่งคอย", zipcode: "18110" },
+      { province: "สระบุรี", amphoe: "เฉลิมพระเกียรติ", district: "หน้าพระลาน", zipcode: "18240" },
+      { province: "สระบุรี", amphoe: "ดอนพุด", district: "ดอนพุด", zipcode: "18210" },
+      { province: "สระบุรี", amphoe: "บ้านหมอ", district: "บ้านหมอ", zipcode: "18130" },
+      { province: "สระบุรี", amphoe: "มวกเหล็ก", district: "มิตรภาพ", zipcode: "18180" },
+      { province: "สระบุรี", amphoe: "วังม่วง", district: "คำพราน", zipcode: "18220" },
+      { province: "สระบุรี", amphoe: "วิหารแดง", district: "หนองหมู", zipcode: "18150" },
+      { province: "สระบุรี", amphoe: "หนองแค", district: "หนองแค", zipcode: "18140" },
+      { province: "สระบุรี", amphoe: "หนองแซง", district: "หนองแซง", zipcode: "18170" },
+      { province: "สระบุรี", amphoe: "หนองโดน", district: "หนองโดน", zipcode: "18190" },
+      { province: "สิงห์บุรี", amphoe: "เมืองสิงห์บุรี", district: "บางพุดซา", zipcode: "16000" },
+      { province: "สิงห์บุรี", amphoe: "เมืองสิงห์บุรี", district: "จักรสีห์", zipcode: "16000" },
+      { province: "สิงห์บุรี", amphoe: "ค่ายบางระจัน", district: "โพธิ์ขนไก่", zipcode: "16150" },
+      { province: "สิงห์บุรี", amphoe: "ท่าช้าง", district: "ถอนสมอ", zipcode: "16140" },
+      { province: "สิงห์บุรี", amphoe: "บางระจัน", district: "สิงห์", zipcode: "16130" },
+      { province: "สิงห์บุรี", amphoe: "พรหมบุรี", district: "พรหมบุรี", zipcode: "16120" },
+      { province: "สิงห์บุรี", amphoe: "อินทร์บุรี", district: "อินทร์บุรี", zipcode: "16110" },
+      { province: "สุโขทัย", amphoe: "เมืองสุโขทัย", district: "ธานี", zipcode: "64000" },
+      { province: "สุโขทัย", amphoe: "เมืองสุโขทัย", district: "ปากแคว", zipcode: "64000" },
+      { province: "สุโขทัย", amphoe: "กงไกรลาศ", district: "กง", zipcode: "64170" },
+      { province: "สุโขทัย", amphoe: "คีรีมาศ", district: "โตนด", zipcode: "64160" },
+      { province: "สุโขทัย", amphoe: "ทุ่งเสลี่ยม", district: "ทุ่งเสลี่ยม", zipcode: "64150" },
+      { province: "สุโขทัย", amphoe: "บ้านด่านลานหอย", district: "บ้านด่าน", zipcode: "64140" },
+      { province: "สุโขทัย", amphoe: "ศรีนคร", district: "ศรีนคร", zipcode: "64180" },
+      { province: "สุโขทัย", amphoe: "ศรีสำโรง", district: "สามเรือน", zipcode: "64120" },
+      { province: "สุโขทัย", amphoe: "สวรรคโลก", district: "เมืองสวรรคโลก", zipcode: "64110" },
+      { province: "สุพรรณบุรี", amphoe: "เมืองสุพรรณบุรี", district: "ท่าพี่เลี้ยง", zipcode: "72000" },
+      { province: "สุพรรณบุรี", amphoe: "เมืองสุพรรณบุรี", district: "รั้วใหญ่", zipcode: "72000" },
+      { province: "สุพรรณบุรี", amphoe: "ดอนเจดีย์", district: "ดอนเจดีย์", zipcode: "72170" },
+      { province: "สุพรรณบุรี", amphoe: "ด่านช้าง", district: "ด่านช้าง", zipcode: "72180" },
+      { province: "สุพรรณบุรี", amphoe: "เดิมบางนางบวช", district: "เดิมบาง", zipcode: "72120" },
+      { province: "สุพรรณบุรี", amphoe: "บางปลาม้า", district: "โคกคราม", zipcode: "72150" },
+      { province: "สุพรรณบุรี", amphoe: "ศรีประจันต์", district: "มดแดง", zipcode: "72140" },
+      { province: "สุพรรณบุรี", amphoe: "สองพี่น้อง", district: "สองพี่น้อง", zipcode: "72110" },
+      { province: "สุพรรณบุรี", amphoe: "สามชุก", district: "สามชุก", zipcode: "72130" },
+      { province: "สุพรรณบุรี", amphoe: "หนองหญ้าไซ", district: "หนองหญ้าไซ", zipcode: "72240" },
+      { province: "สุราษฎร์ธานี", amphoe: "เมืองสุราษฎร์ธานี", district: "ตลาด", zipcode: "84000" },
+      { province: "สุราษฎร์ธานี", amphoe: "เมืองสุราษฎร์ธานี", district: "มะขามเตี้ย", zipcode: "84000" },
+      { province: "สุราษฎร์ธานี", amphoe: "กาญจนดิษฐ์", district: "ช้างซ้าย", zipcode: "84160" },
+      { province: "สุราษฎร์ธานี", amphoe: "เกาะพะงัน", district: "เกาะพะงัน", zipcode: "84280" },
+      { province: "สุราษฎร์ธานี", amphoe: "เกาะสมุย", district: "อ่างทอง", zipcode: "84140" },
+      { province: "สุราษฎร์ธานี", amphoe: "เกาะสมุย", district: "บ่อผุด", zipcode: "84320" },
+      { province: "สุราษฎร์ธานี", amphoe: "คีรีรัฐนิคม", district: "ท่าขนอน", zipcode: "84180" },
+      { province: "สุราษฎร์ธานี", amphoe: "เคียนซา", district: "เคียนซา", zipcode: "84260" },
+      { province: "สุราษฎร์ธานี", amphoe: "ชัยบุรี", district: "ชัยบุรี", zipcode: "84350" },
+      { province: "สุราษฎร์ธานี", amphoe: "ไชยา", district: "ตลาดไชยา", zipcode: "84110" },
+      { province: "สุราษฎร์ธานี", amphoe: "ดอนสัก", district: "ดอนสัก", zipcode: "84220" },
+      { province: "สุราษฎร์ธานี", amphoe: "ท่าฉาง", district: "ท่าฉาง", zipcode: "84150" },
+      { province: "สุราษฎร์ธานี", amphoe: "ท่าชนะ", district: "ท่าชนะ", zipcode: "84170" },
+      { province: "สุราษฎร์ธานี", amphoe: "บ้านตาขุน", district: "เขาวง", zipcode: "84230" },
+      { province: "สุราษฎร์ธานี", amphoe: "บ้านนาสาร", district: "นาสาร", zipcode: "84120" },
+      { province: "สุราษฎร์ธานี", amphoe: "พนม", district: "พนม", zipcode: "84250" },
+      { province: "สุราษฎร์ธานี", amphoe: "พระแสง", district: "ไทรขึง", zipcode: "84210" },
+      { province: "สุราษฎร์ธานี", amphoe: "พุนพิน", district: "ท่าข้าม", zipcode: "84130" },
+      { province: "สุราษฎร์ธานี", amphoe: "วิภาวดี", district: "ตะกุกใต้", zipcode: "84180" },
+      { province: "สุราษฎร์ธานี", amphoe: "เวียงสระ", district: "บ้านส้อง", zipcode: "84190" },
+      { province: "สุรินทร์", amphoe: "เมืองสุรินทร์", district: "ในเมือง", zipcode: "32000" },
+      { province: "สุรินทร์", amphoe: "เมืองสุรินทร์", district: "นอกเมือง", zipcode: "32000" },
+      { province: "สุรินทร์", amphoe: "กาบเชิง", district: "กาบเชิง", zipcode: "32210" },
+      { province: "สุรินทร์", amphoe: "เขวาสินรินทร์", district: "บึง", zipcode: "32000" },
+      { province: "สุรินทร์", amphoe: "ชุมพลบุรี", district: "เมืองบัว", zipcode: "32190" },
+      { province: "สุรินทร์", amphoe: "ท่าตูม", district: "ท่าตูม", zipcode: "32120" },
+      { province: "สุรินทร์", amphoe: "โนนนารายณ์", district: "หนองหลวง", zipcode: "32150" },
+      { province: "สุรินทร์", amphoe: "บัวเชด", district: "บัวเชด", zipcode: "32230" },
+      { province: "สุรินทร์", amphoe: "ปราสาท", district: "กังแอน", zipcode: "32140" },
+      { province: "สุรินทร์", amphoe: "พนมดงรัก", district: "จรัส", zipcode: "32140" },
+      { province: "สุรินทร์", amphoe: "รัตนบุรี", district: "รัตนบุรี", zipcode: "32130" },
+      { province: "สุรินทร์", amphoe: "ลำดวน", district: "ลำดวน", zipcode: "32220" },
+      { province: "สุรินทร์", amphoe: "ศีขรภูมิ", district: "ระแงง", zipcode: "32110" },
+      { province: "สุรินทร์", amphoe: "ศรีณรงค์", district: "ณรงค์", zipcode: "32150" },
+      { province: "สุรินทร์", amphoe: "สนม", district: "สนม", zipcode: "32160" },
+      { province: "สุรินทร์", amphoe: "สำโรงทาบ", district: "สำโรงทาบ", zipcode: "32170" },
+      { province: "สุรินทร์", amphoe: "สังขะ", district: "สังขะ", zipcode: "32150" },
+      { province: "หนองคาย", amphoe: "เมืองหนองคาย", district: "ในเมือง", zipcode: "43000" },
+      { province: "หนองคาย", amphoe: "เมืองหนองคาย", district: "มีชัย", zipcode: "43000" },
+      { province: "หนองคาย", amphoe: "ท่าบ่อ", district: "ท่าบ่อ", zipcode: "43110" },
+      { province: "หนองคาย", amphoe: "เฝ้าไร่", district: "เฝ้าไร่", zipcode: "43230" },
+      { province: "หนองคาย", amphoe: "โพธิ์ตาก", district: "โพธิ์ตาก", zipcode: "43120" },
+      { province: "หนองคาย", amphoe: "โพนพิสัย", district: "จุมพล", zipcode: "43120" },
+      { province: "หนองคาย", amphoe: "รัตนวาปี", district: "รัตนวาปี", zipcode: "43120" },
+      { province: "หนองคาย", amphoe: "ศรีเชียงใหม่", district: "พานพร้าว", zipcode: "43130" },
+      { province: "หนองคาย", amphoe: "สังคม", district: "สังคม", zipcode: "43160" },
+      { province: "หนองบัวลำภู", amphoe: "เมืองหนองบัวลำภู", district: "หนองบัว", zipcode: "39000" },
+      { province: "หนองบัวลำภู", amphoe: "เมืองหนองบัวลำภู", district: "ลำภู", zipcode: "39000" },
+      { province: "หนองบัวลำภู", amphoe: "นากลาง", district: "นากลาง", zipcode: "39170" },
+      { province: "หนองบัวลำภู", amphoe: "นาวัง", district: "นาวัง", zipcode: "39170" },
+      { province: "หนองบัวลำภู", amphoe: "โนนสัง", district: "โนนสัง", zipcode: "39140" },
+      { province: "หนองบัวลำภู", amphoe: "ศรีบุญเรือง", district: "เมืองใหม่", zipcode: "39180" },
+      { province: "หนองบัวลำภู", amphoe: "สุวรรณคูหา", district: "สุวรรณคูหา", zipcode: "39270" },
+      { province: "อ่างทอง", amphoe: "เมืองอ่างทอง", district: "ตลาดหลวง", zipcode: "14000" },
+      { province: "อ่างทอง", amphoe: "เมืองอ่างทอง", district: "บ้านแห", zipcode: "14000" },
+      { province: "อ่างทอง", amphoe: "ไชโย", district: "จรเข้ร้อง", zipcode: "14140" },
+      { province: "อ่างทอง", amphoe: "ป่าโมก", district: "ป่าโมก", zipcode: "14130" },
+      { province: "อ่างทอง", amphoe: "โพธิ์ทอง", district: "อ่างแก้ว", zipcode: "14120" },
+      { province: "อ่างทอง", amphoe: "วิเศษชัยชาญ", district: "ศาลเจ้าโรงทอง", zipcode: "14110" },
+      { province: "อ่างทอง", amphoe: "สามโก้", district: "สามโก้", zipcode: "14160" },
+      { province: "อำนาจเจริญ", amphoe: "เมืองอำนาจเจริญ", district: "บุ่ง", zipcode: "37000" },
+      { province: "อำนาจเจริญ", amphoe: "เมืองอำนาจเจริญ", district: "โนนหนามแท่ง", zipcode: "37000" },
+      { province: "อำนาจเจริญ", amphoe: "ชานุมาน", district: "คำเขื่อนแก้ว", zipcode: "37210" },
+      { province: "อำนาจเจริญ", amphoe: "ปทุมราชวงศา", district: "นาหว้า", zipcode: "37110" },
+      { province: "อำนาจเจริญ", amphoe: "พนา", district: "พระเหลา", zipcode: "37180" },
+      { province: "อำนาจเจริญ", amphoe: "ลืออำนาจ", district: "อำนาจ", zipcode: "37120" },
+      { province: "อำนาจเจริญ", amphoe: "หัวตะพาน", district: "หัวตะพาน", zipcode: "37240" },
+      { province: "อำนาจเจริญ", amphoe: "เสนางคนิคม", district: "เสนางคนิคม", zipcode: "37290" },
+      { province: "อุดรธานี", amphoe: "เมืองอุดรธานี", district: "หมากแข้ง", zipcode: "41000" },
+      { province: "อุดรธานี", amphoe: "เมืองอุดรธานี", district: "สามพร้าว", zipcode: "41000" },
+      { province: "อุดรธานี", amphoe: "เมืองอุดรธานี", district: "หนองบัว", zipcode: "41000" },
+      { province: "อุดรธานี", amphoe: "กุดจับ", district: "กุดจับ", zipcode: "41250" },
+      { province: "อุดรธานี", amphoe: "กุมภวาปี", district: "ตูมใต้", zipcode: "41110" },
+      { province: "อุดรธานี", amphoe: "กู่แก้ว", district: "บ้านเชียง", zipcode: "41130" },
+      { province: "อุดรธานี", amphoe: "ไชยวาน", district: "ไชยวาน", zipcode: "41290" },
+      { province: "อุดรธานี", amphoe: "ทุ่งฝน", district: "ทุ่งฝน", zipcode: "41310" },
+      { province: "อุดรธานี", amphoe: "นายูง", district: "นายูง", zipcode: "41380" },
+      { province: "อุดรธานี", amphoe: "น้ำโสม", district: "น้ำโสม", zipcode: "41210" },
+      { province: "อุดรธานี", amphoe: "โนนสะอาด", district: "โนนสะอาด", zipcode: "41240" },
+      { province: "อุดรธานี", amphoe: "บ้านดุง", district: "ศรีสุทโธ", zipcode: "41190" },
+      { province: "อุดรธานี", amphoe: "บ้านผือ", district: "บ้านผือ", zipcode: "41160" },
+      { province: "อุดรธานี", amphoe: "ประจักษ์ศิลปาคม", district: "ห้วยสามพาด", zipcode: "41110" },
+      { province: "อุดรธานี", amphoe: "เพ็ญ", district: "เพ็ญ", zipcode: "41150" },
+      { province: "อุดรธานี", amphoe: "พิบูลย์รักษ์", district: "บ้านแดง", zipcode: "41130" },
+      { province: "อุดรธานี", amphoe: "วังสามหมอ", district: "วังสามหมอ", zipcode: "41280" },
+      { province: "อุดรธานี", amphoe: "ศรีธาตุ", district: "ศรีธาตุ", zipcode: "41230" },
+      { province: "อุดรธานี", amphoe: "หนองวัวซอ", district: "หนองอ้อ", zipcode: "41220" },
+      { province: "อุดรธานี", amphoe: "หนองหาน", district: "หนองหาน", zipcode: "41130" },
+      { province: "อุตรดิตถ์", amphoe: "เมืองอุตรดิตถ์", district: "ท่าอิฐ", zipcode: "53000" },
+      { province: "อุตรดิตถ์", amphoe: "เมืองอุตรดิตถ์", district: "ท่าเสา", zipcode: "53000" },
+      { province: "อุตรดิตถ์", amphoe: "ทองแสนขัน", district: "น้ำพี้", zipcode: "53230" },
+      { province: "อุตรดิตถ์", amphoe: "ท่าปลา", district: "ท่าปลา", zipcode: "53190" },
+      { province: "อุตรดิตถ์", amphoe: "น้ำปาด", district: "แสนตอ", zipcode: "53110" },
+      { province: "อุตรดิตถ์", amphoe: "บ้านโคก", district: "บ้านโคก", zipcode: "53180" },
+      { province: "อุตรดิตถ์", amphoe: "พิชัย", district: "ในเมือง", zipcode: "53120" },
+      { province: "อุตรดิตถ์", amphoe: "ฟากท่า", district: "ฟากท่า", zipcode: "53160" },
+      { province: "อุตรดิตถ์", amphoe: "ลับแล", district: "ศรีพนมมาศ", zipcode: "53210" },
+      { province: "อุทัยธานี", amphoe: "เมืองอุทัยธานี", district: "อุทัยใหม่", zipcode: "61000" },
+      { province: "อุทัยธานี", amphoe: "เมืองอุทัยธานี", district: "สะแกกรัง", zipcode: "61000" },
+      { province: "อุทัยธานี", amphoe: "ทัพทัน", district: "ทัพทัน", zipcode: "61120" },
+      { province: "อุทัยธานี", amphoe: "บ้านไร่", district: "บ้านไร่", zipcode: "61140" },
+      { province: "อุทัยธานี", amphoe: "ลานสัก", district: "ประดู่ยืน", zipcode: "61160" },
+      { province: "อุทัยธานี", amphoe: "สว่างอารมณ์", district: "สว่างอารมณ์", zipcode: "61150" },
+      { province: "อุทัยธานี", amphoe: "หนองขาหย่าง", district: "หนองขาหย่าง", zipcode: "61130" },
+      { province: "อุทัยธานี", amphoe: "หนองฉาง", district: "หนองฉาง", zipcode: "61110" },
+      { province: "อุบลราชธานี", amphoe: "เมืองอุบลราชธานี", district: "ในเมือง", zipcode: "34000" },
+      { province: "อุบลราชธานี", amphoe: "เมืองอุบลราชธานี", district: "แจระแม", zipcode: "34000" },
+      { province: "อุบลราชธานี", amphoe: "เมืองอุบลราชธานี", district: "ขามใหญ่", zipcode: "34000" },
+      { province: "อุบลราชธานี", amphoe: "กุดข้าวปุ้น", district: "ข้าวปุ้น", zipcode: "34270" },
+      { province: "อุบลราชธานี", amphoe: "เขมราฐ", district: "เขมราฐ", zipcode: "34170" },
+      { province: "อุบลราชธานี", amphoe: "เขื่องใน", district: "เขื่องใน", zipcode: "34150" },
+      { province: "อุบลราชธานี", amphoe: "โขงเจียม", district: "โขงเจียม", zipcode: "34220" },
+      { province: "อุบลราชธานี", amphoe: "ดอนมดแดง", district: "ดอนมดแดง", zipcode: "34290" },
+      { province: "อุบลราชธานี", amphoe: "เดชอุดม", district: "เมืองเดช", zipcode: "34160" },
+      { province: "อุบลราชธานี", amphoe: "ตระการพืชผล", district: "ขุหลุ", zipcode: "34130" },
+      { province: "อุบลราชธานี", amphoe: "ตาลสุม", district: "ตาลสุม", zipcode: "34330" },
+      { province: "อุบลราชธานี", amphoe: "ทุ่งศรีอุดม", district: "โคกชำแระ", zipcode: "34160" },
+      { province: "อุบลราชธานี", amphoe: "นาจะหลวย", district: "นาจะหลวย", zipcode: "34280" },
+      { province: "อุบลราชธานี", amphoe: "นาตาล", district: "นาตาล", zipcode: "34170" },
+      { province: "อุบลราชธานี", amphoe: "นาเยีย", district: "นาเยีย", zipcode: "34160" },
+      { province: "อุบลราชธานี", amphoe: "น้ำขุ่น", district: "ตาเกา", zipcode: "34260" },
+      { province: "อุบลราชธานี", amphoe: "น้ำยืน", district: "โซง", zipcode: "34260" },
+      { province: "อุบลราชธานี", amphoe: "บุณฑริก", district: "โพนงาม", zipcode: "34230" },
+      { province: "อุบลราชธานี", amphoe: "พิบูลมังสาหาร", district: "พิบูล", zipcode: "34110" },
+      { province: "อุบลราชธานี", amphoe: "ม่วงสามสิบ", district: "ม่วงสามสิบ", zipcode: "34140" },
+      { province: "อุบลราชธานี", amphoe: "วารินชำราบ", district: "วารินชำราบ", zipcode: "34190" },
+      { province: "อุบลราชธานี", amphoe: "วารินชำราบ", district: "แสนสุข", zipcode: "34190" },
+      { province: "อุบลราชธานี", amphoe: "ศรีเมืองใหม่", district: "นาคำ", zipcode: "34250" },
+      { province: "อุบลราชธานี", amphoe: "สำโรง", district: "สำโรง", zipcode: "34360" },
+      { province: "อุบลราชธานี", amphoe: "สิรินธร", district: "คำเขื่อนแก้ว", zipcode: "34350" },
+      { province: "อุบลราชธานี", amphoe: "สว่างวีระวงศ์", district: "ท่าช้าง", zipcode: "34190" }
+    ];
+
+    // โครงสร้างหลักของกรุงเทพมหานครก่อนโหลดข้อมูลครบทั่วไทยจากฐานข้อมูลสาธารณะ
+    const FULL_THAILAND_GEO_SEED = {
+      "กรุงเทพมหานคร": {
+        "พระนคร": { "พระบรมมหาราชวัง": ["10200"], "วังบูรพาภิรมย์": ["10200"], "วัดราชบพิธ": ["10200"], "สำราญราษฎร์": ["10200"], "ศาลเจ้าพ่อเสือ": ["10200"], "เสาชิงช้า": ["10200"], "บวรนิเวศ": ["10200"], "ตลาดยอด": ["10200"], "ชนะสงคราม": ["10200"], "บ้านพานถม": ["10200"], "บางขุนพรหม": ["10200"], "วัดสามพระยา": ["10200"] },
+        "ดุสิต": { "ดุสิต": ["10300"], "วชิรพยาบาล": ["10300"], "สวนจิตรลดา": ["10300"], "สี่แยกมหานาค": ["10300"], "ถนนนครไชยศรี": ["10300"] },
+        "หนองจอก": { "กระทุ่มราย": ["10530"], "หนองจอก": ["10530"], "คลองสิบ": ["10530"], "คลองสิบสอง": ["10530"], "โคกแฝด": ["10530"], "คู้ฝั่งเหนือ": ["10530"], "ลำผักชี": ["10530"], "ลำต้อยติ่ง": ["10530"] },
+        "บางรัก": { "มหาพฤฒาราม": ["10500"], "สีลม": ["10500"], "สุริยวงศ์": ["10500"], "บางรัก": ["10500"], "สี่พระยา": ["10500"] },
+        "บางเขน": { "อนุสาวรีย์": ["10220"], "ท่าแร้ง": ["10220"] },
+        "บางกะปิ": { "คลองจั่น": ["10240"], "หัวหมาก": ["10240"] },
+        "ปทุมวัน": { "วังใหม่": ["10330"], "ปทุมวัน": ["10330"], "รองเมือง": ["10330"], "ลุมพินี": ["10330"] },
+        "ป้อมปราบศัตรูพ่าย": { "ป้อมปราบ": ["10100"], "วัดเทพศิรินทร์": ["10100"], "คลองมหานาค": ["10100"], "บ้านบาตร": ["10100"], "วัดโสมนัส": ["10100"] },
+        "พระโขนง": { "บางจาก": ["10260"], "พระโขนงใต้": ["10260"] },
+        "มีนบุรี": { "มีนบุรี": ["10510"], "แสนแสบ": ["10510"] },
+        "ลาดกระบัง": { "ลาดกระบัง": ["10520"], "คลองสองต้นนุ่น": ["10520"], "คลองสามประเวศ": ["10520"], "ลำปลาทิว": ["10520"], "ทับยาว": ["10520"], "ขุมทอง": ["10520"] },
+        "ยานนาวา": { "ช่องนนทรี": ["10120"], "บางโพงพาง": ["10120"] },
+        "สัมพันธวงศ์": { "จักรวรรดิ": ["10100"], "สัมพันธวงศ์": ["10100"], "ตลาดน้อย": ["10100"] },
+        "พญาไท": { "สามเสนใน": ["10400"], "พญาไท": ["10400"] },
+        "ธนบุรี": { "วัดกัลยาณ์": ["10600"], "หิรัญรูจี": ["10600"], "บางยี่เรือ": ["10600"], "บุคคโล": ["10600"], "ตลาดพลู": ["10600"], "ดาวคะนอง": ["10600"], "สำเหร่": ["10600"] },
+        "บางกอกใหญ่": { "วัดอรุณ": ["10600"], "วัดท่าพระ": ["10600"] },
+        "ห้วยขวาง": { "ห้วยขวาง": ["10310"], "บางกะปิ": ["10310"], "สามเสนนอก": ["10310"] },
+        "คลองสาน": { "สมเด็จเจ้าพระยา": ["10600"], "คลองสาน": ["10600"], "บางลำภูล่าง": ["10600"], "คลองต้นไทร": ["10600"] },
+        "ตลิ่งชัน": { "คลองชักพระ": ["10170"], "ตลิ่งชัน": ["10170"], "ฉิมพลี": ["10170"], "บางพรม": ["10170"], "บางระมาด": ["10170"], "บางเชือกหนัง": ["10170"] },
+        "บางกอกน้อย": { "ศิริราช": ["10700"], "บ้านช่างหล่อ": ["10700"], "บางขุนนนท์": ["10700"], "บางขุนศรี": ["10700"], "อรุณอมรินทร์": ["10700"] },
+        "บางขุนเทียน": { "ท่าข้าม": ["10150"], "แสมดำ": ["10150"] },
+        "ภาษีเจริญ": { "บางหว้า": ["10160"], "บางด้วน": ["10160"], "บางจาก": ["10160"], "บางแวก": ["10160"], "คลองขวาง": ["10160"], "ปากคลองภาษีเจริญ": ["10160"], "คูหาสวรรค์": ["10160"] },
+        "หนองแขม": { "หนองแขม": ["10160"], "หนองค้างพลู": ["10160"] },
+        "ราษฎร์บูรณะ": { "ราษฎร์บูรณะ": ["10140"], "บางปะกอก": ["10140"] },
+        "บางพลัด": { "บางพลัด": ["10700"], "บางอ้อ": ["10700"], "บางบำหรุ": ["10700"], "บางยี่ขัน": ["10700"] },
+        "ดินแดง": { "ดินแดง": ["10400"], "รัชดาภิเษก": ["10400"] },
+        "บึงกุ่ม": { "คลองกุ่ม": ["10240"], "นวมินทร์": ["10240"], "นวจันทร์": ["10240"] },
+        "สาทร": { "ทุ่งมหาเมฆ": ["10120"], "ยานนาวา": ["10120"], "ทุ่งวัดดอน": ["10120"] },
+        "บางซื่อ": { "บางซื่อ": ["10800"], "วงศ์สว่าง": ["10800"] },
+        "จตุจักร": { "ลาดยาว": ["10900"], "เสนานิคม": ["10900"], "จันทรเกษม": ["10900"], "จอมพล": ["10900"], "จตุจักร": ["10900"] },
+        "บางคอแหลม": { "บางคอแหลม": ["10120"], "วัดพระยาไกร": ["10120"], "บางโคล่": ["10120"] },
+        "ประเวศ": { "ประเวศ": ["10250"], "หนองบอน": ["10250"], "ดอกไม้": ["10250"] },
+        "คลองเตย": { "คลองเตย": ["10110"], "คลองตัน": ["10110"], "พระโขนง": ["10110"] },
+        "สวนหลวง": { "สวนหลวง": ["10250"], "อ่อนนุช": ["10250"], "พัฒนาการ": ["10250"] },
+        "จอมทอง": { "บางขุนเทียน": ["10150"], "บางค้อ": ["10150"], "บางมด": ["10150"], "จอมทอง": ["10150"] },
+        "ดอนเมือง": { "สีกัน": ["10210"], "ดอนเมือง": ["10210"], "สนามบิน": ["10210"] },
+        "ราชเทวี": { "ทุ่งพญาไท": ["10400"], "ถนนพญาไท": ["10400"], "ถนนเพชรบุรี": ["10400"], "มักกะสัน": ["10400"] },
+        "ลาดพร้าว": { "ลาดพร้าว": ["10230"], "จรเข้บัว": ["10230"] },
+        "วัฒนา": { "คลองเตยเหนือ": ["10110"], "คลองตันเหนือ": ["10110"], "พระโขนงเหนือ": ["10110"] },
+        "บางแค": { "บางแค": ["10160"], "บางแคเหนือ": ["10160"], "บางไผ่": ["10160"], "หลักสอง": ["10160"] },
+        "หลักสี่": { "ทุ่งสองห้อง": ["10210"], "ตลาดบางเขน": ["10210"] },
+        "สายไหม": { "สายไหม": ["10220"], "ออเงิน": ["10220"], "คลองถนน": ["10220"] },
+        "คันนายาว": { "คันนายาว": ["10230"], "รามอินทรา": ["10230"] },
+        "สะพานสูง": { "สะพานสูง": ["10240"], "ราษฎร์พัฒนา": ["10240"], "ทับช้าง": ["10240"] },
+        "วังทองหลาง": { "วังทองหลาง": ["10310"], "สะพานสอง": ["10310"], "คลองเจ้าคุณสิงห์": ["10310"], "พลับพลา": ["10310"] },
+        "คลองสามวา": { "สามวาตะวันตก": ["10510"], "สามวาตะวันออก": ["10510"], "บางชัน": ["10510"], "ทรายกองดิน": ["10510"], "ทรายกองดินใต้": ["10510"] },
+        "บางนา": { "บางนาเหนือ": ["10260"], "บางนาใต้": ["10260"] },
+        "ทวีวัฒนา": { "ทวีวัฒนา": ["10170"], "ศาลาธรรมสพน์": ["10170"] },
+        "ทุ่งครุ": { "ทุ่งครุ": ["10140"], "บางมด": ["10140"] },
+        "บางบอน": { "บางบอนใต้": ["10150"], "บางบอนเหนือ": ["10150"], "คลองบางพราน": ["10150"], "คลองบางบอน": ["10150"] }
+      }
+    };
+
+    let geoTree = {};
+    let shippingRecords = [];
+    let uiMessageTimer = null;
+
+    // ป้องกัน XSS เมื่อนำค่าจากภายนอกมาแสดงผลบน DOM
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    // แสดงกล่องข้อความแจ้งเตือนแบบไม่ใช้ alert()
+    function showUiMessage(text, type = "success") {
+      const banner = document.getElementById("ui-message-banner");
+      const textEl = document.getElementById("ui-message-text");
+      const iconEl = document.getElementById("ui-message-icon");
+      if (!banner || !textEl || !iconEl) return;
+
+      textEl.textContent = text;
+      if (type === "error") {
+        iconEl.className = "fa-solid fa-circle-exclamation text-rose-400 text-lg mt-0.5 shrink-0";
+      } else if (type === "warning") {
+        iconEl.className = "fa-solid fa-triangle-exclamation text-amber-400 text-lg mt-0.5 shrink-0";
+      } else {
+        iconEl.className = "fa-solid fa-circle-check text-emerald-400 text-lg mt-0.5 shrink-0";
+      }
+
+      banner.classList.remove("hidden");
+      if (uiMessageTimer) clearTimeout(uiMessageTimer);
+      uiMessageTimer = setTimeout(hideUiMessage, 4500);
+    }
+
+    function hideUiMessage() {
+      const banner = document.getElementById("ui-message-banner");
+      if (banner) banner.classList.add("hidden");
+    }
+
+    function normalizeName(rawValue) {
+      return String(rawValue || "")
+        .replace(/^(จังหวัด|จ\.|กรุงเทพมหานคร\s*|เขต|อำเภอ|อ\.|แขวง|ตำบล|ต\.)+/g, "")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function mergeGeoTrees(baseTree, incomingTree) {
+      const merged = { ...baseTree };
+      Object.keys(incomingTree || {}).forEach((prov) => {
+        if (!merged[prov]) merged[prov] = {};
+        Object.keys(incomingTree[prov] || {}).forEach((dist) => {
+          if (!merged[prov][dist]) merged[prov][dist] = {};
+          Object.keys(incomingTree[prov][dist] || {}).forEach((sub) => {
+            const existingZips = merged[prov][dist][sub] || [];
+            const newZips = incomingTree[prov][dist][sub] || [];
+            merged[prov][dist][sub] = Array.from(new Set([...existingZips, ...newZips].filter(Boolean)));
+          });
+        });
+      });
+      return merged;
+    }
+
+    function buildGeoTreeFromRows(rows) {
+      const tree = JSON.parse(JSON.stringify(FULL_THAILAND_GEO_SEED));
+      rows.forEach((item) => {
+        const prov = normalizeName(item.province || item.Province_Thai || item.province_name);
+        const distRaw = String(item.amphoe || item.district || item.Amphoe_Thai || item.district_name || "").trim();
+        const subRaw = String(item.district_name || item.district || item.tambon || item.Tambon_Thai || item.subdistrict || "").trim();
+        const zip = String(item.zipcode || item.Zipcode || item.zip || "").trim();
+
+        const dist = normalizeName(distRaw);
+        const sub = normalizeName(subRaw);
+
+        if (!prov || !dist || !sub) return;
+
+        if (!tree[prov]) tree[prov] = {};
+        if (!tree[prov][dist]) tree[prov][dist] = {};
+        if (!tree[prov][dist][sub]) tree[prov][dist][sub] = [];
+        if (zip && !tree[prov][dist][sub].includes(zip)) {
+          tree[prov][dist][sub].push(zip);
+        }
+      });
+      return tree;
+    }
+
+    function readGeoCache() {
+      try {
+        const raw = localStorage.getItem(GEO_CACHE_KEY);
+        if (!raw) return null;
+        const parsed = JSON.parse(raw);
+        if (!parsed || !parsed.savedAt || !parsed.tree) return null;
+        if (Date.now() - parsed.savedAt > GEO_CACHE_TTL_MS) return null;
+        const provCount = Object.keys(parsed.tree).length;
+        if (provCount < 70) return null;
+        return parsed.tree;
+      } catch (_) {
+        return null;
+      }
+    }
+
+    function writeGeoCache(tree) {
+      try {
+        localStorage.setItem(GEO_CACHE_KEY, JSON.stringify({
+          savedAt: Date.now(),
+          tree
+        }));
+      } catch (_) {}
+    }
+
+    async function loadThailandGeoData() {
+      const badge = document.getElementById("address-dataset-badge");
+      const note = document.getElementById("geo-cache-source-note");
+
+      const cachedTree = readGeoCache();
+      if (cachedTree && Object.keys(cachedTree).length >= 70) {
+        geoTree = cachedTree;
+        populateProvinceSelect();
+        const provCount = Object.keys(geoTree).length;
+        if (badge) {
+          badge.innerHTML = `<i class="fa-solid fa-bolt mr-1"></i>พร้อมใช้งานครบ ${provCount} จังหวัดทั่วไทย (แคช)`;
+        }
+        if (note) note.textContent = "LocalStorage Cache Active";
+        return;
+      }
+
+      for (let i = 0; i < THAI_GEO_URLS.length; i++) {
+        const url = THAI_GEO_URLS[i];
+        try {
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 8000);
+          const res = await fetch(url, { signal: controller.signal });
+          clearTimeout(timeoutId);
+          if (!res.ok) continue;
+          const data = await res.json();
+          const rows = Array.isArray(data) ? data : (Array.isArray(data?.data) ? data.data : []);
+          const built = buildGeoTreeFromRows(rows);
+          if (Object.keys(built).length >= 70) {
+            geoTree = built;
+            writeGeoCache(built);
+            populateProvinceSelect();
+            const provCount = Object.keys(geoTree).length;
+            if (badge) {
+              badge.innerHTML = `<i class="fa-solid fa-location-dot mr-1"></i>พร้อมใช้งานครบ ${provCount} จังหวัดทั่วไทย`;
+            }
+            if (note) note.textContent = i === 0 ? "Source: jsDelivr CDN (ครบทั่วไทย)" : `Source #${i + 1} (ครบทั่วไทย)`;
+            return;
+          }
+        } catch (_) {}
+      }
+
+      geoTree = mergeGeoTrees(FULL_THAILAND_GEO_SEED, buildGeoTreeFromRows(FALLBACK_GEO_ROWS));
+      populateProvinceSelect();
+      const provCount = Object.keys(geoTree).length;
+      if (badge) {
+        badge.innerHTML = `<i class="fa-solid fa-location-dot mr-1"></i>พร้อมใช้งานครบ ${provCount} จังหวัดทั่วไทย (โหมดพร้อมใช้งาน)`;
+      }
+      if (note) note.textContent = "Built-in 77 Provinces Active";
+    }
+
+    function populateProvinceSelect() {
+      const provSel = document.getElementById("addr_province");
+      provSel.innerHTML = '<option value="" disabled selected>-- เลือกจังหวัด --</option>';
+      const provinces = Object.keys(geoTree).sort((a, b) => a.localeCompare(b, "th"));
+      provinces.forEach((prov) => {
+        const opt = document.createElement("option");
+        opt.value = prov;
+        opt.textContent = prov;
+        provSel.appendChild(opt);
+      });
+    }
+
+    function handleProvinceChange() {
+      const prov = document.getElementById("addr_province").value;
+      const distSel = document.getElementById("addr_district");
+      const subSel = document.getElementById("addr_subdistrict");
+      const zipSel = document.getElementById("addr_zipcode_select");
+      const zipHidden = document.getElementById("addr_zipcode");
+
+      distSel.innerHTML = `<option value="" disabled selected>-- เลือก${prov === "กรุงเทพมหานคร" ? "เขต" : "อำเภอ"} --</option>`;
+      subSel.innerHTML = `<option value="" disabled selected>-- เลือก${prov === "กรุงเทพมหานคร" ? "แขวง" : "ตำบล"} --</option>`;
+      zipSel.innerHTML = '<option value="" disabled selected>-- เลือกรหัสไปรษณีย์ --</option>';
+      zipHidden.value = "";
+
+      if (prov && geoTree[prov]) {
+        const districts = Object.keys(geoTree[prov]).sort((a, b) => a.localeCompare(b, "th"));
+        districts.forEach((dist) => {
+          const opt = document.createElement("option");
+          opt.value = dist;
+          opt.textContent = prov === "กรุงเทพมหานคร" ? `เขต${dist}` : dist;
+          distSel.appendChild(opt);
+        });
+      }
+      updateFullAddressPreview();
+    }
+
+    function handleDistrictChange() {
+      const prov = document.getElementById("addr_province").value;
+      const dist = document.getElementById("addr_district").value;
+      const subSel = document.getElementById("addr_subdistrict");
+      const zipSel = document.getElementById("addr_zipcode_select");
+      const zipHidden = document.getElementById("addr_zipcode");
+
+      subSel.innerHTML = `<option value="" disabled selected>-- เลือก${prov === "กรุงเทพมหานคร" ? "แขวง" : "ตำบล"} --</option>`;
+      zipSel.innerHTML = '<option value="" disabled selected>-- เลือกรหัสไปรษณีย์ --</option>';
+      zipHidden.value = "";
+
+      if (prov && dist && geoTree[prov]?.[dist]) {
+        const subdistricts = Object.keys(geoTree[prov][dist]).sort((a, b) => a.localeCompare(b, "th"));
+        subdistricts.forEach((sub) => {
+          const opt = document.createElement("option");
+          opt.value = sub;
+          opt.textContent = prov === "กรุงเทพมหานคร" ? `แขวง${sub}` : sub;
+          subSel.appendChild(opt);
+        });
+      }
+      updateFullAddressPreview();
+    }
+
+    function toggleManualGeoFields(forceOpen = false) {
+      const subSel = document.getElementById("addr_subdistrict");
+      const subManual = document.getElementById("addr_subdistrict_manual");
+      const zipSel = document.getElementById("addr_zipcode_select");
+      const zipManual = document.getElementById("addr_zipcode_manual");
+      const btn = document.getElementById("btn-toggle-manual-geo");
+      if (!subManual || !zipManual) return;
+
+      const isOpen = !subManual.classList.contains("hidden");
+      const shouldOpen = forceOpen ? true : !isOpen;
+
+      if (shouldOpen) {
+        subManual.classList.remove("hidden");
+        zipManual.classList.remove("hidden");
+        subSel.required = false;
+        if (btn) btn.textContent = "กลับไปใช้แบบเลือกจากรายการ";
+      } else {
+        subManual.classList.add("hidden");
+        zipManual.classList.add("hidden");
+        subSel.required = true;
+        if (btn) btn.textContent = "พิมพ์ระบุแขวง/ตำบล และรหัสไปรษณีย์เอง";
+      }
+      updateFullAddressPreview();
+    }
+
+    function handleManualSubdistrictInput() {
+      const subManual = document.getElementById("addr_subdistrict_manual");
+      const subSel = document.getElementById("addr_subdistrict");
+      if (subManual && subManual.value.trim() && subSel) {
+        subSel.value = "";
+      }
+      updateFullAddressPreview();
+    }
+
+    function handleManualZipcodeInput() {
+      const zipManual = document.getElementById("addr_zipcode_manual");
+      const zipHidden = document.getElementById("addr_zipcode");
+      const zipSel = document.getElementById("addr_zipcode_select");
+      if (!zipManual || !zipHidden) return;
+      const digitsOnly = zipManual.value.replace(/\D/g, "").slice(0, 5);
+      zipManual.value = digitsOnly;
+      zipHidden.value = digitsOnly;
+      if (digitsOnly && zipSel) zipSel.value = "";
+      updateFullAddressPreview();
+    }
+
+    function handleSubdistrictChange() {
+      const prov = document.getElementById("addr_province").value;
+      const dist = document.getElementById("addr_district").value;
+      const sub = document.getElementById("addr_subdistrict").value;
+      const zipSel = document.getElementById("addr_zipcode_select");
+      const zipHidden = document.getElementById("addr_zipcode");
+
+      zipSel.innerHTML = '<option value="" disabled selected>-- เลือกรหัสไปรษณีย์ --</option>';
+      zipHidden.value = "";
+
+      if (prov && dist && sub && geoTree[prov]?.[dist]?.[sub]) {
+        const zips = Array.from(geoTree[prov][dist][sub]).sort();
+        zips.forEach((z) => {
+          const opt = document.createElement("option");
+          opt.value = z;
+          opt.textContent = z;
+          zipSel.appendChild(opt);
+        });
+        if (zips.length === 1) {
+          zipSel.value = zips[0];
+          zipHidden.value = zips[0];
+        }
+      }
+      updateFullAddressPreview();
+    }
+
+    function handleZipcodeSelectChange() {
+      const zipSel = document.getElementById("addr_zipcode_select");
+      document.getElementById("addr_zipcode").value = zipSel.value || "";
+      updateFullAddressPreview();
+    }
+
+    function updateFullAddressPreview() {
+      const house = (document.getElementById("addr_house_no")?.value || "").trim();
+      const details = (document.getElementById("addr_details")?.value || "").trim();
+      const prov = (document.getElementById("addr_province")?.value || "").trim();
+      const dist = (document.getElementById("addr_district")?.value || "").trim();
+      const subSelected = (document.getElementById("addr_subdistrict")?.value || "").trim();
+      const subManual = (document.getElementById("addr_subdistrict_manual")?.value || "").trim();
+      const sub = subSelected || subManual;
+      const zip = (document.getElementById("addr_zipcode")?.value || "").trim();
+
+      const subFormatted = sub ? (prov === "กรุงเทพมหานคร" ? `แขวง${sub}` : `ต.${sub}`) : "";
+      const distFormatted = dist ? (prov === "กรุงเทพมหานคร" ? `เขต${dist}` : `อ.${dist}`) : "";
+      const provFormatted = prov ? (prov === "กรุงเทพมหานคร" ? prov : `จ.${prov}`) : "";
+
+      const combined = [house, details, subFormatted, distFormatted, provFormatted, zip]
+        .filter(Boolean)
+        .join(" ");
+
+      const previewEl = document.getElementById("full-address-preview");
+      const hiddenAddressEl = document.getElementById("address");
+
+      if (hiddenAddressEl) hiddenAddressEl.value = combined;
+      if (previewEl) {
+        if (combined) {
+          previewEl.textContent = combined;
+          previewEl.classList.remove("italic", "text-slate-800");
+          previewEl.classList.add("not-italic", "font-bold", "text-slate-950");
+        } else {
+          previewEl.textContent = "-- กรุณากรอกข้อมูลที่อยู่ด้านบนให้ครบถ้วน --";
+          previewEl.classList.add("italic", "text-slate-800");
+          previewEl.classList.remove("not-italic", "font-bold", "text-slate-950");
+        }
+      }
+    }
+
+    function handleCardTypeChange() {
+      const selected = document.querySelector('input[name="card_type"]:checked')?.value || "สมัครสมาชิกใหม่ 769 บาท";
+      const labelNew = document.getElementById("label-card-new");
+      const labelLost = document.getElementById("label-card-lost");
+      const boxLostProof = document.getElementById("box-lost-proof");
+      const lostInput = document.getElementById("lost_proof");
+      const badge = document.getElementById("payment-amount-badge");
+      const summaryText = document.getElementById("summary-card-text");
+
+      if (selected.includes("200")) {
+        labelLost.className = "border-2 border-amber-500 bg-amber-50/40 rounded-2xl p-4 cursor-pointer hover:border-amber-600 transition flex items-center justify-between gap-3";
+        labelNew.className = "border-2 border-slate-200 bg-white rounded-2xl p-4 cursor-pointer hover:border-amber-500 transition flex items-center justify-between gap-3";
+        boxLostProof.classList.remove("hidden");
+        if (lostInput) lostInput.required = true;
+        if (badge) badge.textContent = "ยอดโอน: 200 บาท";
+        if (summaryText) summaryText.textContent = "บัตรหาย / ชำรุด 200 บาท (ออกบัตรทดแทน)";
+      } else {
+        labelNew.className = "border-2 border-amber-500 bg-amber-50/40 rounded-2xl p-4 cursor-pointer hover:border-amber-600 transition flex items-center justify-between gap-3";
+        labelLost.className = "border-2 border-slate-200 bg-white rounded-2xl p-4 cursor-pointer hover:border-amber-500 transition flex items-center justify-between gap-3";
+        boxLostProof.classList.add("hidden");
+        if (lostInput) {
+          lostInput.required = false;
+          lostInput.value = "";
+        }
+        document.getElementById("preview-lost-proof")?.classList.add("hidden");
+        if (badge) badge.textContent = "ยอดโอน: 769 บาท";
+        if (summaryText) summaryText.textContent = "สมัครสมาชิกใหม่ 769 บาท (รวมค่าเคลือบใส & จัดส่ง)";
+      }
+    }
+
+    function renderFilePreview(input, previewId) {
+      const box = document.getElementById(previewId);
+      if (!box) return;
+      const file = input.files?.[0];
+      if (!file) {
+        box.classList.add("hidden");
+        box.innerHTML = "";
+        return;
+      }
+      box.classList.remove("hidden");
+      box.innerHTML = `<span class="inline-block text-xs font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-lg"><i class="fa-solid fa-check mr-1"></i>เลือกไฟล์แล้ว: ${escapeHtml(file.name)}</span>`;
+    }
+
+    function copyBankAccount(acc) {
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(acc).catch(() => {});
+        } else {
+          const tempInput = document.createElement("input");
+          tempInput.value = acc;
+          document.body.appendChild(tempInput);
+          tempInput.select();
+          document.execCommand("copy");
+          document.body.removeChild(tempInput);
+        }
+      } catch (_) {}
+      showUiMessage("คัดลอกเลขที่บัญชี 773-2-29853-5 เรียบร้อยแล้วครับ", "success");
+    }
+
+    function switchNavTab(tab) {
+      const regSec = document.getElementById("section-register");
+      const shipSec = document.getElementById("section-shipping");
+      const btnReg = document.getElementById("btn-nav-register");
+      const btnShip = document.getElementById("btn-nav-shipping");
+
+      if (tab === "register") {
+        regSec.classList.remove("hidden");
+        shipSec.classList.add("hidden");
+        btnReg.className = "flex-1 sm:flex-initial px-3.5 py-2.5 sm:px-5 sm:py-3 rounded-2xl transition-all flex items-center justify-center gap-2 bg-slate-900 text-amber-400 shadow-md hover:bg-slate-800";
+        btnShip.className = "flex-1 sm:flex-initial px-3.5 py-2.5 sm:px-5 sm:py-3 rounded-2xl transition-all flex items-center justify-center gap-2 text-slate-700 hover:bg-slate-100 border border-slate-200 hover:border-slate-300";
+      } else {
+        regSec.classList.add("hidden");
+        shipSec.classList.remove("hidden");
+        btnShip.className = "flex-1 sm:flex-initial px-3.5 py-2.5 sm:px-5 sm:py-3 rounded-2xl transition-all flex items-center justify-center gap-2 bg-slate-900 text-amber-400 shadow-md hover:bg-slate-800";
+        btnReg.className = "flex-1 sm:flex-initial px-3.5 py-2.5 sm:px-5 sm:py-3 rounded-2xl transition-all flex items-center justify-center gap-2 text-slate-700 hover:bg-slate-100 border border-slate-200 hover:border-slate-300";
+        renderShippingTable();
+      }
+    }
+
+    function populateRoundFilterOptions() {
+      const sel = document.getElementById("shipping-round-filter");
+      if (!sel) return;
+      sel.innerHTML = '<option value="ALL">แสดงทุกรอบการจัดส่ง</option>';
+      SHIPPING_ROUNDS.forEach((r) => {
+        const opt = document.createElement("option");
+        opt.value = r;
+        opt.textContent = r;
+        sel.appendChild(opt);
+      });
+    }
+
+    function maskPhoneNumber(phone) {
+      const digits = String(phone || "").replace(/\D/g, "");
+      if (digits.length < 7) return phone || "-";
+      return digits.slice(0, 3) + "xxx" + digits.slice(-3);
+    }
+
+    function getStepIndexFromStatus(statusText) {
+      const s = String(statusText || "").trim();
+      if (s.includes("จัดส่งแล้ว")) return 4;
+      if (s.includes("กำลังดำเนินการ")) return 3;
+      if (s.includes("ยืนยันรับออเดอร์แล้ว")) return 2;
+      return 1;
+    }
+
+    function searchStatusTrack() {
+      const q = (document.getElementById("input-search-track")?.value || "").trim().toLowerCase();
+      const container = document.getElementById("tracking-result-container");
+      if (!container) return;
+
+      if (!q) {
+        container.classList.remove("hidden");
+        container.innerHTML = '<p class="text-xs sm:text-sm text-rose-600 font-semibold">กรุณากรอกรหัสอ้างอิง ชื่อ-นามสกุล หรือเบอร์โทรศัพท์ก่อนค้นหาครับ</p>';
+        return;
+      }
+
+      const found = shippingRecords.find((r) => {
+        const refCode = String(r["รหัสอ้างอิง"] || r.refCode || "").toLowerCase();
+        const name = String(r["ชื่อและนามสกุล"] || r.fullname || r.fullName || "").toLowerCase();
+        const phone = String(r["เบอร์โทรศัพท์"] || r.phone || "").toLowerCase();
+        return refCode.includes(q) || name.includes(q) || phone.includes(q);
+      });
+
+      container.classList.remove("hidden");
+      if (!found) {
+        container.innerHTML = '<p class="text-xs sm:text-sm text-slate-600">ไม่พบข้อมูลรายการที่ค้นหา กรุณาตรวจสอบคำค้นหาหรือลองใหม่อีกครั้งครับ</p>';
+        return;
+      }
+
+      const fullName = escapeHtml(found["ชื่อและนามสกุล"] || found.fullname || found.fullName || "-");
+      const status = escapeHtml(found["สถานะการดำเนินการ"] || found.status || "ทำรายการแล้ว");
+      const roundText = escapeHtml(found["รอบการจัดส่ง"] || found.roundDate || "-");
+      const trackingNo = escapeHtml(found["เลขพัสดุ"] || found.trackingNo || "รอจัดส่ง");
+      const step = getStepIndexFromStatus(status);
+
+      const steps = ["ทำรายการแล้ว", "ยืนยันรับออเดอร์แล้ว", "กำลังดำเนินการ", "จัดส่งแล้ว"];
+      const stepsHtml = steps.map((label, idx) => {
+        const active = (idx + 1) <= step;
+        return `
+          <div class="rounded-xl p-3 border ${active ? "bg-amber-50 border-amber-400 text-slate-900" : "bg-white border-slate-200 text-slate-400"}">
+            <span class="text-[11px] font-bold block">ขั้นตอนที่ ${idx + 1}</span>
+            <span class="text-xs sm:text-sm font-extrabold">${escapeHtml(label)}</span>
+          </div>
+        `;
+      }).join("");
+
+      container.innerHTML = `
+        <div class="space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-3">
+            <div>
+              <p class="text-sm font-extrabold text-slate-900">${fullName}</p>
+              <p class="text-xs text-slate-600">รอบการจัดส่ง: <strong>${roundText}</strong> | เลขพัสดุ: <strong class="font-mono">${trackingNo}</strong></p>
+            </div>
+            <span class="text-xs font-bold px-3 py-1 rounded-full bg-amber-100 text-amber-900 w-fit">${status}</span>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">${stepsHtml}</div>
+        </div>
+      `;
+    }
+
+    async function fetchShippingDataFromSheet() {
+      const badge = document.getElementById("sheet-sync-status-badge");
+      try {
+        if (badge) badge.textContent = "กำลังซิงค์ข้อมูลชีต...";
+        const res = await fetch(GAS_WEB_APP_URL);
+        const data = await res.json();
+        const list = Array.isArray(data) ? data : (data.data || data.records || []);
+        shippingRecords = list.filter((item) => item && (item["ชื่อและนามสกุล"] || item.fullname || item.fullName));
+        if (badge) {
+          badge.textContent = `อัปเดตแล้ว (${shippingRecords.length} รายการ)`;
+          badge.className = "bg-emerald-100 text-emerald-800 text-xs font-semibold px-3 py-0.5 rounded-full";
+        }
+        renderShippingTable();
+      } catch (_) {
+        if (badge) {
+          badge.textContent = "ซิงค์ข้อมูลไม่สำเร็จ";
+          badge.className = "bg-rose-100 text-rose-800 text-xs font-semibold px-3 py-0.5 rounded-full";
+        }
+      }
+    }
+
+    function renderShippingTable() {
+      const tbody = document.getElementById("shipping-table-body");
+      if (!tbody) return;
+
+      const kw = (document.getElementById("shipping-search-input")?.value || "").trim().toLowerCase();
+      const selectedRound = document.getElementById("shipping-round-filter")?.value || "ALL";
+
+      const filtered = shippingRecords.filter((row) => {
+        const name = String(row["ชื่อและนามสกุล"] || row.fullname || row.fullName || "").toLowerCase();
+        const tracking = String(row["เลขพัสดุ"] || row.trackingNo || "").toLowerCase();
+        const roundVal = String(row["รอบการจัดส่ง"] || row.roundDate || "");
+        const matchKw = !kw || name.includes(kw) || tracking.includes(kw);
+        const matchRound = selectedRound === "ALL" || roundVal === selectedRound;
+        return matchKw && matchRound;
+      });
+
+      if (!filtered.length) {
+        tbody.innerHTML = '<tr><td colspan="5" class="px-4 py-6 text-center text-slate-500">ไม่พบข้อมูลการจัดส่งตามเงื่อนไขที่เลือก</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = filtered.slice(0, 150).map((row) => {
+        const fullName = escapeHtml(row["ชื่อและนามสกุล"] || row.fullname || row.fullName || "-");
+        const phone = escapeHtml(maskPhoneNumber(row["เบอร์โทรศัพท์"] || row.phone || ""));
+        const status = escapeHtml(row["สถานะการดำเนินการ"] || row.status || "ทำรายการแล้ว");
+        const roundVal = escapeHtml(row["รอบการจัดส่ง"] || row.roundDate || "-");
+        const tracking = escapeHtml(row["เลขพัสดุ"] || row.trackingNo || "-");
+        return `
+          <tr>
+            <td class="px-4 py-3 font-semibold text-slate-900 whitespace-nowrap">${fullName}</td>
+            <td class="px-4 py-3 text-slate-600 whitespace-nowrap">${phone}</td>
+            <td class="px-4 py-3 font-semibold text-amber-700 whitespace-nowrap">${status}</td>
+            <td class="px-4 py-3 text-slate-700 whitespace-nowrap">${roundVal}</td>
+            <td class="px-4 py-3 font-mono text-slate-800 whitespace-nowrap">${tracking}</td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    function readFileAsBase64(file) {
+      return new Promise((resolve, reject) => {
+        if (!file) return resolve("");
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    async function submitRegistrationForm(event) {
+      event.preventDefault();
+      updateFullAddressPreview();
+
+      const zipValue = (document.getElementById("addr_zipcode")?.value || "").trim();
+      if (!/^\d{5}$/.test(zipValue)) {
+        showUiMessage("กรุณาเลือกรหัสไปรษณีย์หรือกรอกรหัสไปรษณีย์ 5 หลักให้ถูกต้องครับ", "warning");
+        return;
+      }
+
+      const btn = document.getElementById("btn-submit-form");
+      const originalHtml = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>กำลังส่งข้อมูล...</span>';
+
+      try {
+        const userPhotoFile = document.getElementById("user_photo")?.files?.[0];
+        const slipPhotoFile = document.getElementById("slip_photo")?.files?.[0];
+        const lostProofFile = document.getElementById("lost_proof")?.files?.[0];
+
+        const [userPhotoBase64, slipPhotoBase64, lostProofBase64] = await Promise.all([
+          readFileAsBase64(userPhotoFile),
+          readFileAsBase64(slipPhotoFile),
+          readFileAsBase64(lostProofFile)
+        ]);
+
+        const cardType = document.querySelector('input[name="card_type"]:checked')?.value || "สมัครสมาชิกใหม่ 769 บาท";
+        const now = new Date();
+        const refCode = `PRM-${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, "0")}${String(now.getDate()).padStart(2, "0")}-${String(now.getHours()).padStart(2, "0")}${String(now.getMinutes()).padStart(2, "0")}${String(now.getSeconds()).padStart(2, "0")}`;
+
+        const payload = {
+          refCode,
+          cardType,
+          referrer: document.getElementById("referrer")?.value || "",
+          prefix: document.getElementById("prefix")?.value || "",
+          fullname: (document.getElementById("fullname")?.value || "").trim(),
+          phone: (document.getElementById("phone")?.value || "").trim(),
+          openchatName: (document.getElementById("openchat_name")?.value || "").trim(),
+          houseNo: (document.getElementById("addr_house_no")?.value || "").trim(),
+          addressDetails: (document.getElementById("addr_details")?.value || "").trim(),
+          province: document.getElementById("addr_province")?.value || "",
+          district: document.getElementById("addr_district")?.value || "",
+          subdistrict: (document.getElementById("addr_subdistrict")?.value || document.getElementById("addr_subdistrict_manual")?.value || "").trim(),
+          zipcode: zipValue,
+          address: (document.getElementById("address")?.value || "").trim(),
+          roundDate: "รอบวันที่ 11 ธันวาคม 2569",
+          status: "ทำรายการแล้ว",
+          userPhotoBase64,
+          slipPhotoBase64,
+          lostProofBase64
+        };
+
+        await fetch(GAS_WEB_APP_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        showUiMessage(`ส่งข้อมูลลงทะเบียนเรียบร้อยแล้ว! รหัสอ้างอิงของคุณคือ: ${refCode}`, "success");
+        document.getElementById("form-registration").reset();
+        document.getElementById("preview-user-photo")?.classList.add("hidden");
+        document.getElementById("preview-slip-photo")?.classList.add("hidden");
+        document.getElementById("preview-lost-proof")?.classList.add("hidden");
+        handleCardTypeChange();
+        handleProvinceChange();
+        setTimeout(fetchShippingDataFromSheet, 1500);
+      } catch (_) {
+        showUiMessage("เกิดข้อผิดพลาดในการส่งข้อมูล กรุณาลองใหม่อีกครั้งครับ", "error");
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = originalHtml;
+      }
+    }
+
+    populateRoundFilterOptions();
+    loadThailandGeoData();
+    fetchShippingDataFromSheet();
+  </script>
+</body>
+</html>  <style>
+    html, body {
+      font-family: 'Prompt', sans-serif;
+      background-color: #f8fafc;
+      max-width: 100%;
+      overflow-x: clip;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      height: 6px;
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    /* Dimensional Background Patterns */
+    .hero-glow-bg {
+      background: radial-gradient(circle at 20% 20%, rgba(245, 158, 11, 0.18) 0%, transparent 40%),
+                  radial-gradient(circle at 80% 80%, rgba(37, 99, 235, 0.28) 0%, transparent 50%),
+                  linear-gradient(135deg, #0f172a 0%, #1e293b 45%, #0f172a 80%, #030712 100%);
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+  </style>
+</head>
+<body class="text-slate-800 antialiased min-h-screen flex flex-col selection:bg-amber-400 selection:text-slate-950">
+
+  <!-- Non-blocking Toast / Status Message Box -->
+  <div id="ui-message-banner" class="hidden fixed bottom-5 right-5 z-50 max-w-sm w-[calc(100vw-2.5rem)] bg-slate-900 text-white border border-amber-400/50 rounded-2xl p-4 shadow-2xl transition-all">
+    <div class="flex items-start gap-3">
+      <i id="ui-message-icon" class="fa-solid fa-circle-check text-emerald-400 text-lg mt-0.5 shrink-0"></i>
+      <div class="text-xs sm:text-sm leading-relaxed flex-1 min-w-0 break-words" id="ui-message-text"></div>
+      <button type="button" onclick="hideUiMessage()" class="text-slate-400 hover:text-white shrink-0" aria-label="ปิดข้อความ">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- HEADER TOP BAR -->
+  <header class="bg-slate-950 text-slate-300 text-xs sm:text-sm py-2.5 px-4 border-b border-slate-800">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row md:justify-between md:items-center gap-2">
+      <div class="flex flex-wrap items-center gap-2 min-w-0">
+        <span class="bg-amber-500 text-slate-950 font-extrabold px-3 py-1 rounded-full text-xs shadow-md shrink-0">
+          <i class="fa-solid fa-car-side mr-1"></i> The Driver Thailand
+        </span>
+        <span class="text-slate-300 text-xs font-medium">บริการออกบัตรสมาชิกประเมศฐ์ และประสานงานเครือข่ายคนขับ</span>
+      </div>
+      <div class="flex flex-wrap items-center gap-2 sm:gap-3 text-xs sm:text-sm">
+        <span class="break-words"><i class="fa-solid fa-clock text-amber-400 mr-1.5"></i> รอบจัดส่งถัดไป: <strong id="top-next-round-text" class="text-amber-300 font-bold">รอบวันที่ 11 ธันวาคม 2569</strong></span>
+        <span class="text-slate-700 hidden sm:inline">|</span>
+        <span class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-semibold px-3 py-1 rounded-full inline-flex items-center gap-1.5 text-xs shrink-0">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span> เปิดรับสมัครออนไลน์ 24 ชม.
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAVIGATION BAR -->
+  <nav class="bg-white border-b border-slate-200 shadow-sm sticky top-0 z-40">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="flex flex-col lg:flex-row lg:justify-between py-3 lg:py-0 lg:min-h-20 gap-3 lg:items-center">
+        <!-- Logo Collaboration Badge -->
+        <div class="flex items-center justify-between gap-3 min-w-0">
+          <div class="flex items-center gap-3 min-w-0">
             <a href="https://aboutmeprocess.github.io/TheDriverThailand/" class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-slate-900 text-amber-400 flex items-center justify-center font-bold text-lg sm:text-xl shadow-lg border-2 border-amber-400/40 shrink-0 hover:scale-105 transition">
               <i class="fa-solid fa-id-badge"></i>
             </a>

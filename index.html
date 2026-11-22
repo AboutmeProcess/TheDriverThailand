@@ -477,6 +477,12 @@
     }
     .tdt-nav-btn.is-quick-register i { color: #ffffff; }
     .tdt-nav-btn.is-quick-register:hover i { color: #020617; }
+    .tdt-nav-btn.is-quick-check-code {
+      color: #5eead4;
+      border-color: rgba(45, 212, 191, 0.38);
+      background-color: rgba(19, 78, 74, 0.28);
+    }
+    .tdt-nav-btn.is-quick-check-code i { color: #2dd4bf; }
     .tdt-nav-btn.is-group-cat {
       color: #fcd34d;
       border-color: rgba(251, 191, 36, 0.38);
@@ -580,6 +586,11 @@
           <span>ลงทะเบียนสมาชิกใหม่</span>
         </a>
 
+        <a href="register.html" class="tdt-nav-btn is-quick-check-code">
+          <i class="fa-solid fa-users-viewfinder"></i>
+          <span>ตรวจสอบรหัสสมาชิก</span>
+        </a>
+
         <!-- หมวดหมู่บริการสมาชิก -->
         <div class="tdt-cat-dropdown-wrap" id="dropdown-member-cat">
           <button type="button" onclick="toggleNavDropdown('member', event)" id="btn-cat-member" aria-expanded="false" class="tdt-nav-btn is-member-cat">
@@ -590,16 +601,8 @@
           <div id="panel-cat-member" class="tdt-cat-menu-panel">
             <div class="tdt-cat-menu-header" style="background:rgba(6,78,59,0.55);color:#6ee7b7;border:1px solid rgba(16,185,129,0.25);">
               <span><i class="fa-solid fa-users"></i> หมวดหมู่บริการสมาชิก</span>
-              <span style="font-size:10px;opacity:0.85;">5 เมนู</span>
+              <span style="font-size:10px;opacity:0.85;">3 เมนู</span>
             </div>
-            <a href="register.html" class="tdt-cat-menu-link">
-              <span class="tdt-cat-menu-icon" style="background:rgba(16,185,129,0.16);color:#34d399;border:1px solid rgba(52,211,153,0.3);"><i class="fa-solid fa-users-viewfinder"></i></span>
-              <span><span class="tdt-cat-menu-title">ตรวจสอบรายชื่อ &amp; รหัสสมาชิก</span><span class="tdt-cat-menu-sub">ค้นหารหัสสมาชิก กติกา และ FAQ</span></span>
-            </a>
-            <a href="member_register.html" class="tdt-cat-menu-link">
-              <span class="tdt-cat-menu-icon" style="background:rgba(20,184,166,0.16);color:#2dd4bf;border:1px solid rgba(45,212,191,0.3);"><i class="fa-solid fa-file-signature"></i></span>
-              <span><span class="tdt-cat-menu-title">ลงทะเบียนสมาชิกใหม่</span><span class="tdt-cat-menu-sub">สมัครสมาชิกกลุ่มคนขับและผู้ปล่อยงาน</span></span>
-            </a>
             <a href="member_edit.html" class="tdt-cat-menu-link">
               <span class="tdt-cat-menu-icon" style="background:rgba(245,158,11,0.16);color:#fbbf24;border:1px solid rgba(251,191,36,0.3);"><i class="fa-solid fa-user-pen"></i></span>
               <span><span class="tdt-cat-menu-title">แก้ไขข้อมูลสมาชิกเดิม</span><span class="tdt-cat-menu-sub">แจ้งเปลี่ยนรถ ทะเบียน หรือข้อมูลติดต่อ</span></span>

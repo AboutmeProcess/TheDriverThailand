@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>แบบฟอร์มขอปลดล็อกห้อง Line OpenChat | The Driver Thailand</title>
+  <!-- โหลด Tailwind CSS สำหรับจัดเลย์เอาต์และการออกแบบ -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- โหลดฟอนต์ Prompt และ Inter จาก Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- โหลดไอคอน FontAwesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Prompt', 'Inter', 'sans-serif'],
+          },
+          colors: {
+            driver: {
+              50: '#fffbeb',
+              100: '#fef3c7',
+              400: '#fbbf24',
+              500: '#f59e0b',
+              600: '#d97706',
+              900: '#090d16',
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    html, body {
+      font-family: 'Prompt', 'Inter', sans-serif;
+      background-color: #f8fafc;
+      color: #0f172a;
+      max-width: 100%;
+      overflow-x: clip;
+    }
+    .hero-glow-bg {
+      background:
+        radial-gradient(circle at 18% 22%, rgba(245, 158, 11, 0.24) 0%, transparent 45%),
+        radial-gradient(circle at 82% 78%, rgba(244, 63, 94, 0.16) 0%, transparent 50%),
+        linear-gradient(135deg, #070a12 0%, #0f172a 52%, #172033 100%);
+    }
+    .gold-shimmer-text {
+      background: linear-gradient(90deg, #fde68a 0%, #fbbf24 35%, #f59e0b 65%, #fef08a 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: goldShimmer 5s linear infinite;
+    }
+    @keyframes goldShimmer {
+      to { background-position: 200% center; }
+    }
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-5px); }
+    }
+    @keyframes iconBouncePop {
+      0%, 100% { transform: translateY(0) scale(1); }
+      40% { transform: translateY(-6px) scale(1.12) rotate(-4deg); }
+      70% { transform: translateY(-2px) scale(1.04) rotate(3deg); }
+    }
+    .icon-float { animation: floatSlow 3.2s ease-in-out infinite; }
+    .group:hover .icon-bounce-hover,
+    .icon-bounce-hover:hover {
+      animation: iconBouncePop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* UNIFIED TOPMOST GLOBAL SITE NAVIGATION BAR */
+    .tdt-global-nav {
+      box-sizing: border-box;
+      font-family: 'Prompt', sans-serif;
+      background: linear-gradient(90deg, #060911 0%, #0d1322 50%, #060911 100%);
+      color: #e2e8f0;
+      border-bottom: 1px solid rgba(251, 191, 36, 0.25);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.35);
+      width: 100%;
+    }
+    .tdt-global-nav *, .tdt-global-nav *::before, .tdt-global-nav *::after {
+      box-sizing: border-box;
+    }
+    .tdt-global-nav-inner {
+      max-width: 1152px;
+      margin: 0 auto;
+      padding: 10px 16px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      min-height: 52px;
+    }
+    @media (min-width: 640px) {
+      .tdt-global-nav-inner {
+        padding: 10px 24px;
+      }
+    }
+    .tdt-global-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      line-height: 1.25;
+      font-weight: 800;
+      color: #fbbf24;
+      text-decoration: none;
+      flex-shrink: 0;
+      transition: color 0.15s ease;
+    }
+    @media (min-width: 640px) {
+      .tdt-global-brand {
+        font-size: 14px;
+      }
+    }
+    .tdt-global-brand:hover {
+      color: #fde68a;
+    }
+    .tdt-global-brand:hover i {
+      animation: iconBouncePop 0.6s ease;
+    }
+    .tdt-global-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 2px 0;
+      margin: 0;
+    }
+    @media (min-width: 640px) {
+      .tdt-global-links {
+        gap: 8px;
+      }
+    }
+    .tdt-nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      line-height: 16px;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+      flex-shrink: 0;
+      background-color: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      color: #e2e8f0;
+      transition: all 0.2s ease;
+    }
+    .tdt-nav-btn:hover {
+      background-color: #1e293b;
+      border-color: rgba(251, 191, 36, 0.45);
+      transform: translateY(-1px);
+    }
+    .tdt-nav-btn:hover i {
+      animation: iconBouncePop 0.55s ease;
+    }
+    .tdt-nav-btn.is-home i { color: #94a3b8; }
+    .tdt-nav-btn.is-register { color: #6ee7b7; }
+    .tdt-nav-btn.is-register i { color: #34d399; }
+    .tdt-nav-btn.is-pcard { color: #fcd34d; }
+    .tdt-nav-btn.is-pcard i { color: #fbbf24; }
+    .tdt-nav-btn.is-blacklist { color: #fda4af; }
+    .tdt-nav-btn.is-blacklist i { color: #fb7185; }
+  </style>
+</head>
+<body class="text-slate-800 antialiased min-h-screen flex flex-col selection:bg-amber-400 selection:text-slate-950 relative">
+  <!-- กล่องแจ้งเตือน Toast มุมขวาบน -->
+  <div id="toast-container" class="fixed top-5 right-5 z-50 flex flex-col gap-3 max-w-sm w-full pointer-events-none px-4"></div>
+
+  <!-- TOPMOST GLOBAL SITE NAVIGATION BAR -->
+  <nav class="tdt-global-nav">
+    <div class="tdt-global-nav-inner">
+      <a href="index.html" class="tdt-global-brand">
+        <i class="fa-solid fa-car-side"></i>
+        <span>The Driver Thailand</span>
+      </a>
+      <div class="tdt-global-links">
+        <a href="index.html" class="tdt-nav-btn is-home">
+          <i class="fa-solid fa-house"></i>
+          <span>หน้าหลัก</span>
+        </a>
+        <a href="register.html" class="tdt-nav-btn is-register">
+          <i class="fa-solid fa-user-plus"></i>
+          <span>ระบบสมาชิก</span>
+        </a>
+        <a href="pcard.html" class="tdt-nav-btn is-pcard">
+          <i class="fa-solid fa-id-badge"></i>
+          <span>ทำบัตรสมาชิกประเมศฐ์</span>
+        </a>
+        <a href="blacklist.html" class="tdt-nav-btn is-blacklist">
+          <i class="fa-solid fa-user-shield"></i>
+          <span>ตรวจสอบ Blacklist</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- แถบประกาศด้านบนสุด -->
+  <header class="bg-slate-900/95 text-slate-300 text-xs py-2.5 px-4 border-b border-amber-500/15">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
+      <div class="flex items-center gap-2 flex-wrap">
+        <span class="bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-extrabold px-2.5 py-0.5 rounded-full text-[11px] shadow-sm">
+          <i class="fa-solid fa-unlock-keyhole mr-1"></i> OPENCHAT UNBLOCK APPEAL
+        </span>
+        <span class="text-slate-300 font-medium">แบบฟอร์มยื่นคำร้องขอปลดล็อกกรณีถูกบล็อก / ลบออกจากห้อง Line OpenChat</span>
+      </div>
+      <div class="flex items-center gap-3 text-xs">
+        <a href="https://forms.gle/wqqhCbGiwhZ6M2CQ7" target="_blank" rel="noopener noreferrer"
+          class="text-amber-300 hover:text-amber-200 font-semibold inline-flex items-center gap-1.5 transition">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i> เปิดแบบฟอร์มต้นฉบับ (Google Forms)
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- พื้นที่เนื้อหาหลัก -->
+  <main class="flex-grow max-w-5xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-6 sm:space-y-8">
+    <!-- Hero Banner -->
+    <section class="hero-glow-bg rounded-3xl p-6 sm:p-10 text-white shadow-2xl border border-amber-400/30 relative overflow-hidden">
+      <div class="absolute -right-16 -top-16 w-72 h-72 bg-amber-500/15 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -left-16 -bottom-16 w-72 h-72 bg-rose-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="relative z-10 space-y-4">
+        <div class="flex flex-wrap items-center gap-2.5">
+          <span class="bg-amber-500/20 border border-amber-400/40 text-amber-300 text-xs font-bold px-3.5 py-1 rounded-full inline-flex items-center gap-1.5">
+            <i class="fa-solid fa-unlock-keyhole icon-float"></i> ยื่นคำร้องขอปลดล็อกห้องแชท
+          </span>
+          <span class="bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-xs font-bold px-3.5 py-1 rounded-full inline-flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> บันทึกร่างอัตโนมัติ
+          </span>
+        </div>
+
+        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black leading-tight">
+          แบบฟอร์มขอปลดล็อกกรณีโดนบล็อก <span class="gold-shimmer-text">ห้อง Line OpenChat</span>
+        </h1>
+        <p class="text-slate-300 text-xs sm:text-sm leading-relaxed max-w-3xl font-light">
+          สำหรับสมาชิกหรือผู้ใช้งานที่ถูกบล็อก / ถูกนำออกจากห้องแชทของเครือข่าย <strong>The Driver Thailand</strong> สามารถกรอกข้อมูลชี้แจงสาเหตุและแนบหลักฐานเพื่อให้ทีมผู้ดูแลพิจารณาปลดล็อกกลับเข้าห้อง
+        </p>
+
+        <div class="bg-amber-500/10 border border-amber-400/30 rounded-2xl p-3.5 sm:p-4 text-xs text-amber-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div class="flex items-start gap-2.5 min-w-0">
+            <i class="fa-solid fa-circle-info text-amber-400 text-base mt-0.5 shrink-0"></i>
+            <div class="min-w-0 space-y-0.5">
+              <strong class="text-amber-300 block">แนวทางในการพิจารณาปลดล็อกของทีมผู้ดูแล:</strong>
+              <span>กรุณาระบุข้อมูลตามความเป็นจริง หากสาเหตุเกิดจากการตั้งชื่อ/รูปโปรไฟล์ไม่ตรงกติกา กรุณาแก้ไขให้ถูกต้องเรียบร้อยก่อนยื่นคำร้อง</span>
+            </div>
+          </div>
+          <a href="https://forms.gle/wqqhCbGiwhZ6M2CQ7" target="_blank" rel="noopener noreferrer"
+            class="shrink-0 bg-slate-950 hover:bg-slate-900 text-amber-300 border border-amber-400/40 font-bold px-3.5 py-2 rounded-xl text-xs whitespace-nowrap inline-flex items-center gap-1.5 transition">
+            <i class="fa-solid fa-up-right-from-square"></i> ดูฟอร์ม Google ต้นฉบับ
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- หลักเกณฑ์การพิจารณาปลดล็อก -->
+    <section class="bg-white rounded-3xl p-5 sm:p-8 shadow-sm border border-slate-200/90 space-y-5">
+      <div class="flex items-start gap-3 bg-amber-50 border border-amber-200 border-l-4 border-l-amber-500 rounded-2xl p-4">
+        <div class="w-10 h-10 rounded-xl bg-amber-500/15 text-amber-600 flex items-center justify-center text-lg shrink-0">
+          <i class="fa-solid fa-scale-balanced icon-float"></i>
+        </div>
+        <div class="text-xs sm:text-sm space-y-1">
+          <h2 class="font-extrabold text-amber-950">ข้อกำหนดเบื้องต้นก่อนยื่นคำร้องขอปลดล็อกห้อง OpenChat</h2>
+          <p class="text-amber-900/90 leading-relaxed">
+            1. กรณีโดนลบเพราะ <strong>ใส่เบอร์โทรในชื่อ / ใช้รูปโปรไฟล์การ์ตูน / ไม่ตั้งชื่อตามรูปแบบห้อง</strong> ต้องแก้ไขโปรไฟล์ให้ถูกต้องก่อนส่งคำร้อง<br>
+            2. กรณีโดนบล็อกจากการโพสต์ผิดกติกาหรือถูกร้องเรียน ทีมผู้ดูแลจะตรวจสอบประวัติและติดต่อกลับทาง <strong>Line ID</strong> หรือ <strong>เบอร์โทรศัพท์</strong> ที่ระบุไว้ภายใน 3–7 วันทำการ
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- กล่องแสดงผลการส่งคำร้องสำเร็จ -->
+    <div id="unblock-success-box" class="hidden bg-emerald-950 text-emerald-100 border border-emerald-500/40 rounded-3xl p-5 sm:p-7 shadow-xl space-y-4">
+      <div class="flex items-start justify-between gap-3 border-b border-emerald-800/80 pb-4">
+        <div class="flex items-center gap-3">
+          <div class="w-11 h-11 rounded-2xl bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 flex items-center justify-center text-xl shrink-0">
+            <i class="fa-solid fa-circle-check"></i>
+          </div>
+          <div>
+            <h3 class="font-extrabold text-base sm:text-lg text-white">บันทึกคำร้องขอปลดล็อกเรียบร้อยแล้ว</h3>
+            <p class="text-xs text-emerald-300">เลขที่คำร้องอ้างอิง: <strong id="unblock-ref-code" class="font-mono text-amber-300">-</strong></p>
+          </div>
+        </div>
+        <button type="button" onclick="document.getElementById('unblock-success-box').classList.add('hidden')" class="text-emerald-300 hover:text-white text-sm">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div id="unblock-summary-details" class="grid sm:grid-cols-2 gap-2.5 text-xs bg-slate-950/60 p-4 rounded-2xl border border-emerald-800/60"></div>
+      <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
+        <p class="text-xs text-emerald-200/90">
+          <i class="fa-brands fa-line mr-1 text-emerald-400"></i> หากต้องการสอบถามความคืบหน้า สามารถแจ้งเลขที่คำร้องได้ที่ <strong>Line @Thedrivethailand</strong>
+        </p>
+        <button type="button" onclick="copyUnblockRef()" class="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold px-4 py-2.5 rounded-xl text-xs inline-flex items-center gap-1.5 transition">
+          <i class="fa-solid fa-copy"></i> คัดลอกเลขที่คำร้อง
+        </button>
+      </div>
+    </div>
+
+    <!-- แบบฟอร์มหลัก (อ้างอิงคำถามทั้งหมดจากแบบฟอร์มขอปลดล็อกห้อง OpenChat) -->
+    <section class="bg-white rounded-3xl p-5 sm:p-10 shadow-sm border border-slate-200/90 space-y-6 sm:space-y-8">
+      <div class="border-b border-slate-200 pb-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div>
+          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">แบบฟอร์มขอปลดล็อกกรณีโดนบล็อกห้อง OpenChat</h2>
+          <p class="text-xs sm:text-sm text-slate-500 mt-0.5">กรอกข้อมูลให้ครบถ้วน ช่องที่มีเครื่องหมาย <span class="text-rose-500 font-bold">*</span> จำเป็นต้องระบุ</p>
+        </div>
+        <div class="flex items-center gap-2.5 flex-wrap">
+          <span id="draft-status-badge" class="text-xs font-semibold text-slate-600 bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200">
+            <i class="fa-solid fa-floppy-disk text-slate-400 mr-1"></i> พร้อมบันทึกร่าง
+          </span>
+          <button type="button" onclick="clearFormDraft()" class="text-xs font-bold text-rose-700 bg-rose-50 hover:bg-rose-100 border border-rose-200 px-3 py-1.5 rounded-xl transition">
+            <i class="fa-solid fa-eraser mr-1"></i> ล้างแบบร่าง
+          </button>
+        </div>
+      </div>
+
+      <form id="unblock-request-form" onsubmit="handleUnblockFormSubmit(event)" class="space-y-6">
+        <!-- ส่วนที่ 1: ห้อง OpenChat ที่โดนบล็อก และข้อมูลโปรไฟล์ในห้อง -->
+        <div class="bg-slate-50/80 border border-slate-200 rounded-3xl p-5 sm:p-6 space-y-4">
+          <h3 class="font-extrabold text-slate-900 text-sm sm:text-base border-b border-slate-200 pb-3 flex items-center gap-2">
+            <i class="fa-brands fa-line text-emerald-600 text-lg"></i>
+            <span>ข้อมูลห้อง OpenChat และโปรไฟล์ที่ถูกบล็อก</span>
+          </h3>
+
+          <div class="space-y-2">
+            <label class="block text-xs font-bold text-slate-700">
+              ห้อง Line OpenChat ที่คุณโดนบล็อก / ถูกลบออกจากห้อง <span class="text-rose-500">*</span>
+            </label>
+            <div class="grid sm:grid-cols-2 gap-2.5 text-xs sm:text-sm">
+              <label class="flex items-center gap-2.5 bg-white border border-slate-300 rounded-xl p-3 cursor-pointer hover:border-amber-500 transition">
+                <input type="checkbox" name="blockedRooms" value="The Driver Thailand (ห้องหลัก)" class="w-4 h-4 text-amber-600 rounded focus:ring-amber-500">
+                <span class="font-medium text-slate-800">The Driver Thailand (ห้องหลัก)</span>
+              </label>
+              <label class="flex items-center gap-2.5 bg-white border border-slate-300 rounded-xl p-3 cursor-pointer hover:border-amber-500 transition">
+                <input type="checkbox" name="blockedRooms" value="The Driver TH Premium Service" class="w-4 h-4 text-amber-600 rounded focus:ring-amber-500">
+                <span class="font-medium text-slate-800">The Driver TH Premium Service</span>
+              </label>
+              <label class="flex items-center gap-2.5 bg-white border border-slate-300 rounded-xl p-3 cursor-pointer hover:border-amber-500 transition">
+                <input type="checkbox" name="blockedRooms" value="ห้องรับ-ส่งงานด่วน / งานเหมาต่างจังหวัด" class="w-4 h-4 text-amber-600 rounded focus:ring-amber-500">
+                <span class="font-medium text-slate-800">ห้องรับ-ส่งงานด่วน / งานเหมาต่างจังหวัด</span>
+              </label>
+              <label class="flex items-center gap-2.5 bg-white border border-slate-300 rounded-xl p-3 cursor-pointer hover:border-amber-500 transition">
+                <input type="checkbox" name="blockedRooms" value="ห้องอื่นๆ ในเครือข่าย The Driver Thailand" class="w-4 h-4 text-amber-600 rounded focus:ring-amber-500">
+                <span class="font-medium text-slate-800">ห้องอื่นๆ ในเครือข่าย The Driver Thailand</span>
+              </label>
+            </div>
+            <input type="text" id="blocked_room_other" name="blockedRoomOther" placeholder="ระบุชื่อห้องเพิ่มเติม (ถ้ามี)"
+              class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="space-y-1.5">
+              <label for="old_chat_name" class="block text-xs font-bold text-slate-700">
+                ชื่อที่ใช้ในห้อง Line OpenChat ตอนที่โดนบล็อก <span class="text-rose-500">*</span>
+              </label>
+              <input type="text" id="old_chat_name" name="oldChatName" required placeholder="ระบุชื่อโปรไฟล์เดิมในห้อง OpenChat"
+                class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
+            </div>
+
+            <div class="space-y-1.5">
+              <label for="new_chat_name" class="block text-xs font-bold text-slate-700">
+                ชื่อโปรไฟล์ใหม่ที่แก้ไขให้ถูกต้องตามกติกาแล้ว (ถ้ามี)
+              </label>
+              <input type="text" id="new_chat_name" name="newChatName" placeholder="เช่น [B999] แทนไทย Camry (ไม่มีเบอร์โทร)"
+                class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
+            </div>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="space-y-1.5">
+              <label for="member_code" class="block text-xs font-bold text-slate-700">
+                รหัสสมาชิกของกลุ่ม (ถ้าเคยลงทะเบียนแล้ว)
+              </label>
+              <input type="text" id="member_code" name="memberCode" placeholder="เช่น B999 (หากยังไม่เคยสมัครให้เว้นว่างหรือพิมพ์ 'ยังไม่เคยสมัคร')"
+                class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-mono focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
+            </div>
+
+            <div class="space-y-1.5">
+              <label for="blocked_date" class="block text-xs font-bold text-slate-700">
+                วันที่โดนบล็อก / วันที่ทราบว่าเข้าห้องไม่ได้ <span class="text-rose-500">*</span>
+              </label>
+              <input type="date" id="blocked_date" name="blockedDate" required
+                class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
+            </div>
+          </div>
+        </div>
+
+        <!-- ส่วนที่ 2: ข้อมูลส่วนตัวสำหรับติดต่อกลับ -->
+        <div class="bg-slate-50/80 border border-slate-200 rounded-3xl p-5 sm:p-6 space-y-4">
+          <h3 class="font-extrabold text-slate-900 text-sm sm:text-base border-b border-slate-200 pb-3 flex items-center gap-2">
+            <i class="fa-solid fa-user-check text-amber-600"></i>
+            <span>ข้อมูลผู้ยื่นคำร้องสำหรับติดต่อกลับ</span>
+          </h3>
+
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="space-y-1.5">
+              <label for="applicant_fullname" class="block text-xs font-bold text-slate-700">
+                ชื่อ - นามสกุลจริง <span class="text-rose-500">*</span>
+              </label>
+              <input type="text" id="applicant_fullname" name="fullName" required placeholder="ระบุชื่อและนามสกุลจริง"
+                class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
+            </div>
+
+            <div class="space-y-1.5">
+              <label for="applicant_phone" class="block text-xs font-bold text-slate-700">
+                เบอร์โทรศัพท์ที่ติดต่อได้ <span class="text-rose-500">*</span>
+              </label>
+              <input type="tel" id="applicant_phone" name="phone" required pattern="[0-9\-+\s]{9,15}" placeholder="เช่น 0812345678"
+                class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-mono focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
+            </div>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="space-y-1.5">
+              <label for="applicant_line_id" class="block text-xs font-bold text-slate-700">
+                Line ID ส่วนตัว (สำหรับแอดมินทักแจ้งผล) <span class="text-rose-500">*</span>
+              </label>
+              <input type="text" id="applicant_line_id" name="lineId" required placeholder="ระบุ Line ID ของคุณ (กรุณาเปิดรับเพื่อนด้วย ID)"
+                class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
+            </div>
+
+            <div class="space-y-1.5">
+              <label for="applicant_plate" class="block text-xs font-bold text-slate-700">
+                ยี่ห้อ / รุ่นรถ / หมายเลขทะเบียนรถ (ถ้ามี)
+              </label>
+              <input type="text" id="applicant_plate" name="vehicleInfo" placeholder="เช่น Toyota Camry 1กข 1234 กทม."
+                class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
+            </div>
+          </div>
+        </div>
+
+        <!-- ส่วนที่ 3: สาเหตุและคำชี้แจงขอปลดล็อก -->
+        <div class="bg-slate-50/80 border border-slate-200 rounded-3xl p-5 sm:p-6 space-y-4">
+          <h3 class="font-extrabold text-slate-900 text-sm sm:text-base border-b border-slate-200 pb-3 flex items-center gap-2">
+            <i class="fa-solid fa-comment-dots text-amber-600"></i>
+            <span>สาเหตุที่ถูกบล็อกและคำชี้แจงประกอบการพิจารณา</span>
+          </h3>
+
+          <div class="space-y-1.5">
+            <label for="block_reason_category" class="block text-xs font-bold text-slate-700">
+              สาเหตุเบื้องต้นที่คุณคาดว่าทำให้โดนบล็อก / ลบออกจากห้อง <span class="text-rose-500">*</span>
+            </label>
+            <select id="block_reason_category" name="reasonCategory" required
+              class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
+              <option value="" disabled selected>-- เลือกสาเหตุที่ถูกบล็อก --</option>
+              <option value="ตั้งชื่อโปรไฟล์ไม่ตรงกติกา / ใส่เบอร์โทรศัพท์ในชื่อ">ตั้งชื่อโปรไฟล์ไม่ตรงกติกา / ใส่เบอร์โทรศัพท์ในชื่อ</option>
+              <option value="ใช้รูปโปรไฟล์ไม่ตรงกติกา (รูปการ์ตูน / รูปวิว / ไม่เห็นใบหน้า)">ใช้รูปโปรไฟล์ไม่ตรงกติกา (รูปการ์ตูน / รูปวิว / ไม่เห็นใบหน้า)</option>
+              <option value="เผลอส่งลิงก์ / สแปม / โฆษณาโดยไม่ตั้งใจ">เผลอส่งลิงก์ / สแปม / โฆษณาโดยไม่ตั้งใจ</option>
+              <option value="เข้าใจผิดในข้อตกลงการรับงาน / ส่งงานในห้อง">เข้าใจผิดในข้อตกลงการรับงาน / ส่งงานในห้อง</option>
+              <option value="ไม่ทราบสาเหตุที่แน่ชัด (อยู่ดีๆ เข้าห้องไม่ได้)">ไม่ทราบสาเหตุที่แน่ชัด (อยู่ดีๆ เข้าห้องไม่ได้)</option>
+              <option value="อื่นๆ (โปรดระบุรายละเอียดด้านล่าง)">อื่นๆ (โปรดระบุรายละเอียดด้านล่าง)</option>
+            </select>
+          </div>
+
+          <div class="space-y-1.5">
+            <label for="appeal_explanation" class="block text-xs font-bold text-slate-700">
+              คำชี้แจงรายละเอียดเหตุการณ์ และเหตุผลที่ขอปลดล็อกกลับเข้าห้อง <span class="text-rose-500">*</span>
+            </label>
+            <textarea id="appeal_explanation" name="explanation" rows="4" required
+              placeholder="อธิบายเหตุการณ์ที่เกิดขึ้นอย่างละเอียด รวมถึงสิ่งที่คุณได้แก้ไขเรียบร้อยแล้ว เช่น เปลี่ยนรูปโปรไฟล์เป็นรูปจริงและลบเบอร์โทรออกจากชื่อแล้ว..."
+              class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition"></textarea>
+          </div>
+        </div>
+
+        <!-- ส่วนที่ 4: แนบภาพหลักฐานประกอบ -->
+        <div class="bg-slate-50/80 border border-slate-200 rounded-3xl p-5 sm:p-6 space-y-4">
+          <div class="border-b border-slate-200 pb-3 flex flex-wrap items-center justify-between gap-2">
+            <h3 class="font-extrabold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+              <i class="fa-solid fa-images text-amber-600"></i>
+              <span>แนบภาพหลักฐานประกอบการขอปลดล็อก</span>
+            </h3>
+            <span class="text-xs text-slate-500">รองรับไฟล์ JPG, PNG (สูงสุด 2 ภาพ)</span>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-4">
+            <!-- ภาพที่ 1: ภาพหน้าจอข้อความแจ้งเตือนโดนบล็อก / โปรไฟล์ OpenChat ปัจจุบัน -->
+            <div class="border-2 border-dashed border-slate-300 bg-white rounded-2xl p-5 text-center hover:border-amber-500 transition flex flex-col justify-between space-y-3">
+              <div class="space-y-1.5">
+                <i class="fa-solid fa-mobile-screen-button text-3xl text-amber-500 icon-bounce-hover"></i>
+                <p class="text-xs sm:text-sm font-bold text-slate-900">
+                  ภาพหน้าจอโปรไฟล์ OpenChat ปัจจุบัน หรือหน้าแจ้งเตือนถูกบล็อก <span class="text-rose-500">*</span>
+                </p>
+                <p class="text-[11px] text-slate-500">แสดงให้เห็นว่าได้แก้ไขชื่อและรูปโปรไฟล์ตามกติกาเรียบร้อยแล้ว</p>
+              </div>
+              <div>
+                <label class="inline-flex items-center justify-center bg-slate-950 hover:bg-slate-800 text-amber-400 border border-amber-400/30 font-semibold text-xs sm:text-sm px-5 py-2.5 rounded-xl cursor-pointer transition shadow-sm">
+                  <i class="fa-solid fa-upload mr-1.5"></i> เลือกรูปหลักฐานที่ 1
+                  <input type="file" id="proof_screen_file" accept="image/*" required onchange="handleProofUpload(this, 'screen')" class="hidden">
+                </label>
+                <div id="preview-proof-screen" class="hidden mt-3"></div>
+              </div>
+            </div>
+
+            <!-- ภาพที่ 2: หลักฐานเพิ่มเติม (ถ้ามี) -->
+            <div class="border-2 border-dashed border-slate-300 bg-white rounded-2xl p-5 text-center hover:border-amber-500 transition flex flex-col justify-between space-y-3">
+              <div class="space-y-1.5">
+                <i class="fa-solid fa-file-shield text-3xl text-emerald-600 icon-bounce-hover"></i>
+                <p class="text-xs sm:text-sm font-bold text-slate-900">
+                  ภาพหลักฐานชี้แจงเพิ่มเติม / รูปยืนยันตัวตน (ถ้ามี)
+                </p>
+                <p class="text-[11px] text-slate-500">เช่น ภาพแชทชี้แจง หรือหลักฐานยืนยันความบริสุทธิ์ใจ</p>
+              </div>
+              <div>
+                <label class="inline-flex items-center justify-center bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-600 text-white font-semibold text-xs sm:text-sm px-5 py-2.5 rounded-xl cursor-pointer transition shadow-sm">
+                  <i class="fa-solid fa-upload mr-1.5"></i> เลือกรูปหลักฐานที่ 2
+                  <input type="file" id="proof_extra_file" accept="image/*" onchange="handleProofUpload(this, 'extra')" class="hidden">
+                </label>
+                <div id="preview-proof-extra" class="hidden mt-3"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ส่วนที่ 5: คำรับรองและยอมรับกติกา -->
+        <div class="bg-amber-50/70 border border-amber-200 rounded-2xl p-4 sm:p-5 space-y-4">
+          <label class="flex items-start gap-3 cursor-pointer text-xs sm:text-sm text-slate-800">
+            <input type="checkbox" id="accept_unblock_terms" required class="mt-1 w-4 h-4 text-amber-600 rounded border-slate-300 focus:ring-amber-500 shrink-0">
+            <span>
+              ข้าพเจ้าขอรับรองว่าข้อมูลและคำชี้แจงข้างต้นเป็นความจริงทุกประการ และยินดีปฏิบัติตามกติกาของห้องแชทและ <a href="privacy_policy.html" target="_blank" rel="noopener noreferrer" class="font-bold text-amber-800 underline hover:text-amber-950">ประกาศความเป็นส่วนตัวของกลุ่ม The Driver Thailand</a> อย่างเคร่งครัด <span class="text-rose-500 font-bold">*</span>
+            </span>
+          </label>
+
+          <div class="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-3 pt-2">
+            <a href="index.html" class="w-full sm:w-auto text-center px-5 py-3 rounded-xl border border-slate-300 bg-white hover:bg-slate-100 text-slate-700 font-bold text-xs sm:text-sm transition">
+              <i class="fa-solid fa-arrow-left mr-1.5"></i> กลับหน้าหลัก
+            </a>
+            <button type="submit" id="btn-submit-unblock"
+              class="group w-full sm:w-auto bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold text-sm sm:text-base px-8 py-3.5 rounded-xl shadow-lg transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
+              <i class="fa-solid fa-paper-plane icon-bounce-hover"></i>
+              <span>ส่งคำร้องขอปลดล็อก</span>
+            </button>
+          </div>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-950 text-slate-400 border-t border-amber-500/20 py-8 px-4 text-xs mt-10">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+      <div class="text-center sm:text-left">
+        <p class="font-bold text-amber-300">The Driver Thailand Official Network</p>
+        <p class="text-[11px] text-slate-500 mt-0.5">ศูนย์กลางระบบสมาชิก บัตรสมาชิกประเมศฐ์ และระบบเฝ้าระวังภัยกลุ่มคนขับรถรับจ้าง</p>
+      </div>
+      <div class="flex flex-wrap justify-center gap-4 font-semibold">
+        <a href="index.html" class="hover:text-amber-400 transition">หน้าหลัก</a>
+        <a href="register.html" class="hover:text-emerald-400 transition">ระบบสมาชิก</a>
+        <a href="pcard.html" class="hover:text-amber-400 transition">ทำบัตรสมาชิกประเมศฐ์</a>
+        <a href="blacklist.html" class="hover:text-rose-400 transition">ตรวจสอบ Blacklist</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const UNBLOCK_CONFIG = {
+      googleFormUrl: 'https://forms.gle/wqqhCbGiwhZ6M2CQ7',
+      // วาง Web App URL ของ Google Apps Script สำหรับรับคำร้องขอปลดล็อกที่นี่ (หากมี)
+      submitEndpointUrl: '',
+      draftStorageKey: 'tdt_unblock_request_draft_v1',
+      submissionsStorageKey: 'tdt_unblock_request_submissions_v1'
+    };
+
+    const UNBLOCK_DRAFT_IDS = [
+      'blocked_room_other',
+      'old_chat_name',
+      'new_chat_name',
+      'member_code',
+      'blocked_date',
+      'applicant_fullname',
+      'applicant_phone',
+      'applicant_line_id',
+      'applicant_plate',
+      'block_reason_category',
+      'appeal_explanation'
+    ];
+
+    let uploadedProofs = {
+      screen: { base64: '', name: '', mimeType: '' },
+      extra: { base64: '', name: '', mimeType: '' }
+    };
+    let lastUnblockRefCode = '';
+
+    function escapeHtml(val) {
+      return String(val ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function showToast(title, message, type = 'info') {
+      const container = document.getElementById('toast-container');
+      if (!container) return;
+      const styles = {
+        success: 'bg-emerald-950 text-emerald-200 border-emerald-500/40',
+        error: 'bg-rose-950 text-rose-200 border-rose-500/40',
+        info: 'bg-slate-950 text-amber-300 border-amber-400/50'
+      };
+      const icons = {
+        success: 'fa-circle-check text-emerald-400',
+        error: 'fa-circle-xmark text-rose-400',
+        info: 'fa-circle-info text-amber-400'
+      };
+      const toast = document.createElement('div');
+      toast.className = `pointer-events-auto flex items-start gap-3 p-4 rounded-2xl border shadow-2xl transition-all duration-300 ${styles[type] || styles.info}`;
+      toast.innerHTML = `
+        <i class="fa-solid ${icons[type] || icons.info} text-lg mt-0.5 shrink-0"></i>
+        <div class="flex-1 min-w-0">
+          <h4 class="font-extrabold text-sm text-white leading-tight">${escapeHtml(title)}</h4>
+          <p class="text-xs mt-0.5 opacity-90 leading-relaxed">${escapeHtml(message)}</p>
+        </div>
+        <button type="button" onclick="this.parentElement.remove()" class="text-slate-400 hover:text-white text-xs">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      `;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.classList.add('opacity-0');
+        setTimeout(() => toast.remove(), 300);
+      }, 4200);
+    }
+
+    function compressImageFile(file, maxWidth = 900, quality = 0.78) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = e => {
+          const img = new Image();
+          img.onload = () => {
+            const canvas = document.createElement('canvas');
+            let width = img.width;
+            let height = img.height;
+            if (width > maxWidth) {
+              height = Math.round((height * maxWidth) / width);
+              width = maxWidth;
+            }
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, width, height);
+            resolve(canvas.toDataURL('image/jpeg', quality));
+          };
+          img.onerror = reject;
+          img.src = e.target.result;
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    async function handleProofUpload(inputEl, kind) {
+      const file = inputEl?.files?.[0];
+      const previewId = kind === 'screen' ? 'preview-proof-screen' : 'preview-proof-extra';
+      const previewBox = document.getElementById(previewId);
+      if (!file || !previewBox) return;
+
+      if (!file.type.startsWith('image/')) {
+        showToast('ไฟล์ไม่ถูกต้อง', 'กรุณาเลือกไฟล์รูปภาพ (JPG หรือ PNG) เท่านั้น', 'error');
+        inputEl.value = '';
+        return;
+      }
+
+      try {
+        const compressedBase64 = await compressImageFile(file);
+        uploadedProofs[kind] = {
+          base64: compressedBase64,
+          name: file.name,
+          mimeType: 'image/jpeg'
+        };
+        previewBox.classList.remove('hidden');
+        previewBox.innerHTML = `
+          <div class="inline-flex items-center gap-2.5 bg-emerald-50 border border-emerald-200 text-emerald-900 px-3 py-2 rounded-xl text-xs font-semibold">
+            <img src="${compressedBase64}" alt="ตัวอย่างรูปหลักฐาน" class="w-10 h-10 rounded-lg object-cover border border-emerald-300 shrink-0">
+            <span class="truncate max-w-[180px]">${escapeHtml(file.name)}</span>
+          </div>
+        `;
+      } catch (err) {
+        showToast('อัปโหลดรูปไม่สำเร็จ', 'ไม่สามารถประมวลผลรูปภาพได้ กรุณาลองใหม่อีกครั้ง', 'error');
+      }
+    }
+
+    function saveFormDraft() {
+      try {
+        const draft = {};
+        UNBLOCK_DRAFT_IDS.forEach(id => {
+          const el = document.getElementById(id);
+          if (el) draft[id] = el.value;
+        });
+        draft.blockedRooms = Array.from(document.querySelectorAll('input[name="blockedRooms"]:checked')).map(cb => cb.value);
+        localStorage.setItem(UNBLOCK_CONFIG.draftStorageKey, JSON.stringify(draft));
+        const badge = document.getElementById('draft-status-badge');
+        if (badge) {
+          badge.className = 'text-xs font-semibold text-emerald-800 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-200';
+          badge.innerHTML = '<i class="fa-solid fa-floppy-disk text-emerald-600 mr-1"></i> บันทึกร่างอัตโนมัติแล้ว';
+        }
+      } catch (_) {}
+    }
+
+    function restoreFormDraft() {
+      try {
+        const raw = localStorage.getItem(UNBLOCK_CONFIG.draftStorageKey);
+        if (!raw) return;
+        const draft = JSON.parse(raw);
+        let restored = false;
+        UNBLOCK_DRAFT_IDS.forEach(id => {
+          const el = document.getElementById(id);
+          if (el && typeof draft[id] === 'string' && draft[id].trim() !== '') {
+            el.value = draft[id];
+            restored = true;
+          }
+        });
+        if (Array.isArray(draft.blockedRooms) && draft.blockedRooms.length > 0) {
+          document.querySelectorAll('input[name="blockedRooms"]').forEach(cb => {
+            if (draft.blockedRooms.includes(cb.value)) cb.checked = true;
+          });
+          restored = true;
+        }
+        if (restored) {
+          showToast('กู้คืนแบบร่างแล้ว', 'ระบบดึงข้อมูลคำร้องที่พิมพ์ค้างไว้กลับมาให้อัตโนมัติแล้วครับ', 'info');
+        }
+      } catch (_) {}
+    }
+
+    function clearFormDraft() {
+      try {
+        localStorage.removeItem(UNBLOCK_CONFIG.draftStorageKey);
+        document.getElementById('unblock-request-form')?.reset();
+        const dateEl = document.getElementById('blocked_date');
+        if (dateEl) dateEl.value = new Date().toISOString().split('T')[0];
+        uploadedProofs = {
+          screen: { base64: '', name: '', mimeType: '' },
+          extra: { base64: '', name: '', mimeType: '' }
+        };
+        document.getElementById('preview-proof-screen')?.classList.add('hidden');
+        document.getElementById('preview-proof-extra')?.classList.add('hidden');
+        const badge = document.getElementById('draft-status-badge');
+        if (badge) {
+          badge.className = 'text-xs font-semibold text-slate-600 bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200';
+          badge.innerHTML = '<i class="fa-solid fa-floppy-disk text-slate-400 mr-1"></i> ล้างแบบร่างเรียบร้อยแล้ว';
+        }
+        showToast('ล้างข้อมูลเรียบร้อย', 'ล้างแบบร่างในแบบฟอร์มเรียบร้อยแล้วครับ', 'success');
+      } catch (_) {}
+    }
+
+    function copyUnblockRef() {
+      if (!lastUnblockRefCode) return;
+      const tempInput = document.createElement('input');
+      tempInput.value = lastUnblockRefCode;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempInput);
+      showToast('คัดลอกสำเร็จ', `คัดลอกเลขที่คำร้อง ${lastUnblockRefCode} เรียบร้อยแล้ว`, 'success');
+    }
+
+    async function handleUnblockFormSubmit(event) {
+      event.preventDefault();
+      const btn = document.getElementById('btn-submit-unblock');
+      const originalHtml = btn.innerHTML;
+
+      try {
+        const checkedRooms = Array.from(document.querySelectorAll('input[name="blockedRooms"]:checked')).map(cb => cb.value);
+        const otherRoom = document.getElementById('blocked_room_other').value.trim();
+        if (otherRoom) checkedRooms.push(otherRoom);
+
+        if (checkedRooms.length === 0) {
+          showToast('ข้อมูลไม่ครบถ้วน', 'กรุณาเลือกหรือระบุชื่อห้อง Line OpenChat ที่โดนบล็อกอย่างน้อย 1 ห้องครับ', 'error');
+          return;
+        }
+        if (!uploadedProofs.screen.base64) {
+          showToast('ข้อมูลไม่ครบถ้วน', 'กรุณาแนบภาพหน้าจอโปรไฟล์ OpenChat ปัจจุบัน หรือหน้าแจ้งเตือนถูกบล็อกครับ', 'error');
+          return;
+        }
+
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> <span>กำลังส่งคำร้องขอปลดล็อก...</span>';
+
+        const now = new Date();
+        const refCode = 'UNB-' +
+          now.getFullYear() +
+          String(now.getMonth() + 1).padStart(2, '0') +
+          String(now.getDate()).padStart(2, '0') + '-' +
+          String(now.getHours()).padStart(2, '0') +
+          String(now.getMinutes()).padStart(2, '0') +
+          String(now.getSeconds()).padStart(2, '0');
+        lastUnblockRefCode = refCode;
+
+        const oldChatName = document.getElementById('old_chat_name').value.trim();
+        const newChatName = document.getElementById('new_chat_name').value.trim();
+        const memberCode = document.getElementById('member_code').value.trim() || '-';
+        const blockedDate = document.getElementById('blocked_date').value;
+        const fullName = document.getElementById('applicant_fullname').value.trim();
+        const phone = document.getElementById('applicant_phone').value.trim();
+        const lineId = document.getElementById('applicant_line_id').value.trim();
+        const vehicleInfo = document.getElementById('applicant_plate').value.trim() || '-';
+        const reasonCategory = document.getElementById('block_reason_category').value;
+        const explanation = document.getElementById('appeal_explanation').value.trim();
+
+        const payload = {
+          action: 'unblock_request',
+          refCode,
+          submittedAt: now.toISOString(),
+          blockedRooms: checkedRooms.join(', '),
+          oldChatName,
+          newChatName,
+          memberCode,
+          blockedDate,
+          fullName,
+          phone,
+          lineId,
+          vehicleInfo,
+          reasonCategory,
+          explanation,
+          proofScreenName: uploadedProofs.screen.name,
+          proofExtraName: uploadedProofs.extra.name || ''
+        };
+
+        if (UNBLOCK_CONFIG.submitEndpointUrl) {
+          await fetch(UNBLOCK_CONFIG.submitEndpointUrl, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              ...payload,
+              proofScreenBase64: uploadedProofs.screen.base64,
+              proofScreenMimeType: uploadedProofs.screen.mimeType,
+              proofExtraBase64: uploadedProofs.extra.base64,
+              proofExtraMimeType: uploadedProofs.extra.mimeType
+            })
+          });
+        }
+
+        const existing = JSON.parse(localStorage.getItem(UNBLOCK_CONFIG.submissionsStorageKey) || '[]');
+        existing.unshift(payload);
+        localStorage.setItem(UNBLOCK_CONFIG.submissionsStorageKey, JSON.stringify(existing));
+        localStorage.removeItem(UNBLOCK_CONFIG.draftStorageKey);
+
+        const successBox = document.getElementById('unblock-success-box');
+        const successRef = document.getElementById('unblock-ref-code');
+        const successDetails = document.getElementById('unblock-summary-details');
+        if (successRef) successRef.textContent = refCode;
+        if (successDetails) {
+          successDetails.innerHTML = `
+            <div><span class="text-emerald-400">ผู้ยื่นคำร้อง:</span> <strong>${escapeHtml(fullName)}</strong> (รหัสสมาชิก: ${escapeHtml(memberCode)})</div>
+            <div><span class="text-emerald-400">ช่องทางติดต่อ:</span> <strong class="font-mono">${escapeHtml(phone)}</strong> / Line: <strong>${escapeHtml(lineId)}</strong></div>
+            <div><span class="text-emerald-400">ห้องที่ขอปลดล็อก:</span> <strong>${escapeHtml(checkedRooms.join(', '))}</strong></div>
+            <div><span class="text-emerald-400">ชื่อในห้องเดิม / ใหม่:</span> <strong>${escapeHtml(oldChatName)}</strong> ${newChatName ? `→ <strong>${escapeHtml(newChatName)}</strong>` : ''}</div>
+          `;
+        }
+        successBox?.classList.remove('hidden');
+        successBox?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        document.getElementById('unblock-request-form')?.reset();
+        const dateEl = document.getElementById('blocked_date');
+        if (dateEl) dateEl.value = new Date().toISOString().split('T')[0];
+        uploadedProofs = {
+          screen: { base64: '', name: '', mimeType: '' },
+          extra: { base64: '', name: '', mimeType: '' }
+        };
+        document.getElementById('preview-proof-screen')?.classList.add('hidden');
+        document.getElementById('preview-proof-extra')?.classList.add('hidden');
+        showToast('ส่งคำร้องสำเร็จ', `บันทึกคำร้องขอปลดล็อกเรียบร้อยแล้ว เลขที่คำร้อง: ${refCode}`, 'success');
+      } catch (err) {
+        showToast('เกิดข้อผิดพลาด', err.message || 'ไม่สามารถส่งข้อมูลได้ กรุณาลองใหม่อีกครั้ง', 'error');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = originalHtml;
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const dateEl = document.getElementById('blocked_date');
+      if (dateEl) dateEl.value = new Date().toISOString().split('T')[0];
+      restoreFormDraft();
+      UNBLOCK_DRAFT_IDS.forEach(id => {
+        const el = document.getElementById(id);
+        el?.addEventListener('input', saveFormDraft);
+        el?.addEventListener('change', saveFormDraft);
+      });
+      document.querySelectorAll('input[name="blockedRooms"]').forEach(cb => {
+        cb.addEventListener('change', saveFormDraft);
+      });
+    });
+  </script>
+</body>
+</html>

@@ -62,31 +62,129 @@
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
+
+        /* UNIFIED TOPMOST GLOBAL SITE NAVIGATION BAR (EXACT SAME SIZE & POSITION ACROSS ALL 4 PAGES) */
+        .tdt-global-nav {
+            box-sizing: border-box;
+            font-family: 'Prompt', sans-serif;
+            background-color: #020617;
+            color: #e2e8f0;
+            border-bottom: 1px solid #1e293b;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+            width: 100%;
+        }
+        .tdt-global-nav *, .tdt-global-nav *::before, .tdt-global-nav *::after {
+            box-sizing: border-box;
+        }
+        .tdt-global-nav-inner {
+            max-width: 1152px;
+            margin: 0 auto;
+            padding: 10px 16px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            min-height: 52px;
+        }
+        @media (min-width: 640px) {
+            .tdt-global-nav-inner {
+                padding: 10px 24px;
+            }
+        }
+        .tdt-global-brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            line-height: 1.25;
+            font-weight: 800;
+            color: #fbbf24;
+            text-decoration: none;
+            flex-shrink: 0;
+            transition: color 0.15s ease;
+        }
+        @media (min-width: 640px) {
+            .tdt-global-brand {
+                font-size: 14px;
+            }
+        }
+        .tdt-global-brand:hover {
+            color: #fcd34d;
+        }
+        .tdt-global-links {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            overflow-x: auto;
+            padding: 2px 0;
+            margin: 0;
+        }
+        @media (min-width: 640px) {
+            .tdt-global-links {
+                gap: 8px;
+            }
+        }
+        .tdt-nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            line-height: 16px;
+            font-weight: 700;
+            text-decoration: none;
+            white-space: nowrap;
+            flex-shrink: 0;
+            background-color: #0f172a;
+            border: 1px solid #334155;
+            color: #e2e8f0;
+            transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+        }
+        .tdt-nav-btn:hover {
+            background-color: #1e293b;
+        }
+        .tdt-nav-btn.is-home i { color: #94a3b8; }
+        .tdt-nav-btn.is-register { color: #6ee7b7; }
+        .tdt-nav-btn.is-register i { color: #34d399; }
+        .tdt-nav-btn.is-pcard { color: #fcd34d; }
+        .tdt-nav-btn.is-pcard i { color: #fbbf24; }
+        .tdt-nav-btn.active-blacklist {
+            background-color: #e11d48;
+            border-color: #e11d48;
+            color: #ffffff;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+        .tdt-nav-btn.active-blacklist i { color: #ffffff; }
     </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between bg-slate-50 text-slate-900 selection:bg-rose-500 selection:text-white">
 
     <!-- TOPMOST GLOBAL SITE NAVIGATION BAR -->
-    <nav class="bg-slate-950 text-slate-200 border-b border-slate-800 sticky top-0 z-50 shadow-md">
-        <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2.5 flex flex-wrap items-center justify-between gap-2">
-            <a href="index.html" class="flex items-center gap-2 text-xs sm:text-sm font-extrabold text-amber-400 hover:text-amber-300 transition shrink-0">
+    <nav class="tdt-global-nav">
+        <div class="tdt-global-nav-inner">
+            <a href="index.html" class="tdt-global-brand">
                 <i class="fa-solid fa-car-side"></i>
                 <span>The Driver Thailand</span>
             </a>
-            <div class="flex items-center gap-1.5 sm:gap-2 overflow-x-auto text-xs font-bold py-0.5">
-                <a href="index.html" class="px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 transition inline-flex items-center gap-1.5 shrink-0 whitespace-nowrap">
-                    <i class="fa-solid fa-house text-slate-400"></i>
+            <div class="tdt-global-links">
+                <a href="index.html" class="tdt-nav-btn is-home">
+                    <i class="fa-solid fa-house"></i>
                     <span>หน้าหลัก</span>
                 </a>
-                <a href="register.html" class="px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-emerald-300 border border-slate-700 transition inline-flex items-center gap-1.5 shrink-0 whitespace-nowrap">
-                    <i class="fa-solid fa-user-plus text-emerald-400"></i>
+                <a href="register.html" class="tdt-nav-btn is-register">
+                    <i class="fa-solid fa-user-plus"></i>
                     <span>ระบบสมาชิก</span>
                 </a>
-                <a href="pcard.html" class="px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-amber-300 border border-slate-700 transition inline-flex items-center gap-1.5 shrink-0 whitespace-nowrap">
-                    <i class="fa-solid fa-id-badge text-amber-400"></i>
+                <a href="pcard.html" class="tdt-nav-btn is-pcard">
+                    <i class="fa-solid fa-id-badge"></i>
                     <span>ทำบัตรสมาชิกประเมศฐ์</span>
                 </a>
-                <a href="blacklist.html" class="px-3 py-1.5 rounded-xl bg-rose-600 text-white shadow-sm inline-flex items-center gap-1.5 shrink-0 whitespace-nowrap">
+                <a href="blacklist.html" class="tdt-nav-btn active-blacklist">
                     <i class="fa-solid fa-user-shield"></i>
                     <span>ตรวจสอบ Blacklist</span>
                 </a>

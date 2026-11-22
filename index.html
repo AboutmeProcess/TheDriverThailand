@@ -248,19 +248,15 @@
       margin: 0 auto;
       padding: 10px 16px;
       display: flex;
-      flex-direction: column;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
       gap: 10px;
     }
     @media (min-width: 640px) {
       .tdt-global-nav-inner {
         padding: 12px 24px;
       }
-    }
-    .tdt-global-top-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
     }
     .tdt-global-brand {
       display: inline-flex;
@@ -313,14 +309,13 @@
     .tdt-global-brand:hover i {
       animation: iconBouncePop 0.6s ease;
     }
-    .tdt-global-sub-row {
+    .tdt-global-right-controls {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
+      justify-content: flex-end;
       gap: 8px;
-      padding-top: 10px;
-      border-top: 1px solid rgba(251, 191, 36, 0.16);
-      width: 100%;
+      margin-left: auto;
     }
     .tdt-cat-dropdown-wrap {
       position: relative;
@@ -329,7 +324,7 @@
     .tdt-cat-menu-panel {
       display: none;
       position: absolute;
-      left: 0;
+      right: 0;
       top: calc(100% + 8px);
       width: 310px;
       max-width: calc(100vw - 32px);
@@ -485,37 +480,22 @@
   <!-- GLOBAL NAVIGATION BAR -->
   <nav class="tdt-global-nav">
     <div class="tdt-global-nav-inner">
-      <!-- แถวบน: โลโก้ + ชื่อกลุ่มขนาดใหญ่สมดุล และปุ่มปรับขนาดตัวอักษร / โหมดสี -->
-      <div class="tdt-global-top-row">
-        <a href="index.html" class="tdt-global-brand">
-          <img src="TheDriverTH.jpg" alt="โลโก้ 🚖 The Driver TH 🇹🇭 Premium Service"
-            onerror="this.onerror=null;this.src='https://placehold.co/80x80/0f172a/fbbf24?text=TDT';"
-            class="tdt-brand-logo-img">
-          <span class="tracking-tight font-medium">🚖 The Driver TH 🇹🇭 Premium Service</span>
-        </a>
+      <!-- ฝั่งซ้าย: โลโก้ + ชื่อกลุ่ม -->
+      <a href="index.html" class="tdt-global-brand">
+        <img src="TheDriverTH.jpg" alt="โลโก้ 🚖 The Driver TH 🇹🇭 Premium Service"
+          onerror="this.onerror=null;this.src='https://placehold.co/80x80/0f172a/fbbf24?text=TDT';"
+          class="tdt-brand-logo-img">
+        <span class="tracking-tight font-medium">🚖 The Driver TH 🇹🇭 Premium Service</span>
+      </a>
 
-        <div class="tdt-util-group" title="ปรับขนาดตัวอักษรและโหมดหน้าเว็บ">
-          <button type="button" onclick="changeFontScale(-1)" aria-label="ลดขนาดตัวอักษร" class="tdt-util-btn" title="ลดขนาดตัวอักษร">
-            <span>A-</span>
-          </button>
-          <span id="font-scale-label" class="text-[11px] font-bold text-amber-300 px-1 select-none">100%</span>
-          <button type="button" onclick="changeFontScale(1)" aria-label="เพิ่มขนาดตัวอักษร" class="tdt-util-btn" title="เพิ่มขนาดตัวอักษร">
-            <span>A+</span>
-          </button>
-          <button type="button" onclick="toggleThemeMode()" id="btn-theme-toggle-desktop" aria-label="สลับโหมดสีสว่างหรือสีเข้ม" class="tdt-util-btn" title="สลับโหมดสีสว่าง / สีเข้ม">
-            <i id="theme-icon-desktop" class="fa-solid fa-moon text-amber-300"></i>
-          </button>
-        </div>
-      </div>
-
-      <!-- แถวล่าง (ใต้ชื่อกลุ่ม): รวมเมนูตามหมวดหมู่เดียวกันเป็นปุ่มหมวดหมู่เดียว -->
-      <div class="tdt-global-sub-row" aria-label="เมนูหลักรวมตามหมวดหมู่">
+      <!-- ฝั่งขวา: เมนูแยกหมวดหมู่ + ปุ่มเพิ่ม/ลดตัวอักษร + ปุ่มโหมดสี ในแถวเดียวกัน -->
+      <div class="tdt-global-right-controls" aria-label="เมนูหลักและตัวช่วยปรับแต่งหน้าเว็บ">
         <a href="index.html" class="tdt-nav-btn active-home">
           <i class="fa-solid fa-house"></i>
           <span>หน้าหลัก</span>
         </a>
 
-        <!-- หมวดหมู่บริการสมาชิก (รวมเป็นปุ่มเดียว) -->
+        <!-- หมวดหมู่บริการสมาชิก -->
         <div class="tdt-cat-dropdown-wrap" id="dropdown-member-cat">
           <button type="button" onclick="toggleNavDropdown('member', event)" id="btn-cat-member" aria-expanded="false" class="tdt-nav-btn is-member-cat">
             <i class="fa-solid fa-users"></i>
@@ -550,7 +530,7 @@
           </div>
         </div>
 
-        <!-- หมวดหมู่บริการของกลุ่ม (รวมเป็นปุ่มเดียว) -->
+        <!-- หมวดหมู่บริการของกลุ่ม -->
         <div class="tdt-cat-dropdown-wrap" id="dropdown-group-cat">
           <button type="button" onclick="toggleNavDropdown('group', event)" id="btn-cat-group" aria-expanded="false" class="tdt-nav-btn is-group-cat">
             <i class="fa-solid fa-briefcase"></i>
@@ -568,7 +548,7 @@
             </a>
             <a href="vip_referral_guide.html" class="tdt-cat-menu-link">
               <span class="tdt-cat-menu-icon" style="background:rgba(168,85,247,0.16);color:#c084fc;border:1px solid rgba(192,132,252,0.3);"><i class="fa-solid fa-map-location-dot"></i></span>
-              <span><span class="tdt-cat-menu-title">[VIP] ลายแทงสถานที่ท่องเที่ยว</span><span class="tdt-cat-menu-sub">ขอรับลายแทงร้านค้า/สถานที่เพื่อรับค่าแนะนำ</span></span>
+              <span><span class="tdt-cat-menu-title">[VIP] ลายแทงสถานที่ท่องเที่ยว</span><span class="tdt-cat-link-sub">ขอรับลายแทงร้านค้า/สถานที่เพื่อรับค่าแนะนำ</span></span>
             </a>
             <a href="rtaf_pass_register.html" class="tdt-cat-menu-link">
               <span class="tdt-cat-menu-icon" style="background:rgba(59,130,246,0.16);color:#60a5fa;border:1px solid rgba(96,165,250,0.3);"><i class="fa-solid fa-plane-departure"></i></span>
@@ -589,6 +569,19 @@
           <i class="fa-solid fa-user-shield"></i>
           <span>ตรวจสอบ Blacklist</span>
         </a>
+
+        <div class="tdt-util-group" title="ปรับขนาดตัวอักษรและโหมดหน้าเว็บ">
+          <button type="button" onclick="changeFontScale(-1)" aria-label="ลดขนาดตัวอักษร" class="tdt-util-btn" title="ลดขนาดตัวอักษร">
+            <span>A-</span>
+          </button>
+          <span id="font-scale-label" class="text-[11px] font-bold text-amber-300 px-1 select-none">100%</span>
+          <button type="button" onclick="changeFontScale(1)" aria-label="เพิ่มขนาดตัวอักษร" class="tdt-util-btn" title="เพิ่มขนาดตัวอักษร">
+            <span>A+</span>
+          </button>
+          <button type="button" onclick="toggleThemeMode()" id="btn-theme-toggle-desktop" aria-label="สลับโหมดสีสว่างหรือสีเข้ม" class="tdt-util-btn" title="สลับโหมดสีสว่าง / สีเข้ม">
+            <i id="theme-icon-desktop" class="fa-solid fa-moon text-amber-300"></i>
+          </button>
+        </div>
       </div>
     </div>
   </nav>

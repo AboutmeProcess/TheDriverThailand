@@ -20,6 +20,9 @@
     width: 100%;
     max-width: 100%;
     overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
   }
 
   @keyframes floatSlow {
@@ -302,121 +305,9 @@
     background-color: rgba(251, 191, 36, 0.18);
     color: #fde68a;
   }
-  .tdt-desktop-nav-group {
-    display: none;
-  }
-  .tdt-mobile-nav-group {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .tdt-mobile-drawer {
-    display: none;
-    border-top: 1px solid #1e293b;
-    background-color: rgba(2, 6, 23, 0.98);
-    padding: 16px;
-    max-height: 82vh;
-    overflow-y: auto;
-  }
-  .tdt-mobile-drawer.is-open {
-    display: block;
-  }
-  @media (min-width: 1024px) {
-    .tdt-desktop-nav-group {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .tdt-mobile-nav-group,
-    .tdt-mobile-drawer {
-      display: none !important;
-    }
-  }
-  .tdt-global-brand {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 13px;
-    line-height: 1.25;
-    font-weight: 800;
-    color: #fbbf24;
-    text-decoration: none;
-    flex-shrink: 0;
-    transition: color 0.15s ease;
-  }
-  @media (min-width: 640px) {
-    .tdt-global-brand {
-      font-size: 14px;
-    }
-  }
-  .tdt-global-brand:hover {
-    color: #fde68a;
-  }
-  .tdt-global-brand:hover i {
-    animation: iconBouncePop 0.6s ease;
-  }
-  .tdt-global-links {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    overflow-x: auto;
-    padding: 2px 0;
-    margin: 0;
-  }
-  @media (min-width: 640px) {
-    .tdt-global-links {
-      gap: 8px;
-    }
-  }
-  .tdt-nav-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 6px 12px;
-    border-radius: 12px;
-    font-size: 12px;
-    line-height: 16px;
-    font-weight: 700;
-    text-decoration: none;
-    white-space: nowrap;
-    flex-shrink: 0;
-    background-color: rgba(15, 23, 42, 0.85);
-    border: 1px solid rgba(148, 163, 184, 0.25);
-    color: #e2e8f0;
-    transition: all 0.2s ease;
-  }
-  .tdt-nav-btn:hover {
-    background-color: #1e293b;
-    border-color: rgba(251, 191, 36, 0.45);
-    transform: translateY(-1px);
-  }
-  .tdt-nav-btn:hover i {
-    animation: iconBouncePop 0.55s ease;
-  }
-  .tdt-nav-btn.is-home i { color: #94a3b8; }
-  .tdt-nav-btn.is-pcard { color: #fcd34d; }
-  .tdt-nav-btn.is-pcard i { color: #fbbf24; }
-  .tdt-nav-btn.is-unblock { color: #7dd3fc; }
-  .tdt-nav-btn.is-unblock i { color: #38bdf8; }
-  .tdt-nav-btn.is-luxury { color: #fde68a; }
-  .tdt-nav-btn.is-luxury i { color: #f59e0b; }
-  .tdt-nav-btn.is-vip { color: #d8b4fe; }
-  .tdt-nav-btn.is-vip i { color: #c084fc; }
-  .tdt-nav-btn.is-rtaf { color: #93c5fd; }
-  .tdt-nav-btn.is-rtaf i { color: #60a5fa; }
-  .tdt-nav-btn.is-tourbook { color: #5eead4; }
-  .tdt-nav-btn.is-tourbook i { color: #2dd4bf; }
-  .tdt-nav-btn.is-blacklist { color: #fda4af; }
-  .tdt-nav-btn.is-blacklist i { color: #fb7185; }
-  .tdt-nav-btn.active-register {
-    background: linear-gradient(135deg, #34d399 0%, #059669 100%);
-    border-color: #6ee7b7;
-    color: #020617;
-    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
-  }
-  .tdt-nav-btn.active-register i { color: #020617; }
 
   .page-wrap {
+    flex: 1 0 auto;
     width: 100%;
     max-width: 1152px;
     margin: 0 auto;
@@ -895,6 +786,65 @@
     color: #D97706;
   }
 
+  /* UNIFIED GLOBAL SITE FOOTER (MATCHING INDEX.HTML & OTHER PAGES) */
+  .tdt-global-footer {
+    background: #020617;
+    color: #94a3b8;
+    border-top: 1px solid rgba(245, 158, 11, 0.2);
+    padding: 32px 16px;
+    font-size: 12px;
+    margin-top: 40px;
+    width: 100%;
+  }
+  .tdt-global-footer-inner {
+    max-width: 1152px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+  @media (min-width: 640px) {
+    .tdt-global-footer-inner {
+      flex-direction: row;
+    }
+  }
+  .tdt-footer-brand-block {
+    text-align: center;
+  }
+  @media (min-width: 640px) {
+    .tdt-footer-brand-block {
+      text-align: left;
+    }
+  }
+  .tdt-footer-title {
+    font-weight: 700;
+    color: #fcd34d;
+  }
+  .tdt-footer-sub {
+    font-size: 11px;
+    color: #64748b;
+    margin-top: 2px;
+  }
+  .tdt-footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    font-weight: 600;
+  }
+  .tdt-footer-links a {
+    color: #94a3b8;
+    text-decoration: none;
+    transition: color 0.18s ease;
+  }
+  .tdt-footer-links a.link-amber:hover { color: #fbbf24; }
+  .tdt-footer-links a.link-emerald:hover { color: #34d399; }
+  .tdt-footer-links a.link-teal:hover { color: #2dd4bf; }
+  .tdt-footer-links a.link-sky:hover { color: #38bdf8; }
+  .tdt-footer-links a.link-rose:hover { color: #fb7185; }
+
   @media (max-width: 768px) {
     .steps-grid, .compare-grid { grid-template-columns: 1fr; }
     .hero-title, .section-title, .faq-title { font-size: 20px; }
@@ -1169,6 +1119,25 @@
   </div>
 </div>
 
+<!-- UNIFIED GLOBAL SITE FOOTER -->
+<footer class="tdt-global-footer">
+  <div class="tdt-global-footer-inner">
+    <div class="tdt-footer-brand-block">
+      <p class="tdt-footer-title">🚖 The Driver TH 🇹🇭 Premium Service Official Network</p>
+      <p class="tdt-footer-sub">ศูนย์กลางระบบสมาชิก บัตรสมาชิกประเมศฐ์ และระบบเฝ้าระวังภัยกลุ่มคนขับรถรับจ้าง</p>
+    </div>
+    <div class="tdt-footer-links">
+      <a href="index.html" class="link-amber">หน้าหลัก</a>
+      <a href="register.html" class="link-emerald">ระบบสมาชิก</a>
+      <a href="member_register.html" class="link-teal">ลงทะเบียนสมาชิกใหม่</a>
+      <a href="pcard.html" class="link-amber">ทำบัตรสมาชิกประเมศฐ์</a>
+      <a href="unblock_request.html" class="link-sky">ขอปลดล็อก OpenChat</a>
+      <a href="blacklist.html" class="link-rose">ตรวจสอบ Blacklist</a>
+      <a href="privacy_policy.html" class="link-amber">ประกาศความเป็นส่วนตัว</a>
+    </div>
+  </div>
+</footer>
+
 <script>
   const csvFile = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRTvooz5EilsOQ9QuZqIB2o_1xIs_BwmOnyXk-21mIJezzpYqT1T9P_u-o49t_QMuyVV7zVlDe5iN80/pub?output=csv";
   let allData = [];
@@ -1268,14 +1237,6 @@
         panel.classList.toggle("is-open", open);
         if (chev) chev.style.transform = open ? "rotate(180deg)" : "rotate(0deg)";
       });
-    };
-    window.tdtToggleMobileDrawer = function () {
-      const drawer = document.getElementById("tdt-mobile-drawer");
-      const icon = document.getElementById("tdt-mobile-drawer-icon");
-      if (!drawer) return;
-      const open = !drawer.classList.contains("is-open");
-      drawer.classList.toggle("is-open", open);
-      if (icon) icon.className = open ? "fa-solid fa-xmark" : "fa-solid fa-bars";
     };
 
     document.addEventListener("click", function (ev) {

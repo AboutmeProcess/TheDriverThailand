@@ -1669,12 +1669,7 @@
 
     function formatFullPhoneDisplay(phoneRaw) {
       const cleaned = String(phoneRaw || "").trim();
-      if (!cleaned) return "-";
-      const digits = cleaned.replace(/\D/g, "");
-      if (digits.length === 10 && digits.startsWith("0")) {
-        return `${digits.slice(0, 3)}-${digits.slice(3, 6)}-${digits.slice(6)}`;
-      }
-      return cleaned;
+      return cleaned || "-";
     }
 
     function maskFullNameSurname(nameRaw) {

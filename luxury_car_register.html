@@ -6,10 +6,10 @@
   <title>ลงทะเบียนขอเข้าห้อง OpenChat Luxury Car | The Driver Thailand</title>
   <!-- โหลด Tailwind CSS สำหรับจัดเลย์เอาต์และการออกแบบ -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- โหลดฟอนต์ Prompt และ Inter จาก Google Fonts -->
+  <!-- โหลดฟอนต์ Prompt จาก Google Fonts (ฟอนต์เดียวทั้งเว็บไซต์) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <!-- โหลดไอคอน FontAwesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script>
@@ -17,7 +17,8 @@
       theme: {
         extend: {
           fontFamily: {
-            sans: ['Prompt', 'Inter', 'sans-serif'],
+            sans: ['Prompt', 'sans-serif'],
+            mono: ['Prompt', 'sans-serif'],
           },
           colors: {
             driver: {
@@ -37,8 +38,10 @@
     html {
       scroll-behavior: smooth;
     }
+    html, body, input, select, textarea, button, code, pre, .font-mono, .font-sans {
+      font-family: 'Prompt', sans-serif !important;
+    }
     html, body {
-      font-family: 'Prompt', 'Inter', sans-serif;
       background-color: #f8fafc;
       color: #0f172a;
       max-width: 100%;
@@ -173,8 +176,23 @@
     .tdt-nav-btn.is-register i { color: #34d399; }
     .tdt-nav-btn.is-pcard { color: #fcd34d; }
     .tdt-nav-btn.is-pcard i { color: #fbbf24; }
+    .tdt-nav-btn.is-unblock { color: #7dd3fc; }
+    .tdt-nav-btn.is-unblock i { color: #38bdf8; }
+    .tdt-nav-btn.is-vip { color: #d8b4fe; }
+    .tdt-nav-btn.is-vip i { color: #c084fc; }
+    .tdt-nav-btn.is-rtaf { color: #93c5fd; }
+    .tdt-nav-btn.is-rtaf i { color: #60a5fa; }
+    .tdt-nav-btn.is-tourbook { color: #5eead4; }
+    .tdt-nav-btn.is-tourbook i { color: #2dd4bf; }
     .tdt-nav-btn.is-blacklist { color: #fda4af; }
     .tdt-nav-btn.is-blacklist i { color: #fb7185; }
+    .tdt-nav-btn.active-luxury {
+      background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+      border-color: #fcd34d;
+      color: #060911;
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.35);
+    }
+    .tdt-nav-btn.active-luxury i { color: #060911; }
   </style>
 </head>
 <body class="text-slate-800 antialiased min-h-screen flex flex-col selection:bg-amber-400 selection:text-slate-950 relative">
@@ -200,6 +218,26 @@
         <a href="pcard.html" class="tdt-nav-btn is-pcard">
           <i class="fa-solid fa-id-badge"></i>
           <span>ทำบัตรสมาชิกประเมศฐ์</span>
+        </a>
+        <a href="unblock_request.html" class="tdt-nav-btn is-unblock">
+          <i class="fa-solid fa-unlock-keyhole"></i>
+          <span>ขอปลดล็อก OpenChat</span>
+        </a>
+        <a href="luxury_car_register.html" class="tdt-nav-btn active-luxury">
+          <i class="fa-solid fa-crown"></i>
+          <span>ห้อง Luxury Car</span>
+        </a>
+        <a href="vip_referral_guide.html" class="tdt-nav-btn is-vip">
+          <i class="fa-solid fa-map-location-dot"></i>
+          <span>[VIP] ลายแทงท่องเที่ยว</span>
+        </a>
+        <a href="rtaf_pass_register.html" class="tdt-nav-btn is-rtaf">
+          <i class="fa-solid fa-plane-departure"></i>
+          <span>บัตรผ่าน ทอ.</span>
+        </a>
+        <a href="tour_book_order.html" class="tdt-nav-btn is-tourbook">
+          <i class="fa-solid fa-book"></i>
+          <span>สั่งซื้อสมุดทัวร์</span>
         </a>
         <a href="blacklist.html" class="tdt-nav-btn is-blacklist">
           <i class="fa-solid fa-user-shield"></i>

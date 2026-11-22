@@ -1577,6 +1577,52 @@
       selectEl.value = currentSelected;
     }
 
+    // แปลงข้อความรอบการจัดส่งภาษาไทยเป็น timestamp เพื่อเรียงลำดับจากรอบใหม่ไปหารอบเก่า
+    function getRoundSortValue(roundStr) {
+      const norm = normalizeThaiRoundDate(roundStr);
+      const thaiMonths = {
+        'มกราคม': 1, 'กุมภาพันธ์': 2, 'มีนาคม': 3, 'เมษายน': 4,
+        'พฤษภาคม': 5, 'มิถุนายน': 6, 'กรกฎาคม': 7, 'สิงหาคม': 8,
+        'กันยายน': 9, 'ตุลาคม': 10, 'พฤศจิกายน': 11, 'ธันวาคม': 12
+      };
+      const match = String(norm || '').match(/(\d{1,2})\s+([^\s]+)\s+(\d{4})/);
+      if (match) {
+        const day = parseInt(match[1], 10);
+        const month = thaiMonths[match[2]] || 0;
+        const buddhistYear = parseInt(match[3], 10);
+        const ceYear = buddhistYear > 2400 ? buddhistYear - 543 : buddhistYear;
+        if (month > 0) {
+          return new Date(ceYear, month - 1, day).getTime();
+        }
+      }
+      const idx = baseHistoricalRounds.indexOf(norm);
+      if (idx !== -1) {
+        return (baseHistoricalRounds.length - idx) * 86400000;
+      }
+      return 0;
+    }
+
+    // ดึงลำดับความใหม่ของรายการจากรหัสอ้างอิงหรือตำแหน่งข้อมูลในชีต
+    function getItemRecencyScore(item, fallbackIdx = 0) {
+      const refStr = String(item?.refCode || '');
+      const refMatch = refStr.match(/PRM-(\d{4})(\d{2})(\d{2})-(\d{2})(\d{2})(\d{2})/);
+      if (refMatch) {
+        const dt = new Date(
+          Number(refMatch[1]),
+          Number(refMatch[2]) - 1,
+          Number(refMatch[3]),
+          Number(refMatch[4]),
+          Number(refMatch[5]),
+          Number(refMatch[6])
+        ).getTime();
+        if (!Number.isNaN(dt)) return dt;
+      }
+      if (typeof item?._sheetRowIndex === 'number') {
+        return item._sheetRowIndex;
+      }
+      return -fallbackIdx;
+    }
+
     function switchNavTab(tabName) {
       const secRegister = document.getElementById('section-register');
       const secShipping = document.getElementById('section-shipping');
@@ -1593,6 +1639,8 @@
         secShipping.classList.remove('hidden');
         btnShipping.className = "group px-3.5 py-2.5 sm:px-6 sm:py-3 rounded-2xl transition-all flex items-center justify-center gap-2 bg-slate-950 text-amber-400 border border-amber-400/30 shadow-md hover:bg-slate-800";
         btnRegister.className = "group px-3.5 py-2.5 sm:px-6 sm:py-3 rounded-2xl transition-all flex items-center justify-center gap-2 text-slate-700 hover:bg-amber-50 hover:text-amber-800 border border-slate-200 hover:border-amber-300";
+        const roundSelect = document.getElementById('filter-round-select');
+        if (roundSelect) roundSelect.value = 'ALL';
         fetchLiveDataFromAppsScript(false);
         filterShippingTable();
       }
@@ -2062,9 +2110,10 @@
         }
 
         const parsedItems = [];
-        rawList.forEach(raw => {
+        rawList.forEach((raw, rowIdx) => {
           const item = normalizeItem(raw);
           if (item && (item.fullName || item.refCode)) {
+            item._sheetRowIndex = rowIdx;
             parsedItems.push(item);
           }
         });
@@ -2128,16 +2177,26 @@
       const roundVal = document.getElementById('filter-round-select')?.value || 'ALL';
       const searchVal = (document.getElementById('filter-search-input')?.value || '').trim().toLowerCase();
 
-      const filtered = shippingData.filter(item => {
-        const itemRoundNormalized = normalizeThaiRoundDate(item.roundDate);
-        const matchRound = (roundVal === 'ALL' || itemRoundNormalized === roundVal);
-        const matchSearch = (!searchVal ||
-          (item.fullName && item.fullName.toLowerCase().includes(searchVal)) ||
-          (item.trackingNo && item.trackingNo.toLowerCase().includes(searchVal)) ||
-          (item.refCode && item.refCode.toLowerCase().includes(searchVal))
-        );
-        return matchRound && matchSearch;
-      });
+      const filtered = shippingData
+        .map((item, originalIdx) => ({ item, originalIdx }))
+        .filter(({ item }) => {
+          const itemRoundNormalized = normalizeThaiRoundDate(item.roundDate);
+          const matchRound = (roundVal === 'ALL' || itemRoundNormalized === roundVal);
+          const matchSearch = (!searchVal ||
+            (item.fullName && item.fullName.toLowerCase().includes(searchVal)) ||
+            (item.trackingNo && item.trackingNo.toLowerCase().includes(searchVal)) ||
+            (item.refCode && item.refCode.toLowerCase().includes(searchVal))
+          );
+          return matchRound && matchSearch;
+        })
+        .sort((a, b) => {
+          const roundDiff = getRoundSortValue(b.item.roundDate) - getRoundSortValue(a.item.roundDate);
+          if (roundDiff !== 0) return roundDiff;
+          const recencyDiff = getItemRecencyScore(b.item, b.originalIdx) - getItemRecencyScore(a.item, a.originalIdx);
+          if (recencyDiff !== 0) return recencyDiff;
+          return a.originalIdx - b.originalIdx;
+        })
+        .map(({ item }) => item);
 
       if (filtered.length === 0) {
         tbody.innerHTML = `
@@ -2201,6 +2260,9 @@
       const bannerRound = document.getElementById('banner-next-round-text');
       if (topRound) topRound.innerText = defaultRoundDate;
       if (bannerRound) bannerRound.innerText = defaultRoundDate;
+
+      const roundSelect = document.getElementById('filter-round-select');
+      if (roundSelect) roundSelect.value = 'ALL';
 
       handleCardTypeChange();
       updateRoundSelectOptions();

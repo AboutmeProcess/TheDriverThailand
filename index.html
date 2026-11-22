@@ -225,7 +225,7 @@
       border: none;
     }
 
-    /* COMPACT & RESPONSIVE GLOBAL NAVIGATION BAR (NO HORIZONTAL OVERFLOW) */
+    /* COMPACT & RESPONSIVE GLOBAL NAVIGATION BAR (LOCKED LAYOUT - DO NOT MODIFY) */
     .tdt-global-nav {
       box-sizing: border-box;
       font-family: 'Prompt', sans-serif;
@@ -464,6 +464,19 @@
       background-color: rgba(6, 78, 59, 0.22);
     }
     .tdt-nav-btn.is-member-cat i { color: #34d399; }
+    .tdt-nav-btn.is-quick-register {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      border-color: #34d399;
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.28);
+    }
+    .tdt-nav-btn.is-quick-register:hover {
+      background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+      border-color: #6ee7b7;
+      color: #020617;
+    }
+    .tdt-nav-btn.is-quick-register i { color: #ffffff; }
+    .tdt-nav-btn.is-quick-register:hover i { color: #020617; }
     .tdt-nav-btn.is-group-cat {
       color: #fcd34d;
       border-color: rgba(251, 191, 36, 0.38);
@@ -522,8 +535,8 @@
     </button>
   </div>
 
-  <!-- GLOBAL NAVIGATION BAR -->
-  <nav class="tdt-global-nav">
+  <!-- LOCKED GLOBAL NAVIGATION BAR (DO NOT MODIFY) -->
+  <nav class="tdt-global-nav" data-locked-header="true">
     <div class="tdt-global-nav-inner">
       <div class="tdt-nav-top-row">
         <!-- โลโก้เต็มกรอบแบบเรียบหรู + ข้อความหัวเรื่องแบบชิดซ้าย ตัวหนังสือไม่หนา -->
@@ -560,6 +573,11 @@
         <a href="index.html" class="tdt-nav-btn active-home">
           <i class="fa-solid fa-house"></i>
           <span>หน้าหลัก</span>
+        </a>
+
+        <a href="member_register.html" class="tdt-nav-btn is-quick-register">
+          <i class="fa-solid fa-file-signature"></i>
+          <span>ลงทะเบียนสมาชิกใหม่</span>
         </a>
 
         <!-- หมวดหมู่บริการสมาชิก -->
@@ -615,19 +633,19 @@
             </a>
             <a href="vip_referral_guide.html" class="tdt-cat-menu-link">
               <span class="tdt-cat-menu-icon" style="background:rgba(168,85,247,0.16);color:#c084fc;border:1px solid rgba(192,132,252,0.3);"><i class="fa-solid fa-map-location-dot"></i></span>
-              <span><span class="tdt-cat-menu-title">[VIP] ลายแทงสถานที่ท่องเที่ยว</span><span class="tdt-cat-menu-sub">ขอรับลายแทงร้านค้า/สถานที่เพื่อรับค่าแนะนำ</span></span>
+              <span><span class="tdt-cat-menu-title">[VIP] ลายแทงสถานที่ท่องเที่ยว</span><span class="tdt-cat-link-sub">ขอรับลายแทงร้านค้า/สถานที่เพื่อรับค่าแนะนำ</span></span>
             </a>
             <a href="rtaf_pass_register.html" class="tdt-cat-menu-link">
               <span class="tdt-cat-menu-icon" style="background:rgba(59,130,246,0.16);color:#60a5fa;border:1px solid rgba(96,165,250,0.3);"><i class="fa-solid fa-plane-departure"></i></span>
-              <span><span class="tdt-cat-menu-title">ทำบัตรผ่านยานพาหนะ ทอ. (ดอนเมือง)</span><span class="tdt-cat-menu-sub">ขอทำบัตรผ่านเข้า - ออก เขตพื้นที่ ทอ.</span></span>
+              <span><span class="tdt-cat-menu-title">ทำบัตรผ่านยานพาหนะ ทอ. (ดอนเมือง)</span><span class="tdt-cat-link-sub">ขอทำบัตรผ่านเข้า - ออก เขตพื้นที่ ทอ.</span></span>
             </a>
             <a href="tour_book_order.html" class="tdt-cat-menu-link">
               <span class="tdt-cat-menu-icon" style="background:rgba(20,184,166,0.16);color:#2dd4bf;border:1px solid rgba(45,212,191,0.3);"><i class="fa-solid fa-book"></i></span>
-              <span><span class="tdt-cat-menu-title">บริการสั่งซื้อสมุดทัวร์</span><span class="tdt-cat-menu-sub">โซนกรุงเทพฯ-ปริมณฑล และ พัทยา-ชลบุรี</span></span>
+              <span><span class="tdt-cat-menu-title">บริการสั่งซื้อสมุดทัวร์</span><span class="tdt-cat-link-sub">โซนกรุงเทพฯ-ปริมณฑล และ พัทยา-ชลบุรี</span></span>
             </a>
             <a href="privacy_policy.html" class="tdt-cat-menu-link">
               <span class="tdt-cat-menu-icon" style="background:rgba(148,163,184,0.16);color:#cbd5e1;border:1px solid rgba(148,163,184,0.3);"><i class="fa-solid fa-scale-balanced"></i></span>
-              <span><span class="tdt-cat-menu-title">ประกาศความเป็นส่วนตัว (PDPA)</span><span class="tdt-cat-menu-sub">นโยบายคุ้มครองข้อมูลส่วนบุคคลของกลุ่ม</span></span>
+              <span><span class="tdt-cat-link-title">ประกาศความเป็นส่วนตัว (PDPA)</span><span class="tdt-cat-link-sub">นโยบายคุ้มครองข้อมูลส่วนบุคคลของกลุ่ม</span></span>
             </a>
           </div>
         </div>

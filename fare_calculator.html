@@ -12,7 +12,27 @@
   <style>
     html { font-size: 16px; transition: font-size 0.18s ease; }
     html, body, input, select, textarea, button { font-family: 'Prompt', sans-serif !important; }
-    body { background-color: #f8fafc; color: #0f172a; overflow-x: clip; }
+    body { background-color: #070a12; color: #f8fafc; overflow-x: clip; }
+    .dark-surface-card {
+      background: rgba(15, 23, 42, 0.94);
+      border: 1px solid rgba(251, 191, 36, 0.24);
+      color: #f8fafc;
+      box-shadow: 0 18px 38px -14px rgba(2, 6, 23, 0.72);
+    }
+    .dark-field {
+      background-color: #070b14;
+      border: 1px solid #334155;
+      color: #f8fafc;
+      transition: border-color 0.2s ease, background-color 0.2s ease;
+    }
+    .dark-field::placeholder {
+      color: #64748b;
+    }
+    .dark-field:focus {
+      outline: none;
+      border-color: #fbbf24;
+      background-color: #0b1120;
+    }
 
     /* UNIFIED GLOBAL NAVIGATION BAR (MATCHING INDEX.HTML) */
     .tdt-global-nav {
@@ -383,17 +403,17 @@
   </nav>
 
   <main class="flex-grow max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-6">
-    <section class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
-      <div class="border-b border-slate-200 pb-4">
-        <span class="text-xs font-extrabold text-emerald-800 bg-emerald-100 px-3 py-1 rounded-full">STANDARD FARE ESTIMATOR</span>
-        <h1 class="text-xl sm:text-2xl font-black text-slate-900 pt-2">คำนวณราคากลางงานเหมา / รับ-ส่งสนามบิน</h1>
-        <p class="text-xs sm:text-sm text-slate-500">เลือกเส้นทางยอดนิยมหรือระบุระยะทางกิโลเมตร เพื่อคำนวณราคามาตรฐานตามประเภทรถและคัดลอกใบเสนอราคาส่งลูกค้า</p>
+    <section class="dark-surface-card rounded-3xl p-6 sm:p-8 space-y-6">
+      <div class="border-b border-slate-800 pb-4">
+        <span class="text-xs font-extrabold text-emerald-300 bg-emerald-950/80 border border-emerald-500/40 px-3 py-1 rounded-full">STANDARD FARE ESTIMATOR</span>
+        <h1 class="text-xl sm:text-2xl font-black text-amber-300 pt-2">คำนวณราคากลางงานเหมา / รับ-ส่งสนามบิน</h1>
+        <p class="text-xs sm:text-sm text-slate-400">เลือกเส้นทางยอดนิยมหรือระบุระยะทางกิโลเมตร เพื่อคำนวณราคามาตรฐานตามประเภทรถและคัดลอกใบเสนอราคาส่งลูกค้า</p>
       </div>
 
       <div class="grid sm:grid-cols-2 gap-4">
         <div class="space-y-1.5">
-          <label class="block text-xs font-bold text-slate-700">เลือกเส้นทางด่วน (หรือกำหนดระยะทางเอง)</label>
-          <select id="preset-route" onchange="applyPresetRoute()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
+          <label class="block text-xs font-bold text-slate-300">เลือกเส้นทางด่วน (หรือกำหนดระยะทางเอง)</label>
+          <select id="preset-route" onchange="applyPresetRoute()" class="dark-field w-full rounded-xl px-4 py-3 text-xs sm:text-sm">
             <option value="custom">-- กำหนดระยะทางกิโลเมตรเอง --</option>
             <option value="35|สุวรรณภูมิ - กรุงเทพฯ ชั้นใน">สุวรรณภูมิ ↔ กรุงเทพฯ ชั้นใน (~35 กม.)</option>
             <option value="125|กรุงเทพฯ - พัทยา">กรุงเทพฯ ↔ พัทยา (~125 กม.)</option>
@@ -405,8 +425,8 @@
         </div>
 
         <div class="space-y-1.5">
-          <label class="block text-xs font-bold text-slate-700">ประเภทรถยนต์ที่ให้บริการ</label>
-          <select id="car-tier" onchange="calculateFare()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
+          <label class="block text-xs font-bold text-slate-300">ประเภทรถยนต์ที่ให้บริการ</label>
+          <select id="car-tier" onchange="calculateFare()" class="dark-field w-full rounded-xl px-4 py-3 text-xs sm:text-sm">
             <option value="500|11|Sedan (เก๋งมาตรฐาน)">Sedan (เก๋งมาตรฐาน) — เริ่มต้น 500 + 11 บ./กม.</option>
             <option value="700|14|SUV / PPV (7 ที่นั่ง)">SUV / PPV (7 ที่นั่ง) — เริ่มต้น 700 + 14 บ./กม.</option>
             <option value="1200|18|VIP Van (Commuter / Staria)">VIP Van (Commuter / Staria) — เริ่มต้น 1,200 + 18 บ./กม.</option>
@@ -415,13 +435,13 @@
         </div>
 
         <div class="space-y-1.5">
-          <label class="block text-xs font-bold text-slate-700">ระยะทางรวม (กิโลเมตร)</label>
-          <input type="number" id="distance-km" value="125" min="1" oninput="calculateFare()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-mono">
+          <label class="block text-xs font-bold text-slate-300">ระยะทางรวม (กิโลเมตร)</label>
+          <input type="number" id="distance-km" value="125" min="1" oninput="calculateFare()" class="dark-field w-full rounded-xl px-4 py-3 text-xs sm:text-sm font-mono">
         </div>
 
         <div class="space-y-1.5">
-          <label class="block text-xs font-bold text-slate-700">ค่าทางด่วน / มอเตอร์เวย์โดยประมาณ (บาท)</label>
-          <input type="number" id="toll-fee" value="150" min="0" oninput="calculateFare()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-mono">
+          <label class="block text-xs font-bold text-slate-300">ค่าทางด่วน / มอเตอร์เวย์โดยประมาณ (บาท)</label>
+          <input type="number" id="toll-fee" value="150" min="0" oninput="calculateFare()" class="dark-field w-full rounded-xl px-4 py-3 text-xs sm:text-sm font-mono">
         </div>
       </div>
 

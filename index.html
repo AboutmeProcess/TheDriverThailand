@@ -1035,20 +1035,40 @@
                     <i class="fa-solid fa-arrow-right text-[11px]"></i>
                   </a>
                   <a id="billboard-secondary-link" href="register.html"
-      <!-- ปุ่มตัวกรองหมวดหมู่บริการทั้ง 19 ระบบ -->
-      <div class="flex flex-wrap items-center justify-center gap-2">
-        <button type="button" onclick="filterServiceCards('ALL')" data-filter="ALL" class="service-filter-btn bg-amber-400 text-slate-950 font-bold text-xs px-4 py-2 rounded-full shadow-sm transition">
-          ทั้งหมด (19 บริการ)
-        </button>
-        <button type="button" onclick="filterServiceCards('member')" data-filter="member" class="service-filter-btn bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 font-semibold text-xs px-4 py-2 rounded-full transition">
-          🪪 งานทะเบียน &amp; บัตรสมาชิก
-        </button>
-        <button type="button" onclick="filterServiceCards('community')" data-filter="community" class="service-filter-btn bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 font-semibold text-xs px-4 py-2 rounded-full transition">
-          💬 ชุมชน ข่าวสาร &amp; สมัครแอป
-        </button>
-        <button type="button" onclick="filterServiceCards('safety')" data-filter="safety" class="service-filter-btn bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 font-semibold text-xs px-4 py-2 rounded-full transition">
-          🛡️ ประกันภัย &amp; ความปลอดภัย
-        </button>
+                    class="inline-flex items-center justify-center gap-1.5 bg-white/10 hover:bg-white/15 text-amber-200 border border-amber-400/35 font-bold text-xs px-3.5 py-3 rounded-xl transition">
+                    <span id="billboard-secondary-label">ตรวจสอบรหัสสมาชิก</span>
+                  </a>
+                </div>
+
+                <!-- แถบควบคุมสไลด์ Carousel (ปุ่มก่อนหน้า/ถัดไป + จุดบอกสไลด์) -->
+                <div class="flex items-center justify-between gap-3 pt-2 border-t border-white/10">
+                  <button type="button" onclick="prevBillboardSlide()" aria-label="สไลด์ก่อนหน้า" class="billboard-nav-btn">
+                    <i class="fa-solid fa-chevron-left text-xs"></i>
+                  </button>
+                  <div id="billboard-dots" class="flex items-center justify-center gap-1.5 flex-wrap"></div>
+                  <button type="button" onclick="nextBillboardSlide()" aria-label="สไลด์ถัดไป" class="billboard-nav-btn">
+                    <i class="fa-solid fa-chevron-right text-xs"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN SERVICE DIRECTORY -->
+  <main class="flex-grow max-w-6xl w-full mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-8">
+    <section class="space-y-6">
+      <div class="text-center max-w-2xl mx-auto space-y-2">
+        <span class="text-xs font-extrabold uppercase tracking-wider text-amber-300 bg-amber-500/15 border border-amber-400/35 px-3.5 py-1 rounded-full">
+          SERVICE DIRECTORY
+        </span>
+        <h2 class="text-2xl sm:text-3xl font-black text-white">บริการทั้งหมดของเครือข่าย</h2>
+        <p class="text-xs sm:text-sm text-slate-300 font-light">
+          เลือกใช้งานระบบที่ต้องการได้ทันที ทุกบริการเชื่อมต่อกับฐานข้อมูลกลางของกลุ่ม 🚖 The Driver TH 🇹🇭 Premium Service
+        </p>
       </div>
 
       <div id="service-cards-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">

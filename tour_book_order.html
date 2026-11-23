@@ -589,9 +589,10 @@
                     <span class="text-xs text-slate-400 block mt-0.5">สมุดทัวร์ แนะนำการท่องเที่ยว กรุงเทพมหานคร และ ปริมณฑล</span>
                   </div>
                 </div>
-                <span id="badge-price-bkk" class="bg-amber-400 text-slate-950 font-black px-3 py-1 rounded-xl text-xs sm:text-sm shrink-0">
-                  799 บาท/เล่ม
-                </span>
+                <div id="badge-price-bkk" class="bg-amber-400 text-slate-950 font-black px-3 py-1.5 rounded-xl text-xs sm:text-sm shrink-0 text-right leading-tight">
+                  <span class="line-through text-[10px] text-slate-700 font-bold block">ปกติ 999 บ.</span>
+                  <span>เหลือ 799 บาท/เล่ม</span>
+                </div>
               </div>
               <div class="pt-2 border-t border-slate-800 flex items-center justify-between text-[11px] text-slate-300">
                 <span><i class="fa-solid fa-truck text-emerald-400 mr-1"></i> รวมค่าจัดส่งพัสดุแล้ว</span>
@@ -608,9 +609,10 @@
                     <span class="text-xs text-slate-400 block mt-0.5">สมุดทัวร์ แนะนำการท่องเที่ยว พัทยา และ ชลบุรี</span>
                   </div>
                 </div>
-                <span id="badge-price-pty" class="bg-slate-800 text-amber-300 border border-amber-400/30 font-black px-3 py-1 rounded-xl text-xs sm:text-sm shrink-0">
-                  999 บาท/เล่ม
-                </span>
+                <div id="badge-price-pty" class="bg-slate-800 text-amber-300 border border-amber-400/30 font-black px-3 py-1.5 rounded-xl text-xs sm:text-sm shrink-0 text-right leading-tight">
+                  <span class="line-through text-[10px] text-slate-400 font-bold block">ปกติ 1,199 บ.</span>
+                  <span>เหลือ 999 บาท/เล่ม</span>
+                </div>
               </div>
               <div class="pt-2 border-t border-slate-800 flex items-center justify-between text-[11px] text-slate-300">
                 <span><i class="fa-solid fa-truck text-emerald-400 mr-1"></i> รวมค่าจัดส่งพัสดุแล้ว</span>
@@ -772,12 +774,14 @@
       BKK: {
         code: 'BKK',
         name: 'กรุงเทพ และ ปริมณฑล',
+        fullPrice: 999,
         unitPrice: 799,
         googleFormUrl: 'https://forms.gle/6i84qmJ5hsw6M3rJ9'
       },
       PTY: {
         code: 'PTY',
         name: 'พัทยา ชลบุรี',
+        fullPrice: 1199,
         unitPrice: 999,
         googleFormUrl: 'https://forms.gle/77YyNCXtiexZsPbs6'
       }
@@ -857,8 +861,8 @@
 
       const activeCardClass = 'border-2 border-amber-400 bg-slate-900 rounded-2xl p-4 sm:p-5 cursor-pointer hover:border-amber-300 transition flex flex-col justify-between gap-3 shadow-sm';
       const defaultCardClass = 'border-2 border-slate-700 bg-slate-900 rounded-2xl p-4 sm:p-5 cursor-pointer hover:border-amber-400 transition flex flex-col justify-between gap-3 shadow-sm';
-      const activeBadgeClass = 'bg-amber-400 text-slate-950 font-black px-3 py-1 rounded-xl text-xs sm:text-sm shrink-0';
-      const defaultBadgeClass = 'bg-slate-800 text-amber-300 border border-amber-400/30 font-black px-3 py-1 rounded-xl text-xs sm:text-sm shrink-0';
+      const activeBadgeClass = 'bg-amber-400 text-slate-950 font-black px-3 py-1.5 rounded-xl text-xs sm:text-sm shrink-0 text-right leading-tight';
+      const defaultBadgeClass = 'bg-slate-800 text-amber-300 border border-amber-400/30 font-black px-3 py-1.5 rounded-xl text-xs sm:text-sm shrink-0 text-right leading-tight';
 
       if (zone.code === 'BKK') {
         if (labelBkk) labelBkk.className = activeCardClass;
@@ -876,7 +880,7 @@
       const totalEl = document.getElementById('total-price-display');
       const payBadgeEl = document.getElementById('payment-amount-badge');
 
-      if (formulaEl) formulaEl.textContent = `${zone.name} (${zone.unitPrice.toLocaleString()} บาท × ${qty} เล่ม)`;
+      if (formulaEl) formulaEl.textContent = `${zone.name} (ราคาเต็ม ${zone.fullPrice.toLocaleString()} บ. → ลดเหลือ ${zone.unitPrice.toLocaleString()} บาท × ${qty} เล่ม)`;
       if (totalEl) totalEl.textContent = `${totalAmount.toLocaleString()} บาท`;
       if (payBadgeEl) payBadgeEl.textContent = `ยอดโอน: ${totalAmount.toLocaleString()} บาท`;
 

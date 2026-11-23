@@ -4,6 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🚖 The Driver TH 🇹🇭 Premium Service | ศูนย์กลางเครือข่ายคนขับรถมืออาชีพ</title>
+  <meta name="theme-color" content="#070a12">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="TheDriverTH">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="TheDriverTH.jpg">
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Google Fonts: Prompt Only (Unified Typography) -->
@@ -603,15 +609,15 @@
         <span class="bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-extrabold px-2.5 py-0.5 rounded-full text-[11px] shadow-sm">
           <i class="fa-solid fa-bullhorn mr-1"></i> OFFICIAL ANNOUNCEMENT
         </span>
-        <span class="text-slate-300 font-medium">ประกาศและรอบการจัดส่งบริการสำหรับสมาชิกเครือข่าย</span>
+        <span id="site-announcement-text" class="text-slate-300 font-medium">ประกาศและรอบการจัดส่งบริการสำหรับสมาชิกเครือข่าย</span>
       </div>
       <div class="flex items-center gap-3 text-xs">
         <span class="text-amber-300 font-semibold">
-          <i class="fa-solid fa-calendar-check mr-1"></i> รอบส่งบัตรถัดไป: 11 ธันวาคม 2569
+          <i class="fa-solid fa-calendar-check mr-1"></i> รอบส่งบัตรถัดไป: <span id="site-next-round-text">11 ธันวาคม 2569</span>
         </span>
         <span class="hidden md:inline text-slate-700">|</span>
         <span class="hidden md:inline-flex items-center gap-1.5 text-emerald-400 font-semibold">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> ระบบออนไลน์พร้อมใช้งาน
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> <span id="site-system-status-text">ระบบออนไลน์พร้อมใช้งาน</span>
         </span>
       </div>
     </div>
@@ -891,9 +897,25 @@
         <p class="text-xs sm:text-sm text-slate-500">เลือกใช้งานระบบออนไลน์ที่ออกแบบมาเพื่อความสะดวก หรูหรา และปลอดภัยของสมาชิกคนขับรถโดยเฉพาะ</p>
       </div>
 
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+      <!-- ปุ่มตัวกรองหมวดหมู่บริการทั้ง 17 ระบบ -->
+      <div class="flex flex-wrap items-center justify-center gap-2">
+        <button type="button" onclick="filterServiceCards('ALL')" data-filter="ALL" class="service-filter-btn bg-slate-950 text-amber-400 font-bold text-xs px-4 py-2 rounded-full shadow-sm transition">
+          ทั้งหมด (17 บริการ)
+        </button>
+        <button type="button" onclick="filterServiceCards('member')" data-filter="member" class="service-filter-btn bg-white hover:bg-amber-50 text-slate-700 border border-slate-200 font-semibold text-xs px-4 py-2 rounded-full transition">
+          🪪 งานทะเบียน &amp; บัตรสมาชิก
+        </button>
+        <button type="button" onclick="filterServiceCards('community')" data-filter="community" class="service-filter-btn bg-white hover:bg-amber-50 text-slate-700 border border-slate-200 font-semibold text-xs px-4 py-2 rounded-full transition">
+          💬 ชุมชน &amp; แลกเปลี่ยนงาน
+        </button>
+        <button type="button" onclick="filterServiceCards('safety')" data-filter="safety" class="service-filter-btn bg-white hover:bg-amber-50 text-slate-700 border border-slate-200 font-semibold text-xs px-4 py-2 rounded-full transition">
+          🛡️ เครื่องมือ &amp; ความปลอดภัย
+        </button>
+      </div>
+
+      <div id="service-cards-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
         <!-- Service Card 1: Member Directory -->
-        <div class="group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
+        <div data-cat="member" class="service-card-item group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
           <div class="space-y-3">
             <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-50 to-emerald-100 border border-emerald-200 text-emerald-600 flex items-center justify-center text-xl shadow-sm">
               <i class="fa-solid fa-users-viewfinder icon-bounce-hover"></i>
@@ -910,7 +932,7 @@
         </div>
 
         <!-- Service Card 2: New Member Registration Form -->
-        <div class="group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
+        <div data-cat="member" class="service-card-item group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
           <div class="space-y-3">
             <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-teal-50 to-teal-100 border border-teal-200 text-teal-600 flex items-center justify-center text-xl shadow-sm">
               <i class="fa-solid fa-file-signature icon-bounce-hover"></i>
@@ -927,7 +949,7 @@
         </div>
 
         <!-- Service Card 3: Pramet Member Card -->
-        <div class="group bg-white rounded-3xl p-6 border-2 border-amber-400/80 shadow-md card-luxury flex flex-col justify-between space-y-5 relative">
+        <div data-cat="member" class="service-card-item group bg-white rounded-3xl p-6 border-2 border-amber-400/80 shadow-md card-luxury flex flex-col justify-between space-y-5 relative">
           <span class="absolute top-4 right-4 text-[10px] font-extrabold bg-gradient-to-r from-amber-400 to-yellow-400 text-slate-950 px-3 py-0.5 rounded-full shadow-sm">
             <i class="fa-solid fa-star mr-1"></i>แนะนำ
           </span>
@@ -947,7 +969,7 @@
         </div>
 
         <!-- Service Card 4: OpenChat Unblock Appeal -->
-        <div class="group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
+        <div data-cat="safety" class="service-card-item group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
           <div class="space-y-3">
             <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-sky-50 to-sky-100 border border-sky-200 text-sky-600 flex items-center justify-center text-xl shadow-sm">
               <i class="fa-solid fa-unlock-keyhole icon-bounce-hover"></i>
@@ -964,7 +986,7 @@
         </div>
 
         <!-- Service Card 5: Blacklist Guard -->
-        <div class="group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
+        <div data-cat="safety" class="service-card-item group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
           <div class="space-y-3">
             <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-rose-50 to-rose-100 border border-rose-200 text-rose-600 flex items-center justify-center text-xl shadow-sm">
               <i class="fa-solid fa-user-shield icon-bounce-hover"></i>
@@ -981,7 +1003,7 @@
         </div>
 
         <!-- Service Card 6: Privacy Policy & Rules -->
-        <div class="group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
+        <div data-cat="safety" class="service-card-item group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
           <div class="space-y-3">
             <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-slate-100 to-slate-200 border border-slate-300 text-slate-700 flex items-center justify-center text-xl shadow-sm">
               <i class="fa-solid fa-scale-balanced icon-bounce-hover"></i>
@@ -998,7 +1020,7 @@
         </div>
 
         <!-- Service Card 7: Edit Member Info -->
-        <div class="group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
+        <div data-cat="member" class="service-card-item group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
           <div class="space-y-3">
             <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-50 to-orange-100 border border-amber-200 text-amber-600 flex items-center justify-center text-xl shadow-sm">
               <i class="fa-solid fa-user-pen icon-bounce-hover"></i>
@@ -1015,7 +1037,7 @@
         </div>
 
         <!-- Service Card 8: Luxury Car OpenChat -->
-        <div class="group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
+        <div data-cat="community" class="service-card-item group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
           <div class="space-y-3">
             <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-yellow-50 to-amber-100 border border-amber-300 text-amber-700 flex items-center justify-center text-xl shadow-sm">
               <i class="fa-solid fa-crown icon-bounce-hover"></i>
@@ -1032,7 +1054,7 @@
         </div>
 
         <!-- Service Card 9: [VIP] Tourism Referral Guide -->
-        <div class="group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
+        <div data-cat="community" class="service-card-item group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
           <div class="space-y-3">
             <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-50 to-indigo-100 border border-purple-200 text-purple-600 flex items-center justify-center text-xl shadow-sm">
               <i class="fa-solid fa-map-location-dot icon-bounce-hover"></i>
@@ -1049,7 +1071,7 @@
         </div>
 
         <!-- Service Card 10: RTAF Don Mueang Pass -->
-        <div class="group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
+        <div data-cat="member" class="service-card-item group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
           <div class="space-y-3">
             <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-50 to-sky-100 border border-blue-200 text-blue-600 flex items-center justify-center text-xl shadow-sm">
               <i class="fa-solid fa-plane-departure icon-bounce-hover"></i>
@@ -1066,7 +1088,7 @@
         </div>
 
         <!-- Service Card 11: Tour Book Order -->
-        <div class="group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
+        <div data-cat="community" class="service-card-item group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
           <div class="space-y-3">
             <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-teal-50 to-emerald-100 border border-teal-200 text-teal-700 flex items-center justify-center text-xl shadow-sm">
               <i class="fa-solid fa-book icon-bounce-hover"></i>
@@ -1083,7 +1105,7 @@
         </div>
 
         <!-- Service Card 12: Unified Request Tracking -->
-        <div class="group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
+        <div data-cat="member" class="service-card-item group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
           <div class="space-y-3">
             <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-50 to-yellow-100 border border-amber-300 text-amber-600 flex items-center justify-center text-xl shadow-sm">
               <i class="fa-solid fa-satellite-dish icon-bounce-hover"></i>
@@ -1100,7 +1122,7 @@
         </div>
 
         <!-- Service Card 13: Digital Member Card & QR -->
-        <div class="group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
+        <div data-cat="member" class="service-card-item group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
           <div class="space-y-3">
             <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-50 to-green-100 border border-emerald-200 text-emerald-600 flex items-center justify-center text-xl shadow-sm">
               <i class="fa-solid fa-qrcode icon-bounce-hover"></i>
@@ -1117,7 +1139,7 @@
         </div>
 
         <!-- Service Card 14: Dispatch Job Board -->
-        <div class="group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
+        <div data-cat="community" class="service-card-item group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
           <div class="space-y-3">
             <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-50 to-orange-100 border border-amber-200 text-amber-700 flex items-center justify-center text-xl shadow-sm">
               <i class="fa-solid fa-handshake icon-bounce-hover"></i>
@@ -1134,7 +1156,7 @@
         </div>
 
         <!-- Service Card 15: Community Forum -->
-        <div class="group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
+        <div data-cat="community" class="service-card-item group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
           <div class="space-y-3">
             <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-sky-50 to-indigo-100 border border-sky-200 text-sky-600 flex items-center justify-center text-xl shadow-sm">
               <i class="fa-solid fa-comments icon-bounce-hover"></i>
@@ -1151,7 +1173,7 @@
         </div>
 
         <!-- Service Card 16: Standard Fare Calculator -->
-        <div class="group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
+        <div data-cat="safety" class="service-card-item group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
           <div class="space-y-3">
             <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-50 to-teal-100 border border-emerald-200 text-emerald-700 flex items-center justify-center text-xl shadow-sm">
               <i class="fa-solid fa-calculator icon-bounce-hover"></i>
@@ -1168,7 +1190,7 @@
         </div>
 
         <!-- Service Card 17: Member Handbook & Guide -->
-        <div class="group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
+        <div data-cat="safety" class="service-card-item group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
           <div class="space-y-3">
             <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-slate-100 to-slate-200 border border-slate-300 text-slate-700 flex items-center justify-center text-xl shadow-sm">
               <i class="fa-solid fa-book-open icon-bounce-hover"></i>
@@ -1525,7 +1547,45 @@
     document.addEventListener("DOMContentLoaded", function () {
       renderBillboardSlide(0);
       syncBillboardTimer();
+      loadAdminSiteSettings();
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("./sw.js").catch(() => {});
+      }
     });
+
+    function filterServiceCards(cat) {
+      document.querySelectorAll(".service-filter-btn").forEach(btn => {
+        const active = btn.getAttribute("data-filter") === cat;
+        btn.className = active
+          ? "service-filter-btn bg-slate-950 text-amber-400 font-bold text-xs px-4 py-2 rounded-full shadow-sm transition"
+          : "service-filter-btn bg-white hover:bg-amber-50 text-slate-700 border border-slate-200 font-semibold text-xs px-4 py-2 rounded-full transition";
+      });
+      document.querySelectorAll(".service-card-item").forEach(card => {
+        const match = cat === "ALL" || card.getAttribute("data-cat") === cat;
+        card.style.display = match ? "" : "none";
+      });
+    }
+
+    async function loadAdminSiteSettings() {
+      const endpoint = "https://script.google.com/macros/s/AKfycbyeDCdxBD10D_AFZQY2NxeylLOiAmAHLesSDZHXYCb3TsYs4wYer_kRTPVOs3VpK2pP/exec?action=site_settings";
+      try {
+        const res = await fetch(`${endpoint}&t=${Date.now()}`);
+        const json = await res.json();
+        const cfg = json && json.settings ? json.settings : {};
+        if (cfg.announcement) {
+          const el = document.getElementById("site-announcement-text");
+          if (el) el.textContent = cfg.announcement;
+        }
+        if (cfg.nextRound) {
+          const el = document.getElementById("site-next-round-text");
+          if (el) el.textContent = cfg.nextRound.replace(/^รอบวันที่\s*/, "");
+        }
+        if (cfg.systemStatus) {
+          const el = document.getElementById("site-system-status-text");
+          if (el) el.textContent = cfg.systemStatus;
+        }
+      } catch (_) {}
+    }
   </script>
 </body>
 </html>

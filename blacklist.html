@@ -30,21 +30,21 @@
         };
     </script>
     <style>
-        html {
-            scroll-behavior: smooth;
-            font-size: 16px;
-            transition: font-size 0.18s ease;
-        }
-        html, body, input, select, textarea, button, code, pre, .font-mono, .font-sans {
-            font-family: 'Prompt', sans-serif !important;
-        }
-        html, body {
-            background-color: #f8fafc;
-            color: #0f172a;
-            max-width: 100%;
-            overflow-x: clip;
-        }
-        ::-webkit-scrollbar {
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+      transition: font-size 0.18s ease;
+    }
+    html, body, input, select, textarea, button, code, pre, .font-mono, .font-sans {
+      font-family: 'Prompt', sans-serif !important;
+    }
+    html, body {
+      background-color: #070a12 !important;
+      color: #f8fafc !important;
+      max-width: 100%;
+      overflow-x: clip;
+    }
+    ::-webkit-scrollbar {
             width: 6px;
             height: 6px;
         }
@@ -177,18 +177,18 @@
             line-height: 1.25;
         }
         .tdt-brand-logo-img {
-            width: 50px;
-            height: 50px;
-            border-radius: 15px;
-            object-fit: cover;
-            object-position: center;
-            background: #ffffff;
-            padding: 0;
-            border: 1.5px solid rgba(251, 191, 36, 0.85);
-            box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.55), 0 0 0 2px rgba(251, 191, 36, 0.16);
-            flex-shrink: 0;
-            transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
-        }
+    width: 50px;
+    height: 50px;
+    border-radius: 15px;
+    object-fit: cover;
+    object-position: center;
+    background: #0f172a;
+    padding: 0;
+    border: 1.5px solid rgba(251, 191, 36, 0.85);
+    box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.55), 0 0 0 2px rgba(251, 191, 36, 0.16);
+    flex-shrink: 0;
+    transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+  }
         .tdt-global-brand:hover .tdt-brand-logo-img {
             transform: scale(1.05);
             border-color: #fde68a;
@@ -401,9 +401,9 @@
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between bg-slate-50 text-slate-900 selection:bg-rose-500 selection:text-white">
+<body class="min-h-screen flex flex-col justify-between bg-[#070a12] text-slate-100 selection:bg-rose-500 selection:text-white">
 
-    <!-- UNIFIED GLOBAL SITE NAVIGATION BAR -->
+  <!-- UNIFIED GLOBAL SITE NAVIGATION BAR -->
     <nav class="tdt-global-nav" aria-label="แถบนำทางหลักของเว็บไซต์">
         <div class="tdt-global-nav-inner">
             <div class="tdt-nav-top-row">
@@ -520,45 +520,45 @@
     </nav>
 
     <!-- SUB-HEADER BAR -->
-    <header class="bg-white border-b border-slate-200 shadow-sm">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6">
-            <div class="flex items-center justify-between h-16 sm:h-20 gap-2">
-                <div class="flex items-center gap-2 sm:gap-3 min-w-0">
-                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-rose-600 to-amber-500 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-sm shadow-rose-200 text-white text-lg sm:text-2xl font-black shrink-0">
-                        <i class="fa-solid fa-shield-cat"></i>
-                    </div>
-                    <div class="min-w-0">
-                        <div class="flex flex-wrap items-center gap-1 sm:gap-2">
-                            <h2 class="text-sm sm:text-lg md:text-xl font-bold tracking-tight text-slate-900 truncate">
-                                ศูนย์เฝ้าระวังภัยคนโกง
-                            </h2>
-                            <span class="text-[9px] sm:text-[10px] font-semibold bg-rose-100 text-rose-700 border border-rose-200 px-1.5 sm:px-2.5 py-0.5 rounded-full uppercase tracking-wider shrink-0 whitespace-nowrap">
-                                กลุ่มรถรับจ้าง
-                            </span>
-                        </div>
-                        <p class="text-[11px] sm:text-xs text-slate-500 truncate hidden xs:block">
-                            Blacklist by The Driver Thailand • เช็กประวัติคนโกง &amp; แจ้งเตือนภัยกลุ่ม
-                        </p>
-                    </div>
-                </div>
-
-                <div class="flex items-center gap-2 shrink-0">
-                    <div id="connectionBadge" class="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">
-                        <span id="connectionDot" class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                        <span id="connectionBadgeText">เชื่อมต่อ Google Sheets</span>
-                    </div>
-
-                    <a href="#reportForm" class="bg-rose-600 hover:bg-rose-700 active:bg-rose-800 text-white px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center gap-1.5 shadow-sm shadow-rose-100 shrink-0 whitespace-nowrap">
-                        <i class="fa-solid fa-triangle-exclamation text-xs sm:text-sm"></i>
-                        <span>แจ้งภัยคนโกง</span>
-                    </a>
-                </div>
+  <header class="bg-slate-950/95 border-b border-amber-400/20 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="flex items-center justify-between h-16 sm:h-20 gap-2">
+        <div class="flex items-center gap-2 sm:gap-3 min-w-0">
+          <div class="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-rose-600 to-amber-500 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-sm shadow-rose-950 text-white text-lg sm:text-2xl font-black shrink-0">
+            <i class="fa-solid fa-shield-cat"></i>
+          </div>
+          <div class="min-w-0">
+            <div class="flex flex-wrap items-center gap-1 sm:gap-2">
+              <h2 class="text-sm sm:text-lg md:text-xl font-bold tracking-tight text-amber-300 truncate">
+                ศูนย์เฝ้าระวังภัยคนโกง
+              </h2>
+              <span class="text-[9px] sm:text-[10px] font-semibold bg-rose-500/20 text-rose-300 border border-rose-400/40 px-1.5 sm:px-2.5 py-0.5 rounded-full uppercase tracking-wider shrink-0 whitespace-nowrap">
+                กลุ่มรถรับจ้าง
+              </span>
             </div>
+            <p class="text-[11px] sm:text-xs text-slate-400 truncate hidden xs:block">
+              Blacklist by The Driver Thailand • เช็กประวัติคนโกง &amp; แจ้งเตือนภัยกลุ่ม
+            </p>
+          </div>
         </div>
-    </header>
 
-    <!-- MAIN CONTENT CONTAINER -->
-    <main class="flex-grow max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-6 sm:space-y-8">
+        <div class="flex items-center gap-2 shrink-0">
+          <div id="connectionBadge" class="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium bg-emerald-500/15 text-emerald-300 border border-emerald-400/35">
+            <span id="connectionDot" class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span id="connectionBadgeText">เชื่อมต่อ Google Sheets</span>
+          </div>
+
+          <a href="#reportForm" class="bg-rose-600 hover:bg-rose-500 text-white px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center gap-1.5 shadow-sm shrink-0 whitespace-nowrap">
+            <i class="fa-solid fa-triangle-exclamation text-xs sm:text-sm"></i>
+            <span>แจ้งภัยคนโกง</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT CONTAINER -->
+  <main class="flex-grow max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-6 sm:space-y-8">
         <!-- Hero Banner & Live Stats -->
         <section class="hero-glow-bg text-white rounded-3xl p-6 sm:p-10 border border-amber-400/35 shadow-2xl space-y-5 relative overflow-hidden">
             <div class="absolute -right-16 -top-16 w-72 h-72 bg-amber-500/15 rounded-full blur-3xl pointer-events-none"></div>
@@ -614,254 +614,254 @@
         </section>
 
         <!-- Two-Column Workspace -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
-            <!-- LEFT COLUMN: REPORT FORM -->
-            <section id="reportForm" class="lg:col-span-5 bg-white rounded-3xl shadow-sm border border-slate-200/90 overflow-hidden lg:sticky lg:top-24">
-                <div class="bg-slate-950 text-white p-4 sm:p-5 border-b border-amber-400/25 flex items-center justify-between gap-2">
-                    <div class="flex items-center gap-2.5 min-w-0">
-                        <div class="w-8 h-8 rounded-lg bg-amber-400/15 text-amber-300 flex items-center justify-center border border-amber-400/30 shrink-0">
-                            <i class="fa-solid fa-file-pen text-sm"></i>
-                        </div>
-                        <h2 class="font-bold text-base sm:text-lg text-amber-300 truncate">บันทึกข้อมูลเตือนภัยคนโกง</h2>
-                    </div>
-                    <span class="text-[10px] sm:text-[11px] font-bold bg-rose-500/20 text-rose-300 border border-rose-400/40 px-2.5 py-0.5 rounded-full shrink-0 whitespace-nowrap">
-                        แสดงทันที
-                    </span>
-                </div>
-
-                <form id="scamForm" class="p-4 sm:p-6 space-y-4 text-xs sm:text-sm">
-                    <div>
-                        <label class="block font-semibold text-slate-700 mb-1.5">
-                            ชื่อ-นามสกุล / ชื่อเล่น / FB / Line ผู้ก่อเหตุ <span class="text-rose-600">*</span>
-                        </label>
-                        <div class="relative">
-                            <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
-                                <i class="fa-solid fa-user-ninja"></i>
-                            </span>
-                            <input type="text" id="scammerName" required placeholder="เช่น นายสมชาย ใจเค็ม (FB: Somchai Taxi)"
-                                class="w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:bg-white text-slate-900 placeholder-slate-400 outline-none transition">
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block font-semibold text-slate-700 mb-1.5">
-                            เบอร์โทรศัพท์ติดต่อผู้ก่อเหตุ
-                        </label>
-                        <div class="relative">
-                            <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
-                                <i class="fa-solid fa-phone"></i>
-                            </span>
-                            <input type="text" id="contactPhone" placeholder="เช่น 081-234-5678"
-                                class="w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:bg-white text-slate-900 placeholder-slate-400 outline-none transition">
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block font-semibold text-slate-700 mb-1.5">
-                            เลขบัญชีธนาคาร / พร้อมเพย์
-                        </label>
-                        <div class="relative">
-                            <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
-                                <i class="fa-solid fa-credit-card"></i>
-                            </span>
-                            <input type="text" id="bankAccount" placeholder="เช่น กสิกรไทย 012-3-45678-9"
-                                class="w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:bg-white text-slate-900 placeholder-slate-400 outline-none transition">
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                        <div>
-                            <label class="block font-semibold text-slate-700 mb-1.5">
-                                ประเภทการโกง <span class="text-rose-600">*</span>
-                            </label>
-                            <select id="scamType" required class="w-full px-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:bg-white text-slate-900 outline-none transition">
-                                <option value="ไม่จ่ายค่าโดยสาร">ไม่จ่ายค่าโดยสาร (ชิ่งหนี)</option>
-                                <option value="เบี้ยวงาน/เทงาน">เบี้ยวงาน / เทงานเหมา</option>
-                                <option value="หลอกโอนเงิน/สลิปปลอม">สลิปปลอม / โอนไม่ครบ</option>
-                                <option value="หลอกโอนมัดจำ/ค่าประกัน">หลอกโอนมัดจำ / ค่าประกัน</option>
-                                <option value="ขโมยทรัพย์สิน">ขโมยทรัพย์สิน / ของหาย</option>
-                                <option value="อื่นๆ">พฤติกรรมสุ่มเสี่ยงอื่นๆ</option>
-                            </select>
-                        </div>
-
-                        <div>
-                            <label class="block font-semibold text-slate-700 mb-1.5">
-                                ยอดความเสียหาย (บาท)
-                            </label>
-                            <div class="relative">
-                                <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">฿</span>
-                                <input type="number" id="damageAmount" min="0" placeholder="0"
-                                    class="w-full pl-8 pr-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:bg-white text-slate-900 placeholder-slate-400 outline-none transition">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                        <div>
-                            <label class="block font-semibold text-slate-700 mb-1.5">
-                                วันที่เกิดเหตุ
-                            </label>
-                            <input type="date" id="incidentDate"
-                                class="w-full px-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:bg-white text-slate-900 outline-none transition">
-                        </div>
-
-                        <div>
-                            <label class="block font-semibold text-slate-700 mb-1.5">
-                                สถานที่ / เส้นทางวิ่งงาน
-                            </label>
-                            <input type="text" id="incidentLocation" placeholder="เช่น รังสิต ไป พัทยา"
-                                class="w-full px-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:bg-white text-slate-900 placeholder-slate-400 outline-none transition">
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block font-semibold text-slate-700 mb-1.5">
-                            รายละเอียดพฤติการณ์ <span class="text-rose-600">*</span>
-                        </label>
-                        <textarea id="description" rows="3" required placeholder="ระบุเหตุการณ์ เช่น เรียกรถเหมาไปส่งแล้วทำทีลงไปกดเงินเซเว่นแล้วหนี หรือส่งสลิปโอนปลอมผ่านไลน์..."
-                            class="w-full px-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:bg-white text-slate-900 placeholder-slate-400 outline-none transition"></textarea>
-                    </div>
-
-                    <div>
-                        <label class="block font-semibold text-slate-700 mb-1.5">
-                            ชื่อผู้แจ้งเบาะแส / กลุ่มรถรับจ้าง
-                        </label>
-                        <input type="text" id="reporterName" placeholder="เช่น พี่ชัย แท็กซี่มีนบุรี (ไม่ระบุได้)"
-                            class="w-full px-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:bg-white text-slate-900 placeholder-slate-400 outline-none transition">
-                    </div>
-
-                    <div>
-                        <div class="flex items-center justify-between mb-1.5 gap-2">
-                            <label class="block font-semibold text-slate-700 truncate">
-                                แนบรูปหลักฐาน (แชท / รูปคนโกง / สลิป)
-                            </label>
-                            <span id="imageCounter" class="text-[10px] sm:text-xs font-semibold text-rose-600 bg-rose-50 border border-rose-200 px-2 py-0.5 rounded-full shrink-0 whitespace-nowrap">
-                                แนบรูปแล้ว 0 / 10 รูป
-                            </span>
-                        </div>
-                        <div class="mt-1 flex flex-col items-center justify-center p-3.5 border-2 border-slate-300 border-dashed rounded-xl bg-slate-50 hover:bg-slate-100 hover:border-amber-400 transition relative">
-                            <div class="space-y-1 text-center" id="uploadPlaceholder">
-                                <i class="fa-solid fa-images text-2xl sm:text-3xl text-slate-400"></i>
-                                <div class="flex text-xs text-slate-600 justify-center">
-                                    <label for="imageInput" class="relative cursor-pointer rounded-md font-semibold text-rose-600 hover:text-rose-700">
-                                        <span>คลิกเลือกไฟล์ภาพ (เลือกได้หลายรูป)</span>
-                                        <input id="imageInput" type="file" accept="image/*" multiple class="sr-only" onchange="previewImages(event)">
-                                    </label>
-                                </div>
-                                <p class="text-[10px] text-slate-400">แนบได้สูงสุด 10 รูป • ระบบจะบีบอัดรูปให้อัตโนมัติ</p>
-                            </div>
-
-                            <div id="imagePreviewContainer" class="hidden w-full space-y-3">
-                                <div id="imagePreviewGrid" class="grid grid-cols-3 sm:grid-cols-5 gap-2"></div>
-                                <div class="flex items-center justify-between pt-2 border-t border-slate-200">
-                                    <label for="imageInputMore" class="cursor-pointer text-xs font-semibold text-rose-600 hover:text-rose-700 flex items-center gap-1">
-                                        <i class="fa-solid fa-plus-circle"></i> เพิ่มรูปภาพอีก
-                                        <input id="imageInputMore" type="file" accept="image/*" multiple class="sr-only" onchange="previewImages(event)">
-                                    </label>
-                                    <button type="button" onclick="removeAllImages()" class="text-xs text-slate-500 hover:text-rose-600 font-medium">
-                                        ลบรูปทั้งหมด
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="pt-2">
-                        <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold py-3 px-4 rounded-xl shadow-md transition flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-paper-plane" id="submitBtnIcon"></i>
-                            <span id="submitBtnText">ลงบันทึกเตือนภัยทันที</span>
-                        </button>
-                    </div>
-                </form>
-            </section>
-
-            <!-- RIGHT COLUMN: BLACKLIST FEED -->
-            <section id="feedSectionHeader" class="lg:col-span-7 space-y-4 min-w-0">
-                <div class="bg-white p-4 sm:p-6 rounded-3xl shadow-sm border border-slate-200/90 space-y-4">
-                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-slate-200">
-                        <div class="min-w-0">
-                            <h2 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-2">
-                                <i class="fa-solid fa-shield-virus text-rose-600 shrink-0"></i>
-                                <span class="truncate">รายชื่อเตือนภัยในระบบ</span>
-                            </h2>
-                            <p class="text-xs text-slate-500 truncate">ค้นหาเบอร์โทร เลขบัญชี หรือชื่อเพื่อเช็กความปลอดภัยก่อนรับงาน</p>
-                        </div>
-
-                        <div class="flex items-center justify-between w-full sm:w-auto gap-2 shrink-0">
-                            <div class="bg-slate-100 p-1 rounded-xl border border-slate-200 flex items-center gap-1 shrink-0">
-                                <button type="button" onclick="setViewMode('detailed')" id="btnViewDetailed" title="มุมมองการ์ดรายละเอียด"
-                                    class="px-2.5 py-1 rounded-lg text-xs font-semibold transition bg-white text-slate-800 shadow-sm whitespace-nowrap">
-                                    <i class="fa-solid fa-table-cells-large"></i> <span>รายละเอียด</span>
-                                </button>
-                                <button type="button" onclick="setViewMode('compact')" id="btnViewCompact" title="มุมมองกะทัดรัด (เน้นสแกนเร็ว)"
-                                    class="px-2.5 py-1 rounded-lg text-xs font-semibold transition text-slate-500 hover:text-slate-800 whitespace-nowrap">
-                                    <i class="fa-solid fa-list-ul"></i> <span>กะทัดรัด</span>
-                                </button>
-                            </div>
-
-                            <button type="button" onclick="fetchDataFromCloud()" title="รีเฟรชข้อมูลล่าสุด"
-                                class="bg-slate-950 hover:bg-slate-800 text-amber-400 border border-amber-400/35 px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 shrink-0 whitespace-nowrap">
-                                <i class="fa-solid fa-rotate" id="refreshSpinIcon"></i>
-                                <span>รีเฟรช</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-12 gap-2.5 sm:gap-3">
-                        <div class="sm:col-span-7 relative">
-                            <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                            </span>
-                            <input type="text" id="searchInput" onkeyup="onSearchOrFilterChange()" placeholder="ค้นหาชื่อ, เบอร์โทร, เลขบัญชี, รหัสเคส..."
-                                class="w-full pl-9 pr-8 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:bg-white text-slate-900 placeholder-slate-400 outline-none transition">
-                            <button type="button" id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600">
-                                <i class="fa-solid fa-xmark"></i>
-                            </button>
-                        </div>
-
-                        <div class="sm:col-span-5">
-                            <select id="filterType" onchange="onSearchOrFilterChange()" class="w-full px-3 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:bg-white text-slate-900 outline-none transition">
-                                <option value="ALL">ทุกประเภทการโกง</option>
-                                <option value="ไม่จ่ายค่าโดยสาร">ไม่จ่ายค่าโดยสาร</option>
-                                <option value="เบี้ยวงาน/เทงาน">เบี้ยวงาน / เทงาน</option>
-                                <option value="หลอกโอนเงิน/สลิปปลอม">สลิปปลอม / โอนไม่ครบ</option>
-                                <option value="หลอกโอนมัดจำ/ค่าประกัน">หลอกโอนมัดจำ / ค่าประกัน</option>
-                                <option value="ขโมยทรัพย์สิน">ขโมยทรัพย์สิน</option>
-                                <option value="อื่นๆ">อื่นๆ</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="feedContainer" class="space-y-4"></div>
-
-                <div id="emptyState" class="hidden bg-white rounded-3xl border border-slate-200 p-8 sm:p-12 text-center shadow-sm">
-                    <div class="w-14 h-14 sm:w-16 sm:h-16 bg-slate-100 text-slate-400 rounded-full flex items-center justify-center mx-auto mb-3 text-xl sm:text-2xl border border-slate-200">
-                        <i class="fa-solid fa-folder-open"></i>
-                    </div>
-                    <h3 class="text-sm sm:text-base font-semibold text-slate-700">ไม่พบรายการแจ้งเตือนภัย</h3>
-                    <p class="text-xs text-slate-500 mt-1">ลองเปลี่ยนคำค้นหา หรือกรอกข้อมูลแจ้งเบาะแสคนโกงรายใหม่</p>
-                </div>
-
-                <div id="paginationBar" class="bg-white p-3.5 sm:p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
-                    <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2 text-slate-500 w-full sm:w-auto">
-                        <span>แสดงหน้าละ:</span>
-                        <select id="pageSizeSelect" onchange="changePageSize(this.value)" class="bg-slate-50 border border-slate-300 rounded-lg px-2 py-1 text-xs font-semibold text-slate-700 outline-none">
-                            <option value="6" selected>6 รายการ</option>
-                            <option value="12">12 รายการ</option>
-                            <option value="24">24 รายการ</option>
-                        </select>
-                        <span class="text-slate-400 hidden xs:inline">|</span>
-                        <span class="text-slate-500 text-[11px] sm:text-xs">แสดง <span id="showingStart">0</span>-<span id="showingEnd">0</span> จาก <span id="totalFilteredRecords">0</span> เคส</span>
-                    </div>
-
-                    <div class="flex items-center gap-1.5 flex-wrap justify-center" id="pageButtonsContainer"></div>
-                </div>
-            </section>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
+      <!-- LEFT COLUMN: REPORT FORM -->
+      <section id="reportForm" class="lg:col-span-5 bg-slate-900/95 rounded-3xl shadow-xl border border-amber-400/25 overflow-hidden lg:sticky lg:top-24 text-slate-100">
+        <div class="bg-slate-950 text-white p-4 sm:p-5 border-b border-amber-400/25 flex items-center justify-between gap-2">
+          <div class="flex items-center gap-2.5 min-w-0">
+            <div class="w-8 h-8 rounded-lg bg-amber-400/15 text-amber-300 flex items-center justify-center border border-amber-400/30 shrink-0">
+              <i class="fa-solid fa-file-pen text-sm"></i>
+            </div>
+            <h2 class="font-bold text-base sm:text-lg text-amber-300 truncate">บันทึกข้อมูลเตือนภัยคนโกง</h2>
+          </div>
+          <span class="text-[10px] sm:text-[11px] font-bold bg-rose-500/20 text-rose-300 border border-rose-400/40 px-2.5 py-0.5 rounded-full shrink-0 whitespace-nowrap">
+            แสดงทันที
+          </span>
         </div>
-    </main>
 
-    <!-- MODAL 1: FULL DETAIL VIEW MODAL -->
+        <form id="scamForm" class="p-4 sm:p-6 space-y-4 text-xs sm:text-sm">
+          <div>
+            <label class="block font-semibold text-slate-200 mb-1.5">
+              ชื่อ-นามสกุล / ชื่อเล่น / FB / Line ผู้ก่อเหตุ <span class="text-rose-400">*</span>
+            </label>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                <i class="fa-solid fa-user-ninja"></i>
+              </span>
+              <input type="text" id="scammerName" required placeholder="เช่น นายสมชาย ใจเค็ม (FB: Somchai Taxi)"
+                class="w-full pl-9 pr-3 py-2.5 bg-slate-950 border border-slate-700 rounded-xl focus:ring-2 focus:ring-amber-400 focus:border-amber-400 text-white placeholder-slate-500 outline-none transition">
+            </div>
+          </div>
+
+          <div>
+            <label class="block font-semibold text-slate-200 mb-1.5">
+              เบอร์โทรศัพท์ติดต่อผู้ก่อเหตุ
+            </label>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                <i class="fa-solid fa-phone"></i>
+              </span>
+              <input type="text" id="contactPhone" placeholder="เช่น 081-234-5678"
+                class="w-full pl-9 pr-3 py-2.5 bg-slate-950 border border-slate-700 rounded-xl focus:ring-2 focus:ring-amber-400 focus:border-amber-400 text-white placeholder-slate-500 outline-none transition">
+            </div>
+          </div>
+
+          <div>
+            <label class="block font-semibold text-slate-200 mb-1.5">
+              เลขบัญชีธนาคาร / พร้อมเพย์
+            </label>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                <i class="fa-solid fa-credit-card"></i>
+              </span>
+              <input type="text" id="bankAccount" placeholder="เช่น กสิกรไทย 012-3-45678-9"
+                class="w-full pl-9 pr-3 py-2.5 bg-slate-950 border border-slate-700 rounded-xl focus:ring-2 focus:ring-amber-400 focus:border-amber-400 text-white placeholder-slate-500 outline-none transition">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <div>
+              <label class="block font-semibold text-slate-200 mb-1.5">
+                ประเภทการโกง <span class="text-rose-400">*</span>
+              </label>
+              <select id="scamType" required class="w-full px-3 py-2.5 bg-slate-950 border border-slate-700 rounded-xl focus:ring-2 focus:ring-amber-400 focus:border-amber-400 text-white outline-none transition">
+                <option value="ไม่จ่ายค่าโดยสาร">ไม่จ่ายค่าโดยสาร (ชิ่งหนี)</option>
+                <option value="เบี้ยวงาน/เทงาน">เบี้ยวงาน / เทงานเหมา</option>
+                <option value="หลอกโอนเงิน/สลิปปลอม">สลิปปลอม / โอนไม่ครบ</option>
+                <option value="หลอกโอนมัดจำ/ค่าประกัน">หลอกโอนมัดจำ / ค่าประกัน</option>
+                <option value="ขโมยทรัพย์สิน">ขโมยทรัพย์สิน / ของหาย</option>
+                <option value="อื่นๆ">พฤติกรรมสุ่มเสี่ยงอื่นๆ</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block font-semibold text-slate-200 mb-1.5">
+                ยอดความเสียหาย (บาท)
+              </label>
+              <div class="relative">
+                <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-amber-400">฿</span>
+                <input type="number" id="damageAmount" min="0" placeholder="0"
+                  class="w-full pl-8 pr-3 py-2.5 bg-slate-950 border border-slate-700 rounded-xl focus:ring-2 focus:ring-amber-400 focus:border-amber-400 text-white placeholder-slate-500 outline-none transition">
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <div>
+              <label class="block font-semibold text-slate-200 mb-1.5">
+                วันที่เกิดเหตุ
+              </label>
+              <input type="date" id="incidentDate"
+                class="w-full px-3 py-2.5 bg-slate-950 border border-slate-700 rounded-xl focus:ring-2 focus:ring-amber-400 focus:border-amber-400 text-white outline-none transition">
+            </div>
+
+            <div>
+              <label class="block font-semibold text-slate-200 mb-1.5">
+                สถานที่ / เส้นทางวิ่งงาน
+              </label>
+              <input type="text" id="incidentLocation" placeholder="เช่น รังสิต ไป พัทยา"
+                class="w-full px-3 py-2.5 bg-slate-950 border border-slate-700 rounded-xl focus:ring-2 focus:ring-amber-400 focus:border-amber-400 text-white placeholder-slate-500 outline-none transition">
+            </div>
+          </div>
+
+          <div>
+            <label class="block font-semibold text-slate-200 mb-1.5">
+              รายละเอียดพฤติการณ์ <span class="text-rose-400">*</span>
+            </label>
+            <textarea id="description" rows="3" required placeholder="ระบุเหตุการณ์ เช่น เรียกรถเหมาไปส่งแล้วทำทีลงไปกดเงินเซเว่นแล้วหนี หรือส่งสลิปโอนปลอมผ่านไลน์..."
+              class="w-full px-3 py-2.5 bg-slate-950 border border-slate-700 rounded-xl focus:ring-2 focus:ring-amber-400 focus:border-amber-400 text-white placeholder-slate-500 outline-none transition"></textarea>
+          </div>
+
+          <div>
+            <label class="block font-semibold text-slate-200 mb-1.5">
+              ชื่อผู้แจ้งเบาะแส / กลุ่มรถรับจ้าง
+            </label>
+            <input type="text" id="reporterName" placeholder="เช่น พี่ชัย แท็กซี่มีนบุรี (ไม่ระบุได้)"
+              class="w-full px-3 py-2.5 bg-slate-950 border border-slate-700 rounded-xl focus:ring-2 focus:ring-amber-400 focus:border-amber-400 text-white placeholder-slate-500 outline-none transition">
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between mb-1.5 gap-2">
+              <label class="block font-semibold text-slate-200 truncate">
+                แนบรูปหลักฐาน (แชท / รูปคนโกง / สลิป)
+              </label>
+              <span id="imageCounter" class="text-[10px] sm:text-xs font-semibold text-rose-300 bg-rose-500/15 border border-rose-400/35 px-2 py-0.5 rounded-full shrink-0 whitespace-nowrap">
+                แนบรูปแล้ว 0 / 10 รูป
+              </span>
+            </div>
+            <div class="mt-1 flex flex-col items-center justify-center p-3.5 border-2 border-slate-700 border-dashed rounded-xl bg-slate-950/80 hover:border-amber-400 transition relative">
+              <div class="space-y-1 text-center" id="uploadPlaceholder">
+                <i class="fa-solid fa-images text-2xl sm:text-3xl text-slate-400"></i>
+                <div class="flex text-xs text-slate-300 justify-center">
+                  <label for="imageInput" class="relative cursor-pointer rounded-md font-semibold text-amber-300 hover:text-amber-200">
+                    <span>คลิกเลือกไฟล์ภาพ (เลือกได้หลายรูป)</span>
+                    <input id="imageInput" type="file" accept="image/*" multiple class="sr-only" onchange="previewImages(event)">
+                  </label>
+                </div>
+                <p class="text-[10px] text-slate-400">แนบได้สูงสุด 10 รูป • ระบบจะบีบอัดรูปให้อัตโนมัติ</p>
+              </div>
+
+              <div id="imagePreviewContainer" class="hidden w-full space-y-3">
+                <div id="imagePreviewGrid" class="grid grid-cols-3 sm:grid-cols-5 gap-2"></div>
+                <div class="flex items-center justify-between pt-2 border-t border-slate-800">
+                  <label for="imageInputMore" class="cursor-pointer text-xs font-semibold text-amber-300 hover:text-amber-200 flex items-center gap-1">
+                    <i class="fa-solid fa-plus-circle"></i> เพิ่มรูปภาพอีก
+                    <input id="imageInputMore" type="file" accept="image/*" multiple class="sr-only" onchange="previewImages(event)">
+                  </label>
+                  <button type="button" onclick="removeAllImages()" class="text-xs text-slate-400 hover:text-rose-300 font-medium">
+                    ลบรูปทั้งหมด
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-2">
+            <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold py-3 px-4 rounded-xl shadow-md transition flex items-center justify-center gap-2">
+              <i class="fa-solid fa-paper-plane" id="submitBtnIcon"></i>
+              <span id="submitBtnText">ลงบันทึกเตือนภัยทันที</span>
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- RIGHT COLUMN: BLACKLIST FEED -->
+      <section id="feedSectionHeader" class="lg:col-span-7 space-y-4 min-w-0">
+        <div class="bg-slate-900/95 p-4 sm:p-6 rounded-3xl shadow-xl border border-amber-400/25 space-y-4 text-slate-100">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-slate-800">
+            <div class="min-w-0">
+              <h2 class="font-extrabold text-base sm:text-lg text-amber-300 flex items-center gap-2">
+                <i class="fa-solid fa-shield-virus text-rose-400 shrink-0"></i>
+                <span class="truncate">รายชื่อเตือนภัยในระบบ</span>
+              </h2>
+              <p class="text-xs text-slate-400 truncate">ค้นหาเบอร์โทร เลขบัญชี หรือชื่อเพื่อเช็กความปลอดภัยก่อนรับงาน</p>
+            </div>
+
+            <div class="flex items-center justify-between w-full sm:w-auto gap-2 shrink-0">
+              <div class="bg-slate-950 p-1 rounded-xl border border-slate-800 flex items-center gap-1 shrink-0">
+                <button type="button" onclick="setViewMode('detailed')" id="btnViewDetailed" title="มุมมองการ์ดรายละเอียด"
+                  class="px-2.5 py-1 rounded-lg text-xs font-semibold transition bg-amber-400 text-slate-950 shadow-sm whitespace-nowrap">
+                  <i class="fa-solid fa-table-cells-large"></i> <span>รายละเอียด</span>
+                </button>
+                <button type="button" onclick="setViewMode('compact')" id="btnViewCompact" title="มุมมองกะทัดรัด (เน้นสแกนเร็ว)"
+                  class="px-2.5 py-1 rounded-lg text-xs font-semibold transition text-slate-300 hover:text-white whitespace-nowrap">
+                  <i class="fa-solid fa-list-ul"></i> <span>กะทัดรัด</span>
+                </button>
+              </div>
+
+              <button type="button" onclick="fetchDataFromCloud()" title="รีเฟรชข้อมูลล่าสุด"
+                class="bg-slate-950 hover:bg-slate-800 text-amber-400 border border-amber-400/35 px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 shrink-0 whitespace-nowrap">
+                <i class="fa-solid fa-rotate" id="refreshSpinIcon"></i>
+                <span>รีเฟรช</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-12 gap-2.5 sm:gap-3">
+            <div class="sm:col-span-7 relative">
+              <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </span>
+              <input type="text" id="searchInput" onkeyup="onSearchOrFilterChange()" placeholder="ค้นหาชื่อ, เบอร์โทร, เลขบัญชี, รหัสเคส..."
+                class="w-full pl-9 pr-8 py-2.5 text-xs sm:text-sm bg-slate-950 border border-slate-700 rounded-xl focus:ring-2 focus:ring-amber-400 focus:border-amber-400 text-white placeholder-slate-500 outline-none transition">
+              <button type="button" id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-white">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            </div>
+
+            <div class="sm:col-span-5">
+              <select id="filterType" onchange="onSearchOrFilterChange()" class="w-full px-3 py-2.5 text-xs sm:text-sm bg-slate-950 border border-slate-700 rounded-xl focus:ring-2 focus:ring-amber-400 focus:border-amber-400 text-white outline-none transition">
+                <option value="ALL">ทุกประเภทการโกง</option>
+                <option value="ไม่จ่ายค่าโดยสาร">ไม่จ่ายค่าโดยสาร</option>
+                <option value="เบี้ยวงาน/เทงาน">เบี้ยวงาน / เทงาน</option>
+                <option value="หลอกโอนเงิน/สลิปปลอม">สลิปปลอม / โอนไม่ครบ</option>
+                <option value="หลอกโอนมัดจำ/ค่าประกัน">หลอกโอนมัดจำ / ค่าประกัน</option>
+                <option value="ขโมยทรัพย์สิน">ขโมยทรัพย์สิน</option>
+                <option value="อื่นๆ">อื่นๆ</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div id="feedContainer" class="space-y-4"></div>
+
+        <div id="emptyState" class="hidden bg-slate-900/95 rounded-3xl border border-amber-400/20 p-8 sm:p-12 text-center shadow-xl">
+          <div class="w-14 h-14 sm:w-16 sm:h-16 bg-slate-950 text-amber-400 rounded-full flex items-center justify-center mx-auto mb-3 text-xl sm:text-2xl border border-amber-400/30">
+            <i class="fa-solid fa-folder-open"></i>
+          </div>
+          <h3 class="text-sm sm:text-base font-semibold text-slate-200">ไม่พบรายการแจ้งเตือนภัย</h3>
+          <p class="text-xs text-slate-400 mt-1">ลองเปลี่ยนคำค้นหา หรือกรอกข้อมูลแจ้งเบาะแสคนโกงรายใหม่</p>
+        </div>
+
+        <div id="paginationBar" class="bg-slate-900/95 p-3.5 sm:p-4 rounded-2xl border border-amber-400/25 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-300">
+          <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2 text-slate-400 w-full sm:w-auto">
+            <span>แสดงหน้าละ:</span>
+            <select id="pageSizeSelect" onchange="changePageSize(this.value)" class="bg-slate-950 border border-slate-700 rounded-lg px-2 py-1 text-xs font-semibold text-amber-300 outline-none">
+              <option value="6" selected>6 รายการ</option>
+              <option value="12">12 รายการ</option>
+              <option value="24">24 รายการ</option>
+            </select>
+            <span class="text-slate-600 hidden xs:inline">|</span>
+            <span class="text-slate-300 text-[11px] sm:text-xs">แสดง <span id="showingStart">0</span>-<span id="showingEnd">0</span> จาก <span id="totalFilteredRecords">0</span> เคส</span>
+          </div>
+
+          <div class="flex items-center gap-1.5 flex-wrap justify-center" id="pageButtonsContainer"></div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- MODAL 1: FULL DETAIL VIEW MODAL -->
     <div id="detailModal" class="hidden fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 overflow-y-auto" onclick="closeDetailModal()">
         <div class="relative max-w-2xl w-full bg-white rounded-3xl overflow-hidden shadow-2xl border border-slate-200 my-auto max-h-[90vh] flex flex-col" onclick="event.stopPropagation()">
             <div class="p-3.5 sm:p-5 bg-slate-950 text-white border-b border-amber-400/25 flex justify-between items-center shrink-0 gap-2">
@@ -1397,11 +1397,11 @@
             const btnCompact = document.getElementById('btnViewCompact');
 
             if (mode === 'detailed') {
-                btnDetailed.className = 'px-2.5 py-1 rounded-lg text-xs font-semibold transition bg-white text-slate-800 shadow-sm whitespace-nowrap';
-                btnCompact.className = 'px-2.5 py-1 rounded-lg text-xs font-semibold transition text-slate-500 hover:text-slate-800 whitespace-nowrap';
+                btnDetailed.className = 'px-2.5 py-1 rounded-lg text-xs font-semibold transition bg-amber-400 text-slate-950 shadow-sm whitespace-nowrap';
+                btnCompact.className = 'px-2.5 py-1 rounded-lg text-xs font-semibold transition text-slate-300 hover:text-white whitespace-nowrap';
             } else {
-                btnCompact.className = 'px-2.5 py-1 rounded-lg text-xs font-semibold transition bg-white text-slate-800 shadow-sm whitespace-nowrap';
-                btnDetailed.className = 'px-2.5 py-1 rounded-lg text-xs font-semibold transition text-slate-500 hover:text-slate-800 whitespace-nowrap';
+                btnCompact.className = 'px-2.5 py-1 rounded-lg text-xs font-semibold transition bg-amber-400 text-slate-950 shadow-sm whitespace-nowrap';
+                btnDetailed.className = 'px-2.5 py-1 rounded-lg text-xs font-semibold transition text-slate-300 hover:text-white whitespace-nowrap';
             }
             renderFeed();
         }
@@ -1547,13 +1547,13 @@
             const safeBank = escapeHtml(item.bankAccount);
 
             const imagesHtml = hasImages ? `
-                <div class="mt-3 pt-3 border-t border-slate-100">
+                <div class="mt-3 pt-3 border-t border-slate-800">
                     <div class="flex items-center gap-2 overflow-x-auto pb-1">
                         ${item.images.slice(0, 4).map((imgSrc, idx) => `
-                            <div onclick="openLightboxByCase('${safeId}', ${idx})" class="relative w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden border border-slate-200 shrink-0 cursor-pointer group bg-slate-100">
+                            <div onclick="openLightboxByCase('${safeId}', ${idx})" class="relative w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden border border-slate-700 shrink-0 cursor-pointer group bg-slate-950">
                                 <img src="${escapeHtml(imgSrc)}" alt="หลักฐาน" onerror="handleImageError(this)" class="w-full h-full object-cover group-hover:scale-105 transition">
                                 ${idx === 3 && item.images.length > 4 ? `
-                                    <div class="absolute inset-0 bg-slate-900/70 text-white font-bold text-xs flex items-center justify-center">
+                                    <div class="absolute inset-0 bg-slate-950/80 text-amber-300 font-bold text-xs flex items-center justify-center">
                                         +${item.images.length - 4}
                                     </div>
                                 ` : ''}
@@ -1564,7 +1564,7 @@
             ` : '';
 
             return `
-                <article class="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-sm hover:border-amber-400 transition min-w-0">
+                <article class="bg-slate-900/95 rounded-2xl border border-slate-800 p-4 sm:p-5 shadow-lg hover:border-amber-400/60 transition min-w-0 text-slate-100">
                     <div class="flex flex-wrap items-start justify-between gap-2 mb-3">
                         <div class="space-y-1 min-w-0 flex-1">
                             <div class="flex flex-wrap items-center gap-2">
@@ -1573,60 +1573,60 @@
                                 </span>
                                 <span class="text-[11px] font-mono text-slate-400 shrink-0">#${safeId}</span>
                             </div>
-                            <h3 class="font-bold text-base sm:text-lg text-slate-900 truncate">${safeName}</h3>
+                            <h3 class="font-bold text-base sm:text-lg text-white truncate">${safeName}</h3>
                         </div>
 
                         <div class="text-right shrink-0">
                             <div class="text-[11px] text-slate-400">ยอดเสียหาย</div>
-                            <div class="font-extrabold text-amber-600 text-sm sm:text-base">
+                            <div class="font-extrabold text-amber-400 text-sm sm:text-base">
                                 ${item.amount > 0 ? '฿' + Number(item.amount).toLocaleString('th-TH') : 'ไม่ระบุยอด'}
                             </div>
                         </div>
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3 text-xs">
-                        <div class="flex items-center justify-between bg-slate-50 px-3 py-2 rounded-xl border border-slate-200 gap-2 min-w-0">
-                            <span class="truncate text-slate-600">
-                                <i class="fa-solid fa-phone text-slate-400 mr-1.5 shrink-0"></i>
-                                <strong class="font-mono text-slate-800">${safePhone || 'ไม่ระบุเบอร์'}</strong>
+                        <div class="flex items-center justify-between bg-slate-950 px-3 py-2 rounded-xl border border-slate-800 gap-2 min-w-0">
+                            <span class="truncate text-slate-300">
+                                <i class="fa-solid fa-phone text-amber-400 mr-1.5 shrink-0"></i>
+                                <strong class="font-mono text-white">${safePhone || 'ไม่ระบุเบอร์'}</strong>
                             </span>
                             ${item.phone ? `
-                                <button type="button" onclick="copyText('${safePhone}', 'คัดลอกเบอร์โทรแล้ว')" class="text-rose-600 hover:text-rose-700 font-semibold text-[11px] px-2 py-0.5 rounded bg-rose-50 border border-rose-200 shrink-0 transition">
+                                <button type="button" onclick="copyText('${safePhone}', 'คัดลอกเบอร์โทรแล้ว')" class="text-amber-300 hover:text-amber-200 font-semibold text-[11px] px-2 py-0.5 rounded bg-amber-400/10 border border-amber-400/30 shrink-0 transition">
                                     คัดลอก
                                 </button>
                             ` : ''}
                         </div>
 
-                        <div class="flex items-center justify-between bg-slate-50 px-3 py-2 rounded-xl border border-slate-200 gap-2 min-w-0">
-                            <span class="truncate text-slate-600">
-                                <i class="fa-solid fa-credit-card text-slate-400 mr-1.5 shrink-0"></i>
-                                <strong class="font-mono text-slate-800">${safeBank || 'ไม่ระบุบัญชี'}</strong>
+                        <div class="flex items-center justify-between bg-slate-950 px-3 py-2 rounded-xl border border-slate-800 gap-2 min-w-0">
+                            <span class="truncate text-slate-300">
+                                <i class="fa-solid fa-credit-card text-amber-400 mr-1.5 shrink-0"></i>
+                                <strong class="font-mono text-white">${safeBank || 'ไม่ระบุบัญชี'}</strong>
                             </span>
                             ${item.bankAccount ? `
-                                <button type="button" onclick="copyText('${safeBank}', 'คัดลอกเลขบัญชีแล้ว')" class="text-rose-600 hover:text-rose-700 font-semibold text-[11px] px-2 py-0.5 rounded bg-rose-50 border border-rose-200 shrink-0 transition">
+                                <button type="button" onclick="copyText('${safeBank}', 'คัดลอกเลขบัญชีแล้ว')" class="text-amber-300 hover:text-amber-200 font-semibold text-[11px] px-2 py-0.5 rounded bg-amber-400/10 border border-amber-400/30 shrink-0 transition">
                                     คัดลอก
                                 </button>
                             ` : ''}
                         </div>
                     </div>
 
-                    <p class="text-xs sm:text-sm text-slate-700 line-clamp-3 leading-relaxed bg-slate-50/70 p-3 rounded-xl border border-slate-100">
+                    <p class="text-xs sm:text-sm text-slate-300 line-clamp-3 leading-relaxed bg-slate-950/75 p-3 rounded-xl border border-slate-800">
                         ${escapeHtml(item.details)}
                     </p>
 
                     ${imagesHtml}
 
-                    <div class="mt-3 pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2 text-xs">
+                    <div class="mt-3 pt-3 border-t border-slate-800 flex flex-wrap items-center justify-between gap-2 text-xs">
                         <div class="text-slate-400 truncate max-w-[55%]">
-                            <i class="fa-solid fa-location-dot text-rose-500 mr-1 shrink-0"></i>
+                            <i class="fa-solid fa-location-dot text-rose-400 mr-1 shrink-0"></i>
                             ${escapeHtml(item.location || 'ไม่ระบุเส้นทาง')}
                         </div>
 
                         <div class="flex items-center gap-2 shrink-0">
-                            <button type="button" onclick="openDeleteRequestModal('${safeId}')" class="text-slate-500 hover:text-amber-700 px-2.5 py-1.5 rounded-lg hover:bg-amber-50 border border-transparent hover:border-amber-200 transition font-medium whitespace-nowrap">
+                            <button type="button" onclick="openDeleteRequestModal('${safeId}')" class="text-slate-300 hover:text-amber-300 px-2.5 py-1.5 rounded-lg hover:bg-amber-400/10 border border-transparent hover:border-amber-400/30 transition font-medium whitespace-nowrap">
                                 <i class="fa-solid fa-flag text-[11px]"></i> ขอลบ
                             </button>
-                            <button type="button" onclick="openDetailModal('${safeId}')" class="bg-slate-950 hover:bg-slate-800 text-amber-400 font-semibold px-3 py-1.5 rounded-lg transition whitespace-nowrap">
+                            <button type="button" onclick="openDetailModal('${safeId}')" class="bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold px-3 py-1.5 rounded-lg transition whitespace-nowrap">
                                 ดูรายละเอียด
                             </button>
                         </div>
@@ -1644,29 +1644,29 @@
             const imgCount = item.images ? item.images.length : 0;
 
             return `
-                <article class="bg-white rounded-xl border border-slate-200 p-3.5 shadow-sm hover:border-amber-400 transition flex flex-col sm:flex-row sm:items-center justify-between gap-3 min-w-0">
+                <article class="bg-slate-900/95 rounded-xl border border-slate-800 p-3.5 shadow-lg hover:border-amber-400/60 transition flex flex-col sm:flex-row sm:items-center justify-between gap-3 min-w-0 text-slate-100">
                     <div class="min-w-0 space-y-1 flex-1">
                         <div class="flex flex-wrap items-center gap-2">
                             <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold border shrink-0 ${badgeClass}">
                                 ${escapeHtml(item.scamType)}
                             </span>
-                            <h3 class="font-bold text-sm text-slate-900 truncate">${safeName}</h3>
-                            ${imgCount > 0 ? `<span class="text-[10px] text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded shrink-0"><i class="fa-regular fa-image"></i> ${imgCount}</span>` : ''}
+                            <h3 class="font-bold text-sm text-white truncate">${safeName}</h3>
+                            ${imgCount > 0 ? `<span class="text-[10px] text-amber-300 bg-slate-950 border border-slate-800 px-1.5 py-0.5 rounded shrink-0"><i class="fa-regular fa-image"></i> ${imgCount}</span>` : ''}
                         </div>
-                        <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-slate-600 font-mono">
-                            <span class="truncate"><i class="fa-solid fa-phone text-slate-400 mr-1"></i>${safePhone || '-'}</span>
-                            <span class="truncate"><i class="fa-solid fa-credit-card text-slate-400 mr-1"></i>${safeBank || '-'}</span>
+                        <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-slate-300 font-mono">
+                            <span class="truncate"><i class="fa-solid fa-phone text-amber-400 mr-1"></i>${safePhone || '-'}</span>
+                            <span class="truncate"><i class="fa-solid fa-credit-card text-amber-400 mr-1"></i>${safeBank || '-'}</span>
                         </div>
                     </div>
 
-                    <div class="flex items-center justify-between sm:justify-end gap-2 shrink-0 border-t sm:border-t-0 pt-2 sm:pt-0 border-slate-100">
-                        <span class="font-bold text-amber-600 text-xs sm:text-sm mr-2 shrink-0">
+                    <div class="flex items-center justify-between sm:justify-end gap-2 shrink-0 border-t sm:border-t-0 pt-2 sm:pt-0 border-slate-800">
+                        <span class="font-bold text-amber-400 text-xs sm:text-sm mr-2 shrink-0">
                             ${item.amount > 0 ? '฿' + Number(item.amount).toLocaleString('th-TH') : '-'}
                         </span>
-                        <button type="button" onclick="openDeleteRequestModal('${safeId}')" title="แจ้งขอลบข้อมูล" class="text-slate-400 hover:text-amber-600 p-1.5 rounded-lg hover:bg-amber-50 shrink-0">
+                        <button type="button" onclick="openDeleteRequestModal('${safeId}')" title="แจ้งขอลบข้อมูล" class="text-slate-400 hover:text-amber-300 p-1.5 rounded-lg hover:bg-amber-400/10 shrink-0">
                             <i class="fa-solid fa-flag"></i>
                         </button>
-                        <button type="button" onclick="openDetailModal('${safeId}')" class="bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300 font-semibold text-xs px-3 py-1.5 rounded-lg transition whitespace-nowrap shrink-0">
+                        <button type="button" onclick="openDetailModal('${safeId}')" class="bg-amber-400/15 hover:bg-amber-400/25 text-amber-300 border border-amber-400/40 font-semibold text-xs px-3 py-1.5 rounded-lg transition whitespace-nowrap shrink-0">
                             รายละเอียด
                         </button>
                     </div>

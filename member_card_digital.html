@@ -12,7 +12,27 @@
   <style>
     html { font-size: 16px; transition: font-size 0.18s ease; }
     html, body, input, select, textarea, button { font-family: 'Prompt', sans-serif !important; }
-    body { background-color: #f8fafc; color: #0f172a; overflow-x: clip; }
+    body { background-color: #070a12; color: #f8fafc; overflow-x: clip; }
+    .dark-surface-card {
+      background: rgba(15, 23, 42, 0.94);
+      border: 1px solid rgba(251, 191, 36, 0.24);
+      color: #f8fafc;
+      box-shadow: 0 18px 38px -14px rgba(2, 6, 23, 0.72);
+    }
+    .dark-field {
+      background-color: #070b14;
+      border: 1px solid #334155;
+      color: #f8fafc;
+      transition: border-color 0.2s ease, background-color 0.2s ease;
+    }
+    .dark-field::placeholder {
+      color: #64748b;
+    }
+    .dark-field:focus {
+      outline: none;
+      border-color: #fbbf24;
+      background-color: #0b1120;
+    }
     .digital-card-bg {
       background:
         radial-gradient(circle at 85% 15%, rgba(251, 191, 36, 0.25) 0%, transparent 45%),
@@ -389,29 +409,29 @@
   </nav>
 
   <main class="flex-grow max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-6">
-    <section class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+    <section class="dark-surface-card rounded-3xl p-6 sm:p-8 space-y-5">
       <div class="space-y-1">
-        <span class="text-xs font-extrabold text-amber-800 bg-amber-100 border border-amber-300 px-3 py-1 rounded-full">DIGITAL MEMBER ID</span>
-        <h1 class="text-xl sm:text-2xl font-black text-slate-900 pt-1">เปิดบัตรสมาชิกดิจิทัลพร้อม QR Code ยืนยันตัวตน</h1>
-        <p class="text-xs sm:text-sm text-slate-500">กรอกรหัสสมาชิกและเบอร์โทรศัพท์ 4 หลักสุดท้ายเพื่อแสดงบัตรสมาชิกอิเล็กทรอนิกส์บนมือถือสำหรับให้ผู้โดยสารหรือจุดคัดกรองตรวจสอบ</p>
+        <span class="text-xs font-extrabold text-amber-300 bg-amber-500/20 border border-amber-400/40 px-3 py-1 rounded-full">DIGITAL MEMBER ID</span>
+        <h1 class="text-xl sm:text-2xl font-black text-white pt-1">เปิดบัตรสมาชิกดิจิทัลพร้อม QR Code ยืนยันตัวตน</h1>
+        <p class="text-xs sm:text-sm text-slate-300">กรอกรหัสสมาชิกและเบอร์โทรศัพท์ 4 หลักสุดท้ายเพื่อแสดงบัตรสมาชิกอิเล็กทรอนิกส์บนมือถือสำหรับให้ผู้โดยสารหรือจุดคัดกรองตรวจสอบ</p>
       </div>
 
       <form onsubmit="loadDigitalCard(event)" class="grid sm:grid-cols-12 gap-3">
         <div class="sm:col-span-5">
           <input type="text" id="card-member-code" required placeholder="รหัสสมาชิก (เช่น B2464)"
-            class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-mono uppercase">
+            class="dark-field w-full rounded-xl px-4 py-3 text-xs sm:text-sm font-mono uppercase text-amber-300">
         </div>
         <div class="sm:col-span-4">
           <input type="text" id="card-phone-last4" maxlength="4" pattern="\d{4}" required placeholder="เบอร์โทร 4 หลักสุดท้าย"
-            class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-mono">
+            class="dark-field w-full rounded-xl px-4 py-3 text-xs sm:text-sm font-mono">
         </div>
         <div class="sm:col-span-3">
-          <button type="submit" id="btn-show-card" class="w-full h-full bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-extrabold py-3 px-4 rounded-xl text-xs sm:text-sm shadow">
+          <button type="submit" id="btn-show-card" class="w-full h-full bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold py-3 px-4 rounded-xl text-xs sm:text-sm shadow transition">
             แสดงบัตรสมาชิก
           </button>
         </div>
       </form>
-      <p id="card-error-msg" class="hidden text-xs text-rose-600 font-bold"></p>
+      <p id="card-error-msg" class="hidden text-xs text-rose-400 font-bold"></p>
     </section>
 
     <section id="digital-card-wrapper" class="hidden flex justify-center">

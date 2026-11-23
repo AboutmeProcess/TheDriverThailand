@@ -447,7 +447,6 @@
               <span>กรุณาเลือกโซนพื้นที่สมุดทัวร์ที่ต้องการใช้งานด้านล่าง ระบบจะคำนวณราคาตามโซน และ จำนวนเล่มให้อัตโนมัติ</span>
             </div>
           </div>
-          
         </div>
       </div>
     </section>
@@ -471,7 +470,7 @@
       <div id="tourbook-summary-details" class="grid sm:grid-cols-2 gap-2.5 text-xs bg-slate-950/60 p-4 rounded-2xl border border-emerald-800/60"></div>
       <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
         <p class="text-xs text-emerald-200/90">
-          <i class="fa-solid fa-truck-fast mr-1 text-amber-400"></i> เจ้าหน้าที่จะตรวจสอบยอดโอนและจัดส่งสมุดทัวร์ตามที่อยู่ที่ระบุ พร้อมแจ้งเลขพัสดุทาง Line ID
+          <i class="fa-solid fa-truck-fast mr-1 text-amber-400"></i> เจ้าหน้าที่จะตรวจสอบยอดโอนและจัดส่งสมุดทัวร์ตามที่อยู่ที่ระบุ
         </p>
         <button type="button" onclick="copyTourbookRef()" class="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold px-4 py-2.5 rounded-xl text-xs inline-flex items-center gap-1.5 transition">
           <i class="fa-solid fa-copy"></i> คัดลอกเลขที่คำสั่งซื้อ
@@ -542,7 +541,6 @@
               </div>
               <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-600">
                 <span><i class="fa-solid fa-truck text-emerald-600 mr-1"></i> รวมค่าจัดส่งพัสดุแล้ว</span>
-  
               </div>
             </label>
           </div>
@@ -576,7 +574,7 @@
           </div>
         </div>
 
-        <!-- หมวดที่ 2: ข้อมูลสมาชิกผู้สั่งซื้อ -->
+        <!-- หมวดที่ 2: ข้อมูลในการจัดส่ง -->
         <div class="bg-slate-50/80 border border-slate-200 rounded-3xl p-5 sm:p-6 space-y-4">
           <h3 class="font-extrabold text-slate-900 text-sm sm:text-base border-b border-slate-200 pb-3 flex items-center gap-2">
             <i class="fa-solid fa-user-check text-amber-600"></i>
@@ -585,7 +583,7 @@
           <div class="grid md:grid-cols-2 gap-4">
             <div class="space-y-1.5">
               <label for="tb_fullname" class="block text-xs font-bold text-slate-700">
-                ชื่อ - นามสกุล<span class="text-rose-500">*</span>
+                ชื่อ - นามสกุล <span class="text-rose-500">*</span>
               </label>
               <input type="text" id="tb_fullname" name="fullName" required placeholder="ระบุชื่อและนามสกุลจริงสำหรับจ่าหน้าซอง"
                 class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
@@ -643,7 +641,8 @@
               </div>
             </div>
             <div class="text-left sm:text-right text-xs text-slate-500">
-              <i class="fa-solid fa-circle-check text-emerald-500 text-base sm:text-lg mb-0.5"></i><p>กรุณาตรวจสอบยอดโอนให้ตรงกับโซนและจำนวนเล่ม</p>
+              <i class="fa-solid fa-circle-check text-emerald-500 text-base sm:text-lg mb-0.5"></i>
+              <p>กรุณาตรวจสอบยอดโอนให้ตรงกับโซนและจำนวนเล่ม</p>
             </div>
           </div>
 
@@ -662,20 +661,19 @@
             </div>
           </div>
         </div>
-           <div class="flex justify-end w-full">
-  <button type="submit" id="btn-submit-tourbook"
-    class="group w-full sm:w-auto bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold text-sm sm:text-base px-8 py-3.5 rounded-xl shadow-lg transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
-    <i class="fa-solid fa-cart-shopping icon-bounce-hover"></i>
-    <span>ยืนยันสั่งซื้อสมุดทัวร์</span>
-  </button>
-</div>
-    
+
+        <div class="flex justify-end w-full">
+          <button type="submit" id="btn-submit-tourbook"
+            class="group w-full sm:w-auto bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold text-sm sm:text-base px-8 py-3.5 rounded-xl shadow-lg transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
+            <i class="fa-solid fa-cart-shopping icon-bounce-hover"></i>
+            <span>ยืนยันสั่งซื้อสมุดทัวร์</span>
+          </button>
         </div>
       </form>
     </section>
   </main>
 
-<!-- FOOTER -->
+  <!-- FOOTER -->
   <footer class="bg-slate-950 text-slate-400 border-t border-amber-500/20 py-8 px-4 text-xs mt-10">
     <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
       <div class="text-center sm:text-left">
@@ -695,7 +693,7 @@
   </footer>
 
   <script>
-    // กำหนดราคาสมุดทัวร์ทั้ง 2 แบบ (สามารถปรับแก้ตัวเลขราคาให้ตรงกับฟอร์มได้ทันที)
+    // กำหนดราคาสมุดทัวร์ทั้ง 2 แบบ
     const TOURBOOK_ZONES = {
       BKK: {
         code: 'BKK',
@@ -712,21 +710,15 @@
     };
 
     const TOURBOOK_CONFIG = {
-      privacyPolicyUrl: 'privacy_policy.html',
-      privacyReadStorageKey: 'tdt_privacy_policy_read_v1',
-      submitEndpointUrl: 'https://script.google.com/macros/s/AKfycbyVNMZq0rBm56TT4dfmHy6XbqbxTDP0CW5r4B5_GN9BpPqSaN8koCUKl9YjHYh3vEZO/exec',
+      submitEndpointUrl: 'https://script.google.com/macros/s/AKfycbyeDCdxBD10D_AFZQY2NxeylLOiAmAHLesSDZHXYCb3TsYs4wYer_kRTPVOs3VpK2pP/exec',
       draftStorageKey: 'tdt_tourbook_order_draft_v1',
       submissionsStorageKey: 'tdt_tourbook_order_submissions_v1'
     };
 
     const TOURBOOK_DRAFT_IDS = [
       'order_quantity',
-      'tb_member_code',
-      'tb_chat_name',
       'tb_fullname',
       'tb_phone',
-      'tb_line_id',
-      'tb_license_plate',
       'tb_shipping_address'
     ];
 
@@ -809,14 +801,10 @@
       const formulaEl = document.getElementById('calc-formula-text');
       const totalEl = document.getElementById('total-price-display');
       const payBadgeEl = document.getElementById('payment-amount-badge');
-      const heroFormBtn = document.getElementById('btn-hero-google-form');
-      const heroFormLabel = document.getElementById('hero-google-form-label');
 
       if (formulaEl) formulaEl.textContent = `${zone.name} (${zone.unitPrice.toLocaleString()} บาท × ${qty} เล่ม)`;
       if (totalEl) totalEl.textContent = `${totalAmount.toLocaleString()} บาท`;
       if (payBadgeEl) payBadgeEl.textContent = `ยอดโอน: ${totalAmount.toLocaleString()} บาท`;
-      if (heroFormBtn) heroFormBtn.href = zone.googleFormUrl;
-      if (heroFormLabel) heroFormLabel.textContent = zone.formLabel;
 
       saveFormDraft();
     }
@@ -835,63 +823,6 @@
         }
       } catch (_) {}
       showToast('คัดลอกสำเร็จ', 'คัดลอกเลขที่บัญชี 773-2-29853-5 เรียบร้อยแล้วครับ', 'success');
-    }
-
-    function hasReadPrivacyPolicy() {
-      try {
-        return localStorage.getItem(TOURBOOK_CONFIG.privacyReadStorageKey) === 'true';
-      } catch (_) {
-        return false;
-      }
-    }
-
-    function updatePrivacyReadBadge() {
-      const statusEl = document.getElementById('privacy-read-status');
-      if (!statusEl) return;
-      if (hasReadPrivacyPolicy()) {
-        statusEl.className = 'text-[11px] font-bold text-emerald-700 inline-flex items-center gap-1.5 pt-0.5';
-        statusEl.innerHTML = '<i class="fa-solid fa-circle-check text-emerald-600"></i><span>สถานะ: เปิดอ่านประกาศความเป็นส่วนตัวแล้ว สามารถติ๊กยอมรับและยืนยันได้</span>';
-      } else {
-        statusEl.className = 'text-[11px] font-bold text-amber-800 inline-flex items-center gap-1.5 pt-0.5';
-        statusEl.innerHTML = '<i class="fa-solid fa-lock text-amber-600"></i><span>สถานะ: ยังไม่ได้เปิดอ่านประกาศความเป็นส่วนตัว</span>';
-      }
-    }
-
-    function markPrivacyPolicyOpened() {
-      try {
-        localStorage.setItem(TOURBOOK_CONFIG.privacyReadStorageKey, 'true');
-      } catch (_) {}
-      updatePrivacyReadBadge();
-    }
-
-    function handleAcceptCheckboxClick(event) {
-      const checkbox = document.getElementById('accept_tourbook_terms');
-      if (!checkbox) return;
-      if (!hasReadPrivacyPolicy()) {
-        event.preventDefault();
-        checkbox.checked = false;
-        markPrivacyPolicyOpened();
-        window.open(TOURBOOK_CONFIG.privacyPolicyUrl, '_blank', 'noopener,noreferrer');
-        showToast(
-          'กรุณาอ่านประกาศความเป็นส่วนตัว',
-          'ระบบเปิดหน้าประกาศความเป็นส่วนตัวให้แล้ว กรุณาอ่านรายละเอียดให้ครบถ้วนแล้วกลับมาติ๊กยอมรับครับ',
-          'info'
-        );
-      }
-    }
-
-    function handleAcceptCheckboxChange(checkboxEl) {
-      if (!checkboxEl) return;
-      if (checkboxEl.checked && !hasReadPrivacyPolicy()) {
-        checkboxEl.checked = false;
-        markPrivacyPolicyOpened();
-        window.open(TOURBOOK_CONFIG.privacyPolicyUrl, '_blank', 'noopener,noreferrer');
-        showToast(
-          'กรุณาอ่านประกาศความเป็นส่วนตัว',
-          'ระบบเปิดหน้าประกาศความเป็นส่วนตัวให้แล้ว กรุณาอ่านรายละเอียดก่อนกดติ๊กยอมรับครับ',
-          'info'
-        );
-      }
     }
 
     function compressImageFile(file, maxWidth = 900, quality = 0.8) {
@@ -1037,10 +968,6 @@
           showToast('ข้อมูลไม่ครบถ้วน', 'กรุณาแนบสลิปหลักฐานการโอนเงินก่อนยืนยันคำสั่งซื้อครับ', 'error');
           return;
         }
-        if (!hasReadPrivacyPolicy() || !document.getElementById('accept_tourbook_terms')?.checked) {
-          showToast('กรุณายืนยันประกาศความเป็นส่วนตัว', 'กรุณาเปิดอ่านประกาศความเป็นส่วนตัวและติ๊กยอมรับก่อนส่งคำสั่งซื้อครับ', 'error');
-          return;
-        }
 
         btn.disabled = true;
         btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> <span>กำลังบันทึกคำสั่งซื้อสมุดทัวร์...</span>';
@@ -1058,13 +985,9 @@
           String(now.getMinutes()).padStart(2, '0') +
           String(now.getSeconds()).padStart(2, '0');
 
-        const memberCode = document.getElementById('tb_member_code').value.trim().toUpperCase();
-        const chatName = document.getElementById('tb_chat_name').value.trim();
-        const fullName = document.getElementById('tb_fullname').value.trim();
-        const phone = document.getElementById('tb_phone').value.trim();
-        const lineId = document.getElementById('tb_line_id').value.trim();
-        const licensePlate = document.getElementById('tb_license_plate').value.trim();
-        const shippingAddress = document.getElementById('tb_shipping_address').value.trim();
+        const fullName = (document.getElementById('tb_fullname')?.value || '').trim();
+        const phone = (document.getElementById('tb_phone')?.value || '').trim();
+        const shippingAddress = (document.getElementById('tb_shipping_address')?.value || '').trim();
 
         const record = {
           refCode,
@@ -1075,12 +998,12 @@
           unitPrice: zone.unitPrice,
           quantity: qty,
           totalAmount,
-          memberCode,
-          chatName,
+          memberCode: '',
+          chatName: '',
           fullName,
           phone,
-          lineId,
-          licensePlate,
+          lineId: '',
+          licensePlate: '',
           shippingAddress,
           status: 'รอตรวจสอบยอดโอนและจัดส่ง'
         };
@@ -1113,8 +1036,8 @@
           summaryEl.innerHTML = `
             <div><span class="text-emerald-400">รายการที่สั่งซื้อ:</span> <strong>สมุดทัวร์ ${escapeHtml(zone.name)}</strong> (${qty} เล่ม)</div>
             <div><span class="text-emerald-400">ยอดโอนชำระ:</span> <strong class="font-mono text-amber-300">${totalAmount.toLocaleString()} บาท</strong></div>
-            <div><span class="text-emerald-400">ผู้รับพัสดุ:</span> <strong>${escapeHtml(fullName)}</strong> (รหัสสมาชิก: <strong class="font-mono">${escapeHtml(memberCode)}</strong>)</div>
-            <div><span class="text-emerald-400">เบอร์โทร / Line ID:</span> <strong>${escapeHtml(phone)}</strong> / ${escapeHtml(lineId)}</div>
+            <div><span class="text-emerald-400">ผู้รับพัสดุ:</span> <strong>${escapeHtml(fullName)}</strong></div>
+            <div><span class="text-emerald-400">เบอร์โทรศัพท์ติดต่อ:</span> <strong>${escapeHtml(phone)}</strong></div>
           `;
         }
         successBox?.classList.remove('hidden');
@@ -1133,14 +1056,7 @@
       }
     }
 
-    window.addEventListener('storage', e => {
-      if (e.key === TOURBOOK_CONFIG.privacyReadStorageKey) {
-        updatePrivacyReadBadge();
-      }
-    });
-
     document.addEventListener('DOMContentLoaded', () => {
-      updatePrivacyReadBadge();
       handleZoneOrQtyChange();
       restoreFormDraft();
       TOURBOOK_DRAFT_IDS.forEach(id => {

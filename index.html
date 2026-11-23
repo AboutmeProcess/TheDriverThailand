@@ -632,7 +632,7 @@
           <button type="button" onclick="changeScale(-1)" aria-label="ลดขนาดตัวอักษร" class="tdt-util-btn" title="ลดขนาดตัวอักษร">
             <span>A-</span>
           </button>
-          <span id="font-pct" class="text-[11px] font-normal text-amber-300 px-1 select-none">100%</span>
+          <span id="tdt-font-pct" class="text-[11px] font-normal text-amber-300 px-1 select-none">100%</span>
           <button type="button" onclick="changeScale(1)" aria-label="เพิ่มขนาดตัวอักษร" class="tdt-util-btn" title="เพิ่มขนาดตัวอักษร">
             <span>A+</span>
           </button>
@@ -1421,11 +1421,21 @@
     const FONT_SCALE_KEY = "tdt_font_scale_pct";
     let currentFontScale = 100;
 
+    function syncFontScaleLabels(pct) {
+      ["tdt-font-pct", "font-pct", "font-scale-label"].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = `${pct}%`;
+      });
+    }
+
     function applyFontScale(pct) {
       currentFontScale = Math.min(130, Math.max(90, Number(pct) || 100));
-      document.documentElement.style.fontSize = `${(currentFontScale / 100) * 16}px`;
-      const labelEl = document.getElementById("font-scale-label");
-      if (labelEl) labelEl.textContent = `${currentFontScale}%`;
+      const pxSize = (currentFontScale / 100) * 16;
+      document.documentElement.style.fontSize = `${pxSize}px`;
+      if (document.body) {
+        document.body.style.fontSize = `${pxSize}px`;
+      }
+      syncFontScaleLabels(currentFontScale);
       try {
         localStorage.setItem(FONT_SCALE_KEY, String(currentFontScale));
       } catch (_) {}
@@ -1437,11 +1447,20 @@
       showToast(`ขนาดตัวอักษร: ${currentFontScale}%`);
     }
 
+    window.changeScale = changeFontScale;
+    window.tdtChangeFontScale = changeFontScale;
+
     (function initAccessibilityPreferences() {
       try {
         const savedScale = localStorage.getItem(FONT_SCALE_KEY);
-        if (savedScale) applyFontScale(Number(savedScale));
-      } catch (_) {}
+        if (savedScale) {
+          applyFontScale(Number(savedScale));
+        } else {
+          syncFontScaleLabels(currentFontScale);
+        }
+      } catch (_) {
+        syncFontScaleLabels(currentFontScale);
+      }
     })();
 
     let toastTimer = null;

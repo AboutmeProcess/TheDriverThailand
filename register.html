@@ -1139,9 +1139,10 @@
 </footer>
 
 <script>
-  const csvFile = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRTvooz5EilsOQ9QuZqIB2o_1xIs_BwmOnyXk-21mIJezzpYqT1T9P_u-o49t_QMuyVV7zVlDe5iN80/pub?output=csv";
+  const MASTER_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyeDCdxBD10D_AFZQY2NxeylLOiAmAHLesSDZHXYCb3TsYs4wYer_kRTPVOs3VpK2pP/exec";
+  const PUBLIC_HEADERS = ["รายชื่อสมาชิก", "ทะเบียนรถ", "เบอร์ติดต่อ 4 หลักสุดท้าย"];
   let allData = [];
-  let headers = [];
+  let headers = [...PUBLIC_HEADERS];
 
   function escapeHtml(val) {
     return String(val ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
@@ -1164,26 +1165,37 @@
       hour: "2-digit",
       minute: "2-digit"
     });
-    syncEl.innerHTML = `<i class="fa-solid fa-circle-check"></i> นับจากฐานข้อมูลล่าสุด (${formatted} น.)`;
+    syncEl.innerHTML = `<i class="fa-solid fa-circle-check"></i> นับจากฐานข้อมูล DATAMember (${formatted} น.)`;
   }
 
-  Papa.parse(csvFile, {
-    download: true,
-    header: true,
-    skipEmptyLines: true,
-    complete: function(res) {
-      allData = (res.data || []).filter(hasAnyValue);
-      headers = allData.length ? Object.keys(allData[0]) : [];
-      const thead = document.getElementById("thead");
-      thead.innerHTML = headers.map(h => `<th>${escapeHtml(h)}</th>`).join("");
+  async function loadApprovedMembersFromSheet() {
+    const thead = document.getElementById("thead");
+    thead.innerHTML = headers.map(h => `<th>${escapeHtml(h)}</th>`).join("");
+
+    try {
+      const res = await fetch(`${MASTER_WEB_APP_URL}?action=public_members&t=${Date.now()}`);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const json = await res.json();
+      const rows = Array.isArray(json?.data) ? json.data : (Array.isArray(json) ? json : []);
+
+      allData = rows
+        .filter(hasAnyValue)
+        .map(r => ({
+          "รายชื่อสมาชิก": String(r["รายชื่อสมาชิก"] ?? "").trim(),
+          "ทะเบียนรถ": String(r["ทะเบียนรถ"] ?? "").trim(),
+          "เบอร์ติดต่อ 4 หลักสุดท้าย": String(r["เบอร์ติดต่อ 4 หลักสุดท้าย"] ?? "").trim()
+        }));
+
       updateMemberCounter(allData.length);
       render(allData);
-    },
-    error: function() {
+    } catch (err) {
       document.getElementById("memberCount").textContent = "ไม่พร้อมใช้งาน";
-      document.getElementById("lastSync").innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> โหลดข้อมูล CSV ไม่สำเร็จ`;
+      document.getElementById("lastSync").innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> โหลดข้อมูลจาก DATAMember ไม่สำเร็จ`;
+      document.getElementById("tbody").innerHTML = `<tr><td colspan="3" style="text-align:center;padding:20px;color:#DC2626;">ไม่สามารถเชื่อมต่อฐานข้อมูลสมาชิกได้ในขณะนี้ กรุณารีเฟรชหน้าเว็บอีกครั้ง</td></tr>`;
     }
-  });
+  }
+
+  document.addEventListener("DOMContentLoaded", loadApprovedMembersFromSheet);
 
   function render(data) {
     document.getElementById("resultCount").textContent = `${data.length.toLocaleString()} / ${allData.length.toLocaleString()} รายการ`;

@@ -211,7 +211,11 @@
     try {
       const navHTML = buildGlobalNavHTML().trim();
       const existingNav = document.querySelector("nav.tdt-global-nav");
-      if (existingNav) {
+      const fallbackNav = document.getElementById("tdt-direct-fallback-nav");
+
+      if (fallbackNav) {
+        fallbackNav.outerHTML = navHTML;
+      } else if (existingNav) {
         existingNav.outerHTML = navHTML;
       } else {
         const slot = document.getElementById("shared-header-slot");

@@ -44,8 +44,8 @@
       font-family: 'Prompt', sans-serif !important;
     }
     html, body {
-      background-color: #f8fafc;
-      color: #0f172a;
+      background-color: #070a12 !important;
+      color: #f8fafc !important;
       max-width: 100%;
       overflow-x: clip;
     }
@@ -54,10 +54,10 @@
       width: 6px;
     }
     .custom-scrollbar::-webkit-scrollbar-track {
-      background: #f1f5f9;
+      background: #0f172a;
     }
     .custom-scrollbar::-webkit-scrollbar-thumb {
-      background: #cbd5e1;
+      background: #334155;
       border-radius: 4px;
     }
     /* Executive Obsidian & Champagne Gold Hero Background */
@@ -68,9 +68,34 @@
         linear-gradient(135deg, #070a12 0%, #0f172a 52%, #172033 100%);
     }
     .glass-card {
-      background: rgba(255, 255, 255, 0.055);
+      background: rgba(15, 23, 42, 0.78);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
+    }
+    .dark-surface-card {
+      background: rgba(15, 23, 42, 0.94);
+      border: 1px solid rgba(251, 191, 36, 0.24);
+      color: #f8fafc;
+      box-shadow: 0 18px 38px -14px rgba(2, 6, 23, 0.72);
+    }
+    .dark-sub-panel {
+      background: rgba(7, 11, 20, 0.82);
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      color: #f8fafc;
+    }
+    .dark-field {
+      background-color: #070b14 !important;
+      border: 1px solid #334155 !important;
+      color: #f8fafc !important;
+      transition: border-color 0.2s ease, background-color 0.2s ease;
+    }
+    .dark-field::placeholder {
+      color: #64748b !important;
+    }
+    .dark-field:focus {
+      outline: none !important;
+      border-color: #fbbf24 !important;
+      background-color: #0b1120 !important;
     }
     .gold-shimmer-text {
       background: linear-gradient(90deg, #fde68a 0%, #fbbf24 35%, #f59e0b 65%, #fef08a 100%);
@@ -509,7 +534,7 @@
   </header>
 
   <!-- แถบนำทางหลัก -->
-  <nav class="bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm z-40">
+  <nav class="bg-slate-900/95 backdrop-blur-md border-b border-amber-400/20 shadow-sm z-40 text-slate-100">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       <div class="flex flex-col sm:flex-row sm:justify-between py-3 sm:py-0 sm:min-h-20 gap-3 sm:items-center">
         <div class="flex items-center gap-3 min-w-0">
@@ -518,22 +543,22 @@
           </div>
           <div class="min-w-0">
             <div class="flex items-center gap-2 flex-wrap">
-              <span class="font-extrabold text-slate-900 text-sm sm:text-base tracking-wide">บัตรสมาชิกประเมศฐ์</span>
-              <span class="text-xs bg-amber-100 text-amber-800 px-2.5 py-0.5 rounded-md font-bold border border-amber-300 shrink-0">Official</span>
+              <span class="font-extrabold text-white text-sm sm:text-base tracking-wide">บัตรสมาชิกประเมศฐ์</span>
+              <span class="text-xs bg-amber-400/20 text-amber-300 px-2.5 py-0.5 rounded-md font-bold border border-amber-400/40 shrink-0">Official</span>
             </div>
-            <p class="text-xs text-amber-600 font-semibold mt-0.5">ดำเนินการโดย กลุ่ม The Driver Thailand</p>
+            <p class="text-xs text-amber-300 font-semibold mt-0.5">ดำเนินการโดย กลุ่ม The Driver Thailand</p>
           </div>
         </div>
 
         <div class="grid grid-cols-2 sm:flex gap-2.5 sm:space-x-3 sm:gap-0 text-xs sm:text-sm font-bold w-full sm:w-auto">
           <button type="button" id="btn-nav-register" onclick="switchNavTab('register')"
-            class="group px-3.5 py-2.5 sm:px-6 sm:py-3 rounded-2xl transition-all flex items-center justify-center gap-2 bg-slate-950 text-amber-400 border border-amber-400/30 shadow-md hover:bg-slate-800">
+            class="group px-3.5 py-2.5 sm:px-6 sm:py-3 rounded-2xl transition-all flex items-center justify-center gap-2 bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 border border-amber-300 shadow-md hover:from-amber-300 hover:to-amber-400">
             <i class="fa-solid fa-pen-to-square text-sm sm:text-base shrink-0 icon-bounce-hover"></i>
             <span class="truncate">ลงทะเบียนทำบัตร</span>
           </button>
           <button type="button" id="btn-nav-shipping" onclick="switchNavTab('shipping')"
-            class="group px-3.5 py-2.5 sm:px-6 sm:py-3 rounded-2xl transition-all flex items-center justify-center gap-2 text-slate-700 hover:bg-amber-50 hover:text-amber-800 border border-slate-200 hover:border-amber-300">
-            <i class="fa-solid fa-truck-fast text-amber-600 text-sm sm:text-base shrink-0 icon-bounce-hover"></i>
+            class="group px-3.5 py-2.5 sm:px-6 sm:py-3 rounded-2xl transition-all flex items-center justify-center gap-2 text-slate-200 bg-slate-950 hover:bg-slate-800 hover:text-amber-300 border border-slate-700 hover:border-amber-400/40">
+            <i class="fa-solid fa-truck-fast text-amber-400 text-sm sm:text-base shrink-0 icon-bounce-hover"></i>
             <span class="truncate">เช็คเลขพัสดุย้อนหลัง</span>
           </button>
         </div>
@@ -606,72 +631,72 @@
       </div>
 
       <!-- กล่องค้นหาสถานะการทำบัตร -->
-      <div id="search-status-anchor" class="bg-white rounded-3xl p-5 sm:p-8 shadow-sm border border-slate-200/90">
+      <div id="search-status-anchor" class="dark-surface-card rounded-3xl p-5 sm:p-8">
         <div class="max-w-2xl mx-auto space-y-4">
           <div class="text-center space-y-1">
-            <h3 class="text-lg sm:text-xl font-bold text-slate-900">
-              <i class="fa-solid fa-magnifying-glass text-amber-500 mr-2 icon-bounce-hover"></i>ค้นหาสถานะการทำบัตร
+            <h3 class="text-lg sm:text-xl font-bold text-amber-300">
+              <i class="fa-solid fa-magnifying-glass text-amber-400 mr-2 icon-bounce-hover"></i>ค้นหาสถานะการทำบัตร
             </h3>
-            <p class="text-xs sm:text-sm text-slate-500">กรอกรหัสอ้างอิง (เช่น PRM-20261121-164900), ชื่อ-นามสกุล หรือ เบอร์โทรศัพท์ เพื่อติดตามสถานะ</p>
+            <p class="text-xs sm:text-sm text-slate-400">กรอกรหัสอ้างอิง (เช่น PRM-20261121-164900), ชื่อ-นามสกุล หรือ เบอร์โทรศัพท์ เพื่อติดตามสถานะ</p>
           </div>
           <div class="flex flex-col sm:flex-row gap-2.5">
             <div class="relative flex-1 min-w-0">
               <i class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
               <input type="text" id="input-search-track" placeholder="พิมพ์รหัสอ้างอิง / ชื่อ-นามสกุล / เบอร์โทรศัพท์..."
-                class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-300 rounded-2xl text-xs sm:text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
+                class="dark-field w-full pl-11 pr-4 py-3 rounded-2xl text-xs sm:text-sm transition">
             </div>
             <button type="button" onclick="searchStatusTrack()"
-              class="w-full sm:w-auto bg-slate-950 hover:bg-slate-800 text-amber-400 border border-amber-400/30 font-bold px-6 py-3 rounded-2xl text-xs sm:text-sm transition shrink-0 shadow">
+              class="w-full sm:w-auto bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 border border-amber-300 font-extrabold px-6 py-3 rounded-2xl text-xs sm:text-sm transition shrink-0 shadow">
               ตรวจสอบ
             </button>
           </div>
-          <div id="tracking-result-container" class="hidden mt-4 bg-slate-50 border border-slate-200 rounded-2xl p-5 sm:p-6 transition-all"></div>
+          <div id="tracking-result-container" class="hidden mt-4 dark-sub-panel rounded-2xl p-5 sm:p-6 transition-all"></div>
         </div>
       </div>
 
       <!-- แบบฟอร์มลงทะเบียนสมัครทำบัตร -->
-      <div class="bg-white rounded-3xl p-5 sm:p-10 shadow-sm border border-slate-200/90 space-y-6 sm:space-y-8">
-        <div class="border-b border-slate-200 pb-5 flex justify-between items-start sm:items-center flex-wrap gap-2">
+      <div class="dark-surface-card rounded-3xl p-5 sm:p-10 space-y-6 sm:space-y-8">
+        <div class="border-b border-slate-800 pb-5 flex justify-between items-start sm:items-center flex-wrap gap-2">
           <div>
-            <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900">แบบฟอร์มลงทะเบียนสมัครทำบัตร</h3>
-            <p class="text-xs sm:text-sm text-slate-500 mt-0.5">กรอกข้อมูลให้ครบถ้วน ข้อมูลจะถูกจัดเก็บเข้าสู่ระบบชีตอัตโนมัติ</p>
+            <h3 class="text-xl sm:text-2xl font-extrabold text-amber-300">แบบฟอร์มลงทะเบียนสมัครทำบัตร</h3>
+            <p class="text-xs sm:text-sm text-slate-400 mt-0.5">กรอกข้อมูลให้ครบถ้วน ข้อมูลจะถูกจัดเก็บเข้าสู่ระบบชีตอัตโนมัติ</p>
           </div>
-          <span class="text-xs font-semibold text-slate-600 bg-slate-100 px-3.5 py-1.5 rounded-full border border-slate-200 shrink-0">
-            <i class="fa-solid fa-shield-halved text-emerald-600 mr-1"></i> ปลอดภัย 100%
+          <span class="text-xs font-semibold text-emerald-300 bg-emerald-950/80 px-3.5 py-1.5 rounded-full border border-emerald-500/40 shrink-0">
+            <i class="fa-solid fa-shield-halved text-emerald-400 mr-1"></i> ปลอดภัย 100%
           </span>
         </div>
 
         <form id="form-registration" onsubmit="submitRegistrationForm(event)" class="space-y-6">
           <!-- ขั้นตอนที่ 1: ประเภทการทำบัตร -->
-          <div class="bg-slate-50/80 border border-slate-200 rounded-3xl p-5 sm:p-6 space-y-4">
-            <label class="block font-bold text-slate-900 text-sm sm:text-base">
-1. ประเภทการทำบัตร <span class="text-red-500">*</span>
+          <div class="dark-sub-panel border-amber-400/25 rounded-3xl p-5 sm:p-6 space-y-4">
+            <label class="block font-bold text-amber-300 text-sm sm:text-base">
+1. ประเภทการทำบัตร <span class="text-rose-400">*</span>
             </label>
             <div class="grid md:grid-cols-2 gap-4">
-              <label id="label-card-new" class="border-2 border-amber-500 bg-amber-50/60 rounded-2xl p-4 sm:p-5 cursor-pointer hover:border-amber-600 transition flex items-center justify-between gap-3 shadow-sm">
+              <label id="label-card-new" class="border-2 border-amber-400 bg-slate-900 rounded-2xl p-4 sm:p-5 cursor-pointer hover:border-amber-300 transition flex items-center justify-between gap-3 shadow-sm">
                 <div class="flex items-center gap-3 min-w-0">
-                  <input type="radio" name="card_type" value="สมัครสมาชิกใหม่ 769 บาท" checked onchange="handleCardTypeChange()" class="w-4 h-4 text-amber-600 focus:ring-amber-500 shrink-0">
-                  <span class="font-bold text-slate-900 text-sm sm:text-base">สมัครสมาชิกใหม่ 769 บาท</span>
+                  <input type="radio" name="card_type" value="สมัครสมาชิกใหม่ 769 บาท" checked onchange="handleCardTypeChange()" class="w-4 h-4 text-amber-500 focus:ring-amber-400 shrink-0">
+                  <span class="font-bold text-white text-sm sm:text-base">สมัครสมาชิกใหม่ 769 บาท</span>
                 </div>
-                <span class="bg-amber-500 text-slate-950 font-extrabold px-3.5 py-1.5 rounded-xl text-xs sm:text-sm shrink-0">769 บาท</span>
+                <span class="bg-amber-400 text-slate-950 font-extrabold px-3.5 py-1.5 rounded-xl text-xs sm:text-sm shrink-0">769 บาท</span>
               </label>
 
-              <label id="label-card-lost" class="border-2 border-slate-200 bg-white rounded-2xl p-4 sm:p-5 cursor-pointer hover:border-amber-500 transition flex items-center justify-between gap-3 shadow-sm">
+              <label id="label-card-lost" class="border-2 border-slate-700 bg-slate-900 rounded-2xl p-4 sm:p-5 cursor-pointer hover:border-amber-400 transition flex items-center justify-between gap-3 shadow-sm">
                 <div class="flex items-center gap-3 min-w-0">
-                  <input type="radio" name="card_type" value="บัตรหาย / ชำรุด 200 บาท" onchange="handleCardTypeChange()" class="w-4 h-4 text-amber-600 focus:ring-amber-500 shrink-0">
-                  <span class="font-bold text-slate-900 text-sm sm:text-base">บัตรหาย / ชำรุด 200 บาท</span>
+                  <input type="radio" name="card_type" value="บัตรหาย / ชำรุด 200 บาท" onchange="handleCardTypeChange()" class="w-4 h-4 text-amber-500 focus:ring-amber-400 shrink-0">
+                  <span class="font-bold text-white text-sm sm:text-base">บัตรหาย / ชำรุด 200 บาท</span>
                 </div>
-                <span class="bg-slate-200 text-slate-800 font-extrabold px-3.5 py-1.5 rounded-xl text-xs sm:text-sm shrink-0">200 บาท</span>
+                <span class="bg-slate-800 text-amber-300 border border-amber-400/30 font-extrabold px-3.5 py-1.5 rounded-xl text-xs sm:text-sm shrink-0">200 บาท</span>
               </label>
             </div>
           </div>
 
           <!-- ขั้นตอนที่ 2: ผู้แนะนำ -->
-          <div class="bg-slate-50/80 border border-slate-200 rounded-3xl p-5 sm:p-6 space-y-3">
-            <label for="referrer" class="block font-bold text-slate-900 text-sm sm:text-base">
-2. ผู้แนะนำในการสมัครบัตรของคุณ <span class="text-red-500">*</span>
+          <div class="dark-sub-panel rounded-3xl p-5 sm:p-6 space-y-3">
+            <label for="referrer" class="block font-bold text-amber-300 text-sm sm:text-base">
+2. ผู้แนะนำในการสมัครบัตรของคุณ <span class="text-rose-400">*</span>
             </label>
-            <select id="referrer" name="referrer" required class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:ring-2 focus:ring-amber-500 focus:outline-none transition">
+            <select id="referrer" name="referrer" required class="dark-field w-full rounded-xl px-4 py-3 text-xs sm:text-sm transition">
               <option value="" disabled selected>-- เลือกผู้แนะนำ --</option>
               <option value="[MD] Moderator">[MD] Moderator</option>
               <option value="[GM7] TMMWNツ">[GM7] TMMWNツ</option>
@@ -687,100 +712,100 @@
           </div>
 
           <!-- ขั้นตอนที่ 3: ข้อมูลผู้สมัครและที่อยู่จัดส่ง -->
-          <div class="bg-slate-50 border border-slate-200 rounded-3xl p-5 sm:p-6 space-y-5">
-            <h4 class="font-bold text-slate-900 text-sm sm:text-base border-b border-slate-200 pb-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div class="dark-sub-panel rounded-3xl p-5 sm:p-6 space-y-5">
+            <h4 class="font-bold text-amber-300 text-sm sm:text-base border-b border-slate-800 pb-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <span>3. ข้อมูลผู้สมัครและที่อยู่จัดส่ง</span>
-              <span id="address-dataset-badge" class="text-xs text-amber-800 bg-amber-100 font-bold px-3 py-1 rounded-lg w-fit border border-amber-300">
+              <span id="address-dataset-badge" class="text-xs text-amber-300 bg-amber-950/80 font-bold px-3 py-1 rounded-lg w-fit border border-amber-400/40">
                 <i class="fa-solid fa-spinner animate-spin mr-1"></i>กำลังโหลดข้อมูลจังหวัด เขต/อำเภอ และแขวง/ตำบล...
               </span>
             </h4>
 
             <div class="grid md:grid-cols-12 gap-4">
               <div class="md:col-span-3 space-y-1">
-                <label for="prefix" class="block text-xs font-bold text-slate-700">คำนำหน้าชื่อ <span class="text-red-500">*</span></label>
-                <select id="prefix" name="prefix" required class="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-3 text-xs sm:text-sm focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                <label for="prefix" class="block text-xs font-bold text-slate-200">คำนำหน้าชื่อ <span class="text-rose-400">*</span></label>
+                <select id="prefix" name="prefix" required class="dark-field w-full rounded-xl px-3.5 py-3 text-xs sm:text-sm">
                   <option value="นาย">นาย</option>
                   <option value="นางสาว">นางสาว</option>
                   <option value="นาง">นาง</option>
                 </select>
               </div>
               <div class="md:col-span-9 space-y-1">
-                <label for="fullname" class="block text-xs font-bold text-slate-700">ชื่อ และ นามสกุล <span class="text-red-500">* (ภาษาไทยเท่านั้น)</span></label>
+                <label for="fullname" class="block text-xs font-bold text-slate-200">ชื่อ และ นามสกุล <span class="text-rose-400">* (ภาษาไทยเท่านั้น)</span></label>
                 <input type="text" id="fullname" name="fullname" required placeholder="เช่น สมศักดิ์ มั่นใจดี"
-                  class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                  class="dark-field w-full rounded-xl px-4 py-3 text-xs sm:text-sm">
               </div>
             </div>
 
             <div class="grid md:grid-cols-2 gap-4">
               <div class="space-y-1">
-                <label for="phone" class="block text-xs font-bold text-slate-700">เบอร์โทรศัพท์ที่ติดต่อได้ <span class="text-red-500">*</span></label>
+                <label for="phone" class="block text-xs font-bold text-slate-200">เบอร์โทรศัพท์ที่ติดต่อได้ <span class="text-rose-400">*</span></label>
                 <input type="tel" id="phone" name="phone" required placeholder="08X-XXX-XXXX" pattern="[0-9]{9,10}"
-                  class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                  class="dark-field w-full rounded-xl px-4 py-3 text-xs sm:text-sm font-mono">
               </div>
               <div class="space-y-1">
-                <label for="openchat_name" class="block text-xs font-bold text-slate-700">ชื่อในห้อง OpenChat ใช้กรณีติดต่อฉุกเฉิน <span class="text-red-500">*</span></label>
+                <label for="openchat_name" class="block text-xs font-bold text-slate-200">ชื่อในห้อง OpenChat ใช้กรณีติดต่อฉุกเฉิน <span class="text-rose-400">*</span></label>
                 <input type="text" id="openchat_name" name="openchat_name" required placeholder="เช่น Somsak_TheDriver"
-                  class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                  class="dark-field w-full rounded-xl px-4 py-3 text-xs sm:text-sm">
               </div>
             </div>
 
-            <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 space-y-4">
-              <div class="border-b border-slate-100 pb-2">
-                <span class="text-xs sm:text-sm font-bold text-slate-900">
-                  <i class="fa-solid fa-house-chimney text-amber-500 mr-1.5"></i>กรอกข้อมูลที่อยู่จัดส่งเอกสาร/บัตรสมาชิกอย่างละเอียด
+            <div class="bg-slate-900/95 p-4 sm:p-5 rounded-2xl border border-slate-800 space-y-4">
+              <div class="border-b border-slate-800 pb-2">
+                <span class="text-xs sm:text-sm font-bold text-amber-300">
+                  <i class="fa-solid fa-house-chimney text-amber-400 mr-1.5"></i>กรอกข้อมูลที่อยู่จัดส่งเอกสาร/บัตรสมาชิกอย่างละเอียด
                 </span>
               </div>
 
               <div class="grid md:grid-cols-12 gap-3">
                 <div class="md:col-span-4 space-y-1">
-                  <label for="addr_house_no" class="block text-xs font-bold text-slate-700">เลขที่บ้าน / หมู่ <span class="text-red-500">*</span></label>
+                  <label for="addr_house_no" class="block text-xs font-bold text-slate-200">เลขที่บ้าน / หมู่ <span class="text-rose-400">*</span></label>
                   <input type="text" id="addr_house_no" required placeholder="เช่น 123/45 หมู่ 5" oninput="updateFullAddressPreview()"
-                    class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-3 text-xs sm:text-sm focus:bg-white focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                    class="dark-field w-full rounded-xl px-3.5 py-3 text-xs sm:text-sm transition">
                 </div>
                 <div class="md:col-span-8 space-y-1">
-                  <label for="addr_details" class="block text-xs font-bold text-slate-700">รายละเอียดที่อยู่ (หมู่บ้าน | อาคาร | ชั้น | ซอย | ถนน)</label>
+                  <label for="addr_details" class="block text-xs font-bold text-slate-200">รายละเอียดที่อยู่ (หมู่บ้าน | อาคาร | ชั้น | ซอย | ถนน)</label>
                   <input type="text" id="addr_details" placeholder="เช่น หมู่บ้านพรประเสริฐ ซอย 8 ถนนพหลโยธิน" oninput="updateFullAddressPreview()"
-                    class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-3 text-xs sm:text-sm focus:bg-white focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                    class="dark-field w-full rounded-xl px-3.5 py-3 text-xs sm:text-sm transition">
                 </div>
               </div>
 
               <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
                 <div class="space-y-1 min-w-0">
-                  <label for="addr_province" class="block text-xs font-bold text-slate-700">1. จังหวัด <span class="text-red-500">*</span></label>
+                  <label for="addr_province" class="block text-xs font-bold text-slate-200">1. จังหวัด <span class="text-rose-400">*</span></label>
                   <select id="addr_province" required onchange="handleProvinceChange()"
-                    class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-3 text-xs sm:text-sm focus:bg-white focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                    class="dark-field w-full rounded-xl px-3.5 py-3 text-xs sm:text-sm transition">
                     <option value="" disabled selected>-- เลือกจังหวัด --</option>
                   </select>
                 </div>
                 <div class="space-y-1 min-w-0">
-                  <label for="addr_district" class="block text-xs font-bold text-slate-700">2. เขต / อำเภอ <span class="text-red-500">*</span></label>
+                  <label for="addr_district" class="block text-xs font-bold text-slate-200">2. เขต / อำเภอ <span class="text-rose-400">*</span></label>
                   <select id="addr_district" required onchange="handleDistrictChange()"
-                    class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-3 text-xs sm:text-sm focus:bg-white focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                    class="dark-field w-full rounded-xl px-3.5 py-3 text-xs sm:text-sm transition">
                     <option value="" disabled selected>-- เลือกเขต/อำเภอ --</option>
                   </select>
                 </div>
                 <div class="space-y-1 min-w-0">
-                  <label for="addr_subdistrict" class="block text-xs font-bold text-slate-700">3. แขวง / ตำบล <span class="text-red-500">*</span></label>
+                  <label for="addr_subdistrict" class="block text-xs font-bold text-slate-200">3. แขวง / ตำบล <span class="text-rose-400">*</span></label>
                   <select id="addr_subdistrict" required onchange="handleSubdistrictChange()"
-                    class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-3 text-xs sm:text-sm focus:bg-white focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                    class="dark-field w-full rounded-xl px-3.5 py-3 text-xs sm:text-sm transition">
                     <option value="" disabled selected>-- เลือกแขวง/ตำบล --</option>
                   </select>
                 </div>
                 <div class="space-y-1 min-w-0">
-                  <label for="addr_zipcode_select" class="block text-xs font-bold text-slate-700">4. รหัสไปรษณีย์ <span class="text-red-500">*</span></label>
+                  <label for="addr_zipcode_select" class="block text-xs font-bold text-slate-200">4. รหัสไปรษณีย์ <span class="text-rose-400">*</span></label>
                   <select id="addr_zipcode_select" onchange="handleZipcodeSelectChange()"
-                    class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-3 text-xs sm:text-sm font-mono font-bold text-slate-900 focus:bg-white focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                    class="dark-field w-full rounded-xl px-3.5 py-3 text-xs sm:text-sm font-mono font-bold text-amber-300 transition">
                     <option value="" disabled selected>-- เลือกรหัสไปรษณีย์ --</option>
                   </select>
                   <input type="hidden" id="addr_zipcode" name="zipcode" required>
                 </div>
               </div>
 
-              <div class="bg-amber-50/80 border border-amber-200/90 rounded-xl p-3.5 text-xs text-amber-950 flex items-start gap-2.5">
-                <i class="fa-solid fa-map-location-dot text-amber-600 text-sm mt-0.5 shrink-0"></i>
+              <div class="bg-amber-950/55 border border-amber-400/35 rounded-xl p-3.5 text-xs text-amber-100 flex items-start gap-2.5">
+                <i class="fa-solid fa-map-location-dot text-amber-400 text-sm mt-0.5 shrink-0"></i>
                 <div class="w-full min-w-0">
-                  <span class="font-bold block text-amber-900">ตัวอย่างที่อยู่จัดส่งเต็มสำหรับพิมพ์จ่าหน้าซอง:</span>
-                  <p id="full-address-preview" class="text-slate-800 font-medium mt-0.5 italic break-words">-- กรุณากรอกข้อมูลที่อยู่ด้านบนให้ครบถ้วน --</p>
+                  <span class="font-bold block text-amber-300">ตัวอย่างที่อยู่จัดส่งเต็มสำหรับพิมพ์จ่าหน้าซอง:</span>
+                  <p id="full-address-preview" class="text-slate-300 font-medium mt-0.5 italic break-words">-- กรุณากรอกข้อมูลที่อยู่ด้านบนให้ครบถ้วน --</p>
                 </div>
               </div>
               <input type="hidden" id="address" name="address" required>
@@ -788,17 +813,17 @@
           </div>
 
           <!-- ขั้นตอนที่ 4: แนบไฟล์รูปภาพประกอบ -->
-          <div class="bg-slate-50 border border-slate-200 rounded-3xl p-5 sm:p-6 space-y-4">
-            <h4 class="font-bold text-slate-900 text-sm sm:text-base border-b border-slate-200 pb-3">4. แนบไฟล์รูปภาพประกอบ</h4>
+          <div class="dark-sub-panel rounded-3xl p-5 sm:p-6 space-y-4">
+            <h4 class="font-bold text-amber-300 text-sm sm:text-base border-b border-slate-800 pb-3">4. แนบไฟล์รูปภาพประกอบ</h4>
 
-            <div class="border-2 border-dashed border-slate-300 bg-white rounded-2xl p-5 text-center hover:border-amber-500 transition">
+            <div class="border-2 border-dashed border-slate-700 bg-slate-900 rounded-2xl p-5 text-center hover:border-amber-400 transition">
               <label class="block cursor-pointer">
                 <div class="space-y-1.5">
-                  <i class="fa-solid fa-user-circle text-3xl text-amber-500 icon-bounce-hover"></i>
-                  <p class="text-xs sm:text-sm font-bold text-slate-900">รูปภาพของคุณ (รูปหน้าตรง, ไม่ใส่แว่นดำ, สุภาพเท่านั้น) <span class="text-red-500">*</span></p>
-                  <p class="text-[11px] text-slate-500">ใช้พิมพ์ติดหน้าบัตรสมาชิก (ไฟล์ JPG หรือ PNG)</p>
+                  <i class="fa-solid fa-user-circle text-3xl text-amber-400 icon-bounce-hover"></i>
+                  <p class="text-xs sm:text-sm font-bold text-white">รูปภาพของคุณ (รูปหน้าตรง, ไม่ใส่แว่นดำ, สุภาพเท่านั้น) <span class="text-rose-400">*</span></p>
+                  <p class="text-[11px] text-slate-400">ใช้พิมพ์ติดหน้าบัตรสมาชิก (ไฟล์ JPG หรือ PNG)</p>
                   <input type="file" id="user_photo" accept="image/*" required onchange="renderFilePreview(this, 'preview-user-photo')" class="hidden">
-                  <span class="inline-block bg-slate-950 hover:bg-slate-800 text-amber-400 border border-amber-400/30 font-semibold text-xs sm:text-sm px-5 py-2.5 rounded-xl mt-2 shadow-sm transition">
+                  <span class="inline-block bg-slate-950 hover:bg-slate-800 text-amber-300 border border-amber-400/40 font-semibold text-xs sm:text-sm px-5 py-2.5 rounded-xl mt-2 shadow-sm transition">
                     <i class="fa-solid fa-upload mr-1.5"></i> เลือกรูปถ่าย
                   </span>
                 </div>
@@ -806,12 +831,12 @@
               <div id="preview-user-photo" class="hidden mt-2"></div>
             </div>
 
-            <div id="box-lost-proof" class="hidden border-2 border-dashed border-amber-300 bg-amber-50/40 rounded-2xl p-5 text-center hover:border-amber-500 transition">
+            <div id="box-lost-proof" class="hidden border-2 border-dashed border-amber-400/40 bg-amber-950/35 rounded-2xl p-5 text-center hover:border-amber-400 transition">
               <label class="block cursor-pointer">
                 <div class="space-y-1.5">
-                  <i class="fa-solid fa-id-card-clip text-3xl text-amber-600 icon-bounce-hover"></i>
-                  <p class="text-xs sm:text-sm font-bold text-slate-900">รูปบัตรสมาชิกที่สูญหาย หรือ เขียนรหัสสมาชิกในบัตรใส่กระดาษแนบรูปมา <span class="text-red-500">*</span></p>
-                  <p class="text-[11px] text-slate-500">หลักฐานยืนยันสำหรับการทำบัตรทดแทน</p>
+                  <i class="fa-solid fa-id-card-clip text-3xl text-amber-400 icon-bounce-hover"></i>
+                  <p class="text-xs sm:text-sm font-bold text-white">รูปบัตรสมาชิกที่สูญหาย หรือ เขียนรหัสสมาชิกในบัตรใส่กระดาษแนบรูปมา <span class="text-rose-400">*</span></p>
+                  <p class="text-[11px] text-slate-400">หลักฐานยืนยันสำหรับการทำบัตรทดแทน</p>
                   <input type="file" id="lost_proof" accept="image/*" onchange="renderFilePreview(this, 'preview-lost-proof')" class="hidden">
                   <span class="inline-block bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-bold text-xs sm:text-sm px-5 py-2.5 rounded-xl mt-2 shadow-sm transition">
                     <i class="fa-solid fa-upload mr-1.5"></i> แนบหลักฐานบัตรเดิม
@@ -823,52 +848,52 @@
           </div>
 
           <!-- ขั้นตอนที่ 5: ชำระเงินและแนบสลิป -->
-          <div class="bg-amber-50/70 border border-amber-200 rounded-3xl p-5 sm:p-6 space-y-4">
-            <div class="flex items-center justify-between border-b border-amber-200 pb-3.5 flex-wrap gap-2">
+          <div class="dark-sub-panel border-amber-400/25 rounded-3xl p-5 sm:p-6 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3.5 flex-wrap gap-2">
               <div class="flex items-center gap-2.5 min-w-0">
-                <div class="w-10 h-10 rounded-xl bg-amber-500 text-slate-950 flex items-center justify-center font-bold text-base shadow-sm shrink-0">
+                <div class="w-10 h-10 rounded-xl bg-amber-400 text-slate-950 flex items-center justify-center font-bold text-base shadow-sm shrink-0">
                   <i class="fa-solid fa-receipt"></i>
                 </div>
                 <div class="min-w-0">
-                  <h4 class="font-bold text-slate-900 text-sm sm:text-base">5. ช่องทางชำระเงิน และแนบสลิปโอนเงิน</h4>
-                  <p class="text-xs text-slate-600">กรุณาโอนเงินตามยอดที่ระบุ และแนบสลิปเพื่อยืนยันรายการ</p>
+                  <h4 class="font-bold text-amber-300 text-sm sm:text-base">5. ช่องทางชำระเงิน และแนบสลิปโอนเงิน</h4>
+                  <p class="text-xs text-slate-400">กรุณาโอนเงินตามยอดที่ระบุ และแนบสลิปเพื่อยืนยันรายการ</p>
                 </div>
               </div>
-              <span id="payment-amount-badge" class="bg-amber-500 text-slate-950 font-extrabold text-xs sm:text-sm px-4 py-2 rounded-full shadow-sm shrink-0">
+              <span id="payment-amount-badge" class="bg-amber-400 text-slate-950 font-extrabold text-xs sm:text-sm px-4 py-2 rounded-full shadow-sm shrink-0">
                 ยอดโอน: 769 บาท
               </span>
             </div>
 
-            <div class="bg-white p-4 sm:p-5 rounded-2xl border border-amber-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+            <div class="bg-slate-900 p-4 sm:p-5 rounded-2xl border border-slate-800 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
               <div class="space-y-1.5 min-w-0">
-                <span class="text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-lg inline-block">
+                <span class="text-xs font-bold text-emerald-300 bg-emerald-950/80 border border-emerald-500/40 px-3 py-1 rounded-lg inline-block">
                   <i class="fa-solid fa-building-columns mr-1"></i> ธนาคารกสิกรไทย (KBANK)
                 </span>
-                <p class="text-xs sm:text-sm text-slate-700 font-semibold mt-1">
-                  ชื่อบัญชี: <strong class="text-slate-900">นาย ชัยรัตน์ วิทวัสโกศล</strong>
+                <p class="text-xs sm:text-sm text-slate-300 font-semibold mt-1">
+                  ชื่อบัญชี: <strong class="text-white">นาย ชัยรัตน์ วิทวัสโกศล</strong>
                 </p>
                 <div class="flex flex-wrap items-center gap-2.5">
-                  <span class="text-base font-bold font-mono text-slate-900">773-2-29853-5</span>
+                  <span class="text-base font-bold font-mono text-amber-300">773-2-29853-5</span>
                   <button type="button" onclick="copyBankAccount('7732298535')"
-                    class="text-xs sm:text-sm text-amber-900 bg-amber-100 hover:bg-amber-200 px-3.5 py-2 rounded-xl font-bold transition inline-flex items-center gap-1.5">
+                    class="text-xs sm:text-sm text-amber-300 bg-slate-950 hover:bg-slate-800 border border-amber-400/40 px-3.5 py-2 rounded-xl font-bold transition inline-flex items-center gap-1.5">
                     <i class="fa-solid fa-copy"></i> คัดลอกเลขบัญชี
                   </button>
                 </div>
               </div>
-              <div class="text-left sm:text-right text-xs text-slate-500">
-                <i class="fa-solid fa-check-circle text-emerald-500 text-base sm:text-lg mb-0.5"></i>
+              <div class="text-left sm:text-right text-xs text-slate-400">
+                <i class="fa-solid fa-check-circle text-emerald-400 text-base sm:text-lg mb-0.5"></i>
                 <p>โอนแล้วระบบจะตรวจสอบสลิปอัตโนมัติ</p>
               </div>
             </div>
 
-            <div class="border-2 border-dashed border-slate-300 bg-white rounded-2xl p-5 text-center hover:border-amber-500 transition">
+            <div class="border-2 border-dashed border-slate-700 bg-slate-900 rounded-2xl p-5 text-center hover:border-amber-400 transition">
               <label class="block cursor-pointer">
                 <div class="space-y-1.5">
-                  <i class="fa-solid fa-file-invoice-dollar text-3xl text-emerald-600 icon-bounce-hover"></i>
-                  <p class="text-xs sm:text-sm font-bold text-slate-900">แนบสลิปหลักฐานการโอนเงิน <span class="text-red-500">*</span></p>
-                  <p class="text-[11px] text-slate-500">ไฟล์ภาพสลิปสแกนชำระเงิน (ไฟล์ JPG หรือ PNG)</p>
+                  <i class="fa-solid fa-file-invoice-dollar text-3xl text-emerald-400 icon-bounce-hover"></i>
+                  <p class="text-xs sm:text-sm font-bold text-white">แนบสลิปหลักฐานการโอนเงิน <span class="text-rose-400">*</span></p>
+                  <p class="text-[11px] text-slate-400">ไฟล์ภาพสลิปสแกนชำระเงิน (ไฟล์ JPG หรือ PNG)</p>
                   <input type="file" id="slip_photo" accept="image/*" required onchange="renderFilePreview(this, 'preview-slip-photo')" class="hidden">
-                  <span class="inline-block bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-600 text-white font-semibold text-xs sm:text-sm px-5 py-2.5 rounded-xl mt-2 shadow-sm transition">
+                  <span class="inline-block bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-extrabold text-xs sm:text-sm px-5 py-2.5 rounded-xl mt-2 shadow-sm transition">
                     <i class="fa-solid fa-upload mr-1.5"></i> แนบไฟล์สลิปโอนเงิน
                   </span>
                 </div>
@@ -894,42 +919,42 @@
 
     <!-- ส่วนที่ 2: ตารางเช็คเลขพัสดุย้อนหลังตามรอบ -->
     <div id="section-shipping" class="hidden space-y-6">
-      <div class="bg-white rounded-3xl p-5 sm:p-8 shadow-sm border border-slate-200/90 space-y-6">
-        <div class="flex flex-col md:flex-row justify-between md:items-center gap-4 border-b border-slate-200 pb-5">
+      <div class="dark-surface-card rounded-3xl p-5 sm:p-8 space-y-6">
+        <div class="flex flex-col md:flex-row justify-between md:items-center gap-4 border-b border-slate-800 pb-5">
           <div>
             <div class="flex items-center gap-2 flex-wrap">
-              <span class="bg-amber-100 text-amber-900 border border-amber-300 text-xs font-bold px-3 py-0.5 rounded-full">Public Shipping History</span>
-              <span id="sheet-sync-status-badge" class="bg-slate-100 text-slate-600 border border-slate-200 text-xs px-3 py-0.5 rounded-full flex items-center gap-1.5 font-semibold">
-                <i class="fa-solid fa-circle-notch animate-spin text-amber-500"></i> กำลังเชื่อมต่อชีต...
+              <span class="bg-amber-400/20 text-amber-300 border border-amber-400/40 text-xs font-bold px-3 py-0.5 rounded-full">Public Shipping History</span>
+              <span id="sheet-sync-status-badge" class="bg-slate-950 text-slate-300 border border-slate-700 text-xs px-3 py-0.5 rounded-full flex items-center gap-1.5 font-semibold">
+                <i class="fa-solid fa-circle-notch animate-spin text-amber-400"></i> กำลังเชื่อมต่อชีต...
               </span>
             </div>
-            <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900 mt-1">เช็คเลขพัสดุย้อนหลังตามรอบ</h3>
-            <p class="text-xs sm:text-sm text-slate-500">แสดงผลเฉพาะชื่อ-นามสกุล และเบอร์โทรศัพท์ปิดบังบางส่วนเพื่อความเป็นส่วนตัวตามนโยบาย PDPA</p>
+            <h3 class="text-xl sm:text-2xl font-extrabold text-amber-300 mt-1">เช็คเลขพัสดุย้อนหลังตามรอบ</h3>
+            <p class="text-xs sm:text-sm text-slate-400">แสดงผลเฉพาะชื่อ-นามสกุล และเบอร์โทรศัพท์ปิดบังบางส่วนเพื่อความเป็นส่วนตัวตามนโยบาย PDPA</p>
           </div>
 
           <div class="flex flex-wrap items-center gap-2.5">
             <button type="button" onclick="fetchLiveDataFromAppsScript(true)" title="โหลดข้อมูลล่าสุดจาก Google Sheets"
-              class="bg-slate-950 hover:bg-slate-800 text-amber-400 border border-amber-400/30 font-bold px-4 py-2.5 rounded-xl text-xs sm:text-sm flex items-center gap-1.5 transition shadow-sm">
+              class="bg-slate-950 hover:bg-slate-800 text-amber-300 border border-amber-400/40 font-bold px-4 py-2.5 rounded-xl text-xs sm:text-sm flex items-center gap-1.5 transition shadow-sm">
               <i class="fa-solid fa-rotate text-amber-400" id="btn-refresh-icon"></i> รีเฟรชข้อมูลจากชีต
             </button>
             <select id="filter-round-select" onchange="filterShippingTable()"
-              class="bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-amber-500">
+              class="dark-field rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-semibold">
               <option value="ALL">แสดงทุกรอบจัดส่ง (0 รายการ)</option>
             </select>
             <input type="text" id="filter-search-input" onkeyup="filterShippingTable()" placeholder="ค้นหาชื่อ / เลขพัสดุ | รหัส..."
-              class="bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500">
+              class="dark-field rounded-xl px-3.5 py-2.5 text-xs sm:text-sm">
           </div>
         </div>
 
-        <div id="sheet-sync-info-box" class="hidden bg-amber-50 border border-amber-200 rounded-2xl p-4 text-xs text-amber-900 space-y-1">
-          <div class="flex items-center gap-2 font-bold text-amber-800">
-            <i class="fa-solid fa-lightbulb text-amber-600"></i>
+        <div id="sheet-sync-info-box" class="hidden bg-amber-950/60 border border-amber-400/40 rounded-2xl p-4 text-xs text-amber-200 space-y-1">
+          <div class="flex items-center gap-2 font-bold text-amber-300">
+            <i class="fa-solid fa-lightbulb text-amber-400"></i>
             <span id="sheet-sync-info-title">ข้อความแจ้งเตือนจากระบบดึงข้อมูลชีต</span>
           </div>
-          <p id="sheet-sync-info-desc" class="text-amber-800 leading-relaxed"></p>
+          <p id="sheet-sync-info-desc" class="text-amber-100/90 leading-relaxed"></p>
         </div>
 
-        <div class="overflow-x-auto custom-scrollbar rounded-2xl border border-slate-200">
+        <div class="overflow-x-auto custom-scrollbar rounded-2xl border border-slate-800">
           <table class="w-full text-left text-xs sm:text-sm">
             <thead class="bg-slate-950 text-amber-400 font-bold uppercase border-b-2 border-amber-500">
               <tr>
@@ -941,12 +966,12 @@
                 <th class="px-4 py-3.5 text-center whitespace-nowrap">เลขพัสดุ</th>
               </tr>
             </thead>
-            <tbody id="table-shipping-tbody" class="divide-y divide-slate-100 font-medium bg-white"></tbody>
+            <tbody id="table-shipping-tbody" class="divide-y divide-slate-800 font-medium bg-slate-950/70 text-slate-200"></tbody>
           </table>
         </div>
 
         <p class="text-xs text-slate-400 text-right">
-          <i class="fa-solid fa-lock text-amber-500 mr-1"></i> ข้อมูลที่อยู่เต็มและรูปถ่ายแนบซ่อนไว้เพื่อความปลอดภัย
+          <i class="fa-solid fa-lock text-amber-400 mr-1"></i> ข้อมูลที่อยู่เต็มและรูปถ่ายแนบซ่อนไว้เพื่อความปลอดภัย
         </p>
       </div>
     </div>
@@ -1914,16 +1939,19 @@
       const summaryText = document.getElementById('summary-card-text');
       const amountBadge = document.getElementById('payment-amount-badge');
 
+      const activeCardCls = "border-2 border-amber-400 bg-slate-900 rounded-2xl p-4 sm:p-5 cursor-pointer hover:border-amber-300 transition flex items-center justify-between gap-3 shadow-sm";
+      const inactiveCardCls = "border-2 border-slate-700 bg-slate-900 rounded-2xl p-4 sm:p-5 cursor-pointer hover:border-amber-400 transition flex items-center justify-between gap-3 shadow-sm";
+
       if (isNew) {
-        labelNew.className = "border-2 border-amber-500 bg-amber-50/60 rounded-2xl p-4 sm:p-5 cursor-pointer hover:border-amber-600 transition flex items-center justify-between gap-3 shadow-sm";
-        labelLost.className = "border-2 border-slate-200 bg-white rounded-2xl p-4 sm:p-5 cursor-pointer hover:border-amber-500 transition flex items-center justify-between gap-3 shadow-sm";
+        labelNew.className = activeCardCls;
+        labelLost.className = inactiveCardCls;
         boxLostProof.classList.add('hidden');
         lostInput.removeAttribute('required');
         summaryText.innerText = "สมัครสมาชิกใหม่ 769 บาท (รวมค่าเคลือบใส & จัดส่ง)";
         amountBadge.innerText = "ยอดโอน: 769 บาท";
       } else {
-        labelLost.className = "border-2 border-amber-500 bg-amber-50/60 rounded-2xl p-4 sm:p-5 cursor-pointer hover:border-amber-500 transition flex items-center justify-between gap-3 shadow-sm";
-        labelNew.className = "border-2 border-slate-200 bg-white rounded-2xl p-4 sm:p-5 cursor-pointer hover:border-amber-500 transition flex items-center justify-between gap-3 shadow-sm";
+        labelLost.className = activeCardCls;
+        labelNew.className = inactiveCardCls;
         boxLostProof.classList.remove('hidden');
         lostInput.setAttribute('required', 'true');
         summaryText.innerText = "บัตรหาย / ชำรุด 200 บาท (ออกบัตรทดแทน)";
@@ -1938,7 +1966,7 @@
       if (input.files && input.files[0]) {
         container.classList.remove('hidden');
         container.innerHTML = `
-          <div class="inline-flex items-center gap-2 bg-emerald-50 text-emerald-700 px-3.5 py-2 rounded-xl border border-emerald-200 text-xs mt-2 font-semibold">
+          <div class="inline-flex items-center gap-2 bg-emerald-950/80 text-emerald-300 px-3.5 py-2 rounded-xl border border-emerald-500/40 text-xs mt-2 font-semibold">
             <i class="fa-solid fa-circle-check"></i> เลือกรูปไฟล์เรียบร้อย (${input.files[0].name})
           </div>
         `;
@@ -2470,20 +2498,20 @@
         const tracking = String(item.trackingNo || '-').trim();
         const hasTracking = tracking && tracking !== '-';
         return `
-          <tr class="hover:bg-amber-50/50 transition">
-            <td class="px-4 py-3.5 font-bold text-slate-900 whitespace-nowrap">${item.fullName || '-'}</td>
-            <td class="px-4 py-3.5 font-mono text-slate-600 whitespace-nowrap">${item.maskedPhone || maskPhone(item.phone)}</td>
-            <td class="px-4 py-3.5 text-slate-700 whitespace-nowrap">${formatCardTypeLabel(item.cardType)}</td>
-            <td class="px-4 py-3.5 text-slate-700 whitespace-nowrap">${normalizeThaiRoundDate(item.roundDate)}</td>
+          <tr class="hover:bg-amber-400/10 transition">
+            <td class="px-4 py-3.5 font-bold text-white whitespace-nowrap">${item.fullName || '-'}</td>
+            <td class="px-4 py-3.5 font-mono text-slate-300 whitespace-nowrap">${item.maskedPhone || maskPhone(item.phone)}</td>
+            <td class="px-4 py-3.5 text-slate-300 whitespace-nowrap">${formatCardTypeLabel(item.cardType)}</td>
+            <td class="px-4 py-3.5 text-slate-300 whitespace-nowrap">${normalizeThaiRoundDate(item.roundDate)}</td>
             <td class="px-4 py-3.5 whitespace-nowrap">${getStatusButtonBadge(item.status)}</td>
             <td class="px-4 py-3.5 text-center whitespace-nowrap">
               ${hasTracking ? `
                 <button type="button" onclick="copyTrackingNumber('${tracking}')"
-                  class="inline-flex items-center gap-1.5 bg-amber-100 hover:bg-amber-200 text-amber-950 border border-amber-300 font-mono font-bold text-xs px-3 py-1.5 rounded-lg transition">
+                  class="inline-flex items-center gap-1.5 bg-amber-400/20 hover:bg-amber-400/30 text-amber-300 border border-amber-400/40 font-mono font-bold text-xs px-3 py-1.5 rounded-lg transition">
                   <span>${tracking}</span>
                   <i class="fa-solid fa-copy text-[10px]"></i>
                 </button>
-              ` : `<span class="text-slate-400 font-mono">-</span>`}
+              ` : `<span class="text-slate-500 font-mono">-</span>`}
             </td>
           </tr>
         `;

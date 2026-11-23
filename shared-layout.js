@@ -209,13 +209,17 @@
 
   function mountSharedHeader() {
     try {
-      if (!document.querySelector("nav.tdt-global-nav")) {
+      const navHTML = buildGlobalNavHTML().trim();
+      const existingNav = document.querySelector("nav.tdt-global-nav");
+      if (existingNav) {
+        existingNav.outerHTML = navHTML;
+      } else {
         const slot = document.getElementById("shared-header-slot");
         if (slot) {
-          slot.innerHTML = buildGlobalNavHTML();
+          slot.innerHTML = navHTML;
         } else if (document.body) {
           const wrap = document.createElement("div");
-          wrap.innerHTML = buildGlobalNavHTML().trim();
+          wrap.innerHTML = navHTML;
           if (wrap.firstElementChild) {
             document.body.insertBefore(wrap.firstElementChild, document.body.firstChild);
           }

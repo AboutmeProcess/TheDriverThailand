@@ -44,10 +44,35 @@
       font-family: 'Prompt', sans-serif !important;
     }
     html, body {
-      background-color: #f8fafc;
-      color: #0f172a;
+      background-color: #070a12 !important;
+      color: #f8fafc !important;
       max-width: 100%;
       overflow-x: clip;
+    }
+    .dark-surface-card {
+      background: rgba(15, 23, 42, 0.94);
+      border: 1px solid rgba(251, 191, 36, 0.24);
+      color: #f8fafc;
+      box-shadow: 0 18px 38px -14px rgba(2, 6, 23, 0.72);
+    }
+    .dark-sub-panel {
+      background: rgba(7, 11, 20, 0.82);
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      color: #f8fafc;
+    }
+    .dark-field {
+      background-color: #070b14 !important;
+      border: 1px solid #334155 !important;
+      color: #f8fafc !important;
+      transition: border-color 0.2s ease, background-color 0.2s ease;
+    }
+    .dark-field::placeholder {
+      color: #64748b !important;
+    }
+    .dark-field:focus {
+      outline: none !important;
+      border-color: #fbbf24 !important;
+      background-color: #0b1120 !important;
     }
     .gold-shimmer-text {
       background: linear-gradient(90deg, #fde68a 0%, #fbbf24 35%, #f59e0b 65%, #fef08a 100%);
@@ -510,14 +535,14 @@
     </section>
 
     <!-- กฎและเกณฑ์การคัดกรองรถ Luxury Car -->
-    <section class="bg-white rounded-3xl p-5 sm:p-8 shadow-sm border border-slate-200/90 space-y-5">
-      <div class="flex items-start gap-3 bg-amber-50 border border-amber-200 border-l-4 border-l-amber-500 rounded-2xl p-4">
-        <div class="w-10 h-10 rounded-xl bg-amber-500/15 text-amber-600 flex items-center justify-center text-lg shrink-0">
+    <section class="dark-surface-card rounded-3xl p-5 sm:p-8 space-y-5">
+      <div class="flex items-start gap-3 bg-amber-950/55 border border-amber-400/35 border-l-4 border-l-amber-400 rounded-2xl p-4">
+        <div class="w-10 h-10 rounded-xl bg-amber-500/15 text-amber-300 flex items-center justify-center text-lg shrink-0">
           <i class="fa-solid fa-award icon-float"></i>
         </div>
         <div class="text-xs sm:text-sm space-y-1">
-          <h2 class="font-extrabold text-amber-950">หลักเกณฑ์การพิจารณาสมาชิกห้อง OpenChat Luxury Car</h2>
-          <p class="text-amber-900/90 leading-relaxed">
+          <h2 class="font-extrabold text-amber-300">หลักเกณฑ์การพิจารณาสมาชิกห้อง OpenChat Luxury Car</h2>
+          <p class="text-amber-100/90 leading-relaxed">
             • <strong>ประเภทรถที่รองรับ:</strong> รถยุโรปหรู (Mercedes-Benz, BMW, Audi, Volvo, Porsche ฯลฯ), รถตู้ผู้บริหาร VIP (Toyota Alphard, Vellfire, Majesty, Hyundai Staria, Lexus LM ฯลฯ), รถซีดาน/SUV ระดับ Luxury (Lexus, Toyota Camry รุ่นท็อป, BYD Seal/Denza ฯลฯ)<br>
             • <strong>หลักฐานยืนยันตัวตน:</strong> ต้องแนบรูปถ่ายรถภายนอกเห็นป้ายทะเบียนชัดเจน รูปถ่ายห้องโดยสารภายใน และรูปถ่ายคู่กับกระดาษเขียนด้วยลายมือจริง
           </p>
@@ -553,17 +578,17 @@
     </div>
 
     <!-- แบบฟอร์มลงทะเบียนขอเข้าห้อง OpenChat Luxury Car -->
-    <section class="bg-white rounded-3xl p-5 sm:p-10 shadow-sm border border-slate-200/90 space-y-6 sm:space-y-8">
-      <div class="border-b border-slate-200 pb-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+    <section class="dark-surface-card rounded-3xl p-5 sm:p-10 space-y-6 sm:space-y-8">
+      <div class="border-b border-slate-800 pb-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
-          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">แบบฟอร์มลงทะเบียนขอเข้าห้อง OpenChat Luxury Car</h2>
-          <p class="text-xs sm:text-sm text-slate-500 mt-0.5">กรอกข้อมูลให้ครบถ้วนตามความเป็นจริง ช่องที่มี <span class="text-rose-500 font-bold">*</span> จำเป็นต้องระบุ</p>
+          <h2 class="text-xl sm:text-2xl font-extrabold text-amber-300">แบบฟอร์มลงทะเบียนขอเข้าห้อง OpenChat Luxury Car</h2>
+          <p class="text-xs sm:text-sm text-slate-400 mt-0.5">กรอกข้อมูลให้ครบถ้วนตามความเป็นจริง ช่องที่มี <span class="text-rose-400 font-bold">*</span> จำเป็นต้องระบุ</p>
         </div>
         <div class="flex items-center gap-2.5 flex-wrap">
-          <span id="draft-status-badge" class="text-xs font-semibold text-slate-600 bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200">
-            <i class="fa-solid fa-floppy-disk text-slate-400 mr-1"></i> พร้อมบันทึกร่าง
+          <span id="draft-status-badge" class="text-xs font-semibold text-slate-200 bg-slate-950 px-3 py-1.5 rounded-full border border-slate-700">
+            <i class="fa-solid fa-floppy-disk text-amber-400 mr-1"></i> พร้อมบันทึกร่าง
           </span>
-          <button type="button" onclick="clearFormDraft()" class="text-xs font-bold text-rose-700 bg-rose-50 hover:bg-rose-100 border border-rose-200 px-3 py-1.5 rounded-xl transition">
+          <button type="button" onclick="clearFormDraft()" class="text-xs font-bold text-rose-300 bg-rose-500/15 hover:bg-rose-500/25 border border-rose-400/35 px-3 py-1.5 rounded-xl transition">
             <i class="fa-solid fa-eraser mr-1"></i> ล้างแบบร่าง
           </button>
         </div>
@@ -571,113 +596,113 @@
 
       <form id="luxury-car-form" onsubmit="handleLuxuryFormSubmit(event)" class="space-y-6">
         <!-- หมวดที่ 1: สถานะสมาชิกกลุ่มหลัก -->
-        <div class="bg-amber-50/70 border border-amber-200 rounded-3xl p-5 sm:p-6 space-y-4">
-          <h3 class="font-extrabold text-slate-900 text-sm sm:text-base border-b border-amber-200 pb-3 flex items-center gap-2">
-            <i class="fa-solid fa-id-badge text-amber-600 text-lg"></i>
+        <div class="dark-sub-panel border-amber-400/25 rounded-3xl p-5 sm:p-6 space-y-4">
+          <h3 class="font-extrabold text-amber-300 text-sm sm:text-base border-b border-slate-800 pb-3 flex items-center gap-2">
+            <i class="fa-solid fa-id-badge text-amber-400 text-lg"></i>
             <span>ข้อมูลสถานะสมาชิกในเครือข่าย The Driver Thailand</span>
           </h3>
 
           <div class="space-y-2">
-            <label class="block text-xs font-bold text-slate-700">
-              คุณได้ลงทะเบียนยืนยันตัวตนในกลุ่มหลัก The Driver Thailand และได้รับรหัสสมาชิกแล้วหรือยัง? <span class="text-rose-500">*</span>
+            <label class="block text-xs font-bold text-slate-200">
+              คุณได้ลงทะเบียนยืนยันตัวตนในกลุ่มหลัก The Driver Thailand และได้รับรหัสสมาชิกแล้วหรือยัง? <span class="text-rose-400">*</span>
             </label>
             <div class="grid md:grid-cols-2 gap-3 text-xs sm:text-sm">
-              <label class="flex items-center gap-2.5 bg-white border border-slate-300 rounded-xl p-3.5 cursor-pointer hover:border-amber-500 transition">
-                <input type="radio" name="hasMainMemberCode" value="มีรหัสสมาชิกในกลุ่มหลักแล้ว" checked onchange="handleMemberStatusChange()" class="w-4 h-4 text-amber-600 focus:ring-amber-500">
-                <span class="font-bold text-slate-800">มีรหัสสมาชิกในกลุ่มหลักแล้ว</span>
+              <label class="flex items-center gap-2.5 bg-slate-900 border border-slate-700 rounded-xl p-3.5 cursor-pointer hover:border-amber-400 transition">
+                <input type="radio" name="hasMainMemberCode" value="มีรหัสสมาชิกในกลุ่มหลักแล้ว" checked onchange="handleMemberStatusChange()" class="w-4 h-4 text-amber-500 focus:ring-amber-400">
+                <span class="font-bold text-slate-100">มีรหัสสมาชิกในกลุ่มหลักแล้ว</span>
               </label>
-              <label class="flex items-center gap-2.5 bg-white border border-slate-300 rounded-xl p-3.5 cursor-pointer hover:border-amber-500 transition">
-                <input type="radio" name="hasMainMemberCode" value="ลงทะเบียนกลุ่มหลักไปแล้ว (อยู่ระหว่างรอตรวจสอบ)" onchange="handleMemberStatusChange()" class="w-4 h-4 text-amber-600 focus:ring-amber-500">
-                <span class="font-bold text-slate-800">ลงทะเบียนกลุ่มหลักไปแล้ว (อยู่ระหว่างรอตรวจสอบ)</span>
+              <label class="flex items-center gap-2.5 bg-slate-900 border border-slate-700 rounded-xl p-3.5 cursor-pointer hover:border-amber-400 transition">
+                <input type="radio" name="hasMainMemberCode" value="ลงทะเบียนกลุ่มหลักไปแล้ว (อยู่ระหว่างรอตรวจสอบ)" onchange="handleMemberStatusChange()" class="w-4 h-4 text-amber-500 focus:ring-amber-400">
+                <span class="font-bold text-slate-100">ลงทะเบียนกลุ่มหลักไปแล้ว (อยู่ระหว่างรอตรวจสอบ)</span>
               </label>
             </div>
           </div>
 
           <div class="grid md:grid-cols-2 gap-4">
             <div class="space-y-1.5">
-              <label for="lux_member_code" class="block text-xs font-bold text-slate-700">
-                หมายเลขสมาชิกของคุณ <span id="lux-code-star" class="text-rose-500">*</span>
+              <label for="lux_member_code" class="block text-xs font-bold text-slate-200">
+                หมายเลขสมาชิกของคุณ <span id="lux-code-star" class="text-rose-400">*</span>
               </label>
               <input type="text" id="lux_member_code" name="memberCode" required placeholder="เช่น B999 (หากรอผลให้พิมพ์ 'รอตรวจสอบ')"
-                class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-mono font-bold uppercase focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
+                class="dark-field w-full rounded-xl px-4 py-3 text-xs sm:text-sm font-mono font-bold uppercase text-amber-300">
             </div>
 
             <div class="space-y-1.5">
-              <label for="lux_chat_name" class="block text-xs font-bold text-slate-700">
-                ชื่อที่ใช้ในห้อง Line OpenChat <span class="text-rose-500">*</span>
+              <label for="lux_chat_name" class="block text-xs font-bold text-slate-200">
+                ชื่อที่ใช้ในห้อง Line OpenChat <span class="text-rose-400">*</span>
               </label>
               <input type="text" id="lux_chat_name" name="chatName" required placeholder="เช่น [B999] แทนไทย Alphard (ห้ามใส่เบอร์โทร)"
-                class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
+                class="dark-field w-full rounded-xl px-4 py-3 text-xs sm:text-sm">
             </div>
           </div>
         </div>
 
         <!-- หมวดที่ 2: ข้อมูลส่วนตัวและการติดต่อ -->
-        <div class="bg-slate-50/80 border border-slate-200 rounded-3xl p-5 sm:p-6 space-y-4">
-          <h3 class="font-extrabold text-slate-900 text-sm sm:text-base border-b border-slate-200 pb-3 flex items-center gap-2">
-            <i class="fa-solid fa-user-tie text-amber-600"></i>
+        <div class="dark-sub-panel rounded-3xl p-5 sm:p-6 space-y-4">
+          <h3 class="font-extrabold text-amber-300 text-sm sm:text-base border-b border-slate-800 pb-3 flex items-center gap-2">
+            <i class="fa-solid fa-user-tie text-amber-400"></i>
             <span>ข้อมูลส่วนตัวและการติดต่อ</span>
           </h3>
 
           <div class="grid md:grid-cols-2 gap-4">
             <div class="space-y-1.5">
-              <label for="lux_first_name" class="block text-xs font-bold text-slate-700">
-                ชื่อ <span class="text-rose-500">*</span>
+              <label for="lux_first_name" class="block text-xs font-bold text-slate-200">
+                ชื่อ <span class="text-rose-400">*</span>
               </label>
               <input type="text" id="lux_first_name" name="firstName" required placeholder="ระบุชื่อจริง"
-                class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
+                class="dark-field w-full rounded-xl px-4 py-3 text-xs sm:text-sm">
             </div>
 
             <div class="space-y-1.5">
-              <label for="lux_last_name" class="block text-xs font-bold text-slate-700">
-                นามสกุล <span class="text-rose-500">*</span>
+              <label for="lux_last_name" class="block text-xs font-bold text-slate-200">
+                นามสกุล <span class="text-rose-400">*</span>
               </label>
               <input type="text" id="lux_last_name" name="lastName" required placeholder="ระบุนามสกุลจริง"
-                class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
+                class="dark-field w-full rounded-xl px-4 py-3 text-xs sm:text-sm">
             </div>
           </div>
 
           <div class="grid md:grid-cols-2 gap-4">
             <div class="space-y-1.5">
-              <label for="lux_phone" class="block text-xs font-bold text-slate-700">
-                เบอร์ติดต่อ <span class="text-rose-500">*</span>
+              <label for="lux_phone" class="block text-xs font-bold text-slate-200">
+                เบอร์ติดต่อ <span class="text-rose-400">*</span>
               </label>
               <input type="tel" id="lux_phone" name="phone" required pattern="[0-9\-+\s]{9,15}" placeholder="เช่น 0812345678"
-                class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-mono focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
+                class="dark-field w-full rounded-xl px-4 py-3 text-xs sm:text-sm font-mono">
             </div>
 
             <div class="space-y-1.5">
-              <label for="lux_line_id" class="block text-xs font-bold text-slate-700">
-                Line ID <span class="text-rose-500">*</span>
+              <label for="lux_line_id" class="block text-xs font-bold text-slate-200">
+                Line ID <span class="text-rose-400">*</span>
               </label>
               <input type="text" id="lux_line_id" name="lineId" required placeholder="ระบุ Line ID สำหรับส่งลิงก์เชิญเข้าห้อง"
-                class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
+                class="dark-field w-full rounded-xl px-4 py-3 text-xs sm:text-sm">
             </div>
           </div>
 
           <div class="space-y-1.5">
-            <label for="lux_service_area" class="block text-xs font-bold text-slate-700">
-              พื้นที่ให้บริการหลัก / จังหวัดที่ประจำการ <span class="text-rose-500">*</span>
+            <label for="lux_service_area" class="block text-xs font-bold text-slate-200">
+              พื้นที่ให้บริการหลัก / จังหวัดที่ประจำการ <span class="text-rose-400">*</span>
             </label>
             <input type="text" id="lux_service_area" name="serviceArea" required placeholder="เช่น กรุงเทพฯ - ปริมณฑล / ภูเก็ต / เชียงใหม่ / พัทยา"
-              class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
+              class="dark-field w-full rounded-xl px-4 py-3 text-xs sm:text-sm">
           </div>
         </div>
 
         <!-- หมวดที่ 3: ข้อมูลรถยนต์ Luxury Car -->
-        <div class="bg-slate-50/80 border border-slate-200 rounded-3xl p-5 sm:p-6 space-y-4">
-          <h3 class="font-extrabold text-slate-900 text-sm sm:text-base border-b border-slate-200 pb-3 flex items-center gap-2">
-            <i class="fa-solid fa-crown text-amber-600"></i>
+        <div class="dark-sub-panel rounded-3xl p-5 sm:p-6 space-y-4">
+          <h3 class="font-extrabold text-amber-300 text-sm sm:text-base border-b border-slate-800 pb-3 flex items-center gap-2">
+            <i class="fa-solid fa-crown text-amber-400"></i>
             <span>ข้อมูลรถยนต์ Luxury Car ที่ใช้ให้บริการ</span>
           </h3>
 
           <div class="grid md:grid-cols-2 gap-4">
             <div class="space-y-1.5">
-              <label for="lux_car_category" class="block text-xs font-bold text-slate-700">
-                ประเภทรถยนต์ Luxury Car <span class="text-rose-500">*</span>
+              <label for="lux_car_category" class="block text-xs font-bold text-slate-200">
+                ประเภทรถยนต์ Luxury Car <span class="text-rose-400">*</span>
               </label>
               <select id="lux_car_category" name="carCategory" required
-                class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
+                class="dark-field w-full rounded-xl px-4 py-3 text-xs sm:text-sm">
                 <option value="" disabled selected>-- เลือกประเภทรถยนต์ --</option>
                 <option value="Luxury Sedan (Mercedes-Benz / BMW / Audi / Lexus / Volvo)">Luxury Sedan (Mercedes-Benz / BMW / Audi / Lexus / Volvo)</option>
                 <option value="Luxury Van / VIP MPV (Alphard / Vellfire / Majesty / Staria / Lexus LM)">Luxury Van / VIP MPV (Alphard / Vellfire / Majesty / Staria / Lexus LM)</option>
@@ -687,73 +712,73 @@
             </div>
 
             <div class="space-y-1.5">
-              <label for="lux_car_brand" class="block text-xs font-bold text-slate-700">
-                ยี่ห้อรถของคุณ <span class="text-rose-500">*</span>
+              <label for="lux_car_brand" class="block text-xs font-bold text-slate-200">
+                ยี่ห้อรถของคุณ <span class="text-rose-400">*</span>
               </label>
               <input type="text" id="lux_car_brand" name="carBrand" required placeholder="เช่น Mercedes-Benz / BMW / Toyota"
-                class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
+                class="dark-field w-full rounded-xl px-4 py-3 text-xs sm:text-sm">
             </div>
           </div>
 
           <div class="grid md:grid-cols-3 gap-4">
             <div class="space-y-1.5">
-              <label for="lux_car_model" class="block text-xs font-bold text-slate-700">
-                รุ่นรถและรุ่นย่อยของคุณ <span class="text-rose-500">*</span>
+              <label for="lux_car_model" class="block text-xs font-bold text-slate-200">
+                รุ่นรถและรุ่นย่อยของคุณ <span class="text-rose-400">*</span>
               </label>
               <input type="text" id="lux_car_model" name="carModel" required placeholder="เช่น E220d AMG / Alphard SC / 530e"
-                class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
+                class="dark-field w-full rounded-xl px-4 py-3 text-xs sm:text-sm">
             </div>
 
             <div class="space-y-1.5">
-              <label for="lux_car_year_color" class="block text-xs font-bold text-slate-700">
-                ปีรถ และ สีรถ <span class="text-rose-500">*</span>
+              <label for="lux_car_year_color" class="block text-xs font-bold text-slate-200">
+                ปีรถ และ สีรถ <span class="text-rose-400">*</span>
               </label>
               <input type="text" id="lux_car_year_color" name="carYearColor" required placeholder="เช่น ปี 2023 สีดำ"
-                class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
+                class="dark-field w-full rounded-xl px-4 py-3 text-xs sm:text-sm">
             </div>
 
             <div class="space-y-1.5">
-              <label for="lux_license_plate" class="block text-xs font-bold text-slate-700">
-                หมายเลขทะเบียนรถ <span class="text-rose-500">*</span>
+              <label for="lux_license_plate" class="block text-xs font-bold text-slate-200">
+                หมายเลขทะเบียนรถ <span class="text-rose-400">*</span>
               </label>
               <input type="text" id="lux_license_plate" name="licensePlate" required placeholder="เช่น 1กข 9999 กรุงเทพมหานคร"
-                class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
+                class="dark-field w-full rounded-xl px-4 py-3 text-xs sm:text-sm font-bold text-amber-300">
             </div>
           </div>
         </div>
 
         <!-- หมวดที่ 4: แนบรูปถ่ายรถยนต์ Luxury Car และรูปยืนยันตัวตน -->
-        <div class="bg-slate-50/80 border border-slate-200 rounded-3xl p-5 sm:p-6 space-y-5">
-          <div class="border-b border-slate-200 pb-3 flex flex-wrap items-center justify-between gap-2">
-            <h3 class="font-extrabold text-slate-900 text-sm sm:text-base flex items-center gap-2">
-              <i class="fa-solid fa-camera-retro text-amber-600"></i>
+        <div class="dark-sub-panel rounded-3xl p-5 sm:p-6 space-y-5">
+          <div class="border-b border-slate-800 pb-3 flex flex-wrap items-center justify-between gap-2">
+            <h3 class="font-extrabold text-amber-300 text-sm sm:text-base flex items-center gap-2">
+              <i class="fa-solid fa-camera-retro text-amber-400"></i>
               <span>แนบรูปถ่ายรถยนต์ Luxury Car และรูปถ่ายยืนยันตัวตน</span>
             </h3>
-            <span class="text-xs text-slate-500">ดูตัวอย่างรูปแบบการถ่ายภาพที่ถูกต้องได้ในแต่ละกล่องด้านล่าง</span>
+            <span class="text-xs text-slate-400">ดูตัวอย่างรูปแบบการถ่ายภาพที่ถูกต้องได้ในแต่ละกล่องด้านล่าง</span>
           </div>
 
           <div class="grid md:grid-cols-3 gap-5">
             <!-- กล่อง 1: รูปถ่ายภายนอกรถยนต์ Luxury Car -->
-            <div class="border-2 border-dashed border-slate-300 bg-white rounded-2xl p-4 hover:border-amber-500 transition flex flex-col justify-between space-y-4">
+            <div class="border-2 border-dashed border-slate-700 bg-slate-900 rounded-2xl p-4 hover:border-amber-400 transition flex flex-col justify-between space-y-4">
               <div class="space-y-3">
                 <div class="flex items-center justify-between gap-1.5">
-                  <span class="text-[11px] font-extrabold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-lg">
+                  <span class="text-[11px] font-extrabold text-emerald-300 bg-emerald-500/15 border border-emerald-400/35 px-2.5 py-1 rounded-lg">
                     <i class="fa-solid fa-car mr-1"></i> รูปภายนอกรถ
                   </span>
-                  <span class="text-[10px] font-bold text-rose-600 bg-rose-50 border border-rose-200 px-2 py-0.5 rounded-full">
+                  <span class="text-[10px] font-bold text-rose-300 bg-rose-500/15 border border-rose-400/35 px-2 py-0.5 rounded-full">
                     จำเป็น *
                   </span>
                 </div>
 
-                <div class="bg-slate-900 rounded-xl p-3 text-white border border-slate-800 space-y-2">
+                <div class="bg-slate-950 rounded-xl p-3 text-white border border-slate-800 space-y-2">
                   <div class="flex items-center justify-between text-[10px] text-amber-300 font-bold">
                     <span>ตัวอย่างรูปภายนอกรถ</span>
                     <span class="text-emerald-400">เห็นป้ายทะเบียน</span>
                   </div>
-                  <div class="bg-slate-950 rounded-lg p-2.5 border border-slate-800 flex flex-col items-center justify-center gap-1.5">
+                  <div class="bg-slate-900 rounded-lg p-2.5 border border-slate-800 flex flex-col items-center justify-center gap-1.5">
                     <div class="flex items-center justify-center">
                       <i class="fa-solid fa-car-side text-3xl text-amber-400"></i>
-                      <span class="ml-2 bg-white text-slate-950 font-mono font-black text-[9px] px-1.5 py-0.5 rounded border border-slate-950">
+                      <span class="ml-2 bg-slate-950 text-amber-300 font-mono font-black text-[9px] px-1.5 py-0.5 rounded border border-amber-400/50">
                         1กข 9999
                       </span>
                     </div>
@@ -764,15 +789,15 @@
                 </div>
 
                 <div class="text-center space-y-1">
-                  <p class="text-xs font-bold text-slate-900">
-                    รูปถ่ายภายนอกรถของคุณ (เห็นป้ายทะเบียน) <span class="text-rose-500">*</span>
+                  <p class="text-xs font-bold text-white">
+                    รูปถ่ายภายนอกรถของคุณ (เห็นป้ายทะเบียน) <span class="text-rose-400">*</span>
                   </p>
-                  <p class="text-[11px] text-slate-500">ไฟล์ JPG หรือ PNG</p>
+                  <p class="text-[11px] text-slate-400">ไฟล์ JPG หรือ PNG</p>
                 </div>
               </div>
 
               <div class="text-center space-y-2">
-                <label class="inline-flex items-center justify-center bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-600 text-white font-semibold text-xs px-4 py-2.5 rounded-xl cursor-pointer transition shadow-sm">
+                <label class="inline-flex items-center justify-center bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-extrabold text-xs px-4 py-2.5 rounded-xl cursor-pointer transition shadow-sm">
                   <i class="fa-solid fa-upload mr-1.5"></i> เลือกรูปภายนอกรถ
                   <input type="file" id="lux_car_ext_file" accept="image/*" required onchange="handleLuxPhotoUpload(this, 'ext')" class="hidden">
                 </label>
@@ -781,23 +806,23 @@
             </div>
 
             <!-- กล่อง 2: รูปถ่ายภายในห้องโดยสาร -->
-            <div class="border-2 border-dashed border-slate-300 bg-white rounded-2xl p-4 hover:border-amber-500 transition flex flex-col justify-between space-y-4">
+            <div class="border-2 border-dashed border-slate-700 bg-slate-900 rounded-2xl p-4 hover:border-amber-400 transition flex flex-col justify-between space-y-4">
               <div class="space-y-3">
                 <div class="flex items-center justify-between gap-1.5">
-                  <span class="text-[11px] font-extrabold text-amber-900 bg-amber-50 border border-amber-300 px-2.5 py-1 rounded-lg">
+                  <span class="text-[11px] font-extrabold text-amber-300 bg-amber-500/15 border border-amber-400/35 px-2.5 py-1 rounded-lg">
                     <i class="fa-solid fa-couch mr-1"></i> รูปห้องโดยสาร
                   </span>
-                  <span class="text-[10px] font-bold text-rose-600 bg-rose-50 border border-rose-200 px-2 py-0.5 rounded-full">
+                  <span class="text-[10px] font-bold text-rose-300 bg-rose-500/15 border border-rose-400/35 px-2 py-0.5 rounded-full">
                     จำเป็น *
                   </span>
                 </div>
 
-                <div class="bg-slate-900 rounded-xl p-3 text-white border border-slate-800 space-y-2">
+                <div class="bg-slate-950 rounded-xl p-3 text-white border border-slate-800 space-y-2">
                   <div class="flex items-center justify-between text-[10px] text-amber-300 font-bold">
                     <span>ตัวอย่างรูปห้องโดยสาร</span>
                     <span class="text-emerald-400">เบาะและภายในสะอาด</span>
                   </div>
-                  <div class="bg-slate-950 rounded-lg p-2.5 border border-slate-800 flex flex-col items-center justify-center gap-1.5">
+                  <div class="bg-slate-900 rounded-lg p-2.5 border border-slate-800 flex flex-col items-center justify-center gap-1.5">
                     <i class="fa-solid fa-chair text-3xl text-amber-400"></i>
                     <p class="text-[10px] text-slate-300 text-center leading-snug">
                       ถ่ายให้เห็นเบาะนั่งผู้โดยสารตอนหลังและห้องโดยสารที่สะอาดเรียบร้อยพร้อมรับแขก VIP
@@ -806,15 +831,15 @@
                 </div>
 
                 <div class="text-center space-y-1">
-                  <p class="text-xs font-bold text-slate-900">
-                    รูปถ่ายภายในห้องโดยสารรถของคุณ <span class="text-rose-500">*</span>
+                  <p class="text-xs font-bold text-white">
+                    รูปถ่ายภายในห้องโดยสารรถของคุณ <span class="text-rose-400">*</span>
                   </p>
-                  <p class="text-[11px] text-slate-500">ไฟล์ JPG หรือ PNG</p>
+                  <p class="text-[11px] text-slate-400">ไฟล์ JPG หรือ PNG</p>
                 </div>
               </div>
 
               <div class="text-center space-y-2">
-                <label class="inline-flex items-center justify-center bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs px-4 py-2.5 rounded-xl cursor-pointer transition shadow-sm">
+                <label class="inline-flex items-center justify-center bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold text-xs px-4 py-2.5 rounded-xl cursor-pointer transition shadow-sm">
                   <i class="fa-solid fa-upload mr-1.5"></i> เลือกรูปภายในรถ
                   <input type="file" id="lux_car_int_file" accept="image/*" required onchange="handleLuxPhotoUpload(this, 'int')" class="hidden">
                 </label>
@@ -823,13 +848,13 @@
             </div>
 
             <!-- กล่อง 3: รูปคู่กระดาษเขียนลายมือยืนยันตัวตน -->
-            <div class="border-2 border-dashed border-slate-300 bg-white rounded-2xl p-4 hover:border-amber-500 transition flex flex-col justify-between space-y-4">
+            <div class="border-2 border-dashed border-slate-700 bg-slate-900 rounded-2xl p-4 hover:border-amber-400 transition flex flex-col justify-between space-y-4">
               <div class="space-y-3">
                 <div class="flex items-center justify-between gap-1.5">
-                  <span class="text-[11px] font-extrabold text-amber-900 bg-amber-50 border border-amber-300 px-2.5 py-1 rounded-lg">
+                  <span class="text-[11px] font-extrabold text-amber-300 bg-amber-500/15 border border-amber-400/35 px-2.5 py-1 rounded-lg">
                     <i class="fa-solid fa-id-card-clip mr-1"></i> รูปคู่กระดาษ
                   </span>
-                  <span class="text-[10px] font-bold text-rose-600 bg-rose-50 border border-rose-200 px-2 py-0.5 rounded-full">
+                  <span class="text-[10px] font-bold text-rose-300 bg-rose-500/15 border border-rose-400/35 px-2 py-0.5 rounded-full">
                     จำเป็น *
                   </span>
                 </div>
@@ -843,9 +868,9 @@
                     <div class="w-10 h-10 rounded-full bg-slate-800 border border-amber-400/70 flex items-center justify-center text-amber-300 shrink-0">
                       <i class="fa-solid fa-user-check"></i>
                     </div>
-                    <div class="bg-amber-50 text-slate-900 rounded p-1.5 border border-dashed border-amber-500 text-left flex-1">
-                      <p class="text-[9px] font-extrabold text-amber-800 leading-tight">“สมัครห้อง Luxury Car”</p>
-                      <p class="text-[8px] text-slate-700">รหัสสมาชิก / ทะเบียนรถ</p>
+                    <div class="bg-slate-950 text-amber-200 rounded p-1.5 border border-dashed border-amber-400/60 text-left flex-1">
+                      <p class="text-[9px] font-extrabold text-amber-300 leading-tight">“สมัครห้อง Luxury Car”</p>
+                      <p class="text-[8px] text-slate-300">รหัสสมาชิก / ทะเบียนรถ</p>
                     </div>
                   </div>
                   <p class="text-[10px] text-slate-300 text-center leading-snug">
@@ -854,15 +879,15 @@
                 </div>
 
                 <div class="text-center space-y-1">
-                  <p class="text-xs font-bold text-slate-900">
-                    แนบรูปคู่กับกระดาษดังรูปตัวอย่างด้านบน <span class="text-rose-500">*</span>
+                  <p class="text-xs font-bold text-white">
+                    แนบรูปคู่กับกระดาษดังรูปตัวอย่างด้านบน <span class="text-rose-400">*</span>
                   </p>
-                  <p class="text-[11px] text-slate-500">ไฟล์ JPG หรือ PNG</p>
+                  <p class="text-[11px] text-slate-400">ไฟล์ JPG หรือ PNG</p>
                 </div>
               </div>
 
               <div class="text-center space-y-2">
-                <label class="inline-flex items-center justify-center bg-slate-950 hover:bg-slate-800 text-amber-400 border border-amber-400/30 font-semibold text-xs px-4 py-2.5 rounded-xl cursor-pointer transition shadow-sm">
+                <label class="inline-flex items-center justify-center bg-slate-950 hover:bg-slate-800 text-amber-300 border border-amber-400/40 font-semibold text-xs px-4 py-2.5 rounded-xl cursor-pointer transition shadow-sm">
                   <i class="fa-solid fa-upload mr-1.5"></i> เลือกรูปคู่กระดาษ
                   <input type="file" id="lux_selfie_file" accept="image/*" required onchange="handleLuxPhotoUpload(this, 'selfie')" class="hidden">
                 </label>
@@ -873,40 +898,40 @@
         </div>
 
         <!-- หมวดที่ 5: ประกาศความเป็นส่วนตัว (รูปแบบเดียวกับ member_register.html) -->
-        <div class="bg-amber-50/70 border border-amber-200 rounded-2xl p-4 sm:p-5 space-y-4">
-          <div class="bg-white/95 border border-amber-200 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div class="dark-sub-panel border-amber-400/25 rounded-2xl p-4 sm:p-5 space-y-4">
+          <div class="bg-slate-900 border border-amber-400/25 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div class="space-y-1 min-w-0">
-              <p class="font-extrabold text-slate-900 text-xs sm:text-sm flex items-center gap-2">
-                <i class="fa-solid fa-shield-halved text-amber-600"></i>
+              <p class="font-extrabold text-amber-300 text-xs sm:text-sm flex items-center gap-2">
+                <i class="fa-solid fa-shield-halved text-amber-400"></i>
                 <span>ประกาศความเป็นส่วนตัว สำหรับสมาชิก กลุ่ม The Driver TH Premium Service</span>
               </p>
-              <p class="text-xs text-slate-600 leading-relaxed">
+              <p class="text-xs text-slate-300 leading-relaxed">
                 กรุณากดอ่านประกาศความเป็นส่วนตัวฉบับเต็มในหน้าถัดไปก่อน จึงจะสามารถติ๊กช่อง <strong>“ยอมรับและยืนยัน”</strong> ด้านล่างได้
               </p>
-              <div id="privacy-read-status" class="text-[11px] font-bold text-amber-800 inline-flex items-center gap-1.5 pt-0.5">
-                <i class="fa-solid fa-lock text-amber-600"></i>
+              <div id="privacy-read-status" class="text-[11px] font-bold text-amber-300 inline-flex items-center gap-1.5 pt-0.5">
+                <i class="fa-solid fa-lock text-amber-400"></i>
                 <span>สถานะ: ยังไม่ได้เปิดอ่านประกาศความเป็นส่วนตัว</span>
               </div>
             </div>
 
             <a href="privacy_policy.html" target="_blank" rel="noopener noreferrer" onclick="markPrivacyPolicyOpened()"
-              class="shrink-0 inline-flex items-center justify-center gap-2 bg-slate-950 hover:bg-slate-800 text-amber-400 border border-amber-400/40 font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow transition">
+              class="shrink-0 inline-flex items-center justify-center gap-2 bg-slate-950 hover:bg-slate-800 text-amber-300 border border-amber-400/45 font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow transition">
               <i class="fa-solid fa-book-open-reader"></i>
               <span>เปิดอ่านประกาศความเป็นส่วนตัว</span>
               <i class="fa-solid fa-arrow-up-right-from-square text-[11px]"></i>
             </a>
           </div>
 
-          <label onclick="handleAcceptCheckboxClick(event)" class="flex items-start gap-3 cursor-pointer text-xs sm:text-sm text-slate-800 select-none">
+          <label onclick="handleAcceptCheckboxClick(event)" class="flex items-start gap-3 cursor-pointer text-xs sm:text-sm text-slate-200 select-none">
             <input type="checkbox" id="accept_luxury_terms" required onchange="handleAcceptCheckboxChange(this)"
-              class="mt-1 w-4 h-4 text-amber-600 rounded border-slate-300 focus:ring-amber-500 shrink-0">
+              class="mt-1 w-4 h-4 text-amber-500 rounded border-slate-600 bg-slate-900 focus:ring-amber-400 shrink-0">
             <span>
-              <strong>ยอมรับและยืนยัน</strong> — ข้าพเจ้าขอรับรองว่าข้อมูลและภาพถ่ายรถยนต์ Luxury Car ข้างต้นเป็นความจริงทุกประการ และได้อ่านยอมรับประกาศความเป็นส่วนตัวและข้อกำหนดเงื่อนไขของกลุ่ม <strong>The Driver Thailand</strong> <span class="text-rose-500 font-bold">*</span>
+              <strong>ยอมรับและยืนยัน</strong> — ข้าพเจ้าขอรับรองว่าข้อมูลและภาพถ่ายรถยนต์ Luxury Car ข้างต้นเป็นความจริงทุกประการ และได้อ่านยอมรับประกาศความเป็นส่วนตัวและข้อกำหนดเงื่อนไขของกลุ่ม <strong>The Driver Thailand</strong> <span class="text-rose-400 font-bold">*</span>
             </span>
           </label>
 
           <div class="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-3 pt-2">
-            <a href="index.html" class="w-full sm:w-auto text-center px-5 py-3 rounded-xl border border-slate-300 bg-white hover:bg-slate-100 text-slate-700 font-bold text-xs sm:text-sm transition">
+            <a href="index.html" class="w-full sm:w-auto text-center px-5 py-3 rounded-xl border border-slate-700 bg-slate-900 hover:bg-slate-800 text-slate-200 font-bold text-xs sm:text-sm transition">
               <i class="fa-solid fa-arrow-left mr-1.5"></i> กลับหน้าหลัก
             </a>
             <button type="submit" id="btn-submit-luxury"

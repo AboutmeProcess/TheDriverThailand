@@ -12,7 +12,24 @@
   <style>
     html { font-size: 16px; transition: font-size 0.18s ease; }
     html, body, input, select, textarea, button { font-family: 'Prompt', sans-serif !important; }
-    body { background-color: #f8fafc; color: #0f172a; overflow-x: clip; }
+    body { background-color: #070a12; color: #f8fafc; overflow-x: clip; }
+    .hero-glow-bg {
+      background:
+        radial-gradient(circle at 18% 22%, rgba(251, 191, 36, 0.22) 0%, transparent 45%),
+        radial-gradient(circle at 82% 78%, rgba(16, 185, 129, 0.14) 0%, transparent 50%),
+        linear-gradient(145deg, #060911 0%, #0d1424 58%, #151f34 100%);
+    }
+    .gold-shimmer-text {
+      background: linear-gradient(90deg, #fde68a 0%, #fbbf24 35%, #f59e0b 65%, #fef08a 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .dark-surface-card {
+      background: rgba(15, 23, 42, 0.94);
+      border: 1px solid rgba(251, 191, 36, 0.24);
+      color: #f8fafc;
+      box-shadow: 0 18px 38px -14px rgba(2, 6, 23, 0.72);
+    }
 
     /* UNIFIED GLOBAL NAVIGATION BAR (MATCHING INDEX.HTML) */
     .tdt-global-nav {
@@ -383,46 +400,46 @@
   </nav>
 
   <main class="flex-grow max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-6">
-    <section class="bg-slate-950 text-white rounded-3xl p-6 sm:p-10 border border-amber-400/35 shadow-xl space-y-3">
+    <section class="hero-glow-bg text-white rounded-3xl p-6 sm:p-10 border border-amber-400/35 shadow-2xl space-y-3">
       <span class="text-xs font-extrabold bg-amber-400/20 text-amber-300 border border-amber-400/40 px-3 py-1 rounded-full">MEMBER HANDBOOK &amp; RULES</span>
-      <h1 class="text-2xl sm:text-4xl font-black text-amber-300">คู่มือการเป็นสมาชิกและกฎกติกาเครือข่าย</h1>
+      <h1 class="text-2xl sm:text-4xl font-black text-white">คู่มือการเป็นสมาชิกและ<span class="gold-shimmer-text">กฎกติกาเครือข่าย</span></h1>
       <p class="text-slate-300 text-xs sm:text-sm max-w-3xl">แนวทางปฏิบัติมาตรฐานสำหรับสมาชิกทุกท่าน เพื่อความปลอดภัย ความน่าเชื่อถือ และความเป็นระเบียบเรียบร้อยในทุกห้องแชท</p>
     </section>
 
     <section class="grid md:grid-cols-2 gap-5">
-      <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-3">
-        <h2 class="text-base sm:text-lg font-extrabold text-slate-900"><i class="fa-solid fa-id-card text-amber-500 mr-2"></i>1. การตั้งชื่อและรูปโปรไฟล์ใน OpenChat</h2>
-        <ul class="text-xs sm:text-sm text-slate-700 space-y-2 list-disc ml-5">
-          <li><strong>รูปแบบชื่อที่ถูกต้อง:</strong> ใส่รหัสสมาชิกในวงเล็บเหลี่ยมนำหน้า ตามด้วยชื่อและรุ่นรถ เช่น <code class="bg-amber-50 text-amber-900 px-2 py-0.5 rounded font-bold">[B2464] Arm Nissan Note</code></li>
-          <li><strong>ห้ามใส่เบอร์โทรศัพท์:</strong> ห้ามใส่เบอร์โทรศัพท์หรือไอดีไลน์ลงในชื่อโปรไฟล์ห้องแชท</li>
-          <li><strong>รูปโปรไฟล์:</strong> ต้องใช้รูปถ่ายจริงที่เห็นใบหน้าชัดเจน ห้ามใช้รูปการ์ตูน สัตว์เลี้ยง หรือรูปวิว</li>
+      <div class="dark-surface-card rounded-3xl p-6 space-y-3">
+        <h2 class="text-base sm:text-lg font-extrabold text-amber-300"><i class="fa-solid fa-id-card text-amber-400 mr-2"></i>1. การตั้งชื่อและรูปโปรไฟล์ใน OpenChat</h2>
+        <ul class="text-xs sm:text-sm text-slate-300 space-y-2 list-disc ml-5">
+          <li><strong class="text-white">รูปแบบชื่อที่ถูกต้อง:</strong> ใส่รหัสสมาชิกในวงเล็บเหลี่ยมนำหน้า ตามด้วยชื่อและรุ่นรถ เช่น <code class="bg-slate-950 text-amber-300 border border-amber-400/35 px-2 py-0.5 rounded font-bold">[B2464] Arm Nissan Note</code></li>
+          <li><strong class="text-white">ห้ามใส่เบอร์โทรศัพท์:</strong> ห้ามใส่เบอร์โทรศัพท์หรือไอดีไลน์ลงในชื่อโปรไฟล์ห้องแชท</li>
+          <li><strong class="text-white">รูปโปรไฟล์:</strong> ต้องใช้รูปถ่ายจริงที่เห็นใบหน้าชัดเจน ห้ามใช้รูปการ์ตูน สัตว์เลี้ยง หรือรูปวิว</li>
         </ul>
       </div>
 
-      <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-3">
-        <h2 class="text-base sm:text-lg font-extrabold text-slate-900"><i class="fa-solid fa-camera text-emerald-600 mr-2"></i>2. วิธีถ่ายรูปคู่กระดาษยืนยันตัวตนให้ผ่าน 100%</h2>
-        <ul class="text-xs sm:text-sm text-slate-700 space-y-2 list-disc ml-5">
-          <li>เขียนข้อความด้วย <strong>ลายมือตนเองลงบนกระดาษจริง</strong> เท่านั้น</li>
+      <div class="dark-surface-card rounded-3xl p-6 space-y-3">
+        <h2 class="text-base sm:text-lg font-extrabold text-emerald-300"><i class="fa-solid fa-camera text-emerald-400 mr-2"></i>2. วิธีถ่ายรูปคู่กระดาษยืนยันตัวตนให้ผ่าน 100%</h2>
+        <ul class="text-xs sm:text-sm text-slate-300 space-y-2 list-disc ml-5">
+          <li>เขียนข้อความด้วย <strong class="text-white">ลายมือตนเองลงบนกระดาษจริง</strong> เท่านั้น</li>
           <li>ถือกระดาษระดับอกถ่ายคู่กับใบหน้าจริงในที่แสงสว่างเพียงพอ</li>
-          <li><strong>ห้ามตัดต่อข้อความลงบนภาพ ห้ามใช้ AI และห้ามถือคู่กับบัตรประชาชน</strong></li>
+          <li><strong class="text-white">ห้ามตัดต่อข้อความลงบนภาพ ห้ามใช้ AI และห้ามถือคู่กับบัตรประชาชน</strong></li>
         </ul>
       </div>
 
-      <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-3">
-        <h2 class="text-base sm:text-lg font-extrabold text-slate-900"><i class="fa-solid fa-handshake-angle text-sky-600 mr-2"></i>3. มารยาทการรับงานและส่งต่อลูกค้า</h2>
-        <ul class="text-xs sm:text-sm text-slate-700 space-y-2 list-disc ml-5">
-          <li>ตรวจสอบประวัติผู้ว่าจ้างใน <a href="blacklist.html" class="text-rose-600 underline font-bold">ศูนย์เฝ้าระวังภัย Blacklist</a> ก่อนรับงานเดินทางไกลทุกครั้ง</li>
+      <div class="dark-surface-card rounded-3xl p-6 space-y-3">
+        <h2 class="text-base sm:text-lg font-extrabold text-sky-300"><i class="fa-solid fa-handshake-angle text-sky-400 mr-2"></i>3. มารยาทการรับงานและส่งต่อลูกค้า</h2>
+        <ul class="text-xs sm:text-sm text-slate-300 space-y-2 list-disc ml-5">
+          <li>ตรวจสอบประวัติผู้ว่าจ้างใน <a href="blacklist.html" class="text-rose-400 underline font-bold">ศูนย์เฝ้าระวังภัย Blacklist</a> ก่อนรับงานเดินทางไกลทุกครั้ง</li>
           <li>ห้ามทิ้งงาน/เทงานผู้โดยสาร และห้ามส่งต่อลูกค้าให้คนนอกเครือข่ายโดยไม่แจ้งผู้ปล่อยงาน</li>
           <li>แต่งกายสุภาพ รถสะอาดพร้อมให้บริการ และตรงต่อเวลานัดหมายอย่างน้อย 15 นาที</li>
         </ul>
       </div>
 
-      <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-3">
-        <h2 class="text-base sm:text-lg font-extrabold text-slate-900"><i class="fa-solid fa-headset text-purple-600 mr-2"></i>4. ช่องทางติดต่อทีมงานและบริการต่างๆ</h2>
-        <ul class="text-xs sm:text-sm text-slate-700 space-y-2 list-disc ml-5">
-          <li><strong>Line Official แอดมินกลาง:</strong> <strong class="text-emerald-700">@Thedrivethailand</strong></li>
-          <li>เช็คสถานะคำร้องทั้งหมดได้ที่หน้า <a href="tracking.html" class="text-amber-700 underline font-bold">ติดตามคำร้อง</a></li>
-          <li>เปิดบัตรสมาชิกดิจิทัลพร้อม QR Code ได้ที่หน้า <a href="member_card_digital.html" class="text-emerald-700 underline font-bold">บัตรสมาชิกดิจิทัล</a></li>
+      <div class="dark-surface-card rounded-3xl p-6 space-y-3">
+        <h2 class="text-base sm:text-lg font-extrabold text-purple-300"><i class="fa-solid fa-headset text-purple-400 mr-2"></i>4. ช่องทางติดต่อทีมงานและบริการต่างๆ</h2>
+        <ul class="text-xs sm:text-sm text-slate-300 space-y-2 list-disc ml-5">
+          <li><strong class="text-white">Line Official แอดมินกลาง:</strong> <strong class="text-emerald-400">@Thedrivethailand</strong></li>
+          <li>เช็คสถานะคำร้องทั้งหมดได้ที่หน้า <a href="tracking.html" class="text-amber-300 underline font-bold">ติดตามคำร้อง</a></li>
+          <li>เปิดบัตรสมาชิกดิจิทัลพร้อม QR Code ได้ที่หน้า <a href="member_card_digital.html" class="text-emerald-400 underline font-bold">บัตรสมาชิกดิจิทัล</a></li>
         </ul>
       </div>
     </section>

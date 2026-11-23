@@ -701,8 +701,12 @@
           <div id="panel-cat-group" class="tdt-cat-menu-panel">
             <div class="tdt-cat-menu-header" style="background:rgba(120,53,15,0.45);color:#fcd34d;border:1px solid rgba(251,191,36,0.25);">
               <span><i class="fa-solid fa-gem"></i> หมวดหมู่บริการของกลุ่ม</span>
-              <span style="font-size:10px;opacity:0.85;">11 เมนู</span>
+              <span style="font-size:10px;opacity:0.85;">12 เมนู</span>
             </div>
+            <a href="captain_insurance.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(20,184,166,0.18);color:#2dd4bf;border:1px solid rgba(45,212,191,0.35);"><i class="fa-solid fa-shield-halved"></i></span>
+              <span><span class="tdt-cat-menu-title">Captain Insurance กัปตัน ประกันภัย</span><span class="tdt-cat-menu-sub">เช็กเบี้ยและทำประกันภัยรถยนต์ราคาสมาชิก</span></span>
+            </a>
             <a href="pcard.html" class="tdt-cat-menu-link">
               <span class="tdt-cat-menu-icon" style="background:rgba(245,158,11,0.16);color:#fbbf24;border:1px solid rgba(251,191,36,0.3);"><i class="fa-solid fa-id-badge"></i></span>
               <span><span class="tdt-cat-menu-title">ทำบัตรสมาชิกประเมศฐ์ &amp; เช็คพัสดุ</span><span class="tdt-cat-menu-sub">สมัครทำบัตรเคลือบใสและตรวจสอบเลขพัสดุ</span></span>
@@ -1038,29 +1042,10 @@
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- MAIN CONTENT -->
-  <main class="flex-grow max-w-6xl w-full mx-auto px-4 sm:px-6 py-9 sm:py-12 space-y-10 sm:space-y-12">
-
-    <!-- SECTION: ALL SERVICES -->
-    <section id="services" class="space-y-6">
-      <div class="text-center max-w-2xl mx-auto space-y-2">
-        <span class="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-amber-800 bg-amber-100 border border-amber-300 px-3.5 py-1 rounded-full">
-          <i class="fa-solid fa-gem text-amber-600"></i> ALL NETWORK SERVICES
-        </span>
-        <h2 class="text-2xl sm:text-3xl font-black text-slate-900">บริการทั้งหมดของเครือข่าย The Driver Thailand</h2>
-        <p class="text-xs sm:text-sm text-slate-500">เลือกใช้งานระบบออนไลน์ที่ออกแบบมาเพื่อความสะดวก หรูหรา และปลอดภัยของสมาชิกคนขับรถโดยเฉพาะ</p>
-      </div>
-
-      <!-- ปุ่มตัวกรองหมวดหมู่บริการทั้ง 17 ระบบ -->
+      <!-- ปุ่มตัวกรองหมวดหมู่บริการทั้ง 18 ระบบ -->
       <div class="flex flex-wrap items-center justify-center gap-2">
         <button type="button" onclick="filterServiceCards('ALL')" data-filter="ALL" class="service-filter-btn bg-slate-950 text-amber-400 font-bold text-xs px-4 py-2 rounded-full shadow-sm transition">
-          ทั้งหมด (17 บริการ)
+          ทั้งหมด (18 บริการ)
         </button>
         <button type="button" onclick="filterServiceCards('member')" data-filter="member" class="service-filter-btn bg-white hover:bg-amber-50 text-slate-700 border border-slate-200 font-semibold text-xs px-4 py-2 rounded-full transition">
           🪪 งานทะเบียน &amp; บัตรสมาชิก
@@ -1069,11 +1054,31 @@
           💬 ชุมชน &amp; แลกเปลี่ยนงาน
         </button>
         <button type="button" onclick="filterServiceCards('safety')" data-filter="safety" class="service-filter-btn bg-white hover:bg-amber-50 text-slate-700 border border-slate-200 font-semibold text-xs px-4 py-2 rounded-full transition">
-          🛡️ เครื่องมือ &amp; ความปลอดภัย
+          🛡️ ประกันภัย &amp; ความปลอดภัย
         </button>
       </div>
 
       <div id="service-cards-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+        <!-- Service Card 0: Captain Insurance -->
+        <div data-cat="safety" class="service-card-item group bg-white rounded-3xl p-6 border-2 border-teal-400/80 shadow-md card-luxury flex flex-col justify-between space-y-5 relative">
+          <span class="absolute top-4 right-4 text-[10px] font-extrabold bg-gradient-to-r from-teal-400 to-emerald-400 text-slate-950 px-3 py-0.5 rounded-full shadow-sm">
+            <i class="fa-solid fa-shield-halved mr-1"></i>บริการใหม่
+          </span>
+          <div class="space-y-3">
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-teal-50 to-emerald-100 border border-teal-300 text-teal-700 flex items-center justify-center text-xl shadow-sm">
+              <i class="fa-solid fa-shield-halved icon-bounce-hover"></i>
+            </div>
+            <h3 class="text-lg font-extrabold text-slate-900">CAPTAIN INSURANCE กัปตัน ประกันภัย</h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              เช็กเบี้ยประกันภัยรถยนต์ชั้น 1, 2+, 3+, ชั้น 3 และ พ.ร.บ. สำหรับรถส่วนบุคคลและรถรับจ้าง บริการโดย The Driver Thailand
+            </p>
+          </div>
+          <a href="captain_insurance.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-500 hover:to-emerald-500 text-white font-bold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
+            <span>เช็กเบี้ย Captain Insurance</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+
         <!-- Service Card 1: Member Directory -->
         <div data-cat="member" class="service-card-item group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
           <div class="space-y-3">

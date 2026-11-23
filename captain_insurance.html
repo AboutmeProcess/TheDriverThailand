@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CAPTAIN INSURANCE กัปตัน ประกันภัย | บริการโดย The Driver Thailand</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Prompt', 'sans-serif'],
+            mono: ['Prompt', 'sans-serif'],
+          },
+          colors: {
+            captain: {
+              navy: '#0a2540',
+              teal: '#0d9488',
+              cyan: '#14b8a6',
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    html { scroll-behavior: smooth; font-size: 16px; transition: font-size 0.18s ease; }
+    html, body, input, select, textarea, button, code, pre { font-family: 'Prompt', sans-serif !important; }
+    html, body { background-color: #f8fafc; color: #0f172a; max-width: 100%; overflow-x: clip; }
+    .gold-shimmer-text {
+      background: linear-gradient(90deg, #fde68a 0%, #fbbf24 35%, #f59e0b 65%, #fef08a 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      animation: goldShimmer 5s linear infinite;
+    }
+    .captain-hero-bg {
+      background:
+        radial-gradient(circle at 15% 20%, rgba(20, 184, 166, 0.24) 0%, transparent 45%),
+        radial-gradient(circle at 85% 80%, rgba(245, 158, 11, 0.18) 0%, transparent 50%),
+        linear-gradient(135deg, #061326 0%, #0a2540 52%, #0f172a 100%);
+    }
+    @keyframes goldShimmer {
+      to { background-position: 200% center; }
+    }
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-4px); }
+    }
+    .icon-float { animation: floatSlow 3.4s ease-in-out infinite; }
+
+    /* UNIFIED GLOBAL NAVIGATION BAR (MATCHING INDEX.HTML) */
+    .tdt-global-nav {
+      box-sizing: border-box;
+      font-family: 'Prompt', sans-serif;
+      background: linear-gradient(180deg, rgba(7, 11, 20, 0.98) 0%, rgba(10, 15, 28, 0.96) 100%);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      color: #e2e8f0;
+      border-bottom: 1px solid rgba(251, 191, 36, 0.28);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 10px 28px -8px rgba(2, 6, 23, 0.65);
+      width: 100%;
+    }
+    .tdt-global-nav *, .tdt-global-nav *::before, .tdt-global-nav *::after { box-sizing: border-box; }
+    .tdt-global-nav-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 12px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 10px;
+    }
+    @media (min-width: 640px) {
+      .tdt-global-nav-inner { padding: 14px 24px; gap: 12px; }
+    }
+    .tdt-nav-top-row {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+    }
+    .tdt-global-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 13px;
+      font-size: 16px;
+      line-height: 1.3;
+      font-weight: 500;
+      color: #fbbf24;
+      text-decoration: none;
+      text-align: left;
+      transition: color 0.15s ease;
+    }
+    .tdt-brand-text-stack {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 5px;
+      line-height: 1.3;
+      font-weight: 400;
+    }
+    .tdt-brand-subline-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 400;
+      color: #cbd5e1;
+      text-align: left;
+    }
+    .tdt-brand-exec-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(251, 191, 36, 0.15);
+      border: 1px solid rgba(251, 191, 36, 0.42);
+      color: #fde68a;
+      font-size: 10.5px;
+      font-weight: 500;
+      padding: 2px 8px;
+      border-radius: 999px;
+      line-height: 1.25;
+    }
+    .tdt-brand-logo-img {
+      width: 50px;
+      height: 50px;
+      border-radius: 15px;
+      object-fit: cover;
+      object-position: center;
+      background: #ffffff;
+      padding: 0;
+      border: 1.5px solid rgba(251, 191, 36, 0.85);
+      box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.55), 0 0 0 2px rgba(251, 191, 36, 0.16);
+      flex-shrink: 0;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+    }
+    .tdt-global-brand:hover .tdt-brand-logo-img { transform: scale(1.05); border-color: #fde68a; }
+    @media (min-width: 640px) {
+      .tdt-global-brand { gap: 14px; font-size: 19px; }
+      .tdt-brand-logo-img { width: 56px; height: 56px; border-radius: 16px; }
+    }
+    .tdt-global-brand:hover { color: #fde68a; }
+    .tdt-global-right-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 7px;
+      width: 100%;
+    }
+    .tdt-nav-divider {
+      width: 1px;
+      height: 20px;
+      background: rgba(148, 163, 184, 0.22);
+      margin: 0 2px;
+      display: none;
+    }
+    @media (min-width: 1024px) {
+      .tdt-nav-divider { display: inline-block; }
+    }
+    .tdt-cat-dropdown-wrap { position: relative; display: inline-block; }
+    .tdt-cat-menu-panel {
+      display: none;
+      position: absolute;
+      left: 0;
+      top: calc(100% + 8px);
+      width: 316px;
+      max-width: calc(100vw - 32px);
+      border-radius: 16px;
+      padding: 10px;
+      background-color: #070b14;
+      border: 1px solid rgba(251, 191, 36, 0.45);
+      box-shadow: 0 24px 54px -10px rgba(0, 0, 0, 0.92), 0 0 0 1px rgba(15, 23, 42, 0.9);
+      z-index: 1060;
+      text-align: left;
+    }
+    .tdt-cat-menu-panel.is-open { display: block; }
+    .tdt-cat-menu-header {
+      padding: 8px 12px;
+      margin-bottom: 6px;
+      border-radius: 11px;
+      font-size: 11px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .tdt-cat-menu-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 12px;
+      background-color: #0d1424;
+      border: 1px solid rgba(148, 163, 184, 0.14);
+      color: #f1f5f9;
+      text-decoration: none;
+      margin-bottom: 6px;
+      transition: all 0.18s ease;
+    }
+    .tdt-cat-menu-link:last-child { margin-bottom: 0; }
+    .tdt-cat-menu-link:hover { background-color: #162038; border-color: rgba(251, 191, 36, 0.5); transform: translateX(2px); }
+    .tdt-cat-menu-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 12px;
+    }
+    .tdt-cat-menu-title { display: block; font-size: 12px; font-weight: 500; line-height: 1.3; }
+    .tdt-cat-menu-sub { display: block; font-size: 10px; font-weight: 400; color: #94a3b8; line-height: 1.25; }
+    .tdt-nav-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      height: 36px;
+      min-height: 36px;
+      padding: 0 13px;
+      border-radius: 11px;
+      font-size: 12px;
+      line-height: 16px;
+      font-weight: 400;
+      text-decoration: none;
+      white-space: nowrap;
+      background-color: rgba(15, 23, 42, 0.88);
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      color: #e2e8f0;
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+    .tdt-nav-btn:hover { background-color: #1e293b; border-color: rgba(251, 191, 36, 0.48); transform: translateY(-1px); }
+    .tdt-nav-btn.is-member-cat { color: #6ee7b7; border-color: rgba(52, 211, 153, 0.35); background-color: rgba(6, 78, 59, 0.24); }
+    .tdt-nav-btn.is-member-cat i { color: #34d399; }
+    .tdt-nav-btn.is-quick-register,
+    .tdt-nav-btn.is-quick-check-code { color: #5eead4; border-color: rgba(45, 212, 191, 0.38); background-color: rgba(19, 78, 74, 0.28); }
+    .tdt-nav-btn.is-quick-register i,
+    .tdt-nav-btn.is-quick-check-code i { color: #2dd4bf; }
+    .tdt-nav-btn.is-group-cat { color: #fcd34d; border-color: rgba(251, 191, 36, 0.38); background-color: rgba(120, 53, 15, 0.24); }
+    .tdt-nav-btn.is-group-cat i { color: #fbbf24; }
+    .tdt-nav-btn.is-blacklist { color: #fda4af; border-color: rgba(251, 113, 133, 0.35); }
+    .tdt-nav-btn.is-blacklist i { color: #fb7185; }
+    .tdt-nav-btn.is-admin-link {
+      color: #fde68a;
+      border-color: rgba(251, 191, 36, 0.45);
+      background-color: rgba(245, 158, 11, 0.14);
+    }
+    .tdt-nav-btn.is-admin-link i { color: #fbbf24; }
+    .tdt-nav-btn.active-current {
+      background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+      border-color: #fcd34d;
+      color: #060911;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.32);
+    }
+    .tdt-nav-btn.active-current i { color: #060911; }
+    .tdt-util-group {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background-color: rgba(15, 23, 42, 0.92);
+      border: 1px solid rgba(251, 191, 36, 0.28);
+      border-radius: 12px;
+      padding: 3px;
+      flex-shrink: 0;
+    }
+    .tdt-util-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      height: 30px;
+      padding: 0 9px;
+      border-radius: 9px;
+      font-size: 12px;
+      font-weight: 400;
+      color: #e2e8f0;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background-color 0.15s ease, color 0.15s ease;
+    }
+    .tdt-util-btn:hover { background-color: rgba(251, 191, 36, 0.18); color: #fde68a; }
+  </style>
+</head>
+<body class="text-slate-800 antialiased min-h-screen flex flex-col selection:bg-teal-400 selection:text-slate-950 relative">
+  <!-- กล่องแจ้งเตือน Toast มุมขวาบน -->
+  <div id="toast-container" class="fixed top-5 right-5 z-[1100] flex flex-col gap-3 max-w-sm w-full pointer-events-none px-4"></div>
+
+  <!-- UNIFIED GLOBAL SITE NAVIGATION BAR -->
+  <nav class="tdt-global-nav" aria-label="แถบนำทางหลักของเว็บไซต์">
+    <div class="tdt-global-nav-inner">
+      <div class="tdt-nav-top-row">
+        <a href="index.html" class="tdt-global-brand">
+          <img src="TheDriverTH.jpg" alt="โลโก้ The Driver Thailand"
+            onerror="this.onerror=null;this.src='https://placehold.co/80x80/0f172a/fbbf24?text=TDT';"
+            class="tdt-brand-logo-img">
+          <span class="tdt-brand-text-stack">
+            <span>🚖 The Driver TH 🇹🇭 Premium Service</span>
+            <span class="tdt-brand-subline-row">
+              <span class="tdt-brand-exec-pill"><i class="fa-solid fa-crown text-[9px]"></i> EXECUTIVE NETWORK</span>
+              <span>เครือข่ายคนขับรถรับส่งผู้โดยสารและบริการมืออาชีพแห่งประเทศไทย</span>
+            </span>
+          </span>
+        </a>
+        <div class="tdt-util-group ml-auto" title="ปรับขนาดตัวอักษร">
+          <button type="button" onclick="tdtChangeFontScale(-1)" aria-label="ลดขนาดตัวอักษร" class="tdt-util-btn">A-</button>
+          <span id="tdt-font-pct" class="text-[11px] font-normal text-amber-300 px-1 select-none">100%</span>
+          <button type="button" onclick="tdtChangeFontScale(1)" aria-label="เพิ่มขนาดตัวอักษร" class="tdt-util-btn">A+</button>
+        </div>
+      </div>
+
+      <div class="tdt-global-right-controls" aria-label="เมนูหลักของหน้าเว็บ">
+        <a href="index.html" class="tdt-nav-btn"><i class="fa-solid fa-house"></i><span>หน้าหลัก</span></a>
+        <a href="member_register.html" class="tdt-nav-btn is-quick-register"><i class="fa-solid fa-file-signature"></i><span>ลงทะเบียนสมาชิกใหม่</span></a>
+        <a href="register.html" class="tdt-nav-btn is-quick-check-code"><i class="fa-solid fa-users-viewfinder"></i><span>ตรวจสอบรหัสสมาชิก</span></a>
+
+        <span class="tdt-nav-divider" aria-hidden="true"></span>
+
+        <div class="tdt-cat-dropdown-wrap" id="nav-drop-member">
+          <button type="button" onclick="tdtToggleDropdown('member', event)" id="nav-btn-member" aria-expanded="false" class="tdt-nav-btn is-member-cat">
+            <i class="fa-solid fa-users"></i><span>หมวดหมู่บริการสมาชิก</span><i id="nav-chev-member" class="fa-solid fa-chevron-down text-[10px]" style="transition:transform 0.2s;"></i>
+          </button>
+          <div id="nav-panel-member" class="tdt-cat-menu-panel">
+            <div class="tdt-cat-menu-header" style="background:rgba(6,78,59,0.55);color:#6ee7b7;border:1px solid rgba(16,185,129,0.25);">
+              <span><i class="fa-solid fa-users"></i> หมวดหมู่บริการสมาชิก</span><span style="font-size:10px;opacity:0.85;">3 เมนู</span>
+            </div>
+            <a href="member_edit.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(245,158,11,0.16);color:#fbbf24;border:1px solid rgba(251,191,36,0.3);"><i class="fa-solid fa-user-pen"></i></span>
+              <span><span class="tdt-cat-menu-title">แก้ไขข้อมูลสมาชิกเดิม</span><span class="tdt-cat-menu-sub">แจ้งเปลี่ยนรถ ทะเบียน หรือข้อมูลติดต่อ</span></span>
+            </a>
+            <a href="unblock_request.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(14,165,233,0.16);color:#38bdf8;border:1px solid rgba(56,189,248,0.3);"><i class="fa-solid fa-unlock-keyhole"></i></span>
+              <span><span class="tdt-cat-menu-title">ขอปลดล็อกห้อง Line OpenChat</span><span class="tdt-cat-menu-sub">ยื่นคำร้องชี้แจงกรณีถูกบล็อกหรือลบออก</span></span>
+            </a>
+            <a href="luxury_car_register.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(245,158,11,0.16);color:#fbbf24;border:1px solid rgba(251,191,36,0.3);"><i class="fa-solid fa-crown"></i></span>
+              <span><span class="tdt-cat-menu-title">ลงทะเบียนห้อง Luxury Car</span><span class="tdt-cat-menu-sub">สมัครเข้าห้องกลุ่มคนขับรถ Luxury Car</span></span>
+            </a>
+          </div>
+        </div>
+
+        <div class="tdt-cat-dropdown-wrap" id="nav-drop-group">
+          <button type="button" onclick="tdtToggleDropdown('group', event)" id="nav-btn-group" aria-expanded="false" class="tdt-nav-btn is-group-cat active-current">
+            <i class="fa-solid fa-briefcase"></i><span>หมวดหมู่บริการของกลุ่ม</span><i id="nav-chev-group" class="fa-solid fa-chevron-down text-[10px]" style="transition:transform 0.2s;"></i>
+          </button>
+          <div id="nav-panel-group" class="tdt-cat-menu-panel">
+            <div class="tdt-cat-menu-header" style="background:rgba(120,53,15,0.45);color:#fcd34d;border:1px solid rgba(251,191,36,0.25);">
+              <span><i class="fa-solid fa-gem"></i> หมวดหมู่บริการของกลุ่ม</span><span style="font-size:10px;opacity:0.85;">12 เมนู</span>
+            </div>
+            <a href="captain_insurance.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(20,184,166,0.18);color:#2dd4bf;border:1px solid rgba(45,212,191,0.35);"><i class="fa-solid fa-shield-halved"></i></span>
+              <span><span class="tdt-cat-menu-title">Captain Insurance กัปตัน ประกันภัย</span><span class="tdt-cat-menu-sub">เช็กเบี้ยและทำประกันภัยรถยนต์ราคาสมาชิก</span></span>
+            </a>
+            <a href="pcard.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(245,158,11,0.16);color:#fbbf24;border:1px solid rgba(251,191,36,0.3);"><i class="fa-solid fa-id-badge"></i></span>
+              <span><span class="tdt-cat-menu-title">ทำบัตรสมาชิกประเมศฐ์ &amp; เช็คพัสดุ</span><span class="tdt-cat-menu-sub">สมัครทำบัตรเคลือบใสและตรวจสอบเลขพัสดุ</span></span>
+            </a>
+            <a href="vip_referral_guide.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(168,85,247,0.16);color:#c084fc;border:1px solid rgba(192,132,252,0.3);"><i class="fa-solid fa-map-location-dot"></i></span>
+              <span><span class="tdt-cat-menu-title">[VIP] ลายแทงสถานที่ท่องเที่ยว</span><span class="tdt-cat-menu-sub">ขอรับลายแทงร้านค้า/สถานที่เพื่อรับค่าแนะนำ</span></span>
+            </a>
+            <a href="rtaf_pass_register.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(59,130,246,0.16);color:#60a5fa;border:1px solid rgba(96,165,250,0.3);"><i class="fa-solid fa-plane-departure"></i></span>
+              <span><span class="tdt-cat-menu-title">ทำบัตรผ่านยานพาหนะ ทอ. (ดอนเมือง)</span><span class="tdt-cat-menu-sub">ขอทำบัตรผ่านเข้า - ออก เขตพื้นที่ ทอ.</span></span>
+            </a>
+            <a href="tour_book_order.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(20,184,166,0.16);color:#2dd4bf;border:1px solid rgba(45,212,191,0.3);"><i class="fa-solid fa-book"></i></span>
+              <span><span class="tdt-cat-menu-title">บริการสั่งซื้อสมุดทัวร์</span><span class="tdt-cat-menu-sub">โซนกรุงเทพฯ-ปริมณฑล และ พัทยา-ชลบุรี</span></span>
+            </a>
+            <a href="privacy_policy.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(148,163,184,0.16);color:#cbd5e1;border:1px solid rgba(148,163,184,0.3);"><i class="fa-solid fa-scale-balanced"></i></span>
+              <span><span class="tdt-cat-menu-title">ประกาศความเป็นส่วนตัว (PDPA)</span><span class="tdt-cat-menu-sub">นโยบายคุ้มครองข้อมูลส่วนบุคคลของกลุ่ม</span></span>
+            </a>
+            <a href="tracking.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(245,158,11,0.16);color:#fbbf24;border:1px solid rgba(251,191,36,0.3);"><i class="fa-solid fa-satellite-dish"></i></span>
+              <span><span class="tdt-cat-menu-title">ศูนย์ติดตามสถานะคำร้องทั้งหมด</span><span class="tdt-cat-menu-sub">เช็คความคืบหน้าและเลขพัสดุทุกบริการ</span></span>
+            </a>
+            <a href="member_card_digital.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(16,185,129,0.16);color:#34d399;border:1px solid rgba(52,211,153,0.3);"><i class="fa-solid fa-qrcode"></i></span>
+              <span><span class="tdt-cat-menu-title">บัตรสมาชิกดิจิทัล &amp; QR Code</span><span class="tdt-cat-menu-sub">เปิดบัตรอิเล็กทรอนิกส์ยืนยันตัวตน</span></span>
+            </a>
+            <a href="job_board.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(245,158,11,0.16);color:#fbbf24;border:1px solid rgba(251,191,36,0.3);"><i class="fa-solid fa-handshake"></i></span>
+              <span><span class="tdt-cat-menu-title">กระดานแลกเปลี่ยนงาน / หาคนขับแทน</span><span class="tdt-cat-menu-sub">ปล่อยงานและรับงานเฉพาะสมาชิกที่ยืนยันรหัส</span></span>
+            </a>
+            <a href="community.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(56,189,248,0.16);color:#38bdf8;border:1px solid rgba(56,189,248,0.3);"><i class="fa-solid fa-comments"></i></span>
+              <span><span class="tdt-cat-menu-title">ชุมชนเว็บบอร์ดสมาชิก</span><span class="tdt-cat-menu-sub">ตั้งกระทู้ รีวิวเส้นทาง และสะสมเรทติ้ง</span></span>
+            </a>
+            <a href="fare_calculator.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(16,185,129,0.16);color:#34d399;border:1px solid rgba(52,211,153,0.3);"><i class="fa-solid fa-calculator"></i></span>
+              <span><span class="tdt-cat-menu-title">คำนวณค่าโดยสารมาตรฐาน</span><span class="tdt-cat-menu-sub">ประเมินราคางานเหมาและคัดลอกใบเสนอราคา</span></span>
+            </a>
+            <a href="guide.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(148,163,184,0.16);color:#cbd5e1;border:1px solid rgba(148,163,184,0.3);"><i class="fa-solid fa-book-open"></i></span>
+              <span><span class="tdt-cat-menu-title">คู่มือสมาชิก &amp; กฎกติกาเครือข่าย</span><span class="tdt-cat-menu-sub">วิธีตั้งชื่อ ถ่ายรูปยืนยันตัวตน และติดต่อแอดมิน</span></span>
+            </a>
+          </div>
+        </div>
+
+        <span class="tdt-nav-divider" aria-hidden="true"></span>
+
+        <a href="blacklist.html" class="tdt-nav-btn is-blacklist"><i class="fa-solid fa-user-shield"></i><span>ตรวจสอบ Blacklist</span></a>
+        <a href="admin.html" class="tdt-nav-btn is-admin-link"><i class="fa-solid fa-sliders"></i><span>ระบบหลังบ้าน (Admin)</span></a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- พื้นที่เนื้อหาหลัก -->
+  <main class="flex-grow max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-6 sm:space-y-8">
+    <!-- Hero Brand Showcase: CAPTAIN INSURANCE กัปตัน ประกันภัย -->
+    <section class="captain-hero-bg rounded-3xl p-6 sm:p-10 text-white shadow-2xl border border-teal-400/35 relative overflow-hidden">
+      <div class="absolute -right-16 -top-16 w-80 h-80 bg-teal-400/15 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -left-16 -bottom-16 w-80 h-80 bg-amber-400/15 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="grid lg:grid-cols-12 gap-6 sm:gap-8 items-center relative z-10">
+        <!-- ฝั่งซ้าย: แบรนด์และคำอธิบายบริการ -->
+        <div class="lg:col-span-7 space-y-4">
+          <div class="flex flex-wrap items-center gap-2.5">
+            <span class="bg-teal-500/20 border border-teal-400/50 text-teal-300 text-xs font-bold px-3.5 py-1 rounded-full inline-flex items-center gap-1.5">
+              <i class="fa-solid fa-shield-halved icon-float"></i> CAPTAIN INSURANCE OFFICIAL PARTNER
+            </span>
+            <span class="bg-amber-500/20 border border-amber-400/40 text-amber-300 text-xs font-bold px-3.5 py-1 rounded-full">
+              บริการโดย The Driver Thailand
+            </span>
+          </div>
+
+          <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black leading-tight">
+            ประกันภัยรถยนต์ครบวงจร<br>
+            <span class="gold-shimmer-text">CAPTAIN INSURANCE กัปตัน ประกันภัย</span>
+          </h1>
+
+          <p class="text-slate-300 text-xs sm:text-sm leading-relaxed font-light max-w-2xl">
+            อุ่นใจทุกเส้นทางการขับขี่ทั้งรถบ้านส่วนบุคคล รถรับจ้างป้ายเขียว/ป้ายเหลือง รถตู้ VIP และรถผู้บริหาร เลือกเทียบเบี้ยประกันภัยรถยนต์ชั้น 1, 2+, 3+, ชั้น 3 และ พ.ร.บ. จากบริษัทประกันภัยชั้นนำ พร้อมส่วนลดพิเศษสำหรับสมาชิก <strong class="text-amber-300 font-semibold">The Driver Thailand</strong>
+          </p>
+
+          <div class="flex flex-wrap items-center gap-3 pt-1">
+            <a href="#quote-form-section" class="bg-gradient-to-r from-teal-400 to-emerald-500 hover:from-teal-300 hover:to-emerald-400 text-slate-950 font-extrabold text-xs sm:text-sm px-6 py-3.5 rounded-2xl shadow-lg transition inline-flex items-center gap-2">
+              <i class="fa-solid fa-file-shield"></i>
+              <span>เช็กเบี้ย &amp; ขอใบเสนอราคาฟรี</span>
+            </a>
+            <a href="#coverage-table" class="bg-white/10 hover:bg-white/15 text-amber-300 border border-amber-400/40 font-bold text-xs sm:text-sm px-5 py-3.5 rounded-2xl transition inline-flex items-center gap-2">
+              <i class="fa-solid fa-table-list"></i>
+              <span>เปรียบเทียบแผนความคุ้มครอง</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- ฝั่งขวา: การ์ดแสดงโลโก้ CAPTAIN INSURANCE กัปตัน ประกันภัย -->
+        <div class="lg:col-span-5 flex justify-center">
+          <div class="w-full max-w-md bg-white rounded-3xl p-6 sm:p-7 shadow-2xl border-2 border-teal-400/60 text-slate-900 space-y-4">
+            <div class="flex items-center justify-center py-2">
+              <!-- โลโก้ CAPTAIN INSURANCE กัปตัน ประกันภัย (SVG พังงาเรือ + เข็มทิศ + โล่เครื่องหมายถูก) -->
+              <svg viewBox="0 0 430 140" class="w-full max-w-[340px] h-auto" role="img" aria-label="CAPTAIN INSURANCE กัปตัน ประกันภัย">
+                <defs>
+                  <linearGradient id="capNavyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#0b3b59"/>
+                    <stop offset="100%" stop-color="#072238"/>
+                  </linearGradient>
+                  <linearGradient id="capTealGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#0d9488"/>
+                    <stop offset="100%" stop-color="#2dd4bf"/>
+                  </linearGradient>
+                </defs>
+                <!-- สัญลักษณ์พังงาเรือและเข็มทิศด้านซ้าย -->
+                <g transform="translate(72, 70)">
+                  <!-- ซี่พังงาเรือ 8 ทิศ -->
+                  <g stroke="url(#capNavyGrad)" stroke-width="5.5" stroke-linecap="round">
+                    <line x1="0" y1="-54" x2="0" y2="54"/>
+                    <line x1="-54" y1="0" x2="54" y2="0"/>
+                    <line x1="-38" y1="-38" x2="38" y2="38"/>
+                    <line x1="-38" y1="38" x2="38" y2="-38"/>
+                  </g>
+                  <!-- ปลายด้ามจับพังงาเรือ -->
+                  <g fill="#082f49">
+                    <circle cx="0" cy="-56" r="4.5"/>
+                    <circle cx="0" cy="56" r="4.5"/>
+                    <circle cx="-56" cy="0" r="4.5"/>
+                    <circle cx="56" cy="0" r="4.5"/>
+                    <circle cx="-40" cy="-40" r="4"/>
+                    <circle cx="40" cy="40" r="4"/>
+                    <circle cx="-40" cy="40" r="4"/>
+                    <circle cx="40" cy="-40" r="4"/>
+                  </g>
+                  <!-- วงล้อพังงาเรือชั้นนอกและชั้นใน -->
+                  <circle cx="0" cy="0" r="41" fill="none" stroke="#082f49" stroke-width="8"/>
+                  <circle cx="0" cy="0" r="41" fill="none" stroke="#14b8a6" stroke-width="2" stroke-dasharray="14 8"/>
+                  <circle cx="0" cy="0" r="28" fill="#ffffff" stroke="#0d9488" stroke-width="3"/>
+
+                  <!-- เข็มทิศเฉียงทะแยง -->
+                  <polygon points="-46,46 -10,4 4,-10" fill="url(#capTealGrad)"/>
+                  <polygon points="46,-46 10,-4 -4,10" fill="#082f49"/>
+
+                  <!-- โล่ตรงกลาง -->
+                  <path d="M0,-23 L20,-15 L20,2 C20,15 11,24 0,29 C-11,24 -20,15 -20,2 L-20,-15 Z"
+                    fill="url(#capTealGrad)" stroke="#082f49" stroke-width="3.5" stroke-linejoin="round"/>
+                  <!-- เครื่องหมายถูกบนโล่ -->
+                  <path d="M-9,2 L-2,9 L11,-6" fill="none" stroke="#082f49" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                </g>
+
+                <!-- ข้อความแบรนด์ด้านขวา -->
+                <g transform="translate(148, 0)">
+                  <text x="0" y="54" fill="#082f49" font-family="Prompt, sans-serif" font-weight="900" font-size="40" letter-spacing="1.5">CAPTAIN</text>
+                  <text x="2" y="85" fill="#082f49" font-family="Prompt, sans-serif" font-weight="600" font-size="25" letter-spacing="3.5">INSURANCE</text>
+                  <text x="2" y="117" fill="#0f2942" font-family="Prompt, sans-serif" font-weight="700" font-size="23">กัปตัน ประกันภัย</text>
+                </g>
+              </svg>
+            </div>
+
+            <div class="border-t border-slate-200 pt-3 flex items-center justify-between text-xs">
+              <span class="font-bold text-slate-700"><i class="fa-solid fa-circle-check text-teal-600 mr-1"></i> คุ้มครองไว ผ่อน 0% ได้</span>
+              <span class="bg-slate-950 text-amber-400 font-extrabold px-2.5 py-1 rounded-lg text-[11px]">by The Driver Thailand</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- จุดเด่นของบริการ Captain Insurance โดย The Driver Thailand -->
+    <section class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm space-y-2">
+        <div class="w-11 h-11 rounded-2xl bg-teal-50 border border-teal-200 text-teal-700 flex items-center justify-center text-lg">
+          <i class="fa-solid fa-taxi"></i>
+        </div>
+        <h2 class="font-extrabold text-slate-900 text-sm sm:text-base">รองรับทั้งรถบ้าน &amp; รถรับจ้าง</h2>
+        <p class="text-xs text-slate-600 leading-relaxed">จัดแผนประกันตรงตามการใช้งานจริง ทั้งรถส่วนบุคคล รถป้ายเขียว รถตู้ VIP และรถเช่าพร้อมคนขับ</p>
+      </div>
+
+      <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm space-y-2">
+        <div class="w-11 h-11 rounded-2xl bg-amber-50 border border-amber-200 text-amber-600 flex items-center justify-center text-lg">
+          <i class="fa-solid fa-tags"></i>
+        </div>
+        <h2 class="font-extrabold text-slate-900 text-sm sm:text-base">เทียบเบี้ยกว่า 20 บริษัทชั้นนำ</h2>
+        <p class="text-xs text-slate-600 leading-relaxed">คัดสรรเบี้ยราคาพิเศษจากวิริยะ กรุงเทพ เมืองไทย คุ้มภัยโตเกียวมารีน ธนชาต และชั้นนำทั่วไทย</p>
+      </div>
+
+      <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm space-y-2">
+        <div class="w-11 h-11 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-600 flex items-center justify-center text-lg">
+          <i class="fa-solid fa-credit-card"></i>
+        </div>
+        <h2 class="font-extrabold text-slate-900 text-sm sm:text-base">เลือกผ่อนชำระสบาย 0%</h2>
+        <p class="text-xs text-slate-600 leading-relaxed">คุ้มครองทันทีตั้งแต่วันแรกที่แจ้งงาน พร้อมทางเลือกผ่อนชำระทั้งบัตรเครดิตและเงินสด</p>
+      </div>
+
+      <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm space-y-2">
+        <div class="w-11 h-11 rounded-2xl bg-sky-50 border border-sky-200 text-sky-600 flex items-center justify-center text-lg">
+          <i class="fa-solid fa-headset"></i>
+        </div>
+        <h2 class="font-extrabold text-slate-900 text-sm sm:text-base">ดูแลประสานงานเคลม 24 ชม.</h2>
+        <p class="text-xs text-slate-600 leading-relaxed">มีทีมงาน Captain Insurance และแอดมิน The Driver Thailand คอยให้คำปรึกษาตลอดอายุกรมธรรม์</p>
+      </div>
+    </section>
+
+    <!-- ตารางเปรียบเทียบแผนประกันภัยรถยนต์ -->
+    <section id="coverage-table" class="bg-white rounded-3xl p-5 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-4">
+        <div>
+          <span class="text-xs font-extrabold text-teal-800 bg-teal-50 border border-teal-200 px-3 py-1 rounded-full">COMPARE PLANS</span>
+          <h2 class="text-lg sm:text-2xl font-black text-slate-900 mt-1.5">เปรียบเทียบความคุ้มครองประกันภัยรถยนต์แต่ละประเภท</h2>
+        </div>
+        <span class="text-xs text-slate-500">เลือกแผนที่ใช่แล้วกดขอใบเสนอราคาด้านล่าง</span>
+      </div>
+
+      <div class="overflow-x-auto rounded-2xl border border-slate-200">
+        <table class="w-full text-left text-xs sm:text-sm min-w-[680px]">
+          <thead class="bg-slate-950 text-amber-300 font-bold">
+            <tr>
+              <th class="px-4 py-3.5">รายการความคุ้มครอง</th>
+              <th class="px-4 py-3.5 text-center bg-teal-950/90 text-teal-300">ชั้น 1 (ซ่อมห้าง/อู่)</th>
+              <th class="px-4 py-3.5 text-center">ชั้น 2+</th>
+              <th class="px-4 py-3.5 text-center">ชั้น 3+</th>
+              <th class="px-4 py-3.5 text-center">ชั้น 3</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200">
+            <tr class="bg-white">
+              <td class="px-4 py-3 font-semibold text-slate-800">รถชนรถ (มีคู่กรณี)</td>
+              <td class="px-4 py-3 text-center text-emerald-600 font-bold bg-teal-50/40"><i class="fa-solid fa-circle-check"></i> คุ้มครอง</td>
+              <td class="px-4 py-3 text-center text-emerald-600 font-bold"><i class="fa-solid fa-circle-check"></i> คุ้มครอง</td>
+              <td class="px-4 py-3 text-center text-emerald-600 font-bold"><i class="fa-solid fa-circle-check"></i> คุ้มครอง</td>
+              <td class="px-4 py-3 text-center text-rose-500"><i class="fa-solid fa-circle-xmark"></i> เฉพาะคู่กรณี</td>
+            </tr>
+            <tr class="bg-slate-50/70">
+              <td class="px-4 py-3 font-semibold text-slate-800">ชนไม่มีคู่กรณี (เสา/รั้ว/พลิกคว่ำ)</td>
+              <td class="px-4 py-3 text-center text-emerald-600 font-bold bg-teal-50/40"><i class="fa-solid fa-circle-check"></i> คุ้มครอง</td>
+              <td class="px-4 py-3 text-center text-slate-400">ไม่คุ้มครอง</td>
+              <td class="px-4 py-3 text-center text-slate-400">ไม่คุ้มครอง</td>
+              <td class="px-4 py-3 text-center text-slate-400">ไม่คุ้มครอง</td>
+            </tr>
+            <tr class="bg-white">
+              <td class="px-4 py-3 font-semibold text-slate-800">รถยนต์สูญหาย / ไฟไหม้</td>
+              <td class="px-4 py-3 text-center text-emerald-600 font-bold bg-teal-50/40"><i class="fa-solid fa-circle-check"></i> คุ้มครอง</td>
+              <td class="px-4 py-3 text-center text-emerald-600 font-bold"><i class="fa-solid fa-circle-check"></i> คุ้มครอง</td>
+              <td class="px-4 py-3 text-center text-slate-400">ไม่คุ้มครอง</td>
+              <td class="px-4 py-3 text-center text-slate-400">ไม่คุ้มครอง</td>
+            </tr>
+            <tr class="bg-slate-50/70">
+              <td class="px-4 py-3 font-semibold text-slate-800">น้ำท่วม / ภัยธรรมชาติ</td>
+              <td class="px-4 py-3 text-center text-emerald-600 font-bold bg-teal-50/40"><i class="fa-solid fa-circle-check"></i> คุ้มครอง</td>
+              <td class="px-4 py-3 text-center text-amber-700 font-semibold">บางแผน</td>
+              <td class="px-4 py-3 text-center text-slate-400">ไม่คุ้มครอง</td>
+              <td class="px-4 py-3 text-center text-slate-400">ไม่คุ้มครอง</td>
+            </tr>
+            <tr class="bg-white">
+              <td class="px-4 py-3 font-semibold text-slate-800">เบี้ยเริ่มต้นโดยประมาณ / ปี</td>
+              <td class="px-4 py-3 text-center font-extrabold text-teal-800 bg-teal-50/40">11,500+ บ.</td>
+              <td class="px-4 py-3 text-center font-extrabold text-slate-900">5,500+ บ.</td>
+              <td class="px-4 py-3 text-center font-extrabold text-slate-900">4,500+ บ.</td>
+              <td class="px-4 py-3 text-center font-extrabold text-slate-900">1,890+ บ.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- กล่องแสดงผลการส่งคำขอเช็กเบี้ยสำเร็จ -->
+    <div id="ins-success-box" class="hidden bg-emerald-950 text-emerald-100 border border-emerald-500/40 rounded-3xl p-5 sm:p-7 shadow-xl space-y-4">
+      <div class="flex items-start justify-between gap-3 border-b border-emerald-800/80 pb-4">
+        <div class="flex items-center gap-3">
+          <div class="w-11 h-11 rounded-2xl bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 flex items-center justify-center text-xl shrink-0">
+            <i class="fa-solid fa-circle-check"></i>
+          </div>
+          <div>
+            <h3 class="font-extrabold text-base sm:text-lg text-white">บันทึกคำขอเช็กเบี้ยประกันภัยเรียบร้อยแล้ว</h3>
+            <p class="text-xs text-emerald-300">เลขที่ใบเสนอราคาอ้างอิง: <strong id="ins-ref-code" class="font-mono text-amber-300">-</strong></p>
+          </div>
+        </div>
+        <button type="button" onclick="document.getElementById('ins-success-box').classList.add('hidden')" class="text-emerald-300 hover:text-white text-sm">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div id="ins-summary-details" class="grid sm:grid-cols-2 gap-2.5 text-xs bg-slate-950/60 p-4 rounded-2xl border border-emerald-800/60"></div>
+      <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
+        <p class="text-xs text-emerald-200/90">
+          <i class="fa-solid fa-headset mr-1 text-amber-400"></i> เจ้าหน้าที่ฝ่ายประกันภัย <strong>CAPTAIN INSURANCE (The Driver Thailand)</strong> จะจัดทำตารางเปรียบเทียบเบี้ยและส่งให้ทาง Line / โทรศัพท์โดยเร็วที่สุด
+        </p>
+        <button type="button" onclick="copyInsRef()" class="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold px-4 py-2.5 rounded-xl text-xs inline-flex items-center gap-1.5 transition">
+          <i class="fa-solid fa-copy"></i> คัดลอกเลขที่อ้างอิง
+        </button>
+      </div>
+    </div>
+
+    <!-- แบบฟอร์มเช็กเบี้ยและขอใบเสนอราคาประกันภัยรถยนต์ -->
+    <section id="quote-form-section" class="bg-white rounded-3xl p-5 sm:p-10 shadow-sm border border-slate-200/90 space-y-6">
+      <div class="border-b border-slate-200 pb-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div>
+          <span class="text-xs font-extrabold text-teal-800 bg-teal-50 border border-teal-200 px-3 py-1 rounded-full">CAPTAIN INSURANCE QUOTE REQUEST</span>
+          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 mt-1.5">แบบฟอร์มเช็กเบี้ยประกันภัยรถยนต์ &amp; พ.ร.บ.</h2>
+          <p class="text-xs sm:text-sm text-slate-500 mt-0.5">กรอกข้อมูลรถยนต์และแผนประกันที่สนใจ เพื่อรับใบเสนอราคาเปรียบเทียบฟรีไม่มีค่าใช้จ่าย</p>
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span id="ins-draft-badge" class="text-xs font-semibold text-slate-600 bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200">
+            <i class="fa-solid fa-floppy-disk text-slate-400 mr-1"></i> พร้อมบันทึกร่าง
+          </span>
+          <button type="button" onclick="clearInsDraft()" class="text-xs font-bold text-rose-700 bg-rose-50 hover:bg-rose-100 border border-rose-200 px-3 py-1.5 rounded-xl transition">
+            <i class="fa-solid fa-eraser mr-1"></i> ล้างแบบร่าง
+          </button>
+        </div>
+      </div>
+
+      <form id="captain-insurance-form" onsubmit="handleInsuranceSubmit(event)" class="space-y-6">
+        <!-- 1. เลือกประเภทประกันภัยและลักษณะการใช้งานรถ -->
+        <div class="bg-teal-50/60 border border-teal-200 rounded-3xl p-5 sm:p-6 space-y-4">
+          <h3 class="font-extrabold text-slate-900 text-sm sm:text-base border-b border-teal-200 pb-3 flex items-center gap-2">
+            <i class="fa-solid fa-shield-halved text-teal-600"></i>
+            <span>1. เลือกประเภทประกันภัยและลักษณะการใช้งานรถ</span>
+          </h3>
+
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="space-y-1.5">
+              <label for="ins_plan_type" class="block text-xs font-bold text-slate-700">ประเภทประกันภัยที่สนใจ <span class="text-rose-500">*</span></label>
+              <select id="ins_plan_type" required onchange="saveInsDraft()" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-semibold">
+                <option value="ประกันภัยรถยนต์ ชั้น 1 (ซ่อมอู่ / ซ่อมห้าง)">ประกันภัยรถยนต์ ชั้น 1 (ซ่อมอู่ / ซ่อมห้าง)</option>
+                <option value="ประกันภัยรถยนต์ ชั้น 2+ (คุ้มครองรถชนรถ + สูญหาย/ไฟไหม้)">ประกันภัยรถยนต์ ชั้น 2+ (คุ้มครองรถชนรถ + สูญหาย/ไฟไหม้)</option>
+                <option value="ประกันภัยรถยนต์ ชั้น 3+ (คุ้มครองรถชนรถ)">ประกันภัยรถยนต์ ชั้น 3+ (คุ้มครองรถชนรถ)</option>
+                <option value="ประกันภัยรถยนต์ ชั้น 3 (คุ้มครองคู่กรณี)">ประกันภัยรถยนต์ ชั้น 3 (คุ้มครองคู่กรณี)</option>
+                <option value="ต่ออายุ พ.ร.บ. รถยนต์ / รถรับจ้าง">ต่ออายุ พ.ร.บ. รถยนต์ / รถรับจ้าง</option>
+                <option value="ขอเทียบราคาหลายแผน (ชั้น 1 / 2+ / 3+)">ขอเทียบราคาหลายแผน (ชั้น 1 / 2+ / 3+)</option>
+              </select>
+            </div>
+
+            <div class="space-y-1.5">
+              <label for="ins_usage_type" class="block text-xs font-bold text-slate-700">ลักษณะการใช้งานรถยนต์ (รหัสตามเล่มทะเบียน) <span class="text-rose-500">*</span></label>
+              <select id="ins_usage_type" required onchange="saveInsDraft()" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-semibold">
+                <option value="รถเก๋งส่วนบุคคล (รหัส 110 - ป้ายขาวตัวอักษรดำ)">รถเก๋งส่วนบุคคล (รหัส 110 - ป้ายขาวตัวอักษรดำ)</option>
+                <option value="รถโดยสาร / รถตู้ส่วนบุคคล (รหัส 210 - ป้ายขาวตัวอักษรฟ้า)">รถโดยสาร / รถตู้ส่วนบุคคล (รหัส 210 - ป้ายขาวตัวอักษรฟ้า)</option>
+                <option value="รถกระบะบรรทุกส่วนบุคคล (รหัส 320 - ป้ายขาวตัวอักษรเขียว)">รถกระบะบรรทุกส่วนบุคคล (รหัส 320 - ป้ายขาวตัวอักษรเขียว)</option>
+                <option value="รถรับจ้างสาธารณะ / รถเช่าพร้อมคนขับ (ป้ายเขียว / ป้ายเหลือง)">รถรับจ้างสาธารณะ / รถเช่าพร้อมคนขับ (ป้ายเขียว / ป้ายเหลือง)</option>
+                <option value="รถยนต์ไฟฟ้า (EV)">รถยนต์ไฟฟ้า (EV)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="space-y-1.5">
+              <label for="ins_preferred_company" class="block text-xs font-bold text-slate-700">บริษัทประกันภัยที่ต้องการ (หรือให้เจ้าหน้าที่เทียบให้)</label>
+              <select id="ins_preferred_company" onchange="saveInsDraft()" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
+                <option value="ให้เจ้าหน้าที่เทียบเบี้ยที่คุ้มค่าที่สุดจากทุกบริษัท">ให้เจ้าหน้าที่เทียบเบี้ยที่คุ้มค่าที่สุดจากทุกบริษัท</option>
+                <option value="วิริยะประกันภัย">วิริยะประกันภัย</option>
+                <option value="กรุงเทพประกันภัย">กรุงเทพประกันภัย</option>
+                <option value="เมืองไทยประกันภัย">เมืองไทยประกันภัย</option>
+                <option value="คุ้มภัยโตเกียวมารีนประกันภัย">คุ้มภัยโตเกียวมารีนประกันภัย</option>
+                <option value="ธนชาตประกันภัย">ธนชาตประกันภัย</option>
+                <option value="ทิพยประกันภัย / เทเวศประกันภัย / อื่นๆ">ทิพยประกันภัย / เทเวศประกันภัย / อื่นๆ</option>
+              </select>
+            </div>
+
+            <div class="space-y-1.5">
+              <label for="ins_repair_type" class="block text-xs font-bold text-slate-700">รูปแบบการซ่อมที่ต้องการ</label>
+              <select id="ins_repair_type" onchange="saveInsDraft()" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
+                <option value="ซ่อมอู่มาตรฐานในเครือ (เบี้ยประหยัด)">ซ่อมอู่มาตรฐานในเครือ (เบี้ยประหยัด)</option>
+                <option value="ซ่อมห้าง / ศูนย์บริการ">ซ่อมห้าง / ศูนย์บริการ</option>
+                <option value="ขอเปรียบเทียบทั้งซ่อมอู่และซ่อมห้าง">ขอเปรียบเทียบทั้งซ่อมอู่และซ่อมห้าง</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. ข้อมูลรถยนต์ที่ต้องการทำประกันภัย -->
+        <div class="bg-slate-50/80 border border-slate-200 rounded-3xl p-5 sm:p-6 space-y-4">
+          <h3 class="font-extrabold text-slate-900 text-sm sm:text-base border-b border-slate-200 pb-3 flex items-center gap-2">
+            <i class="fa-solid fa-car text-teal-600"></i>
+            <span>2. ข้อมูลรถยนต์ที่ต้องการทำประกันภัย</span>
+          </h3>
+
+          <div class="grid md:grid-cols-4 gap-4">
+            <div class="space-y-1.5">
+              <label for="ins_car_brand" class="block text-xs font-bold text-slate-700">ยี่ห้อรถ <span class="text-rose-500">*</span></label>
+              <input type="text" id="ins_car_brand" required placeholder="เช่น Toyota / Honda / BYD" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
+            </div>
+            <div class="space-y-1.5">
+              <label for="ins_car_model" class="block text-xs font-bold text-slate-700">รุ่นรถ และรุ่นย่อย <span class="text-rose-500">*</span></label>
+              <input type="text" id="ins_car_model" required placeholder="เช่น Camry 2.5G / Commuter" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
+            </div>
+            <div class="space-y-1.5">
+              <label for="ins_car_year" class="block text-xs font-bold text-slate-700">ปีจดทะเบียน (ค.ศ. / พ.ศ.) <span class="text-rose-500">*</span></label>
+              <input type="text" id="ins_car_year" required placeholder="เช่น 2022 หรือ 2565" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-mono">
+            </div>
+            <div class="space-y-1.5">
+              <label for="ins_license_plate" class="block text-xs font-bold text-slate-700">หมายเลขทะเบียนรถ <span class="text-rose-500">*</span></label>
+              <input type="text" id="ins_license_plate" required placeholder="เช่น 1กข 1234 กทม." class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold">
+            </div>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="space-y-1.5">
+              <label for="ins_expiry_date" class="block text-xs font-bold text-slate-700">วันหมดอายุกรมธรรม์เดิม (ถ้ามี)</label>
+              <input type="date" id="ins_expiry_date" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
+            </div>
+            <div class="space-y-1.5">
+              <label for="ins_note" class="block text-xs font-bold text-slate-700">รายละเอียดเพิ่มเติม (เช่น ต้องการรวม พ.ร.บ. / ผ่อนชำระ)</label>
+              <input type="text" id="ins_note" placeholder="ระบุความต้องการเพิ่มเติม..." class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
+            </div>
+          </div>
+
+          <!-- แนบรูปหน้าเล่มทะเบียน / กรมธรรม์เดิม (ถ้ามี) -->
+          <div class="border-2 border-dashed border-slate-300 bg-white rounded-2xl p-4 text-center space-y-2">
+            <p class="text-xs font-bold text-slate-800"><i class="fa-solid fa-file-image text-teal-600 mr-1"></i> แนบภาพหน้าเล่มทะเบียนรถ หรือหน้าตารางกรมธรรม์เดิม (ช่วยให้เช็กเบี้ยแม่นยำขึ้น - ไม่บังคับ)</p>
+            <label class="inline-flex items-center justify-center bg-slate-950 hover:bg-slate-800 text-amber-400 font-semibold text-xs px-4 py-2 rounded-xl cursor-pointer transition">
+              <i class="fa-solid fa-upload mr-1.5"></i> เลือกไฟล์รูปภาพ
+              <input type="file" id="ins_doc_file" accept="image/*" onchange="handleInsDocUpload(this)" class="hidden">
+            </label>
+            <div id="preview-ins-doc" class="hidden pt-1"></div>
+          </div>
+        </div>
+
+        <!-- 3. ข้อมูลผู้ติดต่อ -->
+        <div class="bg-slate-50/80 border border-slate-200 rounded-3xl p-5 sm:p-6 space-y-4">
+          <h3 class="font-extrabold text-slate-900 text-sm sm:text-base border-b border-slate-200 pb-3 flex items-center gap-2">
+            <i class="fa-solid fa-address-book text-teal-600"></i>
+            <span>3. ข้อมูลผู้ขอรับใบเสนอราคา</span>
+          </h3>
+
+          <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="space-y-1.5">
+              <label for="ins_member_code" class="block text-xs font-bold text-slate-700">รหัสสมาชิกกลุ่ม (ถ้ามี)</label>
+              <input type="text" id="ins_member_code" placeholder="เช่น B2464 (เพื่อรับส่วนลดสมาชิก)" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-mono uppercase">
+            </div>
+            <div class="space-y-1.5">
+              <label for="ins_fullname" class="block text-xs font-bold text-slate-700">ชื่อ - นามสกุล <span class="text-rose-500">*</span></label>
+              <input type="text" id="ins_fullname" required placeholder="ระบุชื่อ-นามสกุลผู้ติดต่อ" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
+            </div>
+            <div class="space-y-1.5">
+              <label for="ins_phone" class="block text-xs font-bold text-slate-700">เบอร์โทรศัพท์ติดต่อ <span class="text-rose-500">*</span></label>
+              <input type="tel" id="ins_phone" required placeholder="เช่น 0812345678" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-mono">
+            </div>
+            <div class="space-y-1.5">
+              <label for="ins_line_id" class="block text-xs font-bold text-slate-700">Line ID (สำหรับส่งใบเสนอราคา) <span class="text-rose-500">*</span></label>
+              <input type="text" id="ins_line_id" required placeholder="ระบุ Line ID ของคุณ" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-3 pt-1">
+          <a href="index.html" class="w-full sm:w-auto text-center px-5 py-3 rounded-xl border border-slate-300 bg-white hover:bg-slate-100 text-slate-700 font-bold text-xs sm:text-sm transition">
+            <i class="fa-solid fa-arrow-left mr-1.5"></i> กลับหน้าหลัก
+          </a>
+          <button type="submit" id="btn-submit-insurance"
+            class="w-full sm:w-auto bg-gradient-to-r from-teal-500 to-emerald-600 hover:from-teal-400 hover:to-emerald-500 text-white font-extrabold text-sm sm:text-base px-8 py-3.5 rounded-xl shadow-lg transition flex items-center justify-center gap-2">
+            <i class="fa-solid fa-paper-plane"></i>
+            <span>ส่งข้อมูลเช็กเบี้ย CAPTAIN INSURANCE</span>
+          </button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-950 text-slate-400 border-t border-amber-500/25 py-9 px-4 text-xs mt-10">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+      <div class="text-center sm:text-left space-y-1">
+        <p class="font-bold text-amber-300">🚖 The Driver TH 🇹🇭 Premium Service Official Network</p>
+        <p class="text-[11px] text-slate-500">ศูนย์กลางระบบสมาชิก บัตรสมาชิกประเมศฐ์ ประกันภัยรถยนต์ Captain Insurance และระบบเฝ้าระวังภัยกลุ่มคนขับรถรับจ้าง</p>
+      </div>
+      <div class="flex flex-wrap justify-center gap-x-4 gap-y-2 font-semibold">
+        <a href="index.html" class="hover:text-amber-400 transition">หน้าหลัก</a>
+        <a href="captain_insurance.html" class="text-teal-300 hover:text-teal-200 transition">Captain Insurance</a>
+        <a href="register.html" class="hover:text-emerald-400 transition">ระบบสมาชิก</a>
+        <a href="member_register.html" class="hover:text-teal-400 transition">ลงทะเบียนสมาชิกใหม่</a>
+        <a href="pcard.html" class="hover:text-amber-400 transition">ทำบัตรสมาชิกประเมศฐ์</a>
+        <a href="unblock_request.html" class="hover:text-sky-400 transition">ขอปลดล็อก OpenChat</a>
+        <a href="blacklist.html" class="hover:text-rose-400 transition">ตรวจสอบ Blacklist</a>
+        <a href="privacy_policy.html" class="hover:text-amber-300 transition">ประกาศความเป็นส่วนตัว</a>
+        <a href="admin.html" class="text-amber-300 hover:text-amber-200 transition">ระบบหลังบ้าน (Admin)</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const SUBMIT_ENDPOINT_URL = 'https://script.google.com/macros/s/AKfycbyeDCdxBD10D_AFZQY2NxeylLOiAmAHLesSDZHXYCb3TsYs4wYer_kRTPVOs3VpK2pP/exec';
+    const INS_DRAFT_KEY = 'tdt_captain_insurance_draft_v1';
+    const INS_FIELD_IDS = [
+      'ins_plan_type', 'ins_usage_type', 'ins_preferred_company', 'ins_repair_type',
+      'ins_car_brand', 'ins_car_model', 'ins_car_year', 'ins_license_plate',
+      'ins_expiry_date', 'ins_note', 'ins_member_code', 'ins_fullname', 'ins_phone', 'ins_line_id'
+    ];
+
+    let uploadedInsDoc = { base64: '', name: '', mimeType: '' };
+    let lastInsRefCode = '';
+
+    function esc(v) {
+      return String(v ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function showToast(title, message, type = 'info') {
+      const container = document.getElementById('toast-container');
+      if (!container) return;
+      const styles = {
+        success: 'bg-emerald-950 text-emerald-200 border-emerald-500/40',
+        error: 'bg-rose-950 text-rose-200 border-rose-500/40',
+        info: 'bg-slate-950 text-amber-300 border-amber-400/50'
+      };
+      const div = document.createElement('div');
+      div.className = `pointer-events-auto p-4 rounded-2xl border shadow-2xl text-xs ${styles[type] || styles.info}`;
+      div.innerHTML = `<strong class="text-white block text-sm">${esc(title)}</strong><span class="opacity-90">${esc(message)}</span>`;
+      container.appendChild(div);
+      setTimeout(() => div.remove(), 4200);
+    }
+
+    function compressImage(file, maxW = 900, q = 0.78) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = e => {
+          const img = new Image();
+          img.onload = () => {
+            const canvas = document.createElement('canvas');
+            let w = img.width, h = img.height;
+            if (w > maxW) { h = Math.round((h * maxW) / w); w = maxW; }
+            canvas.width = w; canvas.height = h;
+            canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+            resolve(canvas.toDataURL('image/jpeg', q));
+          };
+          img.onerror = reject;
+          img.src = e.target.result;
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    async function handleInsDocUpload(inputEl) {
+      const file = inputEl?.files?.[0];
+      if (!file || !file.type.startsWith('image/')) return;
+      const b64 = await compressImage(file);
+      uploadedInsDoc = { base64: b64, name: file.name, mimeType: 'image/jpeg' };
+      const box = document.getElementById('preview-ins-doc');
+      if (box) {
+        box.classList.remove('hidden');
+        box.innerHTML = `<div class="inline-flex items-center gap-2 bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-xl text-xs font-semibold text-emerald-900"><img src="${b64}" class="w-9 h-9 rounded-lg object-cover"><span class="truncate max-w-[180px]">${esc(file.name)}</span></div>`;
+      }
+    }
+
+    function saveInsDraft() {
+      try {
+        const obj = {};
+        INS_FIELD_IDS.forEach(id => { const el = document.getElementById(id); if (el) obj[id] = el.value; });
+        localStorage.setItem(INS_DRAFT_KEY, JSON.stringify(obj));
+        const b = document.getElementById('ins-draft-badge');
+        if (b) b.innerHTML = '<i class="fa-solid fa-floppy-disk text-emerald-600 mr-1"></i> บันทึกร่างอัตโนมัติแล้ว';
+      } catch (_) {}
+    }
+
+    function restoreInsDraft() {
+      try {
+        const raw = localStorage.getItem(INS_DRAFT_KEY);
+        if (!raw) return;
+        const obj = JSON.parse(raw);
+        INS_FIELD_IDS.forEach(id => { const el = document.getElementById(id); if (el && typeof obj[id] === 'string') el.value = obj[id]; });
+      } catch (_) {}
+    }
+
+    function clearInsDraft() {
+      try { localStorage.removeItem(INS_DRAFT_KEY); } catch (_) {}
+      document.getElementById('captain-insurance-form')?.reset();
+      uploadedInsDoc = { base64: '', name: '', mimeType: '' };
+      document.getElementById('preview-ins-doc')?.classList.add('hidden');
+      showToast('ล้างข้อมูลเรียบร้อย', 'ล้างแบบร่างในแบบฟอร์มเรียบร้อยแล้วครับ', 'info');
+    }
+
+    function copyInsRef() {
+      if (!lastInsRefCode) return;
+      const ta = document.createElement('textarea');
+      ta.value = lastInsRefCode;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      showToast('คัดลอกสำเร็จ', `คัดลอกเลขที่อ้างอิง ${lastInsRefCode} เรียบร้อยแล้ว`, 'success');
+    }
+
+    async function handleInsuranceSubmit(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btn-submit-insurance');
+      const origHtml = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> <span>กำลังส่งข้อมูลเช็กเบี้ย...</span>';
+
+      try {
+        const now = new Date();
+        const refCode = 'CAP-' +
+          now.getFullYear() +
+          String(now.getMonth() + 1).padStart(2, '0') +
+          String(now.getDate()).padStart(2, '0') + '-' +
+          String(now.getHours()).padStart(2, '0') +
+          String(now.getMinutes()).padStart(2, '0') +
+          String(now.getSeconds()).padStart(2, '0');
+
+        const payload = {
+          action: 'captain_insurance',
+          refCode,
+          planType: document.getElementById('ins_plan_type').value,
+          usageType: document.getElementById('ins_usage_type').value,
+          preferredCompany: document.getElementById('ins_preferred_company').value,
+          repairType: document.getElementById('ins_repair_type').value,
+          carBrand: document.getElementById('ins_car_brand').value.trim(),
+          carModel: document.getElementById('ins_car_model').value.trim(),
+          carYear: document.getElementById('ins_car_year').value.trim(),
+          licensePlate: document.getElementById('ins_license_plate').value.trim(),
+          expiryDate: document.getElementById('ins_expiry_date').value,
+          note: document.getElementById('ins_note').value.trim(),
+          memberCode: document.getElementById('ins_member_code').value.trim().toUpperCase(),
+          fullName: document.getElementById('ins_fullname').value.trim(),
+          phone: document.getElementById('ins_phone').value.trim(),
+          lineId: document.getElementById('ins_line_id').value.trim(),
+          docPhotoBase64: uploadedInsDoc.base64,
+          docPhotoName: uploadedInsDoc.name
+        };
+
+        await fetch(SUBMIT_ENDPOINT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        lastInsRefCode = refCode;
+        try { localStorage.removeItem(INS_DRAFT_KEY); } catch (_) {}
+
+        document.getElementById('ins-ref-code').textContent = refCode;
+        document.getElementById('ins-summary-details').innerHTML = `
+          <div><span class="text-emerald-400">แผนประกันที่เลือก:</span> <strong>${esc(payload.planType)}</strong></div>
+          <div><span class="text-emerald-400">รถยนต์ / ทะเบียน:</span> <strong>${esc(payload.carBrand)} ${esc(payload.carModel)} ปี ${esc(payload.carYear)} (${esc(payload.licensePlate)})</strong></div>
+          <div><span class="text-emerald-400">ผู้ติดต่อ:</span> <strong>${esc(payload.fullName)}</strong> ${payload.memberCode ? `(รหัส: ${esc(payload.memberCode)})` : ''}</div>
+          <div><span class="text-emerald-400">เบอร์โทร / Line ID:</span> <strong>${esc(payload.phone)}</strong> (${esc(payload.lineId)})</div>
+        `;
+        const box = document.getElementById('ins-success-box');
+        box?.classList.remove('hidden');
+        box?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        e.target.reset();
+        uploadedInsDoc = { base64: '', name: '', mimeType: '' };
+        document.getElementById('preview-ins-doc')?.classList.add('hidden');
+        showToast('ส่งคำขอเช็กเบี้ยสำเร็จ', `บันทึกข้อมูลเรียบร้อยแล้ว เลขที่อ้างอิง: ${refCode}`, 'success');
+      } catch (_) {
+        showToast('เกิดข้อผิดพลาด', 'ไม่สามารถส่งข้อมูลได้ กรุณาลองใหม่อีกครั้ง', 'error');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = origHtml;
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      restoreInsDraft();
+      INS_FIELD_IDS.forEach(id => {
+        const el = document.getElementById(id);
+        el?.addEventListener('input', saveInsDraft);
+        el?.addEventListener('change', saveInsDraft);
+      });
+    });
+
+    (function initSharedNavAndAccessibility() {
+      const SCALE_KEY = "tdt_font_scale_pct";
+      let scalePct = 100;
+      function applyScale(pct) {
+        scalePct = Math.min(130, Math.max(90, Number(pct) || 100));
+        document.documentElement.style.fontSize = `${(scalePct / 100) * 16}px`;
+        const lbl = document.getElementById("tdt-font-pct");
+        if (lbl) lbl.textContent = `${scalePct}%`;
+        try { localStorage.setItem(SCALE_KEY, String(scalePct)); } catch (_) {}
+      }
+      window.tdtChangeFontScale = function (step) { applyScale(scalePct + step * 10); };
+      window.tdtToggleDropdown = function (cat, ev) {
+        if (ev) ev.stopPropagation();
+        ["member", "group"].forEach(k => {
+          const panel = document.getElementById(`nav-panel-${k}`);
+          const chev = document.getElementById(`nav-chev-${k}`);
+          if (!panel) return;
+          const open = k === cat ? !panel.classList.contains("is-open") : false;
+          panel.classList.toggle("is-open", open);
+          if (chev) chev.style.transform = open ? "rotate(180deg)" : "rotate(0deg)";
+        });
+      };
+      document.addEventListener("click", function (ev) {
+        const mDrop = document.getElementById("nav-drop-member");
+        const gDrop = document.getElementById("nav-drop-group");
+        if (!(mDrop && mDrop.contains(ev.target)) && !(gDrop && gDrop.contains(ev.target))) {
+          ["member", "group"].forEach(k => {
+            document.getElementById(`nav-panel-${k}`)?.classList.remove("is-open");
+            const chev = document.getElementById(`nav-chev-${k}`);
+            if (chev) chev.style.transform = "rotate(0deg)";
+          });
+        }
+      });
+      try {
+        const s = localStorage.getItem(SCALE_KEY);
+        if (s) applyScale(Number(s));
+      } catch (_) {}
+    })();
+  </script>
+</body>
+</html>

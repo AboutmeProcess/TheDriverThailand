@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>บัตรสมาชิกดิจิทัล & QR Code ยืนยันตัวตน | 🚖 The Driver TH 🇹🇭 Premium Service</title>
+  <title>กระดานแลกเปลี่ยนงาน / หาคนขับแทน | 🚖 The Driver TH 🇹🇭 Premium Service</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,11 +13,11 @@
     html { font-size: 16px; transition: font-size 0.18s ease; }
     html, body, input, select, textarea, button { font-family: 'Prompt', sans-serif !important; }
     body { background-color: #f8fafc; color: #0f172a; overflow-x: clip; }
-    .digital-card-bg {
+    .hero-glow-bg {
       background:
-        radial-gradient(circle at 85% 15%, rgba(251, 191, 36, 0.35) 0%, transparent 45%),
-        radial-gradient(circle at 15% 85%, rgba(16, 185, 129, 0.22) 0%, transparent 50%),
-        linear-gradient(135deg, #060911 0%, #0f172a 55%, #1e293b 100%);
+        radial-gradient(circle at 18% 22%, rgba(245, 158, 11, 0.24) 0%, transparent 45%),
+        radial-gradient(circle at 82% 78%, rgba(16, 185, 129, 0.16) 0%, transparent 50%),
+        linear-gradient(135deg, #070a12 0%, #0f172a 52%, #172033 100%);
     }
   </style>
 </head>
@@ -28,13 +28,13 @@
         <img src="TheDriverTH.jpg" alt="โลโก้" onerror="this.onerror=null;this.src='https://placehold.co/80x80/0f172a/fbbf24?text=TDT';" class="w-11 h-11 rounded-2xl object-cover border border-amber-400">
         <div>
           <span class="block text-sm sm:text-base">🚖 The Driver TH 🇹🇭 Premium Service</span>
-          <span class="block text-[11px] text-slate-400">บัตรสมาชิกดิจิทัล &amp; QR Code ยืนยันตัวตน</span>
+          <span class="block text-[11px] text-slate-400">กระดานแลกเปลี่ยนงาน &amp; หาคนขับแทน (เฉพาะสมาชิก)</span>
         </div>
       </a>
       <div class="flex flex-wrap items-center gap-2 text-xs">
         <a href="index.html" class="px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 hover:border-amber-400">หน้าหลัก</a>
-        <a href="register.html" class="px-3 py-2 rounded-xl bg-slate-900 border border-emerald-500/40 text-emerald-300">ตรวจสอบรหัสสมาชิก</a>
-        <a href="tracking.html" class="px-3 py-2 rounded-xl bg-slate-900 border border-amber-500/40 text-amber-300">ติดตามคำร้อง</a>
+        <a href="fare_calculator.html" class="px-3 py-2 rounded-xl bg-slate-900 border border-emerald-500/40 text-emerald-300">คำนวณค่าโดยสาร</a>
+        <a href="community.html" class="px-3 py-2 rounded-xl bg-slate-900 border border-sky-500/40 text-sky-300">เว็บบอร์ด</a>
         <div class="inline-flex items-center bg-slate-900 border border-amber-400/30 rounded-xl p-1">
           <button type="button" onclick="changeScale(-1)" class="px-2 py-1 hover:text-amber-300">A-</button>
           <span id="font-pct" class="px-1.5 text-amber-300">100%</span>
@@ -44,84 +44,80 @@
     </div>
   </nav>
 
-  <main class="flex-grow max-w-4xl w-full mx-auto px-4 py-8 space-y-6">
-    <section class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
-      <div class="space-y-1">
-        <span class="text-xs font-extrabold text-amber-800 bg-amber-100 border border-amber-300 px-3 py-1 rounded-full">DIGITAL MEMBER ID</span>
-        <h1 class="text-xl sm:text-2xl font-black text-slate-900 pt-1">เปิดบัตรสมาชิกดิจิทัลพร้อม QR Code ยืนยันตัวตน</h1>
-        <p class="text-xs sm:text-sm text-slate-500">กรอกรหัสสมาชิกและเบอร์โทรศัพท์ 4 หลักสุดท้ายเพื่อแสดงบัตรสมาชิกอิเล็กทรอนิกส์บนมือถือสำหรับให้ผู้โดยสารหรือจุดคัดกรองตรวจสอบ</p>
+  <main class="flex-grow max-w-6xl w-full mx-auto px-4 py-8 space-y-6">
+    <section class="hero-glow-bg rounded-3xl p-6 sm:p-8 text-white border border-amber-400/30 shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div class="space-y-2">
+        <span class="inline-flex items-center gap-1.5 bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-xs font-bold px-3 py-1 rounded-full">
+          <i class="fa-solid fa-handshake"></i> VERIFIED DRIVER DISPATCH BOARD
+        </span>
+        <h1 class="text-2xl sm:text-3xl font-black">กระดานแลกเปลี่ยนงาน / หาคนขับแทน</h1>
+        <p class="text-slate-300 text-xs sm:text-sm max-w-2xl">ลงงานรับ-ส่งผู้โดยสาร งานเหมาต่างจังหวัด หรือหาคนขับแทน เฉพาะสมาชิกที่มีรหัสในฐานข้อมูล <code class="text-amber-300">DATAMember</code> เท่านั้น</p>
       </div>
-
-      <form onsubmit="loadDigitalCard(event)" class="grid sm:grid-cols-12 gap-3">
-        <div class="sm:col-span-5">
-          <input type="text" id="card-member-code" required placeholder="รหัสสมาชิก (เช่น B2464)"
-            class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-mono uppercase">
-        </div>
-        <div class="sm:col-span-4">
-          <input type="text" id="card-phone-last4" maxlength="4" pattern="\d{4}" required placeholder="เบอร์โทร 4 หลักสุดท้าย"
-            class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-mono">
-        </div>
-        <div class="sm:col-span-3">
-          <button type="submit" id="btn-show-card" class="w-full h-full bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-extrabold py-3 px-4 rounded-xl text-xs sm:text-sm shadow">
-            แสดงบัตรสมาชิก
-          </button>
-        </div>
-      </form>
-      <p id="card-error-msg" class="hidden text-xs text-rose-600 font-bold"></p>
+      <button type="button" onclick="document.getElementById('post-job-box').classList.toggle('hidden')"
+        class="bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-extrabold px-5 py-3 rounded-2xl text-xs sm:text-sm shadow-lg shrink-0">
+        <i class="fa-solid fa-plus mr-1.5"></i> ลงประกาศปล่อยงาน
+      </button>
     </section>
 
-    <!-- ตัวบัตรสมาชิกดิจิทัล -->
-    <section id="digital-card-wrapper" class="hidden flex justify-center">
-      <div class="digital-card-bg w-full max-w-lg rounded-3xl p-6 sm:p-8 text-white border-2 border-amber-400/70 shadow-2xl space-y-5 relative overflow-hidden">
-        <div class="flex items-center justify-between border-b border-amber-400/25 pb-4">
-          <div class="flex items-center gap-3">
-            <img src="TheDriverTH.jpg" alt="โลโก้" onerror="this.onerror=null;this.src='https://placehold.co/80x80/0f172a/fbbf24?text=TDT';" class="w-12 h-12 rounded-2xl object-cover border border-amber-400">
-            <div>
-              <p class="text-[10px] tracking-widest uppercase text-amber-300 font-bold">OFFICIAL VERIFIED DRIVER</p>
-              <h2 class="text-sm sm:text-base font-extrabold text-white">🚖 The Driver TH 🇹🇭 Premium Service</h2>
-            </div>
-          </div>
-          <span class="bg-emerald-500/20 border border-emerald-400/50 text-emerald-300 text-[11px] font-bold px-3 py-1 rounded-full">
-            <i class="fa-solid fa-circle-check mr-1"></i> ยืนยันตัวตนแล้ว
-          </span>
+    <!-- ฟอร์มลงประกาศงาน -->
+    <section id="post-job-box" class="hidden bg-white rounded-3xl p-6 border border-amber-300 shadow-md space-y-4">
+      <h2 class="text-lg font-extrabold text-slate-900"><i class="fa-solid fa-bullhorn text-amber-500 mr-2"></i>ลงประกาศปล่อยงานใหม่</h2>
+      <form onsubmit="submitNewJob(event)" class="space-y-4">
+        <div class="grid sm:grid-cols-3 gap-3">
+          <input type="text" id="job-member-code" required placeholder="รหัสสมาชิกผู้ปล่อยงาน (เช่น B2464) *" class="bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs font-mono uppercase">
+          <input type="text" id="job-phone-last4" maxlength="4" pattern="\d{4}" required placeholder="เบอร์โทร 4 หลักท้ายยืนยันตัวตน *" class="bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs font-mono">
+          <input type="text" id="job-datetime" required placeholder="วัน-เวลาที่รับลูกค้า (เช่น 25 พ.ย. 08:30 น.) *" class="bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs">
         </div>
-
-        <div class="grid grid-cols-12 gap-4 items-center">
-          <div class="col-span-8 space-y-2">
-            <div>
-              <span class="text-[10px] text-amber-300/80 block">หมายเลขสมาชิก (MEMBER ID)</span>
-              <strong id="dc-code" class="text-2xl sm:text-3xl font-black text-amber-400 font-mono">-</strong>
-            </div>
-            <div>
-              <span class="text-[10px] text-slate-400 block">ชื่อในเครือข่าย / ชื่อ-นามสกุล</span>
-              <p id="dc-chat" class="text-sm sm:text-base font-bold text-white">-</p>
-              <p id="dc-name" class="text-xs text-slate-300">-</p>
-            </div>
-            <div class="grid grid-cols-2 gap-2 pt-1 text-xs">
-              <div class="bg-white/5 rounded-xl p-2.5 border border-white/10">
-                <span class="text-[10px] text-slate-400 block">รถยนต์ / รุ่นรถ</span>
-                <strong id="dc-car" class="text-white">-</strong>
-              </div>
-              <div class="bg-white/5 rounded-xl p-2.5 border border-white/10">
-                <span class="text-[10px] text-slate-400 block">ทะเบียนรถ</span>
-                <strong id="dc-plate" class="text-amber-300 font-mono">-</strong>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-span-4 flex flex-col items-center justify-center bg-white p-2.5 rounded-2xl shadow-lg">
-            <img id="dc-qr-img" src="" alt="QR Code ยืนยันตัวตน" class="w-28 h-28 object-contain">
-            <span class="text-[9px] text-slate-800 font-bold mt-1 text-center">สแกนตรวจสอบตัวตน</span>
-          </div>
+        <div class="grid sm:grid-cols-2 gap-3">
+          <input type="text" id="job-pickup" required placeholder="จุดรับลูกค้า (เช่น สนามบินสุวรรณภูมิ ประตู 4) *" class="bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs">
+          <input type="text" id="job-dropoff" required placeholder="จุดส่งปลายทาง (เช่น โรงแรมพัทยากลาง) *" class="bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs">
         </div>
-
-        <div class="pt-3 border-t border-white/15 flex items-center justify-between text-[11px] text-slate-300">
-          <span>โทรติดต่อ: <strong id="dc-phone" class="font-mono text-white">-</strong></span>
-          <span class="text-emerald-300 font-semibold"><i class="fa-solid fa-shield-halved mr-1"></i>ฐานข้อมูล DATAMember แท้</span>
+        <div class="grid sm:grid-cols-3 gap-3">
+          <select id="job-vehicle" class="bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs">
+            <option value="Sedan (เก๋ง 4 ที่นั่ง)">Sedan (เก๋ง 4 ที่นั่ง)</option>
+            <option value="SUV / PPV (7 ที่นั่ง)">SUV / PPV (7 ที่นั่ง)</option>
+            <option value="VIP Van (Commuter / Alphard)">VIP Van (Commuter / Alphard)</option>
+            <option value="ไม่จำกัดประเภทรถ">ไม่จำกัดประเภทรถ</option>
+          </select>
+          <input type="number" id="job-fare" required placeholder="ค่าจ้างสุทธิถึงมือคนขับ (บาท) *" class="bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs">
+          <input type="text" id="job-notes" placeholder="หมายเหตุ (เช่น รวมทางด่วนแล้ว / รับป้ายชื่อ)" class="bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs">
         </div>
+        <button type="submit" id="btn-post-job" class="bg-slate-950 text-amber-400 font-extrabold px-6 py-3 rounded-xl text-xs sm:text-sm">
+          ยืนยันลงประกาศงาน
+        </button>
+      </form>
+    </section>
+
+    <!-- รายการงานทั้งหมด -->
+    <section class="bg-white rounded-3xl p-5 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+        <h2 class="text-base sm:text-lg font-extrabold text-slate-900">รายการงานล่าสุดในเครือข่าย</h2>
+        <button type="button" onclick="loadJobs()" class="text-xs font-bold bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-xl">
+          <i class="fa-solid fa-rotate mr-1"></i> รีเฟรช
+        </button>
+      </div>
+      <div id="jobs-list" class="grid md:grid-cols-2 gap-4">
+        <div class="col-span-full text-center py-8 text-slate-500 text-sm"><i class="fa-solid fa-spinner fa-spin mr-1"></i> กำลังโหลดรายการงาน...</div>
       </div>
     </section>
   </main>
+
+  <!-- Modal ยืนยันรับงาน -->
+  <div id="accept-job-modal" class="hidden fixed inset-0 z-50 bg-slate-950/75 flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 space-y-4 shadow-2xl">
+      <h3 class="text-lg font-extrabold text-slate-900">ยืนยันตัวตนเพื่อกดรับงาน</h3>
+      <p id="accept-job-summary" class="text-xs text-slate-600 bg-amber-50 p-3 rounded-xl border border-amber-200"></p>
+      <form onsubmit="confirmAcceptJob(event)" class="space-y-3">
+        <input type="hidden" id="accept-job-id">
+        <input type="text" id="accept-member-code" required placeholder="รหัสสมาชิกของคุณ (เช่น B2464)" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs font-mono uppercase">
+        <input type="text" id="accept-phone-last4" maxlength="4" pattern="\d{4}" required placeholder="เบอร์โทร 4 หลักสุดท้ายของคุณ" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs font-mono">
+        <div class="flex justify-end gap-2 pt-2">
+          <button type="button" onclick="document.getElementById('accept-job-modal').classList.add('hidden')" class="px-4 py-2.5 rounded-xl bg-slate-100 text-xs font-bold">ยกเลิก</button>
+          <button type="submit" id="btn-confirm-accept" class="px-5 py-2.5 rounded-xl bg-emerald-600 text-white text-xs font-extrabold">ยืนยันรับงานนี้</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
   <footer class="bg-slate-950 text-slate-400 border-t border-amber-500/20 py-8 px-4 text-xs mt-10">
     <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
@@ -143,48 +139,122 @@
 
   <script>
     const MASTER_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyeDCdxBD10D_AFZQY2NxeylLOiAmAHLesSDZHXYCb3TsYs4wYer_kRTPVOs3VpK2pP/exec';
+    function esc(s) { return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
-    async function loadDigitalCard(e) {
-      if (e) e.preventDefault();
-      const code = document.getElementById('card-member-code').value.trim().toUpperCase();
-      const last4 = document.getElementById('card-phone-last4').value.trim();
-      const errEl = document.getElementById('card-error-msg');
-      const cardWrap = document.getElementById('digital-card-wrapper');
-      const btn = document.getElementById('btn-show-card');
-
-      errEl.classList.add('hidden');
-      btn.disabled = true;
-      btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> กำลังตรวจสอบ...';
-
+    async function loadJobs() {
+      const box = document.getElementById('jobs-list');
       try {
-        const res = await fetch(`${MASTER_WEB_APP_URL}?action=digital_card&code=${encodeURIComponent(code)}&last4=${encodeURIComponent(last4)}&t=${Date.now()}`);
+        const res = await fetch(`${MASTER_WEB_APP_URL}?action=job_feed&t=${Date.now()}`);
         const json = await res.json();
-        if (!json.success || !json.member) {
-          cardWrap.classList.add('hidden');
-          errEl.textContent = json.error || 'ไม่พบรหัสสมาชิกนี้ในฐานข้อมูลที่อนุมัติแล้ว';
-          errEl.classList.remove('hidden');
+        const jobs = Array.isArray(json?.jobs) ? json.jobs : [];
+        if (!jobs.length) {
+          box.innerHTML = '<div class="col-span-full text-center py-10 text-slate-500 text-sm">ยังไม่มีประกาศงานในขณะนี้ สามารถกดปุ่ม “ลงประกาศปล่อยงาน” ด้านบนได้เลยครับ</div>';
           return;
         }
-        const m = json.member;
-        document.getElementById('dc-code').textContent = m.memberCode;
-        document.getElementById('dc-chat').textContent = m.chatName;
-        document.getElementById('dc-name').textContent = m.fullName;
-        document.getElementById('dc-car').textContent = `${m.carBrand} ${m.carModel}`.trim() || '-';
-        document.getElementById('dc-plate').textContent = m.licensePlate || '-';
-        document.getElementById('dc-phone').textContent = m.maskedPhone || '-';
-
-        const verifyUrl = `${window.location.origin}${window.location.pathname.replace('member_card_digital.html', 'register.html')}`;
-        document.getElementById('dc-qr-img').src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(verifyUrl + '?code=' + m.memberCode)}`;
-        cardWrap.classList.remove('hidden');
+        box.innerHTML = jobs.map(j => {
+          const isOpen = j.status === 'เปิดรับคนขับ';
+          return `
+            <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-3 flex flex-col justify-between">
+              <div class="space-y-2">
+                <div class="flex items-center justify-between gap-2">
+                  <span class="text-xs font-extrabold px-2.5 py-1 rounded-full ${isOpen ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-200 text-slate-700'}">${esc(j.status)}</span>
+                  <span class="text-lg font-black text-amber-600 font-mono">฿${Number(j.fareAmount).toLocaleString()}</span>
+                </div>
+                <p class="text-xs text-slate-500"><i class="fa-regular fa-clock mr-1"></i> ${esc(j.pickupDateTime)} · <strong>${esc(j.vehicleType)}</strong></p>
+                <div class="bg-white p-3 rounded-xl border border-slate-200 text-xs space-y-1">
+                  <p><strong class="text-emerald-700">รับ:</strong> ${esc(j.pickupLocation)}</p>
+                  <p><strong class="text-rose-700">ส่ง:</strong> ${esc(j.dropoffLocation)}</p>
+                  ${j.notes ? `<p class="text-slate-500 pt-1">หมายเหตุ: ${esc(j.notes)}</p>` : ''}
+                </div>
+              </div>
+              <div class="pt-2 border-t border-slate-200 flex items-center justify-between text-xs">
+                <span>ผู้ปล่อยงาน: <strong>[${esc(j.posterCode)}] ${esc(j.posterName)}</strong></span>
+                ${isOpen
+                  ? `<button type="button" onclick="openAcceptModal('${esc(j.jobId)}', '${esc(j.pickupLocation)} -> ${esc(j.dropoffLocation)}')" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-3.5 py-2 rounded-xl">กดรับงาน</button>`
+                  : `<span class="text-slate-500 font-semibold">รับโดย [${esc(j.accepterCode)}]</span>`}
+              </div>
+            </div>
+          `;
+        }).join('');
       } catch (_) {
-        errEl.textContent = 'ไม่สามารถเชื่อมต่อฐานข้อมูลได้ในขณะนี้ กรุณาลองใหม่อีกครั้ง';
-        errEl.classList.remove('hidden');
-      } finally {
-        btn.disabled = false;
-        btn.textContent = 'แสดงบัตรสมาชิก';
+        box.innerHTML = '<div class="col-span-full text-center py-8 text-rose-600 text-sm">โหลดข้อมูลงานไม่สำเร็จ</div>';
       }
     }
 
+    async function submitNewJob(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btn-post-job');
+      btn.disabled = true;
+      btn.textContent = 'กำลังบันทึก...';
+      try {
+        const res = await fetch(MASTER_WEB_APP_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({
+            action: 'job_post',
+            memberCode: document.getElementById('job-member-code').value.trim().toUpperCase(),
+            phoneLast4: document.getElementById('job-phone-last4').value.trim(),
+            pickupDateTime: document.getElementById('job-datetime').value.trim(),
+            pickupLocation: document.getElementById('job-pickup').value.trim(),
+            dropoffLocation: document.getElementById('job-dropoff').value.trim(),
+            vehicleType: document.getElementById('job-vehicle').value,
+            fareAmount: document.getElementById('job-fare').value,
+            notes: document.getElementById('job-notes').value.trim()
+          })
+        });
+        const json = await res.json();
+        if (!json.success) {
+          document.getElementById('jobs-list').insertAdjacentHTML('beforebegin', `<div class="p-3 rounded-xl bg-rose-50 text-rose-700 text-xs font-bold">${esc(json.error)}</div>`);
+          return;
+        }
+        e.target.reset();
+        document.getElementById('post-job-box').classList.add('hidden');
+        loadJobs();
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'ยืนยันลงประกาศงาน';
+      }
+    }
+
+    function openAcceptModal(jobId, summary) {
+      document.getElementById('accept-job-id').value = jobId;
+      document.getElementById('accept-job-summary').textContent = summary;
+      document.getElementById('accept-job-modal').classList.remove('hidden');
+    }
+
+    async function confirmAcceptJob(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btn-confirm-accept');
+      btn.disabled = true;
+      try {
+        const res = await fetch(MASTER_WEB_APP_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({
+            action: 'job_accept',
+            jobId: document.getElementById('accept-job-id').value,
+            memberCode: document.getElementById('accept-member-code').value.trim().toUpperCase(),
+            phoneLast4: document.getElementById('accept-phone-last4').value.trim()
+          })
+        });
+        const json = await res.json();
+        document.getElementById('accept-job-modal').classList.add('hidden');
+        if (json.success) {
+          document.getElementById('jobs-list').insertAdjacentHTML('beforebegin',
+            `<div class="p-4 rounded-2xl bg-emerald-50 border border-emerald-300 text-emerald-950 text-xs font-bold">รับงานสำเร็จ! ติดต่อผู้ปล่อยงาน (${esc(json.posterName)}) โทร: ${esc(json.posterPhone)}</div>`
+          );
+          loadJobs();
+        } else {
+          document.getElementById('jobs-list').insertAdjacentHTML('beforebegin',
+            `<div class="p-4 rounded-2xl bg-rose-50 border border-rose-300 text-rose-800 text-xs font-bold">${esc(json.error)}</div>`
+          );
+        }
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadJobs);
     let scalePct = Number(localStorage.getItem('tdt_font_scale_pct')) || 100;
     function changeScale(step) {
       scalePct = Math.min(130, Math.max(90, scalePct + step * 10));

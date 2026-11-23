@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ศูนย์รวมข่าวสารคนขับรถรับจ้างผ่านแอป (รวมทุกแอป) | 🚖 The Driver TH 🇹🇭</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    html { scroll-behavior: smooth; font-size: 16px; transition: font-size 0.18s ease; }
+    html, body, input, select, textarea, button, code, pre { font-family: 'Prompt', sans-serif !important; }
+    html, body { background-color: #f8fafc; color: #0f172a; max-width: 100%; overflow-x: clip; }
+    .gold-shimmer-text {
+      background: linear-gradient(90deg, #fde68a 0%, #fbbf24 35%, #f59e0b 65%, #fef08a 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      animation: goldShimmer 5s linear infinite;
+    }
+    .hero-glow-bg {
+      background:
+        radial-gradient(circle at 18% 22%, rgba(16, 185, 129, 0.22) 0%, transparent 45%),
+        radial-gradient(circle at 82% 78%, rgba(245, 158, 11, 0.18) 0%, transparent 50%),
+        linear-gradient(135deg, #070a12 0%, #0f172a 52%, #172033 100%);
+    }
+    @keyframes goldShimmer { to { background-position: 200% center; } }
+
+    /* UNIFIED GLOBAL NAVIGATION BAR */
+    .tdt-global-nav {
+      box-sizing: border-box;
+      font-family: 'Prompt', sans-serif;
+      background: linear-gradient(180deg, rgba(7, 11, 20, 0.98) 0%, rgba(10, 15, 28, 0.96) 100%);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      color: #e2e8f0;
+      border-bottom: 1px solid rgba(251, 191, 36, 0.28);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 10px 28px -8px rgba(2, 6, 23, 0.65);
+      width: 100%;
+    }
+    .tdt-global-nav *, .tdt-global-nav *::before, .tdt-global-nav *::after { box-sizing: border-box; }
+    .tdt-global-nav-inner { max-width: 1280px; margin: 0 auto; padding: 12px 16px; display: flex; flex-direction: column; gap: 10px; }
+    @media (min-width: 640px) { .tdt-global-nav-inner { padding: 14px 24px; gap: 12px; } }
+    .tdt-nav-top-row { width: 100%; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding-bottom: 10px; border-bottom: 1px solid rgba(148, 163, 184, 0.12); }
+    .tdt-global-brand { display: inline-flex; align-items: center; gap: 13px; font-size: 16px; font-weight: 500; color: #fbbf24; text-decoration: none; }
+    .tdt-brand-text-stack { display: inline-flex; flex-direction: column; gap: 5px; }
+    .tdt-brand-subline-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 12px; color: #cbd5e1; }
+    .tdt-brand-exec-pill { display: inline-flex; align-items: center; gap: 5px; background: rgba(251, 191, 36, 0.15); border: 1px solid rgba(251, 191, 36, 0.42); color: #fde68a; font-size: 10.5px; padding: 2px 8px; border-radius: 999px; }
+    .tdt-brand-logo-img { width: 50px; height: 50px; border-radius: 15px; object-fit: cover; background: #fff; border: 1.5px solid rgba(251, 191, 36, 0.85); }
+    @media (min-width: 640px) { .tdt-global-brand { font-size: 19px; } .tdt-brand-logo-img { width: 56px; height: 56px; border-radius: 16px; } }
+    .tdt-global-right-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; width: 100%; }
+    .tdt-nav-divider { width: 1px; height: 20px; background: rgba(148, 163, 184, 0.22); margin: 0 2px; display: none; }
+    @media (min-width: 1024px) { .tdt-nav-divider { display: inline-block; } }
+    .tdt-cat-dropdown-wrap { position: relative; display: inline-block; }
+    .tdt-cat-menu-panel { display: none; position: absolute; left: 0; top: calc(100% + 8px); width: 320px; max-width: calc(100vw - 32px); border-radius: 16px; padding: 10px; background-color: #070b14; border: 1px solid rgba(251, 191, 36, 0.45); box-shadow: 0 24px 54px -10px rgba(0, 0, 0, 0.92); z-index: 1060; }
+    .tdt-cat-menu-panel.is-open { display: block; }
+    .tdt-cat-menu-header { padding: 8px 12px; margin-bottom: 6px; border-radius: 11px; font-size: 11px; font-weight: 500; display: flex; align-items: center; justify-content: space-between; }
+    .tdt-cat-menu-link { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 12px; background-color: #0d1424; border: 1px solid rgba(148, 163, 184, 0.14); color: #f1f5f9; text-decoration: none; margin-bottom: 6px; transition: all 0.18s ease; }
+    .tdt-cat-menu-link:last-child { margin-bottom: 0; }
+    .tdt-cat-menu-link:hover { background-color: #162038; border-color: rgba(251, 191, 36, 0.5); transform: translateX(2px); }
+    .tdt-cat-menu-icon { width: 28px; height: 28px; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 12px; }
+    .tdt-cat-menu-title { display: block; font-size: 12px; font-weight: 500; line-height: 1.3; }
+    .tdt-cat-menu-sub { display: block; font-size: 10px; color: #94a3b8; line-height: 1.25; }
+    .tdt-nav-btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; height: 36px; padding: 0 13px; border-radius: 11px; font-size: 12px; text-decoration: none; white-space: nowrap; background-color: rgba(15, 23, 42, 0.88); border: 1px solid rgba(148, 163, 184, 0.22); color: #e2e8f0; cursor: pointer; transition: all 0.18s ease; }
+    .tdt-nav-btn:hover { background-color: #1e293b; border-color: rgba(251, 191, 36, 0.48); transform: translateY(-1px); }
+    .tdt-nav-btn.is-member-cat { color: #6ee7b7; border-color: rgba(52, 211, 153, 0.35); background-color: rgba(6, 78, 59, 0.24); }
+    .tdt-nav-btn.is-quick-register, .tdt-nav-btn.is-quick-check-code { color: #5eead4; border-color: rgba(45, 212, 191, 0.38); background-color: rgba(19, 78, 74, 0.28); }
+    .tdt-nav-btn.is-group-cat { color: #fcd34d; border-color: rgba(251, 191, 36, 0.38); background-color: rgba(120, 53, 15, 0.24); }
+    .tdt-nav-btn.is-blacklist { color: #fda4af; border-color: rgba(251, 113, 133, 0.35); }
+    .tdt-nav-btn.is-admin-link { color: #fde68a; border-color: rgba(251, 191, 36, 0.45); background-color: rgba(245, 158, 11, 0.14); }
+    .tdt-nav-btn.active-current { background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%); border-color: #fcd34d; color: #060911; font-weight: 600; }
+    .tdt-util-group { display: inline-flex; align-items: center; gap: 4px; background-color: rgba(15, 23, 42, 0.92); border: 1px solid rgba(251, 191, 36, 0.28); border-radius: 12px; padding: 3px; }
+    .tdt-util-btn { display: inline-flex; align-items: center; justify-content: center; height: 30px; padding: 0 9px; border-radius: 9px; font-size: 12px; color: #e2e8f0; background: transparent; border: none; cursor: pointer; }
+  </style>
+</head>
+<body class="text-slate-800 antialiased min-h-screen flex flex-col">
+
+  <!-- UNIFIED GLOBAL NAVIGATION BAR -->
+  <nav class="tdt-global-nav" aria-label="แถบนำทางหลักของเว็บไซต์">
+    <div class="tdt-global-nav-inner">
+      <div class="tdt-nav-top-row">
+        <a href="index.html" class="tdt-global-brand">
+          <img src="TheDriverTH.jpg" alt="โลโก้ The Driver Thailand"
+            onerror="this.onerror=null;this.src='https://placehold.co/80x80/0f172a/fbbf24?text=TDT';"
+            class="tdt-brand-logo-img">
+          <span class="tdt-brand-text-stack">
+            <span>🚖 The Driver TH 🇹🇭 Premium Service</span>
+            <span class="tdt-brand-subline-row">
+              <span class="tdt-brand-exec-pill"><i class="fa-solid fa-crown text-[9px]"></i> EXECUTIVE NETWORK</span>
+              <span>เครือข่ายคนขับรถรับส่งผู้โดยสารและบริการมืออาชีพแห่งประเทศไทย</span>
+            </span>
+          </span>
+        </a>
+        <div class="tdt-util-group ml-auto" title="ปรับขนาดตัวอักษร">
+          <button type="button" onclick="tdtChangeFontScale(-1)" class="tdt-util-btn">A-</button>
+          <span id="tdt-font-pct" class="text-[11px] text-amber-300 px-1 select-none">100%</span>
+          <button type="button" onclick="tdtChangeFontScale(1)" class="tdt-util-btn">A+</button>
+        </div>
+      </div>
+
+      <div class="tdt-global-right-controls">
+        <a href="index.html" class="tdt-nav-btn"><i class="fa-solid fa-house"></i><span>หน้าหลัก</span></a>
+        <a href="member_register.html" class="tdt-nav-btn is-quick-register"><i class="fa-solid fa-file-signature"></i><span>ลงทะเบียนสมาชิกใหม่</span></a>
+        <a href="register.html" class="tdt-nav-btn is-quick-check-code"><i class="fa-solid fa-users-viewfinder"></i><span>ตรวจสอบรหัสสมาชิก</span></a>
+        <a href="driver_news.html" class="tdt-nav-btn active-current"><i class="fa-solid fa-newspaper"></i><span>ข่าวสารคนขับแอป</span></a>
+
+        <span class="tdt-nav-divider" aria-hidden="true"></span>
+
+        <div class="tdt-cat-dropdown-wrap" id="nav-drop-member">
+          <button type="button" onclick="tdtToggleDropdown('member', event)" class="tdt-nav-btn is-member-cat">
+            <i class="fa-solid fa-users"></i><span>หมวดหมู่บริการสมาชิก</span><i id="nav-chev-member" class="fa-solid fa-chevron-down text-[10px]"></i>
+          </button>
+          <div id="nav-panel-member" class="tdt-cat-menu-panel">
+            <div class="tdt-cat-menu-header" style="background:rgba(6,78,59,0.55);color:#6ee7b7;border:1px solid rgba(16,185,129,0.25);">
+              <span><i class="fa-solid fa-users"></i> หมวดหมู่บริการสมาชิก</span><span>3 เมนู</span>
+            </div>
+            <a href="member_edit.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(245,158,11,0.16);color:#fbbf24;"><i class="fa-solid fa-user-pen"></i></span>
+              <span><span class="tdt-cat-menu-title">แก้ไขข้อมูลสมาชิกเดิม</span><span class="tdt-cat-menu-sub">แจ้งเปลี่ยนรถ ทะเบียน หรือข้อมูลติดต่อ</span></span>
+            </a>
+            <a href="unblock_request.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(14,165,233,0.16);color:#38bdf8;"><i class="fa-solid fa-unlock-keyhole"></i></span>
+              <span><span class="tdt-cat-menu-title">ขอปลดล็อกห้อง Line OpenChat</span><span class="tdt-cat-menu-sub">ยื่นคำร้องชี้แจงกรณีถูกบล็อกหรือลบออก</span></span>
+            </a>
+            <a href="luxury_car_register.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(245,158,11,0.16);color:#fbbf24;"><i class="fa-solid fa-crown"></i></span>
+              <span><span class="tdt-cat-menu-title">ลงทะเบียนห้อง Luxury Car</span><span class="tdt-cat-menu-sub">สมัครเข้าห้องกลุ่มคนขับรถ Luxury Car</span></span>
+            </a>
+          </div>
+        </div>
+
+        <div class="tdt-cat-dropdown-wrap" id="nav-drop-group">
+          <button type="button" onclick="tdtToggleDropdown('group', event)" class="tdt-nav-btn is-group-cat">
+            <i class="fa-solid fa-briefcase"></i><span>หมวดหมู่บริการของกลุ่ม</span><i id="nav-chev-group" class="fa-solid fa-chevron-down text-[10px]"></i>
+          </button>
+          <div id="nav-panel-group" class="tdt-cat-menu-panel">
+            <div class="tdt-cat-menu-header" style="background:rgba(120,53,15,0.45);color:#fcd34d;border:1px solid rgba(251,191,36,0.25);">
+              <span><i class="fa-solid fa-gem"></i> หมวดหมู่บริการของกลุ่ม</span><span>15 เมนู</span>
+            </div>
+            <a href="driver_news.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(16,185,129,0.18);color:#34d399;"><i class="fa-solid fa-newspaper"></i></span>
+              <span><span class="tdt-cat-menu-title">ข่าวสารคนขับรถผ่านแอป (รวมทุกแอป)</span><span class="tdt-cat-menu-sub">อัปเดตข่าว Grab, Bolt, Line Man, inDrive &amp; กฎหมาย</span></span>
+            </a>
+            <a href="grab_driver_register.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(22,163,74,0.2);color:#4ade80;"><i class="fa-solid fa-car"></i></span>
+              <span><span class="tdt-cat-menu-title">บริการรับสมัครคนขับ Grab</span><span class="tdt-cat-menu-sub">สมัครขับ GrabCar / GrabTaxi / GrabExpress</span></span>
+            </a>
+            <a href="bolt_driver_register.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(16,185,129,0.2);color:#2dd4bf;"><i class="fa-solid fa-bolt"></i></span>
+              <span><span class="tdt-cat-menu-title">บริการรับสมัครคนขับ Bolt</span><span class="tdt-cat-menu-sub">สมัครขับ Bolt รถยนต์และแท็กซี่ เปิดระบบไว</span></span>
+            </a>
+            <a href="captain_insurance.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(20,184,166,0.18);color:#2dd4bf;"><i class="fa-solid fa-shield-halved"></i></span>
+              <span><span class="tdt-cat-menu-title">Captain Insurance กัปตัน ประกันภัย</span><span class="tdt-cat-menu-sub">เช็กเบี้ยและทำประกันภัยรถยนต์ราคาสมาชิก</span></span>
+            </a>
+            <a href="pcard.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(245,158,11,0.16);color:#fbbf24;"><i class="fa-solid fa-id-badge"></i></span>
+              <span><span class="tdt-cat-menu-title">ทำบัตรสมาชิกประเมศฐ์ &amp; เช็คพัสดุ</span><span class="tdt-cat-menu-sub">สมัครทำบัตรเคลือบใสและตรวจสอบเลขพัสดุ</span></span>
+            </a>
+            <a href="vip_referral_guide.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(168,85,247,0.16);color:#c084fc;"><i class="fa-solid fa-map-location-dot"></i></span>
+              <span><span class="tdt-cat-menu-title">[VIP] ลายแทงสถานที่ท่องเที่ยว</span><span class="tdt-cat-menu-sub">ขอรับลายแทงร้านค้า/สถานที่เพื่อรับค่าแนะนำ</span></span>
+            </a>
+            <a href="rtaf_pass_register.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(59,130,246,0.16);color:#60a5fa;"><i class="fa-solid fa-plane-departure"></i></span>
+              <span><span class="tdt-cat-menu-title">ทำบัตรผ่านยานพาหนะ ทอ. (ดอนเมือง)</span><span class="tdt-cat-menu-sub">ขอทำบัตรผ่านเข้า - ออก เขตพื้นที่ ทอ.</span></span>
+            </a>
+            <a href="tour_book_order.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(20,184,166,0.16);color:#2dd4bf;"><i class="fa-solid fa-book"></i></span>
+              <span><span class="tdt-cat-menu-title">บริการสั่งซื้อสมุดทัวร์</span><span class="tdt-cat-menu-sub">โซนกรุงเทพฯ-ปริมณฑล และ พัทยา-ชลบุรี</span></span>
+            </a>
+            <a href="tracking.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(245,158,11,0.16);color:#fbbf24;"><i class="fa-solid fa-satellite-dish"></i></span>
+              <span><span class="tdt-cat-menu-title">ศูนย์ติดตามสถานะคำร้องทั้งหมด</span><span class="tdt-cat-menu-sub">เช็คความคืบหน้าและเลขพัสดุทุกบริการ</span></span>
+            </a>
+            <a href="member_card_digital.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(16,185,129,0.16);color:#34d399;"><i class="fa-solid fa-qrcode"></i></span>
+              <span><span class="tdt-cat-menu-title">บัตรสมาชิกดิจิทัล &amp; QR Code</span><span class="tdt-cat-menu-sub">เปิดบัตรอิเล็กทรอนิกส์ยืนยันตัวตน</span></span>
+            </a>
+            <a href="job_board.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(245,158,11,0.16);color:#fbbf24;"><i class="fa-solid fa-handshake"></i></span>
+              <span><span class="tdt-cat-menu-title">กระดานแลกเปลี่ยนงาน / หาคนขับแทน</span><span class="tdt-cat-menu-sub">ปล่อยงานและรับงานเฉพาะสมาชิกที่ยืนยันรหัส</span></span>
+            </a>
+            <a href="community.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(56,189,248,0.16);color:#38bdf8;"><i class="fa-solid fa-comments"></i></span>
+              <span><span class="tdt-cat-menu-title">ชุมชนเว็บบอร์ดสมาชิก</span><span class="tdt-cat-menu-sub">ตั้งกระทู้ รีวิวเส้นทาง และสะสมเรทติ้ง</span></span>
+            </a>
+            <a href="fare_calculator.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(16,185,129,0.16);color:#34d399;"><i class="fa-solid fa-calculator"></i></span>
+              <span><span class="tdt-cat-menu-title">คำนวณค่าโดยสารมาตรฐาน</span><span class="tdt-cat-menu-sub">ประเมินราคางานเหมาและคัดลอกใบเสนอราคา</span></span>
+            </a>
+            <a href="guide.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(148,163,184,0.16);color:#cbd5e1;"><i class="fa-solid fa-book-open"></i></span>
+              <span><span class="tdt-cat-menu-title">คู่มือสมาชิก &amp; กฎกติกาเครือข่าย</span><span class="tdt-cat-menu-sub">วิธีตั้งชื่อ ถ่ายรูปยืนยันตัวตน และติดต่อแอดมิน</span></span>
+            </a>
+            <a href="privacy_policy.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(148,163,184,0.16);color:#cbd5e1;"><i class="fa-solid fa-scale-balanced"></i></span>
+              <span><span class="tdt-cat-menu-title">ประกาศความเป็นส่วนตัว (PDPA)</span><span class="tdt-cat-menu-sub">นโยบายคุ้มครองข้อมูลส่วนบุคคลของกลุ่ม</span></span>
+            </a>
+          </div>
+        </div>
+
+        <span class="tdt-nav-divider" aria-hidden="true"></span>
+
+        <a href="blacklist.html" class="tdt-nav-btn is-blacklist"><i class="fa-solid fa-user-shield"></i><span>ตรวจสอบ Blacklist</span></a>
+        <a href="admin.html" class="tdt-nav-btn is-admin-link"><i class="fa-solid fa-sliders"></i><span>ระบบหลังบ้าน (Admin)</span></a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- พื้นที่เนื้อหาหลัก -->
+  <main class="flex-grow max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-8">
+    <!-- Hero Banner -->
+    <section class="hero-glow-bg rounded-3xl p-6 sm:p-10 text-white shadow-2xl border border-emerald-400/35 relative overflow-hidden">
+      <div class="absolute -right-16 -top-16 w-80 h-80 bg-emerald-400/15 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="relative z-10 space-y-4">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="bg-emerald-500/20 border border-emerald-400/50 text-emerald-300 text-xs font-bold px-3.5 py-1 rounded-full inline-flex items-center gap-1.5">
+            <i class="fa-solid fa-tower-broadcast"></i> RIDE-HAILING DRIVER NEWS HUB
+          </span>
+          <span class="bg-amber-500/20 border border-amber-400/40 text-amber-300 text-xs font-bold px-3.5 py-1 rounded-full">
+            อัปเดตข่าวสารทุกแอปพลิเคชัน
+          </span>
+        </div>
+
+        <h1 class="text-2xl sm:text-4xl font-black leading-tight">
+          ศูนย์รวมข่าวสาร<span class="gold-shimmer-text">คนขับรถรับจ้างผ่านแอป</span> (รวมทุกแอป)
+        </h1>
+        <p class="text-slate-300 text-xs sm:text-sm max-w-3xl leading-relaxed font-light">
+          ติดตามอัปเดตนโยบายอัตราค่าโดยสาร อินเซนทีฟ จุดรับ-ส่งสนามบิน กฎหมาย รย.17 / รย.18 ใบขับขี่สาธารณะ ของทุกแพลตฟอร์มทั้ง <strong>Grab, Bolt, Line Man, inDrive, TADA, Robinhood</strong> พร้อมบริการรับสมัครคนขับอย่างเป็นทางการ
+        </p>
+
+        <!-- ทางเข้าหน้าย่อยรับสมัครคนขับ Grab และ Bolt -->
+        <div class="grid sm:grid-cols-2 gap-4 pt-2">
+          <a href="grab_driver_register.html" class="group bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-white rounded-2xl p-4 sm:p-5 border border-green-300/40 shadow-lg transition flex items-center justify-between gap-3">
+            <div class="flex items-center gap-3.5">
+              <div class="w-12 h-12 rounded-2xl bg-white text-green-700 font-black flex items-center justify-center text-lg shadow shrink-0">
+                Grab
+              </div>
+              <div>
+                <span class="text-[10px] font-extrabold bg-black/25 px-2.5 py-0.5 rounded-full uppercase">บริการหน้าย่อยที่ 1</span>
+                <h2 class="text-base sm:text-lg font-extrabold mt-0.5">บริการรับสมัครคนขับ Grab</h2>
+                <p class="text-xs text-green-100">GrabCar / GrabTaxi / GrabSUV / GrabPremium</p>
+              </div>
+            </div>
+            <i class="fa-solid fa-arrow-right text-lg group-hover:translate-x-1 transition"></i>
+          </a>
+
+          <a href="bolt_driver_register.html" class="group bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-slate-950 rounded-2xl p-4 sm:p-5 border border-emerald-200/50 shadow-lg transition flex items-center justify-between gap-3">
+            <div class="flex items-center gap-3.5">
+              <div class="w-12 h-12 rounded-2xl bg-slate-950 text-emerald-400 font-black flex items-center justify-center text-lg shadow shrink-0">
+                Bolt
+              </div>
+              <div>
+                <span class="text-[10px] font-extrabold bg-slate-950 text-emerald-300 px-2.5 py-0.5 rounded-full uppercase">บริการหน้าย่อยที่ 2</span>
+                <h2 class="text-base sm:text-lg font-extrabold mt-0.5 text-slate-950">บริการรับสมัครคนขับ Bolt</h2>
+                <p class="text-xs text-slate-900 font-medium">Bolt Economy / Comfort / XL / Taxi เปิดระบบไว</p>
+              </div>
+            </div>
+            <i class="fa-solid fa-arrow-right text-lg group-hover:translate-x-1 transition"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ตัวกรองข่าวสารแยกตามแอปพลิเคชัน -->
+    <section class="bg-white rounded-3xl p-5 sm:p-8 border border-slate-200 shadow-sm space-y-6">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 pb-4">
+        <div>
+          <h2 class="text-lg sm:text-2xl font-black text-slate-900"><i class="fa-solid fa-rss text-amber-500 mr-2"></i>ข่าวสารและประกาศล่าสุดของคนขับทุกแอป</h2>
+          <p class="text-xs sm:text-sm text-slate-500">เลือกกรองข่าวตามแอปพลิเคชันหรือหัวข้อกฎหมายที่เกี่ยวข้อง</p>
+        </div>
+        <input type="text" id="news-search" oninput="filterNews()" placeholder="ค้นหาข่าวสาร เช่น สนามบิน, รย.18, โบนัส..."
+          class="w-full md:w-72 bg-slate-50 border border-slate-300 rounded-xl px-4 py-2.5 text-xs sm:text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500">
+      </div>
+
+      <div class="flex flex-wrap gap-2">
+        <button type="button" onclick="setNewsAppFilter('ALL')" data-app="ALL" class="news-tab-btn bg-slate-950 text-amber-400 font-bold text-xs px-4 py-2 rounded-full">รวมทุกแอป</button>
+        <button type="button" onclick="setNewsAppFilter('Grab')" data-app="Grab" class="news-tab-btn bg-slate-100 hover:bg-green-50 text-slate-700 font-semibold text-xs px-4 py-2 rounded-full">🟢 Grab</button>
+        <button type="button" onclick="setNewsAppFilter('Bolt')" data-app="Bolt" class="news-tab-btn bg-slate-100 hover:bg-emerald-50 text-slate-700 font-semibold text-xs px-4 py-2 rounded-full">⚡ Bolt</button>
+        <button type="button" onclick="setNewsAppFilter('Line Man / Lalamove')" data-app="Line Man / Lalamove" class="news-tab-btn bg-slate-100 hover:bg-emerald-50 text-slate-700 font-semibold text-xs px-4 py-2 rounded-full">🟩 Line Man / Lalamove</button>
+        <button type="button" onclick="setNewsAppFilter('inDrive / TADA / Robinhood')" data-app="inDrive / TADA / Robinhood" class="news-tab-btn bg-slate-100 hover:bg-sky-50 text-slate-700 font-semibold text-xs px-4 py-2 rounded-full">🔵 inDrive / TADA / Robinhood</button>
+        <button type="button" onclick="setNewsAppFilter('กฎหมาย & ขนส่ง')" data-app="กฎหมาย & ขนส่ง" class="news-tab-btn bg-slate-100 hover:bg-amber-50 text-slate-700 font-semibold text-xs px-4 py-2 rounded-full">⚖️ กฎหมาย &amp; กรมการขนส่งฯ</button>
+      </div>
+
+      <div id="news-cards-grid" class="grid md:grid-cols-2 gap-5"></div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-950 text-slate-400 border-t border-amber-500/25 py-9 px-4 text-xs mt-10">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+      <div class="text-center sm:text-left space-y-1">
+        <p class="font-bold text-amber-300">🚖 The Driver TH 🇹🇭 Premium Service Official Network</p>
+        <p class="text-[11px] text-slate-500">ศูนย์กลางระบบสมาชิก ข่าวสารคนขับรถผ่านแอป และบริการรับสมัครคนขับ Grab &amp; Bolt</p>
+      </div>
+      <div class="flex flex-wrap justify-center gap-x-4 gap-y-2 font-semibold">
+        <a href="index.html" class="hover:text-amber-400 transition">หน้าหลัก</a>
+        <a href="driver_news.html" class="text-emerald-300 hover:text-emerald-200 transition">ข่าวสารคนขับแอป</a>
+        <a href="grab_driver_register.html" class="hover:text-green-400 transition">สมัครคนขับ Grab</a>
+        <a href="bolt_driver_register.html" class="hover:text-teal-300 transition">สมัครคนขับ Bolt</a>
+        <a href="captain_insurance.html" class="hover:text-teal-300 transition">Captain Insurance</a>
+        <a href="register.html" class="hover:text-emerald-400 transition">ระบบสมาชิก</a>
+        <a href="blacklist.html" class="hover:text-rose-400 transition">ตรวจสอบ Blacklist</a>
+        <a href="admin.html" class="text-amber-300 hover:text-amber-200 transition">ระบบหลังบ้าน (Admin)</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const DRIVER_NEWS_ITEMS = [
+      {
+        app: 'กฎหมาย & ขนส่ง',
+        badgeClass: 'bg-amber-100 text-amber-900 border-amber-300',
+        date: 'อัปเดตล่าสุด • กฎระเบียบรถรับจ้างผ่านแอป',
+        title: 'แนวทางการจดทะเบียนรถยนต์รับจ้างผ่านระบบอิเล็กทรอนิกส์ (รย.17 / รย.18) และใบขับขี่สาธารณะ',
+        summary: 'สรุปขั้นตอนการเปลี่ยนประเภทจดทะเบียนเป็น รย.17 / รย.18 การขอใบอนุญาตขับรถยนต์สาธารณะ และการทำประกันภัยคุ้มครองผู้โดยสารให้ถูกต้องตามประกาศกรมการขนส่งทางบก',
+        highlights: ['ใช้ใบขับขี่สาธารณะในการวิ่งงานผ่านแอปทุกค่าย', 'สามารถจดทะเบียน รย.17 ควบคู่การใช้งานส่วนบุคคลได้ตามเกณฑ์', 'เพิ่มความมั่นใจเมื่อรับงานจุดคัดกรองสนามบินและแหล่งท่องเที่ยว'],
+        ctaLabel: 'เช็กประกันภัยรถรับจ้าง Captain Insurance',
+        ctaHref: 'captain_insurance.html'
+      },
+      {
+        app: 'Grab',
+        badgeClass: 'bg-green-100 text-green-800 border-green-300',
+        date: 'ข่าวสารแพลตฟอร์ม • Grab Thailand',
+        title: 'เปิดรับสมัครคนขับ GrabCar / GrabTaxi / GrabSUV รอบใหม่ พร้อมจุดรับผู้โดยสารสนามบินสุวรรณภูมิ-ดอนเมือง',
+        summary: 'อัปเดตเกณฑ์อายุรถ เอกสารประกอบการสมัคร และระบบคิวจุดรับผู้โดยสารสนามบินสุวรรณภูมิ (ชั้น 1 ประตู 4) และดอนเมือง สำหรับคนขับที่ผ่านการยืนยันตัวตนครบถ้วน',
+        highlights: ['รองรับทั้งรถเก๋ง 4 ประตู รถ SUV 7 ที่นั่ง และแท็กซี่', 'มีโบนัสอินเซนทีฟช่วงชั่วโมงเร่งด่วนและวันหยุดสุดสัปดาห์', 'สมัครผ่านทีมงาน The Driver Thailand ช่วยตรวจเอกสารก่อนยื่น'],
+        ctaLabel: 'สมัครคนขับ Grab ออนไลน์',
+        ctaHref: 'grab_driver_register.html'
+      },
+      {
+        app: 'Bolt',
+        badgeClass: 'bg-emerald-100 text-emerald-800 border-emerald-300',
+        date: 'ข่าวสารแพลตฟอร์ม • Bolt Thailand',
+        title: 'Bolt ขยายพื้นที่ให้บริการทั่วไทย พร้อมปรับโครงสร้างค่าคอมมิชชั่นและหมวด Bolt Comfort / XL',
+        summary: 'อัปเดตพื้นที่เปิดให้บริการของ Bolt ทั้งกรุงเทพฯ-ปริมณฑล พัทยา เชียงใหม่ ภูเก็ต หาดใหญ่ ขอนแก่น และอุดรธานี รวมถึงเกณฑ์การอัปเกรดประเภทรถเพื่อรับค่าโดยสารที่สูงขึ้น',
+        highlights: ['สมัครง่าย เปิดบัญชีคนขับได้รวดเร็วเมื่อเอกสารครบ', 'เลือกเวลาวิ่งงานได้อย่างอิสระทั้งพาร์ทไทม์และฟูลไทม์', 'มีบริการช่วยตรวจเอกสารและสมัครผ่านหน้าเว็บของเรา'],
+        ctaLabel: 'สมัครคนขับ Bolt ออนไลน์',
+        ctaHref: 'bolt_driver_register.html'
+      },
+      {
+        app: 'Line Man / Lalamove',
+        badgeClass: 'bg-lime-100 text-lime-800 border-lime-300',
+        date: 'ข่าวสารแพลตฟอร์ม • Line Man Ride & Lalamove',
+        title: 'อัปเดตงานรับส่งผู้โดยสาร Line Man Ride และงานขนส่งด่วนรถยนต์ 4-5 ประตู Lalamove',
+        summary: 'แนวทางการรับงานควบคู่หลายแอปพลิเคชันอย่างปลอดภัย ทั้งงานรับส่งผู้โดยสารในเขตเมืองของ Line Man Ride และงานส่งพัสดุ/เหมาคันของ Lalamove',
+        highlights: ['เหมาะสำหรับรถเก๋ง Eco Car, รถกระบะตู้ทึบ และรถ SUV', 'บริหารจัดการตารางวิ่งงานช่วงกลางวัน-กลางคืนให้คุ้มค่าน้ำมัน', 'ตรวจสอบประวัติผู้ว่าจ้างก่อนรับงานโอนเงินนอกระบบเสมอ'],
+        ctaLabel: 'ตรวจสอบประวัติผู้ว่าจ้าง Blacklist',
+        ctaHref: 'blacklist.html'
+      },
+      {
+        app: 'inDrive / TADA / Robinhood',
+        badgeClass: 'bg-sky-100 text-sky-800 border-sky-300',
+        date: 'ข่าวสารแพลตฟอร์ม • inDrive, TADA & Robinhood Ride',
+        title: 'สรุปจุดเด่นแอปทางเลือก: ระบบเสนอราคาเอง (inDrive) และระบบเก็บค่าคอมมิชชั่นต่ำ (TADA / Robinhood)',
+        summary: 'เปรียบเทียบเงื่อนไขการรับงานของแอปทางเลือกที่คนขับนิยมเปิดคู่กัน เพื่อเพิ่มโอกาสได้งานขาไป-ขากลับโดยไม่ต้องตีรถเปล่า',
+        highlights: ['inDrive: คนขับสามารถกดเสนอราคาค่าโดยสารที่เหมาะสมกับระยะทางได้', 'TADA: เน้นความโปร่งใสของค่าบริการและรอบโอนเงิน', 'ควรตั้งค่ารับงานเฉพาะพื้นที่ที่คุ้นเคยและตรวจสอบจุดรับให้ชัดเจน'],
+        ctaLabel: 'คำนวณราคากลางงานเหมา',
+        ctaHref: 'fare_calculator.html'
+      },
+      {
+        app: 'กฎหมาย & ขนส่ง',
+        badgeClass: 'bg-rose-100 text-rose-800 border-rose-300',
+        date: 'เตือนภัยคนขับแอป • ความปลอดภัยในการทำงาน',
+        title: 'ข้อควรระวังมิจฉาชีพแฝงตัวในรูปแบบผู้โดยสารเรียกรถผ่านแอปและขอยืมเงิน/หลอกโอนค่าสินค้า',
+        summary: 'รวบรวมรูปแบบกลโกงที่พบบ่อยกับคนขับรถผ่านแอป เช่น การขอให้คนขับสำรองจ่ายค่าพัสดุปลายทาง การส่งสลิปปลอม หรือการขอให้ยกเลิกงานในแอปเพื่อจ่ายเงินสดแล้วชิ่งหนี',
+        highlights: ['ห้ามสำรองจ่ายเงินสดให้ผู้โดยสารที่ไม่รู้จักทุกกรณี', 'ตรวจสอบชื่อและยอดเงินเข้าบัญชีก่อนจบงานทุกครั้ง', 'หากพบผู้ก่อเหตุสามารถแจ้งเบาะแสเข้าศูนย์ Blacklist ของกลุ่มได้ทันที'],
+        ctaLabel: 'เข้าสู่ศูนย์เฝ้าระวังภัย Blacklist',
+        ctaHref: 'blacklist.html'
+      }
+    ];
+
+    let activeAppFilter = 'ALL';
+
+    function setNewsAppFilter(app) {
+      activeAppFilter = app;
+      document.querySelectorAll('.news-tab-btn').forEach(btn => {
+        const isActive = btn.getAttribute('data-app') === app;
+        btn.className = isActive
+          ? 'news-tab-btn bg-slate-950 text-amber-400 font-bold text-xs px-4 py-2 rounded-full'
+          : 'news-tab-btn bg-slate-100 hover:bg-amber-50 text-slate-700 font-semibold text-xs px-4 py-2 rounded-full';
+      });
+      filterNews();
+    }
+
+    function filterNews() {
+      const kw = (document.getElementById('news-search')?.value || '').trim().toLowerCase();
+      const grid = document.getElementById('news-cards-grid');
+      if (!grid) return;
+
+      const list = DRIVER_NEWS_ITEMS.filter(item => {
+        const matchApp = activeAppFilter === 'ALL' || item.app === activeAppFilter;
+        if (!matchApp) return false;
+        if (!kw) return true;
+        return `${item.app} ${item.title} ${item.summary} ${item.highlights.join(' ')}`.toLowerCase().includes(kw);
+      });
+
+      if (!list.length) {
+        grid.innerHTML = '<div class="col-span-full text-center py-10 text-slate-500 text-sm">ไม่พบข่าวสารที่ตรงกับคำค้นหา</div>';
+        return;
+      }
+
+      grid.innerHTML = list.map(item => `
+        <article class="bg-slate-50/70 border border-slate-200 rounded-3xl p-6 flex flex-col justify-between space-y-4 hover:border-amber-400 transition">
+          <div class="space-y-3">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <span class="text-xs font-extrabold px-3 py-1 rounded-full border ${item.badgeClass}">${item.app}</span>
+              <span class="text-[11px] text-slate-500 font-medium">${item.date}</span>
+            </div>
+            <h3 class="text-base sm:text-lg font-extrabold text-slate-900 leading-snug">${item.title}</h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">${item.summary}</p>
+            <ul class="space-y-1.5 pt-1 text-xs text-slate-700">
+              ${item.highlights.map(h => `<li class="flex items-start gap-2"><i class="fa-solid fa-circle-check text-emerald-600 mt-0.5 shrink-0"></i><span>${h}</span></li>`).join('')}
+            </ul>
+          </div>
+          <div class="pt-3 border-t border-slate-200">
+            <a href="${item.ctaHref}" class="inline-flex items-center justify-center gap-2 w-full bg-slate-950 hover:bg-slate-800 text-amber-400 font-bold text-xs sm:text-sm py-3 px-4 rounded-xl transition">
+              <span>${item.ctaLabel}</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    document.addEventListener('DOMContentLoaded', filterNews);
+
+    (function initSharedNav() {
+      const SCALE_KEY = "tdt_font_scale_pct";
+      let scalePct = 100;
+      function applyScale(pct) {
+        scalePct = Math.min(130, Math.max(90, Number(pct) || 100));
+        document.documentElement.style.fontSize = `${(scalePct / 100) * 16}px`;
+        const lbl = document.getElementById("tdt-font-pct");
+        if (lbl) lbl.textContent = `${scalePct}%`;
+        try { localStorage.setItem(SCALE_KEY, String(scalePct)); } catch (_) {}
+      }
+      window.tdtChangeFontScale = function (step) { applyScale(scalePct + step * 10); };
+      window.tdtToggleDropdown = function (cat, ev) {
+        if (ev) ev.stopPropagation();
+        ["member", "group"].forEach(k => {
+          const panel = document.getElementById(`nav-panel-${k}`);
+          const chev = document.getElementById(`nav-chev-${k}`);
+          if (!panel) return;
+          const open = k === cat ? !panel.classList.contains("is-open") : false;
+          panel.classList.toggle("is-open", open);
+          if (chev) chev.style.transform = open ? "rotate(180deg)" : "rotate(0deg)";
+        });
+      };
+      document.addEventListener("click", function (ev) {
+        const mDrop = document.getElementById("nav-drop-member");
+        const gDrop = document.getElementById("nav-drop-group");
+        if (!(mDrop && mDrop.contains(ev.target)) && !(gDrop && gDrop.contains(ev.target))) {
+          ["member", "group"].forEach(k => {
+            document.getElementById(`nav-panel-${k}`)?.classList.remove("is-open");
+            const chev = document.getElementById(`nav-chev-${k}`);
+            if (chev) chev.style.transform = "rotate(0deg)";
+          });
+        }
+      });
+      try { const s = localStorage.getItem(SCALE_KEY); if (s) applyScale(Number(s)); } catch (_) {}
+    })();
+  </script>
+</body>
+</html>

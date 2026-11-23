@@ -537,8 +537,8 @@
         document.getElementById('dc-plate').textContent = m.licensePlate || '-';
         document.getElementById('dc-phone').textContent = m.maskedPhone || '-';
 
-        const verifyUrl = `${window.location.origin}${window.location.pathname.replace('member_card_digital.html', 'register.html')}`;
-        document.getElementById('dc-qr-img').src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(verifyUrl + '?code=' + m.memberCode)}`;
+        const verifyUrl = `${window.location.origin}${window.location.pathname.replace('member_card_digital.html', 'trip_voucher.html')}?verify=${encodeURIComponent(m.memberCode)}`;
+        document.getElementById('dc-qr-img').src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(verifyUrl)}`;
         cardWrap.classList.remove('hidden');
       } catch (_) {
         errEl.textContent = 'ไม่สามารถเชื่อมต่อฐานข้อมูลได้ในขณะนี้ กรุณาลองใหม่อีกครั้ง';

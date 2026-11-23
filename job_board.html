@@ -12,12 +12,32 @@
   <style>
     html { font-size: 16px; transition: font-size 0.18s ease; }
     html, body, input, select, textarea, button { font-family: 'Prompt', sans-serif !important; }
-    body { background-color: #f8fafc; color: #0f172a; overflow-x: clip; }
+    body { background-color: #070a12; color: #f8fafc; overflow-x: clip; }
     .hero-glow-bg {
       background:
-        radial-gradient(circle at 18% 22%, rgba(251, 191, 36, 0.2) 0%, transparent 45%),
+        radial-gradient(circle at 18% 22%, rgba(251, 191, 36, 0.22) 0%, transparent 45%),
         radial-gradient(circle at 82% 78%, rgba(16, 185, 129, 0.14) 0%, transparent 50%),
         linear-gradient(145deg, #060911 0%, #0d1424 58%, #151f34 100%);
+    }
+    .dark-surface-card {
+      background: rgba(15, 23, 42, 0.94);
+      border: 1px solid rgba(251, 191, 36, 0.24);
+      color: #f8fafc;
+      box-shadow: 0 18px 38px -14px rgba(2, 6, 23, 0.72);
+    }
+    .dark-field {
+      background-color: #070b14;
+      border: 1px solid #334155;
+      color: #f8fafc;
+      transition: border-color 0.2s ease, background-color 0.2s ease;
+    }
+    .dark-field::placeholder {
+      color: #64748b;
+    }
+    .dark-field:focus {
+      outline: none;
+      border-color: #fbbf24;
+      background-color: #0b1120;
     }
 
     /* UNIFIED GLOBAL NAVIGATION BAR (MATCHING INDEX.HTML) */
@@ -403,58 +423,58 @@
       </button>
     </section>
 
-    <section id="post-job-box" class="hidden bg-white rounded-3xl p-6 border border-amber-300 shadow-md space-y-4">
-      <h2 class="text-lg font-extrabold text-slate-900"><i class="fa-solid fa-bullhorn text-amber-500 mr-2"></i>ลงประกาศปล่อยงานใหม่</h2>
+    <section id="post-job-box" class="hidden dark-surface-card rounded-3xl p-6 border-amber-400/40 shadow-md space-y-4">
+      <h2 class="text-lg font-extrabold text-amber-300"><i class="fa-solid fa-bullhorn text-amber-400 mr-2"></i>ลงประกาศปล่อยงานใหม่</h2>
       <form onsubmit="submitNewJob(event)" class="space-y-4">
         <div class="grid sm:grid-cols-3 gap-3">
-          <input type="text" id="job-member-code" required placeholder="รหัสสมาชิกผู้ปล่อยงาน (เช่น B2464) *" class="bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs font-mono uppercase">
-          <input type="text" id="job-phone-last4" maxlength="4" pattern="\d{4}" required placeholder="เบอร์โทร 4 หลักท้ายยืนยันตัวตน *" class="bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs font-mono">
-          <input type="text" id="job-datetime" required placeholder="วัน-เวลาที่รับลูกค้า (เช่น 25 พ.ย. 08:30 น.) *" class="bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs">
+          <input type="text" id="job-member-code" required placeholder="รหัสสมาชิกผู้ปล่อยงาน (เช่น B2464) *" class="dark-field rounded-xl px-3.5 py-2.5 text-xs font-mono uppercase text-amber-300">
+          <input type="text" id="job-phone-last4" maxlength="4" pattern="\d{4}" required placeholder="เบอร์โทร 4 หลักท้ายยืนยันตัวตน *" class="dark-field rounded-xl px-3.5 py-2.5 text-xs font-mono">
+          <input type="text" id="job-datetime" required placeholder="วัน-เวลาที่รับลูกค้า (เช่น 25 พ.ย. 08:30 น.) *" class="dark-field rounded-xl px-3.5 py-2.5 text-xs">
         </div>
         <div class="grid sm:grid-cols-2 gap-3">
-          <input type="text" id="job-pickup" required placeholder="จุดรับลูกค้า (เช่น สนามบินสุวรรณภูมิ ประตู 4) *" class="bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs">
-          <input type="text" id="job-dropoff" required placeholder="จุดส่งปลายทาง (เช่น โรงแรมพัทยากลาง) *" class="bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs">
+          <input type="text" id="job-pickup" required placeholder="จุดรับลูกค้า (เช่น สนามบินสุวรรณภูมิ ประตู 4) *" class="dark-field rounded-xl px-3.5 py-2.5 text-xs">
+          <input type="text" id="job-dropoff" required placeholder="จุดส่งปลายทาง (เช่น โรงแรมพัทยากลาง) *" class="dark-field rounded-xl px-3.5 py-2.5 text-xs">
         </div>
         <div class="grid sm:grid-cols-3 gap-3">
-          <select id="job-vehicle" class="bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs">
+          <select id="job-vehicle" class="dark-field rounded-xl px-3.5 py-2.5 text-xs">
             <option value="Sedan (เก๋ง 4 ที่นั่ง)">Sedan (เก๋ง 4 ที่นั่ง)</option>
             <option value="SUV / PPV (7 ที่นั่ง)">SUV / PPV (7 ที่นั่ง)</option>
             <option value="VIP Van (Commuter / Alphard)">VIP Van (Commuter / Alphard)</option>
             <option value="ไม่จำกัดประเภทรถ">ไม่จำกัดประเภทรถ</option>
           </select>
-          <input type="number" id="job-fare" required placeholder="ค่าจ้างสุทธิถึงมือคนขับ (บาท) *" class="bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs">
-          <input type="text" id="job-notes" placeholder="หมายเหตุ (เช่น รวมทางด่วนแล้ว / รับป้ายชื่อ)" class="bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs">
+          <input type="number" id="job-fare" required placeholder="ค่าจ้างสุทธิถึงมือคนขับ (บาท) *" class="dark-field rounded-xl px-3.5 py-2.5 text-xs">
+          <input type="text" id="job-notes" placeholder="หมายเหตุ (เช่น รวมทางด่วนแล้ว / รับป้ายชื่อ)" class="dark-field rounded-xl px-3.5 py-2.5 text-xs">
         </div>
-        <button type="submit" id="btn-post-job" class="bg-slate-950 text-amber-400 font-extrabold px-6 py-3 rounded-xl text-xs sm:text-sm">
+        <button type="submit" id="btn-post-job" class="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold px-6 py-3 rounded-xl text-xs sm:text-sm shadow transition">
           ยืนยันลงประกาศงาน
         </button>
       </form>
     </section>
 
-    <section class="bg-white rounded-3xl p-5 sm:p-8 border border-slate-200 shadow-sm space-y-4">
-      <div class="flex items-center justify-between border-b border-slate-200 pb-3">
-        <h2 class="text-base sm:text-lg font-extrabold text-slate-900">รายการงานล่าสุดในเครือข่าย</h2>
-        <button type="button" onclick="loadJobs()" class="text-xs font-bold bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-xl">
+    <section class="dark-surface-card rounded-3xl p-5 sm:p-8 shadow-sm space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <h2 class="text-base sm:text-lg font-extrabold text-amber-300">รายการงานล่าสุดในเครือข่าย</h2>
+        <button type="button" onclick="loadJobs()" class="text-xs font-bold bg-slate-950 hover:bg-slate-800 text-amber-300 border border-amber-400/35 px-3 py-1.5 rounded-xl transition">
           <i class="fa-solid fa-rotate mr-1"></i> รีเฟรช
         </button>
       </div>
       <div id="jobs-list" class="grid md:grid-cols-2 gap-4">
-        <div class="col-span-full text-center py-8 text-slate-500 text-sm"><i class="fa-solid fa-spinner fa-spin mr-1"></i> กำลังโหลดรายการงาน...</div>
+        <div class="col-span-full text-center py-8 text-slate-400 text-sm"><i class="fa-solid fa-spinner fa-spin mr-1"></i> กำลังโหลดรายการงาน...</div>
       </div>
     </section>
   </main>
 
-  <div id="accept-job-modal" class="hidden fixed inset-0 z-50 bg-slate-950/75 flex items-center justify-center p-4">
-    <div class="bg-white rounded-3xl max-w-md w-full p-6 space-y-4 shadow-2xl">
-      <h3 class="text-lg font-extrabold text-slate-900">ยืนยันตัวตนเพื่อกดรับงาน</h3>
-      <p id="accept-job-summary" class="text-xs text-slate-600 bg-amber-50 p-3 rounded-xl border border-amber-200"></p>
+  <div id="accept-job-modal" class="hidden fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-amber-400/40 text-white rounded-3xl max-w-md w-full p-6 space-y-4 shadow-2xl">
+      <h3 class="text-lg font-extrabold text-amber-300">ยืนยันตัวตนเพื่อกดรับงาน</h3>
+      <p id="accept-job-summary" class="text-xs text-amber-100 bg-amber-950/60 p-3 rounded-xl border border-amber-400/35"></p>
       <form onsubmit="confirmAcceptJob(event)" class="space-y-3">
         <input type="hidden" id="accept-job-id">
-        <input type="text" id="accept-member-code" required placeholder="รหัสสมาชิกของคุณ (เช่น B2464)" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs font-mono uppercase">
-        <input type="text" id="accept-phone-last4" maxlength="4" pattern="\d{4}" required placeholder="เบอร์โทร 4 หลักสุดท้ายของคุณ" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs font-mono">
+        <input type="text" id="accept-member-code" required placeholder="รหัสสมาชิกของคุณ (เช่น B2464)" class="dark-field w-full rounded-xl px-4 py-3 text-xs font-mono uppercase text-amber-300">
+        <input type="text" id="accept-phone-last4" maxlength="4" pattern="\d{4}" required placeholder="เบอร์โทร 4 หลักสุดท้ายของคุณ" class="dark-field w-full rounded-xl px-4 py-3 text-xs font-mono">
         <div class="flex justify-end gap-2 pt-2">
-          <button type="button" onclick="document.getElementById('accept-job-modal').classList.add('hidden')" class="px-4 py-2.5 rounded-xl bg-slate-100 text-xs font-bold">ยกเลิก</button>
-          <button type="submit" id="btn-confirm-accept" class="px-5 py-2.5 rounded-xl bg-emerald-600 text-white text-xs font-extrabold">ยืนยันรับงานนี้</button>
+          <button type="button" onclick="document.getElementById('accept-job-modal').classList.add('hidden')" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold">ยกเลิก</button>
+          <button type="submit" id="btn-confirm-accept" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-extrabold">ยืนยันรับงานนี้</button>
         </div>
       </form>
     </div>
@@ -490,36 +510,36 @@
         const json = await res.json();
         const jobs = Array.isArray(json?.jobs) ? json.jobs : [];
         if (!jobs.length) {
-          box.innerHTML = '<div class="col-span-full text-center py-10 text-slate-500 text-sm">ยังไม่มีประกาศงานในขณะนี้ สามารถกดปุ่ม “ลงประกาศปล่อยงาน” ด้านบนได้เลยครับ</div>';
+          box.innerHTML = '<div class="col-span-full text-center py-10 text-slate-400 text-sm">ยังไม่มีประกาศงานในขณะนี้ สามารถกดปุ่ม “ลงประกาศปล่อยงาน” ด้านบนได้เลยครับ</div>';
           return;
         }
         box.innerHTML = jobs.map(j => {
           const isOpen = j.status === 'เปิดรับคนขับ';
           return `
-            <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-3 flex flex-col justify-between">
+            <div class="bg-slate-950/85 border border-slate-800 rounded-2xl p-5 space-y-3 flex flex-col justify-between">
               <div class="space-y-2">
                 <div class="flex items-center justify-between gap-2">
-                  <span class="text-xs font-extrabold px-2.5 py-1 rounded-full ${isOpen ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-200 text-slate-700'}">${esc(j.status)}</span>
-                  <span class="text-lg font-black text-amber-600 font-mono">฿${Number(j.fareAmount).toLocaleString()}</span>
+                  <span class="text-xs font-extrabold px-2.5 py-1 rounded-full ${isOpen ? 'bg-emerald-950/90 text-emerald-300 border border-emerald-500/40' : 'bg-slate-800 text-slate-300 border border-slate-700'}">${esc(j.status)}</span>
+                  <span class="text-lg font-black text-amber-400 font-mono">฿${Number(j.fareAmount).toLocaleString()}</span>
                 </div>
-                <p class="text-xs text-slate-500"><i class="fa-regular fa-clock mr-1"></i> ${esc(j.pickupDateTime)} · <strong>${esc(j.vehicleType)}</strong></p>
-                <div class="bg-white p-3 rounded-xl border border-slate-200 text-xs space-y-1">
-                  <p><strong class="text-emerald-700">รับ:</strong> ${esc(j.pickupLocation)}</p>
-                  <p><strong class="text-rose-700">ส่ง:</strong> ${esc(j.dropoffLocation)}</p>
-                  ${j.notes ? `<p class="text-slate-500 pt-1">หมายเหตุ: ${esc(j.notes)}</p>` : ''}
+                <p class="text-xs text-slate-400"><i class="fa-regular fa-clock mr-1 text-amber-400"></i> ${esc(j.pickupDateTime)} · <strong class="text-slate-200">${esc(j.vehicleType)}</strong></p>
+                <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 text-xs space-y-1 text-slate-200">
+                  <p><strong class="text-emerald-400">รับ:</strong> ${esc(j.pickupLocation)}</p>
+                  <p><strong class="text-rose-400">ส่ง:</strong> ${esc(j.dropoffLocation)}</p>
+                  ${j.notes ? `<p class="text-slate-400 pt-1">หมายเหตุ: ${esc(j.notes)}</p>` : ''}
                 </div>
               </div>
-              <div class="pt-2 border-t border-slate-200 flex items-center justify-between text-xs">
-                <span>ผู้ปล่อยงาน: <strong>[${esc(j.posterCode)}] ${esc(j.posterName)}</strong></span>
+              <div class="pt-2 border-t border-slate-800 flex items-center justify-between text-xs text-slate-300">
+                <span>ผู้ปล่อยงาน: <strong class="text-white">[${esc(j.posterCode)}] ${esc(j.posterName)}</strong></span>
                 ${isOpen
-                  ? `<button type="button" onclick="openAcceptModal('${esc(j.jobId)}', '${esc(j.pickupLocation)} -> ${esc(j.dropoffLocation)}')" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-3.5 py-2 rounded-xl">กดรับงาน</button>`
-                  : `<span class="text-slate-500 font-semibold">รับโดย [${esc(j.accepterCode)}]</span>`}
+                  ? `<button type="button" onclick="openAcceptModal('${esc(j.jobId)}', '${esc(j.pickupLocation)} -> ${esc(j.dropoffLocation)}')" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-3.5 py-2 rounded-xl transition">กดรับงาน</button>`
+                  : `<span class="text-slate-400 font-semibold">รับโดย [${esc(j.accepterCode)}]</span>`}
               </div>
             </div>
           `;
         }).join('');
       } catch (_) {
-        box.innerHTML = '<div class="col-span-full text-center py-8 text-rose-600 text-sm">โหลดข้อมูลงานไม่สำเร็จ</div>';
+        box.innerHTML = '<div class="col-span-full text-center py-8 text-rose-400 text-sm">โหลดข้อมูลงานไม่สำเร็จ</div>';
       }
     }
 
@@ -546,7 +566,7 @@
         });
         const json = await res.json();
         if (!json.success) {
-          document.getElementById('jobs-list').insertAdjacentHTML('beforebegin', `<div class="p-3 rounded-xl bg-rose-50 text-rose-700 text-xs font-bold">${esc(json.error)}</div>`);
+          document.getElementById('jobs-list').insertAdjacentHTML('beforebegin', `<div class="p-3 rounded-xl bg-rose-950/90 border border-rose-500/40 text-rose-200 text-xs font-bold">${esc(json.error)}</div>`);
           return;
         }
         e.target.reset();
@@ -583,12 +603,12 @@
         document.getElementById('accept-job-modal').classList.add('hidden');
         if (json.success) {
           document.getElementById('jobs-list').insertAdjacentHTML('beforebegin',
-            `<div class="p-4 rounded-2xl bg-emerald-50 border border-emerald-300 text-emerald-950 text-xs font-bold">รับงานสำเร็จ! ติดต่อผู้ปล่อยงาน (${esc(json.posterName)}) โทร: ${esc(json.posterPhone)}</div>`
+            `<div class="p-4 rounded-2xl bg-emerald-950/90 border border-emerald-500/40 text-emerald-200 text-xs font-bold">รับงานสำเร็จ! ติดต่อผู้ปล่อยงาน (${esc(json.posterName)}) โทร: ${esc(json.posterPhone)}</div>`
           );
           loadJobs();
         } else {
           document.getElementById('jobs-list').insertAdjacentHTML('beforebegin',
-            `<div class="p-4 rounded-2xl bg-rose-50 border border-rose-300 text-rose-800 text-xs font-bold">${esc(json.error)}</div>`
+            `<div class="p-4 rounded-2xl bg-rose-950/90 border border-rose-500/40 text-rose-200 text-xs font-bold">${esc(json.error)}</div>`
           );
         }
       } finally {

@@ -292,19 +292,19 @@
       border: none;
     }
 
-    /* COMPACT & RESPONSIVE GLOBAL NAVIGATION BAR (LOCKED LAYOUT - DO NOT MODIFY) */
+    /* REFINED EXECUTIVE GLOBAL NAVIGATION BAR */
     .tdt-global-nav {
       box-sizing: border-box;
       font-family: 'Prompt', sans-serif;
-      background: rgba(6, 9, 17, 0.96);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+      background: linear-gradient(180deg, rgba(7, 11, 20, 0.98) 0%, rgba(10, 15, 28, 0.96) 100%);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       color: #e2e8f0;
-      border-bottom: 1px solid rgba(251, 191, 36, 0.25);
+      border-bottom: 1px solid rgba(251, 191, 36, 0.28);
       position: sticky;
       top: 0;
       z-index: 1000;
-      box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.45);
+      box-shadow: 0 10px 28px -8px rgba(2, 6, 23, 0.65);
       width: 100%;
     }
     .tdt-global-nav *, .tdt-global-nav *::before, .tdt-global-nav *::after {
@@ -318,7 +318,7 @@
       flex-direction: column;
       align-items: flex-start;
       justify-content: flex-start;
-      gap: 11px;
+      gap: 10px;
     }
     @media (min-width: 640px) {
       .tdt-global-nav-inner {
@@ -333,14 +333,16 @@
       align-items: center;
       justify-content: space-between;
       gap: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.12);
     }
     .tdt-global-brand {
       display: inline-flex;
       align-items: center;
-      gap: 14px;
+      gap: 13px;
       font-size: 16px;
       line-height: 1.3;
-      font-weight: 400;
+      font-weight: 500;
       color: #fbbf24;
       text-decoration: none;
       text-align: left;
@@ -351,7 +353,7 @@
       flex-direction: column;
       align-items: flex-start;
       justify-content: center;
-      gap: 7px;
+      gap: 5px;
       line-height: 1.3;
       font-weight: 400;
     }
@@ -371,36 +373,36 @@
       display: inline-flex;
       align-items: center;
       gap: 5px;
-      background: rgba(251, 191, 36, 0.18);
-      border: 1px solid rgba(251, 191, 36, 0.45);
+      background: rgba(251, 191, 36, 0.15);
+      border: 1px solid rgba(251, 191, 36, 0.42);
       color: #fde68a;
       font-size: 10.5px;
-      font-weight: 400;
+      font-weight: 500;
       padding: 2px 8px;
       border-radius: 999px;
       line-height: 1.25;
     }
     .tdt-brand-logo-img {
-      width: 52px;
-      height: 52px;
-      border-radius: 16px;
+      width: 50px;
+      height: 50px;
+      border-radius: 15px;
       object-fit: cover;
       object-position: center;
       background: #ffffff;
       padding: 0;
-      border: 1.5px solid rgba(251, 191, 36, 0.9);
+      border: 1.5px solid rgba(251, 191, 36, 0.85);
       box-shadow:
         0 8px 20px -4px rgba(0, 0, 0, 0.55),
-        0 0 0 2px rgba(251, 191, 36, 0.18);
+        0 0 0 2px rgba(251, 191, 36, 0.16);
       flex-shrink: 0;
       transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
     }
     .tdt-global-brand:hover .tdt-brand-logo-img {
-      transform: scale(1.06);
+      transform: scale(1.05);
       border-color: #fde68a;
       box-shadow:
         0 10px 24px -4px rgba(0, 0, 0, 0.65),
-        0 0 14px rgba(251, 191, 36, 0.35);
+        0 0 14px rgba(251, 191, 36, 0.32);
     }
     @media (min-width: 640px) {
       .tdt-global-brand {
@@ -408,9 +410,9 @@
         font-size: 19px;
       }
       .tdt-brand-logo-img {
-        width: 58px;
-        height: 58px;
-        border-radius: 18px;
+        width: 56px;
+        height: 56px;
+        border-radius: 16px;
       }
     }
     .tdt-global-brand:hover {
@@ -424,8 +426,20 @@
       flex-wrap: wrap;
       align-items: center;
       justify-content: flex-start;
-      gap: 8px;
+      gap: 7px;
       width: 100%;
+    }
+    .tdt-nav-divider {
+      width: 1px;
+      height: 20px;
+      background: rgba(148, 163, 184, 0.22);
+      margin: 0 2px;
+      display: none;
+    }
+    @media (min-width: 1024px) {
+      .tdt-nav-divider {
+        display: inline-block;
+      }
     }
     .tdt-cat-dropdown-wrap {
       position: relative;
@@ -436,7 +450,7 @@
       position: absolute;
       left: 0;
       top: calc(100% + 8px);
-      width: 310px;
+      width: 316px;
       max-width: calc(100vw - 32px);
       border-radius: 16px;
       padding: 10px;
@@ -454,7 +468,7 @@
       margin-bottom: 6px;
       border-radius: 11px;
       font-size: 11px;
-      font-weight: 400;
+      font-weight: 500;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -493,7 +507,7 @@
     .tdt-cat-menu-title {
       display: block;
       font-size: 12px;
-      font-weight: 400;
+      font-weight: 500;
       line-height: 1.3;
     }
     .tdt-cat-menu-sub {
@@ -517,21 +531,21 @@
       font-weight: 400;
       text-decoration: none;
       white-space: nowrap;
-      background-color: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.24);
+      background-color: rgba(15, 23, 42, 0.88);
+      border: 1px solid rgba(148, 163, 184, 0.22);
       color: #e2e8f0;
       cursor: pointer;
       transition: all 0.18s ease;
     }
     .tdt-nav-btn:hover {
       background-color: #1e293b;
-      border-color: rgba(251, 191, 36, 0.5);
+      border-color: rgba(251, 191, 36, 0.48);
       transform: translateY(-1px);
     }
     .tdt-nav-btn.is-member-cat {
       color: #6ee7b7;
       border-color: rgba(52, 211, 153, 0.35);
-      background-color: rgba(6, 78, 59, 0.22);
+      background-color: rgba(6, 78, 59, 0.24);
     }
     .tdt-nav-btn.is-member-cat i { color: #34d399; }
     .tdt-nav-btn.is-quick-register,
@@ -545,16 +559,23 @@
     .tdt-nav-btn.is-group-cat {
       color: #fcd34d;
       border-color: rgba(251, 191, 36, 0.38);
-      background-color: rgba(120, 53, 15, 0.22);
+      background-color: rgba(120, 53, 15, 0.24);
     }
     .tdt-nav-btn.is-group-cat i { color: #fbbf24; }
     .tdt-nav-btn.is-blacklist { color: #fda4af; border-color: rgba(251, 113, 133, 0.35); }
     .tdt-nav-btn.is-blacklist i { color: #fb7185; }
+    .tdt-nav-btn.is-admin-link {
+      color: #fde68a;
+      border-color: rgba(251, 191, 36, 0.45);
+      background-color: rgba(245, 158, 11, 0.14);
+    }
+    .tdt-nav-btn.is-admin-link i { color: #fbbf24; }
     .tdt-nav-btn.active-home {
       background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
       border-color: #fcd34d;
       color: #060911;
-      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.35);
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.32);
     }
     .tdt-nav-btn.active-home i { color: #060911; }
     .tdt-util-group {
@@ -600,11 +621,11 @@
     </button>
   </div>
 
-  <!-- LOCKED GLOBAL NAVIGATION BAR (DO NOT MODIFY) -->
-  <nav class="tdt-global-nav" data-locked-header="true">
+  <!-- REFINED GLOBAL NAVIGATION BAR -->
+  <nav class="tdt-global-nav" aria-label="แถบนำทางหลักของเว็บไซต์">
     <div class="tdt-global-nav-inner">
       <div class="tdt-nav-top-row">
-        <!-- โลโก้เต็มกรอบแบบเรียบหรู + ข้อความหัวเรื่องแบบชิดซ้าย ตัวหนังสือไม่หนา -->
+        <!-- โลโก้และชื่อเครือข่าย -->
         <a href="index.html" class="tdt-global-brand">
           <img src="TheDriverTH.jpg" alt="โลโก้ The Driver Thailand"
             onerror="this.onerror=null;this.src='https://placehold.co/80x80/0f172a/fbbf24?text=TDT';"
@@ -618,7 +639,7 @@
           </span>
         </a>
 
-        <!-- ปุ่มสำหรับปรับตัวอักษร วางชิดขวา -->
+        <!-- ปุ่มปรับขนาดตัวอักษร -->
         <div class="tdt-util-group ml-auto" title="ปรับขนาดตัวอักษร">
           <button type="button" onclick="changeFontScale(-1)" aria-label="ลดขนาดตัวอักษร" class="tdt-util-btn" title="ลดขนาดตัวอักษร">
             <span>A-</span>
@@ -630,7 +651,7 @@
         </div>
       </div>
 
-      <!-- เมนูหมวดหมู่แบบชิดซ้าย ตัวหนังสือไม่หนา -->
+      <!-- เมนูหลักและหมวดหมู่บริการ -->
       <div class="tdt-global-right-controls" aria-label="เมนูหลักของหน้าเว็บ">
         <a href="index.html" class="tdt-nav-btn active-home">
           <i class="fa-solid fa-house"></i>
@@ -646,6 +667,8 @@
           <i class="fa-solid fa-users-viewfinder"></i>
           <span>ตรวจสอบรหัสสมาชิก</span>
         </a>
+
+        <span class="tdt-nav-divider" aria-hidden="true"></span>
 
         <!-- หมวดหมู่บริการสมาชิก -->
         <div class="tdt-cat-dropdown-wrap" id="dropdown-member-cat">
@@ -692,29 +715,31 @@
             </a>
             <a href="vip_referral_guide.html" class="tdt-cat-menu-link">
               <span class="tdt-cat-menu-icon" style="background:rgba(168,85,247,0.16);color:#c084fc;border:1px solid rgba(192,132,252,0.3);"><i class="fa-solid fa-map-location-dot"></i></span>
-              <span><span class="tdt-cat-menu-title">[VIP] ลายแทงสถานที่ท่องเที่ยว</span><span class="tdt-cat-link-sub">ขอรับลายแทงร้านค้า/สถานที่เพื่อรับค่าแนะนำ</span></span>
+              <span><span class="tdt-cat-menu-title">[VIP] ลายแทงสถานที่ท่องเที่ยว</span><span class="tdt-cat-menu-sub">ขอรับลายแทงร้านค้า/สถานที่เพื่อรับค่าแนะนำ</span></span>
             </a>
             <a href="rtaf_pass_register.html" class="tdt-cat-menu-link">
               <span class="tdt-cat-menu-icon" style="background:rgba(59,130,246,0.16);color:#60a5fa;border:1px solid rgba(96,165,250,0.3);"><i class="fa-solid fa-plane-departure"></i></span>
-              <span><span class="tdt-cat-menu-title">ทำบัตรผ่านยานพาหนะ ทอ. (ดอนเมือง)</span><span class="tdt-cat-link-sub">ขอทำบัตรผ่านเข้า - ออก เขตพื้นที่ ทอ.</span></span>
+              <span><span class="tdt-cat-menu-title">ทำบัตรผ่านยานพาหนะ ทอ. (ดอนเมือง)</span><span class="tdt-cat-menu-sub">ขอทำบัตรผ่านเข้า - ออก เขตพื้นที่ ทอ.</span></span>
             </a>
             <a href="tour_book_order.html" class="tdt-cat-menu-link">
               <span class="tdt-cat-menu-icon" style="background:rgba(20,184,166,0.16);color:#2dd4bf;border:1px solid rgba(45,212,191,0.3);"><i class="fa-solid fa-book"></i></span>
-              <span><span class="tdt-cat-menu-title">บริการสั่งซื้อสมุดทัวร์</span><span class="tdt-cat-link-sub">โซนกรุงเทพฯ-ปริมณฑล และ พัทยา-ชลบุรี</span></span>
+              <span><span class="tdt-cat-menu-title">บริการสั่งซื้อสมุดทัวร์</span><span class="tdt-cat-menu-sub">โซนกรุงเทพฯ-ปริมณฑล และ พัทยา-ชลบุรี</span></span>
             </a>
             <a href="privacy_policy.html" class="tdt-cat-menu-link">
               <span class="tdt-cat-menu-icon" style="background:rgba(148,163,184,0.16);color:#cbd5e1;border:1px solid rgba(148,163,184,0.3);"><i class="fa-solid fa-scale-balanced"></i></span>
-              <span><span class="tdt-cat-link-title">ประกาศความเป็นส่วนตัว (PDPA)</span><span class="tdt-cat-link-sub">นโยบายคุ้มครองข้อมูลส่วนบุคคลของกลุ่ม</span></span>
+              <span><span class="tdt-cat-menu-title">ประกาศความเป็นส่วนตัว (PDPA)</span><span class="tdt-cat-menu-sub">นโยบายคุ้มครองข้อมูลส่วนบุคคลของกลุ่ม</span></span>
             </a>
           </div>
         </div>
+
+        <span class="tdt-nav-divider" aria-hidden="true"></span>
 
         <a href="blacklist.html" class="tdt-nav-btn is-blacklist">
           <i class="fa-solid fa-user-shield"></i>
           <span>ตรวจสอบ Blacklist</span>
         </a>
 
-        <a href="admin.html" class="tdt-nav-btn" style="color:#fde68a;border-color:rgba(251,191,36,0.45);background-color:rgba(245,158,11,0.14);">
+        <a href="admin.html" class="tdt-nav-btn is-admin-link">
           <i class="fa-solid fa-user-shield"></i>
           <span>ระบบหลังบ้าน (Admin)</span>
         </a>

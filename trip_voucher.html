@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ใบรับรองการเดินทาง (E-Voucher) &amp; ตรวจสอบคนขับ | 🚖 The Driver TH 🇹🇭</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    html { font-size: 16px; transition: font-size 0.18s ease; }
+    html, body, input, select, textarea, button, code, pre { font-family: 'Prompt', sans-serif !important; }
+    body { background-color: #070a12; color: #f8fafc; overflow-x: clip; }
+    .dark-surface-card {
+      background: rgba(15, 23, 42, 0.94);
+      border: 1px solid rgba(251, 191, 36, 0.24);
+      color: #f8fafc;
+      box-shadow: 0 18px 38px -14px rgba(2, 6, 23, 0.72);
+    }
+    .dark-field {
+      background-color: #070b14;
+      border: 1px solid #334155;
+      color: #f8fafc;
+      transition: border-color 0.2s ease, background-color 0.2s ease;
+    }
+    .dark-field::placeholder { color: #64748b; }
+    .dark-field:focus { outline: none; border-color: #fbbf24; background-color: #0b1120; }
+    .gold-shimmer-text {
+      background: linear-gradient(90deg, #fde68a 0%, #fbbf24 35%, #f59e0b 65%, #fef08a 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .voucher-card-bg {
+      background:
+        radial-gradient(circle at 88% 12%, rgba(251, 191, 36, 0.22) 0%, transparent 45%),
+        radial-gradient(circle at 12% 88%, rgba(16, 185, 129, 0.15) 0%, transparent 48%),
+        linear-gradient(145deg, #060911 0%, #0d1424 58%, #151f34 100%);
+    }
+
+    /* UNIFIED GLOBAL NAVIGATION BAR */
+    .tdt-global-nav {
+      box-sizing: border-box;
+      font-family: 'Prompt', sans-serif;
+      background: linear-gradient(180deg, rgba(7, 11, 20, 0.98) 0%, rgba(10, 15, 28, 0.96) 100%);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      color: #e2e8f0;
+      border-bottom: 1px solid rgba(251, 191, 36, 0.28);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 10px 28px -8px rgba(2, 6, 23, 0.65);
+      width: 100%;
+    }
+    .tdt-global-nav *, .tdt-global-nav *::before, .tdt-global-nav *::after { box-sizing: border-box; }
+    .tdt-global-nav-inner { max-width: 1280px; margin: 0 auto; padding: 12px 16px; display: flex; flex-direction: column; gap: 10px; }
+    @media (min-width: 640px) { .tdt-global-nav-inner { padding: 14px 24px; gap: 12px; } }
+    .tdt-nav-top-row { width: 100%; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding-bottom: 10px; border-bottom: 1px solid rgba(148, 163, 184, 0.12); }
+    .tdt-global-brand { display: inline-flex; align-items: center; gap: 13px; font-size: 16px; font-weight: 500; color: #fbbf24; text-decoration: none; }
+    .tdt-brand-text-stack { display: inline-flex; flex-direction: column; gap: 5px; }
+    .tdt-brand-subline-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 12px; color: #cbd5e1; }
+    .tdt-brand-exec-pill { display: inline-flex; align-items: center; gap: 5px; background: rgba(251, 191, 36, 0.15); border: 1px solid rgba(251, 191, 36, 0.42); color: #fde68a; font-size: 10.5px; padding: 2px 8px; border-radius: 999px; }
+    .tdt-brand-logo-img { width: 50px; height: 50px; border-radius: 15px; object-fit: cover; background: #0f172a; border: 1.5px solid rgba(251, 191, 36, 0.85); }
+    @media (min-width: 640px) { .tdt-global-brand { font-size: 19px; } .tdt-brand-logo-img { width: 56px; height: 56px; border-radius: 16px; } }
+    .tdt-global-right-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; width: 100%; }
+    .tdt-nav-divider { width: 1px; height: 20px; background: rgba(148, 163, 184, 0.22); margin: 0 2px; display: none; }
+    @media (min-width: 1024px) { .tdt-nav-divider { display: inline-block; } }
+    .tdt-nav-btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; height: 36px; padding: 0 13px; border-radius: 11px; font-size: 12px; text-decoration: none; white-space: nowrap; background-color: rgba(15, 23, 42, 0.88); border: 1px solid rgba(148, 163, 184, 0.22); color: #e2e8f0; cursor: pointer; transition: all 0.18s ease; }
+    .tdt-nav-btn:hover { background-color: #1e293b; border-color: rgba(251, 191, 36, 0.48); transform: translateY(-1px); }
+    .tdt-nav-btn.is-quick-register, .tdt-nav-btn.is-quick-check-code { color: #5eead4; border-color: rgba(45, 212, 191, 0.38); background-color: rgba(19, 78, 74, 0.28); }
+    .tdt-nav-btn.is-blacklist { color: #fda4af; border-color: rgba(251, 113, 133, 0.35); }
+    .tdt-nav-btn.is-admin-link { color: #fde68a; border-color: rgba(251, 191, 36, 0.45); background-color: rgba(245, 158, 11, 0.14); }
+    .tdt-nav-btn.active-current { background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%); border-color: #fcd34d; color: #060911; font-weight: 600; }
+    .tdt-util-group { display: inline-flex; align-items: center; gap: 4px; background-color: rgba(15, 23, 42, 0.92); border: 1px solid rgba(251, 191, 36, 0.28); border-radius: 12px; padding: 3px; margin-left: auto; }
+    .tdt-util-btn { display: inline-flex; align-items: center; justify-content: center; height: 30px; padding: 0 9px; border-radius: 9px; font-size: 12px; color: #e2e8f0; background: transparent; border: none; cursor: pointer; }
+
+    @media print {
+      body { background: #ffffff !important; color: #0f172a !important; }
+      nav, footer, #creator-controls-section, #tab-switch-bar, #toast-box, .no-print { display: none !important; }
+      #voucher-preview-card {
+        border: 2px solid #0f172a !important;
+        box-shadow: none !important;
+        background: #ffffff !important;
+        color: #0f172a !important;
+        max-width: 100% !important;
+      }
+      #voucher-preview-card * { color: #0f172a !important; }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+  <!-- กล่องแจ้งเตือน Toast -->
+  <div id="toast-box" class="hidden fixed bottom-5 right-5 z-[1100] bg-slate-950 text-amber-300 border border-amber-400/50 px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-2.5 text-xs sm:text-sm">
+    <i class="fa-solid fa-circle-check text-emerald-400"></i>
+    <span id="toast-text" class="text-white"></span>
+  </div>
+
+  <!-- UNIFIED GLOBAL NAVIGATION BAR -->
+  <nav class="tdt-global-nav">
+    <div class="tdt-global-nav-inner">
+      <div class="tdt-nav-top-row">
+        <a href="index.html" class="tdt-global-brand">
+          <img src="TheDriverTH.jpg" alt="โลโก้ The Driver Thailand"
+            onerror="this.onerror=null;this.src='https://placehold.co/80x80/0f172a/fbbf24?text=TDT';"
+            class="tdt-brand-logo-img">
+          <span class="tdt-brand-text-stack">
+            <span>🚖 The Driver TH 🇹🇭 Premium Service</span>
+            <span class="tdt-brand-subline-row">
+              <span class="tdt-brand-exec-pill"><i class="fa-solid fa-crown" style="font-size:9px;"></i> EXECUTIVE NETWORK</span>
+              <span>เครือข่ายคนขับรถรับส่งผู้โดยสารและบริการมืออาชีพแห่งประเทศไทย</span>
+            </span>
+          </span>
+        </a>
+        <div class="tdt-util-group" title="ปรับขนาดตัวอักษร">
+          <button type="button" onclick="changeScale(-1)" class="tdt-util-btn">A-</button>
+          <span id="font-pct" style="font-size:11px;color:#fde68a;padding:0 4px;">100%</span>
+          <button type="button" onclick="changeScale(1)" class="tdt-util-btn">A+</button>
+        </div>
+      </div>
+
+      <div class="tdt-global-right-controls">
+        <a href="index.html" class="tdt-nav-btn"><i class="fa-solid fa-house"></i><span>หน้าหลัก</span></a>
+        <a href="trip_voucher.html" class="tdt-nav-btn active-current"><i class="fa-solid fa-file-invoice"></i><span>ใบรับรองการเดินทาง &amp; ตรวจคนขับ</span></a>
+        <a href="member_card_digital.html" class="tdt-nav-btn is-quick-register"><i class="fa-solid fa-qrcode"></i><span>บัตรสมาชิกดิจิทัล</span></a>
+        <a href="fare_calculator.html" class="tdt-nav-btn is-quick-check-code"><i class="fa-solid fa-calculator"></i><span>คำนวณค่าโดยสาร</span></a>
+
+        <span class="tdt-nav-divider" aria-hidden="true"></span>
+
+        <a href="blacklist.html" class="tdt-nav-btn is-blacklist"><i class="fa-solid fa-user-shield"></i><span>ตรวจสอบ Blacklist</span></a>
+        <a href="admin.html" class="tdt-nav-btn is-admin-link"><i class="fa-solid fa-sliders"></i><span>ระบบหลังบ้าน (Admin)</span></a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="flex-grow max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-6">
+    <!-- แถบเลือกโหมดการใช้งาน -->
+    <div id="tab-switch-bar" class="flex flex-wrap gap-2 bg-slate-900/95 p-2 rounded-2xl border border-amber-400/25">
+      <button type="button" onclick="switchMode('voucher')" id="btn-mode-voucher"
+        class="bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-extrabold px-4 py-2.5 rounded-xl text-xs sm:text-sm transition">
+        <i class="fa-solid fa-file-invoice-dollar mr-1.5"></i> 1. ออกใบรับรองการจองรถ / ใบเสร็จ (E-Voucher)
+      </button>
+      <button type="button" onclick="switchMode('verify')" id="btn-mode-verify"
+        class="bg-slate-950 hover:bg-slate-800 text-slate-200 border border-slate-700 font-bold px-4 py-2.5 rounded-xl text-xs sm:text-sm transition">
+        <i class="fa-solid fa-shield-halved text-emerald-400 mr-1.5"></i> 2. หน้าตรวจสอบคนขับสำหรับผู้โดยสาร (Public Verify)
+      </button>
+    </div>
+
+    <!-- โหมดที่ 1: ออกใบรับรองการเดินทาง & ใบเสร็จรับเงินดิจิทัล -->
+    <div id="panel-mode-voucher" class="space-y-6">
+      <section id="creator-controls-section" class="dark-surface-card rounded-3xl p-6 sm:p-8 space-y-5">
+        <div class="border-b border-slate-800 pb-4 flex flex-wrap items-center justify-between gap-2">
+          <div>
+            <span class="text-xs font-extrabold text-amber-300 bg-amber-500/20 border border-amber-400/40 px-3 py-1 rounded-full">PASSENGER TRUST &amp; E-VOUCHER</span>
+            <h1 class="text-xl sm:text-2xl font-black text-white pt-2">ออกใบยืนยันการจองรถ / ใบเสร็จรับเงินดิจิทัล</h1>
+            <p class="text-xs sm:text-sm text-slate-400">ดึงข้อมูลคนขับจากฐานข้อมูลจริงเพื่อสร้างเอกสารยืนยันการเดินทางพร้อม QR Code ให้ผู้โดยสารตรวจสอบได้ทันที</p>
+          </div>
+          <span class="text-xs font-mono bg-slate-950 border border-slate-800 text-emerald-400 px-3 py-1.5 rounded-xl">
+            เลขที่เอกสาร: <strong id="vch-doc-id">VCH-20261123-01</strong>
+          </span>
+        </div>
+
+        <!-- ขั้นตอนดึงข้อมูลคนขับจาก DATAMember -->
+        <div class="bg-slate-950/80 border border-amber-400/25 rounded-2xl p-4 space-y-3">
+          <p class="text-xs font-extrabold text-amber-300"><i class="fa-solid fa-id-card mr-1.5"></i>ขั้นที่ 1: ยืนยันรหัสสมาชิกคนขับ (ดึงข้อมูลรถและทะเบียนจริงอัตโนมัติ)</p>
+          <div class="grid sm:grid-cols-12 gap-3">
+            <input type="text" id="vch-driver-code" placeholder="รหัสสมาชิก (เช่น B2464)"
+              class="sm:col-span-5 dark-field rounded-xl px-4 py-2.5 text-xs sm:text-sm font-mono uppercase text-amber-300">
+            <input type="text" id="vch-driver-last4" maxlength="4" placeholder="เบอร์โทร 4 หลักสุดท้าย"
+              class="sm:col-span-4 dark-field rounded-xl px-4 py-2.5 text-xs sm:text-sm font-mono">
+            <button type="button" onclick="fetchDriverForVoucher()" id="btn-fetch-driver"
+              class="sm:col-span-3 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold rounded-xl px-4 py-2.5 text-xs sm:text-sm transition">
+              ดึงข้อมูลคนขับ
+            </button>
+          </div>
+          <p id="vch-driver-status" class="text-xs text-slate-400">หากยังไม่ดึงรหัสสมาชิก ระบบจะแสดงข้อมูลตัวอย่าง สามารถกรอกรายละเอียดการเดินทางด้านล่างได้ทันที</p>
+        </div>
+
+        <!-- ขั้นตอนกรอกรายละเอียดการเดินทางของลูกค้า -->
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 text-xs sm:text-sm">
+          <div class="space-y-1">
+            <label class="block text-xs font-bold text-slate-300">ประเภทเอกสาร</label>
+            <select id="vch-doc-type" onchange="renderVoucherPreview()" class="dark-field w-full rounded-xl px-3.5 py-2.5">
+              <option value="ใบยืนยันการจองรถ (BOOKING VOUCHER)">ใบยืนยันการจองรถ (Booking Voucher)</option>
+              <option value="ใบเสร็จรับเงินค่าบริการ (OFFICIAL RECEIPT)">ใบเสร็จรับเงินค่าบริการ (Receipt)</option>
+              <option value="ใบรับรองการเดินทาง (TRIP CERTIFICATE)">ใบรับรองการเดินทาง (Trip Certificate)</option>
+            </select>
+          </div>
+
+          <div class="space-y-1">
+            <label class="block text-xs font-bold text-slate-300">ชื่อผู้โดยสาร / บริษัทผู้ว่าจ้าง</label>
+            <input type="text" id="vch-passenger-name" value="คุณสมชาย ใจดี (Mr. Somchai)" oninput="renderVoucherPreview()"
+              class="dark-field w-full rounded-xl px-3.5 py-2.5">
+          </div>
+
+          <div class="space-y-1">
+            <label class="block text-xs font-bold text-slate-300">วันและเวลานัดรับ</label>
+            <input type="text" id="vch-pickup-time" value="25 พ.ย. 2569 เวลา 08:30 น." oninput="renderVoucherPreview()"
+              class="dark-field w-full rounded-xl px-3.5 py-2.5">
+          </div>
+
+          <div class="space-y-1">
+            <label class="block text-xs font-bold text-slate-300">จุดรับผู้โดยสาร (Pick-up)</label>
+            <input type="text" id="vch-pickup" value="สนามบินสุวรรณภูมิ ชั้น 2 ประตู 4" oninput="renderVoucherPreview()"
+              class="dark-field w-full rounded-xl px-3.5 py-2.5">
+          </div>
+
+          <div class="space-y-1">
+            <label class="block text-xs font-bold text-slate-300">จุดส่งปลายทาง (Drop-off)</label>
+            <input type="text" id="vch-dropoff" value="โรงแรมเซ็นทารา แกรนด์ พัทยา" oninput="renderVoucherPreview()"
+              class="dark-field w-full rounded-xl px-3.5 py-2.5">
+          </div>
+
+          <div class="space-y-1">
+            <label class="block text-xs font-bold text-slate-300">ค่าบริการสุทธิ (บาท)</label>
+            <input type="number" id="vch-amount" value="1800" oninput="renderVoucherPreview()"
+              class="dark-field w-full rounded-xl px-3.5 py-2.5 font-mono text-amber-300 font-bold">
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-2.5 pt-2">
+          <button type="button" onclick="window.print()"
+            class="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold px-5 py-3 rounded-xl text-xs sm:text-sm shadow transition">
+            <i class="fa-solid fa-print mr-1.5"></i> พิมพ์ / บันทึกเป็น PDF ส่งลูกค้า
+          </button>
+          <button type="button" onclick="copyVoucherText()"
+            class="bg-slate-950 hover:bg-slate-800 text-amber-300 border border-amber-400/40 font-bold px-5 py-3 rounded-xl text-xs sm:text-sm transition">
+            <i class="fa-solid fa-copy mr-1.5"></i> คัดลอกข้อความส่งทาง LINE
+          </button>
+          <button type="button" onclick="copyVerifyShareLink()"
+            class="bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/40 font-bold px-5 py-3 rounded-xl text-xs sm:text-sm transition">
+            <i class="fa-solid fa-share-nodes mr-1.5"></i> คัดลอกลิงก์ตรวจสอบคนขับให้ผู้โดยสาร
+          </button>
+        </div>
+      </section>
+
+      <!-- ตัวอย่างเอกสาร E-Voucher / ใบเสร็จดิจิทัล -->
+      <section class="flex justify-center">
+        <div id="voucher-preview-card" class="voucher-card-bg w-full max-w-2xl rounded-3xl p-6 sm:p-8 border-2 border-amber-400/60 shadow-2xl space-y-5">
+          <div class="flex flex-wrap items-center justify-between gap-3 border-b border-amber-400/25 pb-4">
+            <div class="flex items-center gap-3">
+              <img src="TheDriverTH.jpg" alt="โลโก้" onerror="this.onerror=null;this.src='https://placehold.co/80x80/0f172a/fbbf24?text=TDT';"
+                class="w-12 h-12 rounded-2xl object-cover border border-amber-400">
+              <div>
+                <p class="text-[10px] tracking-widest uppercase text-amber-300 font-extrabold" id="prev-doc-type">ใบยืนยันการจองรถ (BOOKING VOUCHER)</p>
+                <h2 class="text-base sm:text-lg font-black text-white">🚖 The Driver TH 🇹🇭 Premium Service</h2>
+                <p class="text-[11px] text-slate-400">เครือข่ายคนขับรถรับส่งผู้โดยสารและบริการมืออาชีพแห่งประเทศไทย</p>
+              </div>
+            </div>
+            <div class="text-right">
+              <span class="inline-flex items-center gap-1 bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-[11px] font-bold px-3 py-1 rounded-full">
+                <i class="fa-solid fa-shield-check"></i> VERIFIED DRIVER
+              </span>
+              <p class="text-[11px] font-mono text-slate-400 mt-1" id="prev-doc-id">VCH-20261123-01</p>
+            </div>
+          </div>
+
+          <div class="grid sm:grid-cols-12 gap-4 items-center">
+            <div class="sm:col-span-8 space-y-3 text-xs sm:text-sm">
+              <div class="bg-slate-950/75 border border-slate-800 rounded-2xl p-3.5 space-y-1.5">
+                <p class="text-[11px] text-amber-300 font-bold uppercase">ข้อมูลผู้โดยสารและกำหนดการเดินทาง</p>
+                <p><span class="text-slate-400">ผู้โดยสาร:</span> <strong id="prev-passenger" class="text-white">-</strong></p>
+                <p><span class="text-slate-400">วัน-เวลานัดรับ:</span> <strong id="prev-time" class="text-amber-300">-</strong></p>
+                <p><span class="text-slate-400">จุดรับ:</span> <strong id="prev-pickup" class="text-emerald-300">-</strong></p>
+                <p><span class="text-slate-400">จุดส่ง:</span> <strong id="prev-dropoff" class="text-white">-</strong></p>
+              </div>
+
+              <div class="bg-slate-950/75 border border-slate-800 rounded-2xl p-3.5 space-y-1.5">
+                <p class="text-[11px] text-emerald-300 font-bold uppercase">ข้อมูลคนขับรถที่ยืนยันตัวตนในเครือข่าย</p>
+                <p><span class="text-slate-400">รหัสสมาชิก / ชื่อคนขับ:</span> <strong id="prev-driver" class="text-white">[ตัวอย่าง] คนขับมืออาชีพ</strong></p>
+                <p><span class="text-slate-400">รถยนต์ / ทะเบียน:</span> <strong id="prev-vehicle" class="text-amber-300">-</strong></p>
+                <p><span class="text-slate-400">เบอร์โทรติดต่อ:</span> <strong id="prev-phone" class="font-mono text-white">-</strong></p>
+              </div>
+            </div>
+
+            <div class="sm:col-span-4 flex flex-col items-center justify-center bg-white p-3 rounded-2xl shadow-lg text-center">
+              <img id="prev-qr-img" src="" alt="QR Code ตรวจสอบคนขับ" class="w-32 h-32 object-contain">
+              <span class="text-[10px] text-slate-900 font-extrabold mt-1.5">สแกนตรวจสอบประวัติคนขับ</span>
+              <span class="text-[9px] text-slate-500">ฐานข้อมูล The Driver TH แท้</span>
+            </div>
+          </div>
+
+          <div class="pt-3 border-t border-amber-400/25 flex flex-wrap items-center justify-between gap-2">
+            <div class="text-xs text-slate-300">
+              <span>ศูนย์ประสานงานเครือข่าย: <strong class="text-emerald-400">Line @Thedrivethailand</strong></span>
+            </div>
+            <div class="text-right">
+              <span class="text-[11px] text-slate-400 block">ค่าบริการรวมสุทธิ</span>
+              <strong id="prev-amount" class="text-2xl font-black text-amber-400 font-mono">฿1,800</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- โหมดที่ 2: หน้าตรวจสอบคนขับสำหรับผู้โดยสาร (Public Driver Verification) -->
+    <div id="panel-mode-verify" class="hidden space-y-6">
+      <section class="dark-surface-card rounded-3xl p-6 sm:p-8 space-y-5">
+        <div class="space-y-1">
+          <span class="text-xs font-extrabold text-emerald-300 bg-emerald-950/80 border border-emerald-500/40 px-3 py-1 rounded-full">PUBLIC PASSENGER SAFETY CHECK</span>
+          <h2 class="text-xl sm:text-2xl font-black text-white pt-1">ตรวจสอบประวัติคนขับรถสำหรับผู้โดยสาร</h2>
+          <p class="text-xs sm:text-sm text-slate-300">กรอกรหัสสมาชิกของคนขับ (เช่น B2464) หรือสแกนจาก QR Code บนบัตร/ใบจอง เพื่อยืนยันว่าเป็นสมาชิกตัวจริงในฐานข้อมูลของเครือข่าย</p>
+        </div>
+
+        <form onsubmit="verifyDriverPublic(event)" class="flex flex-col sm:flex-row gap-3">
+          <input type="text" id="public-verify-code" required placeholder="พิมพ์รหัสสมาชิกคนขับ (เช่น B2464)"
+            class="flex-1 dark-field rounded-2xl px-4 py-3.5 text-xs sm:text-sm font-mono uppercase text-amber-300">
+          <button type="submit" id="btn-public-verify"
+            class="bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-extrabold px-7 py-3.5 rounded-2xl text-xs sm:text-sm shadow-lg shrink-0 transition">
+            <i class="fa-solid fa-shield-check mr-1.5"></i> ตรวจสอบตัวตนคนขับ
+          </button>
+        </form>
+
+        <div id="public-verify-result" class="hidden pt-2"></div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="bg-slate-950 text-slate-400 border-t border-amber-500/25 py-9 px-4 text-xs mt-10">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+      <div class="text-center sm:text-left space-y-1">
+        <p class="font-bold text-amber-300">🚖 The Driver TH 🇹🇭 Premium Service Official Network</p>
+        <p class="text-[11px] text-slate-500">ระบบออกใบรับรองการเดินทางและตรวจสอบความปลอดภัยสำหรับผู้โดยสาร</p>
+      </div>
+      <div class="flex flex-wrap justify-center gap-x-4 gap-y-2 font-semibold">
+        <a href="index.html" class="hover:text-amber-400 transition">หน้าหลัก</a>
+        <a href="trip_voucher.html" class="text-amber-300">ใบรับรองการเดินทาง</a>
+        <a href="member_card_digital.html" class="hover:text-emerald-400 transition">บัตรสมาชิกดิจิทัล</a>
+        <a href="blacklist.html" class="hover:text-rose-400 transition">ตรวจสอบ Blacklist</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const MASTER_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyeDCdxBD10D_AFZQY2NxeylLOiAmAHLesSDZHXYCb3TsYs4wYer_kRTPVOs3VpK2pP/exec';
+
+    let driverInfo = {
+      memberCode: 'SAMPLE',
+      chatName: 'สมาชิกยืนยันตัวตน The Driver TH',
+      fullName: 'กรุณากรอกรหัสสมาชิกด้านบนเพื่อดึงชื่อจริง',
+      carBrand: 'Toyota',
+      carModel: 'Camry',
+      licensePlate: 'รอตรวจสอบรหัสสมาชิก',
+      maskedPhone: '08X-XXX-XXXX'
+    };
+
+    function esc(s) {
+      return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    function showToast(msg) {
+      const box = document.getElementById('toast-box');
+      const txt = document.getElementById('toast-text');
+      if (!box || !txt) return;
+      txt.textContent = msg;
+      box.classList.remove('hidden');
+      setTimeout(() => box.classList.add('hidden'), 3200);
+    }
+
+    function switchMode(mode) {
+      const isVoucher = mode === 'voucher';
+      document.getElementById('panel-mode-voucher').classList.toggle('hidden', !isVoucher);
+      document.getElementById('panel-mode-verify').classList.toggle('hidden', isVoucher);
+      document.getElementById('btn-mode-voucher').className = isVoucher
+        ? 'bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-extrabold px-4 py-2.5 rounded-xl text-xs sm:text-sm transition'
+        : 'bg-slate-950 hover:bg-slate-800 text-slate-200 border border-slate-700 font-bold px-4 py-2.5 rounded-xl text-xs sm:text-sm transition';
+      document.getElementById('btn-mode-verify').className = !isVoucher
+        ? 'bg-gradient-to-r from-emerald-500 to-teal-400 text-slate-950 font-extrabold px-4 py-2.5 rounded-xl text-xs sm:text-sm transition'
+        : 'bg-slate-950 hover:bg-slate-800 text-slate-200 border border-slate-700 font-bold px-4 py-2.5 rounded-xl text-xs sm:text-sm transition';
+    }
+
+    function getPublicVerifyUrl(code) {
+      const base = `${window.location.origin}${window.location.pathname}`;
+      return `${base}?verify=${encodeURIComponent(code || driverInfo.memberCode)}`;
+    }
+
+    function renderVoucherPreview() {
+      const docType = document.getElementById('vch-doc-type').value;
+      const docId = document.getElementById('vch-doc-id').textContent;
+      const passenger = document.getElementById('vch-passenger-name').value.trim() || '-';
+      const time = document.getElementById('vch-pickup-time').value.trim() || '-';
+      const pickup = document.getElementById('vch-pickup').value.trim() || '-';
+      const dropoff = document.getElementById('vch-dropoff').value.trim() || '-';
+      const amount = Number(document.getElementById('vch-amount').value || 0);
+
+      document.getElementById('prev-doc-type').textContent = docType;
+      document.getElementById('prev-doc-id').textContent = docId;
+      document.getElementById('prev-passenger').textContent = passenger;
+      document.getElementById('prev-time').textContent = time;
+      document.getElementById('prev-pickup').textContent = pickup;
+      document.getElementById('prev-dropoff').textContent = dropoff;
+      document.getElementById('prev-amount').textContent = `฿${amount.toLocaleString()}`;
+
+      document.getElementById('prev-driver').textContent = `[${driverInfo.memberCode}] ${driverInfo.fullName}`;
+      document.getElementById('prev-vehicle').textContent = `${driverInfo.carBrand} ${driverInfo.carModel} • ทะเบียน ${driverInfo.licensePlate}`;
+      document.getElementById('prev-phone').textContent = driverInfo.maskedPhone;
+
+      const verifyUrl = getPublicVerifyUrl(driverInfo.memberCode);
+      document.getElementById('prev-qr-img').src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(verifyUrl)}`;
+    }
+
+    async function fetchDriverForVoucher() {
+      const code = document.getElementById('vch-driver-code').value.trim().toUpperCase();
+      const last4 = document.getElementById('vch-driver-last4').value.trim();
+      const statusEl = document.getElementById('vch-driver-status');
+      if (!code || last4.length !== 4) {
+        statusEl.innerHTML = '<span class="text-rose-400 font-bold">กรุณากรอกรหัสสมาชิกและเบอร์โทร 4 หลักสุดท้ายให้ครบถ้วน</span>';
+        return;
+      }
+      statusEl.innerHTML = '<span class="text-amber-300"><i class="fa-solid fa-spinner animate-spin mr-1"></i>กำลังดึงข้อมูลจากฐานข้อมูล DATAMember...</span>';
+      try {
+        const res = await fetch(`${MASTER_WEB_APP_URL}?action=digital_card&code=${encodeURIComponent(code)}&last4=${encodeURIComponent(last4)}&t=${Date.now()}`);
+        const json = await res.json();
+        if (!json.success || !json.member) {
+          statusEl.innerHTML = `<span class="text-rose-400 font-bold">${esc(json.error || 'ไม่พบรหัสสมาชิกหรือเลขท้ายเบอร์โทรไม่ตรงกัน')}</span>`;
+          return;
+        }
+        driverInfo = json.member;
+        statusEl.innerHTML = `<span class="text-emerald-400 font-bold"><i class="fa-solid fa-circle-check mr-1"></i>ดึงข้อมูลสำเร็จ: [${esc(driverInfo.memberCode)}] ${esc(driverInfo.fullName)} (${esc(driverInfo.licensePlate)})</span>`;
+        renderVoucherPreview();
+        showToast('ดึงข้อมูลคนขับจาก DATAMember สำเร็จ');
+      } catch (_) {
+        statusEl.innerHTML = '<span class="text-rose-400 font-bold">ไม่สามารถเชื่อมต่อฐานข้อมูลได้ในขณะนี้</span>';
+      }
+    }
+
+    async function verifyDriverPublic(e, presetCode = '') {
+      if (e) e.preventDefault();
+      const code = (presetCode || document.getElementById('public-verify-code').value).trim().toUpperCase();
+      if (!code) return;
+      document.getElementById('public-verify-code').value = code;
+      const resultBox = document.getElementById('public-verify-result');
+      resultBox.classList.remove('hidden');
+      resultBox.innerHTML = '<div class="p-5 text-center text-amber-300 text-xs"><i class="fa-solid fa-spinner animate-spin mr-1.5"></i>กำลังตรวจสอบข้อมูลสมาชิกในฐานข้อมูลเครือข่าย...</div>';
+
+      try {
+        const res = await fetch(`${MASTER_WEB_APP_URL}?action=digital_card&code=${encodeURIComponent(code)}&t=${Date.now()}`);
+        const json = await res.json();
+        if (!json.success || !json.member) {
+          resultBox.innerHTML = `
+            <div class="bg-rose-950/90 border border-rose-500/50 rounded-2xl p-5 text-rose-200 space-y-1">
+              <p class="font-extrabold text-sm text-white"><i class="fa-solid fa-triangle-exclamation text-rose-400 mr-1.5"></i>ไม่พบรหัสสมาชิก ${esc(code)} ในฐานข้อมูลที่อนุมัติแล้ว</p>
+              <p class="text-xs">โปรดตรวจสอบรหัสสมาชิกอีกครั้ง หรือติดต่อศูนย์ประสานงานเครือข่าย Line: <strong>@Thedrivethailand</strong></p>
+            </div>
+          `;
+          return;
+        }
+        const m = json.member;
+        resultBox.innerHTML = `
+          <div class="bg-emerald-950/85 border-2 border-emerald-400/60 rounded-3xl p-5 sm:p-6 text-white space-y-4 shadow-xl">
+            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-emerald-500/30 pb-3">
+              <div class="flex items-center gap-2.5">
+                <div class="w-11 h-11 rounded-2xl bg-emerald-500/20 border border-emerald-400/50 text-emerald-300 flex items-center justify-center text-xl">
+                  <i class="fa-solid fa-user-check"></i>
+                </div>
+                <div>
+                  <span class="text-[10px] font-extrabold uppercase text-emerald-300 tracking-wider">VERIFIED NETWORK MEMBER</span>
+                  <h3 class="text-base sm:text-lg font-black text-white">[${esc(m.memberCode)}] ${esc(m.fullName)}</h3>
+                </div>
+              </div>
+              <span class="bg-emerald-500 text-slate-950 font-extrabold text-xs px-3 py-1 rounded-full">สถานะ: ปกติ / ยืนยันตัวตนแล้ว</span>
+            </div>
+
+            <div class="grid sm:grid-cols-3 gap-3 text-xs">
+              <div class="bg-slate-950/75 p-3 rounded-xl border border-emerald-500/25">
+                <span class="text-slate-400 block">ชื่อในเครือข่าย</span>
+                <strong class="text-white">${esc(m.chatName)}</strong>
+              </div>
+              <div class="bg-slate-950/75 p-3 rounded-xl border border-emerald-500/25">
+                <span class="text-slate-400 block">รถยนต์ / ทะเบียน</span>
+                <strong class="text-amber-300">${esc(m.carBrand)} ${esc(m.carModel)} (${esc(m.licensePlate)})</strong>
+              </div>
+              <div class="bg-slate-950/75 p-3 rounded-xl border border-emerald-500/25">
+                <span class="text-slate-400 block">เบอร์โทรศัพท์</span>
+                <strong class="font-mono text-white">${esc(m.maskedPhone)}</strong>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap items-center justify-between gap-2 pt-1 text-xs text-emerald-200">
+              <span><i class="fa-solid fa-shield-halved mr-1 text-amber-300"></i>ผ่านการตรวจสอบประวัติและเอกสารยืนยันตัวตนกับ <strong>The Driver Thailand</strong></span>
+              <a href="https://line.me/R/ti/p/@Thedrivethailand" target="_blank" rel="noopener noreferrer"
+                class="bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold px-4 py-2 rounded-xl transition">
+                <i class="fa-brands fa-line mr-1"></i> ติดต่อศูนย์ดูแลผู้โดยสาร
+              </a>
+            </div>
+          </div>
+        `;
+      } catch (_) {
+        resultBox.innerHTML = '<div class="p-4 rounded-2xl bg-rose-950 text-rose-200 text-xs">ไม่สามารถเชื่อมต่อฐานข้อมูลได้ในขณะนี้</div>';
+      }
+    }
+
+    function copyToClipboard(text, msg) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      showToast(msg);
+    }
+
+    function copyVoucherText() {
+      const docType = document.getElementById('vch-doc-type').value;
+      const docId = document.getElementById('vch-doc-id').textContent;
+      const passenger = document.getElementById('vch-passenger-name').value;
+      const time = document.getElementById('vch-pickup-time').value;
+      const pickup = document.getElementById('vch-pickup').value;
+      const dropoff = document.getElementById('vch-dropoff').value;
+      const amount = Number(document.getElementById('vch-amount').value || 0).toLocaleString();
+      const verifyUrl = getPublicVerifyUrl(driverInfo.memberCode);
+
+      const text =
+`🚖 ${docType}
+The Driver TH Premium Service
+• เลขที่เอกสาร: ${docId}
+• ผู้โดยสาร: ${passenger}
+• วัน-เวลานัดรับ: ${time}
+• จุดรับ: ${pickup}
+• จุดส่ง: ${dropoff}
+• พนักงานขับรถ: [${driverInfo.memberCode}] ${driverInfo.fullName}
+• รถยนต์ / ทะเบียน: ${driverInfo.carBrand} ${driverInfo.carModel} (${driverInfo.licensePlate})
+• ค่าบริการรวมสุทธิ: ${amount} บาท
+• ลิงก์ตรวจสอบตัวตนคนขับ: ${verifyUrl}`;
+      copyToClipboard(text, 'คัดลอกรายละเอียดใบจอง/ใบเสร็จส่ง LINE เรียบร้อยแล้ว');
+    }
+
+    function copyVerifyShareLink() {
+      copyToClipboard(getPublicVerifyUrl(driverInfo.memberCode), 'คัดลอกลิงก์ตรวจสอบตัวตนคนขับสำหรับผู้โดยสารเรียบร้อยแล้ว');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const now = new Date();
+      const stamp = `VCH-${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}-${String(now.getHours()).padStart(2, '0')}${String(now.getMinutes()).padStart(2, '0')}`;
+      document.getElementById('vch-doc-id').textContent = stamp;
+      renderVoucherPreview();
+
+      const params = new URLSearchParams(window.location.search);
+      const verifyCode = params.get('verify');
+      if (verifyCode) {
+        switchMode('verify');
+        verifyDriverPublic(null, verifyCode);
+      }
+    });
+
+    let scalePct = Number(localStorage.getItem('tdt_font_scale_pct')) || 100;
+    function changeScale(step) {
+      scalePct = Math.min(130, Math.max(90, scalePct + step * 10));
+      document.documentElement.style.fontSize = `${(scalePct / 100) * 16}px`;
+      document.getElementById('font-pct').textContent = `${scalePct}%`;
+      localStorage.setItem('tdt_font_scale_pct', String(scalePct));
+    }
+    changeScale(0);
+  </script>
+</body>
+</html>

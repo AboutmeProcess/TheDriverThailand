@@ -118,7 +118,7 @@
               <div id="panel-cat-group" class="tdt-cat-menu-panel">
                 <div class="tdt-cat-menu-header" style="background:rgba(120,53,15,0.45);color:#fcd34d;border:1px solid rgba(251,191,36,0.25);">
                   <span><i class="fa-solid fa-gem"></i> หมวดหมู่บริการของกลุ่ม</span>
-                  <span style="font-size:10px;opacity:0.85;">5 เมนู</span>
+                  <span style="font-size:10px;opacity:0.85;">12 เมนู</span>
                 </div>
                 <a href="pcard.html" class="tdt-cat-menu-link">
                   <span class="tdt-cat-menu-icon" style="background:rgba(245,158,11,0.16);color:#fbbf24;border:1px solid rgba(251,191,36,0.3);"><i class="fa-solid fa-id-badge"></i></span>
@@ -137,75 +137,52 @@
                   <span><span class="tdt-cat-menu-title">บริการสั่งซื้อสมุดทัวร์</span><span class="tdt-cat-menu-sub">โซนกรุงเทพฯ-ปริมณฑล และ พัทยา-ชลบุรี</span></span>
                 </a>
                 <a href="privacy_policy.html" class="tdt-cat-menu-link">
-              <span class="tdt-cat-menu-icon" style="background:rgba(148,163,184,0.16);color:#cbd5e1;border:1px solid rgba(148,163,184,0.3);"><i class="fa-solid fa-scale-balanced"></i></span>
-              <span><span class="tdt-cat-menu-title">ประกาศความเป็นส่วนตัว (PDPA)</span><span class="tdt-cat-menu-sub">นโยบายคุ้มครองข้อมูลส่วนบุคคลของกลุ่ม</span></span>
+                  <span class="tdt-cat-menu-icon" style="background:rgba(148,163,184,0.16);color:#cbd5e1;border:1px solid rgba(148,163,184,0.3);"><i class="fa-solid fa-scale-balanced"></i></span>
+                  <span><span class="tdt-cat-menu-title">ประกาศความเป็นส่วนตัว (PDPA)</span><span class="tdt-cat-menu-sub">นโยบายคุ้มครองข้อมูลส่วนบุคคลของกลุ่ม</span></span>
+                </a>
+                <a href="tracking.html" class="tdt-cat-menu-link">
+                  <span class="tdt-cat-menu-icon" style="background:rgba(245,158,11,0.16);color:#fbbf24;border:1px solid rgba(251,191,36,0.3);"><i class="fa-solid fa-satellite-dish"></i></span>
+                  <span><span class="tdt-cat-menu-title">ศูนย์ติดตามสถานะคำร้องทั้งหมด</span><span class="tdt-cat-menu-sub">เช็คความคืบหน้าและเลขพัสดุทุกบริการ</span></span>
+                </a>
+                <a href="member_card_digital.html" class="tdt-cat-menu-link">
+                  <span class="tdt-cat-menu-icon" style="background:rgba(16,185,129,0.16);color:#34d399;border:1px solid rgba(52,211,153,0.3);"><i class="fa-solid fa-qrcode"></i></span>
+                  <span><span class="tdt-cat-menu-title">บัตรสมาชิกดิจิทัล &amp; QR Code</span><span class="tdt-cat-menu-sub">เปิดบัตรอิเล็กทรอนิกส์ยืนยันตัวตน</span></span>
+                </a>
+                <a href="job_board.html" class="tdt-cat-menu-link">
+                  <span class="tdt-cat-menu-icon" style="background:rgba(245,158,11,0.16);color:#fbbf24;border:1px solid rgba(251,191,36,0.3);"><i class="fa-solid fa-handshake"></i></span>
+                  <span><span class="tdt-cat-menu-title">กระดานแลกเปลี่ยนงาน / หาคนขับแทน</span><span class="tdt-cat-menu-sub">ปล่อยงานและรับงานเฉพาะสมาชิกที่ยืนยันรหัส</span></span>
+                </a>
+                <a href="community.html" class="tdt-cat-menu-link">
+                  <span class="tdt-cat-menu-icon" style="background:rgba(56,189,248,0.16);color:#38bdf8;border:1px solid rgba(56,189,248,0.3);"><i class="fa-solid fa-comments"></i></span>
+                  <span><span class="tdt-cat-menu-title">ชุมชนเว็บบอร์ดสมาชิก</span><span class="tdt-cat-menu-sub">ตั้งกระทู้ รีวิวเส้นทาง และสะสมเรทติ้ง</span></span>
+                </a>
+                <a href="fare_calculator.html" class="tdt-cat-menu-link">
+                  <span class="tdt-cat-menu-icon" style="background:rgba(16,185,129,0.16);color:#34d399;border:1px solid rgba(52,211,153,0.3);"><i class="fa-solid fa-calculator"></i></span>
+                  <span><span class="tdt-cat-menu-title">คำนวณค่าโดยสารมาตรฐาน</span><span class="tdt-cat-menu-sub">ประเมินราคางานเหมาและคัดลอกใบเสนอราคา</span></span>
+                </a>
+                <a href="guide.html" class="tdt-cat-menu-link">
+                  <span class="tdt-cat-menu-icon" style="background:rgba(148,163,184,0.16);color:#cbd5e1;border:1px solid rgba(148,163,184,0.3);"><i class="fa-solid fa-book-open"></i></span>
+                  <span><span class="tdt-cat-menu-title">คู่มือสมาชิก &amp; กฎกติกาเครือข่าย</span><span class="tdt-cat-menu-sub">วิธีตั้งชื่อ ถ่ายรูปยืนยันตัวตน และติดต่อแอดมิน</span></span>
+                </a>
+              </div>
+            </div>
+
+            <span class="tdt-nav-divider" aria-hidden="true"></span>
+
+            <a href="blacklist.html" class="tdt-nav-btn is-blacklist ${isBlacklist ? "active-home" : ""}">
+              <i class="fa-solid fa-user-shield"></i>
+              <span>ตรวจสอบ Blacklist</span>
             </a>
-            <a href="tracking.html" class="tdt-cat-menu-link">
-              <span class="tdt-cat-menu-icon" style="background:rgba(245,158,11,0.16);color:#fbbf24;border:1px solid rgba(251,191,36,0.3);"><i class="fa-solid fa-satellite-dish"></i></span>
-              <span><span class="tdt-cat-menu-title">ศูนย์ติดตามสถานะคำร้องทั้งหมด</span><span class="tdt-cat-menu-sub">เช็คความคืบหน้าและเลขพัสดุทุกบริการ</span></span>
-            </a>
-            <a href="member_card_digital.html" class="tdt-cat-menu-link">
-              <span class="tdt-cat-menu-icon" style="background:rgba(16,185,129,0.16);color:#34d399;border:1px solid rgba(52,211,153,0.3);"><i class="fa-solid fa-qrcode"></i></span>
-              <span><span class="tdt-cat-menu-title">บัตรสมาชิกดิจิทัล &amp; QR Code</span><span class="tdt-cat-menu-sub">เปิดบัตรอิเล็กทรอนิกส์ยืนยันตัวตน</span></span>
-            </a>
-            <a href="job_board.html" class="tdt-cat-menu-link">
-              <span class="tdt-cat-menu-icon" style="background:rgba(245,158,11,0.16);color:#fbbf24;border:1px solid rgba(251,191,36,0.3);"><i class="fa-solid fa-handshake"></i></span>
-              <span><span class="tdt-cat-menu-title">กระดานแลกเปลี่ยนงาน / หาคนขับแทน</span><span class="tdt-cat-menu-sub">ปล่อยงานและรับงานเฉพาะสมาชิกที่ยืนยันรหัส</span></span>
-            </a>
-            <a href="community.html" class="tdt-cat-menu-link">
-              <span class="tdt-cat-menu-icon" style="background:rgba(56,189,248,0.16);color:#38bdf8;border:1px solid rgba(56,189,248,0.3);"><i class="fa-solid fa-comments"></i></span>
-              <span><span class="tdt-cat-menu-title">ชุมชนเว็บบอร์ดสมาชิก</span><span class="tdt-cat-menu-sub">ตั้งกระทู้ รีวิวเส้นทาง และสะสมเรทติ้ง</span></span>
-            </a>
-            <a href="fare_calculator.html" class="tdt-cat-menu-link">
-              <span class="tdt-cat-menu-icon" style="background:rgba(16,185,129,0.16);color:#34d399;border:1px solid rgba(52,211,153,0.3);"><i class="fa-solid fa-calculator"></i></span>
-              <span><span class="tdt-cat-menu-title">คำนวณค่าโดยสารมาตรฐาน</span><span class="tdt-cat-menu-sub">ประเมินราคางานเหมาและคัดลอกใบเสนอราคา</span></span>
-            </a>
-            <a href="guide.html" class="tdt-cat-menu-link">
-              <span class="tdt-cat-menu-icon" style="background:rgba(148,163,184,0.16);color:#cbd5e1;border:1px solid rgba(148,163,184,0.3);"><i class="fa-solid fa-book-open"></i></span>
-              <span><span class="tdt-cat-menu-title">คู่มือสมาชิก &amp; กฎกติกาเครือข่าย</span><span class="tdt-cat-menu-sub">วิธีตั้งชื่อ ถ่ายรูปยืนยันตัวตน และติดต่อแอดมิน</span></span>
+
+            <a href="admin.html" class="tdt-nav-btn is-admin-link ${currentPage === "admin.html" ? "active-home" : ""}">
+              <i class="fa-solid fa-sliders"></i>
+              <span>ระบบหลังบ้าน (Admin)</span>
             </a>
           </div>
         </div>
-
-        <span class="tdt-nav-divider" aria-hidden="true"></span>
-
-        <a href="blacklist.html" class="tdt-nav-btn is-blacklist ${isBlacklist ? "active-home" : ""}">
-          <i class="fa-solid fa-user-shield"></i>
-          <span>ตรวจสอบ Blacklist</span>
-        </a>
-
-        <a href="admin.html" class="tdt-nav-btn is-admin-link ${currentPage === "admin.html" ? "active-home" : ""}">
-          <i class="fa-solid fa-sliders"></i>
-          <span>ระบบหลังบ้าน (Admin)</span>
-        </a>
-      </div>
-    </div>
-  </nav>
-`;
-}
-
-function buildGlobalFooterHTML() {
-  return `
-    <footer class="tdt-global-footer bg-slate-950 text-slate-400 border-t border-amber-500/25 py-9 px-4 text-xs mt-10">
-      <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-        <div class="text-center sm:text-left space-y-1">
-          <p class="font-bold text-amber-300"><i class="fa-solid fa-taxi mr-1"></i> The Driver TH 🇹🇭 Premium Service Official Network</p>
-          <p class="text-[11px] text-slate-500">ศูนย์กลางระบบสมาชิก บัตรสมาชิกประเมศฐ์ และระบบเฝ้าระวังภัยกลุ่มคนขับรถรับจ้าง</p>
-        </div>
-        <div class="flex flex-wrap justify-center gap-x-4 gap-y-2 font-semibold">
-          <a href="index.html" class="hover:text-amber-400 transition"><i class="fa-solid fa-house mr-1"></i>หน้าหลัก</a>
-          <a href="register.html" class="hover:text-emerald-400 transition"><i class="fa-solid fa-users-viewfinder mr-1"></i>ระบบสมาชิก</a>
-          <a href="member_register.html" class="hover:text-teal-400 transition"><i class="fa-solid fa-file-signature mr-1"></i>ลงทะเบียนสมาชิกใหม่</a>
-          <a href="pcard.html" class="hover:text-amber-400 transition"><i class="fa-solid fa-id-badge mr-1"></i>ทำบัตรสมาชิกประเมศฐ์</a>
-          <a href="unblock_request.html" class="hover:text-sky-400 transition"><i class="fa-solid fa-unlock-keyhole mr-1"></i>ขอปลดล็อก OpenChat</a>
-          <a href="blacklist.html" class="hover:text-rose-400 transition"><i class="fa-solid fa-user-shield mr-1"></i>ตรวจสอบ Blacklist</a>
-          <a href="privacy_policy.html" class="hover:text-amber-300 transition"><i class="fa-solid fa-scale-balanced mr-1"></i>ประกาศความเป็นส่วนตัว</a>
-          <a href="admin.html" class="text-amber-300 hover:text-amber-200 transition"><i class="fa-solid fa-sliders mr-1"></i>ระบบหลังบ้าน (Admin)</a>
-        </div>
-      </div>
-    </footer>
-  `;
-}
+      </nav>
+    `;
+  }
 
   function buildGlobalFooterHTML() {
     return `

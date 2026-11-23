@@ -46,15 +46,15 @@
     .tdt-global-nav {
       box-sizing: border-box;
       font-family: 'Prompt', sans-serif;
-      background: rgba(6, 9, 17, 0.96);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+      background: linear-gradient(180deg, rgba(7, 11, 20, 0.98) 0%, rgba(10, 15, 28, 0.96) 100%);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       color: #e2e8f0;
-      border-bottom: 1px solid rgba(251, 191, 36, 0.25);
+      border-bottom: 1px solid rgba(251, 191, 36, 0.28);
       position: sticky;
       top: 0;
       z-index: 1000;
-      box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.45);
+      box-shadow: 0 10px 28px -8px rgba(2, 6, 23, 0.65);
       width: 100%;
     }
     .tdt-global-nav *, .tdt-global-nav *::before, .tdt-global-nav *::after { box-sizing: border-box; }
@@ -66,7 +66,7 @@
       flex-direction: column;
       align-items: flex-start;
       justify-content: flex-start;
-      gap: 11px;
+      gap: 10px;
     }
     @media (min-width: 640px) {
       .tdt-global-nav-inner { padding: 14px 24px; gap: 12px; }
@@ -78,14 +78,16 @@
       align-items: center;
       justify-content: space-between;
       gap: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.12);
     }
     .tdt-global-brand {
       display: inline-flex;
       align-items: center;
-      gap: 14px;
+      gap: 13px;
       font-size: 16px;
       line-height: 1.3;
-      font-weight: 400;
+      font-weight: 500;
       color: #fbbf24;
       text-decoration: none;
       text-align: left;
@@ -96,7 +98,7 @@
       flex-direction: column;
       align-items: flex-start;
       justify-content: center;
-      gap: 7px;
+      gap: 5px;
       line-height: 1.3;
       font-weight: 400;
     }
@@ -115,32 +117,32 @@
       display: inline-flex;
       align-items: center;
       gap: 5px;
-      background: rgba(251, 191, 36, 0.18);
-      border: 1px solid rgba(251, 191, 36, 0.45);
+      background: rgba(251, 191, 36, 0.15);
+      border: 1px solid rgba(251, 191, 36, 0.42);
       color: #fde68a;
       font-size: 10.5px;
-      font-weight: 400;
+      font-weight: 500;
       padding: 2px 8px;
       border-radius: 999px;
       line-height: 1.25;
     }
     .tdt-brand-logo-img {
-      width: 52px;
-      height: 52px;
-      border-radius: 16px;
+      width: 50px;
+      height: 50px;
+      border-radius: 15px;
       object-fit: cover;
       object-position: center;
       background: #ffffff;
       padding: 0;
-      border: 1.5px solid rgba(251, 191, 36, 0.9);
-      box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.55), 0 0 0 2px rgba(251, 191, 36, 0.18);
+      border: 1.5px solid rgba(251, 191, 36, 0.85);
+      box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.55), 0 0 0 2px rgba(251, 191, 36, 0.16);
       flex-shrink: 0;
       transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
     }
-    .tdt-global-brand:hover .tdt-brand-logo-img { transform: scale(1.06); border-color: #fde68a; }
+    .tdt-global-brand:hover .tdt-brand-logo-img { transform: scale(1.05); border-color: #fde68a; }
     @media (min-width: 640px) {
-      .tdt-global-brand { font-size: 19px; }
-      .tdt-brand-logo-img { width: 58px; height: 58px; border-radius: 18px; }
+      .tdt-global-brand { gap: 14px; font-size: 19px; }
+      .tdt-brand-logo-img { width: 56px; height: 56px; border-radius: 16px; }
     }
     .tdt-global-brand:hover { color: #fde68a; }
     .tdt-global-right-controls {
@@ -148,8 +150,18 @@
       flex-wrap: wrap;
       align-items: center;
       justify-content: flex-start;
-      gap: 8px;
+      gap: 7px;
       width: 100%;
+    }
+    .tdt-nav-divider {
+      width: 1px;
+      height: 20px;
+      background: rgba(148, 163, 184, 0.22);
+      margin: 0 2px;
+      display: none;
+    }
+    @media (min-width: 1024px) {
+      .tdt-nav-divider { display: inline-block; }
     }
     .tdt-cat-dropdown-wrap { position: relative; display: inline-block; }
     .tdt-cat-menu-panel {
@@ -157,7 +169,7 @@
       position: absolute;
       left: 0;
       top: calc(100% + 8px);
-      width: 310px;
+      width: 316px;
       max-width: calc(100vw - 32px);
       border-radius: 16px;
       padding: 10px;
@@ -173,7 +185,7 @@
       margin-bottom: 6px;
       border-radius: 11px;
       font-size: 11px;
-      font-weight: 400;
+      font-weight: 500;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -203,7 +215,7 @@
       flex-shrink: 0;
       font-size: 12px;
     }
-    .tdt-cat-menu-title { display: block; font-size: 12px; font-weight: 400; line-height: 1.3; }
+    .tdt-cat-menu-title { display: block; font-size: 12px; font-weight: 500; line-height: 1.3; }
     .tdt-cat-menu-sub { display: block; font-size: 10px; font-weight: 400; color: #94a3b8; line-height: 1.25; }
     .tdt-nav-btn {
       display: inline-flex;
@@ -219,28 +231,35 @@
       font-weight: 400;
       text-decoration: none;
       white-space: nowrap;
-      background-color: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.24);
+      background-color: rgba(15, 23, 42, 0.88);
+      border: 1px solid rgba(148, 163, 184, 0.22);
       color: #e2e8f0;
       cursor: pointer;
       transition: all 0.18s ease;
     }
-    .tdt-nav-btn:hover { background-color: #1e293b; border-color: rgba(251, 191, 36, 0.5); transform: translateY(-1px); }
-    .tdt-nav-btn.is-member-cat { color: #6ee7b7; border-color: rgba(52, 211, 153, 0.35); background-color: rgba(6, 78, 59, 0.22); }
+    .tdt-nav-btn:hover { background-color: #1e293b; border-color: rgba(251, 191, 36, 0.48); transform: translateY(-1px); }
+    .tdt-nav-btn.is-member-cat { color: #6ee7b7; border-color: rgba(52, 211, 153, 0.35); background-color: rgba(6, 78, 59, 0.24); }
     .tdt-nav-btn.is-member-cat i { color: #34d399; }
     .tdt-nav-btn.is-quick-register,
     .tdt-nav-btn.is-quick-check-code { color: #5eead4; border-color: rgba(45, 212, 191, 0.38); background-color: rgba(19, 78, 74, 0.28); }
     .tdt-nav-btn.is-quick-register i,
     .tdt-nav-btn.is-quick-check-code i { color: #2dd4bf; }
-    .tdt-nav-btn.is-group-cat { color: #fcd34d; border-color: rgba(251, 191, 36, 0.38); background-color: rgba(120, 53, 15, 0.22); }
+    .tdt-nav-btn.is-group-cat { color: #fcd34d; border-color: rgba(251, 191, 36, 0.38); background-color: rgba(120, 53, 15, 0.24); }
     .tdt-nav-btn.is-group-cat i { color: #fbbf24; }
     .tdt-nav-btn.is-blacklist { color: #fda4af; border-color: rgba(251, 113, 133, 0.35); }
     .tdt-nav-btn.is-blacklist i { color: #fb7185; }
+    .tdt-nav-btn.is-admin-link {
+      color: #fde68a;
+      border-color: rgba(251, 191, 36, 0.45);
+      background-color: rgba(245, 158, 11, 0.14);
+    }
+    .tdt-nav-btn.is-admin-link i { color: #fbbf24; }
     .tdt-nav-btn.active-current {
       background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
       border-color: #fcd34d;
       color: #060911;
-      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.35);
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.32);
     }
     .tdt-nav-btn.active-current i { color: #060911; }
     .tdt-util-group {
@@ -251,7 +270,6 @@
       border: 1px solid rgba(251, 191, 36, 0.28);
       border-radius: 12px;
       padding: 3px;
-      margin-left: auto;
       flex-shrink: 0;
     }
     .tdt-util-btn {
@@ -276,7 +294,7 @@
 </head>
 <body class="antialiased min-h-screen flex flex-col">
   <!-- UNIFIED GLOBAL SITE NAVIGATION BAR -->
-  <nav class="tdt-global-nav">
+  <nav class="tdt-global-nav" aria-label="แถบนำทางหลักของเว็บไซต์">
     <div class="tdt-global-nav-inner">
       <div class="tdt-nav-top-row">
         <a href="index.html" class="tdt-global-brand">
@@ -286,14 +304,14 @@
           <span class="tdt-brand-text-stack">
             <span>🚖 The Driver TH 🇹🇭 Premium Service</span>
             <span class="tdt-brand-subline-row">
-              <span class="tdt-brand-exec-pill"><i class="fa-solid fa-crown" style="font-size:9px;"></i> EXECUTIVE NETWORK</span>
+              <span class="tdt-brand-exec-pill"><i class="fa-solid fa-crown text-[9px]"></i> EXECUTIVE NETWORK</span>
               <span>เครือข่ายคนขับรถรับส่งผู้โดยสารและบริการมืออาชีพแห่งประเทศไทย</span>
             </span>
           </span>
         </a>
-        <div class="tdt-util-group" title="ปรับขนาดตัวอักษร">
+        <div class="tdt-util-group ml-auto" title="ปรับขนาดตัวอักษร">
           <button type="button" onclick="tdtChangeFontScale(-1)" aria-label="ลดขนาดตัวอักษร" class="tdt-util-btn">A-</button>
-          <span id="tdt-font-pct" style="font-size:11px;font-weight:400;color:#fde68a;padding:0 4px;">100%</span>
+          <span id="tdt-font-pct" class="text-[11px] font-normal text-amber-300 px-1 select-none">100%</span>
           <button type="button" onclick="tdtChangeFontScale(1)" aria-label="เพิ่มขนาดตัวอักษร" class="tdt-util-btn">A+</button>
         </div>
       </div>
@@ -302,16 +320,12 @@
         <a href="index.html" class="tdt-nav-btn"><i class="fa-solid fa-house"></i><span>หน้าหลัก</span></a>
         <a href="member_register.html" class="tdt-nav-btn is-quick-register"><i class="fa-solid fa-file-signature"></i><span>ลงทะเบียนสมาชิกใหม่</span></a>
         <a href="register.html" class="tdt-nav-btn is-quick-check-code"><i class="fa-solid fa-users-viewfinder"></i><span>ตรวจสอบรหัสสมาชิก</span></a>
-        <a href="tracking.html" class="tdt-nav-btn"><i class="fa-solid fa-satellite-dish"></i><span>ติดตามสถานะคำร้อง</span></a>
-        <a href="member_card_digital.html" class="tdt-nav-btn"><i class="fa-solid fa-qrcode"></i><span>บัตรดิจิทัล</span></a>
-        <a href="job_board.html" class="tdt-nav-btn"><i class="fa-solid fa-handshake"></i><span>กระดานงาน</span></a>
-        <a href="community.html" class="tdt-nav-btn"><i class="fa-solid fa-comments"></i><span>เว็บบอร์ด</span></a>
-        <a href="fare_calculator.html" class="tdt-nav-btn"><i class="fa-solid fa-calculator"></i><span>คำนวณค่าโดยสาร</span></a>
-        <a href="guide.html" class="tdt-nav-btn"><i class="fa-solid fa-book-open"></i><span>คู่มือสมาชิก</span></a>
+
+        <span class="tdt-nav-divider" aria-hidden="true"></span>
 
         <div class="tdt-cat-dropdown-wrap" id="nav-drop-member">
           <button type="button" onclick="tdtToggleDropdown('member', event)" id="nav-btn-member" aria-expanded="false" class="tdt-nav-btn is-member-cat">
-            <i class="fa-solid fa-users"></i><span>หมวดหมู่บริการสมาชิก</span><i id="nav-chev-member" class="fa-solid fa-chevron-down" style="font-size:10px;transition:transform 0.2s;"></i>
+            <i class="fa-solid fa-users"></i><span>หมวดหมู่บริการสมาชิก</span><i id="nav-chev-member" class="fa-solid fa-chevron-down text-[10px]" style="transition:transform 0.2s;"></i>
           </button>
           <div id="nav-panel-member" class="tdt-cat-menu-panel">
             <div class="tdt-cat-menu-header" style="background:rgba(6,78,59,0.55);color:#6ee7b7;border:1px solid rgba(16,185,129,0.25);">
@@ -334,11 +348,11 @@
 
         <div class="tdt-cat-dropdown-wrap" id="nav-drop-group">
           <button type="button" onclick="tdtToggleDropdown('group', event)" id="nav-btn-group" aria-expanded="false" class="tdt-nav-btn is-group-cat">
-            <i class="fa-solid fa-briefcase"></i><span>หมวดหมู่บริการของกลุ่ม</span><i id="nav-chev-group" class="fa-solid fa-chevron-down" style="font-size:10px;transition:transform 0.2s;"></i>
+            <i class="fa-solid fa-briefcase"></i><span>หมวดหมู่บริการของกลุ่ม</span><i id="nav-chev-group" class="fa-solid fa-chevron-down text-[10px]" style="transition:transform 0.2s;"></i>
           </button>
           <div id="nav-panel-group" class="tdt-cat-menu-panel">
             <div class="tdt-cat-menu-header" style="background:rgba(120,53,15,0.45);color:#fcd34d;border:1px solid rgba(251,191,36,0.25);">
-              <span><i class="fa-solid fa-gem"></i> หมวดหมู่บริการของกลุ่ม</span><span style="font-size:10px;opacity:0.85;">5 เมนู</span>
+              <span><i class="fa-solid fa-gem"></i> หมวดหมู่บริการของกลุ่ม</span><span style="font-size:10px;opacity:0.85;">11 เมนู</span>
             </div>
             <a href="pcard.html" class="tdt-cat-menu-link">
               <span class="tdt-cat-menu-icon" style="background:rgba(245,158,11,0.16);color:#fbbf24;border:1px solid rgba(251,191,36,0.3);"><i class="fa-solid fa-id-badge"></i></span>
@@ -360,11 +374,37 @@
               <span class="tdt-cat-menu-icon" style="background:rgba(148,163,184,0.16);color:#cbd5e1;border:1px solid rgba(148,163,184,0.3);"><i class="fa-solid fa-scale-balanced"></i></span>
               <span><span class="tdt-cat-menu-title">ประกาศความเป็นส่วนตัว (PDPA)</span><span class="tdt-cat-menu-sub">นโยบายคุ้มครองข้อมูลส่วนบุคคลของกลุ่ม</span></span>
             </a>
+            <a href="tracking.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(245,158,11,0.16);color:#fbbf24;border:1px solid rgba(251,191,36,0.3);"><i class="fa-solid fa-satellite-dish"></i></span>
+              <span><span class="tdt-cat-menu-title">ศูนย์ติดตามสถานะคำร้องทั้งหมด</span><span class="tdt-cat-menu-sub">เช็คความคืบหน้าและเลขพัสดุทุกบริการ</span></span>
+            </a>
+            <a href="member_card_digital.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(16,185,129,0.16);color:#34d399;border:1px solid rgba(52,211,153,0.3);"><i class="fa-solid fa-qrcode"></i></span>
+              <span><span class="tdt-cat-menu-title">บัตรสมาชิกดิจิทัล &amp; QR Code</span><span class="tdt-cat-menu-sub">เปิดบัตรอิเล็กทรอนิกส์ยืนยันตัวตน</span></span>
+            </a>
+            <a href="job_board.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(245,158,11,0.16);color:#fbbf24;border:1px solid rgba(251,191,36,0.3);"><i class="fa-solid fa-handshake"></i></span>
+              <span><span class="tdt-cat-menu-title">กระดานแลกเปลี่ยนงาน / หาคนขับแทน</span><span class="tdt-cat-menu-sub">ปล่อยงานและรับงานเฉพาะสมาชิกที่ยืนยันรหัส</span></span>
+            </a>
+            <a href="community.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(56,189,248,0.16);color:#38bdf8;border:1px solid rgba(56,189,248,0.3);"><i class="fa-solid fa-comments"></i></span>
+              <span><span class="tdt-cat-menu-title">ชุมชนเว็บบอร์ดสมาชิก</span><span class="tdt-cat-menu-sub">ตั้งกระทู้ รีวิวเส้นทาง และสะสมเรทติ้ง</span></span>
+            </a>
+            <a href="fare_calculator.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(16,185,129,0.16);color:#34d399;border:1px solid rgba(52,211,153,0.3);"><i class="fa-solid fa-calculator"></i></span>
+              <span><span class="tdt-cat-menu-title">คำนวณค่าโดยสารมาตรฐาน</span><span class="tdt-cat-menu-sub">ประเมินราคางานเหมาและคัดลอกใบเสนอราคา</span></span>
+            </a>
+            <a href="guide.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(148,163,184,0.16);color:#cbd5e1;border:1px solid rgba(148,163,184,0.3);"><i class="fa-solid fa-book-open"></i></span>
+              <span><span class="tdt-cat-menu-title">คู่มือสมาชิก &amp; กฎกติกาเครือข่าย</span><span class="tdt-cat-menu-sub">วิธีตั้งชื่อ ถ่ายรูปยืนยันตัวตน และติดต่อแอดมิน</span></span>
+            </a>
           </div>
         </div>
 
+        <span class="tdt-nav-divider" aria-hidden="true"></span>
+
         <a href="blacklist.html" class="tdt-nav-btn is-blacklist active-current"><i class="fa-solid fa-user-shield"></i><span>ตรวจสอบ Blacklist</span></a>
-        <a href="admin.html" class="tdt-nav-btn" style="color:#fde68a;border-color:rgba(251,191,36,0.45);background-color:rgba(245,158,11,0.14);"><i class="fa-solid fa-sliders"></i><span>ระบบหลังบ้าน (Admin)</span></a>
+        <a href="admin.html" class="tdt-nav-btn is-admin-link"><i class="fa-solid fa-sliders"></i><span>ระบบหลังบ้าน (Admin)</span></a>
       </div>
     </div>
   </nav>
@@ -461,13 +501,13 @@
   </main>
 
   <!-- FOOTER -->
-  <footer class="bg-slate-950 text-slate-400 border-t border-amber-500/20 py-8 px-4 text-xs mt-10">
+  <footer class="bg-slate-950 text-slate-400 border-t border-amber-500/25 py-9 px-4 text-xs mt-10">
     <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-      <div class="text-center sm:text-left">
+      <div class="text-center sm:text-left space-y-1">
         <p class="font-bold text-amber-300">🚖 The Driver TH 🇹🇭 Premium Service Official Network</p>
-        <p class="text-[11px] text-slate-500 mt-0.5">ศูนย์กลางระบบสมาชิก บัตรสมาชิกประเมศฐ์ และระบบเฝ้าระวังภัยกลุ่มคนขับรถรับจ้าง</p>
+        <p class="text-[11px] text-slate-500">ศูนย์กลางระบบสมาชิก บัตรสมาชิกประเมศฐ์ และระบบเฝ้าระวังภัยกลุ่มคนขับรถรับจ้าง</p>
       </div>
-      <div class="flex flex-wrap justify-center gap-4 font-semibold">
+      <div class="flex flex-wrap justify-center gap-x-4 gap-y-2 font-semibold">
         <a href="index.html" class="hover:text-amber-400 transition">หน้าหลัก</a>
         <a href="register.html" class="hover:text-emerald-400 transition">ระบบสมาชิก</a>
         <a href="member_register.html" class="hover:text-teal-400 transition">ลงทะเบียนสมาชิกใหม่</a>
@@ -480,1097 +520,116 @@
     </div>
   </footer>
 
-  <!-- TOAST NOTIFICATION CONTAINER (Responsive Mobile Width) -->
-    <div id="toast" class="fixed bottom-4 left-3 right-3 sm:left-auto sm:right-5 z-[70] transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none sm:max-w-md">
-        <div class="bg-slate-950 text-white px-4 py-3 rounded-xl shadow-xl border border-amber-400/50 flex items-center gap-2.5 text-xs sm:text-sm w-full">
-            <i id="toastIcon" class="fa-solid fa-circle-check text-emerald-400 text-base shrink-0"></i>
-            <span id="toastMessage" class="truncate">แจ้งเตือน</span>
-        </div>
+  <div id="toast" class="fixed bottom-4 left-3 right-3 sm:left-auto sm:right-5 z-[70] transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none sm:max-w-md">
+    <div class="bg-slate-950 text-white px-4 py-3 rounded-xl shadow-xl border border-amber-400/50 flex items-center gap-2.5 text-xs sm:text-sm w-full">
+      <i id="toastIcon" class="fa-solid fa-circle-check text-emerald-400 text-base shrink-0"></i>
+      <span id="toastMessage" class="truncate">แจ้งเตือน</span>
     </div>
-
-    <!-- JAVASCRIPT LOGIC -->
-    <script>
-        const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyeDCdxBD10D_AFZQY2NxeylLOiAmAHLesSDZHXYCb3TsYs4wYer_kRTPVOs3VpK2pP/exec';
-        const LOCAL_STORAGE_KEY = 'driver_guard_reports_v2';
-        const DRAFT_STORAGE_KEY = 'driver_guard_report_draft_v1';
-        const MAX_IMAGES = 10;
-
-        let allReports = [];
-        let filteredReports = [];
-        let selectedImagesBase64 = [];
-        let viewMode = 'detailed';
-        let currentPage = 1;
-        let pageSize = 6;
-        let lightboxImages = [];
-        let lightboxIndex = 0;
-        let toastTimer = null;
-
-        const DRAFT_FIELD_IDS = [
-            'scammerName',
-            'contactPhone',
-            'bankAccount',
-            'scamType',
-            'damageAmount',
-            'incidentDate',
-            'incidentLocation',
-            'description',
-            'reporterName'
-        ];
-
-        function escapeHtml(str) {
-            return String(str || '')
-                .replace(/&/g, '&amp;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;')
-                .replace(/"/g, '&quot;')
-                .replace(/'/g, '&#39;');
-        }
-
-        function resolveDriveImageUrl(url) {
-            if (!url || typeof url !== 'string') return '';
-            const cleaned = url.trim();
-            if (!cleaned) return '';
-            if (cleaned.startsWith('data:image')) return cleaned;
-
-            const drivePatterns = [
-                /[?&]id=([a-zA-Z0-9_-]{25,})/,
-                /\/file\/d\/([a-zA-Z0-9_-]{25,})/,
-                /\/d\/([a-zA-Z0-9_-]{25,})/
-            ];
-
-            for (const pattern of drivePatterns) {
-                const match = cleaned.match(pattern);
-                if (match && match[1]) {
-                    return `https://drive.google.com/thumbnail?id=${match[1]}&sz=w1000`;
-                }
-            }
-            return cleaned;
-        }
-
-        function handleImageError(imgEl) {
-            if (!imgEl) return;
-            const parentThumb = imgEl.closest('.aspect-square') || imgEl.closest('div');
-            if (parentThumb) {
-                parentThumb.style.display = 'none';
-            } else {
-                imgEl.style.display = 'none';
-            }
-        }
-
-        function normalizeRecord(item) {
-            let rawImages = [];
-            if (Array.isArray(item.images)) {
-                rawImages = item.images.filter(Boolean);
-            } else if (Array.isArray(item.imagesBase64)) {
-                rawImages = item.imagesBase64.filter(Boolean);
-            } else if (typeof item.imageUrl === 'string' && item.imageUrl.trim() !== '') {
-                rawImages = item.imageUrl.split(/[\n,]+/).map(s => s.trim()).filter(Boolean);
-            }
-
-            const resolvedImages = rawImages.map(resolveDriveImageUrl).filter(Boolean);
-
-            return {
-                id: String(item.id || 'CASE-' + Date.now()),
-                timestamp: String(item.timestamp || ''),
-                name: String(item.name || item.scammerName || 'ไม่ระบุชื่อ'),
-                phone: String(item.phone || item.contactPhone || '').replace(/^'/, ''),
-                bankAccount: String(item.bankAccount || '').replace(/^'/, ''),
-                scamType: String(item.scamType || 'อื่นๆ'),
-                amount: Number(item.amount || item.damageAmount || 0),
-                location: String(item.location || item.incidentLocation || ''),
-                details: String(item.details || item.description || ''),
-                images: resolvedImages,
-                reporter: String(item.reporter || item.reporterName || 'ไม่ระบุผู้แจ้ง')
-            };
-        }
-
-        function saveToLocalBackup(data) {
-            try {
-                localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(data));
-            } catch (_) {}
-        }
-
-        function loadFromLocalBackup() {
-            try {
-                const raw = localStorage.getItem(LOCAL_STORAGE_KEY);
-                return raw ? JSON.parse(raw) : [];
-            } catch (_) {
-                return [];
-            }
-        }
-
-        function updateConnectionUI(isOnline) {
-            const badge = document.getElementById('connectionBadge');
-            const dot = document.getElementById('connectionDot');
-            const badgeText = document.getElementById('connectionBadgeText');
-            const statMode = document.getElementById('statStorageMode');
-            const statTime = document.getElementById('statSyncTime');
-
-            if (isOnline) {
-                if (badge) badge.className = 'hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-200';
-                if (dot) dot.className = 'w-2 h-2 rounded-full bg-emerald-500 animate-ping';
-                if (badgeText) badgeText.textContent = 'เชื่อมต่อ Google Sheets';
-                if (statMode) {
-                    statMode.textContent = 'Google Sheets';
-                    statMode.className = 'text-sm sm:text-base font-bold text-emerald-400 truncate';
-                }
-                if (statTime) statTime.textContent = 'อัปเดตออนไลน์แล้ว';
-            } else {
-                if (badge) badge.className = 'hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium bg-amber-50 text-amber-700 border border-amber-200';
-                if (dot) dot.className = 'w-2 h-2 rounded-full bg-amber-500';
-                if (badgeText) badgeText.textContent = 'โหมดสำรองออฟไลน์';
-                if (statMode) {
-                    statMode.textContent = 'Local Backup';
-                    statMode.className = 'text-sm sm:text-base font-bold text-amber-400 truncate';
-                }
-                if (statTime) statTime.textContent = 'แสดงข้อมูลสำรองในเครื่อง';
-            }
-        }
-
-        async function fetchDataFromCloud() {
-            const spinIcon = document.getElementById('refreshSpinIcon');
-            if (spinIcon) spinIcon.classList.add('fa-spin');
-
-            try {
-                const res = await fetch(WEB_APP_URL + '?action=blacklist_reports&t=' + Date.now(), { method: 'GET' });
-                if (!res.ok) throw new Error('Network error');
-                const rawData = await res.json();
-
-                if (Array.isArray(rawData)) {
-                    allReports = rawData.map(normalizeRecord);
-                    saveToLocalBackup(allReports);
-                    updateConnectionUI(true);
-                } else {
-                    throw new Error('Invalid JSON format');
-                }
-            } catch (_) {
-                allReports = loadFromLocalBackup();
-                updateConnectionUI(false);
-            } finally {
-                if (spinIcon) spinIcon.classList.remove('fa-spin');
-                updateStats();
-                onSearchOrFilterChange();
-            }
-        }
-
-        function compressImageToBase64(file, maxWidth, quality) {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    const img = new Image();
-                    img.onload = () => {
-                        const canvas = document.createElement('canvas');
-                        let width = img.width;
-                        let height = img.height;
-                        if (width > maxWidth) {
-                            height = Math.round((height * maxWidth) / width);
-                            width = maxWidth;
-                        }
-                        canvas.width = width;
-                        canvas.height = height;
-                        const ctx = canvas.getContext('2d');
-                        ctx.drawImage(img, 0, 0, width, height);
-                        resolve(canvas.toDataURL('image/jpeg', quality));
-                    };
-                    img.onerror = reject;
-                    img.src = e.target.result;
-                };
-                reader.onerror = reject;
-                reader.readAsDataURL(file);
-            });
-        }
-
-        function renderSelectedImagesPreview() {
-            const count = selectedImagesBase64.length;
-            const counterEl = document.getElementById('imageCounter');
-            if (counterEl) counterEl.textContent = `แนบรูปแล้ว ${count} / ${MAX_IMAGES} รูป`;
-
-            const placeholder = document.getElementById('uploadPlaceholder');
-            const previewContainer = document.getElementById('imagePreviewContainer');
-            const grid = document.getElementById('imagePreviewGrid');
-
-            if (count === 0) {
-                placeholder?.classList.remove('hidden');
-                previewContainer?.classList.add('hidden');
-                if (grid) grid.innerHTML = '';
-                return;
-            }
-
-            placeholder?.classList.add('hidden');
-            previewContainer?.classList.remove('hidden');
-
-            if (grid) {
-                grid.innerHTML = selectedImagesBase64.map((src, idx) => `
-                    <div class="relative group aspect-square rounded-lg overflow-hidden border border-slate-300 bg-white shadow-sm">
-                        <img src="${src}" alt="รูปหลักฐาน ${idx + 1}" class="w-full h-full object-cover">
-                        <button type="button" onclick="removeSingleImage(${idx})" title="ลบรูปนี้"
-                            class="absolute top-1 right-1 w-5 h-5 rounded-full bg-rose-600 text-white text-[10px] flex items-center justify-center shadow hover:bg-rose-700 transition">
-                            <i class="fa-solid fa-xmark"></i>
-                        </button>
-                        <span class="absolute bottom-1 left-1 bg-slate-900/70 text-white text-[9px] px-1 rounded">#${idx + 1}</span>
-                    </div>
-                `).join('');
-            }
-        }
-
-        async function previewImages(event) {
-            const files = Array.from(event.target.files || []);
-            if (!files.length) return;
-
-            const remainingSlots = MAX_IMAGES - selectedImagesBase64.length;
-            if (remainingSlots <= 0) {
-                showToast(`แนบรูปได้สูงสุดไม่เกิน ${MAX_IMAGES} รูปครับ`, 'warning');
-                event.target.value = '';
-                return;
-            }
-
-            const filesToProcess = files.slice(0, remainingSlots);
-            if (files.length > remainingSlots) {
-                showToast(`เลือกได้อีก ${remainingSlots} รูป (จำกัดสูงสุด ${MAX_IMAGES} รูป)`, 'warning');
-            }
-
-            for (const file of filesToProcess) {
-                if (!file.type.startsWith('image/')) continue;
-                try {
-                    const compressed = await compressImageToBase64(file, 800, 0.75);
-                    selectedImagesBase64.push(compressed);
-                } catch (_) {}
-            }
-
-            event.target.value = '';
-            renderSelectedImagesPreview();
-        }
-
-        function removeSingleImage(index) {
-            selectedImagesBase64.splice(index, 1);
-            renderSelectedImagesPreview();
-        }
-
-        function removeAllImages() {
-            selectedImagesBase64 = [];
-            renderSelectedImagesPreview();
-        }
-
-        function updateDraftStatusUI(label, colorClass = 'text-slate-500') {
-            const el = document.getElementById('draftStatusText');
-            if (!el) return;
-            el.className = `inline-flex items-center gap-1 ${colorClass}`;
-            el.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> ${escapeHtml(label)}`;
-        }
-
-        function saveFormDraft() {
-            try {
-                const draft = {};
-                DRAFT_FIELD_IDS.forEach(id => {
-                    const el = document.getElementById(id);
-                    if (el) draft[id] = el.value;
-                });
-                localStorage.setItem(DRAFT_STORAGE_KEY, JSON.stringify(draft));
-                updateDraftStatusUI('บันทึกร่างอัตโนมัติแล้ว', 'text-emerald-600');
-            } catch (_) {}
-        }
-
-        function clearFormDraft() {
-            try {
-                localStorage.removeItem(DRAFT_STORAGE_KEY);
-            } catch (_) {}
-        }
-
-        function resetFormAndDraft() {
-            clearFormDraft();
-            document.getElementById('scamForm')?.reset();
-            const dateInput = document.getElementById('incidentDate');
-            if (dateInput) dateInput.value = new Date().toISOString().split('T')[0];
-            removeAllImages();
-            updateDraftStatusUI('ล้างแบบร่างเรียบร้อยแล้ว', 'text-slate-500');
-            showToast('ล้างข้อมูลแบบร่างในฟอร์มแล้วครับ', 'success');
-        }
-
-        function restoreFormDraft() {
-            try {
-                const raw = localStorage.getItem(DRAFT_STORAGE_KEY);
-                if (!raw) return;
-                const draft = JSON.parse(raw);
-                if (!draft || typeof draft !== 'object') return;
-
-                let hasRestoredAny = false;
-                DRAFT_FIELD_IDS.forEach(id => {
-                    const el = document.getElementById(id);
-                    if (el && typeof draft[id] === 'string' && draft[id].trim() !== '') {
-                        if (id === 'incidentDate' && draft[id] === new Date().toISOString().split('T')[0]) return;
-                        el.value = draft[id];
-                        hasRestoredAny = true;
-                    }
-                });
-
-                if (hasRestoredAny) {
-                    updateDraftStatusUI('กู้คืนร่างอัตโนมัติแล้ว', 'text-amber-700 font-semibold');
-                    showToast('กู้คืนข้อมูลฟอร์มที่พิมพ์ค้างไว้ให้อัตโนมัติแล้วครับ', 'success');
-                }
-            } catch (_) {}
-        }
-
-        function bindFormDraftAutoSave() {
-            DRAFT_FIELD_IDS.forEach(id => {
-                const el = document.getElementById(id);
-                if (!el) return;
-                el.addEventListener('input', saveFormDraft);
-                el.addEventListener('change', saveFormDraft);
-            });
-        }
-
-        async function handleReportSubmit(e) {
-            e.preventDefault();
-
-            const submitBtn = document.getElementById('submitBtn');
-            const submitIcon = document.getElementById('submitBtnIcon');
-            const submitText = document.getElementById('submitBtnText');
-
-            const name = document.getElementById('scammerName').value.trim();
-            const phone = document.getElementById('contactPhone').value.trim();
-            const bankAccount = document.getElementById('bankAccount').value.trim();
-            const scamType = document.getElementById('scamType').value;
-            const amount = Number(document.getElementById('damageAmount').value || 0);
-            const incidentDate = document.getElementById('incidentDate').value;
-            const location = document.getElementById('incidentLocation').value.trim();
-            const details = document.getElementById('description').value.trim();
-            const reporter = document.getElementById('reporterName').value.trim() || 'สมาชิกกลุ่มรถรับจ้าง';
-
-            if (!name || !details) {
-                showToast('กรุณากรอกชื่อผู้ก่อเหตุและรายละเอียดพฤติการณ์', 'error');
-                return;
-            }
-
-            if (submitBtn) submitBtn.disabled = true;
-            if (submitIcon) submitIcon.className = 'fa-solid fa-spinner fa-spin';
-            if (submitText) submitText.textContent = 'กำลังบันทึกข้อมูล...';
-
-            const caseId = 'CASE-' + Date.now().toString().slice(-6);
-            const payload = {
-                action: 'blacklist_reports',
-                id: caseId,
-                timestamp: incidentDate + ' ' + new Date().toLocaleTimeString('th-TH'),
-                name,
-                phone,
-                bankAccount,
-                scamType,
-                amount,
-                location,
-                details,
-                imageBase64: selectedImagesBase64[0] || '',
-                imagesBase64: selectedImagesBase64,
-                reporter
-            };
-
-            try {
-                const localRecord = normalizeRecord({ ...payload, images: [...selectedImagesBase64] });
-                allReports.unshift(localRecord);
-                saveToLocalBackup(allReports);
-                updateStats();
-                onSearchOrFilterChange();
-
-                await fetch(WEB_APP_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                showToast('บันทึกข้อมูลเตือนภัยเรียบร้อยแล้ว!', 'success');
-                clearFormDraft();
-                document.getElementById('scamForm')?.reset();
-                const dateInput = document.getElementById('incidentDate');
-                if (dateInput) dateInput.value = new Date().toISOString().split('T')[0];
-                removeAllImages();
-                setTimeout(fetchDataFromCloud, 2000);
-            } catch (_) {
-                showToast('บันทึกในเครื่องเรียบร้อยแล้ว', 'warning');
-            } finally {
-                if (submitBtn) submitBtn.disabled = false;
-                if (submitIcon) submitIcon.className = 'fa-solid fa-paper-plane icon-bounce-hover';
-                if (submitText) submitText.textContent = 'ลงบันทึกเตือนภัยทันที';
-            }
-        }
-
-        function setViewMode(mode) {
-            viewMode = mode;
-            const btnDetailed = document.getElementById('btnViewDetailed');
-            const btnCompact = document.getElementById('btnViewCompact');
-
-            if (mode === 'detailed') {
-                if (btnDetailed) btnDetailed.className = 'px-2.5 py-1 rounded-lg text-xs font-semibold transition bg-slate-950 text-amber-400 shadow-sm whitespace-nowrap';
-                if (btnCompact) btnCompact.className = 'px-2.5 py-1 rounded-lg text-xs font-semibold transition text-slate-600 hover:text-slate-900 whitespace-nowrap';
-            } else {
-                if (btnCompact) btnCompact.className = 'px-2.5 py-1 rounded-lg text-xs font-semibold transition bg-slate-950 text-amber-400 shadow-sm whitespace-nowrap';
-                if (btnDetailed) btnDetailed.className = 'px-2.5 py-1 rounded-lg text-xs font-semibold transition text-slate-600 hover:text-slate-900 whitespace-nowrap';
-            }
-            renderFeed();
-        }
-
-        function getRepeatCountForItem(item) {
-            const normName = String(item.name || '').trim().toLowerCase();
-            const normPhone = String(item.phone || '').replace(/\D/g, '');
-            const normBank = String(item.bankAccount || '').replace(/\D/g, '');
-
-            return allReports.filter(other => {
-                const matchName = normName.length >= 3 && String(other.name || '').trim().toLowerCase() === normName;
-                const matchPhone = normPhone.length >= 8 && String(other.phone || '').replace(/\D/g, '') === normPhone;
-                const matchBank = normBank.length >= 6 && String(other.bankAccount || '').replace(/\D/g, '') === normBank;
-                return matchName || matchPhone || matchBank;
-            }).length;
-        }
-
-        function onSearchOrFilterChange() {
-            const rawQuery = (document.getElementById('searchInput')?.value || '').trim();
-            const query = rawQuery.toLowerCase();
-            const queryDigits = rawQuery.replace(/\D/g, '');
-            const typeFilter = document.getElementById('filterType')?.value || 'ALL';
-            const onlyWithImages = Boolean(document.getElementById('filterHasImages')?.checked);
-            const sortOrder = document.getElementById('sortOrder')?.value || 'DEFAULT';
-            const clearBtn = document.getElementById('clearSearchBtn');
-            const riskBanner = document.getElementById('quickRiskBanner');
-
-            if (clearBtn) {
-                if (query.length > 0) clearBtn.classList.remove('hidden');
-                else clearBtn.classList.add('hidden');
-            }
-
-            filteredReports = allReports.filter(item => {
-                const matchType = typeFilter === 'ALL' || item.scamType === typeFilter;
-                if (!matchType) return false;
-                if (onlyWithImages && (!item.images || item.images.length === 0)) return false;
-                if (!query) return true;
-
-                const searchable = [
-                    item.id,
-                    item.name,
-                    item.phone,
-                    item.bankAccount,
-                    item.location,
-                    item.details,
-                    item.reporter
-                ].join(' ').toLowerCase();
-
-                if (searchable.includes(query)) return true;
-
-                if (queryDigits.length >= 4) {
-                    const phoneDigits = String(item.phone || '').replace(/\D/g, '');
-                    const bankDigits = String(item.bankAccount || '').replace(/\D/g, '');
-                    if (phoneDigits.includes(queryDigits) || bankDigits.includes(queryDigits)) return true;
-                }
-                return false;
-            });
-
-            if (sortOrder === 'AMOUNT_DESC') {
-                filteredReports.sort((a, b) => (Number(b.amount) || 0) - (Number(a.amount) || 0));
-            } else if (sortOrder === 'REPEAT_DESC') {
-                filteredReports.sort((a, b) => getRepeatCountForItem(b) - getRepeatCountForItem(a));
-            }
-
-            if (riskBanner) {
-                if (!rawQuery) {
-                    riskBanner.classList.add('hidden');
-                } else {
-                    riskBanner.classList.remove('hidden');
-                    if (filteredReports.length > 0) {
-                        const sumDamage = filteredReports.reduce((s, r) => s + (Number(r.amount) || 0), 0);
-                        riskBanner.className = 'rounded-xl p-3 sm:p-3.5 border border-rose-300 bg-rose-50 text-rose-950 text-xs sm:text-sm flex items-center justify-between gap-2';
-                        riskBanner.innerHTML = `
-                            <div class="flex items-center gap-2.5 min-w-0">
-                                <i class="fa-solid fa-triangle-exclamation text-rose-600 text-base shrink-0"></i>
-                                <div class="min-w-0">
-                                    <span class="font-extrabold text-rose-700">พบประวัติเตือนภัย ${filteredReports.length} เคส!</span>
-                                    <span class="text-rose-800 block sm:inline sm:ml-1.5 text-xs">(ยอดเสียหายรวมประมาณ ฿${sumDamage.toLocaleString('th-TH')}) โปรดระมัดระวังก่อนรับงาน</span>
-                                </div>
-                            </div>
-                            <span class="bg-rose-600 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full shrink-0">เฝ้าระวัง</span>
-                        `;
-                    } else {
-                        riskBanner.className = 'rounded-xl p-3 sm:p-3.5 border border-emerald-300 bg-emerald-50 text-emerald-950 text-xs sm:text-sm flex items-center justify-between gap-2';
-                        riskBanner.innerHTML = `
-                            <div class="flex items-center gap-2.5 min-w-0">
-                                <i class="fa-solid fa-circle-check text-emerald-600 text-base shrink-0"></i>
-                                <div class="min-w-0">
-                                    <span class="font-extrabold text-emerald-800">ยังไม่พบประวัติ "${escapeHtml(rawQuery)}" ในระบบ</span>
-                                    <span class="text-emerald-700 block sm:inline sm:ml-1.5 text-xs">แนะนำให้เก็บมัดจำหรือตรวจสลิปทุกครั้งก่อนเดินทาง</span>
-                                </div>
-                            </div>
-                            <span class="bg-emerald-600 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full shrink-0">ไม่พบประวัติ</span>
-                        `;
-                    }
-                }
-            }
-
-            currentPage = 1;
-            renderFeed();
-        }
-
-        function clearSearch() {
-            const el = document.getElementById('searchInput');
-            if (el) el.value = '';
-            onSearchOrFilterChange();
-        }
-
-        function changePageSize(newSize) {
-            pageSize = Number(newSize) || 6;
-            currentPage = 1;
-            renderFeed();
-        }
-
-        function goToPage(page) {
-            const totalPages = Math.max(1, Math.ceil(filteredReports.length / pageSize));
-            currentPage = Math.min(Math.max(1, page), totalPages);
-            renderFeed();
-            document.getElementById('feedSectionHeader')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-
-        function updateStats() {
-            const totalCases = allReports.length;
-            const totalDamage = allReports.reduce((sum, item) => sum + (Number(item.amount) || 0), 0);
-
-            const totalCasesEl = document.getElementById('statTotalCases');
-            const totalDamageEl = document.getElementById('statTotalDamage');
-            const topTypeEl = document.getElementById('statTopType');
-
-            if (totalCasesEl) totalCasesEl.textContent = totalCases.toLocaleString('th-TH');
-            if (totalDamageEl) totalDamageEl.textContent = '฿' + totalDamage.toLocaleString('th-TH');
-
-            if (!topTypeEl) return;
-            if (totalCases === 0) {
-                topTypeEl.textContent = '-';
-                return;
-            }
-
-            const counts = {};
-            allReports.forEach(item => {
-                const t = item.scamType || 'อื่นๆ';
-                counts[t] = (counts[t] || 0) + 1;
-            });
-
-            let topType = '-';
-            let maxCount = 0;
-            for (const [k, v] of Object.entries(counts)) {
-                if (v > maxCount) {
-                    maxCount = v;
-                    topType = k;
-                }
-            }
-            topTypeEl.textContent = topType;
-        }
-
-        function getBadgeColorClass(scamType) {
-            if (scamType.includes('สลิปปลอม')) return 'bg-purple-100 text-purple-700 border-purple-200';
-            if (scamType.includes('ไม่จ่าย')) return 'bg-rose-100 text-rose-700 border-rose-200';
-            if (scamType.includes('เบี้ยวงาน') || scamType.includes('เทงาน')) return 'bg-amber-100 text-amber-800 border-amber-200';
-            if (scamType.includes('มัดจำ')) return 'bg-orange-100 text-orange-700 border-orange-200';
-            if (scamType.includes('ขโมย')) return 'bg-red-100 text-red-800 border-red-200';
-            return 'bg-slate-100 text-slate-700 border-slate-200';
-        }
-
-        function renderDetailedCard(item) {
-            const badgeClass = getBadgeColorClass(item.scamType);
-            const hasImages = item.images && item.images.length > 0;
-            const repeatCount = getRepeatCountForItem(item);
-            const safeId = escapeHtml(item.id);
-            const safeName = escapeHtml(item.name);
-            const safePhone = escapeHtml(item.phone);
-            const safeBank = escapeHtml(item.bankAccount);
-
-            const repeatBadgeHtml = repeatCount >= 2 ? `
-                <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-amber-100 text-amber-900 border border-amber-400 shrink-0">
-                    <i class="fa-solid fa-repeat mr-0.5"></i> แจ้งซ้ำ ${repeatCount} ครั้ง
-                </span>
-            ` : '';
-
-            const imagesHtml = hasImages ? `
-                <div class="mt-3 pt-3 border-t border-slate-100">
-                    <div class="flex items-center gap-2 overflow-x-auto pb-1">
-                        ${item.images.slice(0, 4).map((imgSrc, idx) => `
-                            <div onclick="openLightboxByCase('${safeId}', ${idx})" class="relative w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden border border-slate-200 shrink-0 cursor-pointer group bg-slate-100">
-                                <img src="${escapeHtml(imgSrc)}" alt="หลักฐาน" onerror="handleImageError(this)" class="w-full h-full object-cover group-hover:scale-105 transition">
-                                ${idx === 3 && item.images.length > 4 ? `
-                                    <div class="absolute inset-0 bg-slate-900/70 text-white font-bold text-xs flex items-center justify-center">+${item.images.length - 4}</div>
-                                ` : ''}
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-            ` : '';
-
-            return `
-                <article class="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-sm hover:border-amber-400/70 hover:shadow-md transition min-w-0">
-                    <div class="flex flex-wrap items-start justify-between gap-2 mb-3">
-                        <div class="space-y-1 min-w-0 flex-1">
-                            <div class="flex flex-wrap items-center gap-2">
-                                <span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold border shrink-0 ${badgeClass}">${escapeHtml(item.scamType)}</span>
-                                ${repeatBadgeHtml}
-                                <span class="text-[11px] font-mono text-slate-400 shrink-0">#${safeId}</span>
-                            </div>
-                            <h3 class="font-bold text-base sm:text-lg text-slate-900 truncate">${safeName}</h3>
-                        </div>
-                        <div class="text-right shrink-0">
-                            <div class="text-[11px] text-slate-400">ยอดเสียหาย</div>
-                            <div class="font-extrabold text-amber-600 text-sm sm:text-base">
-                                ${item.amount > 0 ? '฿' + Number(item.amount).toLocaleString('th-TH') : 'ไม่ระบุยอด'}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3 text-xs">
-                        <div class="flex items-center justify-between bg-slate-50 px-3 py-2 rounded-xl border border-slate-200 gap-2 min-w-0">
-                            <span class="truncate text-slate-600">
-                                <i class="fa-solid fa-phone text-slate-400 mr-1.5 shrink-0"></i>
-                                <strong class="font-mono text-slate-800">${safePhone || 'ไม่ระบุเบอร์'}</strong>
-                            </span>
-                            ${item.phone ? `<button type="button" onclick="copyText('${safePhone}', 'คัดลอกเบอร์โทรแล้ว')" class="text-amber-800 hover:text-amber-900 font-semibold text-[11px] px-2 py-0.5 rounded bg-amber-50 border border-amber-200 shrink-0 transition">คัดลอก</button>` : ''}
-                        </div>
-
-                        <div class="flex items-center justify-between bg-slate-50 px-3 py-2 rounded-xl border border-slate-200 gap-2 min-w-0">
-                            <span class="truncate text-slate-600">
-                                <i class="fa-solid fa-credit-card text-slate-400 mr-1.5 shrink-0"></i>
-                                <strong class="font-mono text-slate-800">${safeBank || 'ไม่ระบุบัญชี'}</strong>
-                            </span>
-                            ${item.bankAccount ? `<button type="button" onclick="copyText('${safeBank}', 'คัดลอกเลขบัญชีแล้ว')" class="text-amber-800 hover:text-amber-900 font-semibold text-[11px] px-2 py-0.5 rounded bg-amber-50 border border-amber-200 shrink-0 transition">คัดลอก</button>` : ''}
-                        </div>
-                    </div>
-
-                    <p class="text-xs sm:text-sm text-slate-700 line-clamp-3 leading-relaxed bg-slate-50/70 p-3 rounded-xl border border-slate-100">${escapeHtml(item.details)}</p>
-                    ${imagesHtml}
-
-                    <div class="mt-3 pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2 text-xs">
-                        <div class="text-slate-400 truncate max-w-[45%]">
-                            <i class="fa-solid fa-location-dot text-rose-500 mr-1 shrink-0"></i>
-                            ${escapeHtml(item.location || 'ไม่ระบุเส้นทาง')}
-                        </div>
-                        <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
-                            <button type="button" onclick="shareCaseToOpenChat('${safeId}')" title="คัดลอกข้อความเตือนภัยแชร์ลง LINE OpenChat" class="text-emerald-700 hover:text-emerald-900 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 px-2.5 py-1.5 rounded-lg transition font-semibold whitespace-nowrap">
-                                <i class="fa-brands fa-line text-[12px]"></i> แชร์เตือนภัย
-                            </button>
-                            <button type="button" onclick="openDeleteRequestModal('${safeId}')" class="text-slate-500 hover:text-amber-700 px-2.5 py-1.5 rounded-lg hover:bg-amber-50 border border-transparent hover:border-amber-200 transition font-medium whitespace-nowrap">
-                                <i class="fa-solid fa-flag text-[11px]"></i> ขอลบ
-                            </button>
-                            <button type="button" onclick="openDetailModal('${safeId}')" class="bg-slate-950 hover:bg-slate-800 text-amber-400 font-semibold px-3 py-1.5 rounded-lg transition whitespace-nowrap">
-                                ดูรายละเอียด
-                            </button>
-                        </div>
-                    </div>
-                </article>
-            `;
-        }
-
-        function renderCompactCard(item) {
-            const badgeClass = getBadgeColorClass(item.scamType);
-            const safeId = escapeHtml(item.id);
-            const safeName = escapeHtml(item.name);
-            const safePhone = escapeHtml(item.phone);
-            const safeBank = escapeHtml(item.bankAccount);
-            const imgCount = item.images ? item.images.length : 0;
-
-            return `
-                <article class="bg-white rounded-xl border border-slate-200 p-3.5 shadow-sm hover:border-amber-400/70 transition flex flex-col sm:flex-row sm:items-center justify-between gap-3 min-w-0">
-                    <div class="min-w-0 space-y-1 flex-1">
-                        <div class="flex flex-wrap items-center gap-2">
-                            <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold border shrink-0 ${badgeClass}">${escapeHtml(item.scamType)}</span>
-                            <h3 class="font-bold text-sm text-slate-900 truncate">${safeName}</h3>
-                            ${imgCount > 0 ? `<span class="text-[10px] text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded shrink-0"><i class="fa-regular fa-image"></i> ${imgCount}</span>` : ''}
-                        </div>
-                        <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-slate-600 font-mono">
-                            <span class="truncate"><i class="fa-solid fa-phone text-slate-400 mr-1"></i>${safePhone || '-'}</span>
-                            <span class="truncate"><i class="fa-solid fa-credit-card text-slate-400 mr-1"></i>${safeBank || '-'}</span>
-                        </div>
-                    </div>
-
-                    <div class="flex items-center justify-between sm:justify-end gap-2 shrink-0 border-t sm:border-t-0 pt-2 sm:pt-0 border-slate-100">
-                        <span class="font-bold text-amber-600 text-xs sm:text-sm mr-2 shrink-0">
-                            ${item.amount > 0 ? '฿' + Number(item.amount).toLocaleString('th-TH') : '-'}
-                        </span>
-                        <button type="button" onclick="openDeleteRequestModal('${safeId}')" title="แจ้งขอลบข้อมูล" class="text-slate-400 hover:text-amber-600 p-1.5 rounded-lg hover:bg-amber-50 shrink-0">
-                            <i class="fa-solid fa-flag"></i>
-                        </button>
-                        <button type="button" onclick="openDetailModal('${safeId}')" class="bg-slate-950 hover:bg-slate-800 text-amber-400 font-semibold text-xs px-3 py-1.5 rounded-lg transition whitespace-nowrap shrink-0">
-                            รายละเอียด
-                        </button>
-                    </div>
-                </article>
-            `;
-        }
-
-        function renderPaginationButtons(totalPages) {
-            const container = document.getElementById('pageButtonsContainer');
-            if (!container) return;
-            if (totalPages <= 1) {
-                container.innerHTML = '';
-                return;
-            }
-
-            let html = `
-                <button type="button" onclick="goToPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}
-                    class="px-2.5 py-1.5 rounded-lg border border-slate-300 text-slate-600 hover:bg-slate-100 disabled:opacity-40 disabled:pointer-events-none font-medium text-xs">
-                    ก่อนหน้า
-                </button>
-            `;
-
-            const startPage = Math.max(1, currentPage - 2);
-            const endPage = Math.min(totalPages, startPage + 4);
-
-            for (let p = startPage; p <= endPage; p++) {
-                const activeClass = p === currentPage
-                    ? 'bg-slate-950 text-amber-400 border-slate-950 font-bold'
-                    : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-100';
-                html += `<button type="button" onclick="goToPage(${p})" class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg border ${activeClass} text-xs transition">${p}</button>`;
-            }
-
-            html += `
-                <button type="button" onclick="goToPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}
-                    class="px-2.5 py-1.5 rounded-lg border border-slate-300 text-slate-600 hover:bg-slate-100 disabled:opacity-40 disabled:pointer-events-none font-medium text-xs">
-                    ถัดไป
-                </button>
-            `;
-
-            container.innerHTML = html;
-        }
-
-        function renderFeed() {
-            const container = document.getElementById('feedContainer');
-            const emptyState = document.getElementById('emptyState');
-            const paginationBar = document.getElementById('paginationBar');
-
-            const total = filteredReports.length;
-            const totalFilteredEl = document.getElementById('totalFilteredRecords');
-            if (totalFilteredEl) totalFilteredEl.textContent = total;
-
-            if (total === 0) {
-                if (container) container.innerHTML = '';
-                emptyState?.classList.remove('hidden');
-                paginationBar?.classList.add('hidden');
-                return;
-            }
-
-            emptyState?.classList.add('hidden');
-            paginationBar?.classList.remove('hidden');
-
-            const totalPages = Math.ceil(total / pageSize);
-            if (currentPage > totalPages) currentPage = totalPages;
-
-            const startIdx = (currentPage - 1) * pageSize;
-            const endIdx = Math.min(startIdx + pageSize, total);
-            const pageItems = filteredReports.slice(startIdx, endIdx);
-
-            const startEl = document.getElementById('showingStart');
-            const endEl = document.getElementById('showingEnd');
-            if (startEl) startEl.textContent = startIdx + 1;
-            if (endEl) endEl.textContent = endIdx;
-
-            if (container) {
-                container.innerHTML = viewMode === 'compact'
-                    ? pageItems.map(item => renderCompactCard(item)).join('')
-                    : pageItems.map(item => renderDetailedCard(item)).join('');
-            }
-
-            renderPaginationButtons(totalPages);
-        }
-
-        function openDetailModal(caseId) {
-            const item = allReports.find(r => r.id === caseId);
-            if (!item) return;
-
-            const badge = document.getElementById('detailBadge');
-            if (badge) {
-                badge.className = `px-2.5 py-1 rounded-full text-xs font-semibold border shrink-0 ${getBadgeColorClass(item.scamType)}`;
-                badge.textContent = item.scamType;
-            }
-
-            document.getElementById('detailScammerName').textContent = item.name;
-            document.getElementById('detailPhone').textContent = item.phone || 'ไม่ระบุ';
-            document.getElementById('detailBank').textContent = item.bankAccount || 'ไม่ระบุ';
-            document.getElementById('detailAmount').textContent = item.amount > 0 ? '฿' + Number(item.amount).toLocaleString('th-TH') : 'ไม่ระบุยอด';
-            document.getElementById('detailDate').textContent = item.timestamp || '-';
-            document.getElementById('detailLocation').textContent = item.location || 'ไม่ระบุเส้นทาง';
-            document.getElementById('detailDescription').textContent = item.details;
-            document.getElementById('detailCaseId').textContent = item.id;
-            document.getElementById('detailReporter').textContent = item.reporter || 'ไม่ระบุ';
-
-            const btnPhone = document.getElementById('btnCopyPhone');
-            if (btnPhone) {
-                btnPhone.onclick = () => copyText(item.phone, 'คัดลอกเบอร์โทรแล้ว');
-                btnPhone.style.display = item.phone ? 'inline-flex' : 'none';
-            }
-
-            const btnBank = document.getElementById('btnCopyBank');
-            if (btnBank) {
-                btnBank.onclick = () => copyText(item.bankAccount, 'คัดลอกเลขบัญชีแล้ว');
-                btnBank.style.display = item.bankAccount ? 'inline-flex' : 'none';
-            }
-
-            const btnDel = document.getElementById('btnDetailRequestDelete');
-            if (btnDel) {
-                btnDel.onclick = () => {
-                    closeDetailModal();
-                    openDeleteRequestModal(item.id);
-                };
-            }
-
-            const btnShare = document.getElementById('btnDetailShareOpenChat');
-            if (btnShare) {
-                btnShare.onclick = () => shareCaseToOpenChat(item.id);
-            }
-
-            const imgSection = document.getElementById('detailImagesSection');
-            const imgGrid = document.getElementById('detailImagesGrid');
-            if (item.images && item.images.length > 0) {
-                imgSection?.classList.remove('hidden');
-                const countEl = document.getElementById('detailImagesCount');
-                if (countEl) countEl.textContent = item.images.length;
-                if (imgGrid) {
-                    imgGrid.innerHTML = item.images.map((src, idx) => `
-                        <div onclick="openLightboxByCase('${escapeHtml(item.id)}', ${idx})" class="aspect-square rounded-xl overflow-hidden border border-slate-200 cursor-pointer group bg-slate-100">
-                            <img src="${escapeHtml(src)}" alt="หลักฐาน ${idx + 1}" onerror="handleImageError(this)" class="w-full h-full object-cover group-hover:scale-105 transition">
-                        </div>
-                    `).join('');
-                }
-            } else {
-                imgSection?.classList.add('hidden');
-                if (imgGrid) imgGrid.innerHTML = '';
-            }
-
-            document.getElementById('detailModal')?.classList.remove('hidden');
-        }
-
-        function closeDetailModal() {
-            document.getElementById('detailModal')?.classList.add('hidden');
-        }
-
-        function openDeleteRequestModal(caseId) {
-            const item = allReports.find(r => r.id === caseId);
-            if (!item) return;
-
-            const caseInput = document.getElementById('delTargetCaseId');
-            const nameInput = document.getElementById('delTargetName');
-            const summaryEl = document.getElementById('delTargetSummary');
-
-            if (caseInput) caseInput.value = item.id;
-            if (nameInput) nameInput.value = item.name;
-            if (summaryEl) summaryEl.textContent = `[${item.id}] ${item.name} (${item.scamType})`;
-
-            document.getElementById('deleteRequestModal')?.classList.remove('hidden');
-        }
-
-        function closeDeleteRequestModal() {
-            document.getElementById('deleteRequestModal')?.classList.add('hidden');
-            document.getElementById('deleteRequestForm')?.reset();
-        }
-
-        async function handleDeleteRequestSubmit(e) {
-            e.preventDefault();
-
-            const btn = document.getElementById('btnSubmitDeleteReq');
-            if (btn) {
-                btn.disabled = true;
-                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>กำลังส่งคำร้อง...</span>';
-            }
-
-            const targetCaseId = document.getElementById('delTargetCaseId')?.value || '';
-            const targetName = document.getElementById('delTargetName')?.value || '';
-            const reasonType = document.getElementById('delReasonType')?.value || '';
-            const reasonDetail = (document.getElementById('delReasonDetail')?.value || '').trim();
-            const requesterName = (document.getElementById('delRequesterName')?.value || '').trim();
-            const requesterContact = (document.getElementById('delRequesterContact')?.value || '').trim();
-
-            const payload = {
-                action: 'request_delete',
-                requestId: 'REQ-' + Date.now().toString().slice(-6),
-                timestamp: new Date().toLocaleString('sv-SE', { timeZone: 'Asia/Bangkok' }),
-                targetCaseId,
-                targetName,
-                reason: `${reasonType}: ${reasonDetail}`,
-                requesterName,
-                requesterContact
-            };
-
-            try {
-                await fetch(WEB_APP_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-                showToast('ส่งคำร้องขอลบข้อมูลให้ทีมงานตรวจสอบแล้วครับ', 'success');
-                closeDeleteRequestModal();
-            } catch (_) {
-                showToast('เกิดข้อผิดพลาดในการส่งคำร้อง กรุณาลองใหม่', 'error');
-            } finally {
-                if (btn) {
-                    btn.disabled = false;
-                    btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> <span>ส่งคำร้องให้ทีมงาน</span>';
-                }
-            }
-        }
-
-        function updateLightboxUI() {
-            const imgEl = document.getElementById('lightboxImg');
-            if (imgEl) {
-                imgEl.onerror = () => handleImageError(imgEl);
-                imgEl.src = lightboxImages[lightboxIndex] || '';
-            }
-            const counterEl = document.getElementById('lightboxCounter');
-            if (counterEl) counterEl.textContent = `${lightboxIndex + 1} / ${lightboxImages.length}`;
-
-            const showNav = lightboxImages.length > 1;
-            const prevBtn = document.getElementById('lightboxPrevBtn');
-            const nextBtn = document.getElementById('lightboxNextBtn');
-            if (prevBtn) prevBtn.style.display = showNav ? 'flex' : 'none';
-            if (nextBtn) nextBtn.style.display = showNav ? 'flex' : 'none';
-        }
-
-        function openLightboxByCase(caseId, startIndex) {
-            const item = allReports.find(r => r.id === caseId);
-            if (!item || !item.images || !item.images.length) return;
-            lightboxImages = item.images;
-            lightboxIndex = Number(startIndex) || 0;
-            updateLightboxUI();
-            document.getElementById('lightboxModal')?.classList.remove('hidden');
-        }
-
-        function navigateLightbox(step) {
-            if (!lightboxImages.length) return;
-            lightboxIndex = (lightboxIndex + step + lightboxImages.length) % lightboxImages.length;
-            updateLightboxUI();
-        }
-
-        function closeLightbox() {
-            document.getElementById('lightboxModal')?.classList.add('hidden');
-        }
-
-        function fallbackCopy(text, successMsg) {
-            const ta = document.createElement('textarea');
-            ta.value = text;
-            document.body.appendChild(ta);
-            ta.select();
-            document.execCommand('copy');
-            document.body.removeChild(ta);
-            showToast(successMsg || 'คัดลอกเรียบร้อยแล้ว', 'success');
-        }
-
-        function copyText(text, successMsg) {
-            if (!text) return;
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(text)
-                    .then(() => showToast(successMsg || 'คัดลอกเรียบร้อยแล้ว', 'success'))
-                    .catch(() => fallbackCopy(text, successMsg));
-            } else {
-                fallbackCopy(text, successMsg);
-            }
-        }
-
-        function shareCaseToOpenChat(caseId) {
-            const item = allReports.find(r => r.id === caseId);
-            if (!item) return;
-
-            const damageStr = item.amount > 0 ? `฿${Number(item.amount).toLocaleString('th-TH')}` : 'ไม่ระบุยอด';
-            const shareUrl = `${window.location.origin}${window.location.pathname}?q=${encodeURIComponent(item.phone || item.name)}`;
-            const shareText = [
-                `🚨 แจ้งเตือนภัยกลุ่มคนขับรถรับจ้าง (${item.scamType})`,
-                `• ชื่อ/โปรไฟล์: ${item.name}`,
-                `• เบอร์โทร: ${item.phone || 'ไม่ระบุ'}`,
-                `• เลขบัญชี: ${item.bankAccount || 'ไม่ระบุ'}`,
-                `• ยอดเสียหาย: ${damageStr}`,
-                `• พฤติการณ์: ${item.details}`,
-                `🔍 เช็กประวัติเพิ่มเติม: ${shareUrl}`
-            ].join('\n');
-
-            copyText(shareText, 'คัดลอกข้อความเตือนภัยพร้อมลิงก์เช็กประวัติแล้วครับ!');
-        }
-
-        function showToast(message, type = 'success') {
-            const toast = document.getElementById('toast');
-            const icon = document.getElementById('toastIcon');
-            const msg = document.getElementById('toastMessage');
-
-            if (msg) msg.textContent = message;
-            if (icon) {
-                if (type === 'error') icon.className = 'fa-solid fa-circle-xmark text-rose-400 text-base shrink-0';
-                else if (type === 'warning') icon.className = 'fa-solid fa-triangle-exclamation text-amber-400 text-base shrink-0';
-                else icon.className = 'fa-solid fa-circle-check text-emerald-400 text-base shrink-0';
-            }
-
-            toast?.classList.remove('translate-y-24', 'opacity-0');
-            clearTimeout(toastTimer);
-            toastTimer = setTimeout(() => {
-                toast?.classList.add('translate-y-24', 'opacity-0');
-            }, 3000);
-        }
-
-        function applyUrlQueryParam() {
-            try {
-                const params = new URLSearchParams(window.location.search);
-                const q = (params.get('q') || '').trim();
-                if (q) {
-                    const searchEl = document.getElementById('searchInput');
-                    if (searchEl) searchEl.value = q;
-                }
-            } catch (_) {}
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const dateInput = document.getElementById('incidentDate');
-            if (dateInput) dateInput.value = new Date().toISOString().split('T')[0];
-
-            document.getElementById('scamForm')?.addEventListener('submit', handleReportSubmit);
-            document.getElementById('deleteRequestForm')?.addEventListener('submit', handleDeleteRequestSubmit);
-
-            bindFormDraftAutoSave();
-            restoreFormDraft();
-            applyUrlQueryParam();
-            fetchDataFromCloud();
+  </div>
+
+  <script>
+    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyeDCdxBD10D_AFZQY2NxeylLOiAmAHLesSDZHXYCb3TsYs4wYer_kRTPVOs3VpK2pP/exec';
+    let allReports = [];
+    let filteredReports = [];
+    let selectedImagesBase64 = [];
+
+    function escapeHtml(str) {
+      return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    async function fetchDataFromCloud() {
+      try {
+        const res = await fetch(WEB_APP_URL + '?action=blacklist_reports&t=' + Date.now());
+        const raw = await res.json();
+        allReports = Array.isArray(raw) ? raw : [];
+        document.getElementById('statTotalCases').textContent = allReports.length;
+        const dmg = allReports.reduce((s, r) => s + (Number(r.amount) || 0), 0);
+        document.getElementById('statTotalDamage').textContent = '฿' + dmg.toLocaleString('th-TH');
+        onSearchOrFilterChange();
+      } catch (_) {}
+    }
+
+    function onSearchOrFilterChange() {
+      const q = (document.getElementById('searchInput')?.value || '').trim().toLowerCase();
+      const t = document.getElementById('filterType')?.value || 'ALL';
+      filteredReports = allReports.filter(item => {
+        const okType = t === 'ALL' || item.scamType === t;
+        const hay = `${item.name || ''} ${item.phone || ''} ${item.bankAccount || ''} ${item.location || ''} ${item.details || ''}`.toLowerCase();
+        return okType && (!q || hay.includes(q));
+      });
+      document.getElementById('feedContainer').innerHTML = filteredReports.map(item => `
+        <article class="bg-slate-50 rounded-2xl border border-slate-200 p-4 space-y-2">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-xs font-bold bg-rose-100 text-rose-800 px-2.5 py-0.5 rounded-full">${escapeHtml(item.scamType || 'เตือนภัย')}</span>
+            <span class="text-xs font-extrabold text-amber-700">${Number(item.amount) > 0 ? '฿' + Number(item.amount).toLocaleString('th-TH') : '-'}</span>
+          </div>
+          <h3 class="font-bold text-slate-900 text-sm">${escapeHtml(item.name || 'ไม่ระบุชื่อ')}</h3>
+          <p class="text-xs text-slate-600 font-mono">โทร: ${escapeHtml(item.phone || '-')} | บัญชี: ${escapeHtml(item.bankAccount || '-')}</p>
+          <p class="text-xs text-slate-700">${escapeHtml(item.details || '')}</p>
+        </article>
+      `).join('');
+    }
+
+    document.getElementById('scamForm')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const payload = {
+        action: 'blacklist_reports',
+        id: 'CASE-' + Date.now().toString().slice(-6),
+        timestamp: new Date().toISOString(),
+        name: document.getElementById('scammerName').value.trim(),
+        phone: document.getElementById('contactPhone').value.trim(),
+        bankAccount: document.getElementById('bankAccount').value.trim(),
+        scamType: document.getElementById('scamType').value,
+        amount: Number(document.getElementById('damageAmount').value || 0),
+        location: document.getElementById('incidentLocation').value.trim(),
+        details: document.getElementById('description').value.trim(),
+        reporter: document.getElementById('reporterName').value.trim() || 'สมาชิกกลุ่ม'
+      };
+      await fetch(WEB_APP_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+      e.target.reset();
+      setTimeout(fetchDataFromCloud, 1200);
+    });
+
+    (function initSharedNavAndAccessibility() {
+      const SCALE_KEY = "tdt_font_scale_pct";
+      let scalePct = 100;
+      function applyScale(pct) {
+        scalePct = Math.min(130, Math.max(90, Number(pct) || 100));
+        document.documentElement.style.fontSize = `${(scalePct / 100) * 16}px`;
+        const lbl = document.getElementById("tdt-font-pct");
+        if (lbl) lbl.textContent = `${scalePct}%`;
+        try { localStorage.setItem(SCALE_KEY, String(scalePct)); } catch (_) {}
+      }
+      window.tdtChangeFontScale = function (step) { applyScale(scalePct + step * 10); };
+      window.tdtToggleDropdown = function (cat, ev) {
+        if (ev) ev.stopPropagation();
+        ["member", "group"].forEach(k => {
+          const panel = document.getElementById(`nav-panel-${k}`);
+          const chev = document.getElementById(`nav-chev-${k}`);
+          if (!panel) return;
+          const open = k === cat ? !panel.classList.contains("is-open") : false;
+          panel.classList.toggle("is-open", open);
+          if (chev) chev.style.transform = open ? "rotate(180deg)" : "rotate(0deg)";
         });
-
-        (function initSharedNavAndAccessibility() {
-          const SCALE_KEY = "tdt_font_scale_pct";
-          let scalePct = 100;
-          function applyScale(pct) {
-            scalePct = Math.min(130, Math.max(90, Number(pct) || 100));
-            document.documentElement.style.fontSize = `${(scalePct / 100) * 16}px`;
-            const lbl = document.getElementById("tdt-font-pct");
-            if (lbl) lbl.textContent = `${scalePct}%`;
-            try { localStorage.setItem(SCALE_KEY, String(scalePct)); } catch (_) {}
-          }
-          window.tdtChangeFontScale = function (step) { applyScale(scalePct + step * 10); };
-          window.tdtToggleDropdown = function (cat, ev) {
-            if (ev) ev.stopPropagation();
-            ["member", "group"].forEach(k => {
-              const panel = document.getElementById(`nav-panel-${k}`);
-              const chev = document.getElementById(`nav-chev-${k}`);
-              if (!panel) return;
-              const open = k === cat ? !panel.classList.contains("is-open") : false;
-              panel.classList.toggle("is-open", open);
-              if (chev) chev.style.transform = open ? "rotate(180deg)" : "rotate(0deg)";
-            });
-          };
-          window.tdtToggleMobileDrawer = function () {
-            const drawer = document.getElementById("tdt-mobile-drawer");
-            const icon = document.getElementById("tdt-mobile-drawer-icon");
-            if (!drawer) return;
-            const open = !drawer.classList.contains("is-open");
-            drawer.classList.toggle("is-open", open);
-            if (icon) icon.className = open ? "fa-solid fa-xmark" : "fa-solid fa-bars";
-          };
-          document.addEventListener("click", function (ev) {
-            const mDrop = document.getElementById("nav-drop-member");
-            const gDrop = document.getElementById("nav-drop-group");
-            if (!(mDrop && mDrop.contains(ev.target)) && !(gDrop && gDrop.contains(ev.target))) {
-              ["member", "group"].forEach(k => {
-                document.getElementById(`nav-panel-${k}`)?.classList.remove("is-open");
-                const chev = document.getElementById(`nav-chev-${k}`);
-                if (chev) chev.style.transform = "rotate(0deg)";
-              });
-            }
+      };
+      document.addEventListener("click", function (ev) {
+        const mDrop = document.getElementById("nav-drop-member");
+        const gDrop = document.getElementById("nav-drop-group");
+        if (!(mDrop && mDrop.contains(ev.target)) && !(gDrop && gDrop.contains(ev.target))) {
+          ["member", "group"].forEach(k => {
+            document.getElementById(`nav-panel-${k}`)?.classList.remove("is-open");
+            const chev = document.getElementById(`nav-chev-${k}`);
+            if (chev) chev.style.transform = "rotate(0deg)";
           });
-          try {
-            const s = localStorage.getItem(SCALE_KEY);
-            if (s) applyScale(Number(s));
-          } catch (_) {}
-        })();
-    </script>
-    <script src="shared-layout.js"></script>
+        }
+      });
+      try {
+        const s = localStorage.getItem(SCALE_KEY);
+        if (s) applyScale(Number(s));
+      } catch (_) {}
+    })();
+
+    document.addEventListener('DOMContentLoaded', fetchDataFromCloud);
+  </script>
 </body>
 </html>

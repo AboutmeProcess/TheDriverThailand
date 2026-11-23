@@ -52,8 +52,8 @@
       font-family: 'Prompt', sans-serif !important;
     }
     html, body {
-      background-color: #f8fafc;
-      color: #0f172a;
+      background-color: #070a12 !important;
+      color: #f8fafc !important;
       max-width: 100%;
       overflow-x: clip;
     }
@@ -1037,348 +1037,348 @@
                   <a id="billboard-secondary-link" href="register.html"
       <!-- ปุ่มตัวกรองหมวดหมู่บริการทั้ง 19 ระบบ -->
       <div class="flex flex-wrap items-center justify-center gap-2">
-        <button type="button" onclick="filterServiceCards('ALL')" data-filter="ALL" class="service-filter-btn bg-slate-950 text-amber-400 font-bold text-xs px-4 py-2 rounded-full shadow-sm transition">
+        <button type="button" onclick="filterServiceCards('ALL')" data-filter="ALL" class="service-filter-btn bg-amber-400 text-slate-950 font-bold text-xs px-4 py-2 rounded-full shadow-sm transition">
           ทั้งหมด (19 บริการ)
         </button>
-        <button type="button" onclick="filterServiceCards('member')" data-filter="member" class="service-filter-btn bg-white hover:bg-amber-50 text-slate-700 border border-slate-200 font-semibold text-xs px-4 py-2 rounded-full transition">
+        <button type="button" onclick="filterServiceCards('member')" data-filter="member" class="service-filter-btn bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 font-semibold text-xs px-4 py-2 rounded-full transition">
           🪪 งานทะเบียน &amp; บัตรสมาชิก
         </button>
-        <button type="button" onclick="filterServiceCards('community')" data-filter="community" class="service-filter-btn bg-white hover:bg-amber-50 text-slate-700 border border-slate-200 font-semibold text-xs px-4 py-2 rounded-full transition">
+        <button type="button" onclick="filterServiceCards('community')" data-filter="community" class="service-filter-btn bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 font-semibold text-xs px-4 py-2 rounded-full transition">
           💬 ชุมชน ข่าวสาร &amp; สมัครแอป
         </button>
-        <button type="button" onclick="filterServiceCards('safety')" data-filter="safety" class="service-filter-btn bg-white hover:bg-amber-50 text-slate-700 border border-slate-200 font-semibold text-xs px-4 py-2 rounded-full transition">
+        <button type="button" onclick="filterServiceCards('safety')" data-filter="safety" class="service-filter-btn bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 font-semibold text-xs px-4 py-2 rounded-full transition">
           🛡️ ประกันภัย &amp; ความปลอดภัย
         </button>
       </div>
 
       <div id="service-cards-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
         <!-- Service Card: Driver App News Hub -->
-        <div data-cat="community" class="service-card-item group bg-white rounded-3xl p-6 border-2 border-emerald-400/80 shadow-md card-luxury flex flex-col justify-between space-y-5 relative">
+        <div data-cat="community" class="service-card-item group bg-slate-900/95 rounded-3xl p-6 border-2 border-emerald-400/70 shadow-lg card-luxury flex flex-col justify-between space-y-5 relative text-slate-100">
           <span class="absolute top-4 right-4 text-[10px] font-extrabold bg-gradient-to-r from-emerald-400 to-teal-400 text-slate-950 px-3 py-0.5 rounded-full shadow-sm">
             <i class="fa-solid fa-newspaper mr-1"></i>อัปเดตล่าสุด
           </span>
           <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-50 to-teal-100 border border-emerald-300 text-emerald-700 flex items-center justify-center text-xl shadow-sm">
+            <div class="w-12 h-12 rounded-2xl bg-emerald-500/15 border border-emerald-400/35 text-emerald-300 flex items-center justify-center text-xl shadow-sm">
               <i class="fa-solid fa-newspaper icon-bounce-hover"></i>
             </div>
-            <h3 class="text-lg font-extrabold text-slate-900">ข่าวสารคนขับรถผ่านแอป (รวมทุกแอป)</h3>
-            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            <h3 class="text-lg font-extrabold text-white">ข่าวสารคนขับรถผ่านแอป (รวมทุกแอป)</h3>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
               รวมข่าวอัปเดต Grab, Bolt, Line Man, inDrive, TADA กฎหมาย รย.17/รย.18 พร้อมหน้าย่อยรับสมัครคนขับ Grab และ Bolt
             </p>
           </div>
-          <a href="driver_news.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
+          <a href="driver_news.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-extrabold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
             <span>อ่านข่าวสาร &amp; สมัครคนขับแอป</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
         </div>
 
         <!-- Service Card 0: Captain Insurance -->
-        <div data-cat="safety" class="service-card-item group bg-white rounded-3xl p-6 border-2 border-teal-400/80 shadow-md card-luxury flex flex-col justify-between space-y-5 relative">
+        <div data-cat="safety" class="service-card-item group bg-slate-900/95 rounded-3xl p-6 border-2 border-teal-400/70 shadow-lg card-luxury flex flex-col justify-between space-y-5 relative text-slate-100">
           <span class="absolute top-4 right-4 text-[10px] font-extrabold bg-gradient-to-r from-teal-400 to-emerald-400 text-slate-950 px-3 py-0.5 rounded-full shadow-sm">
             <i class="fa-solid fa-shield-halved mr-1"></i>บริการใหม่
           </span>
           <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-teal-50 to-emerald-100 border border-teal-300 text-teal-700 flex items-center justify-center text-xl shadow-sm">
+            <div class="w-12 h-12 rounded-2xl bg-teal-500/15 border border-teal-400/35 text-teal-300 flex items-center justify-center text-xl shadow-sm">
               <i class="fa-solid fa-shield-halved icon-bounce-hover"></i>
             </div>
-            <h3 class="text-lg font-extrabold text-slate-900">CAPTAIN INSURANCE กัปตัน ประกันภัย</h3>
-            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            <h3 class="text-lg font-extrabold text-white">CAPTAIN INSURANCE กัปตัน ประกันภัย</h3>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
               เช็กเบี้ยประกันภัยรถยนต์ชั้น 1, 2+, 3+, ชั้น 3 และ พ.ร.บ. สำหรับรถส่วนบุคคลและรถรับจ้าง บริการโดย The Driver Thailand
             </p>
           </div>
-          <a href="captain_insurance.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-500 hover:to-emerald-500 text-white font-bold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
+          <a href="captain_insurance.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-400 hover:to-emerald-400 text-slate-950 font-extrabold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
             <span>เช็กเบี้ย Captain Insurance</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
         </div>
 
         <!-- Service Card 1: Member Directory -->
-        <div data-cat="member" class="service-card-item group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
+        <div data-cat="member" class="service-card-item group bg-slate-900/95 rounded-3xl p-6 border border-slate-800 shadow-lg card-luxury flex flex-col justify-between space-y-5 text-slate-100">
           <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-50 to-emerald-100 border border-emerald-200 text-emerald-600 flex items-center justify-center text-xl shadow-sm">
+            <div class="w-12 h-12 rounded-2xl bg-emerald-500/15 border border-emerald-400/30 text-emerald-300 flex items-center justify-center text-xl shadow-sm">
               <i class="fa-solid fa-users-viewfinder icon-bounce-hover"></i>
             </div>
-            <h3 class="text-lg font-extrabold text-slate-900">ตรวจสอบรายชื่อ &amp; รหัสสมาชิก</h3>
-            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            <h3 class="text-lg font-extrabold text-white">ตรวจสอบรายชื่อ &amp; รหัสสมาชิก</h3>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
               ค้นหารหัสสมาชิกประจำตัวจากฐานข้อมูลล่าสุด ตรวจสอบกติกาการยืนยันตัวตน และอ่านคำถามที่พบบ่อย (FAQ)
             </p>
           </div>
-          <a href="register.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-600 text-white font-bold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md shadow-emerald-600/15">
+          <a href="register.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-400 hover:from-emerald-400 hover:to-emerald-300 text-slate-950 font-extrabold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
             <span>เปิดหน้าระบบสมาชิก</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
         </div>
 
         <!-- Service Card 2: New Member Registration Form -->
-        <div data-cat="member" class="service-card-item group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
+        <div data-cat="member" class="service-card-item group bg-slate-900/95 rounded-3xl p-6 border border-slate-800 shadow-lg card-luxury flex flex-col justify-between space-y-5 text-slate-100">
           <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-teal-50 to-teal-100 border border-teal-200 text-teal-600 flex items-center justify-center text-xl shadow-sm">
+            <div class="w-12 h-12 rounded-2xl bg-teal-500/15 border border-teal-400/30 text-teal-300 flex items-center justify-center text-xl shadow-sm">
               <i class="fa-solid fa-file-signature icon-bounce-hover"></i>
             </div>
-            <h3 class="text-lg font-extrabold text-slate-900">แบบฟอร์มลงทะเบียนสมาชิกใหม่</h3>
-            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            <h3 class="text-lg font-extrabold text-white">แบบฟอร์มลงทะเบียนสมาชิกใหม่</h3>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
               กรอกใบสมัครสมาชิกออนไลน์ รองรับทั้งสมาชิกคนขับทั่วไปและผู้ปล่อยงานหลัก/บริษัท พร้อมระบบบันทึกร่างอัตโนมัติ
             </p>
           </div>
-          <a href="member_register.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-teal-600 to-teal-500 hover:from-teal-500 hover:to-teal-600 text-white font-bold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md shadow-teal-600/15">
+          <a href="member_register.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-teal-500 to-teal-400 hover:from-teal-400 hover:to-teal-300 text-slate-950 font-extrabold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
             <span>กรอกใบสมัครสมาชิกใหม่</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
         </div>
 
         <!-- Service Card 3: Pramet Member Card -->
-        <div data-cat="member" class="service-card-item group bg-white rounded-3xl p-6 border-2 border-amber-400/80 shadow-md card-luxury flex flex-col justify-between space-y-5 relative">
+        <div data-cat="member" class="service-card-item group bg-slate-900/95 rounded-3xl p-6 border-2 border-amber-400/70 shadow-lg card-luxury flex flex-col justify-between space-y-5 relative text-slate-100">
           <span class="absolute top-4 right-4 text-[10px] font-extrabold bg-gradient-to-r from-amber-400 to-yellow-400 text-slate-950 px-3 py-0.5 rounded-full shadow-sm">
             <i class="fa-solid fa-star mr-1"></i>แนะนำ
           </span>
           <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-50 to-amber-100 border border-amber-300 text-amber-600 flex items-center justify-center text-xl shadow-sm">
+            <div class="w-12 h-12 rounded-2xl bg-amber-500/15 border border-amber-400/35 text-amber-300 flex items-center justify-center text-xl shadow-sm">
               <i class="fa-solid fa-id-badge icon-bounce-hover"></i>
             </div>
-            <h3 class="text-lg font-extrabold text-slate-900">ทำบัตรสมาชิกประเมศฐ์ &amp; เช็คพัสดุ</h3>
-            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            <h3 class="text-lg font-extrabold text-white">ทำบัตรสมาชิกประเมศฐ์ &amp; เช็คพัสดุ</h3>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
               สมัครทำบัตรสมาชิกประเมศฐ์แบบติดรูปถ่ายหน้าตรง เคลือบใสกันน้ำอย่างดี พร้อมระบบติดตามสถานะและเช็คเลขพัสดุย้อนหลัง
             </p>
           </div>
-          <a href="pcard.html" class="w-full py-3 px-4 rounded-xl bg-slate-950 hover:bg-slate-800 text-amber-400 border border-amber-400/30 font-bold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
+          <a href="pcard.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
             <span>สมัครทำบัตร / เช็คพัสดุ</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
         </div>
 
         <!-- Service Card 4: OpenChat Unblock Appeal -->
-        <div data-cat="safety" class="service-card-item group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
+        <div data-cat="safety" class="service-card-item group bg-slate-900/95 rounded-3xl p-6 border border-slate-800 shadow-lg card-luxury flex flex-col justify-between space-y-5 text-slate-100">
           <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-sky-50 to-sky-100 border border-sky-200 text-sky-600 flex items-center justify-center text-xl shadow-sm">
+            <div class="w-12 h-12 rounded-2xl bg-sky-500/15 border border-sky-400/30 text-sky-300 flex items-center justify-center text-xl shadow-sm">
               <i class="fa-solid fa-unlock-keyhole icon-bounce-hover"></i>
             </div>
-            <h3 class="text-lg font-extrabold text-slate-900">ขอปลดล็อกห้อง Line OpenChat</h3>
-            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            <h3 class="text-lg font-extrabold text-white">ขอปลดล็อกห้อง Line OpenChat</h3>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
               ยื่นคำร้องชี้แจงสาเหตุและแนบภาพหลักฐานกรณีถูกบล็อกหรือถูกลบออกจากห้องแชทของเครือข่าย เพื่อให้ทีมผู้ดูแลพิจารณาปลดล็อก
             </p>
           </div>
-          <a href="unblock_request.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-sky-600 to-sky-500 hover:from-sky-500 hover:to-sky-600 text-white font-bold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md shadow-sky-600/15">
+          <a href="unblock_request.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-sky-500 to-sky-400 hover:from-sky-400 hover:to-sky-300 text-slate-950 font-extrabold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
             <span>ยื่นคำร้องขอปลดล็อก</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
         </div>
 
         <!-- Service Card 5: Blacklist Guard -->
-        <div data-cat="safety" class="service-card-item group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
+        <div data-cat="safety" class="service-card-item group bg-slate-900/95 rounded-3xl p-6 border border-slate-800 shadow-lg card-luxury flex flex-col justify-between space-y-5 text-slate-100">
           <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-rose-50 to-rose-100 border border-rose-200 text-rose-600 flex items-center justify-center text-xl shadow-sm">
+            <div class="w-12 h-12 rounded-2xl bg-rose-500/15 border border-rose-400/30 text-rose-300 flex items-center justify-center text-xl shadow-sm">
               <i class="fa-solid fa-user-shield icon-bounce-hover"></i>
             </div>
-            <h3 class="text-lg font-extrabold text-slate-900">ศูนย์เฝ้าระวังภัย (Blacklist)</h3>
-            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            <h3 class="text-lg font-extrabold text-white">ศูนย์เฝ้าระวังภัย (Blacklist)</h3>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
               ตรวจสอบเบอร์โทรศัพท์ เลขบัญชีธนาคาร หรือชื่อผู้ว่าจ้างก่อนออกเดินทางไกล พร้อมช่องทางแจ้งเบาะแสเตือนภัยคนโกงร่วมกันในกลุ่ม
             </p>
           </div>
-          <a href="blacklist.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-rose-600 to-rose-500 hover:from-rose-500 hover:to-rose-600 text-white font-bold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md shadow-rose-600/15">
+          <a href="blacklist.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-rose-500 to-rose-400 hover:from-rose-400 hover:to-rose-300 text-slate-950 font-extrabold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
             <span>เข้าสู่ศูนย์ตรวจสอบ Blacklist</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
         </div>
 
         <!-- Service Card 6: Privacy Policy & Rules -->
-        <div data-cat="safety" class="service-card-item group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
+        <div data-cat="safety" class="service-card-item group bg-slate-900/95 rounded-3xl p-6 border border-slate-800 shadow-lg card-luxury flex flex-col justify-between space-y-5 text-slate-100">
           <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-slate-100 to-slate-200 border border-slate-300 text-slate-700 flex items-center justify-center text-xl shadow-sm">
+            <div class="w-12 h-12 rounded-2xl bg-slate-800 border border-slate-700 text-amber-300 flex items-center justify-center text-xl shadow-sm">
               <i class="fa-solid fa-scale-balanced icon-bounce-hover"></i>
             </div>
-            <h3 class="text-lg font-extrabold text-slate-900">ประกาศความเป็นส่วนตัว (PDPA)</h3>
-            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            <h3 class="text-lg font-extrabold text-white">ประกาศความเป็นส่วนตัว (PDPA)</h3>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
               อ่านประกาศคุ้มครองข้อมูลส่วนบุคคลและแนวทางปฏิบัติสำหรับสมาชิกกลุ่ม 🚖 The Driver TH 🇹🇭 Premium Service ฉบับสมบูรณ์
             </p>
           </div>
-          <a href="privacy_policy.html" class="w-full py-3 px-4 rounded-xl bg-slate-800 hover:bg-slate-900 text-amber-300 border border-slate-700 font-bold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
+          <a href="privacy_policy.html" class="w-full py-3 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-300 border border-amber-400/35 font-bold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
             <span>อ่านประกาศความเป็นส่วนตัว</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
         </div>
 
         <!-- Service Card 7: Edit Member Info -->
-        <div data-cat="member" class="service-card-item group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
+        <div data-cat="member" class="service-card-item group bg-slate-900/95 rounded-3xl p-6 border border-slate-800 shadow-lg card-luxury flex flex-col justify-between space-y-5 text-slate-100">
           <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-50 to-orange-100 border border-amber-200 text-amber-600 flex items-center justify-center text-xl shadow-sm">
+            <div class="w-12 h-12 rounded-2xl bg-amber-500/15 border border-amber-400/30 text-amber-300 flex items-center justify-center text-xl shadow-sm">
               <i class="fa-solid fa-user-pen icon-bounce-hover"></i>
             </div>
-            <h3 class="text-lg font-extrabold text-slate-900">แก้ไขข้อมูลสมาชิกเดิม</h3>
-            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            <h3 class="text-lg font-extrabold text-white">แก้ไขข้อมูลสมาชิกเดิม</h3>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
               สำหรับสมาชิกที่มีรหัสสมาชิกอยู่แล้ว ต้องการแจ้งเปลี่ยนรถยนต์คันใหม่ เปลี่ยนทะเบียนรถ หรือแก้ไขข้อมูลติดต่อ
             </p>
           </div>
-          <a href="member_edit.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-bold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
+          <a href="member_edit.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
             <span>แจ้งแก้ไขข้อมูลสมาชิก</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
         </div>
 
         <!-- Service Card 8: Luxury Car OpenChat -->
-        <div data-cat="community" class="service-card-item group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
+        <div data-cat="community" class="service-card-item group bg-slate-900/95 rounded-3xl p-6 border border-slate-800 shadow-lg card-luxury flex flex-col justify-between space-y-5 text-slate-100">
           <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-yellow-50 to-amber-100 border border-amber-300 text-amber-700 flex items-center justify-center text-xl shadow-sm">
+            <div class="w-12 h-12 rounded-2xl bg-amber-500/15 border border-amber-400/35 text-amber-300 flex items-center justify-center text-xl shadow-sm">
               <i class="fa-solid fa-crown icon-bounce-hover"></i>
             </div>
-            <h3 class="text-lg font-extrabold text-slate-900">ลงทะเบียนห้อง Luxury Car</h3>
-            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            <h3 class="text-lg font-extrabold text-white">ลงทะเบียนห้อง Luxury Car</h3>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
               ลงทะเบียนขอเข้าห้อง Line OpenChat สำหรับสมาชิกกลุ่มคนขับรถ Luxury Car / Executive Van / VIP โดยเฉพาะ
             </p>
           </div>
-          <a href="luxury_car_register.html" class="w-full py-3 px-4 rounded-xl bg-slate-950 hover:bg-slate-800 text-amber-300 border border-amber-400/40 font-bold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
+          <a href="luxury_car_register.html" class="w-full py-3 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-300 border border-amber-400/40 font-bold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
             <span>สมัครเข้าห้อง Luxury Car</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
         </div>
 
         <!-- Service Card 9: [VIP] Tourism Referral Guide -->
-        <div data-cat="community" class="service-card-item group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
+        <div data-cat="community" class="service-card-item group bg-slate-900/95 rounded-3xl p-6 border border-slate-800 shadow-lg card-luxury flex flex-col justify-between space-y-5 text-slate-100">
           <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-50 to-indigo-100 border border-purple-200 text-purple-600 flex items-center justify-center text-xl shadow-sm">
+            <div class="w-12 h-12 rounded-2xl bg-purple-500/15 border border-purple-400/30 text-purple-300 flex items-center justify-center text-xl shadow-sm">
               <i class="fa-solid fa-map-location-dot icon-bounce-hover"></i>
             </div>
-            <h3 class="text-lg font-extrabold text-slate-900">[VIP] ลายแทงสถานที่ท่องเที่ยว</h3>
-            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            <h3 class="text-lg font-extrabold text-white">[VIP] ลายแทงสถานที่ท่องเที่ยว</h3>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
               บริการขอรับลายแทงสถานที่ท่องเที่ยว ร้านค้า ร้านอาหาร และจุดบริการพันธมิตรทั่วไทยเพื่อรับค่าแนะนำ
             </p>
           </div>
-          <a href="vip_referral_guide.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-purple-700 to-indigo-700 hover:from-purple-600 hover:to-indigo-600 text-white font-bold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
+          <a href="vip_referral_guide.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-purple-500 to-indigo-500 hover:from-purple-400 hover:to-indigo-400 text-slate-950 font-extrabold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
             <span>ขอรับสิทธิ์ลายแทง VIP</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
         </div>
 
         <!-- Service Card 10: RTAF Don Mueang Pass -->
-        <div data-cat="member" class="service-card-item group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
+        <div data-cat="member" class="service-card-item group bg-slate-900/95 rounded-3xl p-6 border border-slate-800 shadow-lg card-luxury flex flex-col justify-between space-y-5 text-slate-100">
           <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-50 to-sky-100 border border-blue-200 text-blue-600 flex items-center justify-center text-xl shadow-sm">
+            <div class="w-12 h-12 rounded-2xl bg-blue-500/15 border border-blue-400/30 text-blue-300 flex items-center justify-center text-xl shadow-sm">
               <i class="fa-solid fa-plane-departure icon-bounce-hover"></i>
             </div>
-            <h3 class="text-lg font-extrabold text-slate-900">ทำบัตรผ่านยานพาหนะ ทอ.</h3>
-            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            <h3 class="text-lg font-extrabold text-white">ทำบัตรผ่านยานพาหนะ ทอ.</h3>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
               แบบฟอร์มขอทำบัตรผ่านยานพาหนะเข้า - ออก เขตพื้นที่กองทัพอากาศ (ดอนเมือง) ทั้งขอใหม่และต่ออายุบัตร
             </p>
           </div>
-          <a href="rtaf_pass_register.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-blue-700 to-sky-600 hover:from-blue-600 hover:to-sky-500 text-white font-bold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
+          <a href="rtaf_pass_register.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-blue-500 to-sky-400 hover:from-blue-400 hover:to-sky-300 text-slate-950 font-extrabold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
             <span>ยื่นขอทำบัตรผ่าน ทอ.</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
         </div>
 
         <!-- Service Card 11: Tour Book Order -->
-        <div data-cat="community" class="service-card-item group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
+        <div data-cat="community" class="service-card-item group bg-slate-900/95 rounded-3xl p-6 border border-slate-800 shadow-lg card-luxury flex flex-col justify-between space-y-5 text-slate-100">
           <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-teal-50 to-emerald-100 border border-teal-200 text-teal-700 flex items-center justify-center text-xl shadow-sm">
+            <div class="w-12 h-12 rounded-2xl bg-teal-500/15 border border-teal-400/30 text-teal-300 flex items-center justify-center text-xl shadow-sm">
               <i class="fa-solid fa-book icon-bounce-hover"></i>
             </div>
-            <h3 class="text-lg font-extrabold text-slate-900">บริการสั่งซื้อสมุดทัวร์</h3>
-            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            <h3 class="text-lg font-extrabold text-white">บริการสั่งซื้อสมุดทัวร์</h3>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
               สั่งซื้อสมุดทัวร์ออนไลน์ เลือกได้ 2 พื้นที่บริการ (กรุงเทพฯ-ปริมณฑล และ พัทยา-ชลบุรี) พร้อมจัดส่งถึงบ้าน
             </p>
           </div>
-          <a href="tour_book_order.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-teal-700 to-emerald-600 hover:from-teal-600 hover:to-emerald-500 text-white font-bold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
+          <a href="tour_book_order.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-teal-500 to-emerald-400 hover:from-teal-400 hover:to-emerald-300 text-slate-950 font-extrabold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
             <span>สั่งซื้อสมุดทัวร์</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
         </div>
 
         <!-- Service Card 12: Unified Request Tracking -->
-        <div data-cat="member" class="service-card-item group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
+        <div data-cat="member" class="service-card-item group bg-slate-900/95 rounded-3xl p-6 border border-slate-800 shadow-lg card-luxury flex flex-col justify-between space-y-5 text-slate-100">
           <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-50 to-yellow-100 border border-amber-300 text-amber-600 flex items-center justify-center text-xl shadow-sm">
+            <div class="w-12 h-12 rounded-2xl bg-amber-500/15 border border-amber-400/30 text-amber-300 flex items-center justify-center text-xl shadow-sm">
               <i class="fa-solid fa-satellite-dish icon-bounce-hover"></i>
             </div>
-            <h3 class="text-lg font-extrabold text-slate-900">ศูนย์ติดตามสถานะคำร้องทั้งหมด</h3>
-            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            <h3 class="text-lg font-extrabold text-white">ศูนย์ติดตามสถานะคำร้องทั้งหมด</h3>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
               ตรวจสอบความคืบหน้าและเลขพัสดุของทุกบริการในหน้าเดียวด้วยรหัสอ้างอิงหรือเบอร์โทรศัพท์
             </p>
           </div>
-          <a href="tracking.html" class="w-full py-3 px-4 rounded-xl bg-slate-950 hover:bg-slate-800 text-amber-400 font-bold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
+          <a href="tracking.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
             <span>เช็คสถานะคำร้องทั้งหมด</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
         </div>
 
         <!-- Service Card 13: Digital Member Card & QR -->
-        <div data-cat="member" class="service-card-item group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
+        <div data-cat="member" class="service-card-item group bg-slate-900/95 rounded-3xl p-6 border border-slate-800 shadow-lg card-luxury flex flex-col justify-between space-y-5 text-slate-100">
           <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-50 to-green-100 border border-emerald-200 text-emerald-600 flex items-center justify-center text-xl shadow-sm">
+            <div class="w-12 h-12 rounded-2xl bg-emerald-500/15 border border-emerald-400/30 text-emerald-300 flex items-center justify-center text-xl shadow-sm">
               <i class="fa-solid fa-qrcode icon-bounce-hover"></i>
             </div>
-            <h3 class="text-lg font-extrabold text-slate-900">บัตรสมาชิกดิจิทัล &amp; QR Code</h3>
-            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            <h3 class="text-lg font-extrabold text-white">บัตรสมาชิกดิจิทัล &amp; QR Code</h3>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
               เปิดบัตรสมาชิกอิเล็กทรอนิกส์บนมือถือพร้อม QR Code ให้ผู้โดยสารและจุดคัดกรองสแกนตรวจสอบตัวตนได้ทันที
             </p>
           </div>
-          <a href="member_card_digital.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 text-white font-bold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
+          <a href="member_card_digital.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-400 hover:from-emerald-400 hover:to-emerald-300 text-slate-950 font-extrabold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
             <span>เปิดบัตรสมาชิกดิจิทัล</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
         </div>
 
         <!-- Service Card 14: Dispatch Job Board -->
-        <div data-cat="community" class="service-card-item group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
+        <div data-cat="community" class="service-card-item group bg-slate-900/95 rounded-3xl p-6 border border-slate-800 shadow-lg card-luxury flex flex-col justify-between space-y-5 text-slate-100">
           <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-50 to-orange-100 border border-amber-200 text-amber-700 flex items-center justify-center text-xl shadow-sm">
+            <div class="w-12 h-12 rounded-2xl bg-amber-500/15 border border-amber-400/30 text-amber-300 flex items-center justify-center text-xl shadow-sm">
               <i class="fa-solid fa-handshake icon-bounce-hover"></i>
             </div>
-            <h3 class="text-lg font-extrabold text-slate-900">กระดานแลกเปลี่ยนงาน / หาคนขับแทน</h3>
-            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            <h3 class="text-lg font-extrabold text-white">กระดานแลกเปลี่ยนงาน / หาคนขับแทน</h3>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
               ลงประกาศปล่อยงานรับ-ส่งผู้โดยสารและกดรับงานเฉพาะสมาชิกที่ยืนยันรหัสในฐานข้อมูลแล้วเท่านั้น
             </p>
           </div>
-          <a href="job_board.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-bold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
+          <a href="job_board.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
             <span>เข้าสู่กระดานงานสมาชิก</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
         </div>
 
         <!-- Service Card 15: Community Forum -->
-        <div data-cat="community" class="service-card-item group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
+        <div data-cat="community" class="service-card-item group bg-slate-900/95 rounded-3xl p-6 border border-slate-800 shadow-lg card-luxury flex flex-col justify-between space-y-5 text-slate-100">
           <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-sky-50 to-indigo-100 border border-sky-200 text-sky-600 flex items-center justify-center text-xl shadow-sm">
+            <div class="w-12 h-12 rounded-2xl bg-sky-500/15 border border-sky-400/30 text-sky-300 flex items-center justify-center text-xl shadow-sm">
               <i class="fa-solid fa-comments icon-bounce-hover"></i>
             </div>
-            <h3 class="text-lg font-extrabold text-slate-900">ชุมชนเว็บบอร์ดสมาชิก</h3>
-            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            <h3 class="text-lg font-extrabold text-white">ชุมชนเว็บบอร์ดสมาชิก</h3>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
               ตั้งกระทู้ แลกเปลี่ยนเส้นทาง รีวิวสถานที่ แนบรูปภาพ โหวตคะแนนโพสต์ และสะสมเรทติ้งสมาชิก
             </p>
           </div>
-          <a href="community.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-sky-600 to-indigo-600 text-white font-bold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
+          <a href="community.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-sky-500 to-indigo-400 hover:from-sky-400 hover:to-indigo-300 text-slate-950 font-extrabold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
             <span>เข้าสู่เว็บบอร์ดชุมชน</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
         </div>
 
         <!-- Service Card 16: Standard Fare Calculator -->
-        <div data-cat="safety" class="service-card-item group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
+        <div data-cat="safety" class="service-card-item group bg-slate-900/95 rounded-3xl p-6 border border-slate-800 shadow-lg card-luxury flex flex-col justify-between space-y-5 text-slate-100">
           <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-50 to-teal-100 border border-emerald-200 text-emerald-700 flex items-center justify-center text-xl shadow-sm">
+            <div class="w-12 h-12 rounded-2xl bg-emerald-500/15 border border-emerald-400/30 text-emerald-300 flex items-center justify-center text-xl shadow-sm">
               <i class="fa-solid fa-calculator icon-bounce-hover"></i>
             </div>
-            <h3 class="text-lg font-extrabold text-slate-900">คำนวณค่าโดยสารมาตรฐาน</h3>
-            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            <h3 class="text-lg font-extrabold text-white">คำนวณค่าโดยสารมาตรฐาน</h3>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
               คำนวณราคากลางงานเหมาต่างจังหวัดและรับ-ส่งสนามบินตามประเภทรถ พร้อมคัดลอกใบเสนอราคาส่งลูกค้า
             </p>
           </div>
-          <a href="fare_calculator.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-700 to-teal-600 text-white font-bold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
+          <a href="fare_calculator.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-extrabold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
             <span>คำนวณค่าโดยสาร</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
         </div>
 
         <!-- Service Card 17: Member Handbook & Guide -->
-        <div data-cat="safety" class="service-card-item group bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm card-luxury flex flex-col justify-between space-y-5">
+        <div data-cat="safety" class="service-card-item group bg-slate-900/95 rounded-3xl p-6 border border-slate-800 shadow-lg card-luxury flex flex-col justify-between space-y-5 text-slate-100">
           <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-slate-100 to-slate-200 border border-slate-300 text-slate-700 flex items-center justify-center text-xl shadow-sm">
+            <div class="w-12 h-12 rounded-2xl bg-slate-800 border border-slate-700 text-amber-300 flex items-center justify-center text-xl shadow-sm">
               <i class="fa-solid fa-book-open icon-bounce-hover"></i>
             </div>
-            <h3 class="text-lg font-extrabold text-slate-900">คู่มือสมาชิก &amp; กฎกติกาเครือข่าย</h3>
-            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            <h3 class="text-lg font-extrabold text-white">คู่มือสมาชิก &amp; กฎกติกาเครือข่าย</h3>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
               รวมวิธีตั้งชื่อในห้องแชท วิธีถ่ายรูปยืนยันตัวตนให้ผ่าน 100% มารยาทการรับงาน และช่องทางติดต่อแอดมิน
             </p>
           </div>
-          <a href="guide.html" class="w-full py-3 px-4 rounded-xl bg-slate-800 hover:bg-slate-900 text-amber-300 font-bold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
+          <a href="guide.html" class="w-full py-3 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-300 border border-amber-400/35 font-bold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
             <span>อ่านคู่มือสมาชิก</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
@@ -1736,8 +1736,8 @@
       document.querySelectorAll(".service-filter-btn").forEach(btn => {
         const active = btn.getAttribute("data-filter") === cat;
         btn.className = active
-          ? "service-filter-btn bg-slate-950 text-amber-400 font-bold text-xs px-4 py-2 rounded-full shadow-sm transition"
-          : "service-filter-btn bg-white hover:bg-amber-50 text-slate-700 border border-slate-200 font-semibold text-xs px-4 py-2 rounded-full transition";
+          ? "service-filter-btn bg-amber-400 text-slate-950 font-bold text-xs px-4 py-2 rounded-full shadow-sm transition"
+          : "service-filter-btn bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 font-semibold text-xs px-4 py-2 rounded-full transition";
       });
       document.querySelectorAll(".service-card-item").forEach(card => {
         const match = cat === "ALL" || card.getAttribute("data-cat") === cat;

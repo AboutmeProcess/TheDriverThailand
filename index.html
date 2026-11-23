@@ -701,8 +701,20 @@
           <div id="panel-cat-group" class="tdt-cat-menu-panel">
             <div class="tdt-cat-menu-header" style="background:rgba(120,53,15,0.45);color:#fcd34d;border:1px solid rgba(251,191,36,0.25);">
               <span><i class="fa-solid fa-gem"></i> หมวดหมู่บริการของกลุ่ม</span>
-              <span style="font-size:10px;opacity:0.85;">12 เมนู</span>
+              <span style="font-size:10px;opacity:0.85;">15 เมนู</span>
             </div>
+            <a href="driver_news.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(16,185,129,0.18);color:#34d399;border:1px solid rgba(52,211,153,0.35);"><i class="fa-solid fa-newspaper"></i></span>
+              <span><span class="tdt-cat-menu-title">ข่าวสารคนขับรถผ่านแอป (รวมทุกแอป)</span><span class="tdt-cat-menu-sub">อัปเดตข่าว Grab, Bolt, Line Man, inDrive &amp; กฎหมาย</span></span>
+            </a>
+            <a href="grab_driver_register.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(22,163,74,0.2);color:#4ade80;border:1px solid rgba(74,222,128,0.35);"><i class="fa-solid fa-car"></i></span>
+              <span><span class="tdt-cat-menu-title">บริการรับสมัครคนขับ Grab</span><span class="tdt-cat-menu-sub">สมัครขับ GrabCar / GrabTaxi / GrabSUV</span></span>
+            </a>
+            <a href="bolt_driver_register.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(16,185,129,0.2);color:#2dd4bf;border:1px solid rgba(45,212,191,0.35);"><i class="fa-solid fa-bolt"></i></span>
+              <span><span class="tdt-cat-menu-title">บริการรับสมัครคนขับ Bolt</span><span class="tdt-cat-menu-sub">สมัครขับ Bolt Economy / Comfort / XL</span></span>
+            </a>
             <a href="captain_insurance.html" class="tdt-cat-menu-link">
               <span class="tdt-cat-menu-icon" style="background:rgba(20,184,166,0.18);color:#2dd4bf;border:1px solid rgba(45,212,191,0.35);"><i class="fa-solid fa-shield-halved"></i></span>
               <span><span class="tdt-cat-menu-title">Captain Insurance กัปตัน ประกันภัย</span><span class="tdt-cat-menu-sub">เช็กเบี้ยและทำประกันภัยรถยนต์ราคาสมาชิก</span></span>
@@ -1023,35 +1035,16 @@
                     <i class="fa-solid fa-arrow-right text-[11px]"></i>
                   </a>
                   <a id="billboard-secondary-link" href="register.html"
-                    class="inline-flex items-center justify-center gap-1.5 bg-white/10 hover:bg-white/15 text-amber-200 border border-white/20 font-bold text-xs px-3.5 py-3 rounded-xl transition">
-                    <i class="fa-solid fa-circle-info text-[11px]"></i>
-                    <span id="billboard-secondary-label">ตรวจสอบรหัสสมาชิก</span>
-                  </a>
-                </div>
-
-                <div class="flex items-center justify-between gap-3 pt-2 border-t border-white/10">
-                  <div id="billboard-dots" class="flex items-center gap-1.5 flex-wrap" role="tablist" aria-label="เลือกสไลด์สื่อประชาสัมพันธ์บริการเครือข่าย"></div>
-                  <div class="flex items-center gap-1.5 shrink-0">
-                    <button type="button" onclick="prevBillboardSlide()" aria-label="สไลด์ก่อนหน้า" class="billboard-nav-btn" style="width:34px;height:34px;">
-                      <i class="fa-solid fa-chevron-left text-[11px]"></i>
-                    </button>
-                    <button type="button" onclick="nextBillboardSlide()" aria-label="สไลด์ถัดไป" class="billboard-nav-btn" style="width:34px;height:34px;">
-                      <i class="fa-solid fa-chevron-right text-[11px]"></i>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-      <!-- ปุ่มตัวกรองหมวดหมู่บริการทั้ง 18 ระบบ -->
+      <!-- ปุ่มตัวกรองหมวดหมู่บริการทั้ง 19 ระบบ -->
       <div class="flex flex-wrap items-center justify-center gap-2">
         <button type="button" onclick="filterServiceCards('ALL')" data-filter="ALL" class="service-filter-btn bg-slate-950 text-amber-400 font-bold text-xs px-4 py-2 rounded-full shadow-sm transition">
-          ทั้งหมด (18 บริการ)
+          ทั้งหมด (19 บริการ)
         </button>
         <button type="button" onclick="filterServiceCards('member')" data-filter="member" class="service-filter-btn bg-white hover:bg-amber-50 text-slate-700 border border-slate-200 font-semibold text-xs px-4 py-2 rounded-full transition">
           🪪 งานทะเบียน &amp; บัตรสมาชิก
         </button>
         <button type="button" onclick="filterServiceCards('community')" data-filter="community" class="service-filter-btn bg-white hover:bg-amber-50 text-slate-700 border border-slate-200 font-semibold text-xs px-4 py-2 rounded-full transition">
-          💬 ชุมชน &amp; แลกเปลี่ยนงาน
+          💬 ชุมชน ข่าวสาร &amp; สมัครแอป
         </button>
         <button type="button" onclick="filterServiceCards('safety')" data-filter="safety" class="service-filter-btn bg-white hover:bg-amber-50 text-slate-700 border border-slate-200 font-semibold text-xs px-4 py-2 rounded-full transition">
           🛡️ ประกันภัย &amp; ความปลอดภัย
@@ -1059,6 +1052,26 @@
       </div>
 
       <div id="service-cards-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+        <!-- Service Card: Driver App News Hub -->
+        <div data-cat="community" class="service-card-item group bg-white rounded-3xl p-6 border-2 border-emerald-400/80 shadow-md card-luxury flex flex-col justify-between space-y-5 relative">
+          <span class="absolute top-4 right-4 text-[10px] font-extrabold bg-gradient-to-r from-emerald-400 to-teal-400 text-slate-950 px-3 py-0.5 rounded-full shadow-sm">
+            <i class="fa-solid fa-newspaper mr-1"></i>อัปเดตล่าสุด
+          </span>
+          <div class="space-y-3">
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-50 to-teal-100 border border-emerald-300 text-emerald-700 flex items-center justify-center text-xl shadow-sm">
+              <i class="fa-solid fa-newspaper icon-bounce-hover"></i>
+            </div>
+            <h3 class="text-lg font-extrabold text-slate-900">ข่าวสารคนขับรถผ่านแอป (รวมทุกแอป)</h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              รวมข่าวอัปเดต Grab, Bolt, Line Man, inDrive, TADA กฎหมาย รย.17/รย.18 พร้อมหน้าย่อยรับสมัครคนขับ Grab และ Bolt
+            </p>
+          </div>
+          <a href="driver_news.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
+            <span>อ่านข่าวสาร &amp; สมัครคนขับแอป</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+
         <!-- Service Card 0: Captain Insurance -->
         <div data-cat="safety" class="service-card-item group bg-white rounded-3xl p-6 border-2 border-teal-400/80 shadow-md card-luxury flex flex-col justify-between space-y-5 relative">
           <span class="absolute top-4 right-4 text-[10px] font-extrabold bg-gradient-to-r from-teal-400 to-emerald-400 text-slate-950 px-3 py-0.5 rounded-full shadow-sm">

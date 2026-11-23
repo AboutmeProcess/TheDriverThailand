@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>คลังจุดพักรถ EV Charger &amp; คะแนนความน่าเชื่อถือสมาชิก | 🚖 The Driver TH 🇹🇭</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    html { font-size: 16px; transition: font-size 0.18s ease; }
+    html, body, input, select, textarea, button, code, pre { font-family: 'Prompt', sans-serif !important; }
+    body { background-color: #070a12; color: #f8fafc; overflow-x: clip; }
+    .dark-surface-card {
+      background: rgba(15, 23, 42, 0.94);
+      border: 1px solid rgba(251, 191, 36, 0.24);
+      color: #f8fafc;
+      box-shadow: 0 18px 38px -14px rgba(2, 6, 23, 0.72);
+    }
+    .dark-field {
+      background-color: #070b14;
+      border: 1px solid #334155;
+      color: #f8fafc;
+      transition: border-color 0.2s ease, background-color 0.2s ease;
+    }
+    .dark-field::placeholder { color: #64748b; }
+    .dark-field:focus { outline: none; border-color: #fbbf24; background-color: #0b1120; }
+    .hero-glow-bg {
+      background:
+        radial-gradient(circle at 18% 22%, rgba(251, 191, 36, 0.24) 0%, transparent 45%),
+        radial-gradient(circle at 82% 78%, rgba(16, 185, 129, 0.16) 0%, transparent 50%),
+        linear-gradient(145deg, #060911 0%, #0d1424 58%, #151f34 100%);
+    }
+    .gold-shimmer-text {
+      background: linear-gradient(90deg, #fde68a 0%, #fbbf24 35%, #f59e0b 65%, #fef08a 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+
+    /* UNIFIED GLOBAL NAVIGATION BAR */
+    .tdt-global-nav {
+      box-sizing: border-box;
+      font-family: 'Prompt', sans-serif;
+      background: linear-gradient(180deg, rgba(7, 11, 20, 0.98) 0%, rgba(10, 15, 28, 0.96) 100%);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      color: #e2e8f0;
+      border-bottom: 1px solid rgba(251, 191, 36, 0.28);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 10px 28px -8px rgba(2, 6, 23, 0.65);
+      width: 100%;
+    }
+    .tdt-global-nav *, .tdt-global-nav *::before, .tdt-global-nav *::after { box-sizing: border-box; }
+    .tdt-global-nav-inner { max-width: 1280px; margin: 0 auto; padding: 12px 16px; display: flex; flex-direction: column; gap: 10px; }
+    @media (min-width: 640px) { .tdt-global-nav-inner { padding: 14px 24px; gap: 12px; } }
+    .tdt-nav-top-row { width: 100%; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding-bottom: 10px; border-bottom: 1px solid rgba(148, 163, 184, 0.12); }
+    .tdt-global-brand { display: inline-flex; align-items: center; gap: 13px; font-size: 16px; font-weight: 500; color: #fbbf24; text-decoration: none; }
+    .tdt-brand-text-stack { display: inline-flex; flex-direction: column; gap: 5px; }
+    .tdt-brand-subline-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 12px; color: #cbd5e1; }
+    .tdt-brand-exec-pill { display: inline-flex; align-items: center; gap: 5px; background: rgba(251, 191, 36, 0.15); border: 1px solid rgba(251, 191, 36, 0.42); color: #fde68a; font-size: 10.5px; padding: 2px 8px; border-radius: 999px; }
+    .tdt-brand-logo-img { width: 50px; height: 50px; border-radius: 15px; object-fit: cover; background: #0f172a; border: 1.5px solid rgba(251, 191, 36, 0.85); }
+    @media (min-width: 640px) { .tdt-global-brand { font-size: 19px; } .tdt-brand-logo-img { width: 56px; height: 56px; border-radius: 16px; } }
+    .tdt-global-right-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; width: 100%; }
+    .tdt-nav-divider { width: 1px; height: 20px; background: rgba(148, 163, 184, 0.22); margin: 0 2px; display: none; }
+    @media (min-width: 1024px) { .tdt-nav-divider { display: inline-block; } }
+    .tdt-nav-btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; height: 36px; padding: 0 13px; border-radius: 11px; font-size: 12px; text-decoration: none; white-space: nowrap; background-color: rgba(15, 23, 42, 0.88); border: 1px solid rgba(148, 163, 184, 0.22); color: #e2e8f0; cursor: pointer; transition: all 0.18s ease; }
+    .tdt-nav-btn:hover { background-color: #1e293b; border-color: rgba(251, 191, 36, 0.48); transform: translateY(-1px); }
+    .tdt-nav-btn.is-quick-register, .tdt-nav-btn.is-quick-check-code { color: #5eead4; border-color: rgba(45, 212, 191, 0.38); background-color: rgba(19, 78, 74, 0.28); }
+    .tdt-nav-btn.is-blacklist { color: #fda4af; border-color: rgba(251, 113, 133, 0.35); }
+    .tdt-nav-btn.is-admin-link { color: #fde68a; border-color: rgba(251, 191, 36, 0.45); background-color: rgba(245, 158, 11, 0.14); }
+    .tdt-nav-btn.active-current { background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%); border-color: #fcd34d; color: #060911; font-weight: 600; }
+    .tdt-util-group { display: inline-flex; align-items: center; gap: 4px; background-color: rgba(15, 23, 42, 0.92); border: 1px solid rgba(251, 191, 36, 0.28); border-radius: 12px; padding: 3px; margin-left: auto; }
+    .tdt-util-btn { display: inline-flex; align-items: center; justify-content: center; height: 30px; padding: 0 9px; border-radius: 9px; font-size: 12px; color: #e2e8f0; background: transparent; border: none; cursor: pointer; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+  <div id="toast-box" class="hidden fixed bottom-5 right-5 z-[1100] bg-slate-950 text-amber-300 border border-amber-400/50 px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-2.5 text-xs sm:text-sm">
+    <i class="fa-solid fa-circle-check text-emerald-400"></i>
+    <span id="toast-text" class="text-white"></span>
+  </div>
+
+  <!-- UNIFIED GLOBAL NAVIGATION BAR -->
+  <nav class="tdt-global-nav">
+    <div class="tdt-global-nav-inner">
+      <div class="tdt-nav-top-row">
+        <a href="index.html" class="tdt-global-brand">
+          <img src="TheDriverTH.jpg" alt="โลโก้ The Driver Thailand"
+            onerror="this.onerror=null;this.src='https://placehold.co/80x80/0f172a/fbbf24?text=TDT';"
+            class="tdt-brand-logo-img">
+          <span class="tdt-brand-text-stack">
+            <span>🚖 The Driver TH 🇹🇭 Premium Service</span>
+            <span class="tdt-brand-subline-row">
+              <span class="tdt-brand-exec-pill"><i class="fa-solid fa-crown" style="font-size:9px;"></i> EXECUTIVE NETWORK</span>
+              <span>เครือข่ายคนขับรถรับส่งผู้โดยสารและบริการมืออาชีพแห่งประเทศไทย</span>
+            </span>
+          </span>
+        </a>
+        <div class="tdt-util-group" title="ปรับขนาดตัวอักษร">
+          <button type="button" onclick="changeScale(-1)" class="tdt-util-btn">A-</button>
+          <span id="font-pct" style="font-size:11px;color:#fde68a;padding:0 4px;">100%</span>
+          <button type="button" onclick="changeScale(1)" class="tdt-util-btn">A+</button>
+        </div>
+      </div>
+
+      <div class="tdt-global-right-controls">
+        <a href="index.html" class="tdt-nav-btn"><i class="fa-solid fa-house"></i><span>หน้าหลัก</span></a>
+        <a href="driver_pitstop_reputation.html" class="tdt-nav-btn active-current"><i class="fa-solid fa-charging-station"></i><span>จุดพักรถ EV &amp; ระดับสมาชิก</span></a>
+        <a href="community.html" class="tdt-nav-btn is-quick-register"><i class="fa-solid fa-comments"></i><span>เว็บบอร์ดสมาชิก</span></a>
+        <a href="job_board.html" class="tdt-nav-btn is-quick-check-code"><i class="fa-solid fa-handshake"></i><span>กระดานแลกเปลี่ยนงาน</span></a>
+
+        <span class="tdt-nav-divider" aria-hidden="true"></span>
+
+        <a href="blacklist.html" class="tdt-nav-btn is-blacklist"><i class="fa-solid fa-user-shield"></i><span>ตรวจสอบ Blacklist</span></a>
+        <a href="admin.html" class="tdt-nav-btn is-admin-link"><i class="fa-solid fa-sliders"></i><span>ระบบหลังบ้าน (Admin)</span></a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="flex-grow max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-6">
+    <!-- Hero Banner -->
+    <section class="hero-glow-bg rounded-3xl p-6 sm:p-10 text-white border border-amber-400/35 shadow-2xl space-y-3">
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="inline-flex items-center gap-1.5 bg-amber-500/20 border border-amber-400/45 text-amber-300 text-xs font-bold px-3.5 py-1 rounded-full">
+          <i class="fa-solid fa-award"></i> REPUTATION TIER &amp; DRIVER PIT-STOP MAP
+        </span>
+        <span class="inline-flex items-center gap-1.5 bg-emerald-500/20 border border-emerald-400/35 text-emerald-300 text-xs font-bold px-3 py-1 rounded-full">
+          <i class="fa-solid fa-charging-station"></i> EV Charger • จุดจอดรอ • พิกัดสำคัญ
+        </span>
+      </div>
+      <h1 class="text-2xl sm:text-4xl font-black">ระดับความน่าเชื่อถือสมาชิก <span class="gold-shimmer-text">&amp; คลังพิกัดจุดพักรถทั่วไทย</span></h1>
+      <p class="text-slate-300 text-xs sm:text-sm max-w-3xl font-light">
+        ตรวจสอบระดับเกียรติยศสมาชิก (Verified Driver → Pro Driver → Executive Captain) จากคะแนนเว็บบอร์ดและการรับ-ปล่อยงาน พร้อมแผนที่รวมจุดจอดรอผู้โดยสาร สถานีชาร์จ EV และจุดบริการที่สมาชิกช่วยกันปักหมุด
+      </p>
+    </section>
+
+    <!-- แถบเลือกโหมด -->
+    <div class="flex flex-wrap gap-2 bg-slate-900/95 p-2 rounded-2xl border border-amber-400/25">
+      <button type="button" onclick="switchHubMode('pitstop')" id="btn-mode-pitstop"
+        class="bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-extrabold px-4 py-2.5 rounded-xl text-xs sm:text-sm transition">
+        <i class="fa-solid fa-map-location-dot mr-1.5"></i> 1. คลังพิกัดจุดพักรถ &amp; EV Charger
+      </button>
+      <button type="button" onclick="switchHubMode('reputation')" id="btn-mode-reputation"
+        class="bg-slate-950 hover:bg-slate-800 text-slate-200 border border-slate-700 font-bold px-4 py-2.5 rounded-xl text-xs sm:text-sm transition">
+        <i class="fa-solid fa-crown text-amber-400 mr-1.5"></i> 2. ทำเนียบระดับสมาชิก &amp; คะแนนความน่าเชื่อถือ
+      </button>
+    </div>
+
+    <!-- ส่วนที่ 1: คลังพิกัดจุดพักรถ EV Charger และจุดจอดรอ -->
+    <div id="panel-pitstop" class="space-y-6">
+      <section class="dark-surface-card rounded-3xl p-6 sm:p-8 space-y-5">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
+          <div>
+            <h2 class="text-lg sm:text-xl font-extrabold text-amber-300">พิกัดจุดจอดรอผู้โดยสาร สถานีชาร์จ EV และจุดบริการ</h2>
+            <p class="text-xs text-slate-400">คลิกเปิดนำทาง Google Maps ได้ทันที หรือร่วมปักหมุดจุดบริการใหม่ให้เพื่อนสมาชิก</p>
+          </div>
+          <button type="button" onclick="document.getElementById('add-pitstop-form').classList.toggle('hidden')"
+            class="bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold px-4 py-2.5 rounded-xl text-xs shrink-0 transition">
+            <i class="fa-solid fa-plus mr-1"></i> ปักหมุดพิกัดใหม่
+          </button>
+        </div>
+
+        <!-- ฟอร์มปักหมุดพิกัดใหม่ -->
+        <form id="add-pitstop-form" onsubmit="submitNewPitstop(event)" class="hidden bg-slate-950/85 border border-amber-400/30 rounded-2xl p-4 space-y-3 text-xs">
+          <div class="grid sm:grid-cols-3 gap-3">
+            <select id="ps-category" class="dark-field rounded-xl px-3.5 py-2.5 font-semibold">
+              <option value="สถานีชาร์จรถไฟฟ้า (EV Charger)">⚡ สถานีชาร์จรถไฟฟ้า (EV Charger)</option>
+              <option value="จุดจอดรอสนามบิน / จุดนัดพบ">✈️ จุดจอดรอสนามบิน / จุดนัดพบ</option>
+              <option value="ปั๊มน้ำมัน / ห้องน้ำสะอาด / ร้านอาหาร">⛽ ปั๊มน้ำมัน / ห้องน้ำสะอาด / ร้านอาหาร</option>
+              <option value="จุดล้างรถ / อู่ซ่อม / ศูนย์บริการ">🔧 จุดล้างรถ / อู่ซ่อม / ศูนย์บริการ</option>
+            </select>
+            <input type="text" id="ps-name" required placeholder="ชื่อสถานที่ / จุดบริการ *" class="dark-field rounded-xl px-3.5 py-2.5">
+            <input type="text" id="ps-province" required placeholder="จังหวัด / โซนพื้นที่ *" class="dark-field rounded-xl px-3.5 py-2.5">
+          </div>
+          <div class="grid sm:grid-cols-3 gap-3">
+            <input type="url" id="ps-map-url" placeholder="ลิงก์ Google Maps (ถ้ามี)" class="dark-field rounded-xl px-3.5 py-2.5 font-mono">
+            <input type="text" id="ps-note" required placeholder="รายละเอียด (เช่น หัวชาร์จ DC 120kW / จอดฟรี 2 ชม.) *" class="dark-field rounded-xl px-3.5 py-2.5">
+            <input type="text" id="ps-member-code" required placeholder="รหัสสมาชิกผู้ปักหมุด (เช่น B2464) *" class="dark-field rounded-xl px-3.5 py-2.5 font-mono uppercase text-amber-300">
+          </div>
+          <button type="submit" class="bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-extrabold px-5 py-2.5 rounded-xl">
+            บันทึกพิกัดลงคลังเครือข่าย
+          </button>
+        </form>
+
+        <!-- ตัวกรองหมวดหมู่พิกัด -->
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div class="flex flex-wrap gap-2">
+            <button type="button" onclick="setPitstopFilter('ALL')" data-ps="ALL" class="ps-filter-btn bg-amber-400 text-slate-950 font-extrabold text-xs px-3.5 py-1.5 rounded-full">ทั้งหมด</button>
+            <button type="button" onclick="setPitstopFilter('สถานีชาร์จรถไฟฟ้า (EV Charger)')" data-ps="สถานีชาร์จรถไฟฟ้า (EV Charger)" class="ps-filter-btn bg-slate-950 text-slate-300 border border-slate-700 font-semibold text-xs px-3.5 py-1.5 rounded-full">⚡ EV Charger</button>
+            <button type="button" onclick="setPitstopFilter('จุดจอดรอสนามบิน / จุดนัดพบ')" data-ps="จุดจอดรอสนามบิน / จุดนัดพบ" class="ps-filter-btn bg-slate-950 text-slate-300 border border-slate-700 font-semibold text-xs px-3.5 py-1.5 rounded-full">✈️ จุดจอดสนามบิน</button>
+            <button type="button" onclick="setPitstopFilter('ปั๊มน้ำมัน / ห้องน้ำสะอาด / ร้านอาหาร')" data-ps="ปั๊มน้ำมัน / ห้องน้ำสะอาด / ร้านอาหาร" class="ps-filter-btn bg-slate-950 text-slate-300 border border-slate-700 font-semibold text-xs px-3.5 py-1.5 rounded-full">⛽ จุดพักรถ &amp; ห้องน้ำ</button>
+          </div>
+          <input type="text" id="ps-search" oninput="renderPitstops()" placeholder="ค้นหาชื่อสถานที่, จังหวัด..."
+            class="dark-field rounded-xl px-3.5 py-2 text-xs w-full sm:w-64">
+        </div>
+
+        <div id="pitstops-grid" class="grid md:grid-cols-2 gap-4"></div>
+      </section>
+    </div>
+
+    <!-- ส่วนที่ 2: ระบบคะแนนความน่าเชื่อถือ & ระดับสมาชิก -->
+    <div id="panel-reputation" class="hidden space-y-6">
+      <!-- คำอธิบายระดับสมาชิกทั้ง 4 ขั้น -->
+      <section class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="dark-surface-card rounded-3xl p-5 space-y-2 border-slate-700">
+          <span class="text-xs font-extrabold bg-slate-800 text-slate-200 px-3 py-1 rounded-full">ระดับที่ 1 • 0-14 คะแนน</span>
+          <h3 class="text-base font-extrabold text-white pt-1">🛡️ Verified Driver</h3>
+          <p class="text-xs text-slate-400">สมาชิกที่ผ่านการยืนยันตัวตนและได้รับรหัสสมาชิกอย่างเป็นทางการ</p>
+        </div>
+        <div class="dark-surface-card rounded-3xl p-5 space-y-2 border-emerald-500/40">
+          <span class="text-xs font-extrabold bg-emerald-950 text-emerald-300 border border-emerald-500/40 px-3 py-1 rounded-full">ระดับที่ 2 • 15-49 คะแนน</span>
+          <h3 class="text-base font-extrabold text-emerald-300 pt-1">✨ Active Contributor</h3>
+          <p class="text-xs text-slate-300">สมาชิกที่ร่วมแบ่งปันข้อมูลเส้นทางและช่วยเหลือเพื่อนสมาชิกสม่ำเสมอ</p>
+        </div>
+        <div class="dark-surface-card rounded-3xl p-5 space-y-2 border-sky-500/40">
+          <span class="text-xs font-extrabold bg-sky-950 text-sky-300 border border-sky-500/40 px-3 py-1 rounded-full">ระดับที่ 3 • 50-99 คะแนน</span>
+          <h3 class="text-base font-extrabold text-sky-300 pt-1">🌟 Pro Captain</h3>
+          <p class="text-xs text-slate-300">คนขับมือโปรที่มีประวัติการรับงาน-ส่งงานดีเยี่ยมและได้รับคะแนนโหวตสูง</p>
+        </div>
+        <div class="dark-surface-card rounded-3xl p-5 space-y-2 border-amber-400/60">
+          <span class="text-xs font-extrabold bg-amber-400 text-slate-950 px-3 py-1 rounded-full">ระดับสูงสุด • 100+ คะแนน</span>
+          <h3 class="text-base font-extrabold text-amber-300 pt-1">👑 Executive Captain</h3>
+          <p class="text-xs text-slate-200">ผู้นำเครือข่ายระดับสูงที่ได้รับความไว้วางใจสูงสุดในการรับส่งแขก VIP</p>
+        </div>
+      </section>
+
+      <!-- ตารางจัดอันดับสมาชิกจากฐานข้อมูลจริง -->
+      <section class="dark-surface-card rounded-3xl p-6 sm:p-8 space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-4">
+          <div>
+            <h2 class="text-lg sm:text-xl font-extrabold text-amber-300">ทำเนียบสมาชิกยอดเยี่ยม (คำนวณจากคะแนนเว็บบอร์ด &amp; ประวัติงาน)</h2>
+            <p class="text-xs text-slate-400">ดึงคะแนนจริงแบบเรียลไทม์จากบัญชีสมาชิกเว็บบอร์ดและกระดานแลกเปลี่ยนงาน</p>
+          </div>
+          <button type="button" onclick="loadReputationLeaderboard()" class="bg-slate-950 hover:bg-slate-800 text-amber-300 border border-amber-400/35 px-3.5 py-2 rounded-xl text-xs font-bold">
+            <i class="fa-solid fa-rotate mr-1"></i> อัปเดตอันดับ
+          </button>
+        </div>
+
+        <div id="reputation-leaderboard-list" class="space-y-3">
+          <div class="text-center py-8 text-slate-400 text-xs"><i class="fa-solid fa-spinner fa-spin mr-1.5"></i> กำลังประมวลผลอันดับสมาชิก...</div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="bg-slate-950 text-slate-400 border-t border-amber-500/25 py-9 px-4 text-xs mt-10">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+      <div class="text-center sm:text-left space-y-1">
+        <p class="font-bold text-amber-300">🚖 The Driver TH 🇹🇭 Premium Service Official Network</p>
+        <p class="text-[11px] text-slate-500">คลังพิกัดจุดพักรถ EV Charger และระบบคะแนนความน่าเชื่อถือสมาชิก</p>
+      </div>
+      <div class="flex flex-wrap justify-center gap-x-4 gap-y-2 font-semibold">
+        <a href="index.html" class="hover:text-amber-400 transition">หน้าหลัก</a>
+        <a href="driver_pitstop_reputation.html" class="text-amber-300">จุดพักรถ EV &amp; ระดับสมาชิก</a>
+        <a href="community.html" class="hover:text-emerald-400 transition">เว็บบอร์ดสมาชิก</a>
+        <a href="job_board.html" class="hover:text-sky-400 transition">กระดานแลกเปลี่ยนงาน</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const MASTER_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyeDCdxBD10D_AFZQY2NxeylLOiAmAHLesSDZHXYCb3TsYs4wYer_kRTPVOs3VpK2pP/exec';
+
+    const DEFAULT_PITSTOPS = [
+      {
+        category: 'จุดจอดรอสนามบิน / จุดนัดพบ',
+        name: 'ลานจอดรถโซน 2-3 และจุดนัดพบชั้น 2 ประตู 3-4 สนามบินสุวรรณภูมิ',
+        province: 'สมุทรปราการ (สุวรรณภูมิ)',
+        mapUrl: 'https://maps.google.com/?q=Suvarnabhumi+Airport',
+        note: 'จอดฟรี 15 นาทีแรก สำหรับรับผู้โดยสารขาเข้า กรุณาประสานงานก่อนเข้าเทียบประตู',
+        by: 'MD-Admin'
+      },
+      {
+        category: 'จุดจอดรอสนามบิน / จุดนัดพบ',
+        name: 'อาคารจอดรถ 7 ชั้น และจุดรับผู้โดยสาร อาคาร 1-2 สนามบินดอนเมือง',
+        province: 'กรุงเทพมหานคร (ดอนเมือง)',
+        mapUrl: 'https://maps.google.com/?q=Don+Mueang+International+Airport',
+        note: 'สมาชิกที่มีบัตรผ่านยานพาหนะ ทอ. สามารถใช้เส้นทางลัดตามระเบียบได้',
+        by: 'MD-Admin'
+      },
+      {
+        category: 'สถานีชาร์จรถไฟฟ้า (EV Charger)',
+        name: 'จุดพักรถมอเตอร์เวย์ (ขาออก) บางปะกง — PTT EV Station PluZ & PEA VOLTA',
+        province: 'ฉะเชิงเทรา (เส้นทางพัทยา-ชลบุรี)',
+        mapUrl: 'https://maps.google.com/?q=Motorway+Rest+Area+Bang+Pakong',
+        note: 'หัวชาร์จ DC Fast Charge 120kW-180kW มีห้องน้ำสะอาดและศูนย์อาหารครบครัน',
+        by: 'GM44'
+      },
+      {
+        category: 'สถานีชาร์จรถไฟฟ้า (EV Charger)',
+        name: 'Elex by EGAT & PTT EV Station วังน้อย (ขาออกสายเหนือ-อีสาน)',
+        province: 'พระนครศรีอยุธยา',
+        mapUrl: 'https://maps.google.com/?q=Wang+Noi+Ayutthaya',
+        note: 'จุดชาร์จไฟด่วนก่อนขึ้นสระบุรี-เขาใหญ่-โคราช ช่องจอดกว้างรองรับรถตู้ EV',
+        by: 'GM203'
+      },
+      {
+        category: 'ปั๊มน้ำมัน / ห้องน้ำสะอาด / ร้านอาหาร',
+        name: 'จุดพักรถ ปตท. พระราม 2 กม.35 (ขาออกมุ่งหน้าหัวหิน-ภาคใต้)',
+        province: 'สมุทรสาคร',
+        mapUrl: 'https://maps.google.com/?q=Rama+2+Road+Samut+Sakhon',
+        note: 'ห้องน้ำติดแอร์สะอาดมาก มีจุดชาร์จ EV และร้านกาแฟสำหรับพักสายตาก่อนเดินทางไกล',
+        by: 'MD-Admin'
+      }
+    ];
+
+    let pitstops = [...DEFAULT_PITSTOPS];
+    let pitstopFilter = 'ALL';
+
+    function esc(s) { return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+    function showToast(msg) {
+      const box = document.getElementById('toast-box');
+      const txt = document.getElementById('toast-text');
+      if (!box || !txt) return;
+      txt.textContent = msg;
+      box.classList.remove('hidden');
+      setTimeout(() => box.classList.add('hidden'), 3200);
+    }
+
+    function switchHubMode(mode) {
+      const isPitstop = mode === 'pitstop';
+      document.getElementById('panel-pitstop').classList.toggle('hidden', !isPitstop);
+      document.getElementById('panel-reputation').classList.toggle('hidden', isPitstop);
+      document.getElementById('btn-mode-pitstop').className = isPitstop
+        ? 'bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-extrabold px-4 py-2.5 rounded-xl text-xs sm:text-sm transition'
+        : 'bg-slate-950 hover:bg-slate-800 text-slate-200 border border-slate-700 font-bold px-4 py-2.5 rounded-xl text-xs sm:text-sm transition';
+      document.getElementById('btn-mode-reputation').className = !isPitstop
+        ? 'bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-extrabold px-4 py-2.5 rounded-xl text-xs sm:text-sm transition'
+        : 'bg-slate-950 hover:bg-slate-800 text-slate-200 border border-slate-700 font-bold px-4 py-2.5 rounded-xl text-xs sm:text-sm transition';
+      if (!isPitstop) loadReputationLeaderboard();
+    }
+
+    function setPitstopFilter(cat) {
+      pitstopFilter = cat;
+      document.querySelectorAll('.ps-filter-btn').forEach(btn => {
+        const active = btn.getAttribute('data-ps') === cat;
+        btn.className = active
+          ? 'ps-filter-btn bg-amber-400 text-slate-950 font-extrabold text-xs px-3.5 py-1.5 rounded-full'
+          : 'ps-filter-btn bg-slate-950 text-slate-300 border border-slate-700 font-semibold text-xs px-3.5 py-1.5 rounded-full';
+      });
+      renderPitstops();
+    }
+
+    function renderPitstops() {
+      const grid = document.getElementById('pitstops-grid');
+      const kw = (document.getElementById('ps-search')?.value || '').trim().toLowerCase();
+      const filtered = pitstops.filter(p => {
+        if (pitstopFilter !== 'ALL' && p.category !== pitstopFilter) return false;
+        if (!kw) return true;
+        return `${p.name} ${p.province} ${p.note} ${p.category}`.toLowerCase().includes(kw);
+      });
+
+      if (!filtered.length) {
+        grid.innerHTML = '<div class="col-span-full text-center py-8 text-slate-400 text-xs">ไม่พบพิกัดที่ตรงกับคำค้นหา</div>';
+        return;
+      }
+
+      grid.innerHTML = filtered.map(p => {
+        const mapHref = p.mapUrl || `https://maps.google.com/?q=${encodeURIComponent(p.name + ' ' + p.province)}`;
+        return `
+          <div class="bg-slate-950/85 border border-slate-800 rounded-2xl p-5 space-y-3 flex flex-col justify-between">
+            <div class="space-y-2">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <span class="text-[11px] font-bold bg-emerald-950/80 text-emerald-300 border border-emerald-500/40 px-2.5 py-0.5 rounded-full">${esc(p.category)}</span>
+                <span class="text-[11px] text-amber-300 font-semibold"><i class="fa-solid fa-location-dot mr-1"></i>${esc(p.province)}</span>
+              </div>
+              <h3 class="text-sm sm:text-base font-extrabold text-white">${esc(p.name)}</h3>
+              <p class="text-xs text-slate-300 leading-relaxed">${esc(p.note)}</p>
+            </div>
+            <div class="pt-2 border-t border-slate-800 flex items-center justify-between text-xs">
+              <span class="text-slate-400">ปักหมุดโดย: <strong class="text-slate-200">${esc(p.by)}</strong></span>
+              <a href="${esc(mapHref)}" target="_blank" rel="noopener noreferrer"
+                class="bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold px-3.5 py-1.5 rounded-xl transition">
+                <i class="fa-solid fa-diamond-turn-right mr-1"></i> เปิดแผนที่นำทาง
+              </a>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    async function submitNewPitstop(e) {
+      e.preventDefault();
+      const item = {
+        category: document.getElementById('ps-category').value,
+        name: document.getElementById('ps-name').value.trim(),
+        province: document.getElementById('ps-province').value.trim(),
+        mapUrl: document.getElementById('ps-map-url').value.trim(),
+        note: document.getElementById('ps-note').value.trim(),
+        by: document.getElementById('ps-member-code').value.trim().toUpperCase()
+      };
+      pitstops.unshift(item);
+      renderPitstops();
+      e.target.reset();
+      document.getElementById('add-pitstop-form').classList.add('hidden');
+      showToast('เพิ่มพิกัดใหม่ลงคลังเรียบร้อยแล้ว');
+
+      try {
+        await fetch(MASTER_WEB_APP_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'pitstop_add', ...item })
+        });
+      } catch (_) {}
+    }
+
+    function getTierByScore(score) {
+      if (score >= 100) return { label: '👑 Executive Captain', cls: 'bg-amber-400 text-slate-950' };
+      if (score >= 50) return { label: '🌟 Pro Captain', cls: 'bg-sky-950 text-sky-300 border border-sky-400/50' };
+      if (score >= 15) return { label: '✨ Active Contributor', cls: 'bg-emerald-950 text-emerald-300 border border-emerald-400/50' };
+      return { label: '🛡️ Verified Driver', cls: 'bg-slate-800 text-slate-200 border border-slate-600' };
+    }
+
+    async function loadReputationLeaderboard() {
+      const box = document.getElementById('reputation-leaderboard-list');
+      try {
+        const [forumRes, jobRes] = await Promise.all([
+          fetch(`${MASTER_WEB_APP_URL}?action=forum_feed&t=${Date.now()}`).then(r => r.json()).catch(() => ({})),
+          fetch(`${MASTER_WEB_APP_URL}?action=job_feed&t=${Date.now()}`).then(r => r.json()).catch(() => ({}))
+        ]);
+
+        const scoreMap = new Map();
+        const users = Array.isArray(forumRes?.users) ? forumRes.users : [];
+        users.forEach(u => {
+          if (u.status === 'อนุมัติ') {
+            scoreMap.set(u.memberCode, {
+              code: u.memberCode,
+              name: u.displayName,
+              score: Number(u.rating || 0)
+            });
+          }
+        });
+
+        const jobs = Array.isArray(jobRes?.jobs) ? jobRes.jobs : [];
+        jobs.forEach(j => {
+          if (j.posterCode) {
+            const cur = scoreMap.get(j.posterCode) || { code: j.posterCode, name: j.posterName || j.posterCode, score: 0 };
+            cur.score += 10;
+            scoreMap.set(j.posterCode, cur);
+          }
+          if (j.accepterCode) {
+            const cur = scoreMap.get(j.accepterCode) || { code: j.accepterCode, name: j.accepterName || j.accepterCode, score: 0 };
+            cur.score += 10;
+            scoreMap.set(j.accepterCode, cur);
+          }
+        });
+
+        const ranking = Array.from(scoreMap.values()).sort((a, b) => b.score - a.score);
+        if (!ranking.length) {
+          box.innerHTML = '<div class="text-center py-8 text-slate-400 text-xs">ยังไม่มีข้อมูลคะแนนสะสมในระบบ สามารถเริ่มสะสมคะแนนได้จากการตั้งกระทู้ ตอบคอมเมนต์ และแลกเปลี่ยนงานในเครือข่าย</div>';
+          return;
+        }
+
+        box.innerHTML = ranking.map((item, idx) => {
+          const tier = getTierByScore(item.score);
+          return `
+            <div class="bg-slate-950/85 border border-slate-800 rounded-2xl p-4 flex items-center justify-between gap-3 text-xs">
+              <div class="flex items-center gap-3 min-w-0">
+                <span class="w-8 h-8 rounded-xl bg-amber-400/15 border border-amber-400/40 text-amber-300 font-black flex items-center justify-center shrink-0">
+                  #${idx + 1}
+                </span>
+                <div class="min-w-0">
+                  <p class="font-bold text-white truncate">[${esc(item.code)}] ${esc(item.name)}</p>
+                  <span class="inline-block mt-1 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full ${tier.cls}">${tier.label}</span>
+                </div>
+              </div>
+              <div class="text-right shrink-0">
+                <strong class="text-lg font-black text-amber-400 font-mono">${item.score.toLocaleString()}</strong>
+                <span class="text-[10px] text-slate-400 block">คะแนนความน่าเชื่อถือ</span>
+              </div>
+            </div>
+          `;
+        }).join('');
+      } catch (_) {
+        box.innerHTML = '<div class="text-center py-6 text-rose-400 text-xs">ไม่สามารถโหลดทำเนียบคะแนนได้ในขณะนี้</div>';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderPitstops();
+    });
+
+    let scalePct = Number(localStorage.getItem('tdt_font_scale_pct')) || 100;
+    function changeScale(step) {
+      scalePct = Math.min(130, Math.max(90, scalePct + step * 10));
+      document.documentElement.style.fontSize = `${(scalePct / 100) * 16}px`;
+      document.getElementById('font-pct').textContent = `${scalePct}%`;
+      localStorage.setItem('tdt_font_scale_pct', String(scalePct));
+    }
+    changeScale(0);
+  </script>
+</body>
+</html>

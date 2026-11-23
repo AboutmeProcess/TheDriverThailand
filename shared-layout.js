@@ -52,11 +52,11 @@
 
             <!-- ปุ่มปรับขนาดตัวอักษร -->
             <div class="tdt-util-group ml-auto" title="ปรับขนาดตัวอักษร">
-              <button type="button" onclick="changeFontScale(-1)" aria-label="ลดขนาดตัวอักษร" class="tdt-util-btn" title="ลดขนาดตัวอักษร">
+              <button type="button" onclick="changeScale(-1)" aria-label="ลดขนาดตัวอักษร" class="tdt-util-btn" title="ลดขนาดตัวอักษร">
                 <span>A-</span>
               </button>
-              <span id="font-scale-label" class="text-[11px] font-normal text-amber-300 px-1 select-none">${currentFontScale}%</span>
-              <button type="button" onclick="changeFontScale(1)" aria-label="เพิ่มขนาดตัวอักษร" class="tdt-util-btn" title="เพิ่มขนาดตัวอักษร">
+              <span id="font-pct" class="text-[11px] font-normal text-amber-300 px-1 select-none">${currentFontScale}%</span>
+              <button type="button" onclick="changeScale(1)" aria-label="เพิ่มขนาดตัวอักษร" class="tdt-util-btn" title="เพิ่มขนาดตัวอักษร">
                 <span>A+</span>
               </button>
             </div>
@@ -159,43 +159,84 @@
       </nav>
     `;
   }
-    }
 
-    const footerSlot = document.getElementById("shared-footer-slot");
-    if (footerSlot) {
-      footerSlot.innerHTML = buildGlobalFooterHTML();
-    } else if (!document.querySelector("footer.tdt-global-footer") && document.body) {
-      const existingFooter = document.querySelector("footer");
-      if (!existingFooter) {
-        const fWrap = document.createElement("div");
-        fWrap.innerHTML = buildGlobalFooterHTML().trim();
-        if (fWrap.firstElementChild) {
-          document.body.appendChild(fWrap.firstElementChild);
+  function buildGlobalFooterHTML() {
+    return `
+      <footer class="tdt-global-footer bg-slate-950 text-slate-400 border-t border-amber-500/25 py-9 px-4 text-xs mt-10">
+        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+          <div class="text-center sm:text-left space-y-1">
+            <p class="font-bold text-amber-300">🚖 The Driver TH 🇹🇭 Premium Service Official Network</p>
+            <p class="text-[11px] text-slate-500">ศูนย์กลางระบบสมาชิก บัตรสมาชิกประเมศฐ์ และระบบเฝ้าระวังภัยกลุ่มคนขับรถรับจ้าง</p>
+          </div>
+          <div class="flex flex-wrap justify-center gap-x-4 gap-y-2 font-semibold">
+            <a href="index.html" class="hover:text-amber-400 transition">หน้าหลัก</a>
+            <a href="register.html" class="hover:text-emerald-400 transition">ระบบสมาชิก</a>
+            <a href="member_register.html" class="hover:text-teal-400 transition">ลงทะเบียนสมาชิกใหม่</a>
+            <a href="pcard.html" class="hover:text-amber-400 transition">ทำบัตรสมาชิกประเมศฐ์</a>
+            <a href="unblock_request.html" class="hover:text-sky-400 transition">ขอปลดล็อก OpenChat</a>
+            <a href="blacklist.html" class="hover:text-rose-400 transition">ตรวจสอบ Blacklist</a>
+            <a href="privacy_policy.html" class="hover:text-amber-300 transition">ประกาศความเป็นส่วนตัว</a>
+            <a href="admin.html" class="text-amber-300 hover:text-amber-200 transition">ระบบหลังบ้าน (Admin)</a>
+          </div>
+        </div>
+      </footer>
+    `;
+  }
+
+  function mountSharedHeader() {
+    try {
+      if (!document.querySelector("nav.tdt-global-nav")) {
+        const slot = document.getElementById("shared-header-slot");
+        if (slot) {
+          slot.innerHTML = buildGlobalNavHTML();
+        } else if (document.body) {
+          const wrap = document.createElement("div");
+          wrap.innerHTML = buildGlobalNavHTML().trim();
+          if (wrap.firstElementChild) {
+            document.body.insertBefore(wrap.firstElementChild, document.body.firstChild);
+          }
         }
       }
-    }
-  } catch (err) {
-    console.error("Failed to mount shared header:", err);
-  }
-}
 
-function applyFontScale(pct) {
+      const footerSlot = document.getElementById("shared-footer-slot");
+      if (footerSlot) {
+        footerSlot.innerHTML = buildGlobalFooterHTML();
+      } else if (!document.querySelector("footer.tdt-global-footer") && document.body) {
+        const existingFooter = document.querySelector("footer");
+        if (!existingFooter) {
+          const fWrap = document.createElement("div");
+          fWrap.innerHTML = buildGlobalFooterHTML().trim();
+          if (fWrap.firstElementChild) {
+            document.body.appendChild(fWrap.firstElementChild);
+          }
+        }
+      }
+    } catch (err) {
+      console.error("Failed to mount shared header:", err);
+    }
+  }
+
+  function applyFontScale(pct) {
     currentFontScale = Math.min(130, Math.max(90, Number(pct) || 100));
     document.documentElement.style.fontSize = `${(currentFontScale / 100) * 16}px`;
     const labelEl = document.getElementById("font-scale-label");
     if (labelEl) labelEl.textContent = `${currentFontScale}%`;
+    const tdtPctEl = document.getElementById("tdt-font-pct");
+    if (tdtPctEl) tdtPctEl.textContent = `${currentFontScale}%`;
     try {
       localStorage.setItem(FONT_SCALE_KEY, String(currentFontScale));
     } catch (_) {}
   }
 
-  window.changeFontScale = function (step) {
+  window.changeScale = function (step) {
     const nextScale = currentFontScale + (step * 10);
     applyFontScale(nextScale);
     if (typeof window.showToast === "function") {
       window.showToast(`ขนาดตัวอักษร: ${currentFontScale}%`);
     }
   };
+
+  window.changeFontScale = window.changeScale;
 
   function closeAllDesktopDropdowns() {
     ["member", "group"].forEach(cat => {
@@ -205,14 +246,19 @@ function applyFontScale(pct) {
       if (panel) panel.classList.remove("is-open");
       if (btn) btn.setAttribute("aria-expanded", "false");
       if (chevron) chevron.style.transform = "rotate(0deg)";
+
+      const navPanel = document.getElementById(`nav-panel-${cat}`);
+      const navChev = document.getElementById(`nav-chev-${cat}`);
+      if (navPanel) navPanel.classList.remove("is-open");
+      if (navChev) navChev.style.transform = "rotate(0deg)");
     });
   }
 
   window.toggleNavDropdown = function (category, event) {
     if (event) event.stopPropagation();
-    const targetPanel = document.getElementById(`panel-cat-${category}`);
-    const targetBtn = document.getElementById(`btn-cat-${category}`);
-    const targetChevron = document.getElementById(`chevron-cat-${category}`);
+    const targetPanel = document.getElementById(`panel-cat-${category}`) || document.getElementById(`nav-panel-${category}`);
+    const targetBtn = document.getElementById(`btn-cat-${category}`) || document.getElementById(`nav-btn-${category}`);
+    const targetChevron = document.getElementById(`chevron-cat-${category}`) || document.getElementById(`nav-chev-${category}`);
     if (!targetPanel) return;
 
     const willOpen = !targetPanel.classList.contains("is-open");
@@ -225,9 +271,11 @@ function applyFontScale(pct) {
     }
   };
 
+  window.tdtToggleDropdown = window.toggleNavDropdown;
+
   document.addEventListener("click", function (event) {
-    const memberDrop = document.getElementById("dropdown-member-cat");
-    const groupDrop = document.getElementById("dropdown-group-cat");
+    const memberDrop = document.getElementById("dropdown-member-cat") || document.getElementById("nav-drop-member");
+    const groupDrop = document.getElementById("dropdown-group-cat") || document.getElementById("nav-drop-group");
     const clickedInsideMember = memberDrop && memberDrop.contains(event.target);
     const clickedInsideGroup = groupDrop && groupDrop.contains(event.target);
     if (!clickedInsideMember && !clickedInsideGroup) {

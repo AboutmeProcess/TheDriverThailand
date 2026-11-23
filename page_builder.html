@@ -275,13 +275,21 @@
         </div>
 
         <div class="flex gap-2 pt-2 border-t border-slate-800">
-          <button type="button" onclick="duplicateSelectedElement()" class="flex-1 bg-slate-800 hover:bg-slate-700 text-emerald-300 font-bold py-2 px-3 rounded-xl text-[11px]">
+          <button type="button" onclick="copySelectedElement()" class="flex-1 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-400/40 font-bold py-2 px-2.5 rounded-xl text-[11px]">
+            <i class="fa-solid fa-copy mr-1"></i> Copy
+          </button>
+          <button type="button" onclick="duplicateSelectedElement()" class="flex-1 bg-slate-800 hover:bg-slate-700 text-emerald-300 font-bold py-2 px-2.5 rounded-xl text-[11px]">
             <i class="fa-solid fa-clone mr-1"></i> ทำซ้ำ
           </button>
-          <button type="button" onclick="deleteSelectedElement()" class="flex-1 bg-rose-600/20 hover:bg-rose-600/30 text-rose-300 border border-rose-500/40 font-bold py-2 px-3 rounded-xl text-[11px]">
+          <button type="button" onclick="deleteSelectedElement()" class="flex-1 bg-rose-600/20 hover:bg-rose-600/30 text-rose-300 border border-rose-500/40 font-bold py-2 px-2.5 rounded-xl text-[11px]">
             <i class="fa-solid fa-trash mr-1"></i> ลบออก
           </button>
         </div>
+
+        <button type="button" id="btn-paste-copied-el" onclick="pasteCopiedElement()" disabled
+          class="w-full bg-emerald-600/20 disabled:opacity-35 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/40 font-bold py-2 px-3 rounded-xl text-[11px] transition">
+          <i class="fa-solid fa-paste mr-1"></i> วางองค์ประกอบที่ Copy ไว้
+        </button>
       </div>
     </aside>
   </div>
@@ -338,6 +346,7 @@
     const localFolderHtmlMap = new Map();
 
     let selectedEl = null;
+    let copiedElementClone = null;
     let draggedNewBlockType = '';
     let undoStack = [];
     let redoStack = [];
@@ -550,8 +559,54 @@
     function updateUndoRedoButtons() {
       const uBtn = document.getElementById('btn-undo');
       const rBtn = document.getElementById('btn-redo');
+      const pBtn = document.getElementById('btn-paste-copied-el');
       if (uBtn) uBtn.disabled = undoStack.length === 0;
       if (rBtn) rBtn.disabled = redoStack.length === 0;
+      if (pBtn) pBtn.disabled = !copiedElementClone;
+    }
+
+    function copySelectedElement() {
+      const target = selectedEl
+        ? (selectedEl.closest('nav, .tdt-global-nav, .tdt-cat-dropdown-wrap, a, button') || selectedEl)
+        : null;
+      if (!target) {
+        showBuilderToast('กรุณาคลิกเลือกองค์ประกอบหรือเมนูที่ต้องการ Copy ก่อนครับ');
+        return;
+      }
+      const clone = target.cloneNode(true);
+      clone.style.outline = '';
+      copiedElementClone = clone;
+      updateUndoRedoButtons();
+      const label = target.tagName === 'NAV' || target.classList?.contains('tdt-cat-dropdown-wrap')
+        ? 'Copy เมนูเรียบร้อยแล้ว'
+        : `Copy <${target.tagName.toLowerCase()}> เรียบร้อยแล้ว`;
+      showBuilderToast(label);
+    }
+
+    function pasteCopiedElement() {
+      const doc = getFrameDoc();
+      if (!doc || !doc.body || !copiedElementClone) {
+        showBuilderToast('ยังไม่มีองค์ประกอบที่ Copy ไว้ครับ');
+        return;
+      }
+      pushUndoSnapshot();
+      const freshClone = copiedElementClone.cloneNode(true);
+      freshClone.style.outline = '';
+
+      if (selectedEl && selectedEl.parentNode && selectedEl !== doc.body) {
+        const anchorParent = selectedEl.closest('.tdt-global-right-controls, .tdt-cat-menu-panel') || selectedEl.parentNode;
+        if (anchorParent === selectedEl.parentNode) {
+          selectedEl.parentNode.insertBefore(freshClone, selectedEl.nextSibling);
+        } else {
+          anchorParent.appendChild(freshClone);
+        }
+      } else {
+        const targetMain = doc.querySelector('main') || doc.body;
+        targetMain.appendChild(freshClone);
+      }
+
+      bindEditableHandlersInFrame(doc);
+      showBuilderToast('วางองค์ประกอบที่ Copy ไว้เรียบร้อยแล้ว');
     }
 
     function execFrameCommand(cmd, value = null) {
@@ -710,6 +765,22 @@
 
       const targets = doc.querySelectorAll('h1, h2, h3, h4, p, span, a, button, img, li');
       targets.forEach(node => {
+        // ป้องกันการเปลี่ยนหน้าหรือส่งฟอร์มขณะอยู่ในโหมดแก้ไขหน้าเว็บ
+        if (node.tagName === 'A') {
+          node.setAttribute('data-builder-orig-href', node.getAttribute('href') || '');
+          node.addEventListener('click', ev => {
+            ev.preventDefault();
+            ev.stopPropagation();
+            selectElementInInspector(node);
+          }, true);
+        } else if (node.tagName === 'BUTTON') {
+          node.addEventListener('click', ev => {
+            ev.preventDefault();
+            ev.stopPropagation();
+            selectElementInInspector(node);
+          }, true);
+        }
+
         if (node.tagName !== 'IMG' && node.children.length === 0) {
           node.setAttribute('contenteditable', 'true');
         }
@@ -717,6 +788,16 @@
           e.stopPropagation();
           selectElementInInspector(node);
         });
+      });
+
+      // ป้องกันการเปลี่ยนหน้าเมื่อคลิกลิงก์หรือปุ่มอื่นๆ ที่อยู่นอกเหนือรายการข้างต้น
+      doc.querySelectorAll('a, button').forEach(interactiveEl => {
+        if (!interactiveEl.hasAttribute('data-builder-guard-bound')) {
+          interactiveEl.setAttribute('data-builder-guard-bound', 'true');
+          interactiveEl.addEventListener('click', ev => {
+            ev.preventDefault();
+          }, true);
+        }
       });
     }
 

@@ -138,11 +138,6 @@
           <i class="fa-solid fa-rotate-right"></i>
         </button>
 
-        <button type="button" onclick="toggleCmsStudioDrawer()" id="btn-toggle-cms"
-          class="bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-400/45 font-extrabold px-3.5 py-2 rounded-xl text-xs transition">
-          <i class="fa-solid fa-database mr-1"></i> CMS &amp; AI Studio
-        </button>
-
         <button type="button" onclick="exportCurrentHtmlFile()"
           class="gold-grad hover:opacity-95 text-slate-950 font-extrabold px-3.5 py-2 rounded-xl text-xs shadow transition">
           <i class="fa-solid fa-file-export mr-1"></i> ส่งออกไฟล์ .HTML
@@ -151,194 +146,168 @@
     </div>
   </header>
 
-  <!-- ศูนย์จัดการ CMS, เวิร์กโฟลว์เนื้อหา และผู้ช่วย AI (CMS & AI Studio Drawer) -->
-  <section id="cms-studio-drawer" class="hidden bg-slate-950/98 border-b border-emerald-500/35 px-4 py-4 shrink-0 z-30 shadow-2xl max-h-[58vh] overflow-y-auto">
-    <div class="max-w-7xl mx-auto space-y-4">
-      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
-        <div class="flex items-center gap-2.5">
-          <span class="w-8 h-8 rounded-xl bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 flex items-center justify-center text-sm">
-            <i class="fa-solid fa-layer-group"></i>
-          </span>
-          <div>
-            <h2 class="text-xs sm:text-sm font-extrabold text-emerald-300">CMS Content Database, Workflow &amp; AI Generator</h2>
-            <p class="text-[11px] text-slate-400">จัดการโครงสร้างข้อมูลเนื้อหา กำหนดสถานะเวิร์กโฟลว์ (Draft → Review → Published) ใช้ AI ช่วยร่าง และแทรก/ซิงก์เข้าหน้าเว็บได้ทันที</p>
-          </div>
+  <!-- แถบเครื่องมือจัดรูปแบบข้อความลอยตัวเมื่อเลือกข้อความ -->
+  <div id="floating-text-toolbar" class="hidden fixed top-20 left-1/2 -translate-x-1/2 z-[1150] bg-slate-900/95 border border-amber-400/50 text-white px-3 py-2 rounded-2xl shadow-2xl flex items-center gap-1.5 text-xs">
+    <button type="button" onclick="execFrameCommand('bold')" title="ตัวหนา" class="w-8 h-8 rounded-lg hover:bg-slate-800 font-bold">B</button>
+    <button type="button" onclick="execFrameCommand('italic')" title="ตัวเอียง" class="w-8 h-8 rounded-lg hover:bg-slate-800 italic">I</button>
+    <button type="button" onclick="execFrameCommand('underline')" title="ขีดเส้นใต้" class="w-8 h-8 rounded-lg hover:bg-slate-800 underline">U</button>
+    <span class="w-px h-4 bg-slate-700 mx-0.5"></span>
+    <button type="button" onclick="execFrameCommand('justifyLeft')" title="ชิดซ้าย" class="w-8 h-8 rounded-lg hover:bg-slate-800"><i class="fa-solid fa-align-left"></i></button>
+    <button type="button" onclick="execFrameCommand('justifyCenter')" title="กึ่งกลาง" class="w-8 h-8 rounded-lg hover:bg-slate-800"><i class="fa-solid fa-align-center"></i></button>
+    <button type="button" onclick="execFrameCommand('justifyRight')" title="ชิดขวา" class="w-8 h-8 rounded-lg hover:bg-slate-800"><i class="fa-solid fa-align-right"></i></button>
+    <span class="w-px h-4 bg-slate-700 mx-0.5"></span>
+    <label title="สีตัวอักษร" class="inline-flex items-center gap-1 px-2 py-1 rounded-lg hover:bg-slate-800 cursor-pointer">
+      <i class="fa-solid fa-palette text-amber-400"></i>
+      <input type="color" onchange="execFrameCommand('foreColor', this.value)" class="w-5 h-5 bg-transparent border-0 cursor-pointer">
+    </label>
+  </div>
+
+  <!-- พื้นที่ทำงานหลัก (ซ้าย: รายการหน้า & แทรกบล็อก | กลาง: แคนวาสหน้าเว็บจริง | ขวา: ตั้งค่าองค์ประกอบที่เลือก) -->
+  <div class="flex-1 flex min-h-0 overflow-hidden">
+    <!-- แถบซ้าย: รายการหน้าทั้งหมด & บล็อกสำหรับลากวาง -->
+    <aside class="w-64 bg-slate-900 border-r border-slate-800 flex flex-col shrink-0 overflow-y-auto p-3 space-y-5">
+      <div class="space-y-2">
+        <div class="flex items-center justify-between px-1">
+          <span class="text-[11px] font-extrabold text-amber-300 uppercase tracking-wider">หน้าเว็บทั้งหมด (22 หน้า)</span>
         </div>
-        <div class="flex items-center gap-2 flex-wrap text-xs">
-          <select id="cms-collection-select" onchange="switchCmsCollection(this.value)"
-            class="bg-slate-900 border border-emerald-500/40 text-emerald-200 font-bold px-3 py-1.5 rounded-xl focus:outline-none">
-            <option value="announcements">คอลเลกชัน: ประกาศและรอบบริการ (Announcements)</option>
-            <option value="driver_news">คอลเลกชัน: ข่าวสารคนขับแอป (Driver News)</option>
-            <option value="insurance_plans">คอลเลกชัน: แผนประกัน Captain Insurance</option>
-          </select>
-          <select id="cms-workflow-filter" onchange="renderCmsEntriesList()"
-            class="bg-slate-900 border border-slate-700 text-slate-200 font-semibold px-3 py-1.5 rounded-xl focus:outline-none">
-            <option value="ALL">ทุกสถานะเวิร์กโฟลว์</option>
-            <option value="Draft">Draft (ฉบับร่าง)</option>
-            <option value="In Review">In Review (รอตรวจสอบ)</option>
-            <option value="Scheduled">Scheduled (ตั้งเวลาเผยแพร่)</option>
-            <option value="Published">Published (เผยแพร่แล้ว)</option>
-          </select>
-          <button type="button" onclick="openCmsSchemaModal()"
-            class="bg-indigo-600/25 hover:bg-indigo-600/40 text-indigo-200 border border-indigo-400/40 font-bold px-3 py-1.5 rounded-xl transition">
-            <i class="fa-solid fa-table-columns mr-1"></i> โครงสร้างข้อมูล (Schema)
+        <div id="sidebar-pages-list" class="space-y-1 max-h-56 overflow-y-auto pr-1"></div>
+      </div>
+
+      <div class="border-t border-slate-800 pt-4 space-y-2">
+        <span class="text-[11px] font-extrabold text-emerald-300 uppercase tracking-wider px-1 block">ลากบล็อกไปวางในหน้าจริง</span>
+        <p class="text-[10px] text-slate-400 px-1">ลากบล็อกด้านล่างไปวางบนหน้าเว็บ หรือกดคลิกเพื่อแทรกต่อท้าย</p>
+
+        <div class="grid grid-cols-2 gap-2 text-xs">
+          <button type="button" draggable="true" ondragstart="onDragNewBlock(event, 'heading')" onclick="insertBlockIntoFrame('heading')"
+            class="bg-slate-950 hover:bg-slate-800 border border-slate-700/80 rounded-xl p-2.5 text-left transition cursor-grab active:cursor-grabbing">
+            <i class="fa-solid fa-heading text-amber-400 block mb-1"></i>
+            <span class="font-bold text-[11px] text-white block">หัวข้อใหม่</span>
           </button>
-          <button type="button" onclick="exportCmsJsonDataset()"
-            class="bg-slate-800 hover:bg-slate-700 text-sky-300 border border-sky-500/35 font-bold px-3 py-1.5 rounded-xl transition">
-            <i class="fa-solid fa-file-code mr-1"></i> ส่งออก JSON
+
+          <button type="button" draggable="true" ondragstart="onDragNewBlock(event, 'text')" onclick="insertBlockIntoFrame('text')"
+            class="bg-slate-950 hover:bg-slate-800 border border-slate-700/80 rounded-xl p-2.5 text-left transition cursor-grab active:cursor-grabbing">
+            <i class="fa-solid fa-paragraph text-sky-400 block mb-1"></i>
+            <span class="font-bold text-[11px] text-white block">กล่องข้อความ</span>
           </button>
-          <label class="bg-slate-800 hover:bg-slate-700 text-purple-300 border border-purple-500/35 font-bold px-3 py-1.5 rounded-xl cursor-pointer transition">
-            <i class="fa-solid fa-file-import mr-1"></i> นำเข้า JSON
-            <input type="file" id="cms-import-json-input" accept=".json,application/json" onchange="importCmsJsonDataset(this)" class="hidden">
+
+          <button type="button" draggable="true" ondragstart="onDragNewBlock(event, 'card')" onclick="insertBlockIntoFrame('card')"
+            class="bg-slate-950 hover:bg-slate-800 border border-slate-700/80 rounded-xl p-2.5 text-left transition cursor-grab active:cursor-grabbing">
+            <i class="fa-solid fa-square-plus text-emerald-400 block mb-1"></i>
+            <span class="font-bold text-[11px] text-white block">การ์ดประกาศ</span>
+          </button>
+
+          <button type="button" draggable="true" ondragstart="onDragNewBlock(event, 'button')" onclick="insertBlockIntoFrame('button')"
+            class="bg-slate-950 hover:bg-slate-800 border border-slate-700/80 rounded-xl p-2.5 text-left transition cursor-grab active:cursor-grabbing">
+            <i class="fa-solid fa-link text-amber-300 block mb-1"></i>
+            <span class="font-bold text-[11px] text-white block">ปุ่มลิงก์</span>
+          </button>
+
+          <button type="button" draggable="true" ondragstart="onDragNewBlock(event, 'image')" onclick="insertBlockIntoFrame('image')"
+            class="bg-slate-950 hover:bg-slate-800 border border-slate-700/80 rounded-xl p-2.5 text-left transition cursor-grab active:cursor-grabbing">
+            <i class="fa-solid fa-image text-purple-400 block mb-1"></i>
+            <span class="font-bold text-[11px] text-white block">แทรกรูปภาพ</span>
+          </button>
+
+          <button type="button" draggable="true" ondragstart="onDragNewBlock(event, 'divider')" onclick="insertBlockIntoFrame('divider')"
+            class="bg-slate-950 hover:bg-slate-800 border border-slate-700/80 rounded-xl p-2.5 text-left transition cursor-grab active:cursor-grabbing">
+            <i class="fa-solid fa-minus text-slate-400 block mb-1"></i>
+            <span class="font-bold text-[11px] text-white block">เส้นคั่น</span>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- พื้นที่กลาง: แคนวาสหน้าเว็บจริง -->
+    <main class="flex-1 canvas-stage-bg flex flex-col items-center justify-start p-3 sm:p-5 overflow-auto">
+      <div class="w-full max-w-6xl mb-2 flex items-center justify-between text-xs text-slate-300 bg-slate-900/90 border border-slate-800 px-4 py-2 rounded-2xl">
+        <div class="flex items-center gap-2 truncate">
+          <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+          <span>กำลังแก้ไข: <strong id="current-editing-page-label" class="text-amber-300 font-mono">index.html</strong></span>
+        </div>
+        <span class="text-[11px] text-slate-400 hidden sm:inline">คลิกที่ข้อความเพื่อพิมพ์แก้ได้โดยตรง • คลิกที่รูปภาพเพื่อเปลี่ยนลิงก์/ไฟล์รูป</span>
+      </div>
+
+      <div id="viewport-frame-wrapper" style="width: 100%; transition: width 0.25s ease;" class="flex-1 min-h-[540px] bg-white rounded-2xl overflow-hidden shadow-2xl border border-slate-700">
+        <iframe id="live-page-frame" title="พื้นที่แก้ไขหน้าเว็บจริง" class="w-full h-full border-0 bg-white"></iframe>
+      </div>
+    </main>
+
+    <!-- แถบขวา: ตั้งค่าองค์ประกอบที่คลิกเลือก -->
+    <aside class="w-72 bg-slate-900 border-l border-slate-800 shrink-0 overflow-y-auto p-4 space-y-4">
+      <div class="border-b border-slate-800 pb-3">
+        <h2 class="text-xs font-extrabold text-amber-300 uppercase tracking-wider">คุณสมบัติองค์ประกอบที่เลือก</h2>
+        <p id="selected-element-tag" class="text-[11px] text-slate-400 mt-1">ยังไม่ได้คลิกเลือกองค์ประกอบบนหน้าเว็บ</p>
+      </div>
+
+      <div id="inspector-controls" class="space-y-3.5 text-xs">
+        <div class="space-y-1">
+          <label class="block text-slate-300 font-bold">ข้อความที่เลือก</label>
+          <textarea id="prop-text-input" rows="3" oninput="applySelectedTextProp(this.value)"
+            placeholder="คลิกข้อความบนหน้าเว็บเพื่อแก้ไข..."
+            class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-amber-400"></textarea>
+        </div>
+
+        <div id="prop-link-group" class="hidden space-y-1">
+          <label class="block text-slate-300 font-bold">ลิงก์ปลายทาง (URL / ชื่อไฟล์ .html)</label>
+          <input type="text" id="prop-href-input" oninput="applySelectedLinkProp(this.value)" placeholder="เช่น captain_insurance.html"
+            class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-amber-300 font-mono">
+        </div>
+
+        <div id="prop-image-group" class="hidden space-y-2 bg-slate-950 p-3 rounded-2xl border border-slate-800">
+          <label class="block text-slate-300 font-bold">เปลี่ยนรูปภาพ</label>
+          <input type="text" id="prop-img-src-input" oninput="applySelectedImageUrl(this.value)" placeholder="ลิงก์รูปภาพ URL"
+            class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-[11px] text-white font-mono">
+          <label class="block w-full text-center bg-amber-400/20 hover:bg-amber-400/30 text-amber-300 border border-amber-400/40 font-bold py-2 rounded-xl cursor-pointer text-[11px]">
+            <i class="fa-solid fa-upload mr-1"></i> อัปโหลดรูปจากเครื่อง
+            <input type="file" accept="image/*" onchange="applySelectedImageFile(this)" class="hidden">
           </label>
-          <button type="button" onclick="syncCmsToCloudSheets()" id="btn-cms-cloud-sync"
-            class="bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-400/40 font-bold px-3 py-1.5 rounded-xl transition">
-            <i class="fa-solid fa-cloud-arrow-up mr-1"></i> ซิงก์ CMS ขึ้นชีต
-          </button>
-          <button type="button" onclick="toggleCmsStudioDrawer()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-1.5 rounded-xl font-bold">
-            <i class="fa-solid fa-xmark"></i> ปิด
-          </button>
         </div>
-      </div>
 
-      <div class="grid lg:grid-cols-12 gap-4 text-xs">
-        <!-- ซ้าย: ฟอร์มสร้าง/แก้ไขข้อมูลเชิงโครงสร้าง + ผู้ช่วย AI -->
-        <div class="lg:col-span-5 bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-3">
-          <div class="flex items-center justify-between">
-            <span id="cms-editor-mode-label" class="font-extrabold text-amber-300">สร้างรายการเนื้อหาใหม่ (Structured Record)</span>
-            <button type="button" onclick="resetCmsRecordForm()" class="text-[11px] text-slate-400 hover:text-white underline">ล้างฟอร์ม</button>
-          </div>
-
-          <input type="hidden" id="cms-record-id">
-
-          <!-- ผู้ช่วย AI สร้าง/ปรับปรุงเนื้อหา -->
-          <div class="bg-slate-950 border border-indigo-500/35 rounded-xl p-3 space-y-2">
-            <div class="flex items-center justify-between">
-              <span class="text-[11px] font-extrabold text-indigo-300"><i class="fa-solid fa-sparkles mr-1"></i> ผู้ช่วย AI สร้างและจัดโครงสร้างเนื้อหา</span>
-              <span class="text-[10px] text-slate-500">Gemini AI</span>
-            </div>
-            <div class="flex gap-2">
-              <input type="text" id="cms-ai-topic-input" placeholder="เช่น แจ้งรอบจัดส่งบัตรประเมศฐ์และกติกาการถ่ายรูปคู่กระดาษ"
-                class="flex-1 bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-[11px] text-white focus:outline-none focus:border-indigo-400">
-              <button type="button" onclick="generateStructuredContentWithAI()" id="btn-cms-ai-generate"
-                class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-3 py-1.5 rounded-lg text-[11px] shrink-0 transition">
-                <i class="fa-solid fa-wand-magic mr-1"></i> สร้างด้วย AI
-              </button>
-            </div>
-            <div class="flex flex-wrap gap-1.5 pt-0.5">
-              <button type="button" onclick="transformCurrentCmsDraftWithAI('polish')" id="btn-cms-ai-polish"
-                class="bg-slate-900 hover:bg-slate-800 text-indigo-200 border border-indigo-500/30 px-2.5 py-1 rounded-lg text-[10px] font-bold transition">
-                <i class="fa-solid fa-pen-nib mr-1"></i> ขัดเกลาสำนวนให้เป็นทางการ
-              </button>
-              <button type="button" onclick="transformCurrentCmsDraftWithAI('summary')" id="btn-cms-ai-summary"
-                class="bg-slate-900 hover:bg-slate-800 text-emerald-200 border border-emerald-500/30 px-2.5 py-1 rounded-lg text-[10px] font-bold transition">
-                <i class="fa-solid fa-list-check mr-1"></i> สรุปประเด็นสำคัญสั้นกระชับ
-              </button>
-            </div>
-            <p id="cms-ai-status-msg" class="text-[10px] text-slate-400"></p>
-          </div>
-
-          <div class="grid grid-cols-2 gap-2.5">
-            <div class="space-y-1">
-              <label class="block text-slate-300 font-bold">หัวข้อหลัก (Title) *</label>
-              <input type="text" id="cms-field-title" required placeholder="หัวข้อเนื้อหา..."
-                class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-emerald-400">
-            </div>
-            <div class="space-y-1">
-              <label class="block text-slate-300 font-bold">หมวดหมู่ / ป้ายกำกับ</label>
-              <input type="text" id="cms-field-category" placeholder="เช่น ประกาศสำคัญ / Grab / ชั้น 1"
-                class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-amber-300 focus:outline-none focus:border-emerald-400">
-            </div>
-          </div>
-
-          <div class="grid grid-cols-2 gap-2.5">
-            <div class="space-y-1">
-              <label class="block text-slate-300 font-bold">สถานะเวิร์กโฟลว์ (Workflow)</label>
-              <select id="cms-field-status" onchange="toggleCmsScheduleInput()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-emerald-400">
-                <option value="Draft">Draft (ฉบับร่าง)</option>
-                <option value="In Review">In Review (รอตรวจสอบ)</option>
-                <option value="Scheduled">Scheduled (ตั้งเวลาเผยแพร่)</option>
-                <option value="Published">Published (เผยแพร่แล้ว)</option>
-              </select>
-            </div>
-            <div class="space-y-1">
-              <label class="block text-slate-300 font-bold">สไตล์การแสดงผลบนหน้าเว็บ</label>
-              <select id="cms-field-display-style" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-emerald-400">
-                <option value="gold-banner">การ์ดเน้นทองพรีเมียม</option>
-                <option value="emerald-alert">การ์ดประกาศเวิร์กโฟลว์สีเขียวมรกต</option>
-                <option value="clean-card">การ์ดข้อมูลมาตรฐานโทนสว่าง</option>
-              </select>
-            </div>
-          </div>
-
-          <div id="cms-schedule-row" class="hidden space-y-1">
-            <label class="block text-amber-300 font-bold">วัน-เวลาที่กำหนดเผยแพร่ (Publish Schedule)</label>
-            <input type="datetime-local" id="cms-field-schedule-at"
-              class="w-full bg-slate-950 border border-amber-400/40 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-amber-400">
-          </div>
-
-          <!-- ฟิลด์ข้อมูลโครงสร้างเพิ่มเติมตาม Schema ของคอลเลกชัน -->
-          <div id="cms-custom-schema-fields-container" class="space-y-2.5 bg-slate-950/70 border border-slate-800 rounded-xl p-3"></div>
-
+        <div class="grid grid-cols-2 gap-2 pt-1">
           <div class="space-y-1">
-            <label class="block text-slate-300 font-bold">เนื้อหารายละเอียด *</label>
-            <textarea id="cms-field-body" rows="3" required placeholder="รายละเอียดเนื้อหาหรือจุดเด่น..."
-              class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-white focus:outline-none focus:border-emerald-400"></textarea>
+            <label class="block text-[11px] text-slate-400">สีตัวอักษร</label>
+            <input type="color" id="prop-color-input" onchange="applySelectedStyleProp('color', this.value)" class="w-full h-9 rounded-lg bg-slate-950 border border-slate-700 cursor-pointer">
           </div>
-
-          <div class="flex items-center justify-end gap-2 pt-1">
-            <button type="button" onclick="saveCmsRecord(true)" class="bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold px-3.5 py-2 rounded-xl transition">
-              <i class="fa-solid fa-plus-circle mr-1"></i> บันทึก &amp; แทรกลงหน้าเว็บ
-            </button>
-            <button type="button" onclick="saveCmsRecord(false)" class="bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold px-4 py-2 rounded-xl transition">
-              <i class="fa-solid fa-floppy-disk mr-1"></i> บันทึกลง CMS
-            </button>
+          <div class="space-y-1">
+            <label class="block text-[11px] text-slate-400">สีพื้นหลัง</label>
+            <input type="color" id="prop-bg-input" onchange="applySelectedStyleProp('backgroundColor', this.value)" class="w-full h-9 rounded-lg bg-slate-950 border border-slate-700 cursor-pointer">
           </div>
         </div>
 
-        <!-- ขวา: ตารางรายการข้อมูลใน CMS คอลเลกชันที่เลือก -->
-        <div class="lg:col-span-7 bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-3">
-          <div class="flex flex-wrap items-center justify-between gap-2">
-            <span class="font-extrabold text-emerald-300">รายการข้อมูลในฐานข้อมูล CMS (<span id="cms-records-count">0</span> รายการ)</span>
-            <input type="text" id="cms-search-query" oninput="renderCmsEntriesList()" placeholder="ค้นหารายการในคอลเลกชัน..."
-              class="bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1 text-[11px] text-white focus:outline-none focus:border-emerald-400 w-48">
-          </div>
-          <div id="cms-records-list" class="space-y-2.5 max-h-72 overflow-y-auto pr-1"></div>
+        <div class="flex gap-2 pt-2 border-t border-slate-800">
+          <button type="button" onclick="copySelectedElement()" class="flex-1 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-400/40 font-bold py-2 px-2.5 rounded-xl text-[11px]">
+            <i class="fa-solid fa-copy mr-1"></i> Copy
+          </button>
+          <button type="button" onclick="duplicateSelectedElement()" class="flex-1 bg-slate-800 hover:bg-slate-700 text-emerald-300 font-bold py-2 px-2.5 rounded-xl text-[11px]">
+            <i class="fa-solid fa-clone mr-1"></i> ทำซ้ำ
+          </button>
+          <button type="button" onclick="deleteSelectedElement()" class="flex-1 bg-rose-600/20 hover:bg-rose-600/30 text-rose-300 border border-rose-500/40 font-bold py-2 px-2.5 rounded-xl text-[11px]">
+            <i class="fa-solid fa-trash mr-1"></i> ลบออก
+          </button>
         </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- หน้าต่างจัดการโครงสร้างข้อมูล (Custom CMS Schema Builder Modal) -->
-  <div id="cms-schema-modal" class="hidden fixed inset-0 z-[1250] bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
-    <div class="bg-slate-900 border border-indigo-400/45 rounded-3xl max-w-lg w-full p-6 text-white space-y-4 shadow-2xl">
-      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-        <div>
-          <h3 class="text-base font-extrabold text-indigo-300"><i class="fa-solid fa-table-columns mr-1.5"></i>โครงสร้างข้อมูลของคอลเลกชัน (CMS Schema)</h3>
-          <p id="cms-schema-collection-subtitle" class="text-[11px] text-slate-400">กำหนดฟิลด์ข้อมูลเพิ่มเติมสำหรับแสดงผลในฟอร์มและบนหน้าเว็บ</p>
-        </div>
-        <button type="button" onclick="closeCmsSchemaModal()" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300">
-          <i class="fa-solid fa-xmark"></i>
+        <button type="button" id="btn-paste-copied-el" onclick="pasteCopiedElement()" disabled
+          class="w-full bg-emerald-600/20 disabled:opacity-35 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/40 font-bold py-2 px-3 rounded-xl text-[11px] transition">
+          <i class="fa-solid fa-paste mr-1"></i> วางองค์ประกอบที่ Copy ไว้
         </button>
       </div>
+    </aside>
+  </div>
 
-      <div id="cms-schema-fields-list" class="space-y-2 max-h-56 overflow-y-auto text-xs"></div>
-
-      <form onsubmit="addCmsSchemaField(event)" class="bg-slate-950 border border-slate-800 rounded-2xl p-3.5 space-y-2.5 text-xs">
-        <span class="font-bold text-amber-300 block">เพิ่มฟิลด์ข้อมูลใหม่ในโครงสร้าง (Custom Field)</span>
-        <div class="grid grid-cols-3 gap-2">
-          <input type="text" id="cms-new-field-label" required placeholder="ชื่อฟิลด์ (เช่น ปุ่มลิงก์)"
-            class="col-span-2 bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-indigo-400">
-          <select id="cms-new-field-type" class="bg-slate-900 border border-slate-700 rounded-xl px-2.5 py-2 text-white focus:outline-none focus:border-indigo-400">
-            <option value="text">ข้อความสั้น</option>
-            <option value="url">ลิงก์ URL</option>
-            <option value="badge">ป้ายเน้นข้อความ</option>
-          </select>
-        </div>
-        <div class="flex justify-end">
-          <button type="submit" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-4 py-2 rounded-xl transition">
-            <i class="fa-solid fa-plus mr-1"></i> เพิ่มฟิลด์ใน Schema
-          </button>
+  <!-- หน้าต่างตั้งค่า URL เว็บไซต์จริง -->
+  <div id="base-url-modal" class="hidden fixed inset-0 z-[1200] bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-amber-400/40 rounded-3xl max-w-md w-full p-6 text-white space-y-4 shadow-2xl">
+      <h3 class="text-base font-extrabold text-amber-300"><i class="fa-solid fa-globe mr-1.5"></i>เชื่อมต่อ URL เว็บไซต์จริงของคุณ</h3>
+      <p class="text-xs text-slate-300 leading-relaxed">
+        ระบุลิงก์เว็บไซต์หลักของคุณ (เช่น <code class="text-amber-300">https://www.thedriverthailand.com</code> หรือลิงก์ GitHub Pages ของคุณ) เพื่อให้เครื่องมือดึงหน้า <strong>index.html</strong> และทุกหน้าปัจจุบันของคุณมาแก้ไขได้ทันที
+      </p>
+      <form onsubmit="saveSiteBaseUrl(event)" class="space-y-3">
+        <input type="url" id="base-url-input" placeholder="https://www.thedriverthailand.com"
+          class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-xs text-amber-300 font-mono focus:outline-none focus:border-amber-400">
+        <div class="flex justify-end gap-2">
+          <button type="button" onclick="document.getElementById('base-url-modal').classList.add('hidden')"
+            class="px-4 py-2 rounded-xl bg-slate-800 text-xs font-bold">ยกเลิก</button>
+          <button type="submit" class="px-5 py-2 rounded-xl gold-grad text-slate-950 text-xs font-extrabold">บันทึกและโหลดหน้าเว็บจริง</button>
         </div>
       </form>
     </div>
@@ -383,1118 +352,170 @@
     let redoStack = [];
     let toastTimer = null;
 
-    // =========================================================================
-    // CMS COLLECTIONS, WORKFLOW STATE & AI CONTENT ASSISTANT
-    // =========================================================================
-    const CMS_STORAGE_KEY = 'tdt_visual_cms_collections_v1';
-    const CMS_SCHEMA_KEY = 'tdt_visual_cms_schemas_v1';
-    const DEFAULT_CMS_SCHEMAS = {
-      announcements: [
-        { key: 'ctaLabel', label: 'ข้อความปุ่มดำเนินการ (CTA)', type: 'text', placeholder: 'เช่น อ่านรายละเอียดเพิ่มเติม' },
-        { key: 'ctaUrl', label: 'ลิงก์ปลายทาง (CTA URL)', type: 'url', placeholder: 'เช่น register.html' }
-      ],
-      driver_news: [
-        { key: 'platformTag', label: 'แพลตฟอร์ม / แหล่งที่มา', type: 'badge', placeholder: 'เช่น Grab / Bolt / กรมการขนส่งฯ' },
-        { key: 'ctaUrl', label: 'ลิงก์สมัครหรืออ่านต่อ', type: 'url', placeholder: 'เช่น grab_driver_register.html' }
-      ],
-      insurance_plans: [
-        { key: 'highlightBadge', label: 'ไฮไลต์ความคุ้มครอง / เบี้ยเริ่มต้น', type: 'badge', placeholder: 'เช่น ผ่อน 0% / ซ่อมห้าง & อู่' },
-        { key: 'ctaUrl', label: 'ลิงก์เช็กเบี้ยประกันภัย', type: 'url', placeholder: 'เช่น captain_insurance.html' }
-      ]
-    };
-
-    const DEFAULT_CMS_COLLECTIONS = {
-      announcements: [
-        {
-          id: 'CMS-ANN-01',
-          title: 'อัปเดตรอบจัดส่งบัตรสมาชิกประเมศฐ์ & กติกาความปลอดภัย',
-          category: 'ประกาศสำคัญ',
-          status: 'Published',
-          scheduledAt: '',
-          displayStyle: 'gold-banner',
-          body: 'กรุณาตรวจสอบข้อมูลที่อยู่จัดส่งและรูปคู่กระดาษเขียนด้วยลายมือจริงก่อนส่งใบสมัคร เพื่อความรวดเร็วในการออกรหัสและจัดส่งบัตร',
-          customData: { ctaLabel: 'ลงทะเบียนสมาชิกใหม่', ctaUrl: 'member_register.html' },
-          updatedAt: 'ระบบเริ่มต้น'
-        },
-        {
-          id: 'CMS-ANN-02',
-          title: 'เปิดรับสมัครคนขับผ่านแอป Grab & Bolt ทั่วประเทศ',
-          category: 'สมัครคนขับแอป',
-          status: 'In Review',
-          scheduledAt: '',
-          displayStyle: 'emerald-alert',
-          body: 'สมาชิกและคนขับรถที่สนใจเปิดบัญชีคนขับ GrabCar / Bolt สามารถกรอกข้อมูลเบื้องต้นผ่านหน้าเว็บให้ทีมงานช่วยตรวจสอบเอกสารก่อนยื่นได้ทันที',
-          customData: { ctaLabel: 'ดูข่าวสารคนขับแอป', ctaUrl: 'driver_news.html' },
-          updatedAt: 'ระบบเริ่มต้น'
-        }
-      ],
-      driver_news: [
-        {
-          id: 'CMS-NWS-01',
-          title: 'แนวทางปฏิบัติตามกฎระเบียบรถรับจ้างผ่านแอป รย.17 / รย.18',
-          category: 'กฎหมาย & ขนส่ง',
-          status: 'Published',
-          scheduledAt: '',
-          displayStyle: 'clean-card',
-          body: 'เตรียมเอกสารใบขับขี่สาธารณะ เล่มทะเบียนรถ และกรมธรรม์ประกันภัยให้พร้อม เพื่อความถูกต้องปลอดภัยในการรับงานทุกเส้นทาง',
-          customData: { platformTag: 'กรมการขนส่งทางบก', ctaUrl: 'driver_news.html' },
-          updatedAt: 'ระบบเริ่มต้น'
-        }
-      ],
-      insurance_plans: [
-        {
-          id: 'CMS-INS-01',
-          title: 'CAPTAIN INSURANCE กัปตัน ประกันภัย — แผนคุ้มครองรถรับจ้าง & รถบ้าน',
-          category: 'ชั้น 1 / 2+ / 3+',
-          status: 'Published',
-          scheduledAt: '',
-          displayStyle: 'gold-banner',
-          body: 'เทียบเบี้ยประกันภัยรถยนต์ครบวงจร ทั้งรถส่วนบุคคล รถป้ายเขียว และรถตู้ VIP บริการโดย The Driver Thailand',
-          customData: { highlightBadge: 'เทียบเบี้ยกว่า 20 บริษัท', ctaUrl: 'captain_insurance.html' },
-          updatedAt: 'ระบบเริ่มต้น'
-        }
-      ]
-    };
-
-    let cmsSchemas = loadCmsSchemas();
-    let cmsCollections = loadCmsCollections();
-    let activeCmsCollection = 'announcements';
-
-    function loadCmsSchemas() {
-      try {
-        const raw = localStorage.getItem(CMS_SCHEMA_KEY);
-        if (raw) {
-          const parsed = JSON.parse(raw);
-          if (parsed && typeof parsed === 'object') {
-            return {
-              announcements: Array.isArray(parsed.announcements) ? parsed.announcements : [...DEFAULT_CMS_SCHEMAS.announcements],
-              driver_news: Array.isArray(parsed.driver_news) ? parsed.driver_news : [...DEFAULT_CMS_SCHEMAS.driver_news],
-              insurance_plans: Array.isArray(parsed.insurance_plans) ? parsed.insurance_plans : [...DEFAULT_CMS_SCHEMAS.insurance_plans]
-            };
-          }
-        }
-      } catch (_) {}
-      return JSON.parse(JSON.stringify(DEFAULT_CMS_SCHEMAS));
-    }
-
-    function persistCmsSchemas() {
-      try {
-        localStorage.setItem(CMS_SCHEMA_KEY, JSON.stringify(cmsSchemas));
-      } catch (_) {}
-    }
-
-    function loadCmsCollections() {
-      try {
-        const raw = localStorage.getItem(CMS_STORAGE_KEY);
-        if (raw) {
-          const parsed = JSON.parse(raw);
-          if (parsed && typeof parsed === 'object') {
-            return {
-              announcements: Array.isArray(parsed.announcements) ? parsed.announcements : [...DEFAULT_CMS_COLLECTIONS.announcements],
-              driver_news: Array.isArray(parsed.driver_news) ? parsed.driver_news : [...DEFAULT_CMS_COLLECTIONS.driver_news],
-              insurance_plans: Array.isArray(parsed.insurance_plans) ? parsed.insurance_plans : [...DEFAULT_CMS_COLLECTIONS.insurance_plans]
-            };
-          }
-        }
-      } catch (_) {}
-      return JSON.parse(JSON.stringify(DEFAULT_CMS_COLLECTIONS));
-    }
-
-    function persistCmsCollections() {
-      try {
-        localStorage.setItem(CMS_STORAGE_KEY, JSON.stringify(cmsCollections));
-      } catch (_) {}
-    }
-
-    function escapeHtmlCms(str) {
-      return String(str ?? '')
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#39;');
-    }
-
-    function toggleCmsScheduleInput() {
-      const statusVal = document.getElementById('cms-field-status')?.value || 'Draft';
-      const schedRow = document.getElementById('cms-schedule-row');
-      if (schedRow) {
-        schedRow.classList.toggle('hidden', statusVal !== 'Scheduled');
-      }
-    }
-
-    function renderCmsCustomSchemaInputs(customData = {}) {
-      const container = document.getElementById('cms-custom-schema-fields-container');
-      if (!container) return;
-      const fields = cmsSchemas[activeCmsCollection] || [];
-      if (fields.length === 0) {
-        container.innerHTML = '<p class="text-[11px] text-slate-500">ไม่มีฟิลด์เพิ่มเติมใน Schema กดปุ่ม "โครงสร้างข้อมูล (Schema)" ด้านบนเพื่อเพิ่มฟิลด์ได้</p>';
-        return;
-      }
-      container.innerHTML = fields.map(f => {
-        const val = customData && typeof customData[f.key] === 'string' ? customData[f.key] : '';
-        return `
-          <div class="space-y-1">
-            <label class="block text-[11px] text-indigo-200 font-bold">${escapeHtmlCms(f.label)} <span class="text-[10px] text-slate-500 font-normal">(${escapeHtmlCms(f.type)})</span></label>
-            <input type="text" data-cms-schema-key="${escapeHtmlCms(f.key)}" value="${escapeHtmlCms(val)}" placeholder="${escapeHtmlCms(f.placeholder || '')}"
-              class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-[11px] text-white focus:outline-none focus:border-indigo-400">
-          </div>
-        `;
-      }).join('');
-    }
-
-    function collectCmsCustomSchemaValues() {
-      const result = {};
-      const inputs = document.querySelectorAll('#cms-custom-schema-fields-container [data-cms-schema-key]');
-      inputs.forEach(inp => {
-        const k = inp.getAttribute('data-cms-schema-key');
-        if (k) result[k] = (inp.value || '').trim();
-      });
-      return result;
-    }
-
-    function openCmsSchemaModal() {
-      const modal = document.getElementById('cms-schema-modal');
-      const sub = document.getElementById('cms-schema-collection-subtitle');
-      if (sub) sub.textContent = `คอลเลกชันปัจจุบัน: ${activeCmsCollection}`;
-      renderCmsSchemaFieldsList();
-      if (modal) modal.classList.remove('hidden');
-    }
-
-    function closeCmsSchemaModal() {
-      document.getElementById('cms-schema-modal')?.classList.add('hidden');
-      renderCmsCustomSchemaInputs(collectCmsCustomSchemaValues());
-    }
-
-    function renderCmsSchemaFieldsList() {
-      const listEl = document.getElementById('cms-schema-fields-list');
-      if (!listEl) return;
-      const fields = cmsSchemas[activeCmsCollection] || [];
-      if (fields.length === 0) {
-        listEl.innerHTML = '<div class="text-slate-500 text-center py-4">ยังไม่มีฟิลด์เพิ่มเติม</div>';
-        return;
-      }
-      listEl.innerHTML = fields.map((f, idx) => `
-        <div class="flex items-center justify-between bg-slate-950 border border-slate-800 rounded-xl px-3 py-2">
-          <div>
-            <strong class="text-white">${escapeHtmlCms(f.label)}</strong>
-            <span class="text-[10px] text-indigo-300 ml-2 font-mono">[${escapeHtmlCms(f.key)} · ${escapeHtmlCms(f.type)}]</span>
-          </div>
-          <button type="button" onclick="removeCmsSchemaField(${idx})" class="text-rose-400 hover:text-rose-300 text-[11px] font-bold">ลบ</button>
-        </div>
-      `).join('');
-    }
-
-    function addCmsSchemaField(event) {
-      event.preventDefault();
-      const labelInp = document.getElementById('cms-new-field-label');
-      const typeSel = document.getElementById('cms-new-field-type');
-      const label = (labelInp?.value || '').trim();
-      const type = typeSel?.value || 'text';
-      if (!label) return;
-
-      const keyBase = label.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '') || `field_${Date.now().toString().slice(-4)}`;
-      if (!Array.isArray(cmsSchemas[activeCmsCollection])) {
-        cmsSchemas[activeCmsCollection] = [];
-      }
-      cmsSchemas[activeCmsCollection].push({
-        key: `${keyBase}_${cmsSchemas[activeCmsCollection].length + 1}`,
-        label,
-        type,
-        placeholder: `ระบุ${label}...`
-      });
-      persistCmsSchemas();
-      if (labelInp) labelInp.value = '';
-      renderCmsSchemaFieldsList();
-      renderCmsCustomSchemaInputs(collectCmsCustomSchemaValues());
-      showBuilderToast(`เพิ่มฟิลด์ "${label}" ใน Schema แล้ว`);
-    }
-
-    function removeCmsSchemaField(idx) {
-      const fields = cmsSchemas[activeCmsCollection] || [];
-      fields.splice(idx, 1);
-      cmsSchemas[activeCmsCollection] = fields;
-      persistCmsSchemas();
-      renderCmsSchemaFieldsList();
-      renderCmsCustomSchemaInputs(collectCmsCustomSchemaValues());
-      showBuilderToast('ลบฟิลด์ออกจาก Schema แล้ว');
-    }
-
-    function toggleCmsStudioDrawer() {
-      const drawer = document.getElementById('cms-studio-drawer');
-      if (!drawer) return;
-      const willOpen = drawer.classList.contains('hidden');
-      drawer.classList.toggle('hidden', !willOpen);
-      if (willOpen) {
-        renderCmsCustomSchemaInputs({});
-        toggleCmsScheduleInput();
-        renderCmsEntriesList();
-      }
-    }
-
-    function switchCmsCollection(colKey) {
-      if (cmsCollections[colKey]) {
-        activeCmsCollection = colKey;
-        resetCmsRecordForm();
-        renderCmsEntriesList();
-      }
-    }
-
-    function resetCmsRecordForm() {
-      document.getElementById('cms-record-id').value = '';
-      document.getElementById('cms-field-title').value = '';
-      document.getElementById('cms-field-category').value = '';
-      document.getElementById('cms-field-status').value = 'Draft';
-      document.getElementById('cms-field-schedule-at').value = '';
-      document.getElementById('cms-field-display-style').value = 'gold-banner';
-      document.getElementById('cms-field-body').value = '';
-      toggleCmsScheduleInput();
-      renderCmsCustomSchemaInputs({});
-      const modeLbl = document.getElementById('cms-editor-mode-label');
-      if (modeLbl) modeLbl.textContent = 'สร้างรายการเนื้อหาใหม่ (Structured Record)';
-    }
-
-    function editCmsRecord(recordId) {
-      const list = cmsCollections[activeCmsCollection] || [];
-      const item = list.find(r => r.id === recordId);
-      if (!item) return;
-      document.getElementById('cms-record-id').value = item.id;
-      document.getElementById('cms-field-title').value = item.title || '';
-      document.getElementById('cms-field-category').value = item.category || '';
-      document.getElementById('cms-field-status').value = item.status || 'Draft';
-      document.getElementById('cms-field-schedule-at').value = item.scheduledAt || '';
-      document.getElementById('cms-field-display-style').value = item.displayStyle || 'gold-banner';
-      document.getElementById('cms-field-body').value = item.body || '';
-      toggleCmsScheduleInput();
-      renderCmsCustomSchemaInputs(item.customData || {});
-      const modeLbl = document.getElementById('cms-editor-mode-label');
-      if (modeLbl) modeLbl.textContent = `กำลังแก้ไขรายการ: ${item.id}`;
-    }
-
-    function deleteCmsRecord(recordId) {
-      const list = cmsCollections[activeCmsCollection] || [];
-      cmsCollections[activeCmsCollection] = list.filter(r => r.id !== recordId);
-      persistCmsCollections();
-      renderCmsEntriesList();
-      showBuilderToast('ลบรายการออกจาก CMS แล้ว');
-    }
-
-    function updateCmsWorkflowStatus(recordId, nextStatus) {
-      const list = cmsCollections[activeCmsCollection] || [];
-      const item = list.find(r => r.id === recordId);
-      if (!item) return;
-      item.status = nextStatus;
-      item.updatedAt = new Date().toLocaleString('th-TH');
-      persistCmsCollections();
-      renderCmsEntriesList();
-      showBuilderToast(`เปลี่ยนสถานะเวิร์กโฟลว์เป็น ${nextStatus}`);
-    }
-
-    function buildCmsStyledNode(doc, item) {
-      const wrap = doc.createElement('div');
-      wrap.setAttribute('data-cms-record-id', item.id);
-      wrap.style.margin = '18px auto';
-      wrap.style.maxWidth = '1120px';
-      wrap.style.padding = '0 16px';
-
-      let boxStyle = 'background:#fffbeb;border:1px solid #fcd34d;color:#0f172a;';
-      let badgeStyle = 'background:#0f172a;color:#fbbf24;';
-      if (item.displayStyle === 'emerald-alert') {
-        boxStyle = 'background:#ecfdf5;border:1px solid #6ee7b7;color:#064e3b;';
-        badgeStyle = 'background:#059669;color:#ffffff;';
-      } else if (item.displayStyle === 'clean-card') {
-        boxStyle = 'background:#ffffff;border:1px solid #cbd5e1;color:#0f172a;box-shadow:0 4px 16px rgba(15,23,42,0.06);';
-        badgeStyle = 'background:#e2e8f0;color:#1e293b;';
-      }
-
-      const customData = item.customData && typeof item.customData === 'object' ? item.customData : {};
-      const extraBadges = Object.values(customData)
-        .filter(v => typeof v === 'string' && v.trim() !== '' && !/^https?:\/\//i.test(v.trim()) && !/\.html$/i.test(v.trim()))
-        .map(v => `<span style="display:inline-block;margin-right:6px;margin-top:8px;font-size:11px;font-weight:700;padding:3px 10px;border-radius:999px;background:rgba(15,23,42,0.08);">${escapeHtmlCms(v)}</span>`)
-        .join('');
-
-      const ctaHref = Object.values(customData).find(v => typeof v === 'string' && (/^https?:\/\//i.test(v.trim()) || /\.html$/i.test(v.trim())));
-      const ctaButtonHtml = ctaHref
-        ? `<div style="margin-top:12px;"><a href="${escapeHtmlCms(ctaHref)}" style="display:inline-block;padding:8px 16px;border-radius:10px;background:#0f172a;color:#fbbf24;font-size:12px;font-weight:800;text-decoration:none;">เปิดดูรายละเอียด →</a></div>`
-        : '';
-
-      wrap.innerHTML = `
-        <div style="${boxStyle}border-radius:20px;padding:22px 24px;">
-          <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px;">
-            <span style="${badgeStyle}font-size:11px;font-weight:700;padding:4px 12px;border-radius:999px;">${escapeHtmlCms(item.category || 'CMS Content')}</span>
-            <span style="font-size:11px;font-weight:700;color:#64748b;">สถานะ: ${escapeHtmlCms(item.status || 'Published')}</span>
-          </div>
-          <h3 style="font-size:20px;font-weight:800;margin:0 0 8px;line-height:1.35;">${escapeHtmlCms(item.title)}</h3>
-          <p style="font-size:14px;line-height:1.7;margin:0;opacity:0.92;">${escapeHtmlCms(item.body)}</p>
-          ${extraBadges}
-          ${ctaButtonHtml}
-        </div>
-      `;
-      return wrap;
-    }
-
-    function insertCmsRecordToCanvas(recordId) {
-      const doc = getFrameDoc();
-      if (!doc || !doc.body) {
-        showBuilderToast('ไม่พบหน้าเว็บในแคนวาสสำหรับแทรกเนื้อหา');
-        return;
-      }
-      const list = cmsCollections[activeCmsCollection] || [];
-      const item = list.find(r => r.id === recordId);
-      if (!item) return;
-
-      pushUndoSnapshot();
-      const targetMain = doc.querySelector('main') || doc.body;
-      targetMain.appendChild(buildCmsStyledNode(doc, item));
-      bindEditableHandlersInFrame(doc);
-      showBuilderToast(`แทรกเนื้อหา "${item.title}" ลงบนหน้าเว็บแล้ว`);
-    }
-
-    function saveCmsRecord(alsoInsertToCanvas) {
-      const title = (document.getElementById('cms-field-title')?.value || '').trim();
-      const category = (document.getElementById('cms-field-category')?.value || '').trim() || 'ทั่วไป';
-      const status = document.getElementById('cms-field-status')?.value || 'Draft';
-      const scheduledAt = (document.getElementById('cms-field-schedule-at')?.value || '').trim();
-      const displayStyle = document.getElementById('cms-field-display-style')?.value || 'gold-banner';
-      const body = (document.getElementById('cms-field-body')?.value || '').trim();
-      const existingId = (document.getElementById('cms-record-id')?.value || '').trim();
-      const customData = collectCmsCustomSchemaValues();
-
-      if (!title || !body) {
-        showBuilderToast('กรุณากรอกหัวข้อหลักและเนื้อหารายละเอียดก่อนบันทึกครับ');
-        return;
-      }
-
-      const list = cmsCollections[activeCmsCollection] || [];
-      let savedRecord = null;
-      const nowLabel = new Date().toLocaleString('th-TH');
-
-      if (existingId) {
-        const idx = list.findIndex(r => r.id === existingId);
-        if (idx !== -1) {
-          list[idx] = { id: existingId, title, category, status, scheduledAt, displayStyle, body, customData, updatedAt: nowLabel };
-          savedRecord = list[idx];
-        }
-      }
-
-      if (!savedRecord) {
-        savedRecord = {
-          id: 'CMS-' + Date.now().toString().slice(-6),
-          title,
-          category,
-          status,
-          scheduledAt,
-          displayStyle,
-          body,
-          customData,
-          updatedAt: nowLabel
-        };
-        list.unshift(savedRecord);
-      }
-
-      cmsCollections[activeCmsCollection] = list;
-      persistCmsCollections();
-      renderCmsEntriesList();
-      resetCmsRecordForm();
-      showBuilderToast(`บันทึกข้อมูล CMS "${savedRecord.title}" เรียบร้อยแล้ว`);
-
-      if (alsoInsertToCanvas) {
-        insertCmsRecordToCanvas(savedRecord.id);
-      }
-    }
-
-    function exportCmsJsonDataset() {
-      const payload = {
-        exportedAt: new Date().toISOString(),
-        schemas: cmsSchemas,
-        collections: cmsCollections
-      };
-      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json;charset=utf-8' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `tdt_cms_dataset_${Date.now().toString().slice(-6)}.json`;
-      a.click();
-      URL.revokeObjectURL(url);
-      showBuilderToast('ส่งออกข้อมูล CMS เป็นไฟล์ JSON เรียบร้อยแล้ว');
-    }
-
-    function importCmsJsonDataset(inputEl) {
-      const file = inputEl?.files?.[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = e => {
-        try {
-          const parsed = JSON.parse(String(e.target?.result || '{}'));
-          if (parsed.collections && typeof parsed.collections === 'object') {
-            cmsCollections = {
-              announcements: Array.isArray(parsed.collections.announcements) ? parsed.collections.announcements : cmsCollections.announcements,
-              driver_news: Array.isArray(parsed.collections.driver_news) ? parsed.collections.driver_news : cmsCollections.driver_news,
-              insurance_plans: Array.isArray(parsed.collections.insurance_plans) ? parsed.collections.insurance_plans : cmsCollections.insurance_plans
-            };
-            persistCmsCollections();
-          }
-          if (parsed.schemas && typeof parsed.schemas === 'object') {
-            cmsSchemas = {
-              announcements: Array.isArray(parsed.schemas.announcements) ? parsed.schemas.announcements : cmsSchemas.announcements,
-              driver_news: Array.isArray(parsed.schemas.driver_news) ? parsed.schemas.driver_news : cmsSchemas.driver_news,
-              insurance_plans: Array.isArray(parsed.schemas.insurance_plans) ? parsed.schemas.insurance_plans : cmsSchemas.insurance_plans
-            };
-            persistCmsSchemas();
-          }
-          renderCmsCustomSchemaInputs({});
-          renderCmsEntriesList();
-          showBuilderToast('นำเข้าข้อมูลและโครงสร้าง CMS สำเร็จแล้ว');
-        } catch (_) {
-          showBuilderToast('ไฟล์ JSON ไม่ถูกต้อง ไม่สามารถนำเข้าได้');
-        }
-      };
-      reader.readAsText(file, 'UTF-8');
-      inputEl.value = '';
-    }
-
-    function renderCmsEntriesList() {
-      const listEl = document.getElementById('cms-records-list');
-      const countEl = document.getElementById('cms-records-count');
-      const wfFilter = document.getElementById('cms-workflow-filter')?.value || 'ALL';
-      const searchKw = (document.getElementById('cms-search-query')?.value || '').trim().toLowerCase();
-      if (!listEl) return;
-
-      const rawList = cmsCollections[activeCmsCollection] || [];
-      const filtered = rawList.filter(r => {
-        if (wfFilter !== 'ALL' && r.status !== wfFilter) return false;
-        if (!searchKw) return true;
-        return `${r.id} ${r.title} ${r.category} ${r.body}`.toLowerCase().includes(searchKw);
-      });
-      if (countEl) countEl.textContent = String(filtered.length);
-
-      if (filtered.length === 0) {
-        listEl.innerHTML = '<div class="text-center py-8 text-slate-500 border border-dashed border-slate-800 rounded-xl">ยังไม่มีรายการเนื้อหาตามเงื่อนไขที่เลือก</div>';
-        return;
-      }
-
-      const statusBadgeMap = {
-        'Draft': 'bg-slate-800 text-slate-300 border-slate-600',
-        'In Review': 'bg-amber-500/20 text-amber-300 border-amber-400/40',
-        'Scheduled': 'bg-indigo-500/20 text-indigo-300 border-indigo-400/40',
-        'Published': 'bg-emerald-500/20 text-emerald-300 border-emerald-400/40'
-      };
-
-      listEl.innerHTML = filtered.map(item => {
-        const stBadge = statusBadgeMap[item.status] || statusBadgeMap['Draft'];
-        const schedInfo = item.scheduledAt ? `<span class="text-[10px] text-indigo-300"><i class="fa-regular fa-clock mr-1"></i>${escapeHtmlCms(item.scheduledAt.replace('T', ' '))}</span>` : '';
-        return `
-          <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div class="space-y-1 min-w-0">
-              <div class="flex items-center gap-2 flex-wrap">
-                <span class="text-[10px] font-bold bg-amber-400/15 text-amber-300 border border-amber-400/30 px-2 py-0.5 rounded-full">${escapeHtmlCms(item.category)}</span>
-                <span class="text-[10px] font-bold border px-2 py-0.5 rounded-full ${stBadge}">${escapeHtmlCms(item.status)}</span>
-                <span class="text-[10px] font-mono text-slate-500">${escapeHtmlCms(item.id)}</span>
-                ${schedInfo}
-              </div>
-              <p class="font-bold text-white text-xs truncate">${escapeHtmlCms(item.title)}</p>
-              <p class="text-[11px] text-slate-400 line-clamp-2">${escapeHtmlCms(item.body)}</p>
-            </div>
-            <div class="flex items-center gap-1.5 shrink-0 flex-wrap">
-              <select onchange="updateCmsWorkflowStatus('${escapeHtmlCms(item.id)}', this.value)"
-                class="bg-slate-900 border border-slate-700 text-slate-200 text-[11px] rounded-lg px-2 py-1.5">
-                <option value="Draft" ${item.status === 'Draft' ? 'selected' : ''}>Draft</option>
-                <option value="In Review" ${item.status === 'In Review' ? 'selected' : ''}>In Review</option>
-                <option value="Scheduled" ${item.status === 'Scheduled' ? 'selected' : ''}>Scheduled</option>
-                <option value="Published" ${item.status === 'Published' ? 'selected' : ''}>Published</option>
-              </select>
-              <button type="button" onclick="insertCmsRecordToCanvas('${escapeHtmlCms(item.id)}')" title="แทรกเข้าหน้าเว็บ"
-                class="bg-emerald-600/25 hover:bg-emerald-600/40 text-emerald-300 border border-emerald-500/40 px-2.5 py-1.5 rounded-lg text-[11px] font-bold">
-                แทรก
-              </button>
-              <button type="button" onclick="editCmsRecord('${escapeHtmlCms(item.id)}')" title="แก้ไข"
-                class="bg-slate-800 hover:bg-slate-700 text-amber-300 px-2.5 py-1.5 rounded-lg text-[11px] font-bold">
-                แก้
-              </button>
-              <button type="button" onclick="deleteCmsRecord('${escapeHtmlCms(item.id)}')" title="ลบ"
-                class="bg-rose-600/20 hover:bg-rose-600/35 text-rose-300 px-2.5 py-1.5 rounded-lg text-[11px] font-bold">
-                ลบ
-              </button>
-            </div>
-          </div>
-        `;
-      }).join('');
-    }
-
-    async function syncCmsToCloudSheets() {
-      const endpoint = 'https://script.google.com/macros/s/AKfycbyeDCdxBD10D_AFZQY2NxeylLOiAmAHLesSDZHXYCb3TsYs4wYer_kRTPVOs3VpK2pP/exec';
-      const btn = document.getElementById('btn-cms-cloud-sync');
-      if (btn) btn.disabled = true;
-      try {
-        await fetch(endpoint, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            action: 'admin_save_settings',
-            adminId: 'cms_studio',
-            passcode: 'TDT2026ADMIN',
-            settings: {
-              cms_collections_json: JSON.stringify(cmsCollections),
-              cms_schemas_json: JSON.stringify(cmsSchemas),
-              cms_last_updated_page: currentTargetPage
-            }
-          })
-        });
-        showBuilderToast('ซิงก์ข้อมูล CMS ขึ้นฐานข้อมูลเรียบร้อยแล้ว');
-      } catch (_) {
-        showBuilderToast('บันทึกข้อมูล CMS ในเครื่องเรียบร้อยแล้ว');
-      } finally {
-        if (btn) btn.disabled = false;
-      }
-    }
-
-    async function callGeminiWithBackoff(payload, maxRetries = 3) {
-      const apiKey = '';
-      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
-      let delayMs = 1000;
-
-      for (let attempt = 0; attempt <= maxRetries; attempt++) {
-        try {
-          const response = await fetch(apiUrl, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-          });
-          if (response.status === 429 || response.status >= 500) {
-            if (attempt < maxRetries) {
-              await new Promise(resolve => setTimeout(resolve, delayMs));
-              delayMs *= 2;
-              continue;
-            }
-          }
-          if (!response.ok) {
-            throw new Error(`API HTTP ${response.status}`);
-          }
-          return await response.json();
-        } catch (err) {
-          if (attempt < maxRetries) {
-            await new Promise(resolve => setTimeout(resolve, delayMs));
-            delayMs *= 2;
-          } else {
-            throw err;
-          }
-        }
-      }
-      return null;
-    }
-
-    async function generateStructuredContentWithAI() {
-      const topicInput = document.getElementById('cms-ai-topic-input');
-      const statusEl = document.getElementById('cms-ai-status-msg');
-      const btn = document.getElementById('btn-cms-ai-generate');
-      const topic = (topicInput?.value || document.getElementById('cms-field-title')?.value || '').trim();
-
-      if (!topic) {
-        showBuilderToast('กรุณาพิมพ์หัวข้อหรือประเด็นที่ต้องการให้ AI ช่วยสร้างก่อนครับ');
-        return;
-      }
-
-      if (btn) {
-        btn.disabled = true;
-        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1"></i> กำลังสร้าง...';
-      }
-      if (statusEl) {
-        statusEl.textContent = 'AI กำลังจัดโครงสร้างหัวข้อ หมวดหมู่ และรายละเอียดภาษาไทย...';
-        statusEl.className = 'text-[10px] text-indigo-300';
-      }
-
-      try {
-        const schemaSummary = (cmsSchemas[activeCmsCollection] || []).map(f => `${f.label} (${f.key})`).join(', ');
-        const aiPayload = {
-          systemInstruction: {
-            parts: [{
-              text: 'คุณเป็นผู้ช่วยบริหารเนื้อหา CMS สำหรับชุมชนคนขับรถรับจ้างมืออาชีพ The Driver Thailand ให้สร้างเนื้อหาภาษาไทยที่ชัดเจน กระชับ สุภาพ และเป็นทางการ'
-            }]
-          },
-          contents: [{
-            role: 'user',
-            parts: [{
-              text: `สร้างเนื้อหาเชิงโครงสร้างสำหรับคอลเลกชัน "${activeCmsCollection}" (ฟิลด์เสริม: ${schemaSummary || 'มาตรฐาน'}) บนหน้า "${currentTargetPage}" ในหัวข้อ: "${topic}"`
-            }]
-          }],
-          generationConfig: {
-            responseMimeType: 'application/json',
-            responseSchema: {
-              type: 'OBJECT',
-              properties: {
-                title: { type: 'STRING' },
-                category: { type: 'STRING' },
-                body: { type: 'STRING' }
-              },
-              propertyOrdering: ['title', 'category', 'body']
-            }
-          }
-        };
-
-        const result = await callGeminiWithBackoff(aiPayload);
-        const rawText = result?.candidates?.[0]?.content?.parts?.[0]?.text;
-        if (!rawText) {
-          throw new Error('Empty AI response');
-        }
-        const parsed = JSON.parse(rawText);
-        if (parsed.title) document.getElementById('cms-field-title').value = parsed.title;
-        if (parsed.category) document.getElementById('cms-field-category').value = parsed.category;
-        if (parsed.body) document.getElementById('cms-field-body').value = parsed.body;
-
-        if (statusEl) {
-          statusEl.textContent = 'สร้างโครงสร้างเนื้อหาด้วย AI เรียบร้อยแล้ว สามารถปรับแก้หรือกดบันทึกลง CMS ได้ทันที';
-          statusEl.className = 'text-[10px] text-emerald-400';
-        }
-        showBuilderToast('AI สร้างเนื้อหาเชิงโครงสร้างให้แล้วครับ');
-      } catch (_) {
-        const fallbackTitle = topic;
-        const fallbackCat = activeCmsCollection === 'insurance_plans'
-          ? 'CAPTAIN INSURANCE'
-          : (activeCmsCollection === 'driver_news' ? 'ข่าวสารคนขับแอป' : 'ประกาศเครือข่าย');
-        const fallbackBody = `อัปเดตข้อมูลสำคัญสำหรับสมาชิก The Driver Thailand เรื่อง "${topic}" กรุณาตรวจสอบรายละเอียดและปฏิบัติตามเงื่อนไขของระบบอย่างครบถ้วน`;
-
-        document.getElementById('cms-field-title').value = fallbackTitle;
-        document.getElementById('cms-field-category').value = fallbackCat;
-        document.getElementById('cms-field-body').value = fallbackBody;
-
-        if (statusEl) {
-          statusEl.textContent = 'จัดโครงสร้างร่างเริ่มต้นให้แล้ว สามารถแก้ไขข้อความต่อได้ทันที';
-          statusEl.className = 'text-[10px] text-amber-300';
-        }
-        showBuilderToast('สร้างโครงสร้างร่างเนื้อหาให้แล้วครับ');
-      } finally {
-        if (btn) {
-          btn.disabled = false;
-          btn.innerHTML = '<i class="fa-solid fa-wand-magic mr-1"></i> สร้างด้วย AI';
-        }
-      }
-    }
-
-    async function transformCurrentCmsDraftWithAI(mode) {
-      const title = (document.getElementById('cms-field-title')?.value || '').trim();
-      const body = (document.getElementById('cms-field-body')?.value || '').trim();
-      const statusEl = document.getElementById('cms-ai-status-msg');
-      if (!title && !body) {
-        showBuilderToast('กรุณากรอกหัวข้อหรือเนื้อหาก่อนใช้ AI ปรับปรุงครับ');
-        return;
-      }
-
-      if (statusEl) {
-        statusEl.textContent = mode === 'polish'
-          ? 'AI กำลังขัดเกลาสำนวนให้สุภาพและเป็นทางการ...'
-          : 'AI กำลังสรุปประเด็นสำคัญให้กระชับ...';
-        statusEl.className = 'text-[10px] text-indigo-300';
-      }
-
-      try {
-        const promptText = mode === 'polish'
-          ? `ขัดเกลาหัวข้อและเนื้อหานี้ให้อ่านง่าย สุภาพ และเป็นทางการสำหรับชุมชนคนขับรถรับจ้าง:\nหัวข้อ: ${title}\nเนื้อหา: ${body}`
-          : `สรุปประเด็นสำคัญของหัวข้อและเนื้อหานี้ให้สั้นกระชับ ชัดเจน:\nหัวข้อ: ${title}\nเนื้อหา: ${body}`;
-
-        const result = await callGeminiWithBackoff({
-          systemInstruction: {
-            parts: [{ text: 'คุณเป็นผู้ช่วยบรรณาธิการเนื้อหาภาษาไทยสำหรับระบบ CMS ของ The Driver Thailand' }]
-          },
-          contents: [{ role: 'user', parts: [{ text: promptText }] }],
-          generationConfig: {
-            responseMimeType: 'application/json',
-            responseSchema: {
-              type: 'OBJECT',
-              properties: {
-                title: { type: 'STRING' },
-                body: { type: 'STRING' }
-              },
-              propertyOrdering: ['title', 'body']
-            }
-          }
-        });
-
-        const rawText = result?.candidates?.[0]?.content?.parts?.[0]?.text;
-        if (!rawText) throw new Error('Empty AI response');
-        const parsed = JSON.parse(rawText);
-        if (parsed.title) document.getElementById('cms-field-title').value = parsed.title;
-        if (parsed.body) document.getElementById('cms-field-body').value = parsed.body;
-        if (statusEl) {
-          statusEl.textContent = 'ปรับปรุงเนื้อหาด้วย AI เรียบร้อยแล้ว';
-          statusEl.className = 'text-[10px] text-emerald-400';
-        }
-        showBuilderToast('ปรับปรุงเนื้อหาด้วย AI เรียบร้อยแล้วครับ');
-      } catch (_) {
-        if (mode === 'summary' && body) {
-          document.getElementById('cms-field-body').value = body.slice(0, 140) + (body.length > 140 ? '...' : '');
-        }
-        if (statusEl) {
-          statusEl.textContent = 'จัดรูปแบบข้อความเบื้องต้นให้แล้ว สามารถแก้ไขต่อได้ทันที';
-          statusEl.className = 'text-[10px] text-amber-300';
-        }
-        showBuilderToast('ปรับข้อความเบื้องต้นให้แล้วครับ');
-      }
-    }
-
-    function switchCmsCollection(colKey) {
-      if (cmsCollections[colKey]) {
-        activeCmsCollection = colKey;
-        resetCmsRecordForm();
-        renderCmsEntriesList();
-      }
-    }
-
-    function resetCmsRecordForm() {
-      document.getElementById('cms-record-id').value = '';
-      document.getElementById('cms-field-title').value = '';
-      document.getElementById('cms-field-category').value = '';
-      document.getElementById('cms-field-status').value = 'Draft';
-      document.getElementById('cms-field-display-style').value = 'gold-banner';
-      document.getElementById('cms-field-body').value = '';
-      const modeLbl = document.getElementById('cms-editor-mode-label');
-      if (modeLbl) modeLbl.textContent = 'สร้างรายการเนื้อหาใหม่ (Structured Record)';
-    }
-
-    function editCmsRecord(recordId) {
-      const list = cmsCollections[activeCmsCollection] || [];
-      const item = list.find(r => r.id === recordId);
-      if (!item) return;
-      document.getElementById('cms-record-id').value = item.id;
-      document.getElementById('cms-field-title').value = item.title || '';
-      document.getElementById('cms-field-category').value = item.category || '';
-      document.getElementById('cms-field-status').value = item.status || 'Draft';
-      document.getElementById('cms-field-display-style').value = item.displayStyle || 'gold-banner';
-      document.getElementById('cms-field-body').value = item.body || '';
-      const modeLbl = document.getElementById('cms-editor-mode-label');
-      if (modeLbl) modeLbl.textContent = `กำลังแก้ไขรายการ: ${item.id}`;
-    }
-
-    function deleteCmsRecord(recordId) {
-      const list = cmsCollections[activeCmsCollection] || [];
-      cmsCollections[activeCmsCollection] = list.filter(r => r.id !== recordId);
-      persistCmsCollections();
-      renderCmsEntriesList();
-      showBuilderToast('ลบรายการออกจาก CMS แล้ว');
-    }
-
-    function updateCmsWorkflowStatus(recordId, nextStatus) {
-      const list = cmsCollections[activeCmsCollection] || [];
-      const item = list.find(r => r.id === recordId);
-      if (!item) return;
-      item.status = nextStatus;
-      persistCmsCollections();
-      renderCmsEntriesList();
-      showBuilderToast(`เปลี่ยนสถานะเวิร์กโฟลว์เป็น ${nextStatus}`);
-    }
-
-    function buildCmsStyledNode(doc, item) {
-      const wrap = doc.createElement('div');
-      wrap.setAttribute('data-cms-record-id', item.id);
-      wrap.style.margin = '18px auto';
-      wrap.style.maxWidth = '1120px';
-      wrap.style.padding = '0 16px';
-
-      let boxStyle = 'background:#fffbeb;border:1px solid #fcd34d;color:#0f172a;';
-      let badgeStyle = 'background:#0f172a;color:#fbbf24;';
-      if (item.displayStyle === 'emerald-alert') {
-        boxStyle = 'background:#ecfdf5;border:1px solid #6ee7b7;color:#064e3b;';
-        badgeStyle = 'background:#059669;color:#ffffff;';
-      } else if (item.displayStyle === 'clean-card') {
-        boxStyle = 'background:#ffffff;border:1px solid #cbd5e1;color:#0f172a;box-shadow:0 4px 16px rgba(15,23,42,0.06);';
-        badgeStyle = 'background:#e2e8f0;color:#1e293b;';
-      }
-
-      wrap.innerHTML = `
-        <div style="${boxStyle}border-radius:20px;padding:22px 24px;">
-          <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px;">
-            <span style="${badgeStyle}font-size:11px;font-weight:700;padding:4px 12px;border-radius:999px;">${escapeHtmlCms(item.category || 'CMS Content')}</span>
-            <span style="font-size:11px;font-weight:700;color:#64748b;">สถานะ: ${escapeHtmlCms(item.status || 'Published')}</span>
-          </div>
-          <h3 style="font-size:20px;font-weight:800;margin:0 0 8px;line-height:1.35;">${escapeHtmlCms(item.title)}</h3>
-          <p style="font-size:14px;line-height:1.7;margin:0;opacity:0.92;">${escapeHtmlCms(item.body)}</p>
-        </div>
-      `;
-      return wrap;
-    }
-
-    function insertCmsRecordToCanvas(recordId) {
-      const doc = getFrameDoc();
-      if (!doc || !doc.body) {
-        showBuilderToast('ไม่พบหน้าเว็บในแคนวาสสำหรับแทรกเนื้อหา');
-        return;
-      }
-      const list = cmsCollections[activeCmsCollection] || [];
-      const item = list.find(r => r.id === recordId);
-      if (!item) return;
-
-      pushUndoSnapshot();
-      const targetMain = doc.querySelector('main') || doc.body;
-      targetMain.appendChild(buildCmsStyledNode(doc, item));
-      bindEditableHandlersInFrame(doc);
-      showBuilderToast(`แทรกเนื้อหา "${item.title}" ลงบนหน้าเว็บแล้ว`);
-    }
-
-    function saveCmsRecord(alsoInsertToCanvas) {
-      const title = (document.getElementById('cms-field-title')?.value || '').trim();
-      const category = (document.getElementById('cms-field-category')?.value || '').trim() || 'ทั่วไป';
-      const status = document.getElementById('cms-field-status')?.value || 'Draft';
-      const displayStyle = document.getElementById('cms-field-display-style')?.value || 'gold-banner';
-      const body = (document.getElementById('cms-field-body')?.value || '').trim();
-      const existingId = (document.getElementById('cms-record-id')?.value || '').trim();
-
-      if (!title || !body) {
-        showBuilderToast('กรุณากรอกหัวข้อหลักและเนื้อหารายละเอียดก่อนบันทึกครับ');
-        return;
-      }
-
-      const list = cmsCollections[activeCmsCollection] || [];
-      let savedRecord = null;
-
-      if (existingId) {
-        const idx = list.findIndex(r => r.id === existingId);
-        if (idx !== -1) {
-          list[idx] = { id: existingId, title, category, status, displayStyle, body };
-          savedRecord = list[idx];
-        }
-      }
-
-      if (!savedRecord) {
-        savedRecord = {
-          id: 'CMS-' + Date.now().toString().slice(-6),
-          title,
-          category,
-          status,
-          displayStyle,
-          body
-        };
-        list.unshift(savedRecord);
-      }
-
-      cmsCollections[activeCmsCollection] = list;
-      persistCmsCollections();
-      renderCmsEntriesList();
-      resetCmsRecordForm();
-      showBuilderToast(`บันทึกข้อมูล CMS "${savedRecord.title}" เรียบร้อยแล้ว`);
-
-      if (alsoInsertToCanvas) {
-        insertCmsRecordToCanvas(savedRecord.id);
-      }
-    }
-
-    function renderCmsEntriesList() {
-      const listEl = document.getElementById('cms-records-list');
-      const countEl = document.getElementById('cms-records-count');
-      const wfFilter = document.getElementById('cms-workflow-filter')?.value || 'ALL';
-      if (!listEl) return;
-
-      const rawList = cmsCollections[activeCmsCollection] || [];
-      const filtered = wfFilter === 'ALL' ? rawList : rawList.filter(r => r.status === wfFilter);
-      if (countEl) countEl.textContent = String(filtered.length);
-
-      if (filtered.length === 0) {
-        listEl.innerHTML = '<div class="text-center py-8 text-slate-500 border border-dashed border-slate-800 rounded-xl">ยังไม่มีรายการเนื้อหาในสถานะที่เลือก</div>';
-        return;
-      }
-
-      const statusBadgeMap = {
-        'Draft': 'bg-slate-800 text-slate-300 border-slate-600',
-        'In Review': 'bg-amber-500/20 text-amber-300 border-amber-400/40',
-        'Published': 'bg-emerald-500/20 text-emerald-300 border-emerald-400/40'
-      };
-
-      listEl.innerHTML = filtered.map(item => {
-        const stBadge = statusBadgeMap[item.status] || statusBadgeMap['Draft'];
-        return `
-          <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div class="space-y-1 min-w-0">
-              <div class="flex items-center gap-2 flex-wrap">
-                <span class="text-[10px] font-bold bg-amber-400/15 text-amber-300 border border-amber-400/30 px-2 py-0.5 rounded-full">${escapeHtmlCms(item.category)}</span>
-                <span class="text-[10px] font-bold border px-2 py-0.5 rounded-full ${stBadge}">${escapeHtmlCms(item.status)}</span>
-                <span class="text-[10px] font-mono text-slate-500">${escapeHtmlCms(item.id)}</span>
-              </div>
-              <p class="font-bold text-white text-xs truncate">${escapeHtmlCms(item.title)}</p>
-              <p class="text-[11px] text-slate-400 line-clamp-2">${escapeHtmlCms(item.body)}</p>
-            </div>
-            <div class="flex items-center gap-1.5 shrink-0 flex-wrap">
-              <select onchange="updateCmsWorkflowStatus('${escapeHtmlCms(item.id)}', this.value)"
-                class="bg-slate-900 border border-slate-700 text-slate-200 text-[11px] rounded-lg px-2 py-1.5">
-                <option value="Draft" ${item.status === 'Draft' ? 'selected' : ''}>Draft</option>
-                <option value="In Review" ${item.status === 'In Review' ? 'selected' : ''}>In Review</option>
-                <option value="Published" ${item.status === 'Published' ? 'selected' : ''}>Published</option>
-              </select>
-              <button type="button" onclick="insertCmsRecordToCanvas('${escapeHtmlCms(item.id)}')" title="แทรกเข้าหน้าเว็บ"
-                class="bg-emerald-600/25 hover:bg-emerald-600/40 text-emerald-300 border border-emerald-500/40 px-2.5 py-1.5 rounded-lg text-[11px] font-bold">
-                แทรก
-              </button>
-              <button type="button" onclick="editCmsRecord('${escapeHtmlCms(item.id)}')" title="แก้ไข"
-                class="bg-slate-800 hover:bg-slate-700 text-amber-300 px-2.5 py-1.5 rounded-lg text-[11px] font-bold">
-                แก้
-              </button>
-              <button type="button" onclick="deleteCmsRecord('${escapeHtmlCms(item.id)}')" title="ลบ"
-                class="bg-rose-600/20 hover:bg-rose-600/35 text-rose-300 px-2.5 py-1.5 rounded-lg text-[11px] font-bold">
-                ลบ
-              </button>
-            </div>
-          </div>
-        `;
-      }).join('');
-    }
-
-    async function syncCmsToCloudSheets() {
-      const endpoint = 'https://script.google.com/macros/s/AKfycbyeDCdxBD10D_AFZQY2NxeylLOiAmAHLesSDZHXYCb3TsYs4wYer_kRTPVOs3VpK2pP/exec';
-      const btn = document.getElementById('btn-cms-cloud-sync');
-      if (btn) btn.disabled = true;
-      try {
-        await fetch(endpoint, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            action: 'admin_save_settings',
-            adminId: 'cms_studio',
-            passcode: 'TDT2026ADMIN',
-            settings: {
-              cms_collections_json: JSON.stringify(cmsCollections),
-              cms_last_updated_page: currentTargetPage
-            }
-          })
-        });
-        showBuilderToast('ซิงก์ข้อมูล CMS ขึ้นฐานข้อมูลเรียบร้อยแล้ว');
-      } catch (_) {
-        showBuilderToast('บันทึกข้อมูล CMS ในเครื่องเรียบร้อยแล้ว');
-      } finally {
-        if (btn) btn.disabled = false;
-      }
-    }
-
-    async function callGeminiWithBackoff(payload, maxRetries = 3) {
-      const apiKey = '';
-      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
-      let delayMs = 1000;
-
-      for (let attempt = 0; attempt <= maxRetries; attempt++) {
-        try {
-          const response = await fetch(apiUrl, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-          });
-          if (response.status === 429 || response.status >= 500) {
-            if (attempt < maxRetries) {
-              await new Promise(resolve => setTimeout(resolve, delayMs));
-              delayMs *= 2;
-              continue;
-            }
-          }
-          if (!response.ok) {
-            throw new Error(`API HTTP ${response.status}`);
-          }
-          return await response.json();
-        } catch (err) {
-          if (attempt < maxRetries) {
-            await new Promise(resolve => setTimeout(resolve, delayMs));
-            delayMs *= 2;
-          } else {
-            throw err;
-          }
-        }
-      }
-      return null;
-    }
-
-    async function generateStructuredContentWithAI() {
-      const topicInput = document.getElementById('cms-ai-topic-input');
-      const statusEl = document.getElementById('cms-ai-status-msg');
-      const btn = document.getElementById('btn-cms-ai-generate');
-      const topic = (topicInput?.value || document.getElementById('cms-field-title')?.value || '').trim();
-
-      if (!topic) {
-        showBuilderToast('กรุณาพิมพ์หัวข้อหรือประเด็นที่ต้องการให้ AI ช่วยสร้างก่อนครับ');
-        return;
-      }
-
-      if (btn) {
-        btn.disabled = true;
-        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1"></i> กำลังสร้าง...';
-      }
-      if (statusEl) {
-        statusEl.textContent = 'AI กำลังจัดโครงสร้างหัวข้อ หมวดหมู่ และรายละเอียดภาษาไทย...';
-        statusEl.className = 'text-[10px] text-indigo-300';
-      }
-
-      try {
-        const aiPayload = {
-          systemInstruction: {
-            parts: [{
-              text: 'คุณเป็นผู้ช่วยบริหารเนื้อหา CMS สำหรับชุมชนคนขับรถรับจ้างมืออาชีพ The Driver Thailand ให้สร้างเนื้อหาภาษาไทยที่ชัดเจน กระชับ สุภาพ และเป็นทางการ'
-            }]
-          },
-          contents: [{
-            role: 'user',
-            parts: [{
-              text: `สร้างเนื้อหาเชิงโครงสร้างสำหรับคอลเลกชัน "${activeCmsCollection}" บนหน้า "${currentTargetPage}" ในหัวข้อ: "${topic}"`
-            }]
-          }],
-          generationConfig: {
-            responseMimeType: 'application/json',
-            responseSchema: {
-              type: 'OBJECT',
-              properties: {
-                title: { type: 'STRING' },
-                category: { type: 'STRING' },
-                body: { type: 'STRING' }
-              },
-              propertyOrdering: ['title', 'category', 'body']
-            }
-          }
-        };
-
-        const result = await callGeminiWithBackoff(aiPayload);
-        const rawText = result?.candidates?.[0]?.content?.parts?.[0]?.text;
-        if (!rawText) {
-          throw new Error('Empty AI response');
-        }
-        const parsed = JSON.parse(rawText);
-        if (parsed.title) document.getElementById('cms-field-title').value = parsed.title;
-        if (parsed.category) document.getElementById('cms-field-category').value = parsed.category;
-        if (parsed.body) document.getElementById('cms-field-body').value = parsed.body;
-
-        if (statusEl) {
-          statusEl.textContent = 'สร้างโครงสร้างเนื้อหาด้วย AI เรียบร้อยแล้ว สามารถปรับแก้หรือกดบันทึกลง CMS ได้ทันที';
-          statusEl.className = 'text-[10px] text-emerald-400';
-        }
-        showBuilderToast('AI สร้างเนื้อหาเชิงโครงสร้างให้แล้วครับ');
-      } catch (_) {
-        // Fallback โครงสร้างอัตโนมัติในเครื่องหากไม่ได้ต่อ API key ของ AI
-        const fallbackTitle = topic;
-        const fallbackCat = activeCmsCollection === 'insurance_plans'
-          ? 'CAPTAIN INSURANCE'
-          : (activeCmsCollection === 'driver_news' ? 'ข่าวสารคนขับแอป' : 'ประกาศเครือข่าย');
-        const fallbackBody = `อัปเดตข้อมูลสำคัญสำหรับสมาชิก The Driver Thailand เรื่อง "${topic}" กรุณาตรวจสอบรายละเอียดและปฏิบัติตามเงื่อนไขของระบบอย่างครบถ้วน`;
-
-        document.getElementById('cms-field-title').value = fallbackTitle;
-        document.getElementById('cms-field-category').value = fallbackCat;
-        document.getElementById('cms-field-body').value = fallbackBody;
-
-        if (statusEl) {
-          statusEl.textContent = 'จัดโครงสร้างร่างเริ่มต้นให้แล้ว สามารถแก้ไขข้อความต่อได้ทันที';
-          statusEl.className = 'text-[10px] text-amber-300';
-        }
-        showBuilderToast('สร้างโครงสร้างร่างเนื้อหาให้แล้วครับ');
-      } finally {
-        if (btn) {
-          btn.disabled = false;
-          btn.innerHTML = '<i class="fa-solid fa-wand-magic mr-1"></i> สร้างด้วย AI';
-        }
-      }
-    }
-
     function showBuilderToast(msg) {
       const box = document.getElementById('builder-toast');
       const txt = document.getElementById('builder-toast-text');
       if (!box || !txt) return;
-      txt.textContent = String(msg || '');
+      txt.textContent = msg;
       box.classList.remove('hidden');
       clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => {
-        box.classList.add('hidden');
-      }, 3200);
+      toastTimer = setTimeout(() => box.classList.add('hidden'), 3200);
+    }
+
+    function openBaseUrlModal() {
+      const current = liveSiteBaseUrl || (window.location.origin.startsWith('http') ? window.location.origin : 'https://www.thedriverthailand.com');
+      const modal = document.getElementById('base-url-modal');
+      const input = document.getElementById('base-url-input');
+      if (input) input.value = current;
+      if (modal) modal.classList.remove('hidden');
+    }
+
+    function saveSiteBaseUrl(e) {
+      if (e) e.preventDefault();
+      const input = document.getElementById('base-url-input');
+      liveSiteBaseUrl = String(input?.value || '').trim().replace(/\/+$/, '');
+      try { localStorage.setItem(SITE_BASE_URL_KEY, liveSiteBaseUrl); } catch (_) {}
+      document.getElementById('base-url-modal')?.classList.add('hidden');
+      switchTargetPage(currentTargetPage);
+      showBuilderToast(`บันทึก URL เว็บไซต์จริงแล้ว: ${liveSiteBaseUrl || 'โฟลเดอร์ปัจจุบัน'}`);
+    }
+
+    function renderSidebarPagesList() {
+      const listEl = document.getElementById('sidebar-pages-list');
+      if (!listEl) return;
+      listEl.innerHTML = ALL_SITE_PAGES.map(p => {
+        const isCur = p.file === currentTargetPage;
+        const isInFolder = localFolderHtmlMap.has(p.file);
+        return `
+          <button type="button" onclick="switchTargetPage('${p.file}')"
+            class="page-item-btn w-full text-left px-3 py-2 rounded-xl border text-[11px] font-semibold flex items-center justify-between gap-1.5 transition ${isCur ? 'is-active' : 'bg-slate-950/70 border-slate-800 text-slate-300 hover:bg-slate-800'}">
+            <span class="truncate">${p.title}</span>
+            ${isInFolder ? '<span class="text-[9px] bg-emerald-500/20 text-emerald-300 px-1.5 py-0.5 rounded shrink-0">ไฟล์เครื่อง</span>' : ''}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function renderHtmlIntoEditorFrame(htmlContent, fileName, sourceLabel) {
+      const frame = document.getElementById('live-page-frame');
+      const statusEl = document.getElementById('live-page-load-status');
+      const labelEl = document.getElementById('current-editing-page-label');
+      currentTargetPage = fileName;
+      currentLoadedFileName = fileName;
+      if (labelEl) labelEl.textContent = fileName;
+      if (statusEl) statusEl.textContent = sourceLabel;
+      undoStack = [];
+      redoStack = [];
+      selectedEl = null;
+      updateUndoRedoButtons();
+      if (frame) {
+        frame.removeAttribute('src');
+        frame.srcdoc = htmlContent;
+      }
+    }
+
+    function loadLocalFolderFiles(inputEl) {
+      const files = Array.from(inputEl?.files || []);
+      if (!files.length) return;
+      localFolderHtmlMap.clear();
+
+      const htmlFiles = files.filter(f => /\.(html|htm)$/i.test(f.name));
+      if (!htmlFiles.length) {
+        showBuilderToast('ไม่พบไฟล์ .html ในโฟลเดอร์ที่เลือก');
+        inputEl.value = '';
+        return;
+      }
+
+      let loadedCount = 0;
+      htmlFiles.forEach(file => {
+        const reader = new FileReader();
+        reader.onload = e => {
+          localFolderHtmlMap.set(file.name, String(e.target?.result || ''));
+          loadedCount += 1;
+          if (loadedCount === htmlFiles.length) {
+            const preferred = localFolderHtmlMap.has(currentTargetPage)
+              ? currentTargetPage
+              : (localFolderHtmlMap.has('index.html') ? 'index.html' : htmlFiles[0].name);
+            switchTargetPage(preferred);
+            showBuilderToast(`โหลดโฟลเดอร์สำเร็จ (${htmlFiles.length} หน้า) พร้อมแก้ ${preferred}`);
+          }
+        };
+        reader.readAsText(file, 'UTF-8');
+      });
+      inputEl.value = '';
+    }
+
+    function switchTargetPage(pageFile) {
+      currentTargetPage = pageFile;
+      const labelEl = document.getElementById('current-editing-page-label');
+      if (labelEl) labelEl.textContent = pageFile;
+      const topSelect = document.getElementById('top-page-selector');
+      if (topSelect) topSelect.value = pageFile;
+      renderSidebarPagesList();
+
+      if (localFolderHtmlMap.has(pageFile)) {
+        renderHtmlIntoEditorFrame(
+          localFolderHtmlMap.get(pageFile),
+          pageFile,
+          `กำลังแก้ไขไฟล์ปัจจุบันจากโฟลเดอร์ในเครื่อง: ${pageFile}`
+        );
+        return;
+      }
+
+      const statusEl = document.getElementById('live-page-load-status');
+      const targetUrl = liveSiteBaseUrl ? `${liveSiteBaseUrl}/${pageFile}` : pageFile;
+      if (statusEl) statusEl.textContent = `กำลังดึง ${targetUrl} เวอร์ชันล่าสุด...`;
+
+      const frame = document.getElementById('live-page-frame');
+      if (!frame) return;
+
+      fetch(`${targetUrl}?nocache=${Date.now()}`, { cache: 'no-store' })
+        .then(res => {
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+          return res.text();
+        })
+        .then(htmlText => {
+          const baseTag = liveSiteBaseUrl ? `<base href="${liveSiteBaseUrl}/">` : '';
+          const patchedHtml = baseTag && htmlText.includes('<head>')
+            ? htmlText.replace('<head>', `<head>${baseTag}`)
+            : htmlText;
+          renderHtmlIntoEditorFrame(
+            patchedHtml,
+            pageFile,
+            `กำลังแก้ไขหน้าปัจจุบันจริงจาก ${targetUrl}`
+          );
+        })
+        .catch(() => {
+          currentLoadedFileName = pageFile;
+          frame.removeAttribute('srcdoc');
+          frame.src = `${targetUrl}?t=${Date.now()}`;
+          if (statusEl) {
+            statusEl.textContent = `กำลังแสดง ${targetUrl} — หากต้องการแก้ไฟล์เวอร์ชันล่าสุดในเครื่อง ให้กด "เปิดทั้งโฟลเดอร์" หรือ "เปิดไฟล์ .HTML"`;
+          }
+        });
+    }
+
+    function reloadCurrentLivePage() {
+      switchTargetPage(currentTargetPage);
+      showBuilderToast(`รีเฟรชหน้า ${currentTargetPage} เวอร์ชันล่าสุดแล้ว`);
+    }
+
+    function loadLocalHtmlFile(inputEl) {
+      const file = inputEl?.files?.[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = e => {
+        const htmlContent = String(e.target?.result || '');
+        localFolderHtmlMap.set(file.name, htmlContent);
+        renderHtmlIntoEditorFrame(
+          htmlContent,
+          file.name,
+          `กำลังแก้ไขไฟล์ปัจจุบันจากเครื่อง: ${file.name}`
+        );
+        showBuilderToast(`เปิดไฟล์ ${file.name} จากเครื่องเรียบร้อยแล้ว`);
+      };
+      reader.readAsText(file, 'UTF-8');
+      inputEl.value = '';
     }
 
     function getFrameDoc() {
@@ -1506,245 +527,138 @@
       }
     }
 
-    function updateUndoRedoButtons() {
-      const undoBtn = document.getElementById('btn-undo');
-      const redoBtn = document.getElementById('btn-redo');
-      if (undoBtn) undoBtn.disabled = undoStack.length === 0;
-      if (redoBtn) redoBtn.disabled = redoStack.length === 0;
-    }
-
     function pushUndoSnapshot() {
       const doc = getFrameDoc();
-      if (!doc || !doc.documentElement) return;
-      undoStack.push(doc.documentElement.outerHTML);
+      if (!doc || !doc.body) return;
+      undoStack.push(doc.body.innerHTML);
       if (undoStack.length > 25) undoStack.shift();
       redoStack = [];
       updateUndoRedoButtons();
     }
 
     function undoBuilderAction() {
-      if (!undoStack.length) return;
       const doc = getFrameDoc();
-      if (!doc || !doc.documentElement) return;
-      redoStack.push(doc.documentElement.outerHTML);
-      const prevHtml = undoStack.pop();
-      doc.open();
-      doc.write(prevHtml);
-      doc.close();
-      initLiveFrameEditor();
+      if (!doc || !doc.body || undoStack.length === 0) return;
+      redoStack.push(doc.body.innerHTML);
+      doc.body.innerHTML = undoStack.pop();
+      bindEditableHandlersInFrame(doc);
       updateUndoRedoButtons();
-      showBuilderToast('ย้อนกลับการแก้ไขล่าสุดแล้ว');
+      showBuilderToast('ย้อนกลับการแก้ไขแล้ว');
     }
 
     function redoBuilderAction() {
-      if (!redoStack.length) return;
       const doc = getFrameDoc();
-      if (!doc || !doc.documentElement) return;
-      undoStack.push(doc.documentElement.outerHTML);
-      const nextHtml = redoStack.pop();
-      doc.open();
-      doc.write(nextHtml);
-      doc.close();
-      initLiveFrameEditor();
+      if (!doc || !doc.body || redoStack.length === 0) return;
+      undoStack.push(doc.body.innerHTML);
+      doc.body.innerHTML = redoStack.pop();
+      bindEditableHandlersInFrame(doc);
       updateUndoRedoButtons();
       showBuilderToast('ทำซ้ำการแก้ไขแล้ว');
     }
 
-    function setViewportSize(widthCss) {
-      const wrapper = document.getElementById('viewport-frame-wrapper');
-      if (wrapper) wrapper.style.width = widthCss;
-
-      const map = {
-        '100%': 'vp-desktop',
-        '768px': 'vp-tablet',
-        '390px': 'vp-mobile'
-      };
-      const activeId = map[widthCss] || 'vp-desktop';
-      ['vp-desktop', 'vp-tablet', 'vp-mobile'].forEach(id => {
-        const el = document.getElementById(id);
-        if (!el) return;
-        el.className = id === activeId
-          ? 'px-2.5 py-1.5 rounded-lg text-xs font-bold bg-amber-400 text-slate-950 transition'
-          : 'px-2.5 py-1.5 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition';
-      });
+    function updateUndoRedoButtons() {
+      const uBtn = document.getElementById('btn-undo');
+      const rBtn = document.getElementById('btn-redo');
+      const pBtn = document.getElementById('btn-paste-copied-el');
+      if (uBtn) uBtn.disabled = undoStack.length === 0;
+      if (rBtn) rBtn.disabled = redoStack.length === 0;
+      if (pBtn) pBtn.disabled = !copiedElementClone;
     }
 
-    function renderSidebarPagesList() {
-      const container = document.getElementById('sidebar-pages-list');
-      if (!container) return;
-      container.innerHTML = ALL_SITE_PAGES.map(pg => {
-        const isCurrent = pg.file === currentTargetPage;
-        return `
-          <button type="button" onclick="switchTargetPage('${escapeHtmlCms(pg.file)}')"
-            class="page-item-btn w-full text-left px-3 py-2 rounded-xl text-[11px] font-semibold border transition flex items-center justify-between gap-2 ${isCurrent ? 'is-active' : 'bg-slate-950/70 border-slate-800 text-slate-300 hover:bg-slate-800/80'}">
-            <span class="truncate">${escapeHtmlCms(pg.title)}</span>
-            ${localFolderHtmlMap.has(pg.file) ? '<span class="text-[9px] text-emerald-400 shrink-0">ไฟล์เครื่อง</span>' : ''}
-          </button>
-        `;
-      }).join('');
-    }
-
-    function buildStarterPageHtml(pageFile) {
-      const title = ALL_SITE_PAGES.find(p => p.file === pageFile)?.title || pageFile;
-      return `<!DOCTYPE html>
-<html lang="th">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${escapeHtmlCms(title)}</title>
-  <script src="https://cdn.tailwindcss.com"><\/script>
-  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-</head>
-<body class="bg-slate-50 text-slate-900 p-6 sm:p-10" style="font-family: 'Prompt', sans-serif;">
-  <main class="max-w-5xl mx-auto space-y-6">
-    <header class="bg-slate-950 text-white rounded-3xl p-6 sm:p-8 border border-amber-400/30 shadow-xl">
-      <p class="text-xs font-bold text-amber-400 uppercase">The Driver TH Premium Service</p>
-      <h1 class="text-2xl sm:text-3xl font-black mt-1">${escapeHtmlCms(title)}</h1>
-      <p class="text-sm text-slate-300 mt-2">คลิกที่ข้อความเพื่อแก้ไขได้ทันที หรือลากบล็อกใหม่จากแถบด้านซ้ายเข้ามาวางบนหน้านี้</p>
-    </header>
-    <section class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-3">
-      <h2 class="text-lg font-extrabold text-slate-900">เนื้อหาหลักของหน้า</h2>
-      <p class="text-sm text-slate-600 leading-relaxed">สามารถเพิ่มบล็อกข้อความ การ์ดประกาศ ปุ่มลิงก์ รูปภาพ หรือดึงข้อมูลจาก CMS &amp; AI Studio มาแทรกเพิ่มเติมได้ครับ</p>
-    </section>
-  </main>
-</body>
-</html>`;
-    }
-
-    function renderHtmlIntoEditorFrame(htmlContent, fileName, sourceLabel) {
-      currentTargetPage = fileName;
-      currentLoadedFileName = fileName;
-      const labelEl = document.getElementById('current-editing-page-label');
-      const statusEl = document.getElementById('live-page-load-status');
-      const selectorEl = document.getElementById('top-page-selector');
-      if (labelEl) labelEl.textContent = fileName;
-      if (statusEl) statusEl.textContent = sourceLabel || `กำลังแก้ไข ${fileName}`;
-      if (selectorEl) selectorEl.value = fileName;
-      renderSidebarPagesList();
-
-      undoStack = [];
-      redoStack = [];
-      selectedEl = null;
+    function copySelectedElement() {
+      const target = selectedEl
+        ? (selectedEl.closest('nav, .tdt-global-nav, .tdt-cat-dropdown-wrap, a, button') || selectedEl)
+        : null;
+      if (!target) {
+        showBuilderToast('กรุณาคลิกเลือกองค์ประกอบหรือเมนูที่ต้องการ Copy ก่อนครับ');
+        return;
+      }
+      const clone = target.cloneNode(true);
+      clone.style.outline = '';
+      copiedElementClone = clone;
       updateUndoRedoButtons();
-
-      const frame = document.getElementById('live-page-frame');
-      if (!frame) return;
-      frame.removeAttribute('src');
-      frame.srcdoc = htmlContent;
+      const label = target.tagName === 'NAV' || target.classList?.contains('tdt-cat-dropdown-wrap')
+        ? 'Copy เมนูเรียบร้อยแล้ว'
+        : `Copy <${target.tagName.toLowerCase()}> เรียบร้อยแล้ว`;
+      showBuilderToast(label);
     }
 
-    function switchTargetPage(pageFile) {
-      currentTargetPage = pageFile || 'index.html';
-      renderSidebarPagesList();
-
-      if (localFolderHtmlMap.has(currentTargetPage)) {
-        renderHtmlIntoEditorFrame(
-          localFolderHtmlMap.get(currentTargetPage),
-          currentTargetPage,
-          `แก้ไขไฟล์ปัจจุบันจากเครื่อง: ${currentTargetPage}`
-        );
+    function pasteCopiedElement() {
+      const doc = getFrameDoc();
+      if (!doc || !doc.body || !copiedElementClone) {
+        showBuilderToast('ยังไม่มีองค์ประกอบที่ Copy ไว้ครับ');
         return;
       }
+      pushUndoSnapshot();
+      const freshClone = copiedElementClone.cloneNode(true);
+      freshClone.style.outline = '';
 
-      const statusEl = document.getElementById('live-page-load-status');
-      if (statusEl) statusEl.textContent = `กำลังโหลด ${currentTargetPage}...`;
-
-      const targetUrl = liveSiteBaseUrl ? `${liveSiteBaseUrl}/${currentTargetPage}` : currentTargetPage;
-      fetch(`${targetUrl}?t=${Date.now()}`, { cache: 'no-store' })
-        .then(res => {
-          if (!res.ok) throw new Error(`HTTP ${res.status}`);
-          return res.text();
-        })
-        .then(htmlText => {
-          if (!htmlText || !/<html|<body|<main|<div/i.test(htmlText)) {
-            throw new Error('Empty or non-HTML response');
-          }
-          renderHtmlIntoEditorFrame(htmlText, currentTargetPage, `โหลดหน้า ${currentTargetPage} สำเร็จ`);
-        })
-        .catch(() => {
-          renderHtmlIntoEditorFrame(
-            buildStarterPageHtml(currentTargetPage),
-            currentTargetPage,
-            `เปิดแคนวาสพร้อมแก้ไขสำหรับ ${currentTargetPage} (สามารถกด "เปิดไฟล์ .HTML" หรือ "เปิดทั้งโฟลเดอร์" เพื่อโหลดไฟล์จริงจากเครื่องได้)`
-          );
-        });
-    }
-
-    function reloadCurrentLivePage() {
-      switchTargetPage(currentTargetPage);
-      showBuilderToast(`รีเฟรชหน้า ${currentTargetPage} แล้ว`);
-    }
-
-    function openBaseUrlModal() {
-      const modal = document.getElementById('base-url-modal');
-      const input = document.getElementById('base-url-input');
-      if (input) input.value = liveSiteBaseUrl;
-      if (modal) modal.classList.remove('hidden');
-    }
-
-    function saveSiteBaseUrl(event) {
-      event.preventDefault();
-      const input = document.getElementById('base-url-input');
-      liveSiteBaseUrl = (input?.value || '').trim().replace(/\/+$/, '');
-      try {
-        localStorage.setItem(SITE_BASE_URL_KEY, liveSiteBaseUrl);
-      } catch (_) {}
-      document.getElementById('base-url-modal')?.classList.add('hidden');
-      switchTargetPage(currentTargetPage);
-      showBuilderToast('บันทึก URL เว็บไซต์จริงเรียบร้อยแล้ว');
-    }
-
-    function loadLocalHtmlFile(inputEl) {
-      const file = inputEl?.files?.[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = e => {
-        const content = String(e.target?.result || '');
-        localFolderHtmlMap.set(file.name, content);
-        renderHtmlIntoEditorFrame(content, file.name, `กำลังแก้ไขไฟล์จากเครื่อง: ${file.name}`);
-        showBuilderToast(`เปิดไฟล์ ${file.name} เรียบร้อยแล้ว`);
-      };
-      reader.readAsText(file, 'UTF-8');
-      inputEl.value = '';
-    }
-
-    function loadLocalFolderFiles(inputEl) {
-      const files = Array.from(inputEl?.files || []);
-      if (!files.length) return;
-      const htmlFiles = files.filter(f => /\.(html|htm)$/i.test(f.name));
-      if (!htmlFiles.length) {
-        showBuilderToast('ไม่พบไฟล์ .html ในโฟลเดอร์ที่เลือก');
-        inputEl.value = '';
-        return;
+      if (selectedEl && selectedEl.parentNode && selectedEl !== doc.body) {
+        const anchorParent = selectedEl.closest('.tdt-global-right-controls, .tdt-cat-menu-panel') || selectedEl.parentNode;
+        if (anchorParent === selectedEl.parentNode) {
+          selectedEl.parentNode.insertBefore(freshClone, selectedEl.nextSibling);
+        } else {
+          anchorParent.appendChild(freshClone);
+        }
+      } else {
+        const targetMain = doc.querySelector('main') || doc.body;
+        targetMain.appendChild(freshClone);
       }
 
-      let done = 0;
-      htmlFiles.forEach(file => {
-        const reader = new FileReader();
-        reader.onload = e => {
-          localFolderHtmlMap.set(file.name, String(e.target?.result || ''));
-          done += 1;
-          if (done === htmlFiles.length) {
-            const preferred = localFolderHtmlMap.has(currentTargetPage)
-              ? currentTargetPage
-              : (localFolderHtmlMap.has('index.html') ? 'index.html' : htmlFiles[0].name);
-            renderHtmlIntoEditorFrame(
-              localFolderHtmlMap.get(preferred),
-              preferred,
-              `โหลดจากโฟลเดอร์ (${htmlFiles.length} ไฟล์) — ${preferred}`
-            );
-            showBuilderToast(`โหลดโฟลเดอร์สำเร็จ (${htmlFiles.length} หน้า)`);
-          }
-        };
-        reader.readAsText(file, 'UTF-8');
-      });
-      inputEl.value = '';
+      bindEditableHandlersInFrame(doc);
+      showBuilderToast('วางองค์ประกอบที่ Copy ไว้เรียบร้อยแล้ว');
     }
 
-    function selectFrameElement(el) {
+    function execFrameCommand(cmd, value = null) {
       const doc = getFrameDoc();
       if (!doc) return;
-      if (selectedEl && selectedEl.style) {
+      try {
+        doc.execCommand(cmd, false, value);
+        pushUndoSnapshot();
+      } catch (_) {}
+    }
+
+    function onDragNewBlock(event, blockType) {
+      draggedNewBlockType = blockType;
+      try { event.dataTransfer.setData('text/plain', blockType); } catch (_) {}
+    }
+
+    function createBlockNode(doc, type) {
+      const wrap = doc.createElement('div');
+      wrap.setAttribute('data-builder-block', 'true');
+      wrap.style.margin = '18px auto';
+      wrap.style.maxWidth = '1120px';
+      wrap.style.padding = '16px';
+
+      if (type === 'heading') {
+        wrap.innerHTML = '<h2 style="font-size:28px;font-weight:800;color:#0f172a;margin:0;">หัวข้อประกาศสำคัญใหม่</h2>';
+      } else if (type === 'text') {
+        wrap.innerHTML = '<p style="font-size:15px;line-height:1.7;color:#334155;margin:0;">พิมพ์รายละเอียดข้อความที่ต้องการสื่อสารกับสมาชิกหรือผู้ใช้งานที่นี่...</p>';
+      } else if (type === 'card') {
+        wrap.innerHTML = '<div style="background:#fffbeb;border:1px solid #fcd34d;border-radius:20px;padding:20px;color:#0f172a;"><h3 style="font-size:18px;font-weight:800;margin:0 0 8px;">การ์ดประชาสัมพันธ์บริการ</h3><p style="font-size:14px;color:#475569;margin:0;">คลิกแก้ไขข้อความหรือลิงก์ของการ์ดนี้ได้ทันที</p></div>';
+      } else if (type === 'button') {
+        wrap.innerHTML = '<a href="index.html" style="display:inline-block;background:#0f172a;color:#fbbf24;font-weight:700;padding:12px 24px;border-radius:14px;text-decoration:none;font-size:14px;">ปุ่มดำเนินการ</a>';
+      } else if (type === 'image') {
+        wrap.innerHTML = '<img src="https://placehold.co/960x360/0f172a/fbbf24?text=The+Driver+Thailand+Banner" alt="แบนเนอร์" style="width:100%;max-height:360px;object-fit:cover;border-radius:18px;">';
+      } else {
+        wrap.innerHTML = '<hr style="border:0;border-top:2px solid #e2e8f0;margin:8px 0;">';
+      }
+      return wrap;
+    }
+
+    function insertBlockIntoFrame(type) {
+      const doc = getFrameDoc();
+      if (!doc || !doc.body) return;
+      pushUndoSnapshot();
+      const targetMain = doc.querySelector('main') || doc.body;
+      targetMain.appendChild(createBlockNode(doc, type));
+      bindEditableHandlersInFrame(doc);
+      showBuilderToast('แทรกบล็อกใหม่ลงในหน้าเว็บแล้ว');
+    }
+
+    function selectElementInInspector(el) {
+      const doc = getFrameDoc();
+      if (doc && selectedEl) {
         selectedEl.style.outline = '';
       }
       selectedEl = el;
@@ -1754,67 +668,135 @@
       const hrefInput = document.getElementById('prop-href-input');
       const imgGroup = document.getElementById('prop-image-group');
       const imgSrcInput = document.getElementById('prop-img-src-input');
+      const toolbar = document.getElementById('floating-text-toolbar');
 
-      if (!selectedEl) {
+      if (!el) {
         if (tagLabel) tagLabel.textContent = 'ยังไม่ได้คลิกเลือกองค์ประกอบบนหน้าเว็บ';
-        if (textInput) textInput.value = '';
-        linkGroup?.classList.add('hidden');
-        imgGroup?.classList.add('hidden');
+        if (toolbar) toolbar.classList.add('hidden');
         return;
       }
 
-      selectedEl.style.outline = '2px solid #f59e0b';
-      if (tagLabel) tagLabel.textContent = `<${selectedEl.tagName.toLowerCase()}>`;
-      if (textInput) textInput.value = (selectedEl.innerText || '').trim();
+      el.style.outline = '2px dashed #f59e0b';
+      if (tagLabel) tagLabel.textContent = `<${el.tagName.toLowerCase()}>`;
+      if (textInput) textInput.value = el.innerText || '';
+      if (toolbar) toolbar.classList.remove('hidden');
 
-      const linkEl = selectedEl.tagName === 'A' ? selectedEl : selectedEl.closest('a');
-      if (linkEl && linkGroup && hrefInput) {
-        linkGroup.classList.remove('hidden');
-        hrefInput.value = linkEl.getAttribute('href') || '';
-      } else {
-        linkGroup?.classList.add('hidden');
+      const anchor = el.tagName === 'A' ? el : el.closest('a');
+      if (linkGroup && hrefInput) {
+        linkGroup.classList.toggle('hidden', !anchor);
+        if (anchor) hrefInput.value = anchor.getAttribute('href') || '';
       }
 
-      if (selectedEl.tagName === 'IMG' && imgGroup && imgSrcInput) {
-        imgGroup.classList.remove('hidden');
-        imgSrcInput.value = selectedEl.getAttribute('src') || '';
-      } else {
-        imgGroup?.classList.add('hidden');
+      const imgEl = el.tagName === 'IMG' ? el : null;
+      if (imgGroup && imgSrcInput) {
+        imgGroup.classList.toggle('hidden', !imgEl);
+        if (imgEl) imgSrcInput.value = imgEl.getAttribute('src') || '';
       }
+    }
+
+    function applySelectedTextProp(val) {
+      if (!selectedEl) return;
+      selectedEl.innerText = val;
+    }
+
+    function applySelectedLinkProp(val) {
+      if (!selectedEl) return;
+      const anchor = selectedEl.tagName === 'A' ? selectedEl : selectedEl.closest('a');
+      if (anchor) anchor.setAttribute('href', val);
+    }
+
+    function applySelectedImageUrl(val) {
+      if (selectedEl && selectedEl.tagName === 'IMG') {
+        selectedEl.setAttribute('src', val);
+      }
+    }
+
+    function applySelectedImageFile(inputEl) {
+      const file = inputEl?.files?.[0];
+      if (!file || !selectedEl || selectedEl.tagName !== 'IMG') return;
+      const reader = new FileReader();
+      reader.onload = e => {
+        pushUndoSnapshot();
+        selectedEl.setAttribute('src', String(e.target?.result || ''));
+        showBuilderToast('อัปเดตรูปภาพเรียบร้อยแล้ว');
+      };
+      reader.readAsDataURL(file);
+      inputEl.value = '';
+    }
+
+    function applySelectedStyleProp(prop, val) {
+      if (!selectedEl) return;
+      pushUndoSnapshot();
+      selectedEl.style[prop] = val;
+    }
+
+    function duplicateSelectedElement() {
+      if (!selectedEl || !selectedEl.parentNode) return;
+      pushUndoSnapshot();
+      const clone = selectedEl.cloneNode(true);
+      clone.style.outline = '';
+      selectedEl.parentNode.insertBefore(clone, selectedEl.nextSibling);
+      showBuilderToast('ทำซ้ำองค์ประกอบเรียบร้อยแล้ว');
+    }
+
+    function deleteSelectedElement() {
+      if (!selectedEl || !selectedEl.parentNode) return;
+      pushUndoSnapshot();
+      selectedEl.parentNode.removeChild(selectedEl);
+      selectElementInInspector(null);
+      showBuilderToast('ลบองค์ประกอบเรียบร้อยแล้ว');
     }
 
     function bindEditableHandlersInFrame(doc) {
       if (!doc || !doc.body) return;
-      const textTargets = doc.querySelectorAll('h1, h2, h3, h4, p, span, a, button, li, label, td, th');
-      textTargets.forEach(el => {
-        if (el.children.length <= 1) {
-          el.setAttribute('contenteditable', 'true');
-        }
-        el.addEventListener('click', ev => {
-          const anchor = ev.target.closest('a');
-          if (anchor) {
-            ev.preventDefault();
-          }
-          ev.stopPropagation();
-          selectFrameElement(ev.target.closest('img') || anchor || el);
-        }, true);
-      });
-
-      doc.querySelectorAll('img').forEach(img => {
-        img.style.cursor = 'pointer';
-        img.addEventListener('click', ev => {
-          ev.preventDefault();
-          ev.stopPropagation();
-          selectFrameElement(img);
-        }, true);
-      });
-
-      doc.body.addEventListener('dragover', ev => ev.preventDefault());
-      doc.body.addEventListener('drop', ev => {
-        ev.preventDefault();
-        if (draggedNewBlockType) {
-          insertBlockIntoFrame(draggedNewBlockType, ev.target);
+      doc.body.addEventListener('dragover', e => e.preventDefault());
+      doc.body.addEventListener('drop', e => {
+        e.preventDefault();
+        const type = draggedNewBlockType || (e.dataTransfer ? e.dataTransfer.getData('text/plain') : '');
+        if (type) {
+          pushUndoSnapshot();
+          const targetMain = doc.querySelector('main') || doc.body;
+          targetMain.appendChild(createBlockNode(doc, type));
           draggedNewBlockType = '';
+          bindEditableHandlersInFrame(doc);
+          showBuilderToast('วางบล็อกใหม่ลงบนหน้าเว็บแล้ว');
+        }
+      });
+
+      const targets = doc.querySelectorAll('h1, h2, h3, h4, p, span, a, button, img, li');
+      targets.forEach(node => {
+        // ป้องกันการเปลี่ยนหน้าหรือส่งฟอร์มขณะอยู่ในโหมดแก้ไขหน้าเว็บ
+        if (node.tagName === 'A') {
+          node.setAttribute('data-builder-orig-href', node.getAttribute('href') || '');
+          node.addEventListener('click', ev => {
+            ev.preventDefault();
+            ev.stopPropagation();
+            selectElementInInspector(node);
+          }, true);
+        } else if (node.tagName === 'BUTTON') {
+          node.addEventListener('click', ev => {
+            ev.preventDefault();
+            ev.stopPropagation();
+            selectElementInInspector(node);
+          }, true);
+        }
+
+        if (node.tagName !== 'IMG' && node.children.length === 0) {
+          node.setAttribute('contenteditable', 'true');
+        }
+        node.addEventListener('click', e => {
+          e.stopPropagation();
+          selectElementInInspector(node);
+        });
+      });
+
+      // ป้องกันการเปลี่ยนหน้าเมื่อคลิกลิงก์หรือปุ่มอื่นๆ ที่อยู่นอกเหนือรายการข้างต้น
+      doc.querySelectorAll('a, button').forEach(interactiveEl => {
+        if (!interactiveEl.hasAttribute('data-builder-guard-bound')) {
+          interactiveEl.setAttribute('data-builder-guard-bound', 'true');
+          interactiveEl.addEventListener('click', ev => {
+            ev.preventDefault();
+          }, true);
         }
       });
     }
@@ -1823,163 +805,30 @@
       const doc = getFrameDoc();
       if (!doc || !doc.body) return;
       bindEditableHandlersInFrame(doc);
-      if (doc.body.children.length > 0) {
-        selectFrameElement(doc.body.querySelector('h1, h2, p') || doc.body.firstElementChild);
-      }
     }
 
-    function execFrameCommand(cmd, value = null) {
-      const doc = getFrameDoc();
-      if (!doc) return;
-      pushUndoSnapshot();
-      doc.execCommand(cmd, false, value);
-    }
-
-    function onDragNewBlock(event, blockType) {
-      draggedNewBlockType = blockType;
-      if (event?.dataTransfer) {
-        event.dataTransfer.setData('text/plain', blockType);
-      }
-    }
-
-    function insertBlockIntoFrame(blockType, targetEl = null) {
-      const doc = getFrameDoc();
-      if (!doc || !doc.body) return;
-      pushUndoSnapshot();
-
-      let node = null;
-      if (blockType === 'heading') {
-        node = doc.createElement('h2');
-        node.textContent = 'หัวข้อใหม่ที่เพิ่มด้วย Visual Builder';
-        node.style.cssText = 'font-size:24px;font-weight:800;margin:16px 0;color:#0f172a;';
-      } else if (blockType === 'text') {
-        node = doc.createElement('p');
-        node.textContent = 'กล่องข้อความใหม่ สามารถคลิกเพื่อพิมพ์แก้ไขรายละเอียดได้ทันทีครับ';
-        node.style.cssText = 'font-size:15px;line-height:1.7;margin:12px 0;color:#334155;';
-      } else if (blockType === 'card') {
-        node = doc.createElement('div');
-        node.style.cssText = 'margin:16px 0;padding:20px;border-radius:18px;background:#fffbeb;border:1px solid #fcd34d;color:#0f172a;';
-        node.innerHTML = '<h3 style="font-size:18px;font-weight:800;margin:0 0 6px;">การ์ดประกาศสำคัญ</h3><p style="font-size:14px;margin:0;">ระบุข้อความประกาศหรือโปรโมชันสำหรับสมาชิกได้ที่นี่</p>';
-      } else if (blockType === 'button') {
-        node = doc.createElement('a');
-        node.href = '#';
-        node.textContent = 'ปุ่มลิงก์ใหม่';
-        node.style.cssText = 'display:inline-block;margin:12px 0;padding:10px 20px;border-radius:12px;background:#f59e0b;color:#090d16;font-weight:800;text-decoration:none;font-size:14px;';
-      } else if (blockType === 'image') {
-        node = doc.createElement('img');
-        node.src = 'https://placehold.co/800x360/0f172a/fbbf24?text=The+Driver+Thailand';
-        node.alt = 'รูปภาพตัวอย่าง';
-        node.style.cssText = 'display:block;max-width:100%;height:auto;border-radius:16px;margin:16px 0;';
-      } else {
-        node = doc.createElement('hr');
-        node.style.cssText = 'border:0;border-top:1px solid #cbd5e1;margin:18px 0;';
-      }
-
-      const host = (targetEl && targetEl !== doc.body && targetEl.parentNode)
-        ? targetEl.parentNode
-        : (doc.querySelector('main') || doc.body);
-      host.appendChild(node);
-      bindEditableHandlersInFrame(doc);
-      selectFrameElement(node);
-      showBuilderToast('แทรกบล็อกลงบนหน้าเว็บเรียบร้อยแล้ว');
-    }
-
-    function applySelectedTextProp(val) {
-      if (!selectedEl) return;
-      selectedEl.innerText = val;
-    }
-
-    function applySelectedLinkProp(hrefVal) {
-      if (!selectedEl) return;
-      const anchor = selectedEl.tagName === 'A' ? selectedEl : selectedEl.closest('a');
-      if (anchor) anchor.setAttribute('href', hrefVal);
-    }
-
-    function applySelectedImageUrl(urlVal) {
-      if (!selectedEl || selectedEl.tagName !== 'IMG') return;
-      selectedEl.setAttribute('src', urlVal);
-    }
-
-    function applySelectedImageFile(inputEl) {
-      const file = inputEl?.files?.[0];
-      if (!file || !selectedEl || selectedEl.tagName !== 'IMG') return;
-      pushUndoSnapshot();
-      const reader = new FileReader();
-      reader.onload = e => {
-        selectedEl.setAttribute('src', String(e.target?.result || ''));
-        const srcInput = document.getElementById('prop-img-src-input');
-        if (srcInput) srcInput.value = selectedEl.getAttribute('src') || '';
-        showBuilderToast('อัปเดตรูปภาพเรียบร้อยแล้ว');
-      };
-      reader.readAsDataURL(file);
-      inputEl.value = '';
-    }
-
-    function applySelectedStyleProp(propName, val) {
-      if (!selectedEl || !selectedEl.style) return;
-      pushUndoSnapshot();
-      selectedEl.style[propName] = val;
-    }
-
-    function copySelectedElement() {
-      if (!selectedEl) return;
-      copiedElementClone = selectedEl.cloneNode(true);
-      if (copiedElementClone.style) copiedElementClone.style.outline = '';
-      const pasteBtn = document.getElementById('btn-paste-copied-el');
-      if (pasteBtn) pasteBtn.disabled = false;
-      showBuilderToast('คัดลอกองค์ประกอบเรียบร้อยแล้ว');
-    }
-
-    function pasteCopiedElement() {
-      const doc = getFrameDoc();
-      if (!doc || !doc.body || !copiedElementClone) return;
-      pushUndoSnapshot();
-      const clone = copiedElementClone.cloneNode(true);
-      const targetParent = (selectedEl && selectedEl.parentNode) ? selectedEl.parentNode : (doc.querySelector('main') || doc.body);
-      if (selectedEl && selectedEl.parentNode === targetParent && selectedEl.nextSibling) {
-        targetParent.insertBefore(clone, selectedEl.nextSibling);
-      } else {
-        targetParent.appendChild(clone);
-      }
-      bindEditableHandlersInFrame(doc);
-      selectFrameElement(clone);
-      showBuilderToast('วางองค์ประกอบเรียบร้อยแล้ว');
-    }
-
-    function duplicateSelectedElement() {
-      if (!selectedEl || !selectedEl.parentNode) return;
-      pushUndoSnapshot();
-      const clone = selectedEl.cloneNode(true);
-      if (clone.style) clone.style.outline = '';
-      selectedEl.parentNode.insertBefore(clone, selectedEl.nextSibling);
-      bindEditableHandlersInFrame(getFrameDoc());
-      selectFrameElement(clone);
-      showBuilderToast('ทำซ้ำองค์ประกอบเรียบร้อยแล้ว');
-    }
-
-    function deleteSelectedElement() {
-      if (!selectedEl || !selectedEl.parentNode || selectedEl === selectedEl.ownerDocument.body) return;
-      pushUndoSnapshot();
-      const parent = selectedEl.parentNode;
-      selectedEl.remove();
-      selectedEl = null;
-      selectFrameElement(parent.firstElementChild || null);
-      showBuilderToast('ลบองค์ประกอบออกแล้ว');
+    function setViewportSize(widthVal) {
+      const wrapper = document.getElementById('viewport-frame-wrapper');
+      if (wrapper) wrapper.style.width = widthVal;
+      const map = { '100%': 'vp-desktop', '768px': 'vp-tablet', '390px': 'vp-mobile' };
+      Object.entries(map).forEach(([w, id]) => {
+        const btn = document.getElementById(id);
+        if (!btn) return;
+        btn.className = w === widthVal
+          ? 'px-2.5 py-1.5 rounded-lg text-xs font-bold bg-amber-400 text-slate-950 transition'
+          : 'px-2.5 py-1.5 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition';
+      });
     }
 
     function exportCurrentHtmlFile() {
       const doc = getFrameDoc();
-      if (!doc || !doc.documentElement) {
-        showBuilderToast('ไม่พบเนื้อหาหน้าเว็บสำหรับส่งออก');
+      if (!doc) {
+        showBuilderToast('ไม่สามารถส่งออกโค้ดจากหน้าข้ามโดเมนได้ กรุณาเปิดไฟล์จากเครื่อง');
         return;
       }
-      const cloneRoot = doc.documentElement.cloneNode(true);
-      cloneRoot.querySelectorAll('[contenteditable]').forEach(el => el.removeAttribute('contenteditable'));
-      cloneRoot.querySelectorAll('[style*="outline"]').forEach(el => {
-        el.style.outline = '';
-      });
-      const finalHtml = '<!DOCTYPE html>\n' + cloneRoot.outerHTML;
-      const blob = new Blob([finalHtml], { type: 'text/html;charset=utf-8' });
+      if (selectedEl) selectedEl.style.outline = '';
+      const cleanHtml = '<!DOCTYPE html>\n' + doc.documentElement.outerHTML;
+      const blob = new Blob([cleanHtml], { type: 'text/html;charset=utf-8' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
@@ -1991,7 +840,6 @@
 
     document.addEventListener('DOMContentLoaded', () => {
       renderSidebarPagesList();
-      renderCmsEntriesList();
       updateUndoRedoButtons();
       const frame = document.getElementById('live-page-frame');
       if (frame) {
@@ -2001,4 +849,4 @@
     });
   </script>
 </body>
-</html></selection-tag>
+</html>

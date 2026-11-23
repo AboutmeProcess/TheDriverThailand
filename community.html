@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ชุมชนเว็บบอร์ดสมาชิก | 🚖 The Driver TH 🇹🇭 Premium Service</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Prompt', 'sans-serif'],
+            mono: ['Prompt', 'sans-serif'],
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+      transition: font-size 0.18s ease;
+    }
+    html, body, input, select, textarea, button, code, pre, .font-mono, .font-sans {
+      font-family: 'Prompt', sans-serif !important;
+    }
+    html, body {
+      background-color: #f8fafc;
+      color: #0f172a;
+      max-width: 100%;
+      overflow-x: clip;
+    }
+    .gold-shimmer-text {
+      background: linear-gradient(90deg, #fde68a 0%, #fbbf24 35%, #f59e0b 65%, #fef08a 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: goldShimmer 5s linear infinite;
+    }
+    .hero-glow-bg {
+      background:
+        radial-gradient(circle at 18% 22%, rgba(245, 158, 11, 0.24) 0%, transparent 45%),
+        radial-gradient(circle at 82% 78%, rgba(16, 185, 129, 0.16) 0%, transparent 50%),
+        linear-gradient(135deg, #070a12 0%, #0f172a 52%, #172033 100%);
+    }
+    @keyframes goldShimmer {
+      to { background-position: 200% center; }
+    }
+
+    /* UNIFIED GLOBAL NAVIGATION BAR (MATCHING INDEX.HTML) */
+    .tdt-global-nav {
+      box-sizing: border-box;
+      font-family: 'Prompt', sans-serif;
+      background: rgba(6, 9, 17, 0.96);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      color: #e2e8f0;
+      border-bottom: 1px solid rgba(251, 191, 36, 0.25);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.45);
+      width: 100%;
+    }
+    .tdt-global-nav *, .tdt-global-nav *::before, .tdt-global-nav *::after { box-sizing: border-box; }
+    .tdt-global-nav-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 12px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 11px;
+    }
+    @media (min-width: 640px) {
+      .tdt-global-nav-inner { padding: 14px 24px; gap: 12px; }
+    }
+    .tdt-nav-top-row {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .tdt-global-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 16px;
+      line-height: 1.3;
+      font-weight: 400;
+      color: #fbbf24;
+      text-decoration: none;
+      text-align: left;
+      transition: color 0.15s ease;
+    }
+    .tdt-brand-text-stack {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 7px;
+      line-height: 1.3;
+      font-weight: 400;
+    }
+    .tdt-brand-subline-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 400;
+      color: #cbd5e1;
+      text-align: left;
+    }
+    .tdt-brand-exec-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(251, 191, 36, 0.18);
+      border: 1px solid rgba(251, 191, 36, 0.45);
+      color: #fde68a;
+      font-size: 10.5px;
+      font-weight: 400;
+      padding: 2px 8px;
+      border-radius: 999px;
+      line-height: 1.25;
+    }
+    .tdt-brand-logo-img {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      object-fit: cover;
+      object-position: center;
+      background: #ffffff;
+      padding: 0;
+      border: 1.5px solid rgba(251, 191, 36, 0.9);
+      box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.55), 0 0 0 2px rgba(251, 191, 36, 0.18);
+      flex-shrink: 0;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+    }
+    .tdt-global-brand:hover .tdt-brand-logo-img { transform: scale(1.06); border-color: #fde68a; }
+    @media (min-width: 640px) {
+      .tdt-global-brand { font-size: 19px; }
+      .tdt-brand-logo-img { width: 58px; height: 58px; border-radius: 18px; }
+    }
+    .tdt-global-brand:hover { color: #fde68a; }
+    .tdt-global-right-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 8px;
+      width: 100%;
+    }
+    .tdt-cat-dropdown-wrap { position: relative; display: inline-block; }
+    .tdt-cat-menu-panel {
+      display: none;
+      position: absolute;
+      left: 0;
+      top: calc(100% + 8px);
+      width: 310px;
+      max-width: calc(100vw - 32px);
+      border-radius: 16px;
+      padding: 10px;
+      background-color: #070b14;
+      border: 1px solid rgba(251, 191, 36, 0.45);
+      box-shadow: 0 24px 54px -10px rgba(0, 0, 0, 0.92), 0 0 0 1px rgba(15, 23, 42, 0.9);
+      z-index: 1060;
+      text-align: left;
+    }
+    .tdt-cat-menu-panel.is-open { display: block; }
+    .tdt-cat-menu-header {
+      padding: 8px 12px;
+      margin-bottom: 6px;
+      border-radius: 11px;
+      font-size: 11px;
+      font-weight: 400;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .tdt-cat-menu-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 12px;
+      background-color: #0d1424;
+      border: 1px solid rgba(148, 163, 184, 0.14);
+      color: #f1f5f9;
+      text-decoration: none;
+      margin-bottom: 6px;
+      transition: all 0.18s ease;
+    }
+    .tdt-cat-menu-link:last-child { margin-bottom: 0; }
+    .tdt-cat-menu-link:hover { background-color: #162038; border-color: rgba(251, 191, 36, 0.5); transform: translateX(2px); }
+    .tdt-cat-menu-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 12px;
+    }
+    .tdt-cat-menu-title { display: block; font-size: 12px; font-weight: 400; line-height: 1.3; }
+    .tdt-cat-menu-sub { display: block; font-size: 10px; font-weight: 400; color: #94a3b8; line-height: 1.25; }
+    .tdt-nav-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      height: 36px;
+      min-height: 36px;
+      padding: 0 13px;
+      border-radius: 11px;
+      font-size: 12px;
+      line-height: 16px;
+      font-weight: 400;
+      text-decoration: none;
+      white-space: nowrap;
+      background-color: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      color: #e2e8f0;
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+    .tdt-nav-btn:hover { background-color: #1e293b; border-color: rgba(251, 191, 36, 0.5); transform: translateY(-1px); }
+    .tdt-nav-btn.is-member-cat { color: #6ee7b7; border-color: rgba(52, 211, 153, 0.35); background-color: rgba(6, 78, 59, 0.22); }
+    .tdt-nav-btn.is-member-cat i { color: #34d399; }
+    .tdt-nav-btn.is-quick-register,
+    .tdt-nav-btn.is-quick-check-code { color: #5eead4; border-color: rgba(45, 212, 191, 0.38); background-color: rgba(19, 78, 74, 0.28); }
+    .tdt-nav-btn.is-quick-register i,
+    .tdt-nav-btn.is-quick-check-code i { color: #2dd4bf; }
+    .tdt-nav-btn.is-group-cat { color: #fcd34d; border-color: rgba(251, 191, 36, 0.38); background-color: rgba(120, 53, 15, 0.22); }
+    .tdt-nav-btn.is-group-cat i { color: #fbbf24; }
+    .tdt-nav-btn.is-blacklist { color: #fda4af; border-color: rgba(251, 113, 133, 0.35); }
+    .tdt-nav-btn.is-blacklist i { color: #fb7185; }
+    .tdt-nav-btn.active-current {
+      background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+      border-color: #fcd34d;
+      color: #060911;
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.35);
+    }
+    .tdt-nav-btn.active-current i { color: #060911; }
+    .tdt-util-group {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background-color: rgba(15, 23, 42, 0.92);
+      border: 1px solid rgba(251, 191, 36, 0.28);
+      border-radius: 12px;
+      padding: 3px;
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+    .tdt-util-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      height: 30px;
+      padding: 0 9px;
+      border-radius: 9px;
+      font-size: 12px;
+      font-weight: 400;
+      color: #e2e8f0;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background-color 0.15s ease, color 0.15s ease;
+    }
+    .tdt-util-btn:hover { background-color: rgba(251, 191, 36, 0.18); color: #fde68a; }
+  </style>
+</head>
+<body class="text-slate-800 antialiased min-h-screen flex flex-col selection:bg-amber-400 selection:text-slate-950 relative">
+  <!-- กล่องแจ้งเตือน Toast มุมขวาบน -->
+  <div id="toast-container" class="fixed top-5 right-5 z-[1100] flex flex-col gap-3 max-w-sm w-full pointer-events-none px-4"></div>
+
+  <!-- UNIFIED GLOBAL SITE NAVIGATION BAR -->
+  <nav class="tdt-global-nav">
+    <div class="tdt-global-nav-inner">
+      <div class="tdt-nav-top-row">
+        <a href="index.html" class="tdt-global-brand">
+          <img src="TheDriverTH.jpg" alt="โลโก้ The Driver Thailand"
+            onerror="this.onerror=null;this.src='https://placehold.co/80x80/0f172a/fbbf24?text=TDT';"
+            class="tdt-brand-logo-img">
+          <span class="tdt-brand-text-stack">
+            <span>🚖 The Driver TH 🇹🇭 Premium Service</span>
+            <span class="tdt-brand-subline-row">
+              <span class="tdt-brand-exec-pill"><i class="fa-solid fa-crown" style="font-size:9px;"></i> EXECUTIVE NETWORK</span>
+              <span>เครือข่ายคนขับรถรับส่งผู้โดยสารและบริการมืออาชีพแห่งประเทศไทย</span>
+            </span>
+          </span>
+        </a>
+        <div class="tdt-util-group" title="ปรับขนาดตัวอักษร">
+          <button type="button" onclick="tdtChangeFontScale(-1)" aria-label="ลดขนาดตัวอักษร" class="tdt-util-btn">A-</button>
+          <span id="tdt-font-pct" style="font-size:11px;font-weight:400;color:#fde68a;padding:0 4px;">100%</span>
+          <button type="button" onclick="tdtChangeFontScale(1)" aria-label="เพิ่มขนาดตัวอักษร" class="tdt-util-btn">A+</button>
+        </div>
+      </div>
+
+      <div class="tdt-global-right-controls" aria-label="เมนูหลักของหน้าเว็บ">
+        <a href="index.html" class="tdt-nav-btn"><i class="fa-solid fa-house"></i><span>หน้าหลัก</span></a>
+        <a href="member_register.html" class="tdt-nav-btn is-quick-register"><i class="fa-solid fa-file-signature"></i><span>ลงทะเบียนสมาชิกใหม่</span></a>
+        <a href="register.html" class="tdt-nav-btn is-quick-check-code"><i class="fa-solid fa-users-viewfinder"></i><span>ตรวจสอบรหัสสมาชิก</span></a>
+        <a href="community.html" class="tdt-nav-btn active-current"><i class="fa-solid fa-comments"></i><span>เว็บบอร์ดสมาชิก</span></a>
+
+        <div class="tdt-cat-dropdown-wrap" id="nav-drop-member">
+          <button type="button" onclick="tdtToggleDropdown('member', event)" id="nav-btn-member" aria-expanded="false" class="tdt-nav-btn is-member-cat">
+            <i class="fa-solid fa-users"></i><span>หมวดหมู่บริการสมาชิก</span><i id="nav-chev-member" class="fa-solid fa-chevron-down" style="font-size:10px;transition:transform 0.2s;"></i>
+          </button>
+          <div id="nav-panel-member" class="tdt-cat-menu-panel">
+            <div class="tdt-cat-menu-header" style="background:rgba(6,78,59,0.55);color:#6ee7b7;border:1px solid rgba(16,185,129,0.25);">
+              <span><i class="fa-solid fa-users"></i> หมวดหมู่บริการสมาชิก</span><span style="font-size:10px;opacity:0.85;">3 เมนู</span>
+            </div>
+            <a href="member_edit.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(245,158,11,0.16);color:#fbbf24;border:1px solid rgba(251,191,36,0.3);"><i class="fa-solid fa-user-pen"></i></span>
+              <span><span class="tdt-cat-menu-title">แก้ไขข้อมูลสมาชิกเดิม</span><span class="tdt-cat-menu-sub">แจ้งเปลี่ยนรถ ทะเบียน หรือข้อมูลติดต่อ</span></span>
+            </a>
+            <a href="unblock_request.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(14,165,233,0.16);color:#38bdf8;border:1px solid rgba(56,189,248,0.3);"><i class="fa-solid fa-unlock-keyhole"></i></span>
+              <span><span class="tdt-cat-menu-title">ขอปลดล็อกห้อง Line OpenChat</span><span class="tdt-cat-menu-sub">ยื่นคำร้องชี้แจงกรณีถูกบล็อกหรือลบออก</span></span>
+            </a>
+            <a href="luxury_car_register.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(245,158,11,0.16);color:#fbbf24;border:1px solid rgba(251,191,36,0.3);"><i class="fa-solid fa-crown"></i></span>
+              <span><span class="tdt-cat-menu-title">ลงทะเบียนห้อง Luxury Car</span><span class="tdt-cat-menu-sub">สมัครเข้าห้องกลุ่มคนขับรถ Luxury Car</span></span>
+            </a>
+          </div>
+        </div>
+
+        <div class="tdt-cat-dropdown-wrap" id="nav-drop-group">
+          <button type="button" onclick="tdtToggleDropdown('group', event)" id="nav-btn-group" aria-expanded="false" class="tdt-nav-btn is-group-cat">
+            <i class="fa-solid fa-briefcase"></i><span>หมวดหมู่บริการของกลุ่ม</span><i id="nav-chev-group" class="fa-solid fa-chevron-down" style="font-size:10px;transition:transform 0.2s;"></i>
+          </button>
+          <div id="nav-panel-group" class="tdt-cat-menu-panel">
+            <div class="tdt-cat-menu-header" style="background:rgba(120,53,15,0.45);color:#fcd34d;border:1px solid rgba(251,191,36,0.25);">
+              <span><i class="fa-solid fa-gem"></i> หมวดหมู่บริการของกลุ่ม</span><span style="font-size:10px;opacity:0.85;">5 เมนู</span>
+            </div>
+            <a href="pcard.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(245,158,11,0.16);color:#fbbf24;border:1px solid rgba(251,191,36,0.3);"><i class="fa-solid fa-id-badge"></i></span>
+              <span><span class="tdt-cat-menu-title">ทำบัตรสมาชิกประเมศฐ์ &amp; เช็คพัสดุ</span><span class="tdt-cat-menu-sub">สมัครทำบัตรเคลือบใสและตรวจสอบเลขพัสดุ</span></span>
+            </a>
+            <a href="vip_referral_guide.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(168,85,247,0.16);color:#c084fc;border:1px solid rgba(192,132,252,0.3);"><i class="fa-solid fa-map-location-dot"></i></span>
+              <span><span class="tdt-cat-menu-title">[VIP] ลายแทงสถานที่ท่องเที่ยว</span><span class="tdt-cat-menu-sub">ขอรับลายแทงร้านค้า/สถานที่เพื่อรับค่าแนะนำ</span></span>
+            </a>
+            <a href="rtaf_pass_register.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(59,130,246,0.16);color:#60a5fa;border:1px solid rgba(96,165,250,0.3);"><i class="fa-solid fa-plane-departure"></i></span>
+              <span><span class="tdt-cat-menu-title">ทำบัตรผ่านยานพาหนะ ทอ. (ดอนเมือง)</span><span class="tdt-cat-menu-sub">ขอทำบัตรผ่านเข้า - ออก เขตพื้นที่ ทอ.</span></span>
+            </a>
+            <a href="tour_book_order.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(20,184,166,0.16);color:#2dd4bf;border:1px solid rgba(45,212,191,0.3);"><i class="fa-solid fa-book"></i></span>
+              <span><span class="tdt-cat-menu-title">บริการสั่งซื้อสมุดทัวร์</span><span class="tdt-cat-menu-sub">โซนกรุงเทพฯ-ปริมณฑล และ พัทยา-ชลบุรี</span></span>
+            </a>
+            <a href="privacy_policy.html" class="tdt-cat-menu-link">
+              <span class="tdt-cat-menu-icon" style="background:rgba(148,163,184,0.16);color:#cbd5e1;border:1px solid rgba(148,163,184,0.3);"><i class="fa-solid fa-scale-balanced"></i></span>
+              <span><span class="tdt-cat-menu-title">ประกาศความเป็นส่วนตัว (PDPA)</span><span class="tdt-cat-menu-sub">นโยบายคุ้มครองข้อมูลส่วนบุคคลของกลุ่ม</span></span>
+            </a>
+          </div>
+        </div>
+
+        <a href="blacklist.html" class="tdt-nav-btn is-blacklist"><i class="fa-solid fa-user-shield"></i><span>ตรวจสอบ Blacklist</span></a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- พื้นที่เนื้อหาหลัก -->
+  <main class="flex-grow max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-6">
+    <!-- Hero Banner + สถานะสมาชิกที่ล็อกอิน -->
+    <section class="hero-glow-bg rounded-3xl p-6 sm:p-8 text-white shadow-2xl border border-amber-400/35 relative overflow-hidden">
+      <div class="grid lg:grid-cols-12 gap-6 items-center relative z-10">
+        <div class="lg:col-span-7 space-y-3">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="bg-amber-500/20 border border-amber-400/50 text-amber-300 text-xs font-bold px-3.5 py-1 rounded-full inline-flex items-center gap-1.5">
+              <i class="fa-solid fa-shield-halved"></i> VERIFIED MEMBER COMMUNITY
+            </span>
+            <span class="bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-xs font-bold px-3.5 py-1 rounded-full">
+              เฉพาะสมาชิกที่อนุมัติแล้วเท่านั้น
+            </span>
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-black leading-tight">
+            ชุมชนเว็บบอร์ด <span class="gold-shimmer-text">The Driver Thailand</span>
+          </h1>
+          <p class="text-slate-300 text-xs sm:text-sm leading-relaxed font-light">
+            พื้นที่แลกเปลี่ยนข่าวสาร เส้นทางจราจร รีวิวสถานที่ท่องเที่ยว และพูดคุยระหว่างสมาชิกที่ยืนยันรหัสสมาชิกเรียบร้อยแล้ว
+          </p>
+        </div>
+
+        <!-- กล่องโปรไฟล์สมาชิก / ปุ่มสมัครและเข้าสู่ระบบ -->
+        <div class="lg:col-span-5">
+          <div id="auth-guest-card" class="bg-slate-950/80 border border-amber-400/35 rounded-2xl p-5 space-y-3">
+            <div class="flex items-center gap-3">
+              <div class="w-11 h-11 rounded-xl bg-amber-500/20 border border-amber-400/40 text-amber-300 flex items-center justify-center text-lg shrink-0">
+                <i class="fa-solid fa-user-lock"></i>
+              </div>
+              <div>
+                <h2 class="text-sm font-extrabold text-white">กรุณาเข้าสู่ระบบ หรือ สมัครสมาชิกเว็บบอร์ด</h2>
+                <p class="text-xs text-slate-400">ต้องใช้รหัสสมาชิกที่อนุมัติแล้วในการสมัครใช้งาน</p>
+              </div>
+            </div>
+            <div class="grid grid-cols-2 gap-2.5 pt-1">
+              <button type="button" onclick="openAuthModal('login')" class="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold py-2.5 px-4 rounded-xl text-xs transition">
+                <i class="fa-solid fa-right-to-bracket mr-1"></i> เข้าสู่ระบบ
+              </button>
+              <button type="button" onclick="openAuthModal('register')" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 px-4 rounded-xl text-xs transition">
+                <i class="fa-solid fa-user-plus mr-1"></i> สมัครใช้งานบอร์ด
+              </button>
+            </div>
+          </div>
+
+          <div id="auth-user-card" class="hidden bg-slate-950/85 border border-emerald-400/40 rounded-2xl p-5 space-y-3">
+            <div class="flex items-start justify-between gap-2">
+              <div class="flex items-center gap-3 min-w-0">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-400 to-amber-600 text-slate-950 font-black flex items-center justify-center text-base shrink-0" id="user-avatar-code">
+                  B
+                </div>
+                <div class="min-w-0">
+                  <div class="flex items-center gap-1.5 flex-wrap">
+                    <span id="user-display-name" class="font-extrabold text-sm text-white truncate">-</span>
+                    <span id="user-tier-badge" class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-400/20 text-amber-300 border border-amber-400/40">สมาชิกยืนยันตัวตน</span>
+                  </div>
+                  <p class="text-xs text-amber-300 mt-0.5">
+                    <i class="fa-solid fa-star text-amber-400 mr-1"></i>เรทติ้งสะสม: <strong id="user-rating-score">0</strong> คะแนน (<span id="user-rank-label">สมาชิกใหม่</span>)
+                  </p>
+                </div>
+              </div>
+              <button type="button" onclick="logoutForumUser()" title="ออกจากระบบ" class="text-xs text-rose-300 hover:text-rose-200 bg-rose-500/15 border border-rose-400/30 px-2.5 py-1.5 rounded-lg shrink-0">
+                <i class="fa-solid fa-right-from-bracket"></i> ออก
+              </button>
+            </div>
+            <button type="button" onclick="openNewTopicModal()" class="w-full bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold py-2.5 px-4 rounded-xl text-xs sm:text-sm shadow transition">
+              <i class="fa-solid fa-pen-to-square mr-1.5"></i> ตั้งกระทู้ใหม่ในเว็บบอร์ด
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- แถบหมวดหมู่และค้นหากระทู้ -->
+    <section class="bg-white rounded-3xl p-4 sm:p-6 border border-slate-200 shadow-sm space-y-4">
+      <div class="flex flex-col md:flex-row gap-3 justify-between">
+        <div class="flex flex-wrap items-center gap-2">
+          <button type="button" onclick="setCategoryFilter('ALL')" data-cat="ALL" class="cat-tab-btn bg-slate-950 text-amber-400 font-bold text-xs px-3.5 py-2 rounded-xl transition">ทั้งหมด</button>
+          <button type="button" onclick="setCategoryFilter('ข่าวสารและเส้นทางจราจร')" data-cat="ข่าวสารและเส้นทางจราจร" class="cat-tab-btn bg-slate-100 text-slate-700 hover:bg-amber-50 font-semibold text-xs px-3.5 py-2 rounded-xl transition">🚦 ข่าวสาร &amp; เส้นทาง</button>
+          <button type="button" onclick="setCategoryFilter('แลกเปลี่ยนประสบการณ์คนขับ')" data-cat="แลกเปลี่ยนประสบการณ์คนขับ" class="cat-tab-btn bg-slate-100 text-slate-700 hover:bg-amber-50 font-semibold text-xs px-3.5 py-2 rounded-xl transition">🚖 ประสบการณ์คนขับ</button>
+          <button type="button" onclick="setCategoryFilter('รีวิวสถานที่ท่องเที่ยวและร้านค้า')" data-cat="รีวิวสถานที่ท่องเที่ยวและร้านค้า" class="cat-tab-btn bg-slate-100 text-slate-700 hover:bg-amber-50 font-semibold text-xs px-3.5 py-2 rounded-xl transition">🗺️ รีวิวสถานที่ &amp; ร้านค้า</button>
+          <button type="button" onclick="setCategoryFilter('ซื้อ-ขาย อุปกรณ์และยานยนต์')" data-cat="ซื้อ-ขาย อุปกรณ์และยานยนต์" class="cat-tab-btn bg-slate-100 text-slate-700 hover:bg-amber-50 font-semibold text-xs px-3.5 py-2 rounded-xl transition">🔧 ซื้อ-ขาย อุปกรณ์รถ</button>
+          <button type="button" onclick="setCategoryFilter('สอบถามแอดมินและกติกา')" data-cat="สอบถามแอดมินและกติกา" class="cat-tab-btn bg-slate-100 text-slate-700 hover:bg-amber-50 font-semibold text-xs px-3.5 py-2 rounded-xl transition">📢 สอบถามแอดมิน</button>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <input type="text" id="forum-search-input" oninput="renderTopicsFeed()" placeholder="ค้นหากระทู้, ชื่อผู้ตั้ง..."
+            class="w-full md:w-64 bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2 text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500">
+          <button type="button" onclick="loadForumData(true)" title="รีเฟรชกระทู้" class="bg-slate-950 text-amber-400 px-3.5 py-2 rounded-xl text-xs font-bold shrink-0">
+            <i id="forum-refresh-icon" class="fa-solid fa-rotate"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- รายการกระทู้ทั้งหมด -->
+      <div id="topics-feed-container" class="space-y-4">
+        <div class="text-center py-10 text-slate-500 text-sm">
+          <i class="fa-solid fa-spinner fa-spin mr-1.5"></i> กำลังโหลดกระทู้ชุมชน...
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal สมัครสมาชิกเว็บบอร์ด / เข้าสู่ระบบ -->
+  <div id="auth-modal" class="hidden fixed inset-0 z-[1080] bg-slate-950/75 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-7 shadow-2xl border border-slate-200 space-y-5 relative">
+      <button type="button" onclick="closeAuthModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center text-sm">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="flex gap-2 bg-slate-100 p-1 rounded-2xl">
+        <button type="button" id="tab-auth-login" onclick="switchAuthTab('login')" class="flex-1 py-2 rounded-xl text-xs font-extrabold bg-slate-950 text-amber-400 transition">เข้าสู่ระบบ</button>
+        <button type="button" id="tab-auth-register" onclick="switchAuthTab('register')" class="flex-1 py-2 rounded-xl text-xs font-bold text-slate-600 transition">สมัครใช้งานเว็บบอร์ด</button>
+      </div>
+
+      <!-- ฟอร์มเข้าสู่ระบบ -->
+      <form id="form-forum-login" onsubmit="handleForumLogin(event)" class="space-y-4">
+        <div class="space-y-1">
+          <label class="block text-xs font-bold text-slate-700">รหัสสมาชิกของคุณ <span class="text-rose-500">*</span></label>
+          <input type="text" id="login-member-code" required placeholder="เช่น B2464" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-mono uppercase">
+        </div>
+        <div class="space-y-1">
+          <label class="block text-xs font-bold text-slate-700">รหัสผ่านเว็บบอร์ด <span class="text-rose-500">*</span></label>
+          <input type="password" id="login-password" required placeholder="กรอกรหัสผ่านที่ตั้งไว้ตอนสมัคร" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
+        </div>
+        <button type="submit" id="btn-forum-login" class="w-full bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-extrabold py-3 rounded-xl text-xs sm:text-sm shadow">
+          เข้าสู่ระบบเว็บบอร์ด
+        </button>
+      </form>
+
+      <!-- ฟอร์มสมัครสมาชิกเว็บบอร์ด -->
+      <form id="form-forum-register" onsubmit="handleForumRegister(event)" class="hidden space-y-3.5">
+        <div class="bg-amber-50 border border-amber-200 rounded-xl p-3 text-[11px] text-amber-900">
+          <strong>เงื่อนไขการสมัคร:</strong> ต้องมีรหัสสมาชิกที่อนุมัติแล้วในระบบ และหลังจากส่งคำขอสมัคร <strong>แอดมินจะตรวจสอบและกดอนุมัติ</strong> จึงจะเริ่มตั้งกระทู้และตอบคอมเมนต์ได้
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div class="space-y-1">
+            <label class="block text-xs font-bold text-slate-700">รหัสสมาชิก <span class="text-rose-500">*</span></label>
+            <input type="text" id="reg-member-code" required placeholder="เช่น B2464" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs font-mono uppercase">
+          </div>
+          <div class="space-y-1">
+            <label class="block text-xs font-bold text-slate-700">เบอร์โทร 4 หลักท้าย <span class="text-rose-500">*</span></label>
+            <input type="text" id="reg-phone-last4" required maxlength="4" pattern="\d{4}" placeholder="เช่น 9683" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs font-mono">
+          </div>
+        </div>
+        <div class="space-y-1">
+          <label class="block text-xs font-bold text-slate-700">ชื่อที่แสดงในเว็บบอร์ด <span class="text-rose-500">*</span></label>
+          <input type="text" id="reg-display-name" required placeholder="เช่น [B2464] Arm Nissan Note" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs">
+        </div>
+        <div class="space-y-1">
+          <label class="block text-xs font-bold text-slate-700">ตั้งรหัสผ่านสำหรับเว็บบอร์ด <span class="text-rose-500">*</span></label>
+          <input type="password" id="reg-password" required minlength="4" placeholder="ตั้งรหัสผ่านอย่างน้อย 4 ตัวอักษร" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs">
+        </div>
+        <button type="submit" id="btn-forum-register" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold py-3 rounded-xl text-xs sm:text-sm shadow">
+          ส่งคำขอสมัครใช้งานเว็บบอร์ด
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal ตั้งกระทู้ใหม่ -->
+  <div id="new-topic-modal" class="hidden fixed inset-0 z-[1080] bg-slate-950/75 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-xl w-full p-6 sm:p-7 shadow-2xl border border-slate-200 space-y-4 relative max-h-[90vh] overflow-y-auto">
+      <button type="button" onclick="closeNewTopicModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center text-sm">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <h3 class="text-lg font-extrabold text-slate-900"><i class="fa-solid fa-pen-to-square text-amber-500 mr-2"></i>ตั้งกระทู้ใหม่</h3>
+      <form onsubmit="handleCreateTopic(event)" class="space-y-3.5">
+        <div class="space-y-1">
+          <label class="block text-xs font-bold text-slate-700">หมวดหมู่กระทู้ <span class="text-rose-500">*</span></label>
+          <select id="topic-category" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm">
+            <option value="ข่าวสารและเส้นทางจราจร">🚦 ข่าวสารและเส้นทางจราจร</option>
+            <option value="แลกเปลี่ยนประสบการณ์คนขับ">🚖 แลกเปลี่ยนประสบการณ์คนขับ</option>
+            <option value="รีวิวสถานที่ท่องเที่ยวและร้านค้า">🗺️ รีวิวสถานที่ท่องเที่ยวและร้านค้า</option>
+            <option value="ซื้อ-ขาย อุปกรณ์และยานยนต์">🔧 ซื้อ-ขาย อุปกรณ์และยานยนต์</option>
+            <option value="สอบถามแอดมินและกติกา">📢 สอบถามแอดมินและกติกา</option>
+          </select>
+        </div>
+        <div class="space-y-1">
+          <label class="block text-xs font-bold text-slate-700">หัวข้อกระทู้ <span class="text-rose-500">*</span></label>
+          <input type="text" id="topic-title" required placeholder="ระบุหัวข้อกระทู้ให้ชัดเจน..." class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-2.5 text-xs sm:text-sm">
+        </div>
+        <div class="space-y-1">
+          <label class="block text-xs font-bold text-slate-700">รายละเอียดเนื้อหา <span class="text-rose-500">*</span></label>
+          <textarea id="topic-content" rows="4" required placeholder="พิมพ์รายละเอียดเรื่องราวที่ต้องการแบ่งปันกับเพื่อนสมาชิก..." class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-2.5 text-xs sm:text-sm"></textarea>
+        </div>
+        <div class="space-y-1.5">
+          <label class="inline-flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs px-4 py-2.5 rounded-xl cursor-pointer">
+            <i class="fa-solid fa-image text-emerald-600"></i> แนบรูปภาพประกอบ (ถ้ามี)
+            <input type="file" id="topic-image-file" accept="image/*" onchange="handleTopicImageSelect(this)" class="hidden">
+          </label>
+          <div id="topic-image-preview" class="hidden pt-1"></div>
+        </div>
+        <button type="submit" id="btn-submit-topic" class="w-full bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-extrabold py-3 rounded-xl text-xs sm:text-sm shadow">
+          เผยแพร่กระทู้
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-950 text-slate-400 border-t border-amber-500/20 py-8 px-4 text-xs mt-10">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+      <div class="text-center sm:text-left">
+        <p class="font-bold text-amber-300">🚖 The Driver TH 🇹🇭 Premium Service Official Network</p>
+        <p class="text-[11px] text-slate-500 mt-0.5">ศูนย์กลางระบบสมาชิก บัตรสมาชิกประเมศฐ์ และระบบเฝ้าระวังภัยกลุ่มคนขับรถรับจ้าง</p>
+      </div>
+      <div class="flex flex-wrap justify-center gap-4 font-semibold">
+        <a href="index.html" class="hover:text-amber-400 transition">หน้าหลัก</a>
+        <a href="register.html" class="hover:text-emerald-400 transition">ระบบสมาชิก</a>
+        <a href="member_register.html" class="hover:text-teal-400 transition">ลงทะเบียนสมาชิกใหม่</a>
+        <a href="pcard.html" class="hover:text-amber-400 transition">ทำบัตรสมาชิกประเมศฐ์</a>
+        <a href="unblock_request.html" class="hover:text-sky-400 transition">ขอปลดล็อก OpenChat</a>
+        <a href="blacklist.html" class="hover:text-rose-400 transition">ตรวจสอบ Blacklist</a>
+        <a href="privacy_policy.html" class="hover:text-amber-300 transition">ประกาศความเป็นส่วนตัว</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const FORUM_API_URL = 'https://script.google.com/macros/s/AKfycbyeDCdxBD10D_AFZQY2NxeylLOiAmAHLesSDZHXYCb3TsYs4wYer_kRTPVOs3VpK2pP/exec';
+    const FORUM_SESSION_KEY = 'tdt_forum_user_session_v1';
+
+    let forumState = {
+      user: null,
+      topics: [],
+      comments: [],
+      category: 'ALL',
+      newTopicImageBase64: '',
+      commentImages: {}
+    };
+
+    const REACTION_TYPES = [
+      { key: 'like', emoji: '👍', label: 'ถูกใจ' },
+      { key: 'love', emoji: '❤️', label: 'ชื่นชม' },
+      { key: 'thanks', emoji: '🙏', label: 'ขอบคุณ' },
+      { key: 'fire', emoji: '🔥', label: 'สุดยอด' },
+      { key: 'wow', emoji: '😮', label: 'น่าสนใจ' }
+    ];
+
+    function escapeHtml(val) {
+      return String(val ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function resolveDriveImageUrl(url) {
+      const cleaned = String(url || '').trim();
+      if (!cleaned) return '';
+      if (cleaned.startsWith('data:image')) return cleaned;
+      const m = cleaned.match(/(?:[?&]id=|\/file\/d\/|\/d\/)([a-zA-Z0-9_-]{25,})/);
+      return m && m[1] ? `https://drive.google.com/thumbnail?id=${m[1]}&sz=w1000` : cleaned;
+    }
+
+    function showToast(title, message, type = 'info') {
+      const container = document.getElementById('toast-container');
+      if (!container) return;
+      const styles = {
+        success: 'bg-emerald-950 text-emerald-200 border-emerald-500/40',
+        error: 'bg-rose-950 text-rose-200 border-rose-500/40',
+        info: 'bg-slate-950 text-amber-300 border-amber-400/50'
+      };
+      const icons = {
+        success: 'fa-circle-check text-emerald-400',
+        error: 'fa-circle-xmark text-rose-400',
+        info: 'fa-circle-info text-amber-400'
+      };
+      const toast = document.createElement('div');
+      toast.className = `pointer-events-auto flex items-start gap-3 p-4 rounded-2xl border shadow-2xl transition-all duration-300 ${styles[type] || styles.info}`;
+      toast.innerHTML = `
+        <i class="fa-solid ${icons[type] || icons.info} text-lg mt-0.5 shrink-0"></i>
+        <div class="flex-1 min-w-0">
+          <h4 class="font-extrabold text-sm text-white leading-tight">${escapeHtml(title)}</h4>
+          <p class="text-xs mt-0.5 opacity-90 leading-relaxed">${escapeHtml(message)}</p>
+        </div>
+        <button type="button" onclick="this.parentElement.remove()" class="text-slate-400 hover:text-white text-xs"><i class="fa-solid fa-xmark"></i></button>
+      `;
+      container.appendChild(toast);
+      setTimeout(() => { toast.classList.add('opacity-0'); setTimeout(() => toast.remove(), 300); }, 4200);
+    }
+
+    function getMemberTierInfo(memberCode, ratingScore = 0) {
+      const code = String(memberCode || '').toUpperCase();
+      let tierLabel = 'สมาชิกยืนยันตัวตน (Verified Driver)';
+      let tierClass = 'bg-emerald-50 text-emerald-800 border-emerald-200';
+      if (code.startsWith('MD') || code.startsWith('GM')) {
+        tierLabel = '👑 ผู้บริหาร / แอดมินเครือข่าย';
+        tierClass = 'bg-amber-100 text-amber-950 border-amber-400';
+      } else if (code.startsWith('VIP') || code.startsWith('LX')) {
+        tierLabel = '💎 สมาชิก VIP / Luxury';
+        tierClass = 'bg-purple-50 text-purple-800 border-purple-200';
+      }
+      const score = Number(ratingScore || 0);
+      let rankLabel = '⭐ สมาชิกเริ่มต้น';
+      if (score >= 100) rankLabel = '🏆 กูรูเครือข่าย';
+      else if (score >= 50) rankLabel = '🌟 คนขับมือโปร';
+      else if (score >= 15) rankLabel = '✨ สมาชิกดีเด่น';
+      return { tierLabel, tierClass, rankLabel };
+    }
+
+    function syncUserHeaderUI() {
+      const guestCard = document.getElementById('auth-guest-card');
+      const userCard = document.getElementById('auth-user-card');
+      if (!forumState.user) {
+        guestCard?.classList.remove('hidden');
+        userCard?.classList.add('hidden');
+        return;
+      }
+      guestCard?.classList.add('hidden');
+      userCard?.classList.remove('hidden');
+
+      const u = forumState.user;
+      const info = getMemberTierInfo(u.memberCode, u.rating);
+      document.getElementById('user-avatar-code').textContent = u.memberCode.slice(0, 3);
+      document.getElementById('user-display-name').textContent = u.displayName;
+      document.getElementById('user-tier-badge').textContent = info.tierLabel;
+      document.getElementById('user-rating-score').textContent = Number(u.rating || 0).toLocaleString();
+      document.getElementById('user-rank-label').textContent = info.rankLabel;
+    }
+
+    function openAuthModal(tab = 'login') {
+      switchAuthTab(tab);
+      document.getElementById('auth-modal')?.classList.remove('hidden');
+    }
+
+    function closeAuthModal() {
+      document.getElementById('auth-modal')?.classList.add('hidden');
+    }
+
+    function switchAuthTab(tab) {
+      const isLogin = tab === 'login';
+      document.getElementById('form-forum-login')?.classList.toggle('hidden', !isLogin);
+      document.getElementById('form-forum-register')?.classList.toggle('hidden', isLogin);
+      document.getElementById('tab-auth-login').className = isLogin
+        ? 'flex-1 py-2 rounded-xl text-xs font-extrabold bg-slate-950 text-amber-400 transition'
+        : 'flex-1 py-2 rounded-xl text-xs font-bold text-slate-600 transition';
+      document.getElementById('tab-auth-register').className = !isLogin
+        ? 'flex-1 py-2 rounded-xl text-xs font-extrabold bg-slate-950 text-amber-400 transition'
+        : 'flex-1 py-2 rounded-xl text-xs font-bold text-slate-600 transition';
+    }
+
+    async function handleForumRegister(event) {
+      event.preventDefault();
+      const btn = document.getElementById('btn-forum-register');
+      const orig = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> กำลังตรวจสอบรหัสสมาชิก...';
+
+      try {
+        const memberCode = document.getElementById('reg-member-code').value.trim().toUpperCase();
+        const phoneLast4 = document.getElementById('reg-phone-last4').value.trim();
+        const displayName = document.getElementById('reg-display-name').value.trim();
+        const password = document.getElementById('reg-password').value;
+
+        const res = await fetch(FORUM_API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({
+            action: 'forum_register',
+            memberCode,
+            phoneLast4,
+            displayName,
+            password
+          })
+        });
+        const json = await res.json();
+        if (!json.success) {
+          showToast('สมัครไม่สำเร็จ', json.error || 'ไม่พบรหัสสมาชิกหรือเบอร์โทรไม่ตรงกับฐานข้อมูล DATAMember', 'error');
+          return;
+        }
+        closeAuthModal();
+        document.getElementById('form-forum-register')?.reset();
+        showToast('ส่งคำขอสมัครสำเร็จ!', 'บันทึกข้อมูลเรียบร้อยแล้ว กรุณารอแอดมินกดอนุมัติสิทธิ์ในระบบจึงจะเข้าสู่ระบบได้ครับ', 'success');
+      } catch (err) {
+        showToast('เกิดข้อผิดพลาด', 'ไม่สามารถเชื่อมต่อระบบได้ กรุณาลองใหม่อีกครั้ง', 'error');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = orig;
+      }
+    }
+
+    async function handleForumLogin(event) {
+      event.preventDefault();
+      const btn = document.getElementById('btn-forum-login');
+      const orig = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> กำลังเข้าสู่ระบบ...';
+
+      try {
+        const memberCode = document.getElementById('login-member-code').value.trim().toUpperCase();
+        const password = document.getElementById('login-password').value;
+
+        const res = await fetch(FORUM_API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({
+            action: 'forum_login',
+            memberCode,
+            password
+          })
+        });
+        const json = await res.json();
+        if (!json.success) {
+          showToast('เข้าสู่ระบบไม่สำเร็จ', json.error || 'รหัสสมาชิก รหัสผ่านไม่ถูกต้อง หรือบัญชีของคุณยังรออนุมัติจากแอดมิน', 'error');
+          return;
+        }
+        forumState.user = json.user;
+        localStorage.setItem(FORUM_SESSION_KEY, JSON.stringify(json.user));
+        syncUserHeaderUI();
+        closeAuthModal();
+        renderTopicsFeed();
+        showToast('ยินดีต้อนรับ', `เข้าสู่ระบบในชื่อ ${json.user.displayName} เรียบร้อยแล้ว`, 'success');
+      } catch (err) {
+        showToast('เกิดข้อผิดพลาด', 'ไม่สามารถเชื่อมต่อระบบเข้าสู่ระบบได้', 'error');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = orig;
+      }
+    }
+
+    function logoutForumUser() {
+      forumState.user = null;
+      localStorage.removeItem(FORUM_SESSION_KEY);
+      syncUserHeaderUI();
+      renderTopicsFeed();
+      showToast('ออกจากระบบแล้ว', 'ออกจากระบบเว็บบอร์ดเรียบร้อยแล้ว', 'info');
+    }
+
+    function openNewTopicModal() {
+      if (!forumState.user) {
+        openAuthModal('login');
+        showToast('กรุณาเข้าสู่ระบบ', 'เฉพาะสมาชิกที่ได้รับอนุมัติแล้วเท่านั้นจึงจะตั้งกระทู้ได้', 'info');
+        return;
+      }
+      document.getElementById('new-topic-modal')?.classList.remove('hidden');
+    }
+
+    function closeNewTopicModal() {
+      document.getElementById('new-topic-modal')?.classList.add('hidden');
+    }
+
+    function compressImage(file, maxW = 900, q = 0.78) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = e => {
+          const img = new Image();
+          img.onload = () => {
+            const canvas = document.createElement('canvas');
+            let w = img.width, h = img.height;
+            if (w > maxW) { h = Math.round((h * maxW) / w); w = maxW; }
+            canvas.width = w;
+            canvas.height = h;
+            canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+            resolve(canvas.toDataURL('image/jpeg', q));
+          };
+          img.onerror = reject;
+          img.src = e.target.result;
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    async function handleTopicImageSelect(inputEl) {
+      const file = inputEl?.files?.[0];
+      const box = document.getElementById('topic-image-preview');
+      if (!file || !box) return;
+      const b64 = await compressImage(file);
+      forumState.newTopicImageBase64 = b64;
+      box.classList.remove('hidden');
+      box.innerHTML = `<img src="${b64}" class="h-24 rounded-xl border border-slate-300 object-cover">`;
+    }
+
+    async function handleCreateTopic(event) {
+      event.preventDefault();
+      if (!forumState.user) return;
+      const btn = document.getElementById('btn-submit-topic');
+      const orig = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> กำลังโพสต์กระทู้...';
+
+      try {
+        const category = document.getElementById('topic-category').value;
+        const title = document.getElementById('topic-title').value.trim();
+        const content = document.getElementById('topic-content').value.trim();
+
+        const res = await fetch(FORUM_API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({
+            action: 'forum_create_topic',
+            memberCode: forumState.user.memberCode,
+            authorName: forumState.user.displayName,
+            category,
+            title,
+            content,
+            imageBase64: forumState.newTopicImageBase64
+          })
+        });
+        const json = await res.json();
+        if (!json.success) {
+          showToast('โพสต์ไม่สำเร็จ', json.error || 'ไม่สามารถตั้งกระทู้ได้', 'error');
+          return;
+        }
+        forumState.newTopicImageBase64 = '';
+        document.getElementById('topic-title').value = '';
+        document.getElementById('topic-content').value = '';
+        document.getElementById('topic-image-preview')?.classList.add('hidden');
+        closeNewTopicModal();
+        showToast('เผยแพร่กระทู้สำเร็จ', 'ตั้งกระทู้ใหม่เรียบร้อยแล้ว (+5 คะแนนเรทติ้ง)', 'success');
+        await loadForumData(false);
+      } catch (err) {
+        showToast('เกิดข้อผิดพลาด', 'ไม่สามารถส่งข้อมูลกระทู้ได้', 'error');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = orig;
+      }
+    }
+
+    async function handleCommentImageSelect(topicId, inputEl) {
+      const file = inputEl?.files?.[0];
+      if (!file) return;
+      const b64 = await compressImage(file, 800, 0.75);
+      forumState.commentImages[topicId] = b64;
+      const previewEl = document.getElementById(`comment-img-preview-${topicId}`);
+      if (previewEl) {
+        previewEl.classList.remove('hidden');
+        previewEl.innerHTML = `<img src="${b64}" class="h-16 rounded-lg border border-slate-300 object-cover">`;
+      }
+    }
+
+    async function submitTopicComment(topicId) {
+      if (!forumState.user) {
+        openAuthModal('login');
+        showToast('กรุณาเข้าสู่ระบบ', 'กรุณาเข้าสู่ระบบก่อนตอบความคิดเห็นครับ', 'info');
+        return;
+      }
+      const inputEl = document.getElementById(`comment-input-${topicId}`);
+      const text = (inputEl?.value || '').trim();
+      const imgB64 = forumState.commentImages[topicId] || '';
+      if (!text && !imgB64) {
+        showToast('กรุณาพิมพ์ข้อความ', 'กรุณาพิมพ์ข้อความหรือแนบรูปภาพก่อนกดส่งครับ', 'error');
+        return;
+      }
+
+      try {
+        const res = await fetch(FORUM_API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({
+            action: 'forum_add_comment',
+            topicId,
+            memberCode: forumState.user.memberCode,
+            authorName: forumState.user.displayName,
+            content: text,
+            imageBase64: imgB64
+          })
+        });
+        const json = await res.json();
+        if (json.success) {
+          if (inputEl) inputEl.value = '';
+          delete forumState.commentImages[topicId];
+          showToast('ตอบกลับสำเร็จ', 'เพิ่มความคิดเห็นเรียบร้อยแล้ว (+2 คะแนนเรทติ้ง)', 'success');
+          await loadForumData(false);
+        }
+      } catch (_) {
+        showToast('เกิดข้อผิดพลาด', 'ไม่สามารถส่งความคิดเห็นได้', 'error');
+      }
+    }
+
+    async function sendReaction(topicId, reactionKey) {
+      if (!forumState.user) {
+        openAuthModal('login');
+        showToast('กรุณาเข้าสู่ระบบ', 'เข้าสู่ระบบเพื่อกดอีโมชันและให้คะแนนโพสต์ครับ', 'info');
+        return;
+      }
+      try {
+        const res = await fetch(FORUM_API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({
+            action: 'forum_react_topic',
+            topicId,
+            memberCode: forumState.user.memberCode,
+            reaction: reactionKey
+          })
+        });
+        const json = await res.json();
+        if (json.success) {
+          await loadForumData(false);
+        }
+      } catch (_) {}
+    }
+
+    async function rateTopicStars(topicId, stars) {
+      if (!forumState.user) {
+        openAuthModal('login');
+        showToast('กรุณาเข้าสู่ระบบ', 'เข้าสู่ระบบเพื่อโหวตคะแนนดาวให้โพสต์ครับ', 'info');
+        return;
+      }
+      try {
+        const res = await fetch(FORUM_API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({
+            action: 'forum_rate_topic',
+            topicId,
+            memberCode: forumState.user.memberCode,
+            stars
+          })
+        });
+        const json = await res.json();
+        if (json.success) {
+          showToast('ให้คะแนนสำเร็จ', `คุณให้คะแนนโพสต์นี้ ${stars} ดาวเรียบร้อยแล้ว`, 'success');
+          await loadForumData(false);
+        }
+      } catch (_) {}
+    }
+
+    function setCategoryFilter(cat) {
+      forumState.category = cat;
+      document.querySelectorAll('.cat-tab-btn').forEach(btn => {
+        const active = btn.getAttribute('data-cat') === cat;
+        btn.className = active
+          ? 'cat-tab-btn bg-slate-950 text-amber-400 font-bold text-xs px-3.5 py-2 rounded-xl transition'
+          : 'cat-tab-btn bg-slate-100 text-slate-700 hover:bg-amber-50 font-semibold text-xs px-3.5 py-2 rounded-xl transition';
+      });
+      renderTopicsFeed();
+    }
+
+    async function loadForumData(showNotice = false) {
+      const icon = document.getElementById('forum-refresh-icon');
+      icon?.classList.add('fa-spin');
+      try {
+        const res = await fetch(`${FORUM_API_URL}?action=forum_feed&t=${Date.now()}`);
+        const json = await res.json();
+        if (json.success) {
+          forumState.topics = Array.isArray(json.topics) ? json.topics : [];
+          forumState.comments = Array.isArray(json.comments) ? json.comments : [];
+          if (forumState.user && Array.isArray(json.users)) {
+            const freshMe = json.users.find(u => u.memberCode === forumState.user.memberCode);
+            if (freshMe) {
+              forumState.user.rating = freshMe.rating;
+              localStorage.setItem(FORUM_SESSION_KEY, JSON.stringify(forumState.user));
+              syncUserHeaderUI();
+            }
+          }
+          renderTopicsFeed();
+          if (showNotice) showToast('อัปเดตแล้ว', 'โหลดข้อมูลกระทู้ล่าสุดเรียบร้อยแล้ว', 'success');
+        }
+      } catch (_) {
+        document.getElementById('topics-feed-container').innerHTML =
+          '<div class="text-center py-8 text-rose-600 text-xs">ไม่สามารถโหลดข้อมูลเว็บบอร์ดได้ในขณะนี้ กรุณากดรีเฟรชอีกครั้ง</div>';
+      } finally {
+        icon?.classList.remove('fa-spin');
+      }
+    }
+
+    function renderTopicsFeed() {
+      const container = document.getElementById('topics-feed-container');
+      if (!container) return;
+      const kw = (document.getElementById('forum-search-input')?.value || '').trim().toLowerCase();
+
+      const filtered = forumState.topics.filter(t => {
+        if (forumState.category !== 'ALL' && t.category !== forumState.category) return false;
+        if (!kw) return true;
+        return `${t.title} ${t.content} ${t.authorName} ${t.memberCode}`.toLowerCase().includes(kw);
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-12 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
+            <i class="fa-solid fa-comments text-3xl text-slate-300"></i>
+            <p class="text-sm font-bold text-slate-700">ยังไม่มีกระทู้ในหมวดหมู่นี้</p>
+            <p class="text-xs text-slate-500">สมาชิกที่อนุมัติแล้วสามารถกดปุ่ม “ตั้งกระทู้ใหม่” เพื่อเริ่มพูดคุยได้เลยครับ</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map(topic => {
+        const tier = getMemberTierInfo(topic.memberCode, topic.authorRating);
+        const topicImg = resolveDriveImageUrl(topic.imageUrl);
+        const reactions = topic.reactions || {};
+        const topicComments = forumState.comments.filter(c => c.topicId === topic.id);
+        const avgStars = Number(topic.avgRating || 0).toFixed(1);
+        const voteCount = Number(topic.ratingCount || 0);
+
+        return `
+          <article class="bg-slate-50/70 border border-slate-200 rounded-3xl p-5 sm:p-6 space-y-4">
+            <div class="flex flex-wrap items-start justify-between gap-2 border-b border-slate-200 pb-3">
+              <div class="space-y-1 min-w-0">
+                <div class="flex flex-wrap items-center gap-2">
+                  <span class="text-[11px] font-bold bg-amber-100 text-amber-900 border border-amber-300 px-2.5 py-0.5 rounded-full">${escapeHtml(topic.category)}</span>
+                  <span class="text-[11px] font-bold border px-2.5 py-0.5 rounded-full ${tier.tierClass}">${tier.tierLabel}</span>
+                  <span class="text-[11px] text-amber-700 font-bold"><i class="fa-solid fa-star text-amber-500"></i> เรทติ้ง ${Number(topic.authorRating || 0)} (${tier.rankLabel})</span>
+                </div>
+                <h2 class="text-base sm:text-lg font-extrabold text-slate-900 pt-1">${escapeHtml(topic.title)}</h2>
+                <p class="text-xs text-slate-500">โดย <strong class="text-slate-800">${escapeHtml(topic.authorName)}</strong> · ${escapeHtml(topic.createdAt)}</p>
+              </div>
+              <div class="bg-white border border-amber-200 rounded-xl px-3 py-1.5 text-right shrink-0">
+                <span class="text-[10px] text-slate-500 block">คะแนนโพสต์</span>
+                <strong class="text-xs sm:text-sm text-amber-600"><i class="fa-solid fa-star"></i> ${avgStars} / 5.0</strong>
+                <span class="text-[10px] text-slate-400">(${voteCount} โหวต)</span>
+              </div>
+            </div>
+
+            <p class="text-xs sm:text-sm text-slate-800 leading-relaxed whitespace-pre-line">${escapeHtml(topic.content)}</p>
+
+            ${topicImg ? `
+              <div class="pt-1">
+                <img src="${escapeHtml(topicImg)}" alt="รูปประกอบกระทู้" onerror="this.style.display='none'" class="max-h-80 rounded-2xl border border-slate-200 object-contain bg-white">
+              </div>
+            ` : ''}
+
+            <!-- แถบปุ่มกดอีโมชัน + ให้คะแนนโพสต์ 1-5 ดาว -->
+            <div class="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-slate-200">
+              <div class="flex flex-wrap items-center gap-1.5">
+                ${REACTION_TYPES.map(r => {
+                  const cnt = Number(reactions[r.key] || 0);
+                  return `
+                    <button type="button" onclick="sendReaction('${escapeHtml(topic.id)}', '${r.key}')"
+                      class="inline-flex items-center gap-1 bg-white hover:bg-amber-50 border border-slate-200 hover:border-amber-300 px-2.5 py-1.5 rounded-xl text-xs font-semibold transition">
+                      <span>${r.emoji}</span>
+                      <span class="text-slate-700">${r.label}</span>
+                      ${cnt > 0 ? `<span class="bg-amber-100 text-amber-900 font-bold px-1.5 rounded-full text-[10px]">${cnt}</span>` : ''}
+                    </button>
+                  `;
+                }).join('')}
+              </div>
+
+              <div class="flex items-center gap-1 bg-white border border-slate-200 px-3 py-1.5 rounded-xl text-xs">
+                <span class="text-slate-500 font-semibold mr-1">ให้คะแนนโพสต์:</span>
+                ${[1, 2, 3, 4, 5].map(star => `
+                  <button type="button" onclick="rateTopicStars('${escapeHtml(topic.id)}', ${star})" title="ให้ ${star} ดาว"
+                    class="text-amber-400 hover:text-amber-500 hover:scale-125 transition text-sm">
+                    <i class="fa-solid fa-star"></i>
+                  </button>
+                `).join('')}
+              </div>
+            </div>
+
+            <!-- ส่วนความคิดเห็น -->
+            <div class="bg-white rounded-2xl p-4 border border-slate-200 space-y-3">
+              <p class="text-xs font-extrabold text-slate-800">
+                <i class="fa-solid fa-reply text-amber-600 mr-1"></i> ความคิดเห็น (${topicComments.length})
+              </p>
+
+              <div class="space-y-2.5">
+                ${topicComments.map(c => {
+                  const cTier = getMemberTierInfo(c.memberCode, c.authorRating);
+                  const cImg = resolveDriveImageUrl(c.imageUrl);
+                  return `
+                    <div class="bg-slate-50 rounded-xl p-3 border border-slate-100 space-y-1.5">
+                      <div class="flex flex-wrap items-center justify-between gap-1 text-[11px]">
+                        <div class="flex items-center gap-1.5 flex-wrap">
+                          <strong class="text-slate-900">${escapeHtml(c.authorName)}</strong>
+                          <span class="px-2 py-0.5 rounded-full border text-[10px] font-bold ${cTier.tierClass}">${cTier.tierLabel}</span>
+                          <span class="text-amber-700 font-semibold">⭐ ${Number(c.authorRating || 0)}</span>
+                        </div>
+                        <span class="text-slate-400">${escapeHtml(c.createdAt)}</span>
+                      </div>
+                      ${c.content ? `<p class="text-xs text-slate-700 leading-relaxed whitespace-pre-line">${escapeHtml(c.content)}</p>` : ''}
+                      ${cImg ? `<img src="${escapeHtml(cImg)}" alt="รูปในคอมเมนต์" onerror="this.style.display='none'" class="max-h-48 rounded-lg border border-slate-200 mt-1">` : ''}
+                    </div>
+                  `;
+                }).join('')}
+              </div>
+
+              <!-- ช่องตอบคอมเมนต์ + แนบรูปภาพ -->
+              <div class="pt-2 border-t border-slate-100 space-y-2">
+                <div class="flex flex-col sm:flex-row gap-2">
+                  <input type="text" id="comment-input-${escapeHtml(topic.id)}" placeholder="${forumState.user ? 'เขียนความคิดเห็นตอบกลับ...' : 'กรุณาเข้าสู่ระบบเพื่อตอบคอมเมนต์...'}"
+                    class="flex-1 bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2 text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500">
+                  <div class="flex items-center gap-2 shrink-0">
+                    <label title="แนบรูปภาพในคอมเมนต์" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-2 rounded-xl text-xs font-bold cursor-pointer">
+                      <i class="fa-solid fa-image text-emerald-600"></i> รูปภาพ
+                      <input type="file" accept="image/*" onchange="handleCommentImageSelect('${escapeHtml(topic.id)}', this)" class="hidden">
+                    </label>
+                    <button type="button" onclick="submitTopicComment('${escapeHtml(topic.id)}')"
+                      class="bg-slate-950 hover:bg-slate-800 text-amber-400 font-bold px-4 py-2 rounded-xl text-xs transition">
+                      <i class="fa-solid fa-paper-plane mr-1"></i> ตอบกลับ
+                    </button>
+                  </div>
+                </div>
+                <div id="comment-img-preview-${escapeHtml(topic.id)}" class="hidden"></div>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      try {
+        const saved = localStorage.getItem(FORUM_SESSION_KEY);
+        if (saved) forumState.user = JSON.parse(saved);
+      } catch (_) {}
+      syncUserHeaderUI();
+      loadForumData(false);
+    });
+
+    (function initSharedNavAndAccessibility() {
+      const SCALE_KEY = "tdt_font_scale_pct";
+      let scalePct = 100;
+      function applyScale(pct) {
+        scalePct = Math.min(130, Math.max(90, Number(pct) || 100));
+        document.documentElement.style.fontSize = `${(scalePct / 100) * 16}px`;
+        const lbl = document.getElementById("tdt-font-pct");
+        if (lbl) lbl.textContent = `${scalePct}%`;
+        try { localStorage.setItem(SCALE_KEY, String(scalePct)); } catch (_) {}
+      }
+      window.tdtChangeFontScale = function (step) { applyScale(scalePct + step * 10); };
+      window.tdtToggleDropdown = function (cat, ev) {
+        if (ev) ev.stopPropagation();
+        ["member", "group"].forEach(k => {
+          const panel = document.getElementById(`nav-panel-${k}`);
+          const chev = document.getElementById(`nav-chev-${k}`);
+          if (!panel) return;
+          const open = k === cat ? !panel.classList.contains("is-open") : false;
+          panel.classList.toggle("is-open", open);
+          if (chev) chev.style.transform = open ? "rotate(180deg)" : "rotate(0deg)";
+        });
+      };
+      document.addEventListener("click", function (ev) {
+        const mDrop = document.getElementById("nav-drop-member");
+        const gDrop = document.getElementById("nav-drop-group");
+        if (!(mDrop && mDrop.contains(ev.target)) && !(gDrop && gDrop.contains(ev.target))) {
+          ["member", "group"].forEach(k => {
+            document.getElementById(`nav-panel-${k}`)?.classList.remove("is-open");
+            const chev = document.getElementById(`nav-chev-${k}`);
+            if (chev) chev.style.transform = "rotate(0deg)";
+          });
+        }
+      });
+      try {
+        const s = localStorage.getItem(SCALE_KEY);
+        if (s) applyScale(Number(s));
+      } catch (_) {}
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>บริการรับสมัครคนขับ Grab ออนไลน์ | 🚖 The Driver TH 🇹🇭 Premium Service</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    html { scroll-behavior: smooth; font-size: 16px; transition: font-size 0.18s ease; }
+    html, body, input, select, textarea, button, code, pre { font-family: 'Prompt', sans-serif !important; }
+    html, body { background-color: #f8fafc; color: #0f172a; max-width: 100%; overflow-x: clip; }
+    .grab-hero-bg {
+      background:
+        radial-gradient(circle at 18% 22%, rgba(34, 197, 94, 0.28) 0%, transparent 45%),
+        radial-gradient(circle at 82% 78%, rgba(245, 158, 11, 0.16) 0%, transparent 50%),
+        linear-gradient(135deg, #052e16 0%, #064e3b 52%, #0f172a 100%);
+    }
+
+    /* UNIFIED GLOBAL NAVIGATION BAR */
+    .tdt-global-nav {
+      box-sizing: border-box;
+      font-family: 'Prompt', sans-serif;
+      background: linear-gradient(180deg, rgba(7, 11, 20, 0.98) 0%, rgba(10, 15, 28, 0.96) 100%);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      color: #e2e8f0;
+      border-bottom: 1px solid rgba(251, 191, 36, 0.28);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 10px 28px -8px rgba(2, 6, 23, 0.65);
+      width: 100%;
+    }
+    .tdt-global-nav *, .tdt-global-nav *::before, .tdt-global-nav *::after { box-sizing: border-box; }
+    .tdt-global-nav-inner { max-width: 1280px; margin: 0 auto; padding: 12px 16px; display: flex; flex-direction: column; gap: 10px; }
+    @media (min-width: 640px) { .tdt-global-nav-inner { padding: 14px 24px; gap: 12px; } }
+    .tdt-nav-top-row { width: 100%; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding-bottom: 10px; border-bottom: 1px solid rgba(148, 163, 184, 0.12); }
+    .tdt-global-brand { display: inline-flex; align-items: center; gap: 13px; font-size: 16px; font-weight: 500; color: #fbbf24; text-decoration: none; }
+    .tdt-brand-text-stack { display: inline-flex; flex-direction: column; gap: 5px; }
+    .tdt-brand-subline-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 12px; color: #cbd5e1; }
+    .tdt-brand-exec-pill { display: inline-flex; align-items: center; gap: 5px; background: rgba(251, 191, 36, 0.15); border: 1px solid rgba(251, 191, 36, 0.42); color: #fde68a; font-size: 10.5px; padding: 2px 8px; border-radius: 999px; }
+    .tdt-brand-logo-img { width: 50px; height: 50px; border-radius: 15px; object-fit: cover; background: #fff; border: 1.5px solid rgba(251, 191, 36, 0.85); }
+    @media (min-width: 640px) { .tdt-global-brand { font-size: 19px; } .tdt-brand-logo-img { width: 56px; height: 56px; border-radius: 16px; } }
+    .tdt-global-right-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; width: 100%; }
+    .tdt-nav-divider { width: 1px; height: 20px; background: rgba(148, 163, 184, 0.22); margin: 0 2px; display: none; }
+    @media (min-width: 1024px) { .tdt-nav-divider { display: inline-block; } }
+    .tdt-cat-dropdown-wrap { position: relative; display: inline-block; }
+    .tdt-cat-menu-panel { display: none; position: absolute; left: 0; top: calc(100% + 8px); width: 320px; max-width: calc(100vw - 32px); border-radius: 16px; padding: 10px; background-color: #070b14; border: 1px solid rgba(251, 191, 36, 0.45); box-shadow: 0 24px 54px -10px rgba(0, 0, 0, 0.92); z-index: 1060; }
+    .tdt-cat-menu-panel.is-open { display: block; }
+    .tdt-cat-menu-header { padding: 8px 12px; margin-bottom: 6px; border-radius: 11px; font-size: 11px; font-weight: 500; display: flex; align-items: center; justify-content: space-between; }
+    .tdt-cat-menu-link { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 12px; background-color: #0d1424; border: 1px solid rgba(148, 163, 184, 0.14); color: #f1f5f9; text-decoration: none; margin-bottom: 6px; transition: all 0.18s ease; }
+    .tdt-cat-menu-link:last-child { margin-bottom: 0; }
+    .tdt-cat-menu-link:hover { background-color: #162038; border-color: rgba(251, 191, 36, 0.5); transform: translateX(2px); }
+    .tdt-cat-menu-icon { width: 28px; height: 28px; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 12px; }
+    .tdt-cat-menu-title { display: block; font-size: 12px; font-weight: 500; line-height: 1.3; }
+    .tdt-cat-menu-sub { display: block; font-size: 10px; color: #94a3b8; line-height: 1.25; }
+    .tdt-nav-btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; height: 36px; padding: 0 13px; border-radius: 11px; font-size: 12px; text-decoration: none; white-space: nowrap; background-color: rgba(15, 23, 42, 0.88); border: 1px solid rgba(148, 163, 184, 0.22); color: #e2e8f0; cursor: pointer; transition: all 0.18s ease; }
+    .tdt-nav-btn:hover { background-color: #1e293b; border-color: rgba(251, 191, 36, 0.48); transform: translateY(-1px); }
+    .tdt-nav-btn.is-member-cat { color: #6ee7b7; border-color: rgba(52, 211, 153, 0.35); background-color: rgba(6, 78, 59, 0.24); }
+    .tdt-nav-btn.is-quick-register, .tdt-nav-btn.is-quick-check-code { color: #5eead4; border-color: rgba(45, 212, 191, 0.38); background-color: rgba(19, 78, 74, 0.28); }
+    .tdt-nav-btn.is-group-cat { color: #fcd34d; border-color: rgba(251, 191, 36, 0.38); background-color: rgba(120, 53, 15, 0.24); }
+    .tdt-nav-btn.is-blacklist { color: #fda4af; border-color: rgba(251, 113, 133, 0.35); }
+    .tdt-nav-btn.is-admin-link { color: #fde68a; border-color: rgba(251, 191, 36, 0.45); background-color: rgba(245, 158, 11, 0.14); }
+    .tdt-nav-btn.active-current { background: linear-gradient(135deg, #22c55e 0%, #15803d 100%); border-color: #86efac; color: #ffffff; font-weight: 600; }
+    .tdt-util-group { display: inline-flex; align-items: center; gap: 4px; background-color: rgba(15, 23, 42, 0.92); border: 1px solid rgba(251, 191, 36, 0.28); border-radius: 12px; padding: 3px; }
+    .tdt-util-btn { display: inline-flex; align-items: center; justify-content: center; height: 30px; padding: 0 9px; border-radius: 9px; font-size: 12px; color: #e2e8f0; background: transparent; border: none; cursor: pointer; }
+  </style>
+</head>
+<body class="text-slate-800 antialiased min-h-screen flex flex-col">
+
+  <!-- UNIFIED GLOBAL NAVIGATION BAR -->
+  <nav class="tdt-global-nav" aria-label="แถบนำทางหลักของเว็บไซต์">
+    <div class="tdt-global-nav-inner">
+      <div class="tdt-nav-top-row">
+        <a href="index.html" class="tdt-global-brand">
+          <img src="TheDriverTH.jpg" alt="โลโก้ The Driver Thailand"
+            onerror="this.onerror=null;this.src='https://placehold.co/80x80/0f172a/fbbf24?text=TDT';"
+            class="tdt-brand-logo-img">
+          <span class="tdt-brand-text-stack">
+            <span>🚖 The Driver TH 🇹🇭 Premium Service</span>
+            <span class="tdt-brand-subline-row">
+              <span class="tdt-brand-exec-pill"><i class="fa-solid fa-crown text-[9px]"></i> EXECUTIVE NETWORK</span>
+              <span>เครือข่ายคนขับรถรับส่งผู้โดยสารและบริการมืออาชีพแห่งประเทศไทย</span>
+            </span>
+          </span>
+        </a>
+        <div class="tdt-util-group ml-auto">
+          <button type="button" onclick="tdtChangeFontScale(-1)" class="tdt-util-btn">A-</button>
+          <span id="tdt-font-pct" class="text-[11px] text-amber-300 px-1 select-none">100%</span>
+          <button type="button" onclick="tdtChangeFontScale(1)" class="tdt-util-btn">A+</button>
+        </div>
+      </div>
+
+      <div class="tdt-global-right-controls">
+        <a href="index.html" class="tdt-nav-btn"><i class="fa-solid fa-house"></i><span>หน้าหลัก</span></a>
+        <a href="driver_news.html" class="tdt-nav-btn"><i class="fa-solid fa-newspaper"></i><span>ข่าวสารคนขับแอป</span></a>
+        <a href="grab_driver_register.html" class="tdt-nav-btn active-current"><i class="fa-solid fa-car"></i><span>สมัครคนขับ Grab</span></a>
+        <a href="bolt_driver_register.html" class="tdt-nav-btn is-quick-register"><i class="fa-solid fa-bolt"></i><span>สมัครคนขับ Bolt</span></a>
+
+        <span class="tdt-nav-divider" aria-hidden="true"></span>
+
+        <a href="member_register.html" class="tdt-nav-btn is-quick-check-code"><i class="fa-solid fa-file-signature"></i><span>ลงทะเบียนสมาชิกใหม่</span></a>
+        <a href="blacklist.html" class="tdt-nav-btn is-blacklist"><i class="fa-solid fa-user-shield"></i><span>ตรวจสอบ Blacklist</span></a>
+        <a href="admin.html" class="tdt-nav-btn is-admin-link"><i class="fa-solid fa-sliders"></i><span>ระบบหลังบ้าน (Admin)</span></a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- พื้นที่เนื้อหาหลัก -->
+  <main class="flex-grow max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-8">
+    <!-- Hero Banner -->
+    <section class="grab-hero-bg rounded-3xl p-6 sm:p-10 text-white shadow-2xl border border-green-400/35 relative overflow-hidden">
+      <div class="grid lg:grid-cols-12 gap-6 items-center relative z-10">
+        <div class="lg:col-span-8 space-y-4">
+          <div class="flex flex-wrap items-center gap-2">
+            <a href="driver_news.html" class="bg-white/10 hover:bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full inline-flex items-center gap-1.5 transition">
+              <i class="fa-solid fa-arrow-left"></i> กลับหน้าข่าวสารคนขับแอป
+            </a>
+            <span class="bg-green-400 text-slate-950 text-xs font-extrabold px-3.5 py-1 rounded-full">
+              OFFICIAL GRAB DRIVER RECRUITMENT
+            </span>
+          </div>
+
+          <h1 class="text-2xl sm:text-4xl font-black leading-tight">
+            บริการรับสมัครคนขับ <span class="text-green-400">Grab</span> ออนไลน์
+          </h1>
+          <p class="text-green-100 text-xs sm:text-sm max-w-2xl leading-relaxed font-light">
+            เปิดรับสมัครคนขับ GrabCar, GrabTaxi, GrabSUV และ GrabPremium ทั่วประเทศ มีทีมงาน <strong>The Driver Thailand</strong> ช่วยตรวจสอบเอกสารให้ครบถ้วนก่อนยื่นเปิดระบบ ลดปัญหาเอกสารตีกลับ
+          </p>
+        </div>
+
+        <div class="lg:col-span-4 bg-white/10 backdrop-blur-md border border-green-300/30 rounded-3xl p-5 space-y-2.5 text-xs">
+          <h2 class="font-extrabold text-sm text-green-300"><i class="fa-solid fa-clipboard-check mr-1.5"></i> เอกสารที่ต้องเตรียม</h2>
+          <p class="text-green-50"><i class="fa-solid fa-check text-green-400 mr-1.5"></i> บัตรประจำตัวประชาชน (ตัวจริง)</p>
+          <p class="text-green-50"><i class="fa-solid fa-check text-green-400 mr-1.5"></i> ใบอนุญาตขับขี่รถยนต์ส่วนบุคคล / สาธารณะ</p>
+          <p class="text-green-50"><i class="fa-solid fa-check text-green-400 mr-1.5"></i> รายการจดทะเบียนรถยนต์ (หน้าเล่มทะเบียน)</p>
+          <p class="text-green-50"><i class="fa-solid fa-check text-green-400 mr-1.5"></i> พ.ร.บ. และกรมธรรม์ประกันภัยรถยนต์</p>
+          <p class="text-green-50"><i class="fa-solid fa-check text-green-400 mr-1.5"></i> หนังสือรับรองประวัติอาชญากรรม (หรือให้ทีมงานแนะนำขั้นตอน)</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- กล่องแจ้งผลการส่งสมัครสำเร็จ -->
+    <div id="grab-success-box" class="hidden bg-emerald-950 text-emerald-100 border border-emerald-500/40 rounded-3xl p-6 shadow-xl space-y-3">
+      <h3 class="text-base sm:text-lg font-extrabold text-white"><i class="fa-solid fa-circle-check text-emerald-400 mr-2"></i>บันทึกข้อมูลสมัครคนขับ Grab เรียบร้อยแล้ว</h3>
+      <p class="text-xs sm:text-sm">เลขที่อ้างอิงของคุณคือ: <strong id="grab-ref-code" class="font-mono text-amber-300">-</strong> เจ้าหน้าที่ฝ่ายรับสมัครคนขับของ The Driver Thailand จะติดต่อกลับทาง Line / เบอร์โทรศัพท์เพื่อประสานงานเปิดระบบให้ทันทีครับ</p>
+    </div>
+
+    <!-- แบบฟอร์มลงทะเบียนสมัครคนขับ Grab -->
+    <section class="bg-white rounded-3xl p-5 sm:p-10 border border-slate-200 shadow-sm space-y-6">
+      <div class="border-b border-slate-200 pb-4">
+        <span class="text-xs font-extrabold text-green-800 bg-green-100 px-3 py-1 rounded-full">GRAB DRIVER APPLICATION FORM</span>
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 mt-1.5">กรอกข้อมูลสมัครขับ Grab</h2>
+        <p class="text-xs sm:text-sm text-slate-500">กรอกข้อมูลให้ครบถ้วน ช่องที่มีเครื่องหมาย <span class="text-rose-500 font-bold">*</span> จำเป็นต้องระบุ</p>
+      </div>
+
+      <form id="grab-register-form" onsubmit="submitGrabForm(event)" class="space-y-5">
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="space-y-1.5">
+            <label class="block text-xs font-bold text-slate-700">ประเภทบริการ Grab ที่ต้องการสมัคร <span class="text-rose-500">*</span></label>
+            <select id="grab_service_type" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-semibold">
+              <option value="GrabCar (รถยนต์ส่วนบุคคล 4 ที่นั่ง)">GrabCar (รถยนต์ส่วนบุคคล 4 ที่นั่ง)</option>
+              <option value="GrabSUV / GrabXL (รถยนต์ 6-7 ที่นั่ง)">GrabSUV / GrabXL (รถยนต์ 6-7 ที่นั่ง)</option>
+              <option value="GrabPremium / GrabExec (รถหรู / VIP)">GrabPremium / GrabExec (รถหรู / VIP)</option>
+              <option value="GrabTaxi (รถแท็กซี่มิเตอร์)">GrabTaxi (รถแท็กซี่มิเตอร์)</option>
+              <option value="GrabExpress Car / Hatchback (ส่งพัสดุ)">GrabExpress Car / Hatchback (ส่งพัสดุ)</option>
+            </select>
+          </div>
+
+          <div class="space-y-1.5">
+            <label class="block text-xs font-bold text-slate-700">จังหวัด / พื้นที่ที่ต้องการวิ่งงาน <span class="text-rose-500">*</span></label>
+            <input type="text" id="grab_city" required placeholder="เช่น กรุงเทพฯ-ปริมณฑล / ชลบุรี-พัทยา / เชียงใหม่ / ภูเก็ต" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-4">
+          <div class="space-y-1.5">
+            <label class="block text-xs font-bold text-slate-700">ชื่อ - นามสกุลจริง <span class="text-rose-500">*</span></label>
+            <input type="text" id="grab_fullname" required placeholder="ระบุชื่อและนามสกุลตามบัตรประชาชน" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
+          </div>
+          <div class="space-y-1.5">
+            <label class="block text-xs font-bold text-slate-700">เบอร์โทรศัพท์ติดต่อ <span class="text-rose-500">*</span></label>
+            <input type="tel" id="grab_phone" required placeholder="เช่น 0812345678" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-mono">
+          </div>
+          <div class="space-y-1.5">
+            <label class="block text-xs font-bold text-slate-700">Line ID <span class="text-rose-500">*</span></label>
+            <input type="text" id="grab_line_id" required placeholder="ระบุ Line ID สำหรับส่งเอกสารและติดต่อ" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-4 gap-4">
+          <div class="space-y-1.5">
+            <label class="block text-xs font-bold text-slate-700">ยี่ห้อรถ <span class="text-rose-500">*</span></label>
+            <input type="text" id="grab_car_brand" required placeholder="เช่น Toyota / Honda / BYD" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
+          </div>
+          <div class="space-y-1.5">
+            <label class="block text-xs font-bold text-slate-700">รุ่นรถ <span class="text-rose-500">*</span></label>
+            <input type="text" id="grab_car_model" required placeholder="เช่น Yaris Ativ / Camry / Atto 3" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
+          </div>
+          <div class="space-y-1.5">
+            <label class="block text-xs font-bold text-slate-700">ปีจดทะเบียนรถ <span class="text-rose-500">*</span></label>
+            <input type="text" id="grab_car_year" required placeholder="เช่น 2023 หรือ 2566" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-mono">
+          </div>
+          <div class="space-y-1.5">
+            <label class="block text-xs font-bold text-slate-700">หมายเลขทะเบียนรถ <span class="text-rose-500">*</span></label>
+            <input type="text" id="grab_license_plate" required placeholder="เช่น 1กข 1234 กทม." class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold">
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="space-y-1.5">
+            <label class="block text-xs font-bold text-slate-700">สถานะใบขับขี่ปัจจุบัน <span class="text-rose-500">*</span></label>
+            <select id="grab_license_status" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
+              <option value="มีใบขับขี่สาธารณะแล้ว">มีใบขับขี่สาธารณะแล้ว</option>
+              <option value="มีใบขับขี่ส่วนบุคคล 5 ปี (กำลังดำเนินการทำสาธารณะ)">มีใบขับขี่ส่วนบุคคล 5 ปี (กำลังดำเนินการทำสาธารณะ)</option>
+              <option value="มีใบขับขี่ส่วนบุคคล 2 ปี">มีใบขับขี่ส่วนบุคคล 2 ปี</option>
+            </select>
+          </div>
+          <div class="space-y-1.5">
+            <label class="block text-xs font-bold text-slate-700">รหัสสมาชิก The Driver Thailand (ถ้ามี)</label>
+            <input type="text" id="grab_member_code" placeholder="เช่น B2464 (หากยังไม่เป็นสมาชิกเว้นว่างได้)" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-mono uppercase">
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-3 pt-2">
+          <a href="driver_news.html" class="w-full sm:w-auto text-center px-5 py-3 rounded-xl border border-slate-300 bg-white hover:bg-slate-100 text-slate-700 font-bold text-xs sm:text-sm transition">
+            <i class="fa-solid fa-arrow-left mr-1.5"></i> กลับหน้าข่าวสารคนขับแอป
+          </a>
+          <button type="submit" id="btn-submit-grab" class="w-full sm:w-auto bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-white font-extrabold text-sm sm:text-base px-8 py-3.5 rounded-xl shadow-lg transition flex items-center justify-center gap-2">
+            <i class="fa-solid fa-paper-plane"></i>
+            <span>ส่งใบสมัครคนขับ Grab</span>
+          </button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-950 text-slate-400 border-t border-amber-500/25 py-9 px-4 text-xs mt-10">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+      <div class="text-center sm:text-left space-y-1">
+        <p class="font-bold text-amber-300">🚖 The Driver TH 🇹🇭 Premium Service Official Network</p>
+        <p class="text-[11px] text-slate-500">ศูนย์กลางระบบสมาชิก ข่าวสารคนขับรถผ่านแอป และบริการรับสมัครคนขับ Grab &amp; Bolt</p>
+      </div>
+      <div class="flex flex-wrap justify-center gap-x-4 gap-y-2 font-semibold">
+        <a href="index.html" class="hover:text-amber-400 transition">หน้าหลัก</a>
+        <a href="driver_news.html" class="hover:text-emerald-300 transition">ข่าวสารคนขับแอป</a>
+        <a href="grab_driver_register.html" class="text-green-400 transition">สมัครคนขับ Grab</a>
+        <a href="bolt_driver_register.html" class="hover:text-teal-300 transition">สมัครคนขับ Bolt</a>
+        <a href="admin.html" class="text-amber-300 hover:text-amber-200 transition">ระบบหลังบ้าน (Admin)</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const SUBMIT_ENDPOINT_URL = 'https://script.google.com/macros/s/AKfycbyeDCdxBD10D_AFZQY2NxeylLOiAmAHLesSDZHXYCb3TsYs4wYer_kRTPVOs3VpK2pP/exec';
+
+    async function submitGrabForm(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btn-submit-grab');
+      const origHtml = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> <span>กำลังส่งใบสมัครคนขับ Grab...</span>';
+
+      try {
+        const now = new Date();
+        const refCode = 'GRB-' +
+          now.getFullYear() +
+          String(now.getMonth() + 1).padStart(2, '0') +
+          String(now.getDate()).padStart(2, '0') + '-' +
+          String(now.getHours()).padStart(2, '0') +
+          String(now.getMinutes()).padStart(2, '0') +
+          String(now.getSeconds()).padStart(2, '0');
+
+        await fetch(SUBMIT_ENDPOINT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'app_driver_recruitment',
+            platform: 'Grab',
+            refCode,
+            serviceType: document.getElementById('grab_service_type').value,
+            city: document.getElementById('grab_city').value.trim(),
+            fullName: document.getElementById('grab_fullname').value.trim(),
+            phone: document.getElementById('grab_phone').value.trim(),
+            lineId: document.getElementById('grab_line_id').value.trim(),
+            carBrand: document.getElementById('grab_car_brand').value.trim(),
+            carModel: document.getElementById('grab_car_model').value.trim(),
+            carYear: document.getElementById('grab_car_year').value.trim(),
+            licensePlate: document.getElementById('grab_license_plate').value.trim(),
+            licenseStatus: document.getElementById('grab_license_status').value,
+            memberCode: document.getElementById('grab_member_code').value.trim().toUpperCase()
+          })
+        });
+
+        document.getElementById('grab-ref-code').textContent = refCode;
+        const box = document.getElementById('grab-success-box');
+        box?.classList.remove('hidden');
+        box?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        e.target.reset();
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = origHtml;
+      }
+    }
+
+    (function initScale() {
+      const SCALE_KEY = "tdt_font_scale_pct";
+      let scalePct = 100;
+      function applyScale(pct) {
+        scalePct = Math.min(130, Math.max(90, Number(pct) || 100));
+        document.documentElement.style.fontSize = `${(scalePct / 100) * 16}px`;
+        const lbl = document.getElementById("tdt-font-pct");
+        if (lbl) lbl.textContent = `${scalePct}%`;
+        try { localStorage.setItem(SCALE_KEY, String(scalePct)); } catch (_) {}
+      }
+      window.tdtChangeFontScale = function (step) { applyScale(scalePct + step * 10); };
+      try { const s = localStorage.getItem(SCALE_KEY); if (s) applyScale(Number(s)); } catch (_) {}
+    })();
+  </script>
+</body>
+</html>

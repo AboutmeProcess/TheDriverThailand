@@ -12,12 +12,39 @@
   <style>
     html { scroll-behavior: smooth; font-size: 16px; transition: font-size 0.18s ease; }
     html, body, input, select, textarea, button, code, pre { font-family: 'Prompt', sans-serif !important; }
-    html, body { background-color: #f8fafc; color: #0f172a; max-width: 100%; overflow-x: clip; }
+    html, body { background-color: #070a12 !important; color: #f8fafc !important; max-width: 100%; overflow-x: clip; }
+    .gold-shimmer-text {
+      background: linear-gradient(90deg, #fde68a 0%, #fbbf24 35%, #f59e0b 65%, #fef08a 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      animation: goldShimmer 5s linear infinite;
+    }
+    @keyframes goldShimmer { to { background-position: 200% center; } }
     .grab-hero-bg {
       background:
-        radial-gradient(circle at 18% 22%, rgba(34, 197, 94, 0.28) 0%, transparent 45%),
-        radial-gradient(circle at 82% 78%, rgba(245, 158, 11, 0.16) 0%, transparent 50%),
-        linear-gradient(135deg, #052e16 0%, #064e3b 52%, #0f172a 100%);
+        radial-gradient(circle at 18% 22%, rgba(245, 158, 11, 0.22) 0%, transparent 45%),
+        radial-gradient(circle at 82% 78%, rgba(34, 197, 94, 0.18) 0%, transparent 50%),
+        linear-gradient(135deg, #070a12 0%, #0f172a 52%, #172033 100%);
+    }
+    .dark-surface-card {
+      background: rgba(15, 23, 42, 0.94);
+      border: 1px solid rgba(251, 191, 36, 0.24);
+      color: #f8fafc;
+      box-shadow: 0 18px 38px -14px rgba(2, 6, 23, 0.72);
+    }
+    .dark-field {
+      background-color: #070b14 !important;
+      border: 1px solid #334155 !important;
+      color: #f8fafc !important;
+      transition: border-color 0.2s ease, background-color 0.2s ease;
+    }
+    .dark-field::placeholder {
+      color: #64748b !important;
+    }
+    .dark-field:focus {
+      outline: none !important;
+      border-color: #fbbf24 !important;
+      background-color: #0b1120 !important;
     }
 
     /* UNIFIED GLOBAL NAVIGATION BAR */
@@ -113,33 +140,33 @@
   <!-- พื้นที่เนื้อหาหลัก -->
   <main class="flex-grow max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-8">
     <!-- Hero Banner -->
-    <section class="grab-hero-bg rounded-3xl p-6 sm:p-10 text-white shadow-2xl border border-green-400/35 relative overflow-hidden">
+    <section class="grab-hero-bg rounded-3xl p-6 sm:p-10 text-white shadow-2xl border border-amber-400/35 relative overflow-hidden">
       <div class="grid lg:grid-cols-12 gap-6 items-center relative z-10">
         <div class="lg:col-span-8 space-y-4">
           <div class="flex flex-wrap items-center gap-2">
-            <a href="driver_news.html" class="bg-white/10 hover:bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full inline-flex items-center gap-1.5 transition">
+            <a href="driver_news.html" class="bg-slate-950/80 hover:bg-slate-900 text-amber-300 border border-amber-400/35 text-xs font-bold px-3 py-1 rounded-full inline-flex items-center gap-1.5 transition">
               <i class="fa-solid fa-arrow-left"></i> กลับหน้าข่าวสารคนขับแอป
             </a>
-            <span class="bg-green-400 text-slate-950 text-xs font-extrabold px-3.5 py-1 rounded-full">
+            <span class="bg-amber-500/20 border border-amber-400/45 text-amber-300 text-xs font-extrabold px-3.5 py-1 rounded-full">
               OFFICIAL GRAB DRIVER RECRUITMENT
             </span>
           </div>
 
           <h1 class="text-2xl sm:text-4xl font-black leading-tight">
-            บริการรับสมัครคนขับ <span class="text-green-400">Grab</span> ออนไลน์
+            บริการรับสมัครคนขับ <span class="gold-shimmer-text">Grab</span> ออนไลน์
           </h1>
-          <p class="text-green-100 text-xs sm:text-sm max-w-2xl leading-relaxed font-light">
+          <p class="text-slate-300 text-xs sm:text-sm max-w-2xl leading-relaxed font-light">
             เปิดรับสมัครคนขับ GrabCar, GrabTaxi, GrabSUV และ GrabPremium ทั่วประเทศ มีทีมงาน <strong>The Driver Thailand</strong> ช่วยตรวจสอบเอกสารให้ครบถ้วนก่อนยื่นเปิดระบบ ลดปัญหาเอกสารตีกลับ
           </p>
         </div>
 
-        <div class="lg:col-span-4 bg-white/10 backdrop-blur-md border border-green-300/30 rounded-3xl p-5 space-y-2.5 text-xs">
-          <h2 class="font-extrabold text-sm text-green-300"><i class="fa-solid fa-clipboard-check mr-1.5"></i> เอกสารที่ต้องเตรียม</h2>
-          <p class="text-green-50"><i class="fa-solid fa-check text-green-400 mr-1.5"></i> บัตรประจำตัวประชาชน (ตัวจริง)</p>
-          <p class="text-green-50"><i class="fa-solid fa-check text-green-400 mr-1.5"></i> ใบอนุญาตขับขี่รถยนต์ส่วนบุคคล / สาธารณะ</p>
-          <p class="text-green-50"><i class="fa-solid fa-check text-green-400 mr-1.5"></i> รายการจดทะเบียนรถยนต์ (หน้าเล่มทะเบียน)</p>
-          <p class="text-green-50"><i class="fa-solid fa-check text-green-400 mr-1.5"></i> พ.ร.บ. และกรมธรรม์ประกันภัยรถยนต์</p>
-          <p class="text-green-50"><i class="fa-solid fa-check text-green-400 mr-1.5"></i> หนังสือรับรองประวัติอาชญากรรม (หรือให้ทีมงานแนะนำขั้นตอน)</p>
+        <div class="lg:col-span-4 bg-slate-950/80 backdrop-blur-md border border-amber-400/30 rounded-3xl p-5 space-y-2.5 text-xs">
+          <h2 class="font-extrabold text-sm text-amber-300"><i class="fa-solid fa-clipboard-check mr-1.5"></i> เอกสารที่ต้องเตรียม</h2>
+          <p class="text-slate-200"><i class="fa-solid fa-check text-emerald-400 mr-1.5"></i> บัตรประจำตัวประชาชน (ตัวจริง)</p>
+          <p class="text-slate-200"><i class="fa-solid fa-check text-emerald-400 mr-1.5"></i> ใบอนุญาตขับขี่รถยนต์ส่วนบุคคล / สาธารณะ</p>
+          <p class="text-slate-200"><i class="fa-solid fa-check text-emerald-400 mr-1.5"></i> รายการจดทะเบียนรถยนต์ (หน้าเล่มทะเบียน)</p>
+          <p class="text-slate-200"><i class="fa-solid fa-check text-emerald-400 mr-1.5"></i> พ.ร.บ. และกรมธรรม์ประกันภัยรถยนต์</p>
+          <p class="text-slate-200"><i class="fa-solid fa-check text-emerald-400 mr-1.5"></i> หนังสือรับรองประวัติอาชญากรรม (หรือให้ทีมงานแนะนำขั้นตอน)</p>
         </div>
       </div>
     </section>
@@ -151,18 +178,18 @@
     </div>
 
     <!-- แบบฟอร์มลงทะเบียนสมัครคนขับ Grab -->
-    <section class="bg-white rounded-3xl p-5 sm:p-10 border border-slate-200 shadow-sm space-y-6">
-      <div class="border-b border-slate-200 pb-4">
-        <span class="text-xs font-extrabold text-green-800 bg-green-100 px-3 py-1 rounded-full">GRAB DRIVER APPLICATION FORM</span>
-        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 mt-1.5">กรอกข้อมูลสมัครขับ Grab</h2>
-        <p class="text-xs sm:text-sm text-slate-500">กรอกข้อมูลให้ครบถ้วน ช่องที่มีเครื่องหมาย <span class="text-rose-500 font-bold">*</span> จำเป็นต้องระบุ</p>
+    <section class="dark-surface-card rounded-3xl p-5 sm:p-10 space-y-6">
+      <div class="border-b border-slate-800 pb-4">
+        <span class="text-xs font-extrabold text-amber-300 bg-amber-500/15 border border-amber-400/35 px-3 py-1 rounded-full">GRAB DRIVER APPLICATION FORM</span>
+        <h2 class="text-xl sm:text-2xl font-extrabold text-amber-300 mt-1.5">กรอกข้อมูลสมัครขับ Grab</h2>
+        <p class="text-xs sm:text-sm text-slate-400">กรอกข้อมูลให้ครบถ้วน ช่องที่มีเครื่องหมาย <span class="text-rose-400 font-bold">*</span> จำเป็นต้องระบุ</p>
       </div>
 
       <form id="grab-register-form" onsubmit="submitGrabForm(event)" class="space-y-5">
         <div class="grid md:grid-cols-2 gap-4">
           <div class="space-y-1.5">
-            <label class="block text-xs font-bold text-slate-700">ประเภทบริการ Grab ที่ต้องการสมัคร <span class="text-rose-500">*</span></label>
-            <select id="grab_service_type" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-semibold">
+            <label class="block text-xs font-bold text-slate-300">ประเภทบริการ Grab ที่ต้องการสมัคร <span class="text-rose-400">*</span></label>
+            <select id="grab_service_type" required class="dark-field w-full rounded-xl px-4 py-3 text-xs sm:text-sm font-semibold">
               <option value="GrabCar (รถยนต์ส่วนบุคคล 4 ที่นั่ง)">GrabCar (รถยนต์ส่วนบุคคล 4 ที่นั่ง)</option>
               <option value="GrabSUV / GrabXL (รถยนต์ 6-7 ที่นั่ง)">GrabSUV / GrabXL (รถยนต์ 6-7 ที่นั่ง)</option>
               <option value="GrabPremium / GrabExec (รถหรู / VIP)">GrabPremium / GrabExec (รถหรู / VIP)</option>
@@ -172,65 +199,65 @@
           </div>
 
           <div class="space-y-1.5">
-            <label class="block text-xs font-bold text-slate-700">จังหวัด / พื้นที่ที่ต้องการวิ่งงาน <span class="text-rose-500">*</span></label>
-            <input type="text" id="grab_city" required placeholder="เช่น กรุงเทพฯ-ปริมณฑล / ชลบุรี-พัทยา / เชียงใหม่ / ภูเก็ต" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
+            <label class="block text-xs font-bold text-slate-300">จังหวัด / พื้นที่ที่ต้องการวิ่งงาน <span class="text-rose-400">*</span></label>
+            <input type="text" id="grab_city" required placeholder="เช่น กรุงเทพฯ-ปริมณฑล / ชลบุรี-พัทยา / เชียงใหม่ / ภูเก็ต" class="dark-field w-full rounded-xl px-4 py-3 text-xs sm:text-sm">
           </div>
         </div>
 
         <div class="grid md:grid-cols-3 gap-4">
           <div class="space-y-1.5">
-            <label class="block text-xs font-bold text-slate-700">ชื่อ - นามสกุลจริง <span class="text-rose-500">*</span></label>
-            <input type="text" id="grab_fullname" required placeholder="ระบุชื่อและนามสกุลตามบัตรประชาชน" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
+            <label class="block text-xs font-bold text-slate-300">ชื่อ - นามสกุลจริง <span class="text-rose-400">*</span></label>
+            <input type="text" id="grab_fullname" required placeholder="ระบุชื่อและนามสกุลตามบัตรประชาชน" class="dark-field w-full rounded-xl px-4 py-3 text-xs sm:text-sm">
           </div>
           <div class="space-y-1.5">
-            <label class="block text-xs font-bold text-slate-700">เบอร์โทรศัพท์ติดต่อ <span class="text-rose-500">*</span></label>
-            <input type="tel" id="grab_phone" required placeholder="เช่น 0812345678" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-mono">
+            <label class="block text-xs font-bold text-slate-300">เบอร์โทรศัพท์ติดต่อ <span class="text-rose-400">*</span></label>
+            <input type="tel" id="grab_phone" required placeholder="เช่น 0812345678" class="dark-field w-full rounded-xl px-4 py-3 text-xs sm:text-sm font-mono">
           </div>
           <div class="space-y-1.5">
-            <label class="block text-xs font-bold text-slate-700">Line ID <span class="text-rose-500">*</span></label>
-            <input type="text" id="grab_line_id" required placeholder="ระบุ Line ID สำหรับส่งเอกสารและติดต่อ" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
+            <label class="block text-xs font-bold text-slate-300">Line ID <span class="text-rose-400">*</span></label>
+            <input type="text" id="grab_line_id" required placeholder="ระบุ Line ID สำหรับส่งเอกสารและติดต่อ" class="dark-field w-full rounded-xl px-4 py-3 text-xs sm:text-sm">
           </div>
         </div>
 
         <div class="grid md:grid-cols-4 gap-4">
           <div class="space-y-1.5">
-            <label class="block text-xs font-bold text-slate-700">ยี่ห้อรถ <span class="text-rose-500">*</span></label>
-            <input type="text" id="grab_car_brand" required placeholder="เช่น Toyota / Honda / BYD" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
+            <label class="block text-xs font-bold text-slate-300">ยี่ห้อรถ <span class="text-rose-400">*</span></label>
+            <input type="text" id="grab_car_brand" required placeholder="เช่น Toyota / Honda / BYD" class="dark-field w-full rounded-xl px-4 py-3 text-xs sm:text-sm">
           </div>
           <div class="space-y-1.5">
-            <label class="block text-xs font-bold text-slate-700">รุ่นรถ <span class="text-rose-500">*</span></label>
-            <input type="text" id="grab_car_model" required placeholder="เช่น Yaris Ativ / Camry / Atto 3" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
+            <label class="block text-xs font-bold text-slate-300">รุ่นรถ <span class="text-rose-400">*</span></label>
+            <input type="text" id="grab_car_model" required placeholder="เช่น Yaris Ativ / Camry / Atto 3" class="dark-field w-full rounded-xl px-4 py-3 text-xs sm:text-sm">
           </div>
           <div class="space-y-1.5">
-            <label class="block text-xs font-bold text-slate-700">ปีจดทะเบียนรถ <span class="text-rose-500">*</span></label>
-            <input type="text" id="grab_car_year" required placeholder="เช่น 2023 หรือ 2566" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-mono">
+            <label class="block text-xs font-bold text-slate-300">ปีจดทะเบียนรถ <span class="text-rose-400">*</span></label>
+            <input type="text" id="grab_car_year" required placeholder="เช่น 2023 หรือ 2566" class="dark-field w-full rounded-xl px-4 py-3 text-xs sm:text-sm font-mono">
           </div>
           <div class="space-y-1.5">
-            <label class="block text-xs font-bold text-slate-700">หมายเลขทะเบียนรถ <span class="text-rose-500">*</span></label>
-            <input type="text" id="grab_license_plate" required placeholder="เช่น 1กข 1234 กทม." class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold">
+            <label class="block text-xs font-bold text-slate-300">หมายเลขทะเบียนรถ <span class="text-rose-400">*</span></label>
+            <input type="text" id="grab_license_plate" required placeholder="เช่น 1กข 1234 กทม." class="dark-field w-full rounded-xl px-4 py-3 text-xs sm:text-sm font-bold text-amber-300">
           </div>
         </div>
 
         <div class="grid md:grid-cols-2 gap-4">
           <div class="space-y-1.5">
-            <label class="block text-xs font-bold text-slate-700">สถานะใบขับขี่ปัจจุบัน <span class="text-rose-500">*</span></label>
-            <select id="grab_license_status" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
+            <label class="block text-xs font-bold text-slate-300">สถานะใบขับขี่ปัจจุบัน <span class="text-rose-400">*</span></label>
+            <select id="grab_license_status" class="dark-field w-full rounded-xl px-4 py-3 text-xs sm:text-sm">
               <option value="มีใบขับขี่สาธารณะแล้ว">มีใบขับขี่สาธารณะแล้ว</option>
               <option value="มีใบขับขี่ส่วนบุคคล 5 ปี (กำลังดำเนินการทำสาธารณะ)">มีใบขับขี่ส่วนบุคคล 5 ปี (กำลังดำเนินการทำสาธารณะ)</option>
               <option value="มีใบขับขี่ส่วนบุคคล 2 ปี">มีใบขับขี่ส่วนบุคคล 2 ปี</option>
             </select>
           </div>
           <div class="space-y-1.5">
-            <label class="block text-xs font-bold text-slate-700">รหัสสมาชิก The Driver Thailand (ถ้ามี)</label>
-            <input type="text" id="grab_member_code" placeholder="เช่น B2464 (หากยังไม่เป็นสมาชิกเว้นว่างได้)" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-mono uppercase">
+            <label class="block text-xs font-bold text-slate-300">รหัสสมาชิก The Driver Thailand (ถ้ามี)</label>
+            <input type="text" id="grab_member_code" placeholder="เช่น B2464 (หากยังไม่เป็นสมาชิกเว้นว่างได้)" class="dark-field w-full rounded-xl px-4 py-3 text-xs sm:text-sm font-mono uppercase text-amber-300">
           </div>
         </div>
 
         <div class="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-3 pt-2">
-          <a href="driver_news.html" class="w-full sm:w-auto text-center px-5 py-3 rounded-xl border border-slate-300 bg-white hover:bg-slate-100 text-slate-700 font-bold text-xs sm:text-sm transition">
+          <a href="driver_news.html" class="w-full sm:w-auto text-center px-5 py-3 rounded-xl border border-slate-700 bg-slate-950 hover:bg-slate-800 text-slate-200 font-bold text-xs sm:text-sm transition">
             <i class="fa-solid fa-arrow-left mr-1.5"></i> กลับหน้าข่าวสารคนขับแอป
           </a>
-          <button type="submit" id="btn-submit-grab" class="w-full sm:w-auto bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-white font-extrabold text-sm sm:text-base px-8 py-3.5 rounded-xl shadow-lg transition flex items-center justify-center gap-2">
+          <button type="submit" id="btn-submit-grab" class="w-full sm:w-auto bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold text-sm sm:text-base px-8 py-3.5 rounded-xl shadow-lg transition flex items-center justify-center gap-2">
             <i class="fa-solid fa-paper-plane"></i>
             <span>ส่งใบสมัครคนขับ Grab</span>
           </button>

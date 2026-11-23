@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ระบบหลังบ้านผู้ดูแลระบบ (Admin Portal) | 🚖 The Driver TH</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    html { font-size: 16px; }
+    html, body, input, select, textarea, button { font-family: 'Prompt', sans-serif !important; }
+    body { background-color: #070a12; color: #f8fafc; overflow-x: clip; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+  <!-- กล่องแจ้งเตือน Toast -->
+  <div id="admin-toast-box" class="fixed top-5 right-5 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none px-4"></div>
+
+  <!-- หน้าจอล็อกอินเข้าสู่ระบบหลังบ้าน (ป้องกันข้อมูลรั่วไหล) -->
+  <div id="admin-login-screen" class="flex-grow flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-amber-400/40 rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl space-y-5">
+      <div class="text-center space-y-2">
+        <div class="w-14 h-14 rounded-2xl bg-amber-400/15 border border-amber-400/50 text-amber-400 flex items-center justify-center text-2xl mx-auto">
+          <i class="fa-solid fa-user-shield"></i>
+        </div>
+        <h1 class="text-xl font-black text-amber-300">ระบบหลังบ้านผู้ดูแลระบบ (ADMIN)</h1>
+        <p class="text-xs text-slate-400">สงวนสิทธิ์เฉพาะคณะผู้ดูแลเครือข่าย The Driver Thailand เท่านั้น</p>
+      </div>
+
+      <form onsubmit="handleAdminLogin(event)" class="space-y-4">
+        <div class="space-y-1">
+          <label class="block text-xs font-bold text-slate-300">รหัสผู้ดูแล (Admin ID)</label>
+          <input type="text" id="admin-id-input" required placeholder="เช่น MD01 หรือ ADMIN"
+            class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-xs sm:text-sm text-white font-mono uppercase focus:outline-none focus:border-amber-400">
+        </div>
+        <div class="space-y-1">
+          <label class="block text-xs font-bold text-slate-300">รหัสผ่านหลังบ้าน (Admin Passcode)</label>
+          <input type="password" id="admin-pass-input" required placeholder="กรอกรหัสผ่านผู้ดูแลระบบ"
+            class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-xs sm:text-sm text-white focus:outline-none focus:border-amber-400">
+        </div>
+        <button type="submit" id="btn-admin-login" class="w-full bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold py-3.5 rounded-xl text-xs sm:text-sm shadow-lg transition">
+          <i class="fa-solid fa-lock-open mr-1.5"></i> ยืนยันตัวตนเข้าสู่ระบบหลังบ้าน
+        </button>
+      </form>
+
+      <div class="text-center pt-2 border-t border-slate-800">
+        <a href="index.html" class="text-xs text-slate-400 hover:text-amber-300 transition">
+          <i class="fa-solid fa-arrow-left mr-1"></i> กลับไปหน้าเว็บไซต์หลัก
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- พื้นที่จัดการระบบหลังบ้าน (แสดงเมื่อล็อกอินสำเร็จเท่านั้น) -->
+  <div id="admin-dashboard-screen" class="hidden flex-grow flex flex-col">
+    <header class="bg-slate-900 border-b border-amber-400/25 sticky top-0 z-40">
+      <div class="max-w-7xl mx-auto px-4 py-3.5 flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center gap-3">
+          <img src="TheDriverTH.jpg" alt="โลโก้" onerror="this.onerror=null;this.src='https://placehold.co/80x80/0f172a/fbbf24?text=TDT';" class="w-10 h-10 rounded-xl object-cover border border-amber-400">
+          <div>
+            <span class="text-sm font-extrabold text-amber-300 block">🚖 The Driver TH — Admin Control Center</span>
+            <span class="text-[11px] text-emerald-400"><i class="fa-solid fa-circle-check mr-1"></i>เข้าสู่ระบบในฐานะ: <strong id="logged-admin-name">-</strong></span>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <a href="index.html" target="_blank" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700">
+            <i class="fa-solid fa-up-right-from-square mr-1"></i> ดูหน้าเว็บจริง
+          </a>
+          <button type="button" onclick="logoutAdmin()" class="px-3.5 py-2 rounded-xl bg-rose-600/20 hover:bg-rose-600/30 text-rose-300 border border-rose-500/40 font-bold">
+            <i class="fa-solid fa-right-from-bracket mr-1"></i> ออกจากระบบ
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 py-6 space-y-6">
+      <!-- แถบแท็บเมนูหลังบ้าน -->
+      <div class="flex flex-wrap gap-2 bg-slate-900 p-2 rounded-2xl border border-slate-800">
+        <button type="button" onclick="switchAdminTab('settings')" data-tab="settings" class="admin-tab-btn bg-amber-400 text-slate-950 font-extrabold px-4 py-2.5 rounded-xl text-xs">
+          <i class="fa-solid fa-sliders mr-1.5"></i> 1. แก้ไขข้อมูลหน้าเว็บไซต์ทั้งหมด
+        </button>
+        <button type="button" onclick="switchAdminTab('members')" data-tab="members" class="admin-tab-btn bg-slate-800 text-slate-300 hover:text-white font-bold px-4 py-2.5 rounded-xl text-xs">
+          <i class="fa-solid fa-user-check mr-1.5"></i> 2. อนุมัติสมาชิกใหม่ (<span id="pending-members-count">0</span>)
+        </button>
+        <button type="button" onclick="switchAdminTab('forum')" data-tab="forum" class="admin-tab-btn bg-slate-800 text-slate-300 hover:text-white font-bold px-4 py-2.5 rounded-xl text-xs">
+          <i class="fa-solid fa-comments mr-1.5"></i> 3. อนุมัติบัญชีเว็บบอร์ด (<span id="pending-forum-count">0</span>)
+        </button>
+        <button type="button" onclick="switchAdminTab('shipping')" data-tab="shipping" class="admin-tab-btn bg-slate-800 text-slate-300 hover:text-white font-bold px-4 py-2.5 rounded-xl text-xs">
+          <i class="fa-solid fa-truck-fast mr-1.5"></i> 4. อัปเดตสถานะ &amp; เลขพัสดุ
+        </button>
+        <button type="button" onclick="switchAdminTab('backup')" data-tab="backup" class="admin-tab-btn bg-slate-800 text-emerald-300 hover:text-emerald-200 font-bold px-4 py-2.5 rounded-xl text-xs ml-auto">
+          <i class="fa-solid fa-database mr-1.5"></i> 5. สำรองข้อมูลส่วนตัว (Backup)
+        </button>
+      </div>
+
+      <!-- แท็บ 1: แก้ไขข้อมูลหน้าเว็บไซต์ทั้งหมด -->
+      <section id="admin-panel-settings" class="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-5">
+        <div class="border-b border-slate-800 pb-4 flex items-center justify-between flex-wrap gap-2">
+          <div>
+            <h2 class="text-lg font-extrabold text-amber-300">แก้ไขการตั้งค่าและข้อความหน้าเว็บไซต์</h2>
+            <p class="text-xs text-slate-400">บันทึกแล้วจะมีผลอัปเดตบนหน้าแรก (`index.html`) และหน้าบริการต่างๆ ทันที</p>
+          </div>
+          <button type="button" onclick="loadAdminOverview()" class="text-xs bg-slate-800 hover:bg-slate-700 px-3.5 py-2 rounded-xl text-amber-300 font-bold">
+            <i class="fa-solid fa-rotate mr-1"></i> โหลดค่าปัจจุบัน
+          </button>
+        </div>
+
+        <form onsubmit="saveSiteSettings(event)" class="grid md:grid-cols-2 gap-4 text-xs sm:text-sm">
+          <div class="space-y-1.5">
+            <label class="block text-xs font-bold text-slate-300">ข้อความแถบประกาศด้านบนสุด (Top Announcement)</label>
+            <input type="text" id="cfg-announcement" placeholder="ประกาศและรอบการจัดส่งบริการสำหรับสมาชิกเครือข่าย"
+              class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-white">
+          </div>
+          <div class="space-y-1.5">
+            <label class="block text-xs font-bold text-slate-300">วันที่รอบจัดส่งบัตรสมาชิกถัดไป</label>
+            <input type="text" id="cfg-next-round" placeholder="เช่น รอบวันที่ 11 ธันวาคม 2569"
+              class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-amber-300 font-bold">
+          </div>
+          <div class="space-y-1.5">
+            <label class="block text-xs font-bold text-slate-300">สถานะระบบออนไลน์หน้าเว็บ</label>
+            <input type="text" id="cfg-system-status" placeholder="เช่น ระบบออนไลน์พร้อมใช้งาน"
+              class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-emerald-300">
+          </div>
+          <div class="space-y-1.5">
+            <label class="block text-xs font-bold text-slate-300">Line Official แอดมินกลาง</label>
+            <input type="text" id="cfg-line-official" placeholder="@Thedrivethailand"
+              class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-white font-mono">
+          </div>
+          <div class="space-y-1.5">
+            <label class="block text-xs font-bold text-slate-300">ราคาสมุดทัวร์ โซนกรุงเทพฯ-ปริมณฑล (บาท)</label>
+            <input type="number" id="cfg-price-bkk" placeholder="799"
+              class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-white font-mono">
+          </div>
+          <div class="space-y-1.5">
+            <label class="block text-xs font-bold text-slate-300">ราคาสมุดทัวร์ โซนพัทยา-ชลบุรี (บาท)</label>
+            <input type="number" id="cfg-price-pty" placeholder="999"
+              class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-white font-mono">
+          </div>
+          <div class="md:col-span-2 pt-2">
+            <button type="submit" id="btn-save-settings" class="bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-extrabold px-6 py-3 rounded-xl text-xs sm:text-sm shadow">
+              <i class="fa-solid fa-floppy-disk mr-1.5"></i> บันทึกการตั้งค่าเว็บไซต์ทั้งหมด
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- แท็บ 2: อนุมัติสมาชิกใหม่ -->
+      <section id="admin-panel-members" class="hidden bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-4">
+        <div class="border-b border-slate-800 pb-4 flex items-center justify-between">
+          <div>
+            <h2 class="text-lg font-extrabold text-emerald-400">รายการรออนุมัติสมาชิกใหม่ (จากแผ่นงาน ฐานข้อมูลสมาชิก)</h2>
+            <p class="text-xs text-slate-400">กดอนุมัติเพื่อรันรหัสสมาชิกถัดไปและย้ายเข้าแผ่นงาน DATAMember อัตโนมัติ</p>
+          </div>
+          <button type="button" onclick="loadAdminOverview()" class="text-xs bg-slate-800 px-3.5 py-2 rounded-xl text-amber-300 font-bold">รีเฟรช</button>
+        </div>
+        <div id="pending-members-list" class="space-y-3"></div>
+      </section>
+
+      <!-- แท็บ 3: อนุมัติบัญชีเว็บบอร์ด -->
+      <section id="admin-panel-forum" class="hidden bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-4">
+        <div class="border-b border-slate-800 pb-4 flex items-center justify-between">
+          <div>
+            <h2 class="text-lg font-extrabold text-sky-400">รายการขอสมัครใช้งานเว็บบอร์ด (รออนุมัติ)</h2>
+            <p class="text-xs text-slate-400">ตรวจสอบรหัสสมาชิกและกดอนุมัติเพื่อให้สมาชิกเข้าใช้งานเว็บบอร์ดได้</p>
+          </div>
+          <button type="button" onclick="loadAdminOverview()" class="text-xs bg-slate-800 px-3.5 py-2 rounded-xl text-amber-300 font-bold">รีเฟรช</button>
+        </div>
+        <div id="pending-forum-list" class="space-y-3"></div>
+      </section>
+
+      <!-- แท็บ 4: อัปเดตสถานะและเลขพัสดุ -->
+      <section id="admin-panel-shipping" class="hidden bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-4">
+        <div class="border-b border-slate-800 pb-4">
+          <h2 class="text-lg font-extrabold text-amber-300">อัปเดตสถานะและเลขพัสดุ (บัตรประเมศฐ์ / สมุดทัวร์)</h2>
+          <p class="text-xs text-slate-400">กรอกรหัสอ้างอิง (เช่น PRM-... หรือ TBK-...) เลือกสถานะและใส่เลขพัสดุเพื่ออัปเดตขึ้นระบบทันที</p>
+        </div>
+        <form onsubmit="updateTrackingAdmin(event)" class="grid sm:grid-cols-4 gap-3 text-xs">
+          <input type="text" id="upd-ref-code" required placeholder="รหัสอ้างอิง (เช่น PRM-2026...)" class="bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-3 text-white font-mono">
+          <select id="upd-status" class="bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-3 text-white">
+            <option value="ยืนยันรับออเดอร์แล้ว">ยืนยันรับออเดอร์แล้ว</option>
+            <option value="กำลังดำเนินการ">กำลังดำเนินการ</option>
+            <option value="จัดส่งแล้ว">จัดส่งแล้ว</option>
+          </select>
+          <input type="text" id="upd-tracking-no" placeholder="เลขพัสดุ (เช่น TH0123456789)" class="bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-3 text-amber-300 font-mono">
+          <button type="submit" class="bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold rounded-xl px-4 py-3">บันทึกอัปเดต</button>
+        </form>
+      </section>
+
+      <!-- แท็บ 5: สำรองข้อมูลส่วนตัวเฉพาะแอดมิน (Private Backup) -->
+      <section id="admin-panel-backup" class="hidden bg-slate-900 border border-emerald-500/30 rounded-3xl p-6 space-y-4">
+        <div class="flex items-start gap-3 bg-emerald-950/50 border border-emerald-500/30 rounded-2xl p-4">
+          <i class="fa-solid fa-shield-halved text-emerald-400 text-xl mt-0.5"></i>
+          <div class="text-xs space-y-1">
+            <h2 class="font-extrabold text-emerald-300 text-sm">ระบบสำรองข้อมูลส่วนตัวเฉพาะแอดมิน (Private Encrypted Backup)</h2>
+            <p class="text-slate-300">การดาวน์โหลดไฟล์สำรองจะตรวจสอบรหัสผ่านแอดมินฝั่ง Google Apps Script ทุกครั้ง และไม่มีการแสดงปุ่มหรือลิงก์นี้บนหน้าเว็บไซต์สาธารณะเพื่อป้องกันข้อมูลรั่วไหล 100%</p>
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <button type="button" onclick="downloadPrivateBackup('datamember')" class="bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold px-5 py-3 rounded-xl text-xs">
+            <i class="fa-solid fa-file-csv mr-1.5"></i> ดาวน์โหลดไฟล์สำรอง DATAMember (.CSV)
+          </button>
+          <button type="button" onclick="downloadPrivateBackup('all')" class="bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold px-5 py-3 rounded-xl text-xs">
+            <i class="fa-solid fa-database mr-1.5"></i> ดาวน์โหลดสำรองฐานข้อมูลทั้งหมด (.JSON)
+          </button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const MASTER_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyeDCdxBD10D_AFZQY2NxeylLOiAmAHLesSDZHXYCb3TsYs4wYer_kRTPVOs3VpK2pP/exec';
+    let adminAuth = { adminId: '', passcode: '' };
+
+    function esc(s) { return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+    function showAdminToast(msg, ok = true) {
+      const box = document.getElementById('admin-toast-box');
+      const el = document.createElement('div');
+      el.className = `pointer-events-auto p-3.5 rounded-2xl border text-xs font-bold shadow-xl ${ok ? 'bg-emerald-950 text-emerald-200 border-emerald-500/50' : 'bg-rose-950 text-rose-200 border-rose-500/50'}`;
+      el.textContent = msg;
+      box.appendChild(el);
+      setTimeout(() => el.remove(), 3800);
+    }
+
+    async function handleAdminLogin(e) {
+      e.preventDefault();
+      const adminId = document.getElementById('admin-id-input').value.trim().toUpperCase();
+      const passcode = document.getElementById('admin-pass-input').value;
+      const btn = document.getElementById('btn-admin-login');
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin mr-1.5"></i> กำลังตรวจสอบสิทธิ์...';
+
+      try {
+        const res = await fetch(MASTER_WEB_APP_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({ action: 'admin_login', adminId, passcode })
+        });
+        const json = await res.json();
+        if (!json.success) {
+          showAdminToast(json.error || 'รหัสผู้ดูแลหรือรหัสผ่านไม่ถูกต้อง', false);
+          return;
+        }
+        adminAuth = { adminId, passcode };
+        document.getElementById('logged-admin-name').textContent = adminId;
+        document.getElementById('admin-login-screen').classList.add('hidden');
+        document.getElementById('admin-dashboard-screen').classList.remove('hidden');
+        loadAdminOverview();
+      } catch (_) {
+        showAdminToast('ไม่สามารถเชื่อมต่อ Google Apps Script ได้', false);
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-lock-open mr-1.5"></i> ยืนยันตัวตนเข้าสู่ระบบหลังบ้าน';
+      }
+    }
+
+    function logoutAdmin() {
+      adminAuth = { adminId: '', passcode: '' };
+      document.getElementById('admin-dashboard-screen').classList.add('hidden');
+      document.getElementById('admin-login-screen').classList.remove('hidden');
+      document.getElementById('admin-pass-input').value = '';
+    }
+
+    function switchAdminTab(tab) {
+      ['settings', 'members', 'forum', 'shipping', 'backup'].forEach(k => {
+        document.getElementById(`admin-panel-${k}`).classList.toggle('hidden', k !== tab);
+      });
+      document.querySelectorAll('.admin-tab-btn').forEach(b => {
+        const active = b.getAttribute('data-tab') === tab;
+        b.className = active
+          ? 'admin-tab-btn bg-amber-400 text-slate-950 font-extrabold px-4 py-2.5 rounded-xl text-xs'
+          : 'admin-tab-btn bg-slate-800 text-slate-300 hover:text-white font-bold px-4 py-2.5 rounded-xl text-xs';
+      });
+    }
+
+    async function loadAdminOverview() {
+      try {
+        const res = await fetch(MASTER_WEB_APP_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({ action: 'admin_overview', ...adminAuth })
+        });
+        const json = await res.json();
+        if (!json.success) return;
+
+        const cfg = json.settings || {};
+        document.getElementById('cfg-announcement').value = cfg.announcement || 'ประกาศและรอบการจัดส่งบริการสำหรับสมาชิกเครือข่าย';
+        document.getElementById('cfg-next-round').value = cfg.nextRound || 'รอบวันที่ 11 ธันวาคม 2569';
+        document.getElementById('cfg-system-status').value = cfg.systemStatus || 'ระบบออนไลน์พร้อมใช้งาน';
+        document.getElementById('cfg-line-official').value = cfg.lineOfficial || '@Thedrivethailand';
+        document.getElementById('cfg-price-bkk').value = cfg.priceBkk || '799';
+        document.getElementById('cfg-price-pty').value = cfg.pricePty || '999';
+
+        const pendingMembers = Array.isArray(json.pendingMembers) ? json.pendingMembers : [];
+        document.getElementById('pending-members-count').textContent = pendingMembers.length;
+        const mBox = document.getElementById('pending-members-list');
+        mBox.innerHTML = pendingMembers.length === 0
+          ? '<p class="text-xs text-slate-400 py-4 text-center">ไม่มีรายการรออนุมัติในแผ่นงาน ฐานข้อมูลสมาชิก</p>'
+          : pendingMembers.map(m => `
+            <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+              <div class="space-y-1">
+                <p class="font-bold text-white">${esc(m.chatName)} (${esc(m.fullName)})</p>
+                <p class="text-slate-400">รถ: ${esc(m.carBrand)} ${esc(m.carModel)} · ทะเบียน: <strong class="text-amber-300">${esc(m.licensePlate)}</strong> · โทร: ${esc(m.phone)}</p>
+                <div class="flex gap-3 pt-1">
+                  ${m.carPhoto ? `<a href="${esc(m.carPhoto)}" target="_blank" class="text-emerald-400 underline">ดูรูปรถ</a>` : ''}
+                  ${m.selfiePhoto ? `<a href="${esc(m.selfiePhoto)}" target="_blank" class="text-amber-300 underline">ดูรูปคู่กระดาษ</a>` : ''}
+                </div>
+              </div>
+              <div class="flex items-center gap-2 shrink-0">
+                <input type="text" id="code-for-${esc(m.refCode)}" placeholder="รหัส (เว้นว่าง=รันอัตโนมัติ)" class="w-36 bg-slate-900 border border-slate-700 rounded-xl px-2.5 py-2 text-xs text-white font-mono">
+                <button type="button" onclick="decideMember('${esc(m.refCode)}', 'อนุมัติ')" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-3.5 py-2 rounded-xl">อนุมัติ</button>
+                <button type="button" onclick="decideMember('${esc(m.refCode)}', 'ไม่อนุมัติ')" class="bg-rose-600 hover:bg-rose-500 text-white font-bold px-3.5 py-2 rounded-xl">ไม่อนุมัติ</button>
+              </div>
+            </div>
+          `).join('');
+
+        const pendingForum = Array.isArray(json.pendingForumUsers) ? json.pendingForumUsers : [];
+        document.getElementById('pending-forum-count').textContent = pendingForum.length;
+        const fBox = document.getElementById('pending-forum-list');
+        fBox.innerHTML = pendingForum.length === 0
+          ? '<p class="text-xs text-slate-400 py-4 text-center">ไม่มีบัญชีเว็บบอร์ดที่รออนุมัติ</p>'
+          : pendingForum.map(u => `
+            <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4 flex items-center justify-between gap-3 text-xs">
+              <div>
+                <p class="font-bold text-white">[${esc(u.memberCode)}] ${esc(u.displayName)}</p>
+                <p class="text-slate-400">สมัครเมื่อ: ${esc(u.createdAt)} · ประเภท: ${esc(u.tier)}</p>
+              </div>
+              <div class="flex gap-2">
+                <button type="button" onclick="decideForumUser('${esc(u.memberCode)}', 'อนุมัติ')" class="bg-emerald-600 text-white font-bold px-3.5 py-2 rounded-xl">อนุมัติ</button>
+                <button type="button" onclick="decideForumUser('${esc(u.memberCode)}', 'ไม่อนุมัติ')" class="bg-rose-600 text-white font-bold px-3.5 py-2 rounded-xl">ไม่อนุมัติ</button>
+              </div>
+            </div>
+          `).join('');
+      } catch (_) {}
+    }
+
+    async function saveSiteSettings(e) {
+      e.preventDefault();
+      const res = await fetch(MASTER_WEB_APP_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({
+          action: 'admin_save_settings',
+          ...adminAuth,
+          settings: {
+            announcement: document.getElementById('cfg-announcement').value.trim(),
+            nextRound: document.getElementById('cfg-next-round').value.trim(),
+            systemStatus: document.getElementById('cfg-system-status').value.trim(),
+            lineOfficial: document.getElementById('cfg-line-official').value.trim(),
+            priceBkk: document.getElementById('cfg-price-bkk').value.trim(),
+            pricePty: document.getElementById('cfg-price-pty').value.trim()
+          }
+        })
+      });
+      const json = await res.json();
+      showAdminToast(json.success ? 'บันทึกการตั้งค่าเว็บไซต์เรียบร้อยแล้ว' : (json.error || 'บันทึกไม่สำเร็จ'), json.success);
+    }
+
+    async function decideMember(refCode, decision) {
+      const customCode = (document.getElementById(`code-for-${refCode}`)?.value || '').trim().toUpperCase();
+      const res = await fetch(MASTER_WEB_APP_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({ action: 'admin_decide_member', ...adminAuth, refCode, customCode, decision })
+      });
+      const json = await res.json();
+      showAdminToast(json.message || (json.success ? 'ดำเนินการเรียบร้อย' : 'ผิดพลาด'), json.success);
+      loadAdminOverview();
+    }
+
+    async function decideForumUser(memberCode, decision) {
+      const res = await fetch(MASTER_WEB_APP_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({ action: 'admin_decide_forum_user', ...adminAuth, memberCode, decision })
+      });
+      const json = await res.json();
+      showAdminToast(json.success ? `อัปเดตสถานะบัญชี ${memberCode} เรียบร้อยแล้ว` : 'ผิดพลาด', json.success);
+      loadAdminOverview();
+    }
+
+    async function updateTrackingAdmin(e) {
+      e.preventDefault();
+      const res = await fetch(MASTER_WEB_APP_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({
+          action: 'admin_update_tracking',
+          ...adminAuth,
+          refCode: document.getElementById('upd-ref-code').value.trim(),
+          status: document.getElementById('upd-status').value,
+          trackingNo: document.getElementById('upd-tracking-no').value.trim() || '-'
+        })
+      });
+      const json = await res.json();
+      showAdminToast(json.message || (json.success ? 'อัปเดตเลขพัสดุแล้ว' : 'ไม่พบรหัสอ้างอิงนี้'), json.success);
+    }
+
+    async function downloadPrivateBackup(scope) {
+      showAdminToast('กำลังสร้างไฟล์สำรองข้อมูลส่วนตัว...', true);
+      const res = await fetch(MASTER_WEB_APP_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({ action: 'admin_export_backup', ...adminAuth, scope })
+      });
+      const json = await res.json();
+      if (!json.success) {
+        showAdminToast(json.error || 'ไม่มีสิทธิ์สำรองข้อมูล', false);
+        return;
+      }
+      const blob = new Blob([json.content], { type: scope === 'datamember' ? 'text/csv;charset=utf-8;' : 'application/json;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = json.filename || `TheDriverTH_Backup_${Date.now()}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+      showAdminToast('ดาวน์โหลดไฟล์สำรองข้อมูลเรียบร้อยแล้ว', true);
+    }
+  </script>
+</body>
+</html>

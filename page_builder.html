@@ -3,977 +3,768 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Visual Drag &amp; Drop Website Builder | 🚖 The Driver TH 🇹🇭</title>
+  <title>Visual Website Builder | แก้ไขหน้าเว็บจริงทุกหน้า</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    html, body, input, select, textarea, button, code, pre { font-family: 'Prompt', sans-serif !important; }
-    body { background-color: #e2e8f0; color: #0f172a; overflow-x: clip; }
-    .builder-canvas-shell { transition: max-width 0.3s cubic-bezier(0.22, 1, 0.36, 1); }
-    .builder-block { position: relative; transition: transform 0.18s ease, box-shadow 0.18s ease, outline-color 0.18s ease; border-radius: 16px; }
-    .builder-block:hover { outline: 2px solid #f59e0b; outline-offset: 3px; }
-    .builder-block.is-selected { outline: 2.5px solid #2563eb; outline-offset: 3px; box-shadow: 0 12px 30px -10px rgba(37, 99, 235, 0.25); }
-    .builder-block.is-dragging { opacity: 0.45; transform: scale(0.99); }
-    .builder-block-bar { opacity: 0; pointer-events: none; transition: opacity 0.15s ease; }
-    .builder-block:hover .builder-block-bar,
-    .builder-block.is-selected .builder-block-bar { opacity: 1; pointer-events: auto; }
-    .drop-zone-indicator { height: 10px; border-radius: 999px; transition: all 0.15s ease; margin: 4px 0; }
-    .drop-zone-indicator.is-over { height: 42px; background: rgba(245, 158, 11, 0.16); border: 2px dashed #f59e0b; display: flex; align-items: center; justify-content: center; color: #b45309; font-size: 12px; font-weight: 700; }
-    [contenteditable="true"]:focus { outline: 2px dashed #3b82f6; background-color: rgba(59, 130, 246, 0.05); border-radius: 6px; }
-    .draggable-palette-item { cursor: grab; }
-    .draggable-palette-item:active { cursor: grabbing; }
+    html, body {
+      font-family: 'Prompt', sans-serif !important;
+      background-color: #070a12;
+      color: #f8fafc;
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+    }
+    .gold-grad {
+      background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+    }
+    .canvas-stage-bg {
+      background-color: #0f172a;
+      background-image: radial-gradient(rgba(148, 163, 184, 0.14) 1px, transparent 1px);
+      background-size: 18px 18px;
+    }
+    .page-item-btn.is-active {
+      background: rgba(251, 191, 36, 0.16);
+      border-color: rgba(251, 191, 36, 0.6);
+      color: #fde68a;
+    }
   </style>
 </head>
-<body class="min-h-screen flex flex-col">
+<body class="flex flex-col h-screen select-none">
 
-  <!-- TOP STUDIO HEADER BAR -->
-  <header class="bg-slate-950 text-white border-b border-amber-400/30 sticky top-0 z-50 px-3 sm:px-5 py-2.5 shadow-xl">
-    <div class="max-w-[1600px] mx-auto flex flex-wrap items-center justify-between gap-2.5">
-      <!-- ซ้าย: ชื่อสตูดิโอและเลือกหน้าเว็บ -->
+  <!-- กล่องแจ้งเตือน Toast -->
+  <div id="builder-toast" class="hidden fixed bottom-5 right-5 z-[1300] bg-slate-900 border border-amber-400/50 text-amber-200 px-4 py-3 rounded-2xl shadow-2xl text-xs font-bold flex items-center gap-2.5">
+    <i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i>
+    <span id="builder-toast-text">-</span>
+  </div>
+
+  <!-- แถบเครื่องมือด้านบนสุด (Top Builder Bar) -->
+  <header class="bg-slate-900 border-b border-amber-400/25 px-3 sm:px-5 py-2.5 shrink-0 z-40">
+    <div class="flex flex-wrap items-center justify-between gap-2.5">
+      <!-- หัวข้อและปุ่มกลับหลังบ้าน -->
       <div class="flex items-center gap-2.5">
-        <a href="admin.html" class="w-9 h-9 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-300 flex items-center justify-center border border-slate-700" title="กลับหน้า Admin">
-          <i class="fa-solid fa-arrow-left"></i>
+        <a href="admin.html" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-2 rounded-xl text-xs font-bold border border-slate-700 transition">
+          <i class="fa-solid fa-arrow-left mr-1"></i> กลับหลังบ้าน
         </a>
-        <div>
-          <div class="flex items-center gap-2">
-            <span class="text-xs sm:text-sm font-black text-amber-300">🚖 The Driver TH Studio</span>
-            <span class="hidden sm:inline-block text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 px-2 py-0.5 rounded-full font-bold">PRO VISUAL BUILDER</span>
-          </div>
-          <div class="flex items-center gap-1.5 text-[11px] text-slate-400">
-            <span>กำลังแก้ไข:</span>
-            <select id="active-page-select" onchange="switchBuilderPage(this.value)" class="bg-slate-900 text-amber-300 font-bold rounded px-1.5 py-0.5 border border-slate-700 focus:outline-none">
-              <option value="index.html">หน้าหลัก (index.html)</option>
-              <option value="driver_news.html">ข่าวสารคนขับแอป (driver_news.html)</option>
-              <option value="captain_insurance.html">Captain Insurance (captain_insurance.html)</option>
-              <option value="register.html">ระบบสมาชิก (register.html)</option>
-              <option value="pcard.html">บัตรสมาชิกประเมศฐ์ (pcard.html)</option>
-              <option value="guide.html">คู่มือสมาชิก (guide.html)</option>
-            </select>
+        <div class="flex items-center gap-2">
+          <span class="w-8 h-8 rounded-xl gold-grad text-slate-950 font-black flex items-center justify-center text-sm shadow">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+          </span>
+          <div>
+            <h1 class="text-xs sm:text-sm font-extrabold text-amber-300 leading-tight">Visual Website Builder (แก้ไขหน้าเว็บจริงทุกหน้า)</h1>
+            <p id="live-page-load-status" class="text-[10px] text-slate-400">กำลังเตรียมโหลดหน้าเว็บปัจจุบัน...</p>
           </div>
         </div>
       </div>
 
-      <!-- กลาง: ปุ่ม Undo / Redo + สลับขนาดหน้าจอ Desktop / Tablet / Mobile -->
-      <div class="flex items-center gap-1.5 bg-slate-900 p-1 rounded-xl border border-slate-800">
-        <button type="button" onclick="undoAction()" id="btn-undo" title="ย้อนกลับ (Undo)" class="w-8 h-8 rounded-lg hover:bg-slate-800 text-slate-300 disabled:opacity-30 text-xs">
+      <!-- ตัวเลือกหน้าเว็บจริง & ปุ่มโหลดไฟล์ / โฟลเดอร์ / URL -->
+      <div class="flex items-center gap-1.5 flex-wrap">
+        <select id="top-page-selector" onchange="switchTargetPage(this.value)"
+          class="bg-slate-950 border border-amber-400/50 text-amber-300 font-bold text-xs px-3 py-2 rounded-xl focus:outline-none">
+          <option value="index.html">หน้าแรก (index.html)</option>
+          <option value="driver_news.html">ข่าวสารคนขับแอป (driver_news.html)</option>
+          <option value="grab_driver_register.html">สมัครคนขับ Grab (grab_driver_register.html)</option>
+          <option value="bolt_driver_register.html">สมัครคนขับ Bolt (bolt_driver_register.html)</option>
+          <option value="captain_insurance.html">ประกันภัย Captain Insurance (captain_insurance.html)</option>
+          <option value="register.html">ระบบสมาชิก &amp; ค้นหารหัส (register.html)</option>
+          <option value="member_register.html">ลงทะเบียนสมาชิกใหม่ (member_register.html)</option>
+          <option value="member_edit.html">แก้ไขข้อมูลสมาชิกเดิม (member_edit.html)</option>
+          <option value="pcard.html">บัตรสมาชิกประเมศฐ์ (pcard.html)</option>
+          <option value="unblock_request.html">ขอปลดล็อก OpenChat (unblock_request.html)</option>
+          <option value="luxury_car_register.html">ลงทะเบียน Luxury Car (luxury_car_register.html)</option>
+          <option value="vip_referral_guide.html">[VIP] ลายแทงท่องเที่ยว (vip_referral_guide.html)</option>
+          <option value="rtaf_pass_register.html">บัตรผ่านยานพาหนะ ทอ. (rtaf_pass_register.html)</option>
+          <option value="tour_book_order.html">สั่งซื้อสมุดทัวร์ (tour_book_order.html)</option>
+          <option value="blacklist.html">ศูนย์เฝ้าระวังภัย Blacklist (blacklist.html)</option>
+          <option value="community.html">ชุมชนเว็บบอร์ด (community.html)</option>
+          <option value="job_board.html">กระดานแลกเปลี่ยนงาน (job_board.html)</option>
+          <option value="tracking.html">ติดตามสถานะคำร้อง (tracking.html)</option>
+          <option value="member_card_digital.html">บัตรสมาชิกดิจิทัล QR (member_card_digital.html)</option>
+          <option value="fare_calculator.html">คำนวณค่าโดยสาร (fare_calculator.html)</option>
+          <option value="guide.html">คู่มือสมาชิก (guide.html)</option>
+          <option value="privacy_policy.html">ประกาศความเป็นส่วนตัว (privacy_policy.html)</option>
+        </select>
+
+        <button type="button" onclick="reloadCurrentLivePage()" title="โหลดโค้ดล่าสุดจากเซิร์ฟเวอร์"
+          class="bg-slate-800 hover:bg-slate-700 text-emerald-300 border border-emerald-500/40 px-3 py-2 rounded-xl text-xs font-bold transition">
+          <i class="fa-solid fa-rotate mr-1"></i> โหลดล่าสุด
+        </button>
+
+        <button type="button" onclick="openBaseUrlModal()" title="ตั้งค่า URL เว็บไซต์จริงของคุณ"
+          class="bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-400/40 px-3 py-2 rounded-xl text-xs font-bold transition">
+          <i class="fa-solid fa-globe mr-1"></i> ตั้งค่า URL เว็บจริง
+        </button>
+
+        <label title="เปิดไฟล์ .html ปัจจุบันจากเครื่อง"
+          class="bg-sky-600/25 hover:bg-sky-600/40 text-sky-300 border border-sky-400/40 px-3 py-2 rounded-xl text-xs font-bold cursor-pointer transition">
+          <i class="fa-solid fa-folder-open mr-1"></i> เปิดไฟล์ .HTML
+          <input type="file" id="local-html-loader" accept=".html,.htm" onchange="loadLocalHtmlFile(this)" class="hidden">
+        </label>
+
+        <label title="เลือกทั้งโฟลเดอร์โปรเจกต์เว็บไซต์ในเครื่อง"
+          class="bg-emerald-600/25 hover:bg-emerald-600/40 text-emerald-300 border border-emerald-400/40 px-3 py-2 rounded-xl text-xs font-bold cursor-pointer transition">
+          <i class="fa-solid fa-folder-tree mr-1"></i> เปิดทั้งโฟลเดอร์
+          <input type="file" id="local-folder-loader" webkitdirectory directory multiple onchange="loadLocalFolderFiles(this)" class="hidden">
+        </label>
+      </div>
+
+      <!-- โหมดขนาดหน้าจอ & Undo/Redo & ส่งออกไฟล์ -->
+      <div class="flex items-center gap-1.5 flex-wrap">
+        <div class="inline-flex bg-slate-950 p-1 rounded-xl border border-slate-800">
+          <button type="button" onclick="setViewportSize('100%')" id="vp-desktop" title="มุมมอง Desktop"
+            class="px-2.5 py-1.5 rounded-lg text-xs font-bold bg-amber-400 text-slate-950 transition">
+            <i class="fa-solid fa-desktop"></i>
+          </button>
+          <button type="button" onclick="setViewportSize('768px')" id="vp-tablet" title="มุมมอง Tablet"
+            class="px-2.5 py-1.5 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition">
+            <i class="fa-solid fa-tablet-screen-button"></i>
+          </button>
+          <button type="button" onclick="setViewportSize('390px')" id="vp-mobile" title="มุมมอง Mobile"
+            class="px-2.5 py-1.5 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition">
+            <i class="fa-solid fa-mobile-screen-button"></i>
+          </button>
+        </div>
+
+        <button type="button" onclick="undoBuilderAction()" id="btn-undo" disabled title="ย้อนกลับ (Undo)"
+          class="bg-slate-800 disabled:opacity-35 hover:bg-slate-700 text-slate-200 px-2.5 py-2 rounded-xl text-xs font-bold border border-slate-700">
           <i class="fa-solid fa-rotate-left"></i>
         </button>
-        <button type="button" onclick="redoAction()" id="btn-redo" title="ทำซ้ำ (Redo)" class="w-8 h-8 rounded-lg hover:bg-slate-800 text-slate-300 disabled:opacity-30 text-xs">
+        <button type="button" onclick="redoBuilderAction()" id="btn-redo" disabled title="ทำซ้ำ (Redo)"
+          class="bg-slate-800 disabled:opacity-35 hover:bg-slate-700 text-slate-200 px-2.5 py-2 rounded-xl text-xs font-bold border border-slate-700">
           <i class="fa-solid fa-rotate-right"></i>
         </button>
-        <span class="w-px h-5 bg-slate-700 mx-0.5"></span>
-        <button type="button" onclick="setViewport('desktop')" id="vp-desktop" title="มุมมองคอมพิวเตอร์" class="px-2.5 py-1.5 rounded-lg bg-amber-400 text-slate-950 font-bold text-xs">
-          <i class="fa-solid fa-desktop"></i>
-        </button>
-        <button type="button" onclick="setViewport('tablet')" id="vp-tablet" title="มุมมองแท็บเล็ต" class="px-2.5 py-1.5 rounded-lg hover:bg-slate-800 text-slate-300 text-xs">
-          <i class="fa-solid fa-tablet-screen-button"></i>
-        </button>
-        <button type="button" onclick="setViewport('mobile')" id="vp-mobile" title="มุมมองมือถือ" class="px-2.5 py-1.5 rounded-lg hover:bg-slate-800 text-slate-300 text-xs">
-          <i class="fa-solid fa-mobile-screen-button"></i>
+
+        <button type="button" onclick="exportCurrentHtmlFile()"
+          class="gold-grad hover:opacity-95 text-slate-950 font-extrabold px-3.5 py-2 rounded-xl text-xs shadow transition">
+          <i class="fa-solid fa-file-export mr-1"></i> ส่งออกไฟล์ .HTML
         </button>
       </div>
-
-      <!-- ขวา: ดูตัวอย่าง / ส่งออก HTML / บันทึกขึ้นระบบ -->
-      <div class="flex items-center gap-2 text-xs">
-        <button type="button" onclick="togglePreviewMode()" id="btn-preview-toggle"
-          class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-3 py-2 rounded-xl font-bold inline-flex items-center gap-1.5">
-          <i class="fa-solid fa-eye"></i> <span id="preview-btn-text">ดูตัวอย่าง</span>
-        </button>
-
-        <button type="button" onclick="exportStandaloneHtml()"
-          class="bg-emerald-600 hover:bg-emerald-500 text-white px-3 py-2 rounded-xl font-bold inline-flex items-center gap-1.5" title="ดาวน์โหลดเป็นไฟล์ .html พร้อมใช้งาน">
-          <i class="fa-solid fa-file-code"></i> <span class="hidden md:inline">ส่งออกไฟล์ .HTML</span>
-        </button>
-
-        <button type="button" onclick="saveBuilderToCloud()" id="btn-publish-builder"
-          class="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold px-4 py-2 rounded-xl shadow-lg inline-flex items-center gap-1.5">
-          <i class="fa-solid fa-cloud-arrow-up"></i> <span>บันทึก &amp; เผยแพร่</span>
-        </button>
-      </div>
-    </div>
-
-    <!-- แถบเครื่องมือจัดรูปแบบข้อความ (Rich Text Toolbar) -->
-    <div id="rich-text-bar" class="max-w-[1600px] mx-auto mt-2 pt-2 border-t border-slate-800/90 flex flex-wrap items-center gap-1.5 text-xs">
-      <span class="text-[11px] text-slate-400 mr-1"><i class="fa-solid fa-font text-amber-400 mr-1"></i>จัดรูปแบบข้อความ:</span>
-      <button type="button" onmousedown="execFormat('bold', event)" class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-700 font-bold" title="ตัวหนา">B</button>
-      <button type="button" onmousedown="execFormat('italic', event)" class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-700 italic" title="ตัวเอียง">I</button>
-      <button type="button" onmousedown="execFormat('underline', event)" class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-700 underline" title="ขีดเส้นใต้">U</button>
-      <span class="w-px h-4 bg-slate-700 mx-1"></span>
-      <button type="button" onmousedown="execFormat('justifyLeft', event)" class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-700" title="ชิดซ้าย"><i class="fa-solid fa-align-left"></i></button>
-      <button type="button" onmousedown="execFormat('justifyCenter', event)" class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-700" title="กึ่งกลาง"><i class="fa-solid fa-align-center"></i></button>
-      <button type="button" onmousedown="execFormat('justifyRight', event)" class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-700" title="ชิดขวา"><i class="fa-solid fa-align-right"></i></button>
-      <span class="w-px h-4 bg-slate-700 mx-1"></span>
-      <label class="inline-flex items-center gap-1.5 bg-slate-900 border border-slate-700 px-2.5 py-1 rounded-lg cursor-pointer" title="เลือกสีตัวอักษร">
-        <span class="text-[11px] text-slate-300">สีตัวอักษร</span>
-        <input type="color" value="#0f172a" onchange="execColor(this.value)" class="w-5 h-4 bg-transparent border-0 cursor-pointer">
-      </label>
-      <span class="ml-auto text-[11px] text-amber-300/90 hidden sm:inline">
-        <i class="fa-solid fa-hand-pointer mr-1"></i> เคล็ดลับ: ลากบล็อกจากแถบขวามาวางแทรก หรือคลิกที่ข้อความเพื่อพิมพ์แก้ไขได้ทันที
-      </span>
     </div>
   </header>
 
-  <!-- พื้นที่ทำงานหลัก: แคนวาสตรงกลาง + แถบเครื่องมือด้านขวา -->
-  <div class="flex-grow max-w-[1600px] w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-5 p-4 sm:p-6 items-start">
+  <!-- แถบเครื่องมือจัดรูปแบบข้อความลอยตัวเมื่อเลือกข้อความ -->
+  <div id="floating-text-toolbar" class="hidden fixed top-20 left-1/2 -translate-x-1/2 z-[1150] bg-slate-900/95 border border-amber-400/50 text-white px-3 py-2 rounded-2xl shadow-2xl flex items-center gap-1.5 text-xs">
+    <button type="button" onclick="execFrameCommand('bold')" title="ตัวหนา" class="w-8 h-8 rounded-lg hover:bg-slate-800 font-bold">B</button>
+    <button type="button" onclick="execFrameCommand('italic')" title="ตัวเอียง" class="w-8 h-8 rounded-lg hover:bg-slate-800 italic">I</button>
+    <button type="button" onclick="execFrameCommand('underline')" title="ขีดเส้นใต้" class="w-8 h-8 rounded-lg hover:bg-slate-800 underline">U</button>
+    <span class="w-px h-4 bg-slate-700 mx-0.5"></span>
+    <button type="button" onclick="execFrameCommand('justifyLeft')" title="ชิดซ้าย" class="w-8 h-8 rounded-lg hover:bg-slate-800"><i class="fa-solid fa-align-left"></i></button>
+    <button type="button" onclick="execFrameCommand('justifyCenter')" title="กึ่งกลาง" class="w-8 h-8 rounded-lg hover:bg-slate-800"><i class="fa-solid fa-align-center"></i></button>
+    <button type="button" onclick="execFrameCommand('justifyRight')" title="ชิดขวา" class="w-8 h-8 rounded-lg hover:bg-slate-800"><i class="fa-solid fa-align-right"></i></button>
+    <span class="w-px h-4 bg-slate-700 mx-0.5"></span>
+    <label title="สีตัวอักษร" class="inline-flex items-center gap-1 px-2 py-1 rounded-lg hover:bg-slate-800 cursor-pointer">
+      <i class="fa-solid fa-palette text-amber-400"></i>
+      <input type="color" onchange="execFrameCommand('foreColor', this.value)" class="w-5 h-5 bg-transparent border-0 cursor-pointer">
+    </label>
+  </div>
 
-    <!-- ฝั่งซ้าย (8 คอลัมน์): พื้นที่แคนวาสแสดงหน้าเว็บ (รองรับ Drag & Drop เต็มรูปแบบ) -->
-    <main class="lg:col-span-8 flex justify-center">
-      <div id="builder-canvas-shell" class="builder-canvas-shell w-full max-w-full bg-white rounded-3xl border border-slate-300 shadow-xl overflow-hidden min-h-[720px] flex flex-col">
-        <!-- แถบหัวหน้าเว็บจำลอง -->
-        <div id="canvas-hero-header" class="bg-gradient-to-r from-slate-950 via-slate-900 to-slate-800 text-white p-6 sm:p-9 border-b border-amber-400/30">
-          <div class="flex flex-wrap items-center justify-between gap-2">
-            <span class="text-[10px] font-bold bg-amber-400/20 text-amber-300 border border-amber-400/40 px-2.5 py-0.5 rounded-full">
-              🚖 The Driver TH 🇹🇭 Premium Service · <span id="canvas-page-label">index.html</span>
-            </span>
-          </div>
-          <h2 contenteditable="true" id="canvas-banner-title" onblur="syncHeaderFromDOM()" class="text-xl sm:text-3xl font-black mt-3 text-amber-300 leading-tight">
-            คลิกตรงนี้เพื่อแก้ไขหัวข้อหลักของหน้าเว็บ
-          </h2>
-          <p contenteditable="true" id="canvas-banner-sub" onblur="syncHeaderFromDOM()" class="text-xs sm:text-sm text-slate-300 mt-1.5 leading-relaxed">
-            พิมพ์คำอธิบายหรือประกาศสำคัญที่ต้องการแสดงให้สมาชิกเห็นได้ทันที...
-          </p>
+  <!-- พื้นที่ทำงานหลัก (ซ้าย: รายการหน้า & แทรกบล็อก | กลาง: แคนวาสหน้าเว็บจริง | ขวา: ตั้งค่าองค์ประกอบที่เลือก) -->
+  <div class="flex-1 flex min-h-0 overflow-hidden">
+    <!-- แถบซ้าย: รายการหน้าทั้งหมด & บล็อกสำหรับลากวาง -->
+    <aside class="w-64 bg-slate-900 border-r border-slate-800 flex flex-col shrink-0 overflow-y-auto p-3 space-y-5">
+      <div class="space-y-2">
+        <div class="flex items-center justify-between px-1">
+          <span class="text-[11px] font-extrabold text-amber-300 uppercase tracking-wider">หน้าเว็บทั้งหมด (22 หน้า)</span>
         </div>
+        <div id="sidebar-pages-list" class="space-y-1 max-h-56 overflow-y-auto pr-1"></div>
+      </div>
 
-        <!-- รายการบล็อกเนื้อหา + จุดวาง (Drop Zones) -->
-        <div id="canvas-blocks-container" class="p-4 sm:p-8 flex-grow"></div>
+      <div class="border-t border-slate-800 pt-4 space-y-2">
+        <span class="text-[11px] font-extrabold text-emerald-300 uppercase tracking-wider px-1 block">ลากบล็อกไปวางในหน้าจริง</span>
+        <p class="text-[10px] text-slate-400 px-1">ลากบล็อกด้านล่างไปวางบนหน้าเว็บ หรือกดคลิกเพื่อแทรกต่อท้าย</p>
 
-        <!-- พื้นที่วางท้ายหน้า -->
-        <div id="canvas-end-dropzone"
-          ondragover="handleEndZoneDragOver(event)"
-          ondragleave="handleEndZoneDragLeave(event)"
-          ondrop="handleEndZoneDrop(event)"
-          class="m-4 sm:m-6 p-5 border-2 border-dashed border-slate-300 rounded-2xl text-center text-xs text-slate-500 hover:border-amber-400 transition">
-          <i class="fa-solid fa-plus-circle text-amber-500 mr-1.5"></i>
-          ลากบล็อกเนื้อหาหรือปุ่มจากแถบขวามาวางที่นี่ หรือคลิกเลือกจากแถบเครื่องมือเพื่อเพิ่มส่วนใหม่
+        <div class="grid grid-cols-2 gap-2 text-xs">
+          <button type="button" draggable="true" ondragstart="onDragNewBlock(event, 'heading')" onclick="insertBlockIntoFrame('heading')"
+            class="bg-slate-950 hover:bg-slate-800 border border-slate-700/80 rounded-xl p-2.5 text-left transition cursor-grab active:cursor-grabbing">
+            <i class="fa-solid fa-heading text-amber-400 block mb-1"></i>
+            <span class="font-bold text-[11px] text-white block">หัวข้อใหม่</span>
+          </button>
+
+          <button type="button" draggable="true" ondragstart="onDragNewBlock(event, 'text')" onclick="insertBlockIntoFrame('text')"
+            class="bg-slate-950 hover:bg-slate-800 border border-slate-700/80 rounded-xl p-2.5 text-left transition cursor-grab active:cursor-grabbing">
+            <i class="fa-solid fa-paragraph text-sky-400 block mb-1"></i>
+            <span class="font-bold text-[11px] text-white block">กล่องข้อความ</span>
+          </button>
+
+          <button type="button" draggable="true" ondragstart="onDragNewBlock(event, 'card')" onclick="insertBlockIntoFrame('card')"
+            class="bg-slate-950 hover:bg-slate-800 border border-slate-700/80 rounded-xl p-2.5 text-left transition cursor-grab active:cursor-grabbing">
+            <i class="fa-solid fa-square-plus text-emerald-400 block mb-1"></i>
+            <span class="font-bold text-[11px] text-white block">การ์ดประกาศ</span>
+          </button>
+
+          <button type="button" draggable="true" ondragstart="onDragNewBlock(event, 'button')" onclick="insertBlockIntoFrame('button')"
+            class="bg-slate-950 hover:bg-slate-800 border border-slate-700/80 rounded-xl p-2.5 text-left transition cursor-grab active:cursor-grabbing">
+            <i class="fa-solid fa-link text-amber-300 block mb-1"></i>
+            <span class="font-bold text-[11px] text-white block">ปุ่มลิงก์</span>
+          </button>
+
+          <button type="button" draggable="true" ondragstart="onDragNewBlock(event, 'image')" onclick="insertBlockIntoFrame('image')"
+            class="bg-slate-950 hover:bg-slate-800 border border-slate-700/80 rounded-xl p-2.5 text-left transition cursor-grab active:cursor-grabbing">
+            <i class="fa-solid fa-image text-purple-400 block mb-1"></i>
+            <span class="font-bold text-[11px] text-white block">แทรกรูปภาพ</span>
+          </button>
+
+          <button type="button" draggable="true" ondragstart="onDragNewBlock(event, 'divider')" onclick="insertBlockIntoFrame('divider')"
+            class="bg-slate-950 hover:bg-slate-800 border border-slate-700/80 rounded-xl p-2.5 text-left transition cursor-grab active:cursor-grabbing">
+            <i class="fa-solid fa-minus text-slate-400 block mb-1"></i>
+            <span class="font-bold text-[11px] text-white block">เส้นคั่น</span>
+          </button>
         </div>
+      </div>
+    </aside>
+
+    <!-- พื้นที่กลาง: แคนวาสหน้าเว็บจริง -->
+    <main class="flex-1 canvas-stage-bg flex flex-col items-center justify-start p-3 sm:p-5 overflow-auto">
+      <div class="w-full max-w-6xl mb-2 flex items-center justify-between text-xs text-slate-300 bg-slate-900/90 border border-slate-800 px-4 py-2 rounded-2xl">
+        <div class="flex items-center gap-2 truncate">
+          <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+          <span>กำลังแก้ไข: <strong id="current-editing-page-label" class="text-amber-300 font-mono">index.html</strong></span>
+        </div>
+        <span class="text-[11px] text-slate-400 hidden sm:inline">คลิกที่ข้อความเพื่อพิมพ์แก้ได้โดยตรง • คลิกที่รูปภาพเพื่อเปลี่ยนลิงก์/ไฟล์รูป</span>
+      </div>
+
+      <div id="viewport-frame-wrapper" style="width: 100%; transition: width 0.25s ease;" class="flex-1 min-h-[540px] bg-white rounded-2xl overflow-hidden shadow-2xl border border-slate-700">
+        <iframe id="live-page-frame" title="พื้นที่แก้ไขหน้าเว็บจริง" class="w-full h-full border-0 bg-white"></iframe>
       </div>
     </main>
 
-    <!-- ฝั่งขวา (4 คอลัมน์): แผงเครื่องมือ แทรก / ตั้งค่าบล็อก / หน้าเว็บ / ธีม -->
-    <aside id="builder-right-sidebar" class="lg:col-span-4 bg-white rounded-3xl border border-slate-200 shadow-lg overflow-hidden sticky top-28">
-      <!-- แท็บ 4 หมวด: แทรก | ตั้งค่าบล็อก | หน้าเว็บ | ธีม -->
-      <div class="grid grid-cols-4 border-b border-slate-200 bg-slate-50 text-[11px] sm:text-xs font-bold">
-        <button type="button" onclick="switchSidebarTab('insert')" id="stab-insert" class="py-3.5 text-blue-600 border-b-2 border-blue-600 bg-white transition">แทรก</button>
-        <button type="button" onclick="switchSidebarTab('props')" id="stab-props" class="py-3.5 text-slate-600 hover:text-slate-900 border-b-2 border-transparent transition">ตั้งค่าบล็อก</button>
-        <button type="button" onclick="switchSidebarTab('pages')" id="stab-pages" class="py-3.5 text-slate-600 hover:text-slate-900 border-b-2 border-transparent transition">หน้าเว็บ</button>
-        <button type="button" onclick="switchSidebarTab('theme')" id="stab-theme" class="py-3.5 text-slate-600 hover:text-slate-900 border-b-2 border-transparent transition">ธีม</button>
+    <!-- แถบขวา: ตั้งค่าองค์ประกอบที่คลิกเลือก -->
+    <aside class="w-72 bg-slate-900 border-l border-slate-800 shrink-0 overflow-y-auto p-4 space-y-4">
+      <div class="border-b border-slate-800 pb-3">
+        <h2 class="text-xs font-extrabold text-amber-300 uppercase tracking-wider">คุณสมบัติองค์ประกอบที่เลือก</h2>
+        <p id="selected-element-tag" class="text-[11px] text-slate-400 mt-1">ยังไม่ได้คลิกเลือกองค์ประกอบบนหน้าเว็บ</p>
       </div>
 
-      <!-- แท็บที่ 1: แทรก (Drag & Drop หรือคลิกเพิ่ม) -->
-      <div id="spanel-insert" class="p-4 sm:p-5 space-y-5 max-h-[76vh] overflow-y-auto">
-        <div class="grid grid-cols-2 gap-2.5">
-          <button type="button" draggable="true" ondragstart="handlePaletteDragStart(event, 'textbox')" onclick="addBlock('textbox')"
-            class="draggable-palette-item flex flex-col items-center justify-center gap-1.5 p-3.5 rounded-2xl border border-slate-200 hover:border-blue-400 hover:bg-blue-50/40 transition">
-            <span class="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 font-black flex items-center justify-center text-base">TT</span>
-            <span class="text-xs font-bold text-slate-800">กล่องข้อความ</span>
-          </button>
-
-          <button type="button" draggable="true" ondragstart="handlePaletteDragStart(event, 'image')" onclick="addBlock('image')"
-            class="draggable-palette-item flex flex-col items-center justify-center gap-1.5 p-3.5 rounded-2xl border border-slate-200 hover:border-rose-400 hover:bg-rose-50/40 transition">
-            <span class="w-9 h-9 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center text-base"><i class="fa-regular fa-image"></i></span>
-            <span class="text-xs font-bold text-slate-800">รูปภาพ</span>
-          </button>
-
-          <button type="button" draggable="true" ondragstart="handlePaletteDragStart(event, 'embed')" onclick="addBlock('embed')"
-            class="draggable-palette-item flex flex-col items-center justify-center gap-1.5 p-3.5 rounded-2xl border border-slate-200 hover:border-amber-400 hover:bg-amber-50/40 transition">
-            <span class="w-9 h-9 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-base"><i class="fa-solid fa-code"></i></span>
-            <span class="text-xs font-bold text-slate-800">ฝัง (Embed)</span>
-          </button>
-
-          <button type="button" draggable="true" ondragstart="handlePaletteDragStart(event, 'drive')" onclick="addBlock('drive')"
-            class="draggable-palette-item flex flex-col items-center justify-center gap-1.5 p-3.5 rounded-2xl border border-slate-200 hover:border-emerald-400 hover:bg-emerald-50/40 transition">
-            <span class="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-base"><i class="fa-brands fa-google-drive"></i></span>
-            <span class="text-xs font-bold text-slate-800">ไดรฟ์ / เอกสาร</span>
-          </button>
+      <div id="inspector-controls" class="space-y-3.5 text-xs">
+        <div class="space-y-1">
+          <label class="block text-slate-300 font-bold">ข้อความที่เลือก</label>
+          <textarea id="prop-text-input" rows="3" oninput="applySelectedTextProp(this.value)"
+            placeholder="คลิกข้อความบนหน้าเว็บเพื่อแก้ไข..."
+            class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-amber-400"></textarea>
         </div>
 
-        <!-- หมวดบล็อกเนื้อหา 6 รูปแบบ (ลากวางได้) -->
-        <div class="space-y-2.5 border-t border-slate-200 pt-4">
-          <div class="flex items-center justify-between text-xs font-bold text-slate-700">
-            <span>บล็อกเนื้อหา (ลากวางหรือคลิกเพิ่ม)</span>
-            <i class="fa-solid fa-grip text-slate-400"></i>
-          </div>
-
-          <div class="grid grid-cols-2 gap-2.5">
-            <button type="button" draggable="true" ondragstart="handlePaletteDragStart(event, 'layout_media_left')" onclick="addBlock('layout_media_left')"
-              class="draggable-palette-item p-2.5 rounded-xl border border-slate-200 hover:border-amber-500 hover:bg-amber-50/30 transition flex items-center gap-2">
-              <div class="w-11 h-10 bg-slate-200 rounded flex items-center justify-center text-slate-500 text-xs shrink-0"><i class="fa-solid fa-image"></i></div>
-              <div class="flex-1 space-y-1"><div class="h-1.5 bg-slate-400 rounded w-4/5"></div><div class="h-1 bg-slate-300 rounded w-full"></div><div class="h-1 bg-slate-300 rounded w-3/4"></div></div>
-            </button>
-
-            <button type="button" draggable="true" ondragstart="handlePaletteDragStart(event, 'layout_2_cols')" onclick="addBlock('layout_2_cols')"
-              class="draggable-palette-item p-2.5 rounded-xl border border-slate-200 hover:border-amber-500 hover:bg-amber-50/30 transition grid grid-cols-2 gap-1.5">
-              <div class="space-y-1"><div class="h-7 bg-slate-200 rounded flex items-center justify-center text-slate-500 text-[10px]"><i class="fa-solid fa-image"></i></div><div class="h-1 bg-slate-400 rounded"></div></div>
-              <div class="space-y-1"><div class="h-7 bg-slate-200 rounded flex items-center justify-center text-slate-500 text-[10px]"><i class="fa-solid fa-image"></i></div><div class="h-1 bg-slate-400 rounded"></div></div>
-            </button>
-
-            <button type="button" draggable="true" ondragstart="handlePaletteDragStart(event, 'layout_collage')" onclick="addBlock('layout_collage')"
-              class="draggable-palette-item p-2.5 rounded-xl border border-slate-200 hover:border-amber-500 hover:bg-amber-50/30 transition grid grid-cols-12 gap-1.5">
-              <div class="col-span-4 space-y-1"><div class="h-4.5 bg-slate-200 rounded"></div><div class="h-4.5 bg-slate-200 rounded"></div></div>
-              <div class="col-span-8 h-10 bg-slate-200 rounded flex items-center justify-center text-slate-500 text-xs"><i class="fa-solid fa-image"></i></div>
-            </button>
-
-            <button type="button" draggable="true" ondragstart="handlePaletteDragStart(event, 'layout_3_cols')" onclick="addBlock('layout_3_cols')"
-              class="draggable-palette-item p-2.5 rounded-xl border border-slate-200 hover:border-amber-500 hover:bg-amber-50/30 transition grid grid-cols-3 gap-1">
-              <div class="space-y-1"><div class="h-6 bg-slate-200 rounded"></div><div class="h-1 bg-slate-300 rounded"></div></div>
-              <div class="space-y-1"><div class="h-6 bg-slate-200 rounded"></div><div class="h-1 bg-slate-300 rounded"></div></div>
-              <div class="space-y-1"><div class="h-6 bg-slate-200 rounded"></div><div class="h-1 bg-slate-300 rounded"></div></div>
-            </button>
-
-            <button type="button" draggable="true" ondragstart="handlePaletteDragStart(event, 'layout_2_horizontal')" onclick="addBlock('layout_2_horizontal')"
-              class="draggable-palette-item p-2.5 rounded-xl border border-slate-200 hover:border-amber-500 hover:bg-amber-50/30 transition grid grid-cols-2 gap-1.5">
-              <div class="flex items-center gap-1"><div class="w-6 h-7 bg-slate-200 rounded shrink-0"></div><div class="flex-1 space-y-1"><div class="h-1 bg-slate-400 rounded"></div><div class="h-1 bg-slate-300 rounded"></div></div></div>
-              <div class="flex items-center gap-1"><div class="w-6 h-7 bg-slate-200 rounded shrink-0"></div><div class="flex-1 space-y-1"><div class="h-1 bg-slate-400 rounded"></div><div class="h-1 bg-slate-300 rounded"></div></div></div>
-            </button>
-
-            <button type="button" draggable="true" ondragstart="handlePaletteDragStart(event, 'layout_4_cols')" onclick="addBlock('layout_4_cols')"
-              class="draggable-palette-item p-2.5 rounded-xl border border-slate-200 hover:border-amber-500 hover:bg-amber-50/30 transition grid grid-cols-4 gap-1">
-              <div class="space-y-1"><div class="h-6 bg-slate-200 rounded"></div><div class="h-1 bg-slate-300 rounded"></div></div>
-              <div class="space-y-1"><div class="h-6 bg-slate-200 rounded"></div><div class="h-1 bg-slate-300 rounded"></div></div>
-              <div class="space-y-1"><div class="h-6 bg-slate-200 rounded"></div><div class="h-1 bg-slate-300 rounded"></div></div>
-              <div class="space-y-1"><div class="h-6 bg-slate-200 rounded"></div><div class="h-1 bg-slate-300 rounded"></div></div>
-            </button>
-          </div>
+        <div id="prop-link-group" class="hidden space-y-1">
+          <label class="block text-slate-300 font-bold">ลิงก์ปลายทาง (URL / ชื่อไฟล์ .html)</label>
+          <input type="text" id="prop-href-input" oninput="applySelectedLinkProp(this.value)" placeholder="เช่น captain_insurance.html"
+            class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-amber-300 font-mono">
         </div>
 
-        <!-- รายการคอมโพเนนต์เสริม (ลากวางหรือคลิกเพิ่ม) -->
-        <div class="space-y-1 border-t border-slate-200 pt-3 text-xs font-semibold text-slate-700">
-          <button type="button" draggable="true" ondragstart="handlePaletteDragStart(event, 'collapsible')" onclick="addBlock('collapsible')" class="draggable-palette-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-100 text-left transition">
-            <i class="fa-solid fa-arrows-up-down text-slate-500 w-4 text-center"></i><span>กลุ่มแบบยุบได้ (Accordion)</span>
-          </button>
-          <button type="button" draggable="true" ondragstart="handlePaletteDragStart(event, 'toc')" onclick="addBlock('toc')" class="draggable-palette-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-100 text-left transition">
-            <i class="fa-solid fa-list-ul text-slate-500 w-4 text-center"></i><span>สารบัญ (Table of Contents)</span>
-          </button>
-          <button type="button" draggable="true" ondragstart="handlePaletteDragStart(event, 'carousel')" onclick="addBlock('carousel')" class="draggable-palette-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-100 text-left transition">
-            <i class="fa-solid fa-images text-slate-500 w-4 text-center"></i><span>ภาพหมุน (Image Carousel)</span>
-          </button>
-          <button type="button" draggable="true" ondragstart="handlePaletteDragStart(event, 'button')" onclick="addBlock('button')" class="draggable-palette-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-100 text-left transition">
-            <i class="fa-regular fa-square text-slate-500 w-4 text-center"></i><span>ปุ่ม (Button CTA)</span>
-          </button>
-          <button type="button" draggable="true" ondragstart="handlePaletteDragStart(event, 'divider')" onclick="addBlock('divider')" class="draggable-palette-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-100 text-left transition">
-            <i class="fa-solid fa-minus text-slate-500 w-4 text-center"></i><span>ตัวแบ่ง (Divider)</span>
-          </button>
-          <button type="button" draggable="true" ondragstart="handlePaletteDragStart(event, 'spacer')" onclick="addBlock('spacer')" class="draggable-palette-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-100 text-left transition">
-            <i class="fa-solid fa-arrows-up-down-left-right text-slate-500 w-4 text-center"></i><span>Spacer (ช่องว่างจัดระยะ)</span>
-          </button>
+        <div id="prop-image-group" class="hidden space-y-2 bg-slate-950 p-3 rounded-2xl border border-slate-800">
+          <label class="block text-slate-300 font-bold">เปลี่ยนรูปภาพ</label>
+          <input type="text" id="prop-img-src-input" oninput="applySelectedImageUrl(this.value)" placeholder="ลิงก์รูปภาพ URL"
+            class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-[11px] text-white font-mono">
+          <label class="block w-full text-center bg-amber-400/20 hover:bg-amber-400/30 text-amber-300 border border-amber-400/40 font-bold py-2 rounded-xl cursor-pointer text-[11px]">
+            <i class="fa-solid fa-upload mr-1"></i> อัปโหลดรูปจากเครื่อง
+            <input type="file" accept="image/*" onchange="applySelectedImageFile(this)" class="hidden">
+          </label>
         </div>
-      </div>
 
-      <!-- แท็บที่ 2: ตั้งค่าบล็อกที่เลือก (Block Inspector) -->
-      <div id="spanel-props" class="hidden p-4 sm:p-5 space-y-4 text-xs">
-        <div id="block-inspector-empty" class="text-center py-8 text-slate-400 space-y-2">
-          <i class="fa-solid fa-arrow-pointer text-2xl"></i>
-          <p>คลิกเลือกบล็อกใดก็ได้บนหน้าเว็บด้านซ้าย เพื่อปรับแต่งลิงก์ปุ่ม สีพื้นหลัง หรืออัปโหลดรูปภาพใหม่</p>
-        </div>
-        <div id="block-inspector-form" class="hidden space-y-4">
-          <div class="flex items-center justify-between border-b border-slate-200 pb-2">
-            <span class="font-extrabold text-slate-900">คุณสมบัติของบล็อก #<span id="insp-block-num">1</span></span>
-            <button type="button" onclick="duplicateSelectedBlock()" class="text-blue-600 hover:underline font-bold">
-              <i class="fa-regular fa-copy mr-1"></i>ทำซ้ำบล็อก
-            </button>
-          </div>
-
+        <div class="grid grid-cols-2 gap-2 pt-1">
           <div class="space-y-1">
-            <label class="block font-bold text-slate-700">สีพื้นหลังของบล็อก</label>
-            <div class="grid grid-cols-4 gap-2">
-              <button type="button" onclick="setBlockBg('bg-white')" class="h-8 rounded-lg border border-slate-300 bg-white text-[10px] font-bold">ขาว</button>
-              <button type="button" onclick="setBlockBg('bg-slate-50')" class="h-8 rounded-lg border border-slate-300 bg-slate-100 text-[10px] font-bold">เทาอ่อน</button>
-              <button type="button" onclick="setBlockBg('bg-amber-50')" class="h-8 rounded-lg border border-amber-300 bg-amber-50 text-[10px] font-bold text-amber-900">ครีมทอง</button>
-              <button type="button" onclick="setBlockBg('bg-slate-950 text-white')" class="h-8 rounded-lg border border-slate-800 bg-slate-950 text-[10px] font-bold text-amber-300">เข้มพรีเมียม</button>
-            </div>
+            <label class="block text-[11px] text-slate-400">สีตัวอักษร</label>
+            <input type="color" id="prop-color-input" onchange="applySelectedStyleProp('color', this.value)" class="w-full h-9 rounded-lg bg-slate-950 border border-slate-700 cursor-pointer">
           </div>
-
-          <div id="insp-link-wrap" class="space-y-1.5">
-            <label class="block font-bold text-slate-700">ลิงก์ปลายทางของปุ่ม (URL หรือชื่อหน้าเว็บ)</label>
-            <input type="text" id="insp-btn-link" oninput="updateSelectedBlockProp('buttonLink', this.value)" placeholder="เช่น member_register.html"
-              class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-mono">
-          </div>
-
-          <div id="insp-embed-wrap" class="hidden space-y-1.5">
-            <label class="block font-bold text-slate-700">โค้ด HTML / Embed (เช่น YouTube หรือแผนที่)</label>
-            <textarea id="insp-embed-code" rows="4" oninput="updateSelectedBlockProp('embedCode', this.value)"
-              class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-xs font-mono"></textarea>
-          </div>
-
-          <div id="insp-img-wrap" class="space-y-1.5">
-            <label class="block font-bold text-slate-700">เปลี่ยนรูปภาพในบล็อกนี้</label>
-            <button type="button" onclick="editBlockImage(selectedBlockIndex)" class="w-full bg-slate-950 text-amber-400 font-bold py-2.5 rounded-xl">
-              <i class="fa-solid fa-upload mr-1.5"></i> อัปโหลดรูปภาพใหม่จากเครื่อง
-            </button>
+          <div class="space-y-1">
+            <label class="block text-[11px] text-slate-400">สีพื้นหลัง</label>
+            <input type="color" id="prop-bg-input" onchange="applySelectedStyleProp('backgroundColor', this.value)" class="w-full h-9 rounded-lg bg-slate-950 border border-slate-700 cursor-pointer">
           </div>
         </div>
-      </div>
 
-      <!-- แท็บที่ 3: หน้าเว็บ (Pages) -->
-      <div id="spanel-pages" class="hidden p-4 sm:p-5 space-y-3 text-xs">
-        <p class="font-bold text-slate-700">เลือกหน้าเว็บในระบบเพื่อจัดการบล็อกเนื้อหา:</p>
-        <div class="space-y-1.5">
-          <button type="button" onclick="switchBuilderPage('index.html')" class="w-full flex items-center justify-between p-3 rounded-xl border border-slate-200 hover:border-amber-500 text-left">
-            <span class="font-bold"><i class="fa-solid fa-house text-amber-500 mr-2"></i>หน้าหลัก (index.html)</span>
-            <i class="fa-solid fa-chevron-right text-slate-400"></i>
+        <div class="flex gap-2 pt-2 border-t border-slate-800">
+          <button type="button" onclick="duplicateSelectedElement()" class="flex-1 bg-slate-800 hover:bg-slate-700 text-emerald-300 font-bold py-2 px-3 rounded-xl text-[11px]">
+            <i class="fa-solid fa-clone mr-1"></i> ทำซ้ำ
           </button>
-          <button type="button" onclick="switchBuilderPage('driver_news.html')" class="w-full flex items-center justify-between p-3 rounded-xl border border-slate-200 hover:border-amber-500 text-left">
-            <span class="font-bold"><i class="fa-solid fa-newspaper text-emerald-600 mr-2"></i>ข่าวสารคนขับแอป (driver_news.html)</span>
-            <i class="fa-solid fa-chevron-right text-slate-400"></i>
-          </button>
-          <button type="button" onclick="switchBuilderPage('captain_insurance.html')" class="w-full flex items-center justify-between p-3 rounded-xl border border-slate-200 hover:border-amber-500 text-left">
-            <span class="font-bold"><i class="fa-solid fa-shield-halved text-teal-600 mr-2"></i>Captain Insurance (captain_insurance.html)</span>
-            <i class="fa-solid fa-chevron-right text-slate-400"></i>
-          </button>
-          <button type="button" onclick="switchBuilderPage('register.html')" class="w-full flex items-center justify-between p-3 rounded-xl border border-slate-200 hover:border-amber-500 text-left">
-            <span class="font-bold"><i class="fa-solid fa-users text-sky-600 mr-2"></i>ระบบสมาชิก (register.html)</span>
-            <i class="fa-solid fa-chevron-right text-slate-400"></i>
-          </button>
-          <button type="button" onclick="switchBuilderPage('pcard.html')" class="w-full flex items-center justify-between p-3 rounded-xl border border-slate-200 hover:border-amber-500 text-left">
-            <span class="font-bold"><i class="fa-solid fa-id-badge text-amber-600 mr-2"></i>บัตรสมาชิกประเมศฐ์ (pcard.html)</span>
-            <i class="fa-solid fa-chevron-right text-slate-400"></i>
+          <button type="button" onclick="deleteSelectedElement()" class="flex-1 bg-rose-600/20 hover:bg-rose-600/30 text-rose-300 border border-rose-500/40 font-bold py-2 px-3 rounded-xl text-[11px]">
+            <i class="fa-solid fa-trash mr-1"></i> ลบออก
           </button>
         </div>
-      </div>
-
-      <!-- แท็บที่ 4: ธีม (Themes) -->
-      <div id="spanel-theme" class="hidden p-4 sm:p-5 space-y-3 text-xs">
-        <p class="font-bold text-slate-700">เลือกธีมสีส่วนหัวของหน้าเว็บ:</p>
-        <button type="button" onclick="applyBuilderTheme('obsidian')" class="w-full p-3.5 rounded-2xl border-2 border-amber-400 bg-slate-950 text-white text-left flex items-center justify-between">
-          <div><strong class="text-amber-300 block">Obsidian &amp; Champagne Gold</strong><span class="text-[11px] text-slate-400">ธีมหลัก Executive Network</span></div>
-          <span class="w-6 h-6 rounded-full bg-amber-400"></span>
-        </button>
-        <button type="button" onclick="applyBuilderTheme('captain')" class="w-full p-3.5 rounded-2xl border border-slate-200 bg-teal-950 text-white text-left flex items-center justify-between">
-          <div><strong class="text-teal-300 block">Captain Marine &amp; Teal</strong><span class="text-[11px] text-teal-100/70">ธีมประกันภัยและบริการมืออาชีพ</span></div>
-          <span class="w-6 h-6 rounded-full bg-teal-400"></span>
-        </button>
-        <button type="button" onclick="applyBuilderTheme('emerald')" class="w-full p-3.5 rounded-2xl border border-slate-200 bg-emerald-950 text-white text-left flex items-center justify-between">
-          <div><strong class="text-emerald-300 block">Driver App Emerald</strong><span class="text-[11px] text-emerald-100/70">ธีมข่าวสารคนขับรถผ่านแอป</span></div>
-          <span class="w-6 h-6 rounded-full bg-emerald-400"></span>
-        </button>
       </div>
     </aside>
   </div>
 
-  <!-- Toast -->
-  <div id="builder-toast" class="hidden fixed bottom-5 left-5 z-50 bg-slate-950 text-amber-300 border border-amber-400/50 px-4 py-3 rounded-2xl shadow-2xl text-xs font-bold"></div>
+  <!-- หน้าต่างตั้งค่า URL เว็บไซต์จริง -->
+  <div id="base-url-modal" class="hidden fixed inset-0 z-[1200] bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-amber-400/40 rounded-3xl max-w-md w-full p-6 text-white space-y-4 shadow-2xl">
+      <h3 class="text-base font-extrabold text-amber-300"><i class="fa-solid fa-globe mr-1.5"></i>เชื่อมต่อ URL เว็บไซต์จริงของคุณ</h3>
+      <p class="text-xs text-slate-300 leading-relaxed">
+        ระบุลิงก์เว็บไซต์หลักของคุณ (เช่น <code class="text-amber-300">https://www.thedriverthailand.com</code> หรือลิงก์ GitHub Pages ของคุณ) เพื่อให้เครื่องมือดึงหน้า <strong>index.html</strong> และทุกหน้าปัจจุบันของคุณมาแก้ไขได้ทันที
+      </p>
+      <form onsubmit="saveSiteBaseUrl(event)" class="space-y-3">
+        <input type="url" id="base-url-input" placeholder="https://www.thedriverthailand.com"
+          class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-xs text-amber-300 font-mono focus:outline-none focus:border-amber-400">
+        <div class="flex justify-end gap-2">
+          <button type="button" onclick="document.getElementById('base-url-modal').classList.add('hidden')"
+            class="px-4 py-2 rounded-xl bg-slate-800 text-xs font-bold">ยกเลิก</button>
+          <button type="submit" class="px-5 py-2 rounded-xl gold-grad text-slate-950 text-xs font-extrabold">บันทึกและโหลดหน้าเว็บจริง</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
   <script>
-    const BUILDER_STORAGE_KEY = 'tdt_visual_builder_pages_v2';
-    const MASTER_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyeDCdxBD10D_AFZQY2NxeylLOiAmAHLesSDZHXYCb3TsYs4wYer_kRTPVOs3VpK2pP/exec';
+    const ALL_SITE_PAGES = [
+      { file: 'index.html', title: 'หน้าแรก (index.html)' },
+      { file: 'driver_news.html', title: 'ข่าวสารคนขับแอป (driver_news.html)' },
+      { file: 'grab_driver_register.html', title: 'สมัครคนขับ Grab (grab_driver_register.html)' },
+      { file: 'bolt_driver_register.html', title: 'สมัครคนขับ Bolt (bolt_driver_register.html)' },
+      { file: 'captain_insurance.html', title: 'ประกันภัย Captain Insurance (captain_insurance.html)' },
+      { file: 'register.html', title: 'ระบบสมาชิก & ค้นหารหัส (register.html)' },
+      { file: 'member_register.html', title: 'ลงทะเบียนสมาชิกใหม่ (member_register.html)' },
+      { file: 'member_edit.html', title: 'แก้ไขข้อมูลสมาชิกเดิม (member_edit.html)' },
+      { file: 'pcard.html', title: 'บัตรสมาชิกประเมศฐ์ (pcard.html)' },
+      { file: 'unblock_request.html', title: 'ขอปลดล็อก OpenChat (unblock_request.html)' },
+      { file: 'luxury_car_register.html', title: 'ลงทะเบียน Luxury Car (luxury_car_register.html)' },
+      { file: 'vip_referral_guide.html', title: '[VIP] ลายแทงท่องเที่ยว (vip_referral_guide.html)' },
+      { file: 'rtaf_pass_register.html', title: 'บัตรผ่านยานพาหนะ ทอ. (rtaf_pass_register.html)' },
+      { file: 'tour_book_order.html', title: 'สั่งซื้อสมุดทัวร์ (tour_book_order.html)' },
+      { file: 'blacklist.html', title: 'ศูนย์เฝ้าระวังภัย Blacklist (blacklist.html)' },
+      { file: 'community.html', title: 'ชุมชนเว็บบอร์ด (community.html)' },
+      { file: 'job_board.html', title: 'กระดานแลกเปลี่ยนงาน (job_board.html)' },
+      { file: 'tracking.html', title: 'ติดตามสถานะคำร้อง (tracking.html)' },
+      { file: 'member_card_digital.html', title: 'บัตรสมาชิกดิจิทัล QR (member_card_digital.html)' },
+      { file: 'fare_calculator.html', title: 'คำนวณค่าโดยสาร (fare_calculator.html)' },
+      { file: 'guide.html', title: 'คู่มือสมาชิก (guide.html)' },
+      { file: 'privacy_policy.html', title: 'ประกาศความเป็นส่วนตัว (privacy_policy.html)' }
+    ];
 
-    let currentPage = 'index.html';
-    let isPreview = false;
-    let selectedBlockIndex = null;
-    let pagesState = {};
-    let historyUndo = [];
-    let historyRedo = [];
+    let currentTargetPage = 'index.html';
+    let currentLoadedFileName = 'index.html';
+    const SITE_BASE_URL_KEY = 'tdt_builder_live_base_url';
+    let liveSiteBaseUrl = (localStorage.getItem(SITE_BASE_URL_KEY) || '').trim().replace(/\/+$/, '');
+    const localFolderHtmlMap = new Map();
 
-    // ตัวแปรสำหรับ Drag & Drop
-    let dragPayload = null; // { source: 'palette'|'canvas', type?: string, fromIndex?: number }
+    let selectedEl = null;
+    let draggedNewBlockType = '';
+    let undoStack = [];
+    let redoStack = [];
+    let toastTimer = null;
 
     function showBuilderToast(msg) {
-      const el = document.getElementById('builder-toast');
-      if (!el) return;
-      el.textContent = msg;
-      el.classList.remove('hidden');
-      setTimeout(() => el.classList.add('hidden'), 3200);
+      const box = document.getElementById('builder-toast');
+      const txt = document.getElementById('builder-toast-text');
+      if (!box || !txt) return;
+      txt.textContent = msg;
+      box.classList.remove('hidden');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => box.classList.add('hidden'), 3200);
+    }
+
+    function openBaseUrlModal() {
+      const current = liveSiteBaseUrl || (window.location.origin.startsWith('http') ? window.location.origin : 'https://www.thedriverthailand.com');
+      const modal = document.getElementById('base-url-modal');
+      const input = document.getElementById('base-url-input');
+      if (input) input.value = current;
+      if (modal) modal.classList.remove('hidden');
+    }
+
+    function saveSiteBaseUrl(e) {
+      if (e) e.preventDefault();
+      const input = document.getElementById('base-url-input');
+      liveSiteBaseUrl = String(input?.value || '').trim().replace(/\/+$/, '');
+      try { localStorage.setItem(SITE_BASE_URL_KEY, liveSiteBaseUrl); } catch (_) {}
+      document.getElementById('base-url-modal')?.classList.add('hidden');
+      switchTargetPage(currentTargetPage);
+      showBuilderToast(`บันทึก URL เว็บไซต์จริงแล้ว: ${liveSiteBaseUrl || 'โฟลเดอร์ปัจจุบัน'}`);
+    }
+
+    function renderSidebarPagesList() {
+      const listEl = document.getElementById('sidebar-pages-list');
+      if (!listEl) return;
+      listEl.innerHTML = ALL_SITE_PAGES.map(p => {
+        const isCur = p.file === currentTargetPage;
+        const isInFolder = localFolderHtmlMap.has(p.file);
+        return `
+          <button type="button" onclick="switchTargetPage('${p.file}')"
+            class="page-item-btn w-full text-left px-3 py-2 rounded-xl border text-[11px] font-semibold flex items-center justify-between gap-1.5 transition ${isCur ? 'is-active' : 'bg-slate-950/70 border-slate-800 text-slate-300 hover:bg-slate-800'}">
+            <span class="truncate">${p.title}</span>
+            ${isInFolder ? '<span class="text-[9px] bg-emerald-500/20 text-emerald-300 px-1.5 py-0.5 rounded shrink-0">ไฟล์เครื่อง</span>' : ''}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function renderHtmlIntoEditorFrame(htmlContent, fileName, sourceLabel) {
+      const frame = document.getElementById('live-page-frame');
+      const statusEl = document.getElementById('live-page-load-status');
+      const labelEl = document.getElementById('current-editing-page-label');
+      currentTargetPage = fileName;
+      currentLoadedFileName = fileName;
+      if (labelEl) labelEl.textContent = fileName;
+      if (statusEl) statusEl.textContent = sourceLabel;
+      undoStack = [];
+      redoStack = [];
+      selectedEl = null;
+      updateUndoRedoButtons();
+      if (frame) {
+        frame.removeAttribute('src');
+        frame.srcdoc = htmlContent;
+      }
+    }
+
+    function loadLocalFolderFiles(inputEl) {
+      const files = Array.from(inputEl?.files || []);
+      if (!files.length) return;
+      localFolderHtmlMap.clear();
+
+      const htmlFiles = files.filter(f => /\.(html|htm)$/i.test(f.name));
+      if (!htmlFiles.length) {
+        showBuilderToast('ไม่พบไฟล์ .html ในโฟลเดอร์ที่เลือก');
+        inputEl.value = '';
+        return;
+      }
+
+      let loadedCount = 0;
+      htmlFiles.forEach(file => {
+        const reader = new FileReader();
+        reader.onload = e => {
+          localFolderHtmlMap.set(file.name, String(e.target?.result || ''));
+          loadedCount += 1;
+          if (loadedCount === htmlFiles.length) {
+            const preferred = localFolderHtmlMap.has(currentTargetPage)
+              ? currentTargetPage
+              : (localFolderHtmlMap.has('index.html') ? 'index.html' : htmlFiles[0].name);
+            switchTargetPage(preferred);
+            showBuilderToast(`โหลดโฟลเดอร์สำเร็จ (${htmlFiles.length} หน้า) พร้อมแก้ ${preferred}`);
+          }
+        };
+        reader.readAsText(file, 'UTF-8');
+      });
+      inputEl.value = '';
+    }
+
+    function switchTargetPage(pageFile) {
+      currentTargetPage = pageFile;
+      const labelEl = document.getElementById('current-editing-page-label');
+      if (labelEl) labelEl.textContent = pageFile;
+      const topSelect = document.getElementById('top-page-selector');
+      if (topSelect) topSelect.value = pageFile;
+      renderSidebarPagesList();
+
+      if (localFolderHtmlMap.has(pageFile)) {
+        renderHtmlIntoEditorFrame(
+          localFolderHtmlMap.get(pageFile),
+          pageFile,
+          `กำลังแก้ไขไฟล์ปัจจุบันจากโฟลเดอร์ในเครื่อง: ${pageFile}`
+        );
+        return;
+      }
+
+      const statusEl = document.getElementById('live-page-load-status');
+      const targetUrl = liveSiteBaseUrl ? `${liveSiteBaseUrl}/${pageFile}` : pageFile;
+      if (statusEl) statusEl.textContent = `กำลังดึง ${targetUrl} เวอร์ชันล่าสุด...`;
+
+      const frame = document.getElementById('live-page-frame');
+      if (!frame) return;
+
+      fetch(`${targetUrl}?nocache=${Date.now()}`, { cache: 'no-store' })
+        .then(res => {
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+          return res.text();
+        })
+        .then(htmlText => {
+          const baseTag = liveSiteBaseUrl ? `<base href="${liveSiteBaseUrl}/">` : '';
+          const patchedHtml = baseTag && htmlText.includes('<head>')
+            ? htmlText.replace('<head>', `<head>${baseTag}`)
+            : htmlText;
+          renderHtmlIntoEditorFrame(
+            patchedHtml,
+            pageFile,
+            `กำลังแก้ไขหน้าปัจจุบันจริงจาก ${targetUrl}`
+          );
+        })
+        .catch(() => {
+          currentLoadedFileName = pageFile;
+          frame.removeAttribute('srcdoc');
+          frame.src = `${targetUrl}?t=${Date.now()}`;
+          if (statusEl) {
+            statusEl.textContent = `กำลังแสดง ${targetUrl} — หากต้องการแก้ไฟล์เวอร์ชันล่าสุดในเครื่อง ให้กด "เปิดทั้งโฟลเดอร์" หรือ "เปิดไฟล์ .HTML"`;
+          }
+        });
+    }
+
+    function reloadCurrentLivePage() {
+      switchTargetPage(currentTargetPage);
+      showBuilderToast(`รีเฟรชหน้า ${currentTargetPage} เวอร์ชันล่าสุดแล้ว`);
+    }
+
+    function loadLocalHtmlFile(inputEl) {
+      const file = inputEl?.files?.[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = e => {
+        const htmlContent = String(e.target?.result || '');
+        localFolderHtmlMap.set(file.name, htmlContent);
+        renderHtmlIntoEditorFrame(
+          htmlContent,
+          file.name,
+          `กำลังแก้ไขไฟล์ปัจจุบันจากเครื่อง: ${file.name}`
+        );
+        showBuilderToast(`เปิดไฟล์ ${file.name} จากเครื่องเรียบร้อยแล้ว`);
+      };
+      reader.readAsText(file, 'UTF-8');
+      inputEl.value = '';
+    }
+
+    function getFrameDoc() {
+      const frame = document.getElementById('live-page-frame');
+      try {
+        return frame?.contentDocument || frame?.contentWindow?.document || null;
+      } catch (_) {
+        return null;
+      }
     }
 
     function pushUndoSnapshot() {
-      historyUndo.push(JSON.stringify(pagesState));
-      if (historyUndo.length > 30) historyUndo.shift();
-      historyRedo = [];
+      const doc = getFrameDoc();
+      if (!doc || !doc.body) return;
+      undoStack.push(doc.body.innerHTML);
+      if (undoStack.length > 25) undoStack.shift();
+      redoStack = [];
       updateUndoRedoButtons();
     }
 
-    function undoAction() {
-      if (!historyUndo.length) return;
-      historyRedo.push(JSON.stringify(pagesState));
-      pagesState = JSON.parse(historyUndo.pop());
-      selectedBlockIndex = null;
-      saveToLocal();
-      renderCanvas();
+    function undoBuilderAction() {
+      const doc = getFrameDoc();
+      if (!doc || !doc.body || undoStack.length === 0) return;
+      redoStack.push(doc.body.innerHTML);
+      doc.body.innerHTML = undoStack.pop();
+      bindEditableHandlersInFrame(doc);
       updateUndoRedoButtons();
-      showBuilderToast('ย้อนกลับการแก้ไขแล้ว (Undo)');
+      showBuilderToast('ย้อนกลับการแก้ไขแล้ว');
     }
 
-    function redoAction() {
-      if (!historyRedo.length) return;
-      historyUndo.push(JSON.stringify(pagesState));
-      pagesState = JSON.parse(historyRedo.pop());
-      selectedBlockIndex = null;
-      saveToLocal();
-      renderCanvas();
+    function redoBuilderAction() {
+      const doc = getFrameDoc();
+      if (!doc || !doc.body || redoStack.length === 0) return;
+      undoStack.push(doc.body.innerHTML);
+      doc.body.innerHTML = redoStack.pop();
+      bindEditableHandlersInFrame(doc);
       updateUndoRedoButtons();
-      showBuilderToast('ทำซ้ำการแก้ไขแล้ว (Redo)');
+      showBuilderToast('ทำซ้ำการแก้ไขแล้ว');
     }
 
     function updateUndoRedoButtons() {
-      const u = document.getElementById('btn-undo');
-      const r = document.getElementById('btn-redo');
-      if (u) u.disabled = historyUndo.length === 0;
-      if (r) r.disabled = historyRedo.length === 0;
+      const uBtn = document.getElementById('btn-undo');
+      const rBtn = document.getElementById('btn-redo');
+      if (uBtn) uBtn.disabled = undoStack.length === 0;
+      if (rBtn) rBtn.disabled = redoStack.length === 0;
     }
 
-    function getDefaultPageState(page) {
-      return {
-        theme: 'obsidian',
-        bannerTitle: `หัวข้อหลักของหน้า ${page} (คลิกเพื่อพิมพ์แก้ไข)`,
-        bannerSub: 'พิมพ์คำอธิบายหรือประกาศสำคัญที่ต้องการแสดงในหน้านี้ได้เลย...',
-        blocks: [
-          {
-            id: 'blk-' + Date.now(),
-            type: 'layout_media_left',
-            bgClass: 'bg-white',
-            title: 'หัวข้อประชาสัมพันธ์สำหรับสมาชิก',
-            body: 'คลิกที่ข้อความนี้เพื่อแก้ไขรายละเอียด โปรโมชั่น หรือข่าวสารของกลุ่มได้โดยตรง หรือลากบล็อกสลับตำแหน่งขึ้น-ลงได้ทันที',
-            image: 'TheDriverTH.jpg',
-            buttonText: 'ดูรายละเอียดเพิ่มเติม',
-            buttonLink: 'driver_news.html'
-          }
-        ]
-      };
-    }
-
-    function loadAllPagesState() {
+    function execFrameCommand(cmd, value = null) {
+      const doc = getFrameDoc();
+      if (!doc) return;
       try {
-        const raw = localStorage.getItem(BUILDER_STORAGE_KEY);
-        pagesState = raw ? JSON.parse(raw) : {};
-      } catch (_) {
-        pagesState = {};
-      }
-      if (!pagesState[currentPage]) {
-        pagesState[currentPage] = getDefaultPageState(currentPage);
-      }
-    }
-
-    function saveToLocal() {
-      try {
-        localStorage.setItem(BUILDER_STORAGE_KEY, JSON.stringify(pagesState));
+        doc.execCommand(cmd, false, value);
+        pushUndoSnapshot();
       } catch (_) {}
     }
 
-    function syncHeaderFromDOM() {
-      const state = pagesState[currentPage];
-      if (!state) return;
-      state.bannerTitle = document.getElementById('canvas-banner-title')?.innerHTML || state.bannerTitle;
-      state.bannerSub = document.getElementById('canvas-banner-sub')?.innerHTML || state.bannerSub;
-      saveToLocal();
+    function onDragNewBlock(event, blockType) {
+      draggedNewBlockType = blockType;
+      try { event.dataTransfer.setData('text/plain', blockType); } catch (_) {}
     }
 
-    function syncBlockField(index, field, el) {
-      const block = pagesState[currentPage]?.blocks?.[index];
-      if (!block || !el) return;
-      block[field] = el.innerHTML;
-      saveToLocal();
-    }
+    function createBlockNode(doc, type) {
+      const wrap = doc.createElement('div');
+      wrap.setAttribute('data-builder-block', 'true');
+      wrap.style.margin = '18px auto';
+      wrap.style.maxWidth = '1120px';
+      wrap.style.padding = '16px';
 
-    function syncBlockArrayItem(index, arrayField, itemIdx, el) {
-      const block = pagesState[currentPage]?.blocks?.[index];
-      if (!block || !Array.isArray(block[arrayField]) || !el) return;
-      block[arrayField][itemIdx] = el.innerText;
-      saveToLocal();
-    }
-
-    /* จัดรูปแบบข้อความ Rich Text */
-    function execFormat(command, event) {
-      if (event) event.preventDefault();
-      document.execCommand(command, false, null);
-    }
-    function execColor(hex) {
-      document.execCommand('foreColor', false, hex);
-    }
-
-    /* สลับขนาดหน้าจอ Desktop / Tablet / Mobile */
-    function setViewport(mode) {
-      const shell = document.getElementById('builder-canvas-shell');
-      ['desktop', 'tablet', 'mobile'].forEach(m => {
-        const btn = document.getElementById(`vp-${m}`);
-        if (btn) {
-          btn.className = m === mode
-            ? 'px-2.5 py-1.5 rounded-lg bg-amber-400 text-slate-950 font-bold text-xs'
-            : 'px-2.5 py-1.5 rounded-lg hover:bg-slate-800 text-slate-300 text-xs';
-        }
-      });
-      if (!shell) return;
-      if (mode === 'mobile') shell.style.maxWidth = '390px';
-      else if (mode === 'tablet') shell.style.maxWidth = '768px';
-      else shell.style.maxWidth = '100%';
-    }
-
-    function switchSidebarTab(tab) {
-      ['insert', 'props', 'pages', 'theme'].forEach(t => {
-        document.getElementById(`spanel-${t}`)?.classList.toggle('hidden', t !== tab);
-        const btn = document.getElementById(`stab-${t}`);
-        if (btn) {
-          btn.className = t === tab
-            ? 'py-3.5 text-blue-600 border-b-2 border-blue-600 bg-white transition'
-            : 'py-3.5 text-slate-600 hover:text-slate-900 border-b-2 border-transparent transition';
-        }
-      });
-    }
-
-    function switchBuilderPage(pageName) {
-      syncHeaderFromDOM();
-      currentPage = pageName;
-      selectedBlockIndex = null;
-      document.getElementById('active-page-select').value = pageName;
-      document.getElementById('canvas-page-label').textContent = pageName;
-      if (!pagesState[currentPage]) {
-        pagesState[currentPage] = getDefaultPageState(currentPage);
-      }
-      renderCanvas();
-      updateInspectorUI();
-    }
-
-    function applyBuilderTheme(themeKey) {
-      pagesState[currentPage].theme = themeKey;
-      const header = document.getElementById('canvas-hero-header');
-      if (header) {
-        if (themeKey === 'captain') {
-          header.className = 'bg-gradient-to-r from-slate-950 via-teal-950 to-slate-900 text-white p-6 sm:p-9 border-b border-teal-400/30';
-        } else if (themeKey === 'emerald') {
-          header.className = 'bg-gradient-to-r from-emerald-950 via-slate-900 to-slate-950 text-white p-6 sm:p-9 border-b border-emerald-400/30';
-        } else {
-          header.className = 'bg-gradient-to-r from-slate-950 via-slate-900 to-slate-800 text-white p-6 sm:p-9 border-b border-amber-400/30';
-        }
-      }
-      saveToLocal();
-    }
-
-    function createBlockObject(type) {
-      const id = 'blk-' + Date.now() + '-' + Math.floor(Math.random() * 1000);
-      const templates = {
-        textbox: { id, type, bgClass: 'bg-slate-50', title: 'หัวข้อกล่องข้อความใหม่', body: 'คลิกตรงนี้เพื่อพิมพ์เนื้อหาประชาสัมพันธ์ กฎกติกา หรือประกาศแจ้งเตือนสมาชิก...' },
-        image: { id, type, bgClass: 'bg-slate-50', image: 'TheDriverTH.jpg', caption: 'คำอธิบายใต้ภาพ (คลิกเพื่อแก้ไข)' },
-        embed: { id, type, bgClass: 'bg-white', embedCode: '<div class="p-4 bg-amber-50 border border-amber-300 rounded-xl text-xs font-bold text-amber-900">พื้นที่โค้ดฝัง (HTML / Google Maps / YouTube) — แก้ไขโค้ดได้ที่แท็บ “ตั้งค่าบล็อก”</div>' },
-        drive: { id, type, bgClass: 'bg-emerald-50/60', title: 'เอกสารสำคัญจาก Google Drive', body: 'คลิกปุ่มด้านล่างเพื่อเปิดดูไฟล์เอกสารหรือคู่มือสมาชิก', buttonText: 'เปิดเอกสารใน Drive', buttonLink: 'guide.html' },
-        layout_media_left: { id, type, bgClass: 'bg-white', title: 'หัวข้อเนื้อหาพร้อมภาพประกอบ', body: 'รายละเอียดเนื้อหาสำคัญของบริการหรือข่าวสารล่าสุดในเครือข่าย', image: 'TheDriverTH.jpg' },
-        layout_2_cols: { id, type, bgClass: 'bg-white', col1Title: 'คอลัมน์ที่ 1', col1Body: 'รายละเอียดรายการที่ 1', col2Title: 'คอลัมน์ที่ 2', col2Body: 'รายละเอียดรายการที่ 2', image: 'TheDriverTH.jpg' },
-        layout_collage: { id, type, bgClass: 'bg-white', title: 'แกลเลอรีภาพกิจกรรมเครือข่าย', image: 'TheDriverTH.jpg' },
-        layout_3_cols: { id, type, bgClass: 'bg-white', items: ['บริการที่ 1', 'บริการที่ 2', 'บริการที่ 3'], image: 'TheDriverTH.jpg' },
-        layout_2_horizontal: { id, type, bgClass: 'bg-white', leftTitle: 'จุดเด่นที่ 1', leftBody: 'คำอธิบายสั้นๆ', rightTitle: 'จุดเด่นที่ 2', rightBody: 'คำอธิบายสั้นๆ', image: 'TheDriverTH.jpg' },
-        layout_4_cols: { id, type, bgClass: 'bg-white', items: ['หัวข้อ 1', 'หัวข้อ 2', 'หัวข้อ 3', 'หัวข้อ 4'], image: 'TheDriverTH.jpg' },
-        collapsible: { id, type, bgClass: 'bg-amber-50/70', title: 'หัวข้อแบบยุบ-ขยายได้ (คลิกเพื่อเปิดดูคำตอบ)', body: 'รายละเอียดคำตอบหรือเงื่อนไขเพิ่มเติมที่ซ่อนอยู่ภายในกลุ่มแบบยุบได้' },
-        toc: { id, type, bgClass: 'bg-slate-100' },
-        carousel: { id, type, bgClass: 'bg-slate-950 text-white', slides: ['สไลด์ประชาสัมพันธ์ที่ 1', 'สไลด์ประชาสัมพันธ์ที่ 2', 'สไลด์ประชาสัมพันธ์ที่ 3'] },
-        button: { id, type, bgClass: 'bg-white', buttonText: 'คลิกเข้าสู่บริการ', buttonLink: 'member_register.html' },
-        divider: { id, type, bgClass: 'bg-white' },
-        spacer: { id, type, bgClass: 'bg-white' }
-      };
-      return templates[type] || templates.textbox;
-    }
-
-    function addBlock(type, insertAtIndex = null) {
-      pushUndoSnapshot();
-      const newObj = createBlockObject(type);
-      const list = pagesState[currentPage].blocks;
-      if (insertAtIndex !== null && insertAtIndex >= 0 && insertAtIndex <= list.length) {
-        list.splice(insertAtIndex, 0, newObj);
-        selectedBlockIndex = insertAtIndex;
+      if (type === 'heading') {
+        wrap.innerHTML = '<h2 style="font-size:28px;font-weight:800;color:#0f172a;margin:0;">หัวข้อประกาศสำคัญใหม่</h2>';
+      } else if (type === 'text') {
+        wrap.innerHTML = '<p style="font-size:15px;line-height:1.7;color:#334155;margin:0;">พิมพ์รายละเอียดข้อความที่ต้องการสื่อสารกับสมาชิกหรือผู้ใช้งานที่นี่...</p>';
+      } else if (type === 'card') {
+        wrap.innerHTML = '<div style="background:#fffbeb;border:1px solid #fcd34d;border-radius:20px;padding:20px;color:#0f172a;"><h3 style="font-size:18px;font-weight:800;margin:0 0 8px;">การ์ดประชาสัมพันธ์บริการ</h3><p style="font-size:14px;color:#475569;margin:0;">คลิกแก้ไขข้อความหรือลิงก์ของการ์ดนี้ได้ทันที</p></div>';
+      } else if (type === 'button') {
+        wrap.innerHTML = '<a href="index.html" style="display:inline-block;background:#0f172a;color:#fbbf24;font-weight:700;padding:12px 24px;border-radius:14px;text-decoration:none;font-size:14px;">ปุ่มดำเนินการ</a>';
+      } else if (type === 'image') {
+        wrap.innerHTML = '<img src="https://placehold.co/960x360/0f172a/fbbf24?text=The+Driver+Thailand+Banner" alt="แบนเนอร์" style="width:100%;max-height:360px;object-fit:cover;border-radius:18px;">';
       } else {
-        list.push(newObj);
-        selectedBlockIndex = list.length - 1;
+        wrap.innerHTML = '<hr style="border:0;border-top:2px solid #e2e8f0;margin:8px 0;">';
       }
-      saveToLocal();
-      renderCanvas();
-      updateInspectorUI();
-      showBuilderToast('เพิ่มบล็อกเนื้อหาลงในหน้าเว็บแล้ว');
+      return wrap;
     }
 
-    function selectBlock(index) {
-      if (isPreview) return;
-      selectedBlockIndex = index;
-      renderCanvas();
-      updateInspectorUI();
+    function insertBlockIntoFrame(type) {
+      const doc = getFrameDoc();
+      if (!doc || !doc.body) return;
+      pushUndoSnapshot();
+      const targetMain = doc.querySelector('main') || doc.body;
+      targetMain.appendChild(createBlockNode(doc, type));
+      bindEditableHandlersInFrame(doc);
+      showBuilderToast('แทรกบล็อกใหม่ลงในหน้าเว็บแล้ว');
     }
 
-    function updateInspectorUI() {
-      const emptyEl = document.getElementById('block-inspector-empty');
-      const formEl = document.getElementById('block-inspector-form');
-      const list = pagesState[currentPage]?.blocks || [];
-      if (selectedBlockIndex === null || !list[selectedBlockIndex]) {
-        emptyEl?.classList.remove('hidden');
-        formEl?.classList.add('hidden');
+    function selectElementInInspector(el) {
+      const doc = getFrameDoc();
+      if (doc && selectedEl) {
+        selectedEl.style.outline = '';
+      }
+      selectedEl = el;
+      const tagLabel = document.getElementById('selected-element-tag');
+      const textInput = document.getElementById('prop-text-input');
+      const linkGroup = document.getElementById('prop-link-group');
+      const hrefInput = document.getElementById('prop-href-input');
+      const imgGroup = document.getElementById('prop-image-group');
+      const imgSrcInput = document.getElementById('prop-img-src-input');
+      const toolbar = document.getElementById('floating-text-toolbar');
+
+      if (!el) {
+        if (tagLabel) tagLabel.textContent = 'ยังไม่ได้คลิกเลือกองค์ประกอบบนหน้าเว็บ';
+        if (toolbar) toolbar.classList.add('hidden');
         return;
       }
-      const b = list[selectedBlockIndex];
-      emptyEl?.classList.add('hidden');
-      formEl?.classList.remove('hidden');
-      document.getElementById('insp-block-num').textContent = selectedBlockIndex + 1;
 
-      const linkWrap = document.getElementById('insp-link-wrap');
-      const embedWrap = document.getElementById('insp-embed-wrap');
-      const imgWrap = document.getElementById('insp-img-wrap');
+      el.style.outline = '2px dashed #f59e0b';
+      if (tagLabel) tagLabel.textContent = `<${el.tagName.toLowerCase()}>`;
+      if (textInput) textInput.value = el.innerText || '';
+      if (toolbar) toolbar.classList.remove('hidden');
 
-      linkWrap?.classList.toggle('hidden', b.buttonLink === undefined);
-      if (b.buttonLink !== undefined) document.getElementById('insp-btn-link').value = b.buttonLink;
+      const anchor = el.tagName === 'A' ? el : el.closest('a');
+      if (linkGroup && hrefInput) {
+        linkGroup.classList.toggle('hidden', !anchor);
+        if (anchor) hrefInput.value = anchor.getAttribute('href') || '';
+      }
 
-      embedWrap?.classList.toggle('hidden', b.type !== 'embed');
-      if (b.type === 'embed') document.getElementById('insp-embed-code').value = b.embedCode || '';
-
-      imgWrap?.classList.toggle('hidden', !b.image);
+      const imgEl = el.tagName === 'IMG' ? el : null;
+      if (imgGroup && imgSrcInput) {
+        imgGroup.classList.toggle('hidden', !imgEl);
+        if (imgEl) imgSrcInput.value = imgEl.getAttribute('src') || '';
+      }
     }
 
-    function setBlockBg(bgClass) {
-      if (selectedBlockIndex === null) return;
-      const b = pagesState[currentPage]?.blocks?.[selectedBlockIndex];
-      if (!b) return;
-      pushUndoSnapshot();
-      b.bgClass = bgClass;
-      saveToLocal();
-      renderCanvas();
+    function applySelectedTextProp(val) {
+      if (!selectedEl) return;
+      selectedEl.innerText = val;
     }
 
-    function updateSelectedBlockProp(prop, val) {
-      if (selectedBlockIndex === null) return;
-      const b = pagesState[currentPage]?.blocks?.[selectedBlockIndex];
-      if (!b) return;
-      b[prop] = val;
-      saveToLocal();
-      if (prop === 'embedCode') renderCanvas();
+    function applySelectedLinkProp(val) {
+      if (!selectedEl) return;
+      const anchor = selectedEl.tagName === 'A' ? selectedEl : selectedEl.closest('a');
+      if (anchor) anchor.setAttribute('href', val);
     }
 
-    function duplicateSelectedBlock() {
-      if (selectedBlockIndex === null) return;
-      const list = pagesState[currentPage]?.blocks || [];
-      const src = list[selectedBlockIndex];
-      if (!src) return;
-      pushUndoSnapshot();
-      const copy = JSON.parse(JSON.stringify(src));
-      copy.id = 'blk-' + Date.now();
-      list.splice(selectedBlockIndex + 1, 0, copy);
-      selectedBlockIndex += 1;
-      saveToLocal();
-      renderCanvas();
-      updateInspectorUI();
-      showBuilderToast('ทำซ้ำบล็อกเรียบร้อยแล้ว');
+    function applySelectedImageUrl(val) {
+      if (selectedEl && selectedEl.tagName === 'IMG') {
+        selectedEl.setAttribute('src', val);
+      }
     }
 
-    function moveBlock(index, dir) {
-      const arr = pagesState[currentPage].blocks;
-      const target = index + dir;
-      if (target < 0 || target >= arr.length) return;
-      pushUndoSnapshot();
-      const temp = arr[index];
-      arr[index] = arr[target];
-      arr[target] = temp;
-      selectedBlockIndex = target;
-      saveToLocal();
-      renderCanvas();
-      updateInspectorUI();
-    }
-
-    function deleteBlock(index) {
-      pushUndoSnapshot();
-      pagesState[currentPage].blocks.splice(index, 1);
-      selectedBlockIndex = null;
-      saveToLocal();
-      renderCanvas();
-      updateInspectorUI();
-      showBuilderToast('ลบบล็อกเนื้อหาแล้ว');
-    }
-
-    function editBlockImage(index) {
-      const block = pagesState[currentPage]?.blocks?.[index];
-      if (!block) return;
-      const input = document.createElement('input');
-      input.type = 'file';
-      input.accept = 'image/*';
-      input.onchange = e => {
-        const file = e.target.files?.[0];
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = ev => {
-          pushUndoSnapshot();
-          block.image = ev.target.result;
-          saveToLocal();
-          renderCanvas();
-          showBuilderToast('อัปเดตรูปภาพในบล็อกเรียบร้อยแล้ว');
-        };
-        reader.readAsDataURL(file);
-      };
-      input.click();
-    }
-
-    /* Drag & Drop Handlers */
-    function handlePaletteDragStart(event, blockType) {
-      dragPayload = { source: 'palette', type: blockType };
-      event.dataTransfer.effectAllowed = 'copy';
-    }
-
-    function handleCanvasBlockDragStart(event, index) {
-      if (isPreview) return;
-      dragPayload = { source: 'canvas', fromIndex: index };
-      event.currentTarget.classList.add('is-dragging');
-      event.dataTransfer.effectAllowed = 'move';
-    }
-
-    function handleCanvasBlockDragEnd(event) {
-      event.currentTarget.classList.remove('is-dragging');
-      document.querySelectorAll('.drop-zone-indicator').forEach(el => {
-        el.classList.remove('is-over');
-        el.textContent = '';
-      });
-    }
-
-    function handleDropZoneDragOver(event) {
-      event.preventDefault();
-      event.currentTarget.classList.add('is-over');
-      event.currentTarget.textContent = 'วางบล็อกลงตำแหน่งนี้';
-    }
-
-    function handleDropZoneDragLeave(event) {
-      event.currentTarget.classList.remove('is-over');
-      event.currentTarget.textContent = '';
-    }
-
-    function handleDropZoneDrop(event, targetIndex) {
-      event.preventDefault();
-      event.currentTarget.classList.remove('is-over');
-      event.currentTarget.textContent = '';
-      if (!dragPayload) return;
-
-      if (dragPayload.source === 'palette' && dragPayload.type) {
-        addBlock(dragPayload.type, targetIndex);
-      } else if (dragPayload.source === 'canvas' && typeof dragPayload.fromIndex === 'number') {
-        const fromIdx = dragPayload.fromIndex;
-        if (fromIdx === targetIndex || fromIdx + 1 === targetIndex) return;
+    function applySelectedImageFile(inputEl) {
+      const file = inputEl?.files?.[0];
+      if (!file || !selectedEl || selectedEl.tagName !== 'IMG') return;
+      const reader = new FileReader();
+      reader.onload = e => {
         pushUndoSnapshot();
-        const arr = pagesState[currentPage].blocks;
-        const [moved] = arr.splice(fromIdx, 1);
-        const adjustedTarget = fromIdx < targetIndex ? targetIndex - 1 : targetIndex;
-        arr.splice(adjustedTarget, 0, moved);
-        selectedBlockIndex = adjustedTarget;
-        saveToLocal();
-        renderCanvas();
-        updateInspectorUI();
-      }
-      dragPayload = null;
+        selectedEl.setAttribute('src', String(e.target?.result || ''));
+        showBuilderToast('อัปเดตรูปภาพเรียบร้อยแล้ว');
+      };
+      reader.readAsDataURL(file);
+      inputEl.value = '';
     }
 
-    function handleEndZoneDragOver(event) {
-      event.preventDefault();
-      event.currentTarget.classList.add('border-amber-500', 'bg-amber-50');
-    }
-    function handleEndZoneDragLeave(event) {
-      event.currentTarget.classList.remove('border-amber-500', 'bg-amber-50');
-    }
-    function handleEndZoneDrop(event) {
-      event.preventDefault();
-      event.currentTarget.classList.remove('border-amber-500', 'bg-amber-50');
-      const total = pagesState[currentPage]?.blocks?.length || 0;
-      handleDropZoneDrop(event, total);
+    function applySelectedStyleProp(prop, val) {
+      if (!selectedEl) return;
+      pushUndoSnapshot();
+      selectedEl.style[prop] = val;
     }
 
-    function renderCanvas() {
-      const state = pagesState[currentPage];
-      document.getElementById('canvas-banner-title').innerHTML = state.bannerTitle;
-      document.getElementById('canvas-banner-sub').innerHTML = state.bannerSub;
-      applyBuilderTheme(state.theme || 'obsidian');
+    function duplicateSelectedElement() {
+      if (!selectedEl || !selectedEl.parentNode) return;
+      pushUndoSnapshot();
+      const clone = selectedEl.cloneNode(true);
+      clone.style.outline = '';
+      selectedEl.parentNode.insertBefore(clone, selectedEl.nextSibling);
+      showBuilderToast('ทำซ้ำองค์ประกอบเรียบร้อยแล้ว');
+    }
 
-      const container = document.getElementById('canvas-blocks-container');
-      const editableAttr = isPreview ? '' : 'contenteditable="true"';
+    function deleteSelectedElement() {
+      if (!selectedEl || !selectedEl.parentNode) return;
+      pushUndoSnapshot();
+      selectedEl.parentNode.removeChild(selectedEl);
+      selectElementInInspector(null);
+      showBuilderToast('ลบองค์ประกอบเรียบร้อยแล้ว');
+    }
 
-      if (!state.blocks.length) {
-        container.innerHTML = '<div class="text-center py-14 text-slate-400 text-xs sm:text-sm border-2 border-dashed border-slate-200 rounded-2xl">ยังไม่มีบล็อกเนื้อหาในหน้านี้ ลากหรือคลิกเลือกบล็อกจากแถบด้านขวาได้เลยครับ</div>';
-        return;
-      }
-
-      let html = '';
-      state.blocks.forEach((b, idx) => {
-        if (!isPreview) {
-          html += `<div class="drop-zone-indicator" ondragover="handleDropZoneDragOver(event)" ondragleave="handleDropZoneDragLeave(event)" ondrop="handleDropZoneDrop(event, ${idx})"></div>`;
+    function bindEditableHandlersInFrame(doc) {
+      if (!doc || !doc.body) return;
+      doc.body.addEventListener('dragover', e => e.preventDefault());
+      doc.body.addEventListener('drop', e => {
+        e.preventDefault();
+        const type = draggedNewBlockType || (e.dataTransfer ? e.dataTransfer.getData('text/plain') : '');
+        if (type) {
+          pushUndoSnapshot();
+          const targetMain = doc.querySelector('main') || doc.body;
+          targetMain.appendChild(createBlockNode(doc, type));
+          draggedNewBlockType = '';
+          bindEditableHandlersInFrame(doc);
+          showBuilderToast('วางบล็อกใหม่ลงบนหน้าเว็บแล้ว');
         }
-
-        const isSelected = !isPreview && selectedBlockIndex === idx;
-        const bgClass = b.bgClass || 'bg-white';
-        const dragAttrs = isPreview ? '' : `draggable="true" ondragstart="handleCanvasBlockDragStart(event, ${idx})" ondragend="handleCanvasBlockDragEnd(event)" onclick="selectBlock(${idx})"`;
-
-        const toolbar = isPreview ? '' : `
-          <div class="builder-block-bar absolute -top-3.5 right-3 z-20 flex items-center gap-1 bg-slate-950 text-white px-2.5 py-1 rounded-xl shadow-lg border border-amber-400/50 text-[11px]">
-            <span class="text-amber-300 font-bold pr-1 cursor-grab" title="ลากเพื่อย้ายตำแหน่ง"><i class="fa-solid fa-grip-vertical"></i></span>
-            ${b.image ? `<button type="button" onclick="event.stopPropagation(); editBlockImage(${idx})" class="px-1.5 py-0.5 hover:text-amber-300" title="เปลี่ยนรูป"><i class="fa-solid fa-image"></i></button>` : ''}
-            <button type="button" onclick="event.stopPropagation(); moveBlock(${idx}, -1)" class="px-1.5 py-0.5 hover:text-amber-300" title="เลื่อนขึ้น"><i class="fa-solid fa-arrow-up"></i></button>
-            <button type="button" onclick="event.stopPropagation(); moveBlock(${idx}, 1)" class="px-1.5 py-0.5 hover:text-amber-300" title="เลื่อนลง"><i class="fa-solid fa-arrow-down"></i></button>
-            <button type="button" onclick="event.stopPropagation(); deleteBlock(${idx})" class="px-1.5 py-0.5 text-rose-400 hover:text-rose-300" title="ลบ"><i class="fa-solid fa-trash"></i></button>
-          </div>
-        `;
-
-        let innerHtml = '';
-        if (b.type === 'textbox') {
-          innerHtml = `
-            <div class="p-5 rounded-2xl ${bgClass} border border-slate-200 space-y-2">
-              <h3 ${editableAttr} onblur="syncBlockField(${idx}, 'title', this)" class="text-base sm:text-lg font-extrabold">${b.title}</h3>
-              <p ${editableAttr} onblur="syncBlockField(${idx}, 'body', this)" class="text-xs sm:text-sm opacity-85 leading-relaxed">${b.body}</p>
-            </div>`;
-        } else if (b.type === 'image') {
-          innerHtml = `
-            <div class="rounded-2xl overflow-hidden border border-slate-200 ${bgClass} p-3 text-center space-y-2">
-              <img src="${b.image}" alt="ภาพประกอบ" class="max-h-80 mx-auto rounded-xl object-contain">
-              <p ${editableAttr} onblur="syncBlockField(${idx}, 'caption', this)" class="text-xs opacity-75">${b.caption}</p>
-            </div>`;
-        } else if (b.type === 'embed') {
-          innerHtml = `<div class="p-2 rounded-2xl ${bgClass}">${b.embedCode}</div>`;
-        } else if (b.type === 'drive') {
-          innerHtml = `
-            <div class="p-5 rounded-2xl ${bgClass} border border-emerald-200 flex flex-wrap items-center justify-between gap-3">
-              <div>
-                <h3 ${editableAttr} onblur="syncBlockField(${idx}, 'title', this)" class="font-extrabold text-sm"><i class="fa-brands fa-google-drive text-emerald-600 mr-1.5"></i>${b.title}</h3>
-                <p ${editableAttr} onblur="syncBlockField(${idx}, 'body', this)" class="text-xs opacity-80 mt-0.5">${b.body}</p>
-              </div>
-              <a href="${isPreview ? b.buttonLink : 'javascript:void(0)'}" ${editableAttr} onblur="syncBlockField(${idx}, 'buttonText', this)" class="bg-slate-950 text-amber-400 font-bold text-xs px-4 py-2.5 rounded-xl">${b.buttonText}</a>
-            </div>`;
-        } else if (b.type === 'layout_media_left') {
-          innerHtml = `
-            <div class="grid sm:grid-cols-12 gap-4 items-center p-4 rounded-2xl border border-slate-200 ${bgClass}">
-              <div class="sm:col-span-4"><img src="${b.image}" class="w-full h-36 object-cover rounded-xl border border-slate-200"></div>
-              <div class="sm:col-span-8 space-y-2">
-                <h3 ${editableAttr} onblur="syncBlockField(${idx}, 'title', this)" class="text-base font-extrabold">${b.title}</h3>
-                <p ${editableAttr} onblur="syncBlockField(${idx}, 'body', this)" class="text-xs sm:text-sm opacity-85 leading-relaxed">${b.body}</p>
-              </div>
-            </div>`;
-        } else if (b.type === 'layout_2_cols') {
-          innerHtml = `
-            <div class="grid sm:grid-cols-2 gap-4">
-              <div class="p-4 rounded-2xl border border-slate-200 ${bgClass} space-y-2">
-                <img src="${b.image}" class="w-full h-32 object-cover rounded-xl">
-                <h4 ${editableAttr} onblur="syncBlockField(${idx}, 'col1Title', this)" class="font-extrabold text-sm">${b.col1Title}</h4>
-                <p ${editableAttr} onblur="syncBlockField(${idx}, 'col1Body', this)" class="text-xs opacity-80">${b.col1Body}</p>
-              </div>
-              <div class="p-4 rounded-2xl border border-slate-200 ${bgClass} space-y-2">
-                <img src="${b.image}" class="w-full h-32 object-cover rounded-xl">
-                <h4 ${editableAttr} onblur="syncBlockField(${idx}, 'col2Title', this)" class="font-extrabold text-sm">${b.col2Title}</h4>
-                <p ${editableAttr} onblur="syncBlockField(${idx}, 'col2Body', this)" class="text-xs opacity-80">${b.col2Body}</p>
-              </div>
-            </div>`;
-        } else if (b.type === 'layout_collage') {
-          innerHtml = `
-            <div class="p-4 rounded-2xl border border-slate-200 ${bgClass} space-y-3">
-              <h4 ${editableAttr} onblur="syncBlockField(${idx}, 'title', this)" class="font-extrabold text-sm">${b.title}</h4>
-              <div class="grid grid-cols-12 gap-2">
-                <div class="col-span-4 space-y-2"><img src="${b.image}" class="w-full h-20 object-cover rounded-xl"><img src="${b.image}" class="w-full h-20 object-cover rounded-xl"></div>
-                <div class="col-span-8"><img src="${b.image}" class="w-full h-42 object-cover rounded-xl"></div>
-              </div>
-            </div>`;
-        } else if (b.type === 'layout_3_cols') {
-          innerHtml = `
-            <div class="grid sm:grid-cols-3 gap-3">
-              ${b.items.map((it, iIdx) => `<div class="p-3.5 rounded-2xl border border-slate-200 ${bgClass} space-y-2"><img src="${b.image}" class="w-full h-24 object-cover rounded-xl"><p ${editableAttr} onblur="syncBlockArrayItem(${idx}, 'items', ${iIdx}, this)" class="font-bold text-xs">${it}</p></div>`).join('')}
-            </div>`;
-        } else if (b.type === 'layout_2_horizontal') {
-          innerHtml = `
-            <div class="grid sm:grid-cols-2 gap-3">
-              <div class="p-3.5 rounded-2xl border border-slate-200 ${bgClass} flex items-center gap-3"><img src="${b.image}" class="w-16 h-16 rounded-xl object-cover shrink-0"><div><h4 ${editableAttr} onblur="syncBlockField(${idx}, 'leftTitle', this)" class="font-bold text-xs">${b.leftTitle}</h4><p ${editableAttr} onblur="syncBlockField(${idx}, 'leftBody', this)" class="text-[11px] opacity-75">${b.leftBody}</p></div></div>
-              <div class="p-3.5 rounded-2xl border border-slate-200 ${bgClass} flex items-center gap-3"><img src="${b.image}" class="w-16 h-16 rounded-xl object-cover shrink-0"><div><h4 ${editableAttr} onblur="syncBlockField(${idx}, 'rightTitle', this)" class="font-bold text-xs">${b.rightTitle}</h4><p ${editableAttr} onblur="syncBlockField(${idx}, 'rightBody', this)" class="text-[11px] opacity-75">${b.rightBody}</p></div></div>
-            </div>`;
-        } else if (b.type === 'layout_4_cols') {
-          innerHtml = `
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-              ${b.items.map((it, iIdx) => `<div class="p-3 rounded-2xl border border-slate-200 ${bgClass} text-center space-y-1.5"><img src="${b.image}" class="w-full h-20 object-cover rounded-xl"><p ${editableAttr} onblur="syncBlockArrayItem(${idx}, 'items', ${iIdx}, this)" class="font-bold text-xs">${it}</p></div>`).join('')}
-            </div>`;
-        } else if (b.type === 'collapsible') {
-          innerHtml = `
-            <details open class="p-4 rounded-2xl ${bgClass} border border-amber-200">
-              <summary ${editableAttr} onblur="syncBlockField(${idx}, 'title', this)" class="font-extrabold text-xs sm:text-sm cursor-pointer">${b.title}</summary>
-              <p ${editableAttr} onblur="syncBlockField(${idx}, 'body', this)" class="text-xs opacity-85 mt-2 pt-2 border-t border-amber-200/70">${b.body}</p>
-            </details>`;
-        } else if (b.type === 'toc') {
-          const headings = state.blocks.filter(x => x.title).map(x => `<li>• ${x.title.replace(/<[^>]*>/g, '')}</li>`).join('') || '<li>• ยังไม่มีหัวข้อในหน้านี้</li>';
-          innerHtml = `<div class="p-4 rounded-2xl ${bgClass} border border-slate-200 text-xs space-y-1"><strong class="block">สารบัญเนื้อหาในหน้านี้:</strong><ul class="opacity-80 space-y-0.5">${headings}</ul></div>`;
-        } else if (b.type === 'carousel') {
-          innerHtml = `<div class="p-5 rounded-2xl ${bgClass} border border-amber-400/40 flex items-center justify-between gap-3"><span class="text-xs font-bold text-amber-400"><i class="fa-solid fa-images mr-1.5"></i>ภาพหมุนประชาสัมพันธ์ (${b.slides.length} สไลด์)</span><span ${editableAttr} onblur="syncBlockArrayItem(${idx}, 'slides', 0, this)" class="text-xs">${b.slides[0]}</span></div>`;
-        } else if (b.type === 'button') {
-          innerHtml = `<div class="text-center py-2"><a href="${isPreview ? b.buttonLink : 'javascript:void(0)'}" ${editableAttr} onblur="syncBlockField(${idx}, 'buttonText', this)" class="inline-block bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-extrabold text-xs sm:text-sm px-6 py-3 rounded-xl shadow">${b.buttonText}</a></div>`;
-        } else if (b.type === 'divider') {
-          innerHtml = `<hr class="border-t-2 border-slate-200 my-2">`;
-        } else if (b.type === 'spacer') {
-          innerHtml = `<div class="h-8 ${isPreview ? '' : 'bg-slate-50/60 border border-dashed border-slate-200'} rounded-lg flex items-center justify-center text-[10px] text-slate-400">${isPreview ? '' : 'Spacer (ช่องว่างจัดระยะ)'}</div>`;
-        }
-
-        html += `<div ${dragAttrs} class="builder-block ${isSelected ? 'is-selected' : ''}">${toolbar}${innerHtml}</div>`;
       });
 
-      container.innerHTML = html;
+      const targets = doc.querySelectorAll('h1, h2, h3, h4, p, span, a, button, img, li');
+      targets.forEach(node => {
+        if (node.tagName !== 'IMG' && node.children.length === 0) {
+          node.setAttribute('contenteditable', 'true');
+        }
+        node.addEventListener('click', e => {
+          e.stopPropagation();
+          selectElementInInspector(node);
+        });
+      });
     }
 
-    function togglePreviewMode() {
-      syncHeaderFromDOM();
-      isPreview = !isPreview;
-      document.getElementById('builder-right-sidebar')?.classList.toggle('hidden', isPreview);
-      document.getElementById('canvas-end-dropzone')?.classList.toggle('hidden', isPreview);
-      document.getElementById('rich-text-bar')?.classList.toggle('hidden', isPreview);
-      document.getElementById('preview-btn-text').textContent = isPreview ? 'กลับโหมดแก้ไข' : 'ดูตัวอย่าง';
-      renderCanvas();
+    function initLiveFrameEditor() {
+      const doc = getFrameDoc();
+      if (!doc || !doc.body) return;
+      bindEditableHandlersInFrame(doc);
     }
 
-    function exportStandaloneHtml() {
-      syncHeaderFromDOM();
-      const wasPreview = isPreview;
-      if (!wasPreview) {
-        isPreview = true;
-        renderCanvas();
+    function setViewportSize(widthVal) {
+      const wrapper = document.getElementById('viewport-frame-wrapper');
+      if (wrapper) wrapper.style.width = widthVal;
+      const map = { '100%': 'vp-desktop', '768px': 'vp-tablet', '390px': 'vp-mobile' };
+      Object.entries(map).forEach(([w, id]) => {
+        const btn = document.getElementById(id);
+        if (!btn) return;
+        btn.className = w === widthVal
+          ? 'px-2.5 py-1.5 rounded-lg text-xs font-bold bg-amber-400 text-slate-950 transition'
+          : 'px-2.5 py-1.5 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition';
+      });
+    }
+
+    function exportCurrentHtmlFile() {
+      const doc = getFrameDoc();
+      if (!doc) {
+        showBuilderToast('ไม่สามารถส่งออกโค้ดจากหน้าข้ามโดเมนได้ กรุณาเปิดไฟล์จากเครื่อง');
+        return;
       }
-      const headerHtml = document.getElementById('canvas-hero-header').outerHTML;
-      const bodyHtml = document.getElementById('canvas-blocks-container').innerHTML;
-      const fullDoc = `<!DOCTYPE html>
-<html lang="th">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${document.getElementById('canvas-banner-title').innerText} | The Driver Thailand</title>
-  <script src="https://cdn.tailwindcss.com"><\/script>
-  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>body { font-family: 'Prompt', sans-serif; background: #f8fafc; }</style>
-</head>
-<body class="min-h-screen">
-  <main class="max-w-6xl mx-auto p-4 sm:p-8">
-    <div class="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
-      ${headerHtml}
-      <div class="p-6 sm:p-8 space-y-5">${bodyHtml}</div>
-    </div>
-  </main>
-</body>
-</html>`;
-      if (!wasPreview) {
-        isPreview = false;
-        renderCanvas();
-      }
-      const blob = new Blob([fullDoc], { type: 'text/html;charset=utf-8;' });
+      if (selectedEl) selectedEl.style.outline = '';
+      const cleanHtml = '<!DOCTYPE html>\n' + doc.documentElement.outerHTML;
+      const blob = new Blob([cleanHtml], { type: 'text/html;charset=utf-8' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `custom_${currentPage}`;
+      a.download = currentLoadedFileName || currentTargetPage || 'index.html';
       a.click();
       URL.revokeObjectURL(url);
-      showBuilderToast(`ส่งออกไฟล์ custom_${currentPage} เรียบร้อยแล้ว`);
-    }
-
-    async function saveBuilderToCloud() {
-      syncHeaderFromDOM();
-      const btn = document.getElementById('btn-publish-builder');
-      btn.disabled = true;
-      try {
-        await fetch(MASTER_ENDPOINT, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            action: 'site_settings',
-            page: currentPage,
-            builderData: pagesState[currentPage]
-          })
-        });
-        showBuilderToast(`บันทึกและเผยแพร่หน้า ${currentPage} ขึ้นฐานข้อมูลเรียบร้อยแล้ว`);
-      } finally {
-        btn.disabled = false;
-      }
+      showBuilderToast(`ส่งออกไฟล์ ${a.download} เรียบร้อยแล้ว`);
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      loadAllPagesState();
-      switchBuilderPage(currentPage);
+      renderSidebarPagesList();
       updateUndoRedoButtons();
+      const frame = document.getElementById('live-page-frame');
+      if (frame) {
+        frame.addEventListener('load', initLiveFrameEditor);
+      }
+      switchTargetPage('index.html');
     });
   </script>
 </body>

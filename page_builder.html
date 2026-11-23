@@ -3,207 +3,234 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Visual Page Builder | เครื่องมือสร้างและแก้ไขหน้าเว็บ The Driver Thailand</title>
+  <title>Visual Drag &amp; Drop Website Builder | 🚖 The Driver TH 🇹🇭</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    html, body, input, select, textarea, button { font-family: 'Prompt', sans-serif !important; }
-    body { background-color: #f1f5f9; color: #0f172a; overflow-x: clip; }
-    .builder-canvas-block { position: relative; transition: all 0.2s ease; }
-    .builder-canvas-block:hover { outline: 2px solid #f59e0b; outline-offset: 2px; }
-    .builder-block-toolbar { opacity: 0; transition: opacity 0.15s ease; }
-    .builder-canvas-block:hover .builder-block-toolbar { opacity: 1; }
-    [contenteditable="true"]:focus { outline: 2px dashed #3b82f6; background-color: rgba(59, 130, 246, 0.04); border-radius: 6px; }
+    html, body, input, select, textarea, button, code, pre { font-family: 'Prompt', sans-serif !important; }
+    body { background-color: #e2e8f0; color: #0f172a; overflow-x: clip; }
+    .builder-canvas-shell { transition: max-width 0.3s cubic-bezier(0.22, 1, 0.36, 1); }
+    .builder-block { position: relative; transition: transform 0.18s ease, box-shadow 0.18s ease, outline-color 0.18s ease; border-radius: 16px; }
+    .builder-block:hover { outline: 2px solid #f59e0b; outline-offset: 3px; }
+    .builder-block.is-selected { outline: 2.5px solid #2563eb; outline-offset: 3px; box-shadow: 0 12px 30px -10px rgba(37, 99, 235, 0.25); }
+    .builder-block.is-dragging { opacity: 0.45; transform: scale(0.99); }
+    .builder-block-bar { opacity: 0; pointer-events: none; transition: opacity 0.15s ease; }
+    .builder-block:hover .builder-block-bar,
+    .builder-block.is-selected .builder-block-bar { opacity: 1; pointer-events: auto; }
+    .drop-zone-indicator { height: 10px; border-radius: 999px; transition: all 0.15s ease; margin: 4px 0; }
+    .drop-zone-indicator.is-over { height: 42px; background: rgba(245, 158, 11, 0.16); border: 2px dashed #f59e0b; display: flex; align-items: center; justify-content: center; color: #b45309; font-size: 12px; font-weight: 700; }
+    [contenteditable="true"]:focus { outline: 2px dashed #3b82f6; background-color: rgba(59, 130, 246, 0.05); border-radius: 6px; }
+    .draggable-palette-item { cursor: grab; }
+    .draggable-palette-item:active { cursor: grabbing; }
   </style>
 </head>
 <body class="min-h-screen flex flex-col">
 
-  <!-- แถบเครื่องมือด้านบนสุดของ Visual Builder -->
-  <header class="bg-slate-950 text-white border-b border-amber-400/30 sticky top-0 z-50 px-4 py-3 shadow-lg">
-    <div class="max-w-[1440px] mx-auto flex flex-wrap items-center justify-between gap-3">
-      <div class="flex items-center gap-3">
+  <!-- TOP STUDIO HEADER BAR -->
+  <header class="bg-slate-950 text-white border-b border-amber-400/30 sticky top-0 z-50 px-3 sm:px-5 py-2.5 shadow-xl">
+    <div class="max-w-[1600px] mx-auto flex flex-wrap items-center justify-between gap-2.5">
+      <!-- ซ้าย: ชื่อสตูดิโอและเลือกหน้าเว็บ -->
+      <div class="flex items-center gap-2.5">
         <a href="admin.html" class="w-9 h-9 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-300 flex items-center justify-center border border-slate-700" title="กลับหน้า Admin">
           <i class="fa-solid fa-arrow-left"></i>
         </a>
         <div>
           <div class="flex items-center gap-2">
-            <h1 class="text-sm sm:text-base font-extrabold text-amber-300">🚖 The Driver TH — Visual Page Builder</h1>
-            <span class="text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 px-2 py-0.5 rounded-full font-bold">NO-CODE EDITOR</span>
+            <span class="text-xs sm:text-sm font-black text-amber-300">🚖 The Driver TH Studio</span>
+            <span class="hidden sm:inline-block text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 px-2 py-0.5 rounded-full font-bold">PRO VISUAL BUILDER</span>
           </div>
-          <p class="text-[11px] text-slate-400">คลิกเพิ่มบล็อกเนื้อหา แก้ไขข้อความ/รูปภาพ และจัดเรียงหน้าเว็บได้ทันที</p>
+          <div class="flex items-center gap-1.5 text-[11px] text-slate-400">
+            <span>กำลังแก้ไข:</span>
+            <select id="active-page-select" onchange="switchBuilderPage(this.value)" class="bg-slate-900 text-amber-300 font-bold rounded px-1.5 py-0.5 border border-slate-700 focus:outline-none">
+              <option value="index.html">หน้าหลัก (index.html)</option>
+              <option value="driver_news.html">ข่าวสารคนขับแอป (driver_news.html)</option>
+              <option value="captain_insurance.html">Captain Insurance (captain_insurance.html)</option>
+              <option value="register.html">ระบบสมาชิก (register.html)</option>
+              <option value="pcard.html">บัตรสมาชิกประเมศฐ์ (pcard.html)</option>
+              <option value="guide.html">คู่มือสมาชิก (guide.html)</option>
+            </select>
+          </div>
         </div>
       </div>
 
-      <!-- เลือกหน้าที่กำลังแก้ไข + ปุ่มบันทึก/เผยแพร่ -->
-      <div class="flex flex-wrap items-center gap-2">
-        <div class="flex items-center gap-1.5 bg-slate-900 border border-slate-700 rounded-xl px-3 py-1.5 text-xs">
-          <span class="text-slate-400">หน้าเว็บ:</span>
-          <select id="active-page-select" onchange="switchBuilderPage(this.value)" class="bg-transparent text-amber-300 font-bold focus:outline-none">
-            <option value="index.html">หน้าหลัก (index.html)</option>
-            <option value="driver_news.html">ข่าวสารคนขับแอป (driver_news.html)</option>
-            <option value="captain_insurance.html">Captain Insurance (captain_insurance.html)</option>
-            <option value="register.html">ระบบสมาชิก (register.html)</option>
-            <option value="pcard.html">บัตรสมาชิกประเมศฐ์ (pcard.html)</option>
-            <option value="guide.html">คู่มือสมาชิก (guide.html)</option>
-          </select>
-        </div>
+      <!-- กลาง: ปุ่ม Undo / Redo + สลับขนาดหน้าจอ Desktop / Tablet / Mobile -->
+      <div class="flex items-center gap-1.5 bg-slate-900 p-1 rounded-xl border border-slate-800">
+        <button type="button" onclick="undoAction()" id="btn-undo" title="ย้อนกลับ (Undo)" class="w-8 h-8 rounded-lg hover:bg-slate-800 text-slate-300 disabled:opacity-30 text-xs">
+          <i class="fa-solid fa-rotate-left"></i>
+        </button>
+        <button type="button" onclick="redoAction()" id="btn-redo" title="ทำซ้ำ (Redo)" class="w-8 h-8 rounded-lg hover:bg-slate-800 text-slate-300 disabled:opacity-30 text-xs">
+          <i class="fa-solid fa-rotate-right"></i>
+        </button>
+        <span class="w-px h-5 bg-slate-700 mx-0.5"></span>
+        <button type="button" onclick="setViewport('desktop')" id="vp-desktop" title="มุมมองคอมพิวเตอร์" class="px-2.5 py-1.5 rounded-lg bg-amber-400 text-slate-950 font-bold text-xs">
+          <i class="fa-solid fa-desktop"></i>
+        </button>
+        <button type="button" onclick="setViewport('tablet')" id="vp-tablet" title="มุมมองแท็บเล็ต" class="px-2.5 py-1.5 rounded-lg hover:bg-slate-800 text-slate-300 text-xs">
+          <i class="fa-solid fa-tablet-screen-button"></i>
+        </button>
+        <button type="button" onclick="setViewport('mobile')" id="vp-mobile" title="มุมมองมือถือ" class="px-2.5 py-1.5 rounded-lg hover:bg-slate-800 text-slate-300 text-xs">
+          <i class="fa-solid fa-mobile-screen-button"></i>
+        </button>
+      </div>
 
+      <!-- ขวา: ดูตัวอย่าง / ส่งออก HTML / บันทึกขึ้นระบบ -->
+      <div class="flex items-center gap-2 text-xs">
         <button type="button" onclick="togglePreviewMode()" id="btn-preview-toggle"
-          class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-3.5 py-2 rounded-xl text-xs font-bold inline-flex items-center gap-1.5">
+          class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-3 py-2 rounded-xl font-bold inline-flex items-center gap-1.5">
           <i class="fa-solid fa-eye"></i> <span id="preview-btn-text">ดูตัวอย่าง</span>
         </button>
 
+        <button type="button" onclick="exportStandaloneHtml()"
+          class="bg-emerald-600 hover:bg-emerald-500 text-white px-3 py-2 rounded-xl font-bold inline-flex items-center gap-1.5" title="ดาวน์โหลดเป็นไฟล์ .html พร้อมใช้งาน">
+          <i class="fa-solid fa-file-code"></i> <span class="hidden md:inline">ส่งออกไฟล์ .HTML</span>
+        </button>
+
         <button type="button" onclick="saveBuilderToCloud()" id="btn-publish-builder"
-          class="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold px-4 py-2 rounded-xl text-xs shadow-lg inline-flex items-center gap-1.5">
-          <i class="fa-solid fa-cloud-arrow-up"></i> <span>บันทึก &amp; เผยแพร่ขึ้นเว็บ</span>
+          class="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold px-4 py-2 rounded-xl shadow-lg inline-flex items-center gap-1.5">
+          <i class="fa-solid fa-cloud-arrow-up"></i> <span>บันทึก &amp; เผยแพร่</span>
         </button>
       </div>
     </div>
+
+    <!-- แถบเครื่องมือจัดรูปแบบข้อความ (Rich Text Toolbar) -->
+    <div id="rich-text-bar" class="max-w-[1600px] mx-auto mt-2 pt-2 border-t border-slate-800/90 flex flex-wrap items-center gap-1.5 text-xs">
+      <span class="text-[11px] text-slate-400 mr-1"><i class="fa-solid fa-font text-amber-400 mr-1"></i>จัดรูปแบบข้อความ:</span>
+      <button type="button" onmousedown="execFormat('bold', event)" class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-700 font-bold" title="ตัวหนา">B</button>
+      <button type="button" onmousedown="execFormat('italic', event)" class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-700 italic" title="ตัวเอียง">I</button>
+      <button type="button" onmousedown="execFormat('underline', event)" class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-700 underline" title="ขีดเส้นใต้">U</button>
+      <span class="w-px h-4 bg-slate-700 mx-1"></span>
+      <button type="button" onmousedown="execFormat('justifyLeft', event)" class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-700" title="ชิดซ้าย"><i class="fa-solid fa-align-left"></i></button>
+      <button type="button" onmousedown="execFormat('justifyCenter', event)" class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-700" title="กึ่งกลาง"><i class="fa-solid fa-align-center"></i></button>
+      <button type="button" onmousedown="execFormat('justifyRight', event)" class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-700" title="ชิดขวา"><i class="fa-solid fa-align-right"></i></button>
+      <span class="w-px h-4 bg-slate-700 mx-1"></span>
+      <label class="inline-flex items-center gap-1.5 bg-slate-900 border border-slate-700 px-2.5 py-1 rounded-lg cursor-pointer" title="เลือกสีตัวอักษร">
+        <span class="text-[11px] text-slate-300">สีตัวอักษร</span>
+        <input type="color" value="#0f172a" onchange="execColor(this.value)" class="w-5 h-4 bg-transparent border-0 cursor-pointer">
+      </label>
+      <span class="ml-auto text-[11px] text-amber-300/90 hidden sm:inline">
+        <i class="fa-solid fa-hand-pointer mr-1"></i> เคล็ดลับ: ลากบล็อกจากแถบขวามาวางแทรก หรือคลิกที่ข้อความเพื่อพิมพ์แก้ไขได้ทันที
+      </span>
+    </div>
   </header>
 
-  <!-- พื้นที่ทำงานหลัก: แคนวาสตรงกลาง + แถบเครื่องมือด้านขวา (เหมือนในภาพตัวอย่าง) -->
-  <div class="flex-grow max-w-[1440px] w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-5 p-4 sm:p-6 items-start">
+  <!-- พื้นที่ทำงานหลัก: แคนวาสตรงกลาง + แถบเครื่องมือด้านขวา -->
+  <div class="flex-grow max-w-[1600px] w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-5 p-4 sm:p-6 items-start">
 
-    <!-- ฝั่งซ้าย (8 คอลัมน์): พื้นที่แคนวาสแสดงหน้าเว็บและบล็อกเนื้อหา -->
-    <main class="lg:col-span-8 space-y-4">
-      <div id="builder-theme-wrapper" class="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden min-h-[680px] flex flex-col">
+    <!-- ฝั่งซ้าย (8 คอลัมน์): พื้นที่แคนวาสแสดงหน้าเว็บ (รองรับ Drag & Drop เต็มรูปแบบ) -->
+    <main class="lg:col-span-8 flex justify-center">
+      <div id="builder-canvas-shell" class="builder-canvas-shell w-full max-w-full bg-white rounded-3xl border border-slate-300 shadow-xl overflow-hidden min-h-[720px] flex flex-col">
         <!-- แถบหัวหน้าเว็บจำลอง -->
-        <div id="canvas-hero-header" class="bg-gradient-to-r from-slate-950 via-slate-900 to-slate-800 text-white p-6 sm:p-8 border-b border-amber-400/30">
-          <span class="text-[10px] font-bold bg-amber-400/20 text-amber-300 border border-amber-400/40 px-2.5 py-0.5 rounded-full">
-            พื้นที่เนื้อหาเสริมของหน้า <span id="canvas-page-label">index.html</span>
-          </span>
-          <h2 contenteditable="true" id="canvas-banner-title" class="text-xl sm:text-2xl font-black mt-2 text-amber-300">
-            คลิกตรงนี้เพื่อแก้ไขหัวข้อแบนเนอร์ของหน้าเว็บ
+        <div id="canvas-hero-header" class="bg-gradient-to-r from-slate-950 via-slate-900 to-slate-800 text-white p-6 sm:p-9 border-b border-amber-400/30">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <span class="text-[10px] font-bold bg-amber-400/20 text-amber-300 border border-amber-400/40 px-2.5 py-0.5 rounded-full">
+              🚖 The Driver TH 🇹🇭 Premium Service · <span id="canvas-page-label">index.html</span>
+            </span>
+          </div>
+          <h2 contenteditable="true" id="canvas-banner-title" onblur="syncHeaderFromDOM()" class="text-xl sm:text-3xl font-black mt-3 text-amber-300 leading-tight">
+            คลิกตรงนี้เพื่อแก้ไขหัวข้อหลักของหน้าเว็บ
           </h2>
-          <p contenteditable="true" id="canvas-banner-sub" class="text-xs sm:text-sm text-slate-300 mt-1">
-            พิมพ์คำอธิบายหรือประกาศสำคัญที่ต้องการแสดงในหน้านี้ได้เลย...
+          <p contenteditable="true" id="canvas-banner-sub" onblur="syncHeaderFromDOM()" class="text-xs sm:text-sm text-slate-300 mt-1.5 leading-relaxed">
+            พิมพ์คำอธิบายหรือประกาศสำคัญที่ต้องการแสดงให้สมาชิกเห็นได้ทันที...
           </p>
         </div>
 
-        <!-- รายการบล็อกเนื้อหาที่ผู้ใช้เพิ่มเข้ามา -->
-        <div id="canvas-blocks-container" class="p-5 sm:p-8 space-y-5 flex-grow">
-          <!-- Render blocks dynamically -->
-        </div>
+        <!-- รายการบล็อกเนื้อหา + จุดวาง (Drop Zones) -->
+        <div id="canvas-blocks-container" class="p-4 sm:p-8 flex-grow"></div>
 
-        <!-- ปุ่มเพิ่มบล็อกด่วนด้านล่างแคนวาส -->
-        <div id="canvas-bottom-hint" class="p-4 bg-slate-50 border-t border-slate-200 text-center text-xs text-slate-500">
-          คลิกเลือก <strong>บล็อกเนื้อหา</strong> หรือเครื่องมือจากแถบด้านขวา เพื่อเพิ่มส่วนประกอบลงในหน้านี้
+        <!-- พื้นที่วางท้ายหน้า -->
+        <div id="canvas-end-dropzone"
+          ondragover="handleEndZoneDragOver(event)"
+          ondragleave="handleEndZoneDragLeave(event)"
+          ondrop="handleEndZoneDrop(event)"
+          class="m-4 sm:m-6 p-5 border-2 border-dashed border-slate-300 rounded-2xl text-center text-xs text-slate-500 hover:border-amber-400 transition">
+          <i class="fa-solid fa-plus-circle text-amber-500 mr-1.5"></i>
+          ลากบล็อกเนื้อหาหรือปุ่มจากแถบขวามาวางที่นี่ หรือคลิกเลือกจากแถบเครื่องมือเพื่อเพิ่มส่วนใหม่
         </div>
       </div>
     </main>
 
-    <!-- ฝั่งขวา (4 คอลัมน์): แผงเครื่องมือ แทรก / หน้าเว็บ / ธีม (ถอดแบบจากภาพตัวอย่าง) -->
-    <aside id="builder-right-sidebar" class="lg:col-span-4 bg-white rounded-3xl border border-slate-200 shadow-md overflow-hidden sticky top-20">
-      <!-- แท็บ 3 หมวดหลัก: แทรก | หน้าเว็บ | ธีม -->
-      <div class="grid grid-cols-3 border-b border-slate-200 bg-slate-50 text-xs sm:text-sm font-bold">
-        <button type="button" onclick="switchSidebarTab('insert')" id="stab-insert"
-          class="py-3.5 text-blue-600 border-b-2 border-blue-600 bg-white transition">
-          แทรก
-        </button>
-        <button type="button" onclick="switchSidebarTab('pages')" id="stab-pages"
-          class="py-3.5 text-slate-600 hover:text-slate-900 border-b-2 border-transparent transition">
-          หน้าเว็บ
-        </button>
-        <button type="button" onclick="switchSidebarTab('theme')" id="stab-theme"
-          class="py-3.5 text-slate-600 hover:text-slate-900 border-b-2 border-transparent transition">
-          ธีม
-        </button>
+    <!-- ฝั่งขวา (4 คอลัมน์): แผงเครื่องมือ แทรก / ตั้งค่าบล็อก / หน้าเว็บ / ธีม -->
+    <aside id="builder-right-sidebar" class="lg:col-span-4 bg-white rounded-3xl border border-slate-200 shadow-lg overflow-hidden sticky top-28">
+      <!-- แท็บ 4 หมวด: แทรก | ตั้งค่าบล็อก | หน้าเว็บ | ธีม -->
+      <div class="grid grid-cols-4 border-b border-slate-200 bg-slate-50 text-[11px] sm:text-xs font-bold">
+        <button type="button" onclick="switchSidebarTab('insert')" id="stab-insert" class="py-3.5 text-blue-600 border-b-2 border-blue-600 bg-white transition">แทรก</button>
+        <button type="button" onclick="switchSidebarTab('props')" id="stab-props" class="py-3.5 text-slate-600 hover:text-slate-900 border-b-2 border-transparent transition">ตั้งค่าบล็อก</button>
+        <button type="button" onclick="switchSidebarTab('pages')" id="stab-pages" class="py-3.5 text-slate-600 hover:text-slate-900 border-b-2 border-transparent transition">หน้าเว็บ</button>
+        <button type="button" onclick="switchSidebarTab('theme')" id="stab-theme" class="py-3.5 text-slate-600 hover:text-slate-900 border-b-2 border-transparent transition">ธีม</button>
       </div>
 
-      <!-- แท็บที่ 1: แทรก (Insert) -->
-      <div id="spanel-insert" class="p-4 sm:p-5 space-y-5 max-h-[78vh] overflow-y-auto">
-        <!-- 4 ปุ่มหลักด้านบน: กล่องข้อความ / รูปภาพ / ฝัง / ไดรฟ์ -->
+      <!-- แท็บที่ 1: แทรก (Drag & Drop หรือคลิกเพิ่ม) -->
+      <div id="spanel-insert" class="p-4 sm:p-5 space-y-5 max-h-[76vh] overflow-y-auto">
         <div class="grid grid-cols-2 gap-2.5">
-          <button type="button" onclick="addBlock('textbox')"
-            class="flex flex-col items-center justify-center gap-1.5 p-3.5 rounded-2xl border border-slate-200 hover:border-blue-400 hover:bg-blue-50/40 transition">
+          <button type="button" draggable="true" ondragstart="handlePaletteDragStart(event, 'textbox')" onclick="addBlock('textbox')"
+            class="draggable-palette-item flex flex-col items-center justify-center gap-1.5 p-3.5 rounded-2xl border border-slate-200 hover:border-blue-400 hover:bg-blue-50/40 transition">
             <span class="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 font-black flex items-center justify-center text-base">TT</span>
             <span class="text-xs font-bold text-slate-800">กล่องข้อความ</span>
           </button>
 
-          <button type="button" onclick="addBlock('image')"
-            class="flex flex-col items-center justify-center gap-1.5 p-3.5 rounded-2xl border border-slate-200 hover:border-rose-400 hover:bg-rose-50/40 transition">
+          <button type="button" draggable="true" ondragstart="handlePaletteDragStart(event, 'image')" onclick="addBlock('image')"
+            class="draggable-palette-item flex flex-col items-center justify-center gap-1.5 p-3.5 rounded-2xl border border-slate-200 hover:border-rose-400 hover:bg-rose-50/40 transition">
             <span class="w-9 h-9 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center text-base"><i class="fa-regular fa-image"></i></span>
             <span class="text-xs font-bold text-slate-800">รูปภาพ</span>
           </button>
 
-          <button type="button" onclick="addBlock('embed')"
-            class="flex flex-col items-center justify-center gap-1.5 p-3.5 rounded-2xl border border-slate-200 hover:border-amber-400 hover:bg-amber-50/40 transition">
+          <button type="button" draggable="true" ondragstart="handlePaletteDragStart(event, 'embed')" onclick="addBlock('embed')"
+            class="draggable-palette-item flex flex-col items-center justify-center gap-1.5 p-3.5 rounded-2xl border border-slate-200 hover:border-amber-400 hover:bg-amber-50/40 transition">
             <span class="w-9 h-9 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-base"><i class="fa-solid fa-code"></i></span>
             <span class="text-xs font-bold text-slate-800">ฝัง (Embed)</span>
           </button>
 
-          <button type="button" onclick="addBlock('drive')"
-            class="flex flex-col items-center justify-center gap-1.5 p-3.5 rounded-2xl border border-slate-200 hover:border-emerald-400 hover:bg-emerald-50/40 transition">
+          <button type="button" draggable="true" ondragstart="handlePaletteDragStart(event, 'drive')" onclick="addBlock('drive')"
+            class="draggable-palette-item flex flex-col items-center justify-center gap-1.5 p-3.5 rounded-2xl border border-slate-200 hover:border-emerald-400 hover:bg-emerald-50/40 transition">
             <span class="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-base"><i class="fa-brands fa-google-drive"></i></span>
             <span class="text-xs font-bold text-slate-800">ไดรฟ์ / เอกสาร</span>
           </button>
         </div>
 
-        <!-- หมวดบล็อกเนื้อหา (6 รูปแบบเหมือนในภาพตัวอย่าง) -->
+        <!-- หมวดบล็อกเนื้อหา 6 รูปแบบ (ลากวางได้) -->
         <div class="space-y-2.5 border-t border-slate-200 pt-4">
           <div class="flex items-center justify-between text-xs font-bold text-slate-700">
-            <span>บล็อกเนื้อหา</span>
-            <i class="fa-solid fa-chevron-up text-slate-400"></i>
+            <span>บล็อกเนื้อหา (ลากวางหรือคลิกเพิ่ม)</span>
+            <i class="fa-solid fa-grip text-slate-400"></i>
           </div>
 
           <div class="grid grid-cols-2 gap-2.5">
-            <!-- รูปแบบที่ 1: รูปซ้าย ข้อความขวา -->
-            <button type="button" onclick="addBlock('layout_media_left')" title="รูปภาพด้านซ้าย + ข้อความด้านขวา"
-              class="p-2.5 rounded-xl border border-slate-200 hover:border-amber-500 hover:bg-amber-50/30 transition flex items-center gap-2">
+            <button type="button" draggable="true" ondragstart="handlePaletteDragStart(event, 'layout_media_left')" onclick="addBlock('layout_media_left')"
+              class="draggable-palette-item p-2.5 rounded-xl border border-slate-200 hover:border-amber-500 hover:bg-amber-50/30 transition flex items-center gap-2">
               <div class="w-11 h-10 bg-slate-200 rounded flex items-center justify-center text-slate-500 text-xs shrink-0"><i class="fa-solid fa-image"></i></div>
-              <div class="flex-1 space-y-1">
-                <div class="h-1.5 bg-slate-400 rounded w-4/5"></div>
-                <div class="h-1 bg-slate-300 rounded w-full"></div>
-                <div class="h-1 bg-slate-300 rounded w-3/4"></div>
-              </div>
+              <div class="flex-1 space-y-1"><div class="h-1.5 bg-slate-400 rounded w-4/5"></div><div class="h-1 bg-slate-300 rounded w-full"></div><div class="h-1 bg-slate-300 rounded w-3/4"></div></div>
             </button>
 
-            <!-- รูปแบบที่ 2: 2 คอลัมน์ รูป+ข้อความ -->
-            <button type="button" onclick="addBlock('layout_2_cols')" title="2 คอลัมน์ รูปภาพและข้อความ"
-              class="p-2.5 rounded-xl border border-slate-200 hover:border-amber-500 hover:bg-amber-50/30 transition grid grid-cols-2 gap-1.5">
-              <div class="space-y-1">
-                <div class="h-7 bg-slate-200 rounded flex items-center justify-center text-slate-500 text-[10px]"><i class="fa-solid fa-image"></i></div>
-                <div class="h-1 bg-slate-400 rounded"></div>
-                <div class="h-1 bg-slate-300 rounded w-3/4"></div>
-              </div>
-              <div class="space-y-1">
-                <div class="h-7 bg-slate-200 rounded flex items-center justify-center text-slate-500 text-[10px]"><i class="fa-solid fa-image"></i></div>
-                <div class="h-1 bg-slate-400 rounded"></div>
-                <div class="h-1 bg-slate-300 rounded w-3/4"></div>
-              </div>
+            <button type="button" draggable="true" ondragstart="handlePaletteDragStart(event, 'layout_2_cols')" onclick="addBlock('layout_2_cols')"
+              class="draggable-palette-item p-2.5 rounded-xl border border-slate-200 hover:border-amber-500 hover:bg-amber-50/30 transition grid grid-cols-2 gap-1.5">
+              <div class="space-y-1"><div class="h-7 bg-slate-200 rounded flex items-center justify-center text-slate-500 text-[10px]"><i class="fa-solid fa-image"></i></div><div class="h-1 bg-slate-400 rounded"></div></div>
+              <div class="space-y-1"><div class="h-7 bg-slate-200 rounded flex items-center justify-center text-slate-500 text-[10px]"><i class="fa-solid fa-image"></i></div><div class="h-1 bg-slate-400 rounded"></div></div>
             </button>
 
-            <!-- รูปแบบที่ 3: รูปเล็กซ้าย 2 รูป + รูปใหญ่ขวา -->
-            <button type="button" onclick="addBlock('layout_collage')" title="แกลเลอรี 3 รูปภาพ"
-              class="p-2.5 rounded-xl border border-slate-200 hover:border-amber-500 hover:bg-amber-50/30 transition grid grid-cols-12 gap-1.5">
-              <div class="col-span-4 space-y-1">
-                <div class="h-4.5 bg-slate-200 rounded flex items-center justify-center text-slate-500 text-[8px]"><i class="fa-solid fa-image"></i></div>
-                <div class="h-4.5 bg-slate-200 rounded flex items-center justify-center text-slate-500 text-[8px]"><i class="fa-solid fa-image"></i></div>
-              </div>
+            <button type="button" draggable="true" ondragstart="handlePaletteDragStart(event, 'layout_collage')" onclick="addBlock('layout_collage')"
+              class="draggable-palette-item p-2.5 rounded-xl border border-slate-200 hover:border-amber-500 hover:bg-amber-50/30 transition grid grid-cols-12 gap-1.5">
+              <div class="col-span-4 space-y-1"><div class="h-4.5 bg-slate-200 rounded"></div><div class="h-4.5 bg-slate-200 rounded"></div></div>
               <div class="col-span-8 h-10 bg-slate-200 rounded flex items-center justify-center text-slate-500 text-xs"><i class="fa-solid fa-image"></i></div>
             </button>
 
-            <!-- รูปแบบที่ 4: 3 คอลัมน์ รูป+ข้อความ -->
-            <button type="button" onclick="addBlock('layout_3_cols')" title="3 คอลัมน์ รูปภาพและข้อความ"
-              class="p-2.5 rounded-xl border border-slate-200 hover:border-amber-500 hover:bg-amber-50/30 transition grid grid-cols-3 gap-1">
-              <div class="space-y-1"><div class="h-6 bg-slate-200 rounded flex items-center justify-center text-slate-500 text-[9px]"><i class="fa-solid fa-image"></i></div><div class="h-1 bg-slate-300 rounded"></div></div>
-              <div class="space-y-1"><div class="h-6 bg-slate-200 rounded flex items-center justify-center text-slate-500 text-[9px]"><i class="fa-solid fa-image"></i></div><div class="h-1 bg-slate-300 rounded"></div></div>
-              <div class="space-y-1"><div class="h-6 bg-slate-200 rounded flex items-center justify-center text-slate-500 text-[9px]"><i class="fa-solid fa-image"></i></div><div class="h-1 bg-slate-300 rounded"></div></div>
+            <button type="button" draggable="true" ondragstart="handlePaletteDragStart(event, 'layout_3_cols')" onclick="addBlock('layout_3_cols')"
+              class="draggable-palette-item p-2.5 rounded-xl border border-slate-200 hover:border-amber-500 hover:bg-amber-50/30 transition grid grid-cols-3 gap-1">
+              <div class="space-y-1"><div class="h-6 bg-slate-200 rounded"></div><div class="h-1 bg-slate-300 rounded"></div></div>
+              <div class="space-y-1"><div class="h-6 bg-slate-200 rounded"></div><div class="h-1 bg-slate-300 rounded"></div></div>
+              <div class="space-y-1"><div class="h-6 bg-slate-200 rounded"></div><div class="h-1 bg-slate-300 rounded"></div></div>
             </button>
 
-            <!-- รูปแบบที่ 5: 2 คอลัมน์ แนวนอน -->
-            <button type="button" onclick="addBlock('layout_2_horizontal')" title="2 คอลัมน์แนวนอน"
-              class="p-2.5 rounded-xl border border-slate-200 hover:border-amber-500 hover:bg-amber-50/30 transition grid grid-cols-2 gap-1.5">
+            <button type="button" draggable="true" ondragstart="handlePaletteDragStart(event, 'layout_2_horizontal')" onclick="addBlock('layout_2_horizontal')"
+              class="draggable-palette-item p-2.5 rounded-xl border border-slate-200 hover:border-amber-500 hover:bg-amber-50/30 transition grid grid-cols-2 gap-1.5">
               <div class="flex items-center gap-1"><div class="w-6 h-7 bg-slate-200 rounded shrink-0"></div><div class="flex-1 space-y-1"><div class="h-1 bg-slate-400 rounded"></div><div class="h-1 bg-slate-300 rounded"></div></div></div>
               <div class="flex items-center gap-1"><div class="w-6 h-7 bg-slate-200 rounded shrink-0"></div><div class="flex-1 space-y-1"><div class="h-1 bg-slate-400 rounded"></div><div class="h-1 bg-slate-300 rounded"></div></div></div>
             </button>
 
-            <!-- รูปแบบที่ 6: 4 คอลัมน์ -->
-            <button type="button" onclick="addBlock('layout_4_cols')" title="4 คอลัมน์ รูปภาพและหัวข้อ"
-              class="p-2.5 rounded-xl border border-slate-200 hover:border-amber-500 hover:bg-amber-50/30 transition grid grid-cols-4 gap-1">
+            <button type="button" draggable="true" ondragstart="handlePaletteDragStart(event, 'layout_4_cols')" onclick="addBlock('layout_4_cols')"
+              class="draggable-palette-item p-2.5 rounded-xl border border-slate-200 hover:border-amber-500 hover:bg-amber-50/30 transition grid grid-cols-4 gap-1">
               <div class="space-y-1"><div class="h-6 bg-slate-200 rounded"></div><div class="h-1 bg-slate-300 rounded"></div></div>
               <div class="space-y-1"><div class="h-6 bg-slate-200 rounded"></div><div class="h-1 bg-slate-300 rounded"></div></div>
               <div class="space-y-1"><div class="h-6 bg-slate-200 rounded"></div><div class="h-1 bg-slate-300 rounded"></div></div>
@@ -212,36 +239,75 @@
           </div>
         </div>
 
-        <!-- รายการคอมโพเนนต์ด้านล่าง (เหมือนในภาพตัวอย่างทุกตัว) -->
+        <!-- รายการคอมโพเนนต์เสริม (ลากวางหรือคลิกเพิ่ม) -->
         <div class="space-y-1 border-t border-slate-200 pt-3 text-xs font-semibold text-slate-700">
-          <button type="button" onclick="addBlock('collapsible')" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-100 text-left transition">
-            <i class="fa-solid fa-arrows-up-down text-slate-500 w-4 text-center"></i>
-            <span>กลุ่มแบบยุบได้ (Accordion)</span>
+          <button type="button" draggable="true" ondragstart="handlePaletteDragStart(event, 'collapsible')" onclick="addBlock('collapsible')" class="draggable-palette-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-100 text-left transition">
+            <i class="fa-solid fa-arrows-up-down text-slate-500 w-4 text-center"></i><span>กลุ่มแบบยุบได้ (Accordion)</span>
           </button>
-          <button type="button" onclick="addBlock('toc')" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-100 text-left transition">
-            <i class="fa-solid fa-list-ul text-slate-500 w-4 text-center"></i>
-            <span>สารบัญ (Table of Contents)</span>
+          <button type="button" draggable="true" ondragstart="handlePaletteDragStart(event, 'toc')" onclick="addBlock('toc')" class="draggable-palette-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-100 text-left transition">
+            <i class="fa-solid fa-list-ul text-slate-500 w-4 text-center"></i><span>สารบัญ (Table of Contents)</span>
           </button>
-          <button type="button" onclick="addBlock('carousel')" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-100 text-left transition">
-            <i class="fa-solid fa-images text-slate-500 w-4 text-center"></i>
-            <span>ภาพหมุน (Image Carousel)</span>
+          <button type="button" draggable="true" ondragstart="handlePaletteDragStart(event, 'carousel')" onclick="addBlock('carousel')" class="draggable-palette-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-100 text-left transition">
+            <i class="fa-solid fa-images text-slate-500 w-4 text-center"></i><span>ภาพหมุน (Image Carousel)</span>
           </button>
-          <button type="button" onclick="addBlock('button')" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-100 text-left transition">
-            <i class="fa-regular fa-square text-slate-500 w-4 text-center"></i>
-            <span>ปุ่ม (Button CTA)</span>
+          <button type="button" draggable="true" ondragstart="handlePaletteDragStart(event, 'button')" onclick="addBlock('button')" class="draggable-palette-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-100 text-left transition">
+            <i class="fa-regular fa-square text-slate-500 w-4 text-center"></i><span>ปุ่ม (Button CTA)</span>
           </button>
-          <button type="button" onclick="addBlock('divider')" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-100 text-left transition">
-            <i class="fa-solid fa-minus text-slate-500 w-4 text-center"></i>
-            <span>ตัวแบ่ง (Divider)</span>
+          <button type="button" draggable="true" ondragstart="handlePaletteDragStart(event, 'divider')" onclick="addBlock('divider')" class="draggable-palette-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-100 text-left transition">
+            <i class="fa-solid fa-minus text-slate-500 w-4 text-center"></i><span>ตัวแบ่ง (Divider)</span>
           </button>
-          <button type="button" onclick="addBlock('spacer')" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-100 text-left transition">
-            <i class="fa-solid fa-arrows-up-down-left-right text-slate-500 w-4 text-center"></i>
-            <span>Spacer (ช่องว่างจัดระยะ)</span>
+          <button type="button" draggable="true" ondragstart="handlePaletteDragStart(event, 'spacer')" onclick="addBlock('spacer')" class="draggable-palette-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-100 text-left transition">
+            <i class="fa-solid fa-arrows-up-down-left-right text-slate-500 w-4 text-center"></i><span>Spacer (ช่องว่างจัดระยะ)</span>
           </button>
         </div>
       </div>
 
-      <!-- แท็บที่ 2: หน้าเว็บ (Pages) -->
+      <!-- แท็บที่ 2: ตั้งค่าบล็อกที่เลือก (Block Inspector) -->
+      <div id="spanel-props" class="hidden p-4 sm:p-5 space-y-4 text-xs">
+        <div id="block-inspector-empty" class="text-center py-8 text-slate-400 space-y-2">
+          <i class="fa-solid fa-arrow-pointer text-2xl"></i>
+          <p>คลิกเลือกบล็อกใดก็ได้บนหน้าเว็บด้านซ้าย เพื่อปรับแต่งลิงก์ปุ่ม สีพื้นหลัง หรืออัปโหลดรูปภาพใหม่</p>
+        </div>
+        <div id="block-inspector-form" class="hidden space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+            <span class="font-extrabold text-slate-900">คุณสมบัติของบล็อก #<span id="insp-block-num">1</span></span>
+            <button type="button" onclick="duplicateSelectedBlock()" class="text-blue-600 hover:underline font-bold">
+              <i class="fa-regular fa-copy mr-1"></i>ทำซ้ำบล็อก
+            </button>
+          </div>
+
+          <div class="space-y-1">
+            <label class="block font-bold text-slate-700">สีพื้นหลังของบล็อก</label>
+            <div class="grid grid-cols-4 gap-2">
+              <button type="button" onclick="setBlockBg('bg-white')" class="h-8 rounded-lg border border-slate-300 bg-white text-[10px] font-bold">ขาว</button>
+              <button type="button" onclick="setBlockBg('bg-slate-50')" class="h-8 rounded-lg border border-slate-300 bg-slate-100 text-[10px] font-bold">เทาอ่อน</button>
+              <button type="button" onclick="setBlockBg('bg-amber-50')" class="h-8 rounded-lg border border-amber-300 bg-amber-50 text-[10px] font-bold text-amber-900">ครีมทอง</button>
+              <button type="button" onclick="setBlockBg('bg-slate-950 text-white')" class="h-8 rounded-lg border border-slate-800 bg-slate-950 text-[10px] font-bold text-amber-300">เข้มพรีเมียม</button>
+            </div>
+          </div>
+
+          <div id="insp-link-wrap" class="space-y-1.5">
+            <label class="block font-bold text-slate-700">ลิงก์ปลายทางของปุ่ม (URL หรือชื่อหน้าเว็บ)</label>
+            <input type="text" id="insp-btn-link" oninput="updateSelectedBlockProp('buttonLink', this.value)" placeholder="เช่น member_register.html"
+              class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-mono">
+          </div>
+
+          <div id="insp-embed-wrap" class="hidden space-y-1.5">
+            <label class="block font-bold text-slate-700">โค้ด HTML / Embed (เช่น YouTube หรือแผนที่)</label>
+            <textarea id="insp-embed-code" rows="4" oninput="updateSelectedBlockProp('embedCode', this.value)"
+              class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-xs font-mono"></textarea>
+          </div>
+
+          <div id="insp-img-wrap" class="space-y-1.5">
+            <label class="block font-bold text-slate-700">เปลี่ยนรูปภาพในบล็อกนี้</label>
+            <button type="button" onclick="editBlockImage(selectedBlockIndex)" class="w-full bg-slate-950 text-amber-400 font-bold py-2.5 rounded-xl">
+              <i class="fa-solid fa-upload mr-1.5"></i> อัปโหลดรูปภาพใหม่จากเครื่อง
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- แท็บที่ 3: หน้าเว็บ (Pages) -->
       <div id="spanel-pages" class="hidden p-4 sm:p-5 space-y-3 text-xs">
         <p class="font-bold text-slate-700">เลือกหน้าเว็บในระบบเพื่อจัดการบล็อกเนื้อหา:</p>
         <div class="space-y-1.5">
@@ -268,48 +334,41 @@
         </div>
       </div>
 
-      <!-- แท็บที่ 3: ธีม (Themes) -->
-      <div id="spanel-theme" class="hidden p-4 sm:p-5 space-y-4 text-xs">
-        <p class="font-bold text-slate-700">เลือกธีมสีส่วนหัวและปุ่มกดของหน้า:</p>
-        <div class="grid grid-cols-1 gap-2.5">
-          <button type="button" onclick="applyBuilderTheme('obsidian')" class="p-3.5 rounded-2xl border-2 border-amber-400 bg-slate-950 text-white text-left flex items-center justify-between">
-            <div>
-              <strong class="text-amber-300 block">Obsidian &amp; Champagne Gold</strong>
-              <span class="text-[11px] text-slate-400">ธีมหลัก Executive Network</span>
-            </div>
-            <span class="w-6 h-6 rounded-full bg-amber-400"></span>
-          </button>
-
-          <button type="button" onclick="applyBuilderTheme('captain')" class="p-3.5 rounded-2xl border border-slate-200 bg-teal-950 text-white text-left flex items-center justify-between">
-            <div>
-              <strong class="text-teal-300 block">Captain Marine &amp; Teal</strong>
-              <span class="text-[11px] text-teal-100/70">ธีมประกันภัยและบริการมืออาชีพ</span>
-            </div>
-            <span class="w-6 h-6 rounded-full bg-teal-400"></span>
-          </button>
-
-          <button type="button" onclick="applyBuilderTheme('emerald')" class="p-3.5 rounded-2xl border border-slate-200 bg-emerald-950 text-white text-left flex items-center justify-between">
-            <div>
-              <strong class="text-emerald-300 block">Driver App Emerald</strong>
-              <span class="text-[11px] text-emerald-100/70">ธีมข่าวสารคนขับรถผ่านแอป</span>
-            </div>
-            <span class="w-6 h-6 rounded-full bg-emerald-400"></span>
-          </button>
-        </div>
+      <!-- แท็บที่ 4: ธีม (Themes) -->
+      <div id="spanel-theme" class="hidden p-4 sm:p-5 space-y-3 text-xs">
+        <p class="font-bold text-slate-700">เลือกธีมสีส่วนหัวของหน้าเว็บ:</p>
+        <button type="button" onclick="applyBuilderTheme('obsidian')" class="w-full p-3.5 rounded-2xl border-2 border-amber-400 bg-slate-950 text-white text-left flex items-center justify-between">
+          <div><strong class="text-amber-300 block">Obsidian &amp; Champagne Gold</strong><span class="text-[11px] text-slate-400">ธีมหลัก Executive Network</span></div>
+          <span class="w-6 h-6 rounded-full bg-amber-400"></span>
+        </button>
+        <button type="button" onclick="applyBuilderTheme('captain')" class="w-full p-3.5 rounded-2xl border border-slate-200 bg-teal-950 text-white text-left flex items-center justify-between">
+          <div><strong class="text-teal-300 block">Captain Marine &amp; Teal</strong><span class="text-[11px] text-teal-100/70">ธีมประกันภัยและบริการมืออาชีพ</span></div>
+          <span class="w-6 h-6 rounded-full bg-teal-400"></span>
+        </button>
+        <button type="button" onclick="applyBuilderTheme('emerald')" class="w-full p-3.5 rounded-2xl border border-slate-200 bg-emerald-950 text-white text-left flex items-center justify-between">
+          <div><strong class="text-emerald-300 block">Driver App Emerald</strong><span class="text-[11px] text-emerald-100/70">ธีมข่าวสารคนขับรถผ่านแอป</span></div>
+          <span class="w-6 h-6 rounded-full bg-emerald-400"></span>
+        </button>
       </div>
     </aside>
   </div>
 
-  <!-- Toast Notification -->
+  <!-- Toast -->
   <div id="builder-toast" class="hidden fixed bottom-5 left-5 z-50 bg-slate-950 text-amber-300 border border-amber-400/50 px-4 py-3 rounded-2xl shadow-2xl text-xs font-bold"></div>
 
   <script>
-    const BUILDER_STORAGE_KEY = 'tdt_visual_builder_pages_v1';
+    const BUILDER_STORAGE_KEY = 'tdt_visual_builder_pages_v2';
     const MASTER_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyeDCdxBD10D_AFZQY2NxeylLOiAmAHLesSDZHXYCb3TsYs4wYer_kRTPVOs3VpK2pP/exec';
 
     let currentPage = 'index.html';
     let isPreview = false;
+    let selectedBlockIndex = null;
     let pagesState = {};
+    let historyUndo = [];
+    let historyRedo = [];
+
+    // ตัวแปรสำหรับ Drag & Drop
+    let dragPayload = null; // { source: 'palette'|'canvas', type?: string, fromIndex?: number }
 
     function showBuilderToast(msg) {
       const el = document.getElementById('builder-toast');
@@ -319,17 +378,54 @@
       setTimeout(() => el.classList.add('hidden'), 3200);
     }
 
+    function pushUndoSnapshot() {
+      historyUndo.push(JSON.stringify(pagesState));
+      if (historyUndo.length > 30) historyUndo.shift();
+      historyRedo = [];
+      updateUndoRedoButtons();
+    }
+
+    function undoAction() {
+      if (!historyUndo.length) return;
+      historyRedo.push(JSON.stringify(pagesState));
+      pagesState = JSON.parse(historyUndo.pop());
+      selectedBlockIndex = null;
+      saveToLocal();
+      renderCanvas();
+      updateUndoRedoButtons();
+      showBuilderToast('ย้อนกลับการแก้ไขแล้ว (Undo)');
+    }
+
+    function redoAction() {
+      if (!historyRedo.length) return;
+      historyUndo.push(JSON.stringify(pagesState));
+      pagesState = JSON.parse(historyRedo.pop());
+      selectedBlockIndex = null;
+      saveToLocal();
+      renderCanvas();
+      updateUndoRedoButtons();
+      showBuilderToast('ทำซ้ำการแก้ไขแล้ว (Redo)');
+    }
+
+    function updateUndoRedoButtons() {
+      const u = document.getElementById('btn-undo');
+      const r = document.getElementById('btn-redo');
+      if (u) u.disabled = historyUndo.length === 0;
+      if (r) r.disabled = historyRedo.length === 0;
+    }
+
     function getDefaultPageState(page) {
       return {
         theme: 'obsidian',
-        bannerTitle: `ส่วนประกาศและเนื้อหาเสริม (${page})`,
-        bannerSub: 'คลิกแก้ไขข้อความได้ทันที หรือเพิ่มบล็อกเนื้อหาจากแถบเครื่องมือด้านขวา',
+        bannerTitle: `หัวข้อหลักของหน้า ${page} (คลิกเพื่อพิมพ์แก้ไข)`,
+        bannerSub: 'พิมพ์คำอธิบายหรือประกาศสำคัญที่ต้องการแสดงในหน้านี้ได้เลย...',
         blocks: [
           {
             id: 'blk-' + Date.now(),
             type: 'layout_media_left',
+            bgClass: 'bg-white',
             title: 'หัวข้อประชาสัมพันธ์สำหรับสมาชิก',
-            body: 'คลิกที่ข้อความนี้เพื่อแก้ไขรายละเอียด โปรโมชั่น หรือข่าวสารของกลุ่มได้โดยตรง',
+            body: 'คลิกที่ข้อความนี้เพื่อแก้ไขรายละเอียด โปรโมชั่น หรือข่าวสารของกลุ่มได้โดยตรง หรือลากบล็อกสลับตำแหน่งขึ้น-ลงได้ทันที',
             image: 'TheDriverTH.jpg',
             buttonText: 'ดูรายละเอียดเพิ่มเติม',
             buttonLink: 'driver_news.html'
@@ -350,18 +446,62 @@
       }
     }
 
-    function persistCurrentPageFromDOM() {
-      const state = pagesState[currentPage];
-      if (!state) return;
-      state.bannerTitle = document.getElementById('canvas-banner-title')?.innerText || state.bannerTitle;
-      state.bannerSub = document.getElementById('canvas-banner-sub')?.innerText || state.bannerSub;
+    function saveToLocal() {
       try {
         localStorage.setItem(BUILDER_STORAGE_KEY, JSON.stringify(pagesState));
       } catch (_) {}
     }
 
+    function syncHeaderFromDOM() {
+      const state = pagesState[currentPage];
+      if (!state) return;
+      state.bannerTitle = document.getElementById('canvas-banner-title')?.innerHTML || state.bannerTitle;
+      state.bannerSub = document.getElementById('canvas-banner-sub')?.innerHTML || state.bannerSub;
+      saveToLocal();
+    }
+
+    function syncBlockField(index, field, el) {
+      const block = pagesState[currentPage]?.blocks?.[index];
+      if (!block || !el) return;
+      block[field] = el.innerHTML;
+      saveToLocal();
+    }
+
+    function syncBlockArrayItem(index, arrayField, itemIdx, el) {
+      const block = pagesState[currentPage]?.blocks?.[index];
+      if (!block || !Array.isArray(block[arrayField]) || !el) return;
+      block[arrayField][itemIdx] = el.innerText;
+      saveToLocal();
+    }
+
+    /* จัดรูปแบบข้อความ Rich Text */
+    function execFormat(command, event) {
+      if (event) event.preventDefault();
+      document.execCommand(command, false, null);
+    }
+    function execColor(hex) {
+      document.execCommand('foreColor', false, hex);
+    }
+
+    /* สลับขนาดหน้าจอ Desktop / Tablet / Mobile */
+    function setViewport(mode) {
+      const shell = document.getElementById('builder-canvas-shell');
+      ['desktop', 'tablet', 'mobile'].forEach(m => {
+        const btn = document.getElementById(`vp-${m}`);
+        if (btn) {
+          btn.className = m === mode
+            ? 'px-2.5 py-1.5 rounded-lg bg-amber-400 text-slate-950 font-bold text-xs'
+            : 'px-2.5 py-1.5 rounded-lg hover:bg-slate-800 text-slate-300 text-xs';
+        }
+      });
+      if (!shell) return;
+      if (mode === 'mobile') shell.style.maxWidth = '390px';
+      else if (mode === 'tablet') shell.style.maxWidth = '768px';
+      else shell.style.maxWidth = '100%';
+    }
+
     function switchSidebarTab(tab) {
-      ['insert', 'pages', 'theme'].forEach(t => {
+      ['insert', 'props', 'pages', 'theme'].forEach(t => {
         document.getElementById(`spanel-${t}`)?.classList.toggle('hidden', t !== tab);
         const btn = document.getElementById(`stab-${t}`);
         if (btn) {
@@ -373,14 +513,16 @@
     }
 
     function switchBuilderPage(pageName) {
-      persistCurrentPageFromDOM();
+      syncHeaderFromDOM();
       currentPage = pageName;
+      selectedBlockIndex = null;
       document.getElementById('active-page-select').value = pageName;
       document.getElementById('canvas-page-label').textContent = pageName;
       if (!pagesState[currentPage]) {
         pagesState[currentPage] = getDefaultPageState(currentPage);
       }
       renderCanvas();
+      updateInspectorUI();
     }
 
     function applyBuilderTheme(themeKey) {
@@ -388,64 +530,151 @@
       const header = document.getElementById('canvas-hero-header');
       if (header) {
         if (themeKey === 'captain') {
-          header.className = 'bg-gradient-to-r from-slate-950 via-teal-950 to-slate-900 text-white p-6 sm:p-8 border-b border-teal-400/30';
+          header.className = 'bg-gradient-to-r from-slate-950 via-teal-950 to-slate-900 text-white p-6 sm:p-9 border-b border-teal-400/30';
         } else if (themeKey === 'emerald') {
-          header.className = 'bg-gradient-to-r from-emerald-950 via-slate-900 to-slate-950 text-white p-6 sm:p-8 border-b border-emerald-400/30';
+          header.className = 'bg-gradient-to-r from-emerald-950 via-slate-900 to-slate-950 text-white p-6 sm:p-9 border-b border-emerald-400/30';
         } else {
-          header.className = 'bg-gradient-to-r from-slate-950 via-slate-900 to-slate-800 text-white p-6 sm:p-8 border-b border-amber-400/30';
+          header.className = 'bg-gradient-to-r from-slate-950 via-slate-900 to-slate-800 text-white p-6 sm:p-9 border-b border-amber-400/30';
         }
       }
-      persistCurrentPageFromDOM();
-      showBuilderToast('เปลี่ยนธีมสีเรียบร้อยแล้ว');
+      saveToLocal();
     }
 
-    function addBlock(type) {
-      persistCurrentPageFromDOM();
-      const id = 'blk-' + Date.now() + '-' + Math.floor(Math.random() * 100);
+    function createBlockObject(type) {
+      const id = 'blk-' + Date.now() + '-' + Math.floor(Math.random() * 1000);
       const templates = {
-        textbox: { id, type, title: 'หัวข้อกล่องข้อความใหม่', body: 'คลิกตรงนี้เพื่อพิมพ์เนื้อหาประชาสัมพันธ์ กฎกติกา หรือประกาศแจ้งเตือนสมาชิก...' },
-        image: { id, type, image: 'TheDriverTH.jpg', caption: 'คำอธิบายใต้ภาพ (คลิกเพื่อแก้ไข)' },
-        embed: { id, type, embedCode: '<div class="p-4 bg-amber-50 border border-amber-300 rounded-xl text-xs font-bold text-amber-900">พื้นที่โค้ดฝัง (HTML / Google Maps / YouTube)</div>' },
-        drive: { id, type, title: 'เอกสารสำคัญจาก Google Drive', body: 'คลิกปุ่มด้านล่างเพื่อเปิดดูไฟล์เอกสารหรือคู่มือสมาชิก', buttonText: 'เปิดเอกสารใน Drive', buttonLink: 'guide.html' },
-        layout_media_left: { id, type, title: 'หัวข้อเนื้อหาพร้อมภาพประกอบ', body: 'รายละเอียดเนื้อหาสำคัญของบริการหรือข่าวสารล่าสุดในเครือข่าย', image: 'TheDriverTH.jpg' },
-        layout_2_cols: { id, type, col1Title: 'คอลัมน์ที่ 1', col1Body: 'รายละเอียดรายการที่ 1', col2Title: 'คอลัมน์ที่ 2', col2Body: 'รายละเอียดรายการที่ 2', image: 'TheDriverTH.jpg' },
-        layout_collage: { id, type, title: 'แกลเลอรีภาพกิจกรรมเครือข่าย', image: 'TheDriverTH.jpg' },
-        layout_3_cols: { id, type, items: ['บริการที่ 1', 'บริการที่ 2', 'บริการที่ 3'], image: 'TheDriverTH.jpg' },
-        layout_2_horizontal: { id, type, leftTitle: 'จุดเด่นที่ 1', leftBody: 'คำอธิบายสั้นๆ', rightTitle: 'จุดเด่นที่ 2', rightBody: 'คำอธิบายสั้นๆ', image: 'TheDriverTH.jpg' },
-        layout_4_cols: { id, type, items: ['หัวข้อ 1', 'หัวข้อ 2', 'หัวข้อ 3', 'หัวข้อ 4'], image: 'TheDriverTH.jpg' },
-        collapsible: { id, type, title: 'หัวข้อแบบยุบ-ขยายได้ (คลิกเพื่อเปิดดูคำตอบ)', body: 'รายละเอียดคำตอบหรือเงื่อนไขเพิ่มเติมที่ซ่อนอยู่ภายในกลุ่มแบบยุบได้' },
-        toc: { id, type },
-        carousel: { id, type, slides: ['สไลด์ประชาสัมพันธ์ที่ 1', 'สไลด์ประชาสัมพันธ์ที่ 2', 'สไลด์ประชาสัมพันธ์ที่ 3'] },
-        button: { id, type, buttonText: 'คลิกเข้าสู่บริการ', buttonLink: 'member_register.html' },
-        divider: { id, type },
-        spacer: { id, type }
+        textbox: { id, type, bgClass: 'bg-slate-50', title: 'หัวข้อกล่องข้อความใหม่', body: 'คลิกตรงนี้เพื่อพิมพ์เนื้อหาประชาสัมพันธ์ กฎกติกา หรือประกาศแจ้งเตือนสมาชิก...' },
+        image: { id, type, bgClass: 'bg-slate-50', image: 'TheDriverTH.jpg', caption: 'คำอธิบายใต้ภาพ (คลิกเพื่อแก้ไข)' },
+        embed: { id, type, bgClass: 'bg-white', embedCode: '<div class="p-4 bg-amber-50 border border-amber-300 rounded-xl text-xs font-bold text-amber-900">พื้นที่โค้ดฝัง (HTML / Google Maps / YouTube) — แก้ไขโค้ดได้ที่แท็บ “ตั้งค่าบล็อก”</div>' },
+        drive: { id, type, bgClass: 'bg-emerald-50/60', title: 'เอกสารสำคัญจาก Google Drive', body: 'คลิกปุ่มด้านล่างเพื่อเปิดดูไฟล์เอกสารหรือคู่มือสมาชิก', buttonText: 'เปิดเอกสารใน Drive', buttonLink: 'guide.html' },
+        layout_media_left: { id, type, bgClass: 'bg-white', title: 'หัวข้อเนื้อหาพร้อมภาพประกอบ', body: 'รายละเอียดเนื้อหาสำคัญของบริการหรือข่าวสารล่าสุดในเครือข่าย', image: 'TheDriverTH.jpg' },
+        layout_2_cols: { id, type, bgClass: 'bg-white', col1Title: 'คอลัมน์ที่ 1', col1Body: 'รายละเอียดรายการที่ 1', col2Title: 'คอลัมน์ที่ 2', col2Body: 'รายละเอียดรายการที่ 2', image: 'TheDriverTH.jpg' },
+        layout_collage: { id, type, bgClass: 'bg-white', title: 'แกลเลอรีภาพกิจกรรมเครือข่าย', image: 'TheDriverTH.jpg' },
+        layout_3_cols: { id, type, bgClass: 'bg-white', items: ['บริการที่ 1', 'บริการที่ 2', 'บริการที่ 3'], image: 'TheDriverTH.jpg' },
+        layout_2_horizontal: { id, type, bgClass: 'bg-white', leftTitle: 'จุดเด่นที่ 1', leftBody: 'คำอธิบายสั้นๆ', rightTitle: 'จุดเด่นที่ 2', rightBody: 'คำอธิบายสั้นๆ', image: 'TheDriverTH.jpg' },
+        layout_4_cols: { id, type, bgClass: 'bg-white', items: ['หัวข้อ 1', 'หัวข้อ 2', 'หัวข้อ 3', 'หัวข้อ 4'], image: 'TheDriverTH.jpg' },
+        collapsible: { id, type, bgClass: 'bg-amber-50/70', title: 'หัวข้อแบบยุบ-ขยายได้ (คลิกเพื่อเปิดดูคำตอบ)', body: 'รายละเอียดคำตอบหรือเงื่อนไขเพิ่มเติมที่ซ่อนอยู่ภายในกลุ่มแบบยุบได้' },
+        toc: { id, type, bgClass: 'bg-slate-100' },
+        carousel: { id, type, bgClass: 'bg-slate-950 text-white', slides: ['สไลด์ประชาสัมพันธ์ที่ 1', 'สไลด์ประชาสัมพันธ์ที่ 2', 'สไลด์ประชาสัมพันธ์ที่ 3'] },
+        button: { id, type, bgClass: 'bg-white', buttonText: 'คลิกเข้าสู่บริการ', buttonLink: 'member_register.html' },
+        divider: { id, type, bgClass: 'bg-white' },
+        spacer: { id, type, bgClass: 'bg-white' }
       };
+      return templates[type] || templates.textbox;
+    }
 
-      pagesState[currentPage].blocks.push(templates[type] || templates.textbox);
+    function addBlock(type, insertAtIndex = null) {
+      pushUndoSnapshot();
+      const newObj = createBlockObject(type);
+      const list = pagesState[currentPage].blocks;
+      if (insertAtIndex !== null && insertAtIndex >= 0 && insertAtIndex <= list.length) {
+        list.splice(insertAtIndex, 0, newObj);
+        selectedBlockIndex = insertAtIndex;
+      } else {
+        list.push(newObj);
+        selectedBlockIndex = list.length - 1;
+      }
+      saveToLocal();
       renderCanvas();
+      updateInspectorUI();
       showBuilderToast('เพิ่มบล็อกเนื้อหาลงในหน้าเว็บแล้ว');
     }
 
-    function moveBlock(index, dir) {
-      persistCurrentPageFromDOM();
-      const arr = pagesState[currentPage].blocks;
-      const target = index + dir;
-      if (target < 0 || target >= arr.length) return;
-      const temp = arr[index];
-      arr[index] = arr[target];
-      arr[target] = temp;
+    function selectBlock(index) {
+      if (isPreview) return;
+      selectedBlockIndex = index;
+      renderCanvas();
+      updateInspectorUI();
+    }
+
+    function updateInspectorUI() {
+      const emptyEl = document.getElementById('block-inspector-empty');
+      const formEl = document.getElementById('block-inspector-form');
+      const list = pagesState[currentPage]?.blocks || [];
+      if (selectedBlockIndex === null || !list[selectedBlockIndex]) {
+        emptyEl?.classList.remove('hidden');
+        formEl?.classList.add('hidden');
+        return;
+      }
+      const b = list[selectedBlockIndex];
+      emptyEl?.classList.add('hidden');
+      formEl?.classList.remove('hidden');
+      document.getElementById('insp-block-num').textContent = selectedBlockIndex + 1;
+
+      const linkWrap = document.getElementById('insp-link-wrap');
+      const embedWrap = document.getElementById('insp-embed-wrap');
+      const imgWrap = document.getElementById('insp-img-wrap');
+
+      linkWrap?.classList.toggle('hidden', b.buttonLink === undefined);
+      if (b.buttonLink !== undefined) document.getElementById('insp-btn-link').value = b.buttonLink;
+
+      embedWrap?.classList.toggle('hidden', b.type !== 'embed');
+      if (b.type === 'embed') document.getElementById('insp-embed-code').value = b.embedCode || '';
+
+      imgWrap?.classList.toggle('hidden', !b.image);
+    }
+
+    function setBlockBg(bgClass) {
+      if (selectedBlockIndex === null) return;
+      const b = pagesState[currentPage]?.blocks?.[selectedBlockIndex];
+      if (!b) return;
+      pushUndoSnapshot();
+      b.bgClass = bgClass;
+      saveToLocal();
       renderCanvas();
     }
 
-    function deleteBlock(index) {
-      persistCurrentPageFromDOM();
-      pagesState[currentPage].blocks.splice(index, 1);
+    function updateSelectedBlockProp(prop, val) {
+      if (selectedBlockIndex === null) return;
+      const b = pagesState[currentPage]?.blocks?.[selectedBlockIndex];
+      if (!b) return;
+      b[prop] = val;
+      saveToLocal();
+      if (prop === 'embedCode') renderCanvas();
+    }
+
+    function duplicateSelectedBlock() {
+      if (selectedBlockIndex === null) return;
+      const list = pagesState[currentPage]?.blocks || [];
+      const src = list[selectedBlockIndex];
+      if (!src) return;
+      pushUndoSnapshot();
+      const copy = JSON.parse(JSON.stringify(src));
+      copy.id = 'blk-' + Date.now();
+      list.splice(selectedBlockIndex + 1, 0, copy);
+      selectedBlockIndex += 1;
+      saveToLocal();
       renderCanvas();
+      updateInspectorUI();
+      showBuilderToast('ทำซ้ำบล็อกเรียบร้อยแล้ว');
+    }
+
+    function moveBlock(index, dir) {
+      const arr = pagesState[currentPage].blocks;
+      const target = index + dir;
+      if (target < 0 || target >= arr.length) return;
+      pushUndoSnapshot();
+      const temp = arr[index];
+      arr[index] = arr[target];
+      arr[target] = temp;
+      selectedBlockIndex = target;
+      saveToLocal();
+      renderCanvas();
+      updateInspectorUI();
+    }
+
+    function deleteBlock(index) {
+      pushUndoSnapshot();
+      pagesState[currentPage].blocks.splice(index, 1);
+      selectedBlockIndex = null;
+      saveToLocal();
+      renderCanvas();
+      updateInspectorUI();
       showBuilderToast('ลบบล็อกเนื้อหาแล้ว');
     }
 
     function editBlockImage(index) {
-      const block = pagesState[currentPage].blocks[index];
+      const block = pagesState[currentPage]?.blocks?.[index];
       if (!block) return;
       const input = document.createElement('input');
       input.type = 'file';
@@ -455,7 +684,9 @@
         if (!file) return;
         const reader = new FileReader();
         reader.onload = ev => {
+          pushUndoSnapshot();
           block.image = ev.target.result;
+          saveToLocal();
           renderCanvas();
           showBuilderToast('อัปเดตรูปภาพในบล็อกเรียบร้อยแล้ว');
         };
@@ -464,89 +695,161 @@
       input.click();
     }
 
-    function editButtonProps(index) {
-      const block = pagesState[currentPage].blocks[index];
-      if (!block) return;
-      const textEl = document.getElementById(`btn-text-${index}`);
-      if (textEl) textEl.focus();
-      showBuilderToast('พิมพ์แก้ไขข้อความบนปุ่มได้โดยตรงเลยครับ');
+    /* Drag & Drop Handlers */
+    function handlePaletteDragStart(event, blockType) {
+      dragPayload = { source: 'palette', type: blockType };
+      event.dataTransfer.effectAllowed = 'copy';
+    }
+
+    function handleCanvasBlockDragStart(event, index) {
+      if (isPreview) return;
+      dragPayload = { source: 'canvas', fromIndex: index };
+      event.currentTarget.classList.add('is-dragging');
+      event.dataTransfer.effectAllowed = 'move';
+    }
+
+    function handleCanvasBlockDragEnd(event) {
+      event.currentTarget.classList.remove('is-dragging');
+      document.querySelectorAll('.drop-zone-indicator').forEach(el => {
+        el.classList.remove('is-over');
+        el.textContent = '';
+      });
+    }
+
+    function handleDropZoneDragOver(event) {
+      event.preventDefault();
+      event.currentTarget.classList.add('is-over');
+      event.currentTarget.textContent = 'วางบล็อกลงตำแหน่งนี้';
+    }
+
+    function handleDropZoneDragLeave(event) {
+      event.currentTarget.classList.remove('is-over');
+      event.currentTarget.textContent = '';
+    }
+
+    function handleDropZoneDrop(event, targetIndex) {
+      event.preventDefault();
+      event.currentTarget.classList.remove('is-over');
+      event.currentTarget.textContent = '';
+      if (!dragPayload) return;
+
+      if (dragPayload.source === 'palette' && dragPayload.type) {
+        addBlock(dragPayload.type, targetIndex);
+      } else if (dragPayload.source === 'canvas' && typeof dragPayload.fromIndex === 'number') {
+        const fromIdx = dragPayload.fromIndex;
+        if (fromIdx === targetIndex || fromIdx + 1 === targetIndex) return;
+        pushUndoSnapshot();
+        const arr = pagesState[currentPage].blocks;
+        const [moved] = arr.splice(fromIdx, 1);
+        const adjustedTarget = fromIdx < targetIndex ? targetIndex - 1 : targetIndex;
+        arr.splice(adjustedTarget, 0, moved);
+        selectedBlockIndex = adjustedTarget;
+        saveToLocal();
+        renderCanvas();
+        updateInspectorUI();
+      }
+      dragPayload = null;
+    }
+
+    function handleEndZoneDragOver(event) {
+      event.preventDefault();
+      event.currentTarget.classList.add('border-amber-500', 'bg-amber-50');
+    }
+    function handleEndZoneDragLeave(event) {
+      event.currentTarget.classList.remove('border-amber-500', 'bg-amber-50');
+    }
+    function handleEndZoneDrop(event) {
+      event.preventDefault();
+      event.currentTarget.classList.remove('border-amber-500', 'bg-amber-50');
+      const total = pagesState[currentPage]?.blocks?.length || 0;
+      handleDropZoneDrop(event, total);
     }
 
     function renderCanvas() {
       const state = pagesState[currentPage];
-      document.getElementById('canvas-banner-title').innerText = state.bannerTitle;
-      document.getElementById('canvas-banner-sub').innerText = state.bannerSub;
+      document.getElementById('canvas-banner-title').innerHTML = state.bannerTitle;
+      document.getElementById('canvas-banner-sub').innerHTML = state.bannerSub;
       applyBuilderTheme(state.theme || 'obsidian');
 
       const container = document.getElementById('canvas-blocks-container');
+      const editableAttr = isPreview ? '' : 'contenteditable="true"';
+
       if (!state.blocks.length) {
-        container.innerHTML = '<div class="text-center py-16 text-slate-400 text-xs sm:text-sm border-2 border-dashed border-slate-200 rounded-2xl">ยังไม่มีบล็อกเนื้อหาในหน้านี้ กดเลือกบล็อกจากแถบด้านขวาเพื่อเริ่มต้น</div>';
+        container.innerHTML = '<div class="text-center py-14 text-slate-400 text-xs sm:text-sm border-2 border-dashed border-slate-200 rounded-2xl">ยังไม่มีบล็อกเนื้อหาในหน้านี้ ลากหรือคลิกเลือกบล็อกจากแถบด้านขวาได้เลยครับ</div>';
         return;
       }
 
-      const editableAttr = isPreview ? '' : 'contenteditable="true"';
+      let html = '';
+      state.blocks.forEach((b, idx) => {
+        if (!isPreview) {
+          html += `<div class="drop-zone-indicator" ondragover="handleDropZoneDragOver(event)" ondragleave="handleDropZoneDragLeave(event)" ondrop="handleDropZoneDrop(event, ${idx})"></div>`;
+        }
 
-      container.innerHTML = state.blocks.map((b, idx) => {
+        const isSelected = !isPreview && selectedBlockIndex === idx;
+        const bgClass = b.bgClass || 'bg-white';
+        const dragAttrs = isPreview ? '' : `draggable="true" ondragstart="handleCanvasBlockDragStart(event, ${idx})" ondragend="handleCanvasBlockDragEnd(event)" onclick="selectBlock(${idx})"`;
+
         const toolbar = isPreview ? '' : `
-          <div class="builder-block-toolbar absolute -top-3 right-3 z-20 flex items-center gap-1 bg-slate-950 text-white px-2 py-1 rounded-xl shadow-lg border border-amber-400/40 text-[11px]">
-            ${b.image ? `<button type="button" onclick="editBlockImage(${idx})" class="px-2 py-0.5 hover:text-amber-300" title="เปลี่ยนรูปภาพ"><i class="fa-solid fa-image"></i> เปลี่ยนรูป</button>` : ''}
-            <button type="button" onclick="moveBlock(${idx}, -1)" class="px-1.5 py-0.5 hover:text-amber-300" title="เลื่อนขึ้น"><i class="fa-solid fa-arrow-up"></i></button>
-            <button type="button" onclick="moveBlock(${idx}, 1)" class="px-1.5 py-0.5 hover:text-amber-300" title="เลื่อนลง"><i class="fa-solid fa-arrow-down"></i></button>
-            <button type="button" onclick="deleteBlock(${idx})" class="px-1.5 py-0.5 text-rose-400 hover:text-rose-300" title="ลบบล็อก"><i class="fa-solid fa-trash"></i></button>
+          <div class="builder-block-bar absolute -top-3.5 right-3 z-20 flex items-center gap-1 bg-slate-950 text-white px-2.5 py-1 rounded-xl shadow-lg border border-amber-400/50 text-[11px]">
+            <span class="text-amber-300 font-bold pr-1 cursor-grab" title="ลากเพื่อย้ายตำแหน่ง"><i class="fa-solid fa-grip-vertical"></i></span>
+            ${b.image ? `<button type="button" onclick="event.stopPropagation(); editBlockImage(${idx})" class="px-1.5 py-0.5 hover:text-amber-300" title="เปลี่ยนรูป"><i class="fa-solid fa-image"></i></button>` : ''}
+            <button type="button" onclick="event.stopPropagation(); moveBlock(${idx}, -1)" class="px-1.5 py-0.5 hover:text-amber-300" title="เลื่อนขึ้น"><i class="fa-solid fa-arrow-up"></i></button>
+            <button type="button" onclick="event.stopPropagation(); moveBlock(${idx}, 1)" class="px-1.5 py-0.5 hover:text-amber-300" title="เลื่อนลง"><i class="fa-solid fa-arrow-down"></i></button>
+            <button type="button" onclick="event.stopPropagation(); deleteBlock(${idx})" class="px-1.5 py-0.5 text-rose-400 hover:text-rose-300" title="ลบ"><i class="fa-solid fa-trash"></i></button>
           </div>
         `;
 
         let innerHtml = '';
         if (b.type === 'textbox') {
           innerHtml = `
-            <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
-              <h3 ${editableAttr} class="text-base sm:text-lg font-extrabold text-slate-900">${b.title}</h3>
-              <p ${editableAttr} class="text-xs sm:text-sm text-slate-600 leading-relaxed">${b.body}</p>
+            <div class="p-5 rounded-2xl ${bgClass} border border-slate-200 space-y-2">
+              <h3 ${editableAttr} onblur="syncBlockField(${idx}, 'title', this)" class="text-base sm:text-lg font-extrabold">${b.title}</h3>
+              <p ${editableAttr} onblur="syncBlockField(${idx}, 'body', this)" class="text-xs sm:text-sm opacity-85 leading-relaxed">${b.body}</p>
             </div>`;
         } else if (b.type === 'image') {
           innerHtml = `
-            <div class="rounded-2xl overflow-hidden border border-slate-200 bg-slate-50 p-3 text-center space-y-2">
-              <img src="${b.image}" alt="ภาพประกอบ" class="max-h-72 mx-auto rounded-xl object-contain">
-              <p ${editableAttr} class="text-xs text-slate-500">${b.caption}</p>
+            <div class="rounded-2xl overflow-hidden border border-slate-200 ${bgClass} p-3 text-center space-y-2">
+              <img src="${b.image}" alt="ภาพประกอบ" class="max-h-80 mx-auto rounded-xl object-contain">
+              <p ${editableAttr} onblur="syncBlockField(${idx}, 'caption', this)" class="text-xs opacity-75">${b.caption}</p>
             </div>`;
         } else if (b.type === 'embed') {
-          innerHtml = `<div>${b.embedCode}</div>`;
+          innerHtml = `<div class="p-2 rounded-2xl ${bgClass}">${b.embedCode}</div>`;
         } else if (b.type === 'drive') {
           innerHtml = `
-            <div class="p-5 rounded-2xl bg-emerald-50/60 border border-emerald-200 flex flex-wrap items-center justify-between gap-3">
+            <div class="p-5 rounded-2xl ${bgClass} border border-emerald-200 flex flex-wrap items-center justify-between gap-3">
               <div>
-                <h3 ${editableAttr} class="font-extrabold text-slate-900 text-sm"><i class="fa-brands fa-google-drive text-emerald-600 mr-1.5"></i>${b.title}</h3>
-                <p ${editableAttr} class="text-xs text-slate-600 mt-0.5">${b.body}</p>
+                <h3 ${editableAttr} onblur="syncBlockField(${idx}, 'title', this)" class="font-extrabold text-sm"><i class="fa-brands fa-google-drive text-emerald-600 mr-1.5"></i>${b.title}</h3>
+                <p ${editableAttr} onblur="syncBlockField(${idx}, 'body', this)" class="text-xs opacity-80 mt-0.5">${b.body}</p>
               </div>
-              <a href="${b.buttonLink}" class="bg-slate-950 text-amber-400 font-bold text-xs px-4 py-2.5 rounded-xl">${b.buttonText}</a>
+              <a href="${isPreview ? b.buttonLink : 'javascript:void(0)'}" ${editableAttr} onblur="syncBlockField(${idx}, 'buttonText', this)" class="bg-slate-950 text-amber-400 font-bold text-xs px-4 py-2.5 rounded-xl">${b.buttonText}</a>
             </div>`;
         } else if (b.type === 'layout_media_left') {
           innerHtml = `
-            <div class="grid sm:grid-cols-12 gap-4 items-center p-4 rounded-2xl border border-slate-200 bg-white">
+            <div class="grid sm:grid-cols-12 gap-4 items-center p-4 rounded-2xl border border-slate-200 ${bgClass}">
               <div class="sm:col-span-4"><img src="${b.image}" class="w-full h-36 object-cover rounded-xl border border-slate-200"></div>
               <div class="sm:col-span-8 space-y-2">
-                <h3 ${editableAttr} class="text-base font-extrabold text-slate-900">${b.title}</h3>
-                <p ${editableAttr} class="text-xs sm:text-sm text-slate-600 leading-relaxed">${b.body}</p>
+                <h3 ${editableAttr} onblur="syncBlockField(${idx}, 'title', this)" class="text-base font-extrabold">${b.title}</h3>
+                <p ${editableAttr} onblur="syncBlockField(${idx}, 'body', this)" class="text-xs sm:text-sm opacity-85 leading-relaxed">${b.body}</p>
               </div>
             </div>`;
         } else if (b.type === 'layout_2_cols') {
           innerHtml = `
             <div class="grid sm:grid-cols-2 gap-4">
-              <div class="p-4 rounded-2xl border border-slate-200 space-y-2">
+              <div class="p-4 rounded-2xl border border-slate-200 ${bgClass} space-y-2">
                 <img src="${b.image}" class="w-full h-32 object-cover rounded-xl">
-                <h4 ${editableAttr} class="font-extrabold text-sm text-slate-900">${b.col1Title}</h4>
-                <p ${editableAttr} class="text-xs text-slate-600">${b.col1Body}</p>
+                <h4 ${editableAttr} onblur="syncBlockField(${idx}, 'col1Title', this)" class="font-extrabold text-sm">${b.col1Title}</h4>
+                <p ${editableAttr} onblur="syncBlockField(${idx}, 'col1Body', this)" class="text-xs opacity-80">${b.col1Body}</p>
               </div>
-              <div class="p-4 rounded-2xl border border-slate-200 space-y-2">
+              <div class="p-4 rounded-2xl border border-slate-200 ${bgClass} space-y-2">
                 <img src="${b.image}" class="w-full h-32 object-cover rounded-xl">
-                <h4 ${editableAttr} class="font-extrabold text-sm text-slate-900">${b.col2Title}</h4>
-                <p ${editableAttr} class="text-xs text-slate-600">${b.col2Body}</p>
+                <h4 ${editableAttr} onblur="syncBlockField(${idx}, 'col2Title', this)" class="font-extrabold text-sm">${b.col2Title}</h4>
+                <p ${editableAttr} onblur="syncBlockField(${idx}, 'col2Body', this)" class="text-xs opacity-80">${b.col2Body}</p>
               </div>
             </div>`;
         } else if (b.type === 'layout_collage') {
           innerHtml = `
-            <div class="p-4 rounded-2xl border border-slate-200 space-y-3">
-              <h4 ${editableAttr} class="font-extrabold text-sm text-slate-900">${b.title}</h4>
+            <div class="p-4 rounded-2xl border border-slate-200 ${bgClass} space-y-3">
+              <h4 ${editableAttr} onblur="syncBlockField(${idx}, 'title', this)" class="font-extrabold text-sm">${b.title}</h4>
               <div class="grid grid-cols-12 gap-2">
                 <div class="col-span-4 space-y-2"><img src="${b.image}" class="w-full h-20 object-cover rounded-xl"><img src="${b.image}" class="w-full h-20 object-cover rounded-xl"></div>
                 <div class="col-span-8"><img src="${b.image}" class="w-full h-42 object-cover rounded-xl"></div>
@@ -555,53 +858,99 @@
         } else if (b.type === 'layout_3_cols') {
           innerHtml = `
             <div class="grid sm:grid-cols-3 gap-3">
-              ${b.items.map(it => `<div class="p-3.5 rounded-2xl border border-slate-200 space-y-2"><img src="${b.image}" class="w-full h-24 object-cover rounded-xl"><p ${editableAttr} class="font-bold text-xs text-slate-800">${it}</p></div>`).join('')}
+              ${b.items.map((it, iIdx) => `<div class="p-3.5 rounded-2xl border border-slate-200 ${bgClass} space-y-2"><img src="${b.image}" class="w-full h-24 object-cover rounded-xl"><p ${editableAttr} onblur="syncBlockArrayItem(${idx}, 'items', ${iIdx}, this)" class="font-bold text-xs">${it}</p></div>`).join('')}
             </div>`;
         } else if (b.type === 'layout_2_horizontal') {
           innerHtml = `
             <div class="grid sm:grid-cols-2 gap-3">
-              <div class="p-3.5 rounded-2xl border border-slate-200 flex items-center gap-3"><img src="${b.image}" class="w-16 h-16 rounded-xl object-cover shrink-0"><div><h4 ${editableAttr} class="font-bold text-xs text-slate-900">${b.leftTitle}</h4><p ${editableAttr} class="text-[11px] text-slate-500">${b.leftBody}</p></div></div>
-              <div class="p-3.5 rounded-2xl border border-slate-200 flex items-center gap-3"><img src="${b.image}" class="w-16 h-16 rounded-xl object-cover shrink-0"><div><h4 ${editableAttr} class="font-bold text-xs text-slate-900">${b.rightTitle}</h4><p ${editableAttr} class="text-[11px] text-slate-500">${b.rightBody}</p></div></div>
+              <div class="p-3.5 rounded-2xl border border-slate-200 ${bgClass} flex items-center gap-3"><img src="${b.image}" class="w-16 h-16 rounded-xl object-cover shrink-0"><div><h4 ${editableAttr} onblur="syncBlockField(${idx}, 'leftTitle', this)" class="font-bold text-xs">${b.leftTitle}</h4><p ${editableAttr} onblur="syncBlockField(${idx}, 'leftBody', this)" class="text-[11px] opacity-75">${b.leftBody}</p></div></div>
+              <div class="p-3.5 rounded-2xl border border-slate-200 ${bgClass} flex items-center gap-3"><img src="${b.image}" class="w-16 h-16 rounded-xl object-cover shrink-0"><div><h4 ${editableAttr} onblur="syncBlockField(${idx}, 'rightTitle', this)" class="font-bold text-xs">${b.rightTitle}</h4><p ${editableAttr} onblur="syncBlockField(${idx}, 'rightBody', this)" class="text-[11px] opacity-75">${b.rightBody}</p></div></div>
             </div>`;
         } else if (b.type === 'layout_4_cols') {
           innerHtml = `
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-              ${b.items.map(it => `<div class="p-3 rounded-2xl border border-slate-200 text-center space-y-1.5"><img src="${b.image}" class="w-full h-20 object-cover rounded-xl"><p ${editableAttr} class="font-bold text-xs text-slate-800">${it}</p></div>`).join('')}
+              ${b.items.map((it, iIdx) => `<div class="p-3 rounded-2xl border border-slate-200 ${bgClass} text-center space-y-1.5"><img src="${b.image}" class="w-full h-20 object-cover rounded-xl"><p ${editableAttr} onblur="syncBlockArrayItem(${idx}, 'items', ${iIdx}, this)" class="font-bold text-xs">${it}</p></div>`).join('')}
             </div>`;
         } else if (b.type === 'collapsible') {
           innerHtml = `
-            <details open class="p-4 rounded-2xl bg-amber-50/60 border border-amber-200">
-              <summary ${editableAttr} class="font-extrabold text-xs sm:text-sm text-slate-900 cursor-pointer">${b.title}</summary>
-              <p ${editableAttr} class="text-xs text-slate-700 mt-2 pt-2 border-t border-amber-200/70">${b.body}</p>
+            <details open class="p-4 rounded-2xl ${bgClass} border border-amber-200">
+              <summary ${editableAttr} onblur="syncBlockField(${idx}, 'title', this)" class="font-extrabold text-xs sm:text-sm cursor-pointer">${b.title}</summary>
+              <p ${editableAttr} onblur="syncBlockField(${idx}, 'body', this)" class="text-xs opacity-85 mt-2 pt-2 border-t border-amber-200/70">${b.body}</p>
             </details>`;
         } else if (b.type === 'toc') {
-          const headings = state.blocks.filter(x => x.title).map(x => `<li>• ${x.title}</li>`).join('') || '<li>• ยังไม่มีหัวข้อในหน้านี้</li>';
-          innerHtml = `<div class="p-4 rounded-2xl bg-slate-100 border border-slate-200 text-xs space-y-1"><strong class="text-slate-800 block">สารบัญเนื้อหาในหน้านี้:</strong><ul class="text-slate-600 space-y-0.5">${headings}</ul></div>`;
+          const headings = state.blocks.filter(x => x.title).map(x => `<li>• ${x.title.replace(/<[^>]*>/g, '')}</li>`).join('') || '<li>• ยังไม่มีหัวข้อในหน้านี้</li>';
+          innerHtml = `<div class="p-4 rounded-2xl ${bgClass} border border-slate-200 text-xs space-y-1"><strong class="block">สารบัญเนื้อหาในหน้านี้:</strong><ul class="opacity-80 space-y-0.5">${headings}</ul></div>`;
         } else if (b.type === 'carousel') {
-          innerHtml = `<div class="p-5 rounded-2xl bg-slate-950 text-white border border-amber-400/40 flex items-center justify-between gap-3"><span class="text-xs font-bold text-amber-300"><i class="fa-solid fa-images mr-1.5"></i>ภาพหมุนประชาสัมพันธ์ (${b.slides.length} สไลด์)</span><span ${editableAttr} class="text-xs text-slate-300">${b.slides[0]}</span></div>`;
+          innerHtml = `<div class="p-5 rounded-2xl ${bgClass} border border-amber-400/40 flex items-center justify-between gap-3"><span class="text-xs font-bold text-amber-400"><i class="fa-solid fa-images mr-1.5"></i>ภาพหมุนประชาสัมพันธ์ (${b.slides.length} สไลด์)</span><span ${editableAttr} onblur="syncBlockArrayItem(${idx}, 'slides', 0, this)" class="text-xs">${b.slides[0]}</span></div>`;
         } else if (b.type === 'button') {
-          innerHtml = `<div class="text-center py-2"><span id="btn-text-${idx}" ${editableAttr} onclick="editButtonProps(${idx})" class="inline-block bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-extrabold text-xs sm:text-sm px-6 py-3 rounded-xl shadow cursor-pointer">${b.buttonText}</span></div>`;
+          innerHtml = `<div class="text-center py-2"><a href="${isPreview ? b.buttonLink : 'javascript:void(0)'}" ${editableAttr} onblur="syncBlockField(${idx}, 'buttonText', this)" class="inline-block bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-extrabold text-xs sm:text-sm px-6 py-3 rounded-xl shadow">${b.buttonText}</a></div>`;
         } else if (b.type === 'divider') {
           innerHtml = `<hr class="border-t-2 border-slate-200 my-2">`;
         } else if (b.type === 'spacer') {
-          innerHtml = `<div class="h-8 bg-slate-50/50 border border-dashed border-slate-200 rounded-lg flex items-center justify-center text-[10px] text-slate-400">Spacer (ช่องว่างจัดระยะ)</div>`;
+          innerHtml = `<div class="h-8 ${isPreview ? '' : 'bg-slate-50/60 border border-dashed border-slate-200'} rounded-lg flex items-center justify-center text-[10px] text-slate-400">${isPreview ? '' : 'Spacer (ช่องว่างจัดระยะ)'}</div>`;
         }
 
-        return `<div class="builder-canvas-block rounded-2xl">${toolbar}${innerHtml}</div>`;
-      }).join('');
+        html += `<div ${dragAttrs} class="builder-block ${isSelected ? 'is-selected' : ''}">${toolbar}${innerHtml}</div>`;
+      });
+
+      container.innerHTML = html;
     }
 
     function togglePreviewMode() {
-      persistCurrentPageFromDOM();
+      syncHeaderFromDOM();
       isPreview = !isPreview;
       document.getElementById('builder-right-sidebar')?.classList.toggle('hidden', isPreview);
-      document.getElementById('canvas-bottom-hint')?.classList.toggle('hidden', isPreview);
+      document.getElementById('canvas-end-dropzone')?.classList.toggle('hidden', isPreview);
+      document.getElementById('rich-text-bar')?.classList.toggle('hidden', isPreview);
       document.getElementById('preview-btn-text').textContent = isPreview ? 'กลับโหมดแก้ไข' : 'ดูตัวอย่าง';
       renderCanvas();
     }
 
+    function exportStandaloneHtml() {
+      syncHeaderFromDOM();
+      const wasPreview = isPreview;
+      if (!wasPreview) {
+        isPreview = true;
+        renderCanvas();
+      }
+      const headerHtml = document.getElementById('canvas-hero-header').outerHTML;
+      const bodyHtml = document.getElementById('canvas-blocks-container').innerHTML;
+      const fullDoc = `<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${document.getElementById('canvas-banner-title').innerText} | The Driver Thailand</title>
+  <script src="https://cdn.tailwindcss.com"><\/script>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>body { font-family: 'Prompt', sans-serif; background: #f8fafc; }</style>
+</head>
+<body class="min-h-screen">
+  <main class="max-w-6xl mx-auto p-4 sm:p-8">
+    <div class="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
+      ${headerHtml}
+      <div class="p-6 sm:p-8 space-y-5">${bodyHtml}</div>
+    </div>
+  </main>
+</body>
+</html>`;
+      if (!wasPreview) {
+        isPreview = false;
+        renderCanvas();
+      }
+      const blob = new Blob([fullDoc], { type: 'text/html;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `custom_${currentPage}`;
+      a.click();
+      URL.revokeObjectURL(url);
+      showBuilderToast(`ส่งออกไฟล์ custom_${currentPage} เรียบร้อยแล้ว`);
+    }
+
     async function saveBuilderToCloud() {
-      persistCurrentPageFromDOM();
+      syncHeaderFromDOM();
       const btn = document.getElementById('btn-publish-builder');
       btn.disabled = true;
       try {
@@ -615,7 +964,7 @@
             builderData: pagesState[currentPage]
           })
         });
-        showBuilderToast(`บันทึกและเผยแพร่โครงสร้างหน้า ${currentPage} เรียบร้อยแล้ว`);
+        showBuilderToast(`บันทึกและเผยแพร่หน้า ${currentPage} ขึ้นฐานข้อมูลเรียบร้อยแล้ว`);
       } finally {
         btn.disabled = false;
       }
@@ -624,6 +973,7 @@
     document.addEventListener('DOMContentLoaded', () => {
       loadAllPagesState();
       switchBuilderPage(currentPage);
+      updateUndoRedoButtons();
     });
   </script>
 </body>

@@ -31,7 +31,7 @@
   <style>
     html { scroll-behavior: smooth; font-size: 16px; transition: font-size 0.18s ease; }
     html, body, input, select, textarea, button, code, pre { font-family: 'Prompt', sans-serif !important; }
-    html, body { background-color: #f8fafc; color: #0f172a; max-width: 100%; overflow-x: clip; }
+    html, body { background-color: #070a12 !important; color: #f8fafc !important; max-width: 100%; overflow-x: clip; }
     .gold-shimmer-text {
       background: linear-gradient(90deg, #fde68a 0%, #fbbf24 35%, #f59e0b 65%, #fef08a 100%);
       background-size: 200% auto;
@@ -143,7 +143,7 @@
       border-radius: 15px;
       object-fit: cover;
       object-position: center;
-      background: #ffffff;
+      background: #0f172a;
       padding: 0;
       border: 1.5px solid rgba(251, 191, 36, 0.85);
       box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.55), 0 0 0 2px rgba(251, 191, 36, 0.16);
@@ -303,7 +303,7 @@
     .tdt-util-btn:hover { background-color: rgba(251, 191, 36, 0.18); color: #fde68a; }
   </style>
 </head>
-<body class="text-slate-800 antialiased min-h-screen flex flex-col selection:bg-teal-400 selection:text-slate-950 relative">
+<body class="text-slate-100 antialiased min-h-screen flex flex-col bg-[#070a12] selection:bg-teal-400 selection:text-slate-950 relative">
   <!-- กล่องแจ้งเตือน Toast มุมขวาบน -->
   <div id="toast-container" class="fixed top-5 right-5 z-[1100] flex flex-col gap-3 max-w-sm w-full pointer-events-none px-4"></div>
 
@@ -469,14 +469,14 @@
 
         <!-- ฝั่งขวา: การ์ดแสดงโลโก้ CAPTAIN INSURANCE กัปตัน ประกันภัย -->
         <div class="lg:col-span-5 flex justify-center">
-          <div class="w-full max-w-md bg-white rounded-3xl p-6 sm:p-7 shadow-2xl border-2 border-teal-400/60 text-slate-900 space-y-4">
+          <div class="w-full max-w-md bg-slate-950/90 rounded-3xl p-6 sm:p-7 shadow-2xl border-2 border-teal-400/50 text-slate-100 space-y-4">
             <div class="flex items-center justify-center py-2">
               <!-- โลโก้ CAPTAIN INSURANCE กัปตัน ประกันภัย (SVG พังงาเรือ + เข็มทิศ + โล่เครื่องหมายถูก) -->
               <svg viewBox="0 0 430 140" class="w-full max-w-[340px] h-auto" role="img" aria-label="CAPTAIN INSURANCE กัปตัน ประกันภัย">
                 <defs>
                   <linearGradient id="capNavyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#0b3b59"/>
-                    <stop offset="100%" stop-color="#072238"/>
+                    <stop offset="0%" stop-color="#38bdf8"/>
+                    <stop offset="100%" stop-color="#0284c7"/>
                   </linearGradient>
                   <linearGradient id="capTealGrad" x1="0%" y1="100%" x2="100%" y2="0%">
                     <stop offset="0%" stop-color="#0d9488"/>
@@ -493,7 +493,7 @@
                     <line x1="-38" y1="38" x2="38" y2="-38"/>
                   </g>
                   <!-- ปลายด้ามจับพังงาเรือ -->
-                  <g fill="#082f49">
+                  <g fill="#7dd3fc">
                     <circle cx="0" cy="-56" r="4.5"/>
                     <circle cx="0" cy="56" r="4.5"/>
                     <circle cx="-56" cy="0" r="4.5"/>
@@ -504,33 +504,33 @@
                     <circle cx="40" cy="-40" r="4"/>
                   </g>
                   <!-- วงล้อพังงาเรือชั้นนอกและชั้นใน -->
-                  <circle cx="0" cy="0" r="41" fill="none" stroke="#082f49" stroke-width="8"/>
-                  <circle cx="0" cy="0" r="41" fill="none" stroke="#14b8a6" stroke-width="2" stroke-dasharray="14 8"/>
-                  <circle cx="0" cy="0" r="28" fill="#ffffff" stroke="#0d9488" stroke-width="3"/>
+                  <circle cx="0" cy="0" r="41" fill="none" stroke="#38bdf8" stroke-width="8"/>
+                  <circle cx="0" cy="0" r="41" fill="none" stroke="#2dd4bf" stroke-width="2" stroke-dasharray="14 8"/>
+                  <circle cx="0" cy="0" r="28" fill="#070b14" stroke="#2dd4bf" stroke-width="3"/>
 
                   <!-- เข็มทิศเฉียงทะแยง -->
                   <polygon points="-46,46 -10,4 4,-10" fill="url(#capTealGrad)"/>
-                  <polygon points="46,-46 10,-4 -4,10" fill="#082f49"/>
+                  <polygon points="46,-46 10,-4 -4,10" fill="#fbbf24"/>
 
                   <!-- โล่ตรงกลาง -->
                   <path d="M0,-23 L20,-15 L20,2 C20,15 11,24 0,29 C-11,24 -20,15 -20,2 L-20,-15 Z"
-                    fill="url(#capTealGrad)" stroke="#082f49" stroke-width="3.5" stroke-linejoin="round"/>
+                    fill="url(#capTealGrad)" stroke="#0f172a" stroke-width="3.5" stroke-linejoin="round"/>
                   <!-- เครื่องหมายถูกบนโล่ -->
-                  <path d="M-9,2 L-2,9 L11,-6" fill="none" stroke="#082f49" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M-9,2 L-2,9 L11,-6" fill="none" stroke="#060911" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
                 </g>
 
                 <!-- ข้อความแบรนด์ด้านขวา -->
                 <g transform="translate(148, 0)">
-                  <text x="0" y="54" fill="#082f49" font-family="Prompt, sans-serif" font-weight="900" font-size="40" letter-spacing="1.5">CAPTAIN</text>
-                  <text x="2" y="85" fill="#082f49" font-family="Prompt, sans-serif" font-weight="600" font-size="25" letter-spacing="3.5">INSURANCE</text>
-                  <text x="2" y="117" fill="#0f2942" font-family="Prompt, sans-serif" font-weight="700" font-size="23">กัปตัน ประกันภัย</text>
+                  <text x="0" y="54" fill="#f8fafc" font-family="Prompt, sans-serif" font-weight="900" font-size="40" letter-spacing="1.5">CAPTAIN</text>
+                  <text x="2" y="85" fill="#2dd4bf" font-family="Prompt, sans-serif" font-weight="600" font-size="25" letter-spacing="3.5">INSURANCE</text>
+                  <text x="2" y="117" fill="#fbbf24" font-family="Prompt, sans-serif" font-weight="700" font-size="23">กัปตัน ประกันภัย</text>
                 </g>
               </svg>
             </div>
 
-            <div class="border-t border-slate-200 pt-3 flex items-center justify-between text-xs">
-              <span class="font-bold text-slate-700"><i class="fa-solid fa-circle-check text-teal-600 mr-1"></i> คุ้มครองไว ผ่อน 0% ได้</span>
-              <span class="bg-slate-950 text-amber-400 font-extrabold px-2.5 py-1 rounded-lg text-[11px]">by The Driver Thailand</span>
+            <div class="border-t border-slate-800 pt-3 flex items-center justify-between text-xs">
+              <span class="font-bold text-teal-300"><i class="fa-solid fa-circle-check text-emerald-400 mr-1"></i> คุ้มครองไว ผ่อน 0% ได้</span>
+              <span class="bg-amber-400/15 text-amber-300 border border-amber-400/35 font-extrabold px-2.5 py-1 rounded-lg text-[11px]">by The Driver Thailand</span>
             </div>
           </div>
         </div>
@@ -539,95 +539,95 @@
 
     <!-- จุดเด่นของบริการ Captain Insurance โดย The Driver Thailand -->
     <section class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-      <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm space-y-2">
-        <div class="w-11 h-11 rounded-2xl bg-teal-50 border border-teal-200 text-teal-700 flex items-center justify-center text-lg">
+      <div class="bg-slate-900/95 rounded-3xl p-5 border border-amber-400/20 shadow-lg space-y-2">
+        <div class="w-11 h-11 rounded-2xl bg-teal-500/15 border border-teal-400/35 text-teal-300 flex items-center justify-center text-lg">
           <i class="fa-solid fa-taxi"></i>
         </div>
-        <h2 class="font-extrabold text-slate-900 text-sm sm:text-base">รองรับทั้งรถบ้าน &amp; รถรับจ้าง</h2>
-        <p class="text-xs text-slate-600 leading-relaxed">จัดแผนประกันตรงตามการใช้งานจริง ทั้งรถส่วนบุคคล รถป้ายเขียว รถตู้ VIP และรถเช่าพร้อมคนขับ</p>
+        <h2 class="font-extrabold text-white text-sm sm:text-base">รองรับทั้งรถบ้าน &amp; รถรับจ้าง</h2>
+        <p class="text-xs text-slate-300 leading-relaxed">จัดแผนประกันตรงตามการใช้งานจริง ทั้งรถส่วนบุคคล รถป้ายเขียว รถตู้ VIP และรถเช่าพร้อมคนขับ</p>
       </div>
 
-      <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm space-y-2">
-        <div class="w-11 h-11 rounded-2xl bg-amber-50 border border-amber-200 text-amber-600 flex items-center justify-center text-lg">
+      <div class="bg-slate-900/95 rounded-3xl p-5 border border-amber-400/20 shadow-lg space-y-2">
+        <div class="w-11 h-11 rounded-2xl bg-amber-500/15 border border-amber-400/35 text-amber-300 flex items-center justify-center text-lg">
           <i class="fa-solid fa-tags"></i>
         </div>
-        <h2 class="font-extrabold text-slate-900 text-sm sm:text-base">เทียบเบี้ยกว่า 20 บริษัทชั้นนำ</h2>
-        <p class="text-xs text-slate-600 leading-relaxed">คัดสรรเบี้ยราคาพิเศษจากวิริยะ กรุงเทพ เมืองไทย คุ้มภัยโตเกียวมารีน ธนชาต และชั้นนำทั่วไทย</p>
+        <h2 class="font-extrabold text-white text-sm sm:text-base">เทียบเบี้ยกว่า 20 บริษัทชั้นนำ</h2>
+        <p class="text-xs text-slate-300 leading-relaxed">คัดสรรเบี้ยราคาพิเศษจากวิริยะ กรุงเทพ เมืองไทย คุ้มภัยโตเกียวมารีน ธนชาต และชั้นนำทั่วไทย</p>
       </div>
 
-      <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm space-y-2">
-        <div class="w-11 h-11 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-600 flex items-center justify-center text-lg">
+      <div class="bg-slate-900/95 rounded-3xl p-5 border border-amber-400/20 shadow-lg space-y-2">
+        <div class="w-11 h-11 rounded-2xl bg-emerald-500/15 border border-emerald-400/35 text-emerald-300 flex items-center justify-center text-lg">
           <i class="fa-solid fa-credit-card"></i>
         </div>
-        <h2 class="font-extrabold text-slate-900 text-sm sm:text-base">เลือกผ่อนชำระสบาย 0%</h2>
-        <p class="text-xs text-slate-600 leading-relaxed">คุ้มครองทันทีตั้งแต่วันแรกที่แจ้งงาน พร้อมทางเลือกผ่อนชำระทั้งบัตรเครดิตและเงินสด</p>
+        <h2 class="font-extrabold text-white text-sm sm:text-base">เลือกผ่อนชำระสบาย 0%</h2>
+        <p class="text-xs text-slate-300 leading-relaxed">คุ้มครองทันทีตั้งแต่วันแรกที่แจ้งงาน พร้อมทางเลือกผ่อนชำระทั้งบัตรเครดิตและเงินสด</p>
       </div>
 
-      <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm space-y-2">
-        <div class="w-11 h-11 rounded-2xl bg-sky-50 border border-sky-200 text-sky-600 flex items-center justify-center text-lg">
+      <div class="bg-slate-900/95 rounded-3xl p-5 border border-amber-400/20 shadow-lg space-y-2">
+        <div class="w-11 h-11 rounded-2xl bg-sky-500/15 border border-sky-400/35 text-sky-300 flex items-center justify-center text-lg">
           <i class="fa-solid fa-headset"></i>
         </div>
-        <h2 class="font-extrabold text-slate-900 text-sm sm:text-base">ดูแลประสานงานเคลม 24 ชม.</h2>
-        <p class="text-xs text-slate-600 leading-relaxed">มีทีมงาน Captain Insurance และแอดมิน The Driver Thailand คอยให้คำปรึกษาตลอดอายุกรมธรรม์</p>
+        <h2 class="font-extrabold text-white text-sm sm:text-base">ดูแลประสานงานเคลม 24 ชม.</h2>
+        <p class="text-xs text-slate-300 leading-relaxed">มีทีมงาน Captain Insurance และแอดมิน The Driver Thailand คอยให้คำปรึกษาตลอดอายุกรมธรรม์</p>
       </div>
     </section>
 
     <!-- ตารางเปรียบเทียบแผนประกันภัยรถยนต์ -->
-    <section id="coverage-table" class="bg-white rounded-3xl p-5 sm:p-8 border border-slate-200 shadow-sm space-y-5">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-4">
+    <section id="coverage-table" class="bg-slate-900/95 rounded-3xl p-5 sm:p-8 border border-amber-400/25 shadow-xl space-y-5 text-slate-100">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800 pb-4">
         <div>
-          <span class="text-xs font-extrabold text-teal-800 bg-teal-50 border border-teal-200 px-3 py-1 rounded-full">COMPARE PLANS</span>
-          <h2 class="text-lg sm:text-2xl font-black text-slate-900 mt-1.5">เปรียบเทียบความคุ้มครองประกันภัยรถยนต์แต่ละประเภท</h2>
+          <span class="text-xs font-extrabold text-teal-300 bg-teal-500/15 border border-teal-400/35 px-3 py-1 rounded-full">COMPARE PLANS</span>
+          <h2 class="text-lg sm:text-2xl font-black text-amber-300 mt-1.5">เปรียบเทียบความคุ้มครองประกันภัยรถยนต์แต่ละประเภท</h2>
         </div>
-        <span class="text-xs text-slate-500">เลือกแผนที่ใช่แล้วกดขอใบเสนอราคาด้านล่าง</span>
+        <span class="text-xs text-slate-400">เลือกแผนที่ใช่แล้วกดขอใบเสนอราคาด้านล่าง</span>
       </div>
 
-      <div class="overflow-x-auto rounded-2xl border border-slate-200">
+      <div class="overflow-x-auto rounded-2xl border border-slate-800">
         <table class="w-full text-left text-xs sm:text-sm min-w-[680px]">
           <thead class="bg-slate-950 text-amber-300 font-bold">
             <tr>
               <th class="px-4 py-3.5">รายการความคุ้มครอง</th>
-              <th class="px-4 py-3.5 text-center bg-teal-950/90 text-teal-300">ชั้น 1 (ซ่อมห้าง/อู่)</th>
+              <th class="px-4 py-3.5 text-center bg-teal-950/80 text-teal-300">ชั้น 1 (ซ่อมห้าง/อู่)</th>
               <th class="px-4 py-3.5 text-center">ชั้น 2+</th>
               <th class="px-4 py-3.5 text-center">ชั้น 3+</th>
               <th class="px-4 py-3.5 text-center">ชั้น 3</th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-slate-200">
-            <tr class="bg-white">
-              <td class="px-4 py-3 font-semibold text-slate-800">รถชนรถ (มีคู่กรณี)</td>
-              <td class="px-4 py-3 text-center text-emerald-600 font-bold bg-teal-50/40"><i class="fa-solid fa-circle-check"></i> คุ้มครอง</td>
-              <td class="px-4 py-3 text-center text-emerald-600 font-bold"><i class="fa-solid fa-circle-check"></i> คุ้มครอง</td>
-              <td class="px-4 py-3 text-center text-emerald-600 font-bold"><i class="fa-solid fa-circle-check"></i> คุ้มครอง</td>
-              <td class="px-4 py-3 text-center text-rose-500"><i class="fa-solid fa-circle-xmark"></i> เฉพาะคู่กรณี</td>
+          <tbody class="divide-y divide-slate-800">
+            <tr class="bg-slate-900/80">
+              <td class="px-4 py-3 font-semibold text-slate-200">รถชนรถ (มีคู่กรณี)</td>
+              <td class="px-4 py-3 text-center text-emerald-400 font-bold bg-teal-950/35"><i class="fa-solid fa-circle-check"></i> คุ้มครอง</td>
+              <td class="px-4 py-3 text-center text-emerald-400 font-bold"><i class="fa-solid fa-circle-check"></i> คุ้มครอง</td>
+              <td class="px-4 py-3 text-center text-emerald-400 font-bold"><i class="fa-solid fa-circle-check"></i> คุ้มครอง</td>
+              <td class="px-4 py-3 text-center text-rose-400"><i class="fa-solid fa-circle-xmark"></i> เฉพาะคู่กรณี</td>
             </tr>
-            <tr class="bg-slate-50/70">
-              <td class="px-4 py-3 font-semibold text-slate-800">ชนไม่มีคู่กรณี (เสา/รั้ว/พลิกคว่ำ)</td>
-              <td class="px-4 py-3 text-center text-emerald-600 font-bold bg-teal-50/40"><i class="fa-solid fa-circle-check"></i> คุ้มครอง</td>
-              <td class="px-4 py-3 text-center text-slate-400">ไม่คุ้มครอง</td>
-              <td class="px-4 py-3 text-center text-slate-400">ไม่คุ้มครอง</td>
-              <td class="px-4 py-3 text-center text-slate-400">ไม่คุ้มครอง</td>
+            <tr class="bg-slate-950/60">
+              <td class="px-4 py-3 font-semibold text-slate-200">ชนไม่มีคู่กรณี (เสา/รั้ว/พลิกคว่ำ)</td>
+              <td class="px-4 py-3 text-center text-emerald-400 font-bold bg-teal-950/35"><i class="fa-solid fa-circle-check"></i> คุ้มครอง</td>
+              <td class="px-4 py-3 text-center text-slate-500">ไม่คุ้มครอง</td>
+              <td class="px-4 py-3 text-center text-slate-500">ไม่คุ้มครอง</td>
+              <td class="px-4 py-3 text-center text-slate-500">ไม่คุ้มครอง</td>
             </tr>
-            <tr class="bg-white">
-              <td class="px-4 py-3 font-semibold text-slate-800">รถยนต์สูญหาย / ไฟไหม้</td>
-              <td class="px-4 py-3 text-center text-emerald-600 font-bold bg-teal-50/40"><i class="fa-solid fa-circle-check"></i> คุ้มครอง</td>
-              <td class="px-4 py-3 text-center text-emerald-600 font-bold"><i class="fa-solid fa-circle-check"></i> คุ้มครอง</td>
-              <td class="px-4 py-3 text-center text-slate-400">ไม่คุ้มครอง</td>
-              <td class="px-4 py-3 text-center text-slate-400">ไม่คุ้มครอง</td>
+            <tr class="bg-slate-900/80">
+              <td class="px-4 py-3 font-semibold text-slate-200">รถยนต์สูญหาย / ไฟไหม้</td>
+              <td class="px-4 py-3 text-center text-emerald-400 font-bold bg-teal-950/35"><i class="fa-solid fa-circle-check"></i> คุ้มครอง</td>
+              <td class="px-4 py-3 text-center text-emerald-400 font-bold"><i class="fa-solid fa-circle-check"></i> คุ้มครอง</td>
+              <td class="px-4 py-3 text-center text-slate-500">ไม่คุ้มครอง</td>
+              <td class="px-4 py-3 text-center text-slate-500">ไม่คุ้มครอง</td>
             </tr>
-            <tr class="bg-slate-50/70">
-              <td class="px-4 py-3 font-semibold text-slate-800">น้ำท่วม / ภัยธรรมชาติ</td>
-              <td class="px-4 py-3 text-center text-emerald-600 font-bold bg-teal-50/40"><i class="fa-solid fa-circle-check"></i> คุ้มครอง</td>
-              <td class="px-4 py-3 text-center text-amber-700 font-semibold">บางแผน</td>
-              <td class="px-4 py-3 text-center text-slate-400">ไม่คุ้มครอง</td>
-              <td class="px-4 py-3 text-center text-slate-400">ไม่คุ้มครอง</td>
+            <tr class="bg-slate-950/60">
+              <td class="px-4 py-3 font-semibold text-slate-200">น้ำท่วม / ภัยธรรมชาติ</td>
+              <td class="px-4 py-3 text-center text-emerald-400 font-bold bg-teal-950/35"><i class="fa-solid fa-circle-check"></i> คุ้มครอง</td>
+              <td class="px-4 py-3 text-center text-amber-300 font-semibold">บางแผน</td>
+              <td class="px-4 py-3 text-center text-slate-500">ไม่คุ้มครอง</td>
+              <td class="px-4 py-3 text-center text-slate-500">ไม่คุ้มครอง</td>
             </tr>
-            <tr class="bg-white">
-              <td class="px-4 py-3 font-semibold text-slate-800">เบี้ยเริ่มต้นโดยประมาณ / ปี</td>
-              <td class="px-4 py-3 text-center font-extrabold text-teal-800 bg-teal-50/40">11,500+ บ.</td>
-              <td class="px-4 py-3 text-center font-extrabold text-slate-900">5,500+ บ.</td>
-              <td class="px-4 py-3 text-center font-extrabold text-slate-900">4,500+ บ.</td>
-              <td class="px-4 py-3 text-center font-extrabold text-slate-900">1,890+ บ.</td>
+            <tr class="bg-slate-900/80">
+              <td class="px-4 py-3 font-semibold text-slate-200">เบี้ยเริ่มต้นโดยประมาณ / ปี</td>
+              <td class="px-4 py-3 text-center font-extrabold text-teal-300 bg-teal-950/35">11,500+ บ.</td>
+              <td class="px-4 py-3 text-center font-extrabold text-amber-300">5,500+ บ.</td>
+              <td class="px-4 py-3 text-center font-extrabold text-amber-300">4,500+ บ.</td>
+              <td class="px-4 py-3 text-center font-extrabold text-amber-300">1,890+ บ.</td>
             </tr>
           </tbody>
         </table>
@@ -662,18 +662,18 @@
     </div>
 
     <!-- แบบฟอร์มเช็กเบี้ยและขอใบเสนอราคาประกันภัยรถยนต์ -->
-    <section id="quote-form-section" class="bg-white rounded-3xl p-5 sm:p-10 shadow-sm border border-slate-200/90 space-y-6">
-      <div class="border-b border-slate-200 pb-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+    <section id="quote-form-section" class="bg-slate-900/95 rounded-3xl p-5 sm:p-10 shadow-xl border border-amber-400/25 space-y-6 text-slate-100">
+      <div class="border-b border-slate-800 pb-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
-          <span class="text-xs font-extrabold text-teal-800 bg-teal-50 border border-teal-200 px-3 py-1 rounded-full">CAPTAIN INSURANCE QUOTE REQUEST</span>
-          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 mt-1.5">แบบฟอร์มเช็กเบี้ยประกันภัยรถยนต์ &amp; พ.ร.บ.</h2>
-          <p class="text-xs sm:text-sm text-slate-500 mt-0.5">กรอกข้อมูลรถยนต์และแผนประกันที่สนใจ เพื่อรับใบเสนอราคาเปรียบเทียบฟรีไม่มีค่าใช้จ่าย</p>
+          <span class="text-xs font-extrabold text-teal-300 bg-teal-500/15 border border-teal-400/35 px-3 py-1 rounded-full">CAPTAIN INSURANCE QUOTE REQUEST</span>
+          <h2 class="text-xl sm:text-2xl font-extrabold text-amber-300 mt-1.5">แบบฟอร์มเช็กเบี้ยประกันภัยรถยนต์ &amp; พ.ร.บ.</h2>
+          <p class="text-xs sm:text-sm text-slate-400 mt-0.5">กรอกข้อมูลรถยนต์และแผนประกันที่สนใจ เพื่อรับใบเสนอราคาเปรียบเทียบฟรีไม่มีค่าใช้จ่าย</p>
         </div>
         <div class="flex items-center gap-2 flex-wrap">
-          <span id="ins-draft-badge" class="text-xs font-semibold text-slate-600 bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200">
-            <i class="fa-solid fa-floppy-disk text-slate-400 mr-1"></i> พร้อมบันทึกร่าง
+          <span id="ins-draft-badge" class="text-xs font-semibold text-slate-300 bg-slate-950 px-3 py-1.5 rounded-full border border-slate-700">
+            <i class="fa-solid fa-floppy-disk text-amber-400 mr-1"></i> พร้อมบันทึกร่าง
           </span>
-          <button type="button" onclick="clearInsDraft()" class="text-xs font-bold text-rose-700 bg-rose-50 hover:bg-rose-100 border border-rose-200 px-3 py-1.5 rounded-xl transition">
+          <button type="button" onclick="clearInsDraft()" class="text-xs font-bold text-rose-300 bg-rose-500/15 hover:bg-rose-500/25 border border-rose-400/35 px-3 py-1.5 rounded-xl transition">
             <i class="fa-solid fa-eraser mr-1"></i> ล้างแบบร่าง
           </button>
         </div>
@@ -681,16 +681,16 @@
 
       <form id="captain-insurance-form" onsubmit="handleInsuranceSubmit(event)" class="space-y-6">
         <!-- 1. เลือกประเภทประกันภัยและลักษณะการใช้งานรถ -->
-        <div class="bg-teal-50/60 border border-teal-200 rounded-3xl p-5 sm:p-6 space-y-4">
-          <h3 class="font-extrabold text-slate-900 text-sm sm:text-base border-b border-teal-200 pb-3 flex items-center gap-2">
-            <i class="fa-solid fa-shield-halved text-teal-600"></i>
+        <div class="bg-slate-950/75 border border-teal-400/25 rounded-3xl p-5 sm:p-6 space-y-4">
+          <h3 class="font-extrabold text-teal-300 text-sm sm:text-base border-b border-slate-800 pb-3 flex items-center gap-2">
+            <i class="fa-solid fa-shield-halved text-teal-400"></i>
             <span>1. เลือกประเภทประกันภัยและลักษณะการใช้งานรถ</span>
           </h3>
 
           <div class="grid md:grid-cols-2 gap-4">
             <div class="space-y-1.5">
-              <label for="ins_plan_type" class="block text-xs font-bold text-slate-700">ประเภทประกันภัยที่สนใจ <span class="text-rose-500">*</span></label>
-              <select id="ins_plan_type" required onchange="saveInsDraft()" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-semibold">
+              <label for="ins_plan_type" class="block text-xs font-bold text-slate-300">ประเภทประกันภัยที่สนใจ <span class="text-rose-400">*</span></label>
+              <select id="ins_plan_type" required onchange="saveInsDraft()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-xs sm:text-sm font-semibold text-white">
                 <option value="ประกันภัยรถยนต์ ชั้น 1 (ซ่อมอู่ / ซ่อมห้าง)">ประกันภัยรถยนต์ ชั้น 1 (ซ่อมอู่ / ซ่อมห้าง)</option>
                 <option value="ประกันภัยรถยนต์ ชั้น 2+ (คุ้มครองรถชนรถ + สูญหาย/ไฟไหม้)">ประกันภัยรถยนต์ ชั้น 2+ (คุ้มครองรถชนรถ + สูญหาย/ไฟไหม้)</option>
                 <option value="ประกันภัยรถยนต์ ชั้น 3+ (คุ้มครองรถชนรถ)">ประกันภัยรถยนต์ ชั้น 3+ (คุ้มครองรถชนรถ)</option>
@@ -701,8 +701,8 @@
             </div>
 
             <div class="space-y-1.5">
-              <label for="ins_usage_type" class="block text-xs font-bold text-slate-700">ลักษณะการใช้งานรถยนต์ (รหัสตามเล่มทะเบียน) <span class="text-rose-500">*</span></label>
-              <select id="ins_usage_type" required onchange="saveInsDraft()" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-semibold">
+              <label for="ins_usage_type" class="block text-xs font-bold text-slate-300">ลักษณะการใช้งานรถยนต์ (รหัสตามเล่มทะเบียน) <span class="text-rose-400">*</span></label>
+              <select id="ins_usage_type" required onchange="saveInsDraft()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-xs sm:text-sm font-semibold text-white">
                 <option value="รถเก๋งส่วนบุคคล (รหัส 110 - ป้ายขาวตัวอักษรดำ)">รถเก๋งส่วนบุคคล (รหัส 110 - ป้ายขาวตัวอักษรดำ)</option>
                 <option value="รถโดยสาร / รถตู้ส่วนบุคคล (รหัส 210 - ป้ายขาวตัวอักษรฟ้า)">รถโดยสาร / รถตู้ส่วนบุคคล (รหัส 210 - ป้ายขาวตัวอักษรฟ้า)</option>
                 <option value="รถกระบะบรรทุกส่วนบุคคล (รหัส 320 - ป้ายขาวตัวอักษรเขียว)">รถกระบะบรรทุกส่วนบุคคล (รหัส 320 - ป้ายขาวตัวอักษรเขียว)</option>
@@ -714,8 +714,8 @@
 
           <div class="grid md:grid-cols-2 gap-4">
             <div class="space-y-1.5">
-              <label for="ins_preferred_company" class="block text-xs font-bold text-slate-700">บริษัทประกันภัยที่ต้องการ (หรือให้เจ้าหน้าที่เทียบให้)</label>
-              <select id="ins_preferred_company" onchange="saveInsDraft()" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
+              <label for="ins_preferred_company" class="block text-xs font-bold text-slate-300">บริษัทประกันภัยที่ต้องการ (หรือให้เจ้าหน้าที่เทียบให้)</label>
+              <select id="ins_preferred_company" onchange="saveInsDraft()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-xs sm:text-sm text-white">
                 <option value="ให้เจ้าหน้าที่เทียบเบี้ยที่คุ้มค่าที่สุดจากทุกบริษัท">ให้เจ้าหน้าที่เทียบเบี้ยที่คุ้มค่าที่สุดจากทุกบริษัท</option>
                 <option value="วิริยะประกันภัย">วิริยะประกันภัย</option>
                 <option value="กรุงเทพประกันภัย">กรุงเทพประกันภัย</option>
@@ -727,8 +727,8 @@
             </div>
 
             <div class="space-y-1.5">
-              <label for="ins_repair_type" class="block text-xs font-bold text-slate-700">รูปแบบการซ่อมที่ต้องการ</label>
-              <select id="ins_repair_type" onchange="saveInsDraft()" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
+              <label for="ins_repair_type" class="block text-xs font-bold text-slate-300">รูปแบบการซ่อมที่ต้องการ</label>
+              <select id="ins_repair_type" onchange="saveInsDraft()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-xs sm:text-sm text-white">
                 <option value="ซ่อมอู่มาตรฐานในเครือ (เบี้ยประหยัด)">ซ่อมอู่มาตรฐานในเครือ (เบี้ยประหยัด)</option>
                 <option value="ซ่อมห้าง / ศูนย์บริการ">ซ่อมห้าง / ศูนย์บริการ</option>
                 <option value="ขอเปรียบเทียบทั้งซ่อมอู่และซ่อมห้าง">ขอเปรียบเทียบทั้งซ่อมอู่และซ่อมห้าง</option>
@@ -738,46 +738,46 @@
         </div>
 
         <!-- 2. ข้อมูลรถยนต์ที่ต้องการทำประกันภัย -->
-        <div class="bg-slate-50/80 border border-slate-200 rounded-3xl p-5 sm:p-6 space-y-4">
-          <h3 class="font-extrabold text-slate-900 text-sm sm:text-base border-b border-slate-200 pb-3 flex items-center gap-2">
-            <i class="fa-solid fa-car text-teal-600"></i>
+        <div class="bg-slate-950/75 border border-slate-800 rounded-3xl p-5 sm:p-6 space-y-4">
+          <h3 class="font-extrabold text-amber-300 text-sm sm:text-base border-b border-slate-800 pb-3 flex items-center gap-2">
+            <i class="fa-solid fa-car text-teal-400"></i>
             <span>2. ข้อมูลรถยนต์ที่ต้องการทำประกันภัย</span>
           </h3>
 
           <div class="grid md:grid-cols-4 gap-4">
             <div class="space-y-1.5">
-              <label for="ins_car_brand" class="block text-xs font-bold text-slate-700">ยี่ห้อรถ <span class="text-rose-500">*</span></label>
-              <input type="text" id="ins_car_brand" required placeholder="เช่น Toyota / Honda / BYD" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
+              <label for="ins_car_brand" class="block text-xs font-bold text-slate-300">ยี่ห้อรถ <span class="text-rose-400">*</span></label>
+              <input type="text" id="ins_car_brand" required placeholder="เช่น Toyota / Honda / BYD" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-xs sm:text-sm text-white">
             </div>
             <div class="space-y-1.5">
-              <label for="ins_car_model" class="block text-xs font-bold text-slate-700">รุ่นรถ และรุ่นย่อย <span class="text-rose-500">*</span></label>
-              <input type="text" id="ins_car_model" required placeholder="เช่น Camry 2.5G / Commuter" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
+              <label for="ins_car_model" class="block text-xs font-bold text-slate-300">รุ่นรถ และรุ่นย่อย <span class="text-rose-400">*</span></label>
+              <input type="text" id="ins_car_model" required placeholder="เช่น Camry 2.5G / Commuter" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-xs sm:text-sm text-white">
             </div>
             <div class="space-y-1.5">
-              <label for="ins_car_year" class="block text-xs font-bold text-slate-700">ปีจดทะเบียน (ค.ศ. / พ.ศ.) <span class="text-rose-500">*</span></label>
-              <input type="text" id="ins_car_year" required placeholder="เช่น 2022 หรือ 2565" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-mono">
+              <label for="ins_car_year" class="block text-xs font-bold text-slate-300">ปีจดทะเบียน (ค.ศ. / พ.ศ.) <span class="text-rose-400">*</span></label>
+              <input type="text" id="ins_car_year" required placeholder="เช่น 2022 หรือ 2565" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-xs sm:text-sm font-mono text-white">
             </div>
             <div class="space-y-1.5">
-              <label for="ins_license_plate" class="block text-xs font-bold text-slate-700">หมายเลขทะเบียนรถ <span class="text-rose-500">*</span></label>
-              <input type="text" id="ins_license_plate" required placeholder="เช่น 1กข 1234 กทม." class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold">
+              <label for="ins_license_plate" class="block text-xs font-bold text-slate-300">หมายเลขทะเบียนรถ <span class="text-rose-400">*</span></label>
+              <input type="text" id="ins_license_plate" required placeholder="เช่น 1กข 1234 กทม." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold text-amber-300">
             </div>
           </div>
 
           <div class="grid md:grid-cols-2 gap-4">
             <div class="space-y-1.5">
-              <label for="ins_expiry_date" class="block text-xs font-bold text-slate-700">วันหมดอายุกรมธรรม์เดิม (ถ้ามี)</label>
-              <input type="date" id="ins_expiry_date" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
+              <label for="ins_expiry_date" class="block text-xs font-bold text-slate-300">วันหมดอายุกรมธรรม์เดิม (ถ้ามี)</label>
+              <input type="date" id="ins_expiry_date" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-xs sm:text-sm text-white">
             </div>
             <div class="space-y-1.5">
-              <label for="ins_note" class="block text-xs font-bold text-slate-700">รายละเอียดเพิ่มเติม (เช่น ต้องการรวม พ.ร.บ. / ผ่อนชำระ)</label>
-              <input type="text" id="ins_note" placeholder="ระบุความต้องการเพิ่มเติม..." class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
+              <label for="ins_note" class="block text-xs font-bold text-slate-300">รายละเอียดเพิ่มเติม (เช่น ต้องการรวม พ.ร.บ. / ผ่อนชำระ)</label>
+              <input type="text" id="ins_note" placeholder="ระบุความต้องการเพิ่มเติม..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-xs sm:text-sm text-white">
             </div>
           </div>
 
           <!-- แนบรูปหน้าเล่มทะเบียน / กรมธรรม์เดิม (ถ้ามี) -->
-          <div class="border-2 border-dashed border-slate-300 bg-white rounded-2xl p-4 text-center space-y-2">
-            <p class="text-xs font-bold text-slate-800"><i class="fa-solid fa-file-image text-teal-600 mr-1"></i> แนบภาพหน้าเล่มทะเบียนรถ หรือหน้าตารางกรมธรรม์เดิม (ช่วยให้เช็กเบี้ยแม่นยำขึ้น - ไม่บังคับ)</p>
-            <label class="inline-flex items-center justify-center bg-slate-950 hover:bg-slate-800 text-amber-400 font-semibold text-xs px-4 py-2 rounded-xl cursor-pointer transition">
+          <div class="border-2 border-dashed border-slate-700 bg-slate-900/80 rounded-2xl p-4 text-center space-y-2">
+            <p class="text-xs font-bold text-slate-200"><i class="fa-solid fa-file-image text-teal-400 mr-1"></i> แนบภาพหน้าเล่มทะเบียนรถ หรือหน้าตารางกรมธรรม์เดิม (ช่วยให้เช็กเบี้ยแม่นยำขึ้น - ไม่บังคับ)</p>
+            <label class="inline-flex items-center justify-center bg-slate-800 hover:bg-slate-700 text-amber-300 border border-amber-400/35 font-semibold text-xs px-4 py-2 rounded-xl cursor-pointer transition">
               <i class="fa-solid fa-upload mr-1.5"></i> เลือกไฟล์รูปภาพ
               <input type="file" id="ins_doc_file" accept="image/*" onchange="handleInsDocUpload(this)" class="hidden">
             </label>
@@ -786,38 +786,38 @@
         </div>
 
         <!-- 3. ข้อมูลผู้ติดต่อ -->
-        <div class="bg-slate-50/80 border border-slate-200 rounded-3xl p-5 sm:p-6 space-y-4">
-          <h3 class="font-extrabold text-slate-900 text-sm sm:text-base border-b border-slate-200 pb-3 flex items-center gap-2">
-            <i class="fa-solid fa-address-book text-teal-600"></i>
+        <div class="bg-slate-950/75 border border-slate-800 rounded-3xl p-5 sm:p-6 space-y-4">
+          <h3 class="font-extrabold text-amber-300 text-sm sm:text-base border-b border-slate-800 pb-3 flex items-center gap-2">
+            <i class="fa-solid fa-address-book text-teal-400"></i>
             <span>3. ข้อมูลผู้ขอรับใบเสนอราคา</span>
           </h3>
 
           <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
             <div class="space-y-1.5">
-              <label for="ins_member_code" class="block text-xs font-bold text-slate-700">รหัสสมาชิกกลุ่ม (ถ้ามี)</label>
-              <input type="text" id="ins_member_code" placeholder="เช่น B2464 (เพื่อรับส่วนลดสมาชิก)" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-mono uppercase">
+              <label for="ins_member_code" class="block text-xs font-bold text-slate-300">รหัสสมาชิกกลุ่ม (ถ้ามี)</label>
+              <input type="text" id="ins_member_code" placeholder="เช่น B2464 (เพื่อรับส่วนลดสมาชิก)" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-xs sm:text-sm font-mono uppercase text-white">
             </div>
             <div class="space-y-1.5">
-              <label for="ins_fullname" class="block text-xs font-bold text-slate-700">ชื่อ - นามสกุล <span class="text-rose-500">*</span></label>
-              <input type="text" id="ins_fullname" required placeholder="ระบุชื่อ-นามสกุลผู้ติดต่อ" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
+              <label for="ins_fullname" class="block text-xs font-bold text-slate-300">ชื่อ - นามสกุล <span class="text-rose-400">*</span></label>
+              <input type="text" id="ins_fullname" required placeholder="ระบุชื่อ-นามสกุลผู้ติดต่อ" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-xs sm:text-sm text-white">
             </div>
             <div class="space-y-1.5">
-              <label for="ins_phone" class="block text-xs font-bold text-slate-700">เบอร์โทรศัพท์ติดต่อ <span class="text-rose-500">*</span></label>
-              <input type="tel" id="ins_phone" required placeholder="เช่น 0812345678" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-mono">
+              <label for="ins_phone" class="block text-xs font-bold text-slate-300">เบอร์โทรศัพท์ติดต่อ <span class="text-rose-400">*</span></label>
+              <input type="tel" id="ins_phone" required placeholder="เช่น 0812345678" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-xs sm:text-sm font-mono text-white">
             </div>
             <div class="space-y-1.5">
-              <label for="ins_line_id" class="block text-xs font-bold text-slate-700">Line ID (สำหรับส่งใบเสนอราคา) <span class="text-rose-500">*</span></label>
-              <input type="text" id="ins_line_id" required placeholder="ระบุ Line ID ของคุณ" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
+              <label for="ins_line_id" class="block text-xs font-bold text-slate-300">Line ID (สำหรับส่งใบเสนอราคา) <span class="text-rose-400">*</span></label>
+              <input type="text" id="ins_line_id" required placeholder="ระบุ Line ID ของคุณ" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-xs sm:text-sm text-white">
             </div>
           </div>
         </div>
 
         <div class="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-3 pt-1">
-          <a href="index.html" class="w-full sm:w-auto text-center px-5 py-3 rounded-xl border border-slate-300 bg-white hover:bg-slate-100 text-slate-700 font-bold text-xs sm:text-sm transition">
+          <a href="index.html" class="w-full sm:w-auto text-center px-5 py-3 rounded-xl border border-slate-700 bg-slate-950 hover:bg-slate-800 text-slate-200 font-bold text-xs sm:text-sm transition">
             <i class="fa-solid fa-arrow-left mr-1.5"></i> กลับหน้าหลัก
           </a>
           <button type="submit" id="btn-submit-insurance"
-            class="w-full sm:w-auto bg-gradient-to-r from-teal-500 to-emerald-600 hover:from-teal-400 hover:to-emerald-500 text-white font-extrabold text-sm sm:text-base px-8 py-3.5 rounded-xl shadow-lg transition flex items-center justify-center gap-2">
+            class="w-full sm:w-auto bg-gradient-to-r from-teal-400 to-emerald-500 hover:from-teal-300 hover:to-emerald-400 text-slate-950 font-extrabold text-sm sm:text-base px-8 py-3.5 rounded-xl shadow-lg transition flex items-center justify-center gap-2">
             <i class="fa-solid fa-paper-plane"></i>
             <span>ส่งข้อมูลเช็กเบี้ย CAPTAIN INSURANCE</span>
           </button>

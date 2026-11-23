@@ -23,6 +23,7 @@
   </script>
   <style>
     html {
+      scroll-behavior: smooth;
       font-size: 16px;
       transition: font-size 0.18s ease;
     }
@@ -410,95 +411,201 @@
   </nav>
 
   <main class="flex-grow max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-6">
+    <!-- Hero Banner & Stats -->
     <section class="hero-glow-bg text-white rounded-3xl p-6 sm:p-10 border border-rose-500/30 shadow-xl space-y-4">
-      <span class="inline-flex items-center gap-2 bg-rose-500/20 border border-rose-400/40 text-rose-300 text-xs font-bold px-3.5 py-1 rounded-full">
-        <i class="fa-solid fa-shield-halved"></i> DRIVER SAFETY &amp; BLACKLIST GUARD
-      </span>
+      <div class="flex flex-wrap items-center justify-between gap-2">
+        <span class="inline-flex items-center gap-2 bg-rose-500/20 border border-rose-400/40 text-rose-300 text-xs font-bold px-3.5 py-1 rounded-full">
+          <i class="fa-solid fa-shield-halved"></i> DRIVER SAFETY &amp; BLACKLIST GUARD
+        </span>
+        <a href="#report-scam-section" class="bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-extrabold text-xs px-4 py-2 rounded-full shadow hover:opacity-95 transition">
+          <i class="fa-solid fa-triangle-exclamation mr-1"></i> แจ้งเบาะแสคนโกง
+        </a>
+      </div>
       <h1 class="text-2xl sm:text-4xl font-extrabold">ศูนย์เฝ้าระวังภัย <span class="text-amber-400">Blacklist</span> เครือข่ายคนขับรถ</h1>
-      <p class="text-slate-300 text-xs sm:text-sm max-w-3xl">ตรวจสอบประวัติเบอร์โทรศัพท์ เลขบัญชีธนาคาร หรือชื่อผู้ว่าจ้างก่อนรับงานเดินทางไกล และแจ้งเบาะแสเตือนภัยคนโกงร่วมกันในกลุ่ม</p>
+      <p class="text-slate-300 text-xs sm:text-sm max-w-3xl leading-relaxed">
+        ตรวจสอบประวัติเบอร์โทรศัพท์ เลขบัญชีธนาคาร ชื่อผู้ว่าจ้าง หรือเส้นทางก่อนรับงานเดินทางไกล เพื่อลดความเสี่ยงจากการถูกเบี้ยวค่าโดยสาร สลิปปลอม หรือการเทงาน
+      </p>
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2 text-xs">
         <div class="bg-white/5 border border-white/10 rounded-2xl p-3.5">
-          <span class="text-slate-400 block">จำนวนเคสเตือนภัย</span>
+          <span class="text-slate-400 block">จำนวนเคสเตือนภัยทั้งหมด</span>
           <strong id="statTotalCases" class="text-lg sm:text-xl font-extrabold text-amber-400">0</strong>
         </div>
         <div class="bg-white/5 border border-white/10 rounded-2xl p-3.5">
-          <span class="text-slate-400 block">ยอดความเสียหายรวม</span>
+          <span class="text-slate-400 block">ยอดความเสียหายสะสม</span>
           <strong id="statTotalDamage" class="text-lg sm:text-xl font-extrabold text-rose-400">฿0</strong>
         </div>
         <div class="bg-white/5 border border-white/10 rounded-2xl p-3.5">
-          <span class="text-slate-400 block">รูปแบบที่พบบ่อย</span>
+          <span class="text-slate-400 block">พฤติการณ์ที่พบบ่อย</span>
           <strong id="statTopType" class="text-sm sm:text-base font-bold text-white truncate block">-</strong>
         </div>
         <div class="bg-white/5 border border-white/10 rounded-2xl p-3.5">
-          <span class="text-slate-400 block">สถานะฐานข้อมูล</span>
-          <strong id="statStorageMode" class="text-sm sm:text-base font-bold text-emerald-400">Google Sheets</strong>
+          <span class="text-slate-400 block">สถานะฐานข้อมูลกลาง</span>
+          <strong id="statStorageMode" class="text-sm sm:text-base font-bold text-emerald-400">กำลังเชื่อมต่อ...</strong>
         </div>
       </div>
     </section>
 
-    <section class="bg-white rounded-3xl p-5 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+    <!-- Search & Feed Section -->
+    <section class="bg-white rounded-3xl p-5 sm:p-8 border border-slate-200 shadow-sm space-y-5">
       <div class="flex flex-col sm:flex-row gap-3">
-        <input type="text" id="searchInput" oninput="onSearchOrFilterChange()" placeholder="ค้นหาชื่อ, เบอร์โทร, เลขบัญชีธนาคาร หรือเส้นทาง..."
-          class="flex-1 bg-slate-50 border border-slate-300 rounded-2xl px-4 py-3 text-xs sm:text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500">
+        <div class="relative flex-1">
+          <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+          <input type="text" id="searchInput" oninput="onSearchOrFilterChange()" placeholder="พิมพ์ชื่อผู้ก่อเหตุ, เบอร์โทรศัพท์, เลขบัญชีธนาคาร หรือเส้นทางเพื่อตรวจสอบ..."
+            class="w-full bg-slate-50 border border-slate-300 rounded-2xl pl-10 pr-4 py-3 text-xs sm:text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500">
+        </div>
         <select id="filterType" onchange="onSearchOrFilterChange()" class="bg-slate-50 border border-slate-300 rounded-2xl px-4 py-3 text-xs sm:text-sm font-semibold">
-          <option value="ALL">ทุกประเภทการโกง</option>
+          <option value="ALL">ทุกประเภทพฤติการณ์</option>
           <option value="สลิปปลอม">สลิปปลอม</option>
           <option value="ไม่จ่ายค่าโดยสาร">ไม่จ่ายค่าโดยสาร</option>
           <option value="เบี้ยวงาน / เทงาน">เบี้ยวงาน / เทงาน</option>
           <option value="โกงเงินมัดจำ">โกงเงินมัดจำ</option>
+          <option value="อื่นๆ">อื่นๆ</option>
         </select>
-        <button type="button" onclick="fetchDataFromCloud()" class="bg-slate-950 hover:bg-slate-800 text-amber-400 font-bold px-5 py-3 rounded-2xl text-xs sm:text-sm">
+        <button type="button" onclick="fetchDataFromCloud(true)" class="bg-slate-950 hover:bg-slate-800 text-amber-400 font-bold px-5 py-3 rounded-2xl text-xs sm:text-sm shrink-0 transition">
           <i id="refreshSpinIcon" class="fa-solid fa-rotate mr-1"></i> อัปเดตข้อมูล
         </button>
       </div>
+
+      <!-- แถบประเมินความเสี่ยงด่วนเมื่อพิมพ์ค้นหา -->
       <div id="quickRiskBanner" class="hidden"></div>
+
+      <!-- รายการเคสเตือนภัย -->
       <div id="feedContainer" class="grid md:grid-cols-2 gap-4"></div>
-      <div id="emptyState" class="hidden text-center py-8 text-slate-500 text-sm">ไม่พบข้อมูลที่ค้นหา</div>
-      <div id="paginationBar" class="hidden flex items-center justify-between pt-2 text-xs text-slate-500">
-        <span>แสดง <strong id="showingStart">0</strong> - <strong id="showingEnd">0</strong> จาก <strong id="totalFilteredRecords">0</strong> รายการ</span>
-        <div id="pageButtonsContainer" class="flex items-center gap-1.5"></div>
+
+      <!-- กรณีไม่พบข้อมูล -->
+      <div id="emptyState" class="hidden text-center py-10 bg-slate-50 rounded-2xl border border-slate-200 space-y-1">
+        <i class="fa-solid fa-shield-check text-3xl text-emerald-500"></i>
+        <p class="font-bold text-slate-800 text-sm">ไม่พบประวัติเตือนภัยที่ตรงกับคำค้นหา</p>
+        <p class="text-xs text-slate-500">หากพบพฤติการณ์ทุจริต สามารถบันทึกข้อมูลแจ้งเตือนภัยได้ที่แบบฟอร์มด้านล่าง</p>
+      </div>
+
+      <!-- แถบเปลี่ยนหน้า Pagination -->
+      <div id="paginationBar" class="hidden flex flex-col sm:flex-row items-center justify-between gap-3 pt-3 border-t border-slate-200 text-xs text-slate-600">
+        <span>แสดงรายการที่ <strong id="showingStart">0</strong> - <strong id="showingEnd">0</strong> จากทั้งหมด <strong id="totalFilteredRecords">0</strong> เคส</span>
+        <div id="pageButtonsContainer" class="flex items-center gap-1.5 flex-wrap"></div>
       </div>
     </section>
 
-    <section class="bg-white rounded-3xl p-5 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+    <!-- Report Scam Form Section -->
+    <section id="report-scam-section" class="bg-white rounded-3xl p-5 sm:p-8 border border-slate-200 shadow-sm space-y-5">
       <div class="flex items-center justify-between flex-wrap gap-2 border-b border-slate-200 pb-4">
-        <h2 class="text-lg sm:text-xl font-extrabold text-slate-900"><i class="fa-solid fa-triangle-exclamation text-rose-600 mr-2"></i>แจ้งเบาะแสเตือนภัยคนโกง</h2>
-        <span id="draftStatusText" class="text-xs text-slate-500"><i class="fa-solid fa-floppy-disk"></i> พร้อมบันทึกร่างอัตโนมัติ</span>
+        <div>
+          <h2 class="text-lg sm:text-xl font-extrabold text-slate-900">
+            <i class="fa-solid fa-triangle-exclamation text-rose-600 mr-2"></i>แจ้งเบาะแสเตือนภัยคนโกง / ผู้ไม่ชำระค่าบริการ
+          </h2>
+          <p class="text-xs text-slate-500 mt-0.5">กรอกข้อมูลตามข้อเท็จจริงพร้อมแนบภาพหลักฐานเพื่อเตือนภัยเพื่อนสมาชิก</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <span id="draftStatusText" class="text-xs font-semibold text-slate-600 bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200">
+            <i class="fa-solid fa-floppy-disk text-slate-400 mr-1"></i> พร้อมบันทึกร่างอัตโนมัติ
+          </span>
+          <button type="button" onclick="clearScamDraft()" class="text-xs font-bold text-rose-700 bg-rose-50 hover:bg-rose-100 border border-rose-200 px-3 py-1.5 rounded-xl">
+            ล้างร่าง
+          </button>
+        </div>
       </div>
+
       <form id="scamForm" class="space-y-4">
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          <input type="text" id="scammerName" required placeholder="ชื่อผู้ก่อเหตุ / ชื่อโปรไฟล์ *" class="bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
-          <input type="text" id="contactPhone" placeholder="เบอร์โทรศัพท์ผู้ก่อเหตุ" class="bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
-          <input type="text" id="bankAccount" placeholder="เลขบัญชีธนาคาร / ชื่อบัญชี" class="bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
-          <select id="scamType" class="bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
-            <option value="ไม่จ่ายค่าโดยสาร">ไม่จ่ายค่าโดยสาร</option>
-            <option value="สลิปปลอม">สลิปปลอม</option>
-            <option value="เบี้ยวงาน / เทงาน">เบี้ยวงาน / เทงาน</option>
-            <option value="โกงเงินมัดจำ">โกงเงินมัดจำ</option>
-            <option value="อื่นๆ">อื่นๆ</option>
-          </select>
-          <input type="number" id="damageAmount" placeholder="ยอดความเสียหาย (บาท)" class="bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
-          <input type="date" id="incidentDate" class="bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
+          <div class="space-y-1">
+            <label class="block text-xs font-bold text-slate-700">ชื่อผู้ก่อเหตุ / ชื่อโปรไฟล์ <span class="text-rose-500">*</span></label>
+            <input type="text" id="scammerName" required placeholder="ระบุชื่อ-นามสกุล หรือชื่อไลน์/เฟซบุ๊ก" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500">
+          </div>
+          <div class="space-y-1">
+            <label class="block text-xs font-bold text-slate-700">เบอร์โทรศัพท์ผู้ก่อเหตุ</label>
+            <input type="text" id="contactPhone" placeholder="เช่น 08X-XXX-XXXX" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-mono focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500">
+          </div>
+          <div class="space-y-1">
+            <label class="block text-xs font-bold text-slate-700">เลขบัญชีธนาคาร / ชื่อบัญชี</label>
+            <input type="text" id="bankAccount" placeholder="เช่น กสิกรไทย 123-4-56789-0" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500">
+          </div>
+          <div class="space-y-1">
+            <label class="block text-xs font-bold text-slate-700">ประเภทพฤติการณ์ <span class="text-rose-500">*</span></label>
+            <select id="scamType" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500">
+              <option value="ไม่จ่ายค่าโดยสาร">ไม่จ่ายค่าโดยสาร</option>
+              <option value="สลิปปลอม">สลิปปลอม</option>
+              <option value="เบี้ยวงาน / เทงาน">เบี้ยวงาน / เทงาน</option>
+              <option value="โกงเงินมัดจำ">โกงเงินมัดจำ</option>
+              <option value="อื่นๆ">อื่นๆ</option>
+            </select>
+          </div>
+          <div class="space-y-1">
+            <label class="block text-xs font-bold text-slate-700">ยอดความเสียหาย (บาท)</label>
+            <input type="number" id="damageAmount" min="0" placeholder="0" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-mono focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500">
+          </div>
+          <div class="space-y-1">
+            <label class="block text-xs font-bold text-slate-700">วันที่เกิดเหตุ</label>
+            <input type="date" id="incidentDate" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500">
+          </div>
         </div>
+
         <div class="grid sm:grid-cols-2 gap-4">
-          <input type="text" id="incidentLocation" placeholder="เส้นทาง / สถานที่เกิดเหตุ" class="bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
-          <input type="text" id="reporterName" placeholder="ชื่อผู้แจ้ง / รหัสสมาชิก" class="bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
+          <div class="space-y-1">
+            <label class="block text-xs font-bold text-slate-700">เส้นทาง / สถานที่เกิดเหตุ</label>
+            <input type="text" id="incidentLocation" placeholder="เช่น สุวรรณภูมิ - พัทยา / ดอนเมือง" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500">
+          </div>
+          <div class="space-y-1">
+            <label class="block text-xs font-bold text-slate-700">ชื่อผู้แจ้งเบาะแส / รหัสสมาชิก <span class="text-rose-500">*</span></label>
+            <input type="text" id="reporterName" required placeholder="เช่น [B999] แทนไทย" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500">
+          </div>
         </div>
-        <textarea id="description" rows="3" required placeholder="รายละเอียดพฤติการณ์ *" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm"></textarea>
-        <div class="flex flex-wrap items-center justify-between gap-3">
-          <label class="inline-flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs px-4 py-2.5 rounded-xl cursor-pointer">
-            <i class="fa-solid fa-camera"></i> แนบรูปหลักฐาน (สูงสุด 10 รูป)
-            <input type="file" accept="image/*" multiple onchange="previewImages(event)" class="hidden">
-          </label>
-          <span id="imageCounter" class="text-xs text-slate-500">แนบรูปแล้ว 0 / 10 รูป</span>
-          <button type="submit" id="submitBtn" class="bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-extrabold text-xs sm:text-sm px-6 py-3 rounded-xl shadow">
+
+        <div class="space-y-1">
+          <label class="block text-xs font-bold text-slate-700">รายละเอียดพฤติการณ์อย่างละเอียด <span class="text-rose-500">*</span></label>
+          <textarea id="description" rows="3" required placeholder="อธิบายลำดับเหตุการณ์ การติดต่อ และข้อสังเกตเพื่อให้เพื่อนสมาชิกเฝ้าระวัง..." class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500"></textarea>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
+          <div class="flex items-center gap-3 flex-wrap">
+            <label class="inline-flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs px-4 py-2.5 rounded-xl cursor-pointer transition">
+              <i class="fa-solid fa-camera text-rose-600"></i> แนบรูปหลักฐาน (สูงสุด 10 รูป)
+              <input type="file" id="evidenceInput" accept="image/*" multiple onchange="previewImages(event)" class="hidden">
+            </label>
+            <span id="imageCounter" class="text-xs text-slate-500 font-semibold">แนบรูปแล้ว 0 / 10 รูป</span>
+          </div>
+
+          <button type="submit" id="submitBtn" class="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold text-xs sm:text-sm px-6 py-3 rounded-xl shadow transition">
             <i id="submitBtnIcon" class="fa-solid fa-paper-plane mr-1"></i> <span id="submitBtnText">ลงบันทึกเตือนภัยทันที</span>
           </button>
         </div>
-        <div id="imagePreviewContainer" class="hidden"><div id="imagePreviewGrid" class="grid grid-cols-5 gap-2"></div></div>
+
+        <div id="imagePreviewContainer" class="hidden pt-2">
+          <div id="imagePreviewGrid" class="grid grid-cols-2 sm:grid-cols-5 gap-2.5"></div>
+        </div>
       </form>
     </section>
   </main>
+
+  <!-- Modal ยื่นคำร้องขอลบ/แก้ไขเคส -->
+  <div id="deleteRequestModal" class="hidden fixed inset-0 z-[1080] bg-slate-950/75 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-200 space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+        <h3 class="font-extrabold text-base text-slate-900">
+          <i class="fa-solid fa-flag text-amber-500 mr-1.5"></i> แจ้งขอลบ / แก้ไขข้อมูลเคส
+        </h3>
+        <button type="button" onclick="closeDeleteModal()" class="text-slate-400 hover:text-slate-700 text-sm">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <p id="deleteTargetLabel" class="text-xs bg-amber-50 border border-amber-200 text-amber-950 p-3 rounded-xl font-semibold"></p>
+      <form onsubmit="submitDeleteRequest(event)" class="space-y-3">
+        <input type="hidden" id="deleteCaseId">
+        <input type="hidden" id="deleteCaseName">
+        <textarea id="deleteReason" rows="3" required placeholder="ระบุเหตุผลที่ขอลบหรือแก้ไข (เช่น ชำระเงินคืนครบถ้วนแล้ว / ข้อมูลคลาดเคลื่อน) *" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs"></textarea>
+        <input type="text" id="deleteRequesterName" required placeholder="ชื่อผู้ยื่นคำร้อง / รหัสสมาชิก *" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs">
+        <input type="text" id="deleteRequesterContact" required placeholder="เบอร์โทร หรือ Line ID สำหรับติดต่อกลับ *" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs">
+        <div class="flex justify-end gap-2 pt-2">
+          <button type="button" onclick="closeDeleteModal()" class="px-4 py-2 rounded-xl bg-slate-100 text-xs font-bold text-slate-700">ยกเลิก</button>
+          <button type="submit" id="btnSubmitDeleteReq" class="px-5 py-2 rounded-xl bg-slate-950 text-amber-400 text-xs font-extrabold">ส่งคำร้องให้แอดมิน</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal ดูภาพหลักฐานขนาดใหญ่ -->
+  <div id="lightboxModal" onclick="this.classList.add('hidden')" class="hidden fixed inset-0 z-[1090] bg-slate-950/90 flex items-center justify-center p-4 cursor-zoom-out">
+    <img id="lightboxImg" src="" alt="ภาพหลักฐานขยาย" class="max-w-full max-h-[88vh] rounded-2xl border border-amber-400/50 shadow-2xl object-contain">
+  </div>
 
   <!-- FOOTER -->
   <footer class="bg-slate-950 text-slate-400 border-t border-amber-500/25 py-9 px-4 text-xs mt-10">
@@ -520,7 +627,8 @@
     </div>
   </footer>
 
-  <div id="toast" class="fixed bottom-4 left-3 right-3 sm:left-auto sm:right-5 z-[70] transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none sm:max-w-md">
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed bottom-4 left-3 right-3 sm:left-auto sm:right-5 z-[1100] transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none sm:max-w-md">
     <div class="bg-slate-950 text-white px-4 py-3 rounded-xl shadow-xl border border-amber-400/50 flex items-center gap-2.5 text-xs sm:text-sm w-full">
       <i id="toastIcon" class="fa-solid fa-circle-check text-emerald-400 text-base shrink-0"></i>
       <span id="toastMessage" class="truncate">แจ้งเตือน</span>
@@ -529,65 +637,406 @@
 
   <script>
     const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyeDCdxBD10D_AFZQY2NxeylLOiAmAHLesSDZHXYCb3TsYs4wYer_kRTPVOs3VpK2pP/exec';
+    const SCAM_DRAFT_KEY = 'tdt_blacklist_report_draft_v1';
+    const ITEMS_PER_PAGE = 8;
+
     let allReports = [];
     let filteredReports = [];
+    let currentPage = 1;
     let selectedImagesBase64 = [];
 
     function escapeHtml(str) {
-      return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      return String(str ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
     }
 
-    async function fetchDataFromCloud() {
+    function resolveEvidenceImageUrl(url) {
+      const cleaned = String(url || '').trim();
+      if (!cleaned) return '';
+      if (cleaned.startsWith('data:image')) return cleaned;
+      const m = cleaned.match(/(?:[?&]id=|\/file\/d\/|\/d\/)([a-zA-Z0-9_-]{25,})/);
+      return m && m[1] ? `https://drive.google.com/thumbnail?id=${m[1]}&sz=w1000` : cleaned;
+    }
+
+    function showToast(message, isError = false) {
+      const box = document.getElementById('toast');
+      const icon = document.getElementById('toastIcon');
+      const msg = document.getElementById('toastMessage');
+      if (!box || !msg) return;
+      msg.textContent = message;
+      if (icon) {
+        icon.className = isError
+          ? 'fa-solid fa-circle-exclamation text-rose-400 text-base shrink-0'
+          : 'fa-solid fa-circle-check text-emerald-400 text-base shrink-0';
+      }
+      box.classList.remove('translate-y-24', 'opacity-0');
+      setTimeout(() => {
+        box.classList.add('translate-y-24', 'opacity-0');
+      }, 3800);
+    }
+
+    function openLightbox(src) {
+      if (!src) return;
+      document.getElementById('lightboxImg').src = src;
+      document.getElementById('lightboxModal').classList.remove('hidden');
+    }
+
+    function updateDashboardStats(list) {
+      document.getElementById('statTotalCases').textContent = list.length.toLocaleString('th-TH');
+      const dmg = list.reduce((s, r) => s + (Number(r.amount) || 0), 0);
+      document.getElementById('statTotalDamage').textContent = '฿' + dmg.toLocaleString('th-TH');
+
+      const freq = {};
+      list.forEach(r => {
+        const t = String(r.scamType || '').trim();
+        if (t) freq[t] = (freq[t] || 0) + 1;
+      });
+      const topEntry = Object.entries(freq).sort((a, b) => b[1] - a[1])[0];
+      document.getElementById('statTopType').textContent = topEntry ? `${topEntry[0]} (${topEntry[1]})` : '-';
+    }
+
+    async function fetchDataFromCloud(notify = false) {
+      const spinIcon = document.getElementById('refreshSpinIcon');
+      const modeEl = document.getElementById('statStorageMode');
+      spinIcon?.classList.add('fa-spin');
       try {
         const res = await fetch(WEB_APP_URL + '?action=blacklist_reports&t=' + Date.now());
         const raw = await res.json();
-        allReports = Array.isArray(raw) ? raw : [];
-        document.getElementById('statTotalCases').textContent = allReports.length;
-        const dmg = allReports.reduce((s, r) => s + (Number(r.amount) || 0), 0);
-        document.getElementById('statTotalDamage').textContent = '฿' + dmg.toLocaleString('th-TH');
+        allReports = Array.isArray(raw) ? raw.slice().reverse() : [];
+        if (modeEl) modeEl.textContent = 'ออนไลน์ (Google Sheets)';
+        updateDashboardStats(allReports);
         onSearchOrFilterChange();
-      } catch (_) {}
+        if (notify) showToast('อัปเดตข้อมูลเตือนภัยล่าสุดเรียบร้อยแล้ว');
+      } catch (_) {
+        if (modeEl) modeEl.textContent = 'ออฟไลน์ / เชื่อมต่อขัดข้อง';
+        if (notify) showToast('ไม่สามารถเชื่อมต่อฐานข้อมูลได้ในขณะนี้', true);
+      } finally {
+        spinIcon?.classList.remove('fa-spin');
+      }
     }
 
     function onSearchOrFilterChange() {
       const q = (document.getElementById('searchInput')?.value || '').trim().toLowerCase();
       const t = document.getElementById('filterType')?.value || 'ALL';
+      const qDigits = q.replace(/\D/g, '');
+
       filteredReports = allReports.filter(item => {
         const okType = t === 'ALL' || item.scamType === t;
-        const hay = `${item.name || ''} ${item.phone || ''} ${item.bankAccount || ''} ${item.location || ''} ${item.details || ''}`.toLowerCase();
-        return okType && (!q || hay.includes(q));
+        const hay = `${item.id || ''} ${item.name || ''} ${item.phone || ''} ${item.bankAccount || ''} ${item.location || ''} ${item.details || ''} ${item.reporter || ''}`.toLowerCase();
+        const hayDigits = `${item.phone || ''} ${item.bankAccount || ''}`.replace(/\D/g, '');
+        const matchText = !q || hay.includes(q) || (qDigits.length >= 4 && hayDigits.includes(qDigits));
+        return okType && matchText;
       });
-      document.getElementById('feedContainer').innerHTML = filteredReports.map(item => `
-        <article class="bg-slate-50 rounded-2xl border border-slate-200 p-4 space-y-2">
-          <div class="flex items-center justify-between gap-2">
-            <span class="text-xs font-bold bg-rose-100 text-rose-800 px-2.5 py-0.5 rounded-full">${escapeHtml(item.scamType || 'เตือนภัย')}</span>
-            <span class="text-xs font-extrabold text-amber-700">${Number(item.amount) > 0 ? '฿' + Number(item.amount).toLocaleString('th-TH') : '-'}</span>
-          </div>
-          <h3 class="font-bold text-slate-900 text-sm">${escapeHtml(item.name || 'ไม่ระบุชื่อ')}</h3>
-          <p class="text-xs text-slate-600 font-mono">โทร: ${escapeHtml(item.phone || '-')} | บัญชี: ${escapeHtml(item.bankAccount || '-')}</p>
-          <p class="text-xs text-slate-700">${escapeHtml(item.details || '')}</p>
-        </article>
+
+      const riskBanner = document.getElementById('quickRiskBanner');
+      if (riskBanner) {
+        if (q.length >= 3) {
+          riskBanner.classList.remove('hidden');
+          if (filteredReports.length > 0) {
+            riskBanner.innerHTML = `
+              <div class="bg-rose-50 border-2 border-rose-300 rounded-2xl p-4 flex items-center gap-3 text-xs sm:text-sm text-rose-950">
+                <i class="fa-solid fa-triangle-exclamation text-rose-600 text-xl shrink-0"></i>
+                <div>
+                  <strong class="block text-rose-800">พบประวัติเฝ้าระวังภัยจำนวน ${filteredReports.length} รายการ ที่ตรงกับคำค้นหา “${escapeHtml(q)}”</strong>
+                  <span class="text-xs text-rose-700">กรุณาตรวจสอบรายละเอียดด้านล่างอย่างรอบคอบก่อนรับงานหรือทำธุรกรรม</span>
+                </div>
+              </div>
+            `;
+          } else {
+            riskBanner.innerHTML = `
+              <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-3.5 flex items-center gap-3 text-xs text-emerald-900">
+                <i class="fa-solid fa-circle-check text-emerald-600 text-lg shrink-0"></i>
+                <span>ยังไม่พบประวัติในฐานข้อมูล Blacklist สำหรับคำค้นหา <strong>“${escapeHtml(q)}”</strong> (โปรดใช้ความระมัดระวังตามปกติ)</span>
+              </div>
+            `;
+          }
+        } else {
+          riskBanner.classList.add('hidden');
+        }
+      }
+
+      currentPage = 1;
+      renderCurrentPage();
+    }
+
+    function renderCurrentPage() {
+      const feed = document.getElementById('feedContainer');
+      const empty = document.getElementById('emptyState');
+      const pagBar = document.getElementById('paginationBar');
+
+      if (filteredReports.length === 0) {
+        feed.innerHTML = '';
+        empty?.classList.remove('hidden');
+        pagBar?.classList.add('hidden');
+        return;
+      }
+
+      empty?.classList.add('hidden');
+      const totalPages = Math.ceil(filteredReports.length / ITEMS_PER_PAGE);
+      if (currentPage > totalPages) currentPage = totalPages;
+
+      const startIdx = (currentPage - 1) * ITEMS_PER_PAGE;
+      const pageItems = filteredReports.slice(startIdx, startIdx + ITEMS_PER_PAGE);
+
+      feed.innerHTML = pageItems.map(item => {
+        const imgs = String(item.imageUrl || '')
+          .split(/\r?\n|,/)
+          .map(s => resolveEvidenceImageUrl(s))
+          .filter(Boolean);
+
+        return `
+          <article class="bg-slate-50 rounded-2xl border border-slate-200 hover:border-rose-300 transition p-5 flex flex-col justify-between space-y-3">
+            <div class="space-y-2.5">
+              <div class="flex items-center justify-between gap-2 flex-wrap">
+                <div class="flex items-center gap-2">
+                  <span class="text-xs font-extrabold bg-rose-100 text-rose-800 border border-rose-200 px-3 py-0.5 rounded-full">${escapeHtml(item.scamType || 'เตือนภัย')}</span>
+                  ${item.id ? `<span class="text-[11px] font-mono text-slate-400">#${escapeHtml(item.id)}</span>` : ''}
+                </div>
+                <span class="text-xs sm:text-sm font-extrabold text-amber-700">
+                  ${Number(item.amount) > 0 ? 'เสียหาย ฿' + Number(item.amount).toLocaleString('th-TH') : 'ไม่ระบุยอด'}
+                </span>
+              </div>
+
+              <h3 class="font-extrabold text-slate-900 text-base">${escapeHtml(item.name || 'ไม่ระบุชื่อ')}</h3>
+
+              <div class="bg-white rounded-xl p-3 border border-slate-200 text-xs space-y-1 text-slate-700">
+                <p><i class="fa-solid fa-phone text-rose-500 w-4"></i> เบอร์โทร: <strong class="font-mono text-slate-900">${escapeHtml(item.phone || '-')}</strong></p>
+                <p><i class="fa-solid fa-building-columns text-amber-600 w-4"></i> บัญชีธนาคาร: <strong class="font-mono text-slate-900">${escapeHtml(item.bankAccount || '-')}</strong></p>
+                ${item.location ? `<p><i class="fa-solid fa-route text-sky-600 w-4"></i> เส้นทาง/สถานที่: <span>${escapeHtml(item.location)}</span></p>` : ''}
+              </div>
+
+              <p class="text-xs sm:text-sm text-slate-700 leading-relaxed whitespace-pre-line">${escapeHtml(item.details || '')}</p>
+
+              ${imgs.length > 0 ? `
+                <div class="flex gap-2 overflow-x-auto pt-1">
+                  ${imgs.map(src => `
+                    <img src="${escapeHtml(src)}" alt="หลักฐาน" onclick="openLightbox('${escapeHtml(src)}')"
+                      onerror="this.style.display='none'"
+                      class="w-16 h-16 rounded-xl object-cover border border-slate-300 cursor-zoom-in hover:opacity-90 shrink-0 bg-white">
+                  `).join('')}
+                </div>
+              ` : ''}
+            </div>
+
+            <div class="pt-2.5 border-t border-slate-200 flex items-center justify-between gap-2 text-[11px] text-slate-500">
+              <span class="truncate">แจ้งโดย: <strong class="text-slate-700">${escapeHtml(item.reporter || 'สมาชิกกลุ่ม')}</strong></span>
+              <button type="button" onclick="openDeleteModal('${escapeHtml(item.id || '')}', '${escapeHtml(item.name || '')}')"
+                class="text-amber-700 hover:text-amber-900 font-bold shrink-0">
+                <i class="fa-solid fa-flag mr-1"></i>แจ้งแก้ไข/ลบ
+              </button>
+            </div>
+          </article>
+        `;
+      }).join('');
+
+      if (pagBar) {
+        pagBar.classList.remove('hidden');
+        document.getElementById('showingStart').textContent = startIdx + 1;
+        document.getElementById('showingEnd').textContent = Math.min(startIdx + ITEMS_PER_PAGE, filteredReports.length);
+        document.getElementById('totalFilteredRecords').textContent = filteredReports.length;
+
+        const btnContainer = document.getElementById('pageButtonsContainer');
+        let html = '';
+        for (let p = 1; p <= totalPages; p++) {
+          if (totalPages > 7 && Math.abs(p - currentPage) > 2 && p !== 1 && p !== totalPages) continue;
+          const active = p === currentPage;
+          html += `<button type="button" onclick="goToPage(${p})" class="px-3 py-1.5 rounded-lg font-bold ${active ? 'bg-slate-950 text-amber-400' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'}">${p}</button>`;
+        }
+        btnContainer.innerHTML = html;
+      }
+    }
+
+    function goToPage(p) {
+      currentPage = p;
+      renderCurrentPage();
+      document.getElementById('searchInput')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function compressImage(file, maxW = 900, q = 0.78) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = e => {
+          const img = new Image();
+          img.onload = () => {
+            const canvas = document.createElement('canvas');
+            let w = img.width, h = img.height;
+            if (w > maxW) { h = Math.round((h * maxW) / w); w = maxW; }
+            canvas.width = w;
+            canvas.height = h;
+            canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+            resolve(canvas.toDataURL('image/jpeg', q));
+          };
+          img.onerror = reject;
+          img.src = e.target.result;
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    async function previewImages(event) {
+      const files = Array.from(event.target.files || []);
+      for (const f of files) {
+        if (selectedImagesBase64.length >= 10) break;
+        if (!f.type.startsWith('image/')) continue;
+        try {
+          const b64 = await compressImage(f);
+          selectedImagesBase64.push(b64);
+        } catch (_) {}
+      }
+      renderSelectedEvidenceGrid();
+    }
+
+    function removeSelectedImage(idx) {
+      selectedImagesBase64.splice(idx, 1);
+      renderSelectedEvidenceGrid();
+    }
+
+    function renderSelectedEvidenceGrid() {
+      const counter = document.getElementById('imageCounter');
+      const container = document.getElementById('imagePreviewContainer');
+      const grid = document.getElementById('imagePreviewGrid');
+      if (counter) counter.textContent = `แนบรูปแล้ว ${selectedImagesBase64.length} / 10 รูป`;
+      if (!container || !grid) return;
+
+      if (selectedImagesBase64.length === 0) {
+        container.classList.add('hidden');
+        grid.innerHTML = '';
+        return;
+      }
+      container.classList.remove('hidden');
+      grid.innerHTML = selectedImagesBase64.map((src, idx) => `
+        <div class="relative rounded-xl overflow-hidden border border-slate-300 bg-slate-100 aspect-square">
+          <img src="${src}" class="w-full h-full object-cover">
+          <button type="button" onclick="removeSelectedImage(${idx})" class="absolute top-1 right-1 w-6 h-6 rounded-full bg-rose-600 text-white text-xs flex items-center justify-center shadow">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
       `).join('');
+    }
+
+    function openDeleteModal(caseId, caseName) {
+      document.getElementById('deleteCaseId').value = caseId;
+      document.getElementById('deleteCaseName').value = caseName;
+      document.getElementById('deleteTargetLabel').textContent = `เคสอ้างอิง: ${caseId || '-'} (${caseName || 'ไม่ระบุชื่อ'})`;
+      document.getElementById('deleteRequestModal').classList.remove('hidden');
+    }
+
+    function closeDeleteModal() {
+      document.getElementById('deleteRequestModal').classList.add('hidden');
+    }
+
+    async function submitDeleteRequest(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btnSubmitDeleteReq');
+      btn.disabled = true;
+      btn.textContent = 'กำลังส่งคำร้อง...';
+      try {
+        await fetch(WEB_APP_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'blacklist_delete_requests',
+            requestId: 'DEL-' + Date.now().toString().slice(-6),
+            timestamp: new Date().toISOString(),
+            targetCaseId: document.getElementById('deleteCaseId').value,
+            targetName: document.getElementById('deleteCaseName').value,
+            reason: document.getElementById('deleteReason').value.trim(),
+            requesterName: document.getElementById('deleteRequesterName').value.trim(),
+            requesterContact: document.getElementById('deleteRequesterContact').value.trim()
+          })
+        });
+        e.target.reset();
+        closeDeleteModal();
+        showToast('ส่งคำร้องให้ทีมผู้ดูแลระบบพิจารณาเรียบร้อยแล้ว');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'ส่งคำร้องให้แอดมิน';
+      }
+    }
+
+    const SCAM_DRAFT_IDS = ['scammerName', 'contactPhone', 'bankAccount', 'scamType', 'damageAmount', 'incidentDate', 'incidentLocation', 'reporterName', 'description'];
+
+    function saveScamDraft() {
+      try {
+        const d = {};
+        SCAM_DRAFT_IDS.forEach(id => {
+          const el = document.getElementById(id);
+          if (el) d[id] = el.value;
+        });
+        localStorage.setItem(SCAM_DRAFT_KEY, JSON.stringify(d));
+        const st = document.getElementById('draftStatusText');
+        if (st) st.innerHTML = '<i class="fa-solid fa-floppy-disk text-emerald-600 mr-1"></i> บันทึกร่างอัตโนมัติแล้ว';
+      } catch (_) {}
+    }
+
+    function restoreScamDraft() {
+      try {
+        const raw = localStorage.getItem(SCAM_DRAFT_KEY);
+        if (!raw) return;
+        const d = JSON.parse(raw);
+        SCAM_DRAFT_IDS.forEach(id => {
+          const el = document.getElementById(id);
+          if (el && typeof d[id] === 'string' && d[id] !== '') el.value = d[id];
+        });
+      } catch (_) {}
+    }
+
+    function clearScamDraft() {
+      localStorage.removeItem(SCAM_DRAFT_KEY);
+      document.getElementById('scamForm')?.reset();
+      selectedImagesBase64 = [];
+      renderSelectedEvidenceGrid();
+      showToast('ล้างแบบร่างเรียบร้อยแล้ว');
     }
 
     document.getElementById('scamForm')?.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const payload = {
-        action: 'blacklist_reports',
-        id: 'CASE-' + Date.now().toString().slice(-6),
-        timestamp: new Date().toISOString(),
-        name: document.getElementById('scammerName').value.trim(),
-        phone: document.getElementById('contactPhone').value.trim(),
-        bankAccount: document.getElementById('bankAccount').value.trim(),
-        scamType: document.getElementById('scamType').value,
-        amount: Number(document.getElementById('damageAmount').value || 0),
-        location: document.getElementById('incidentLocation').value.trim(),
-        details: document.getElementById('description').value.trim(),
-        reporter: document.getElementById('reporterName').value.trim() || 'สมาชิกกลุ่ม'
-      };
-      await fetch(WEB_APP_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-      e.target.reset();
-      setTimeout(fetchDataFromCloud, 1200);
+      const btn = document.getElementById('submitBtn');
+      const btnText = document.getElementById('submitBtnText');
+      btn.disabled = true;
+      if (btnText) btnText.textContent = 'กำลังบันทึกข้อมูล...';
+
+      try {
+        const caseId = 'CASE-' + Date.now().toString().slice(-6);
+        const payload = {
+          action: 'blacklist_reports',
+          id: caseId,
+          timestamp: new Date().toISOString(),
+          name: document.getElementById('scammerName').value.trim(),
+          phone: document.getElementById('contactPhone').value.trim(),
+          bankAccount: document.getElementById('bankAccount').value.trim(),
+          scamType: document.getElementById('scamType').value,
+          amount: Number(document.getElementById('damageAmount').value || 0),
+          incidentDate: document.getElementById('incidentDate').value,
+          location: document.getElementById('incidentLocation').value.trim(),
+          details: document.getElementById('description').value.trim(),
+          reporter: document.getElementById('reporterName').value.trim() || 'สมาชิกกลุ่ม',
+          imagesBase64: selectedImagesBase64
+        };
+        await fetch(WEB_APP_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        localStorage.removeItem(SCAM_DRAFT_KEY);
+        e.target.reset();
+        selectedImagesBase64 = [];
+        renderSelectedEvidenceGrid();
+        showToast(`บันทึกข้อมูลเตือนภัยเรียบร้อยแล้ว (${caseId})`);
+        setTimeout(() => fetchDataFromCloud(false), 1500);
+      } catch (_) {
+        showToast('เกิดข้อผิดพลาดในการส่งข้อมูล กรุณาลองใหม่', true);
+      } finally {
+        btn.disabled = false;
+        if (btnText) btnText.textContent = 'ลงบันทึกเตือนภัยทันที';
+      }
     });
 
     (function initSharedNavAndAccessibility() {
@@ -629,7 +1078,15 @@
       } catch (_) {}
     })();
 
-    document.addEventListener('DOMContentLoaded', fetchDataFromCloud);
+    document.addEventListener('DOMContentLoaded', () => {
+      restoreScamDraft();
+      SCAM_DRAFT_IDS.forEach(id => {
+        const el = document.getElementById(id);
+        el?.addEventListener('input', saveScamDraft);
+        el?.addEventListener('change', saveScamDraft);
+      });
+      fetchDataFromCloud(false);
+    });
   </script>
 </body>
 </html>

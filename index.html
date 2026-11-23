@@ -231,8 +231,7 @@
 
     /* 3D Showcase Billboard Carousel */
     .billboard-3d-shell {
-      perspective: 1400px;
-      transform-style: preserve-3d;
+      position: relative;
     }
     .billboard-3d-stage {
       position: relative;
@@ -244,25 +243,15 @@
         linear-gradient(135deg, #060911 0%, #0f172a 55%, #19243b 100%);
       border: 1px solid rgba(251, 191, 36, 0.35);
       box-shadow:
-        0 28px 60px -15px rgba(2, 6, 23, 0.55),
-        0 10px 25px -8px rgba(245, 158, 11, 0.18),
+        0 24px 48px -16px rgba(2, 6, 23, 0.55),
         inset 0 1px 0 rgba(255, 255, 255, 0.12);
-      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s ease;
-    }
-    .billboard-3d-stage:hover {
-      transform: rotateX(1.2deg) rotateY(-1.2deg) translateY(-3px);
-      box-shadow:
-        0 34px 70px -15px rgba(2, 6, 23, 0.65),
-        0 14px 30px -8px rgba(245, 158, 11, 0.25),
-        inset 0 1px 0 rgba(255, 255, 255, 0.18);
     }
     .billboard-depth-card {
       background: linear-gradient(145deg, rgba(15, 23, 42, 0.92) 0%, rgba(30, 41, 59, 0.82) 100%);
       border: 1px solid rgba(251, 191, 36, 0.35);
       box-shadow:
-        0 20px 35px -10px rgba(0, 0, 0, 0.55),
+        0 14px 28px -12px rgba(0, 0, 0, 0.45),
         0 0 0 1px rgba(255, 255, 255, 0.05) inset;
-      transform: translateZ(18px);
     }
     .billboard-nav-btn {
       width: 40px;
@@ -1005,7 +994,7 @@
                   </div>
 
                   <div class="flex items-center gap-3.5">
-                    <div id="billboard-icon-box" class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-400/25 to-amber-600/20 border border-amber-300/40 text-amber-300 flex items-center justify-center text-2xl shadow-inner shrink-0 icon-float">
+                    <div id="billboard-icon-box" class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-400/25 to-amber-600/20 border border-amber-300/40 text-amber-300 flex items-center justify-center text-2xl shadow-inner shrink-0">
                       <i id="billboard-main-icon" class="fa-solid fa-id-badge"></i>
                     </div>
                     <div class="min-w-0 space-y-0.5">

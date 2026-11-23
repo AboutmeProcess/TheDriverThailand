@@ -146,44 +146,81 @@
             <span class="tdt-nav-divider" aria-hidden="true"></span>
 
             <a href="blacklist.html" class="tdt-nav-btn is-blacklist ${isBlacklist ? "active-home" : ""}">
-              <i class="fa-solid fa-user-shield"></i>
-              <span>ตรวจสอบ Blacklist</span>
-            </a>
+          <i class="fa-solid fa-user-shield"></i>
+          <span>ตรวจสอบ Blacklist</span>
+        </a>
 
-            <a href="admin.html" class="tdt-nav-btn is-admin-link">
-              <i class="fa-solid fa-user-shield"></i>
-              <span>ระบบหลังบ้าน (Admin)</span>
-            </a>
-          </div>
+        <a href="admin.html" class="tdt-nav-btn is-admin-link">
+          <i class="fa-solid fa-user-shield"></i>
+          <span>ระบบหลังบ้าน (Admin)</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+`;
+}
+
+/**
+ * สร้าง HTML ของส่วนท้ายหน้า (Global Footer) แบบเดียวกันทุกหน้า
+ */
+function buildGlobalFooterHTML() {
+  return `
+    <footer class="tdt-global-footer bg-slate-950 text-slate-400 border-t border-amber-500/25 py-9 px-4 text-xs mt-10 w-full">
+      <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div class="text-center sm:text-left space-y-1">
+          <p class="font-bold text-amber-300">🚖 The Driver TH 🇹🇭 Premium Service Official Network</p>
+          <p class="text-[11px] text-slate-500">ศูนย์กลางระบบสมาชิก บัตรสมาชิกประเมศฐ์ และระบบเฝ้าระวังภัยกลุ่มคนขับรถรับจ้าง</p>
         </div>
-      </nav>
-    `;
-  }
+        <div class="flex flex-wrap justify-center gap-x-4 gap-y-2 font-semibold">
+          <a href="index.html" class="hover:text-amber-400 transition">หน้าหลัก</a>
+          <a href="register.html" class="hover:text-emerald-400 transition">ระบบสมาชิก</a>
+          <a href="member_register.html" class="hover:text-teal-400 transition">ลงทะเบียนสมาชิกใหม่</a>
+          <a href="pcard.html" class="hover:text-amber-400 transition">ทำบัตรสมาชิกประเมศฐ์</a>
+          <a href="unblock_request.html" class="hover:text-sky-400 transition">ขอปลดล็อก OpenChat</a>
+          <a href="blacklist.html" class="hover:text-rose-400 transition">ตรวจสอบ Blacklist</a>
+          <a href="privacy_policy.html" class="hover:text-amber-300 transition">ประกาศความเป็นส่วนตัว</a>
+        </div>
+      </div>
+    </footer>
+  `;
+}
 
-  /**
-   * แทรกส่วนหัวลงในตำแหน่งที่กำหนด หรือแทรกไว้ต้น <body> อัตโนมัติ
-   */
-  function mountSharedHeader() {
-    try {
-      const placeholder = document.getElementById("shared-header-slot");
-      if (placeholder) {
-        placeholder.innerHTML = buildGlobalNavHTML();
-        return;
+/**
+ * แทรกส่วนหัวและส่วนท้ายลงในหน้าเว็บอัตโนมัติ
+ */
+function mountSharedHeader() {
+  try {
+    const placeholder = document.getElementById("shared-header-slot");
+    if (placeholder) {
+      placeholder.innerHTML = buildGlobalNavHTML();
+    } else if (!document.querySelector(".tdt-global-nav") && document.body) {
+      const wrapper = document.createElement("div");
+      wrapper.innerHTML = buildGlobalNavHTML().trim();
+      const navEl = wrapper.firstElementChild;
+      if (navEl) {
+        document.body.insertBefore(navEl, document.body.firstChild);
       }
-      if (!document.querySelector(".tdt-global-nav") && document.body) {
-        const wrapper = document.createElement("div");
-        wrapper.innerHTML = buildGlobalNavHTML().trim();
-        const navEl = wrapper.firstElementChild;
-        if (navEl) {
-          document.body.insertBefore(navEl, document.body.firstChild);
+    }
+
+    const footerSlot = document.getElementById("shared-footer-slot");
+    if (footerSlot) {
+      footerSlot.innerHTML = buildGlobalFooterHTML();
+    } else if (!document.querySelector("footer.tdt-global-footer") && document.body) {
+      const existingFooter = document.querySelector("footer");
+      if (!existingFooter) {
+        const fWrap = document.createElement("div");
+        fWrap.innerHTML = buildGlobalFooterHTML().trim();
+        if (fWrap.firstElementChild) {
+          document.body.appendChild(fWrap.firstElementChild);
         }
       }
-    } catch (err) {
-      console.error("Failed to mount shared header:", err);
     }
+  } catch (err) {
+    console.error("Failed to mount shared header:", err);
   }
+}
 
-  function applyFontScale(pct) {
+function applyFontScale(pct) {
     currentFontScale = Math.min(130, Math.max(90, Number(pct) || 100));
     document.documentElement.style.fontSize = `${(currentFontScale / 100) * 16}px`;
     const labelEl = document.getElementById("font-scale-label");

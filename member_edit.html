@@ -412,20 +412,169 @@
 
     <section class="bg-white rounded-3xl p-5 sm:p-8 shadow-sm border border-slate-200 space-y-5">
       <div id="edit-msg" class="hidden p-4 rounded-2xl text-xs sm:text-sm font-bold"></div>
-      <form id="member-edit-form" onsubmit="handleMemberEditSubmit(event)" class="space-y-4">
-        <div class="grid md:grid-cols-2 gap-4">
-          <input type="text" id="existing_member_code" required placeholder="หมายเลขสมาชิกเดิม (เช่น B999) *" class="bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-mono uppercase">
-          <input type="text" id="current_chat_name" required placeholder="ชื่อในห้อง Line OpenChat ปัจจุบัน *" class="bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
-          <input type="text" id="edit_first_name" required placeholder="ชื่อจริง *" class="bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
-          <input type="text" id="edit_last_name" required placeholder="นามสกุลจริง *" class="bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
-          <input type="tel" id="edit_phone" required placeholder="เบอร์ติดต่อ *" class="bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-mono">
-          <input type="text" id="edit_line_id" required placeholder="Line ID *" class="bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
-          <input type="text" id="edit_car_brand" required placeholder="ยี่ห้อรถ *" class="bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
-          <input type="text" id="edit_car_model" required placeholder="รุ่นรถ *" class="bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
+
+      <!-- กล่องแสดงผลการส่งคำร้องแก้ไขข้อมูลสำเร็จ -->
+      <div id="edit-success-box" class="hidden bg-emerald-950 text-emerald-100 border border-emerald-500/40 rounded-3xl p-5 sm:p-7 shadow-xl space-y-4">
+        <div class="flex items-start justify-between gap-3 border-b border-emerald-800/80 pb-4">
+          <div class="flex items-center gap-3">
+            <div class="w-11 h-11 rounded-2xl bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 flex items-center justify-center text-xl shrink-0">
+              <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <div>
+              <h3 class="font-extrabold text-base sm:text-lg text-white">บันทึกคำร้องแก้ไขข้อมูลสมาชิกเรียบร้อยแล้ว</h3>
+              <p class="text-xs text-emerald-300">เลขที่คำร้องอ้างอิง: <strong id="edit-ref-code" class="font-mono text-amber-300">-</strong></p>
+            </div>
+          </div>
+          <button type="button" onclick="document.getElementById('edit-success-box').classList.add('hidden')" class="text-emerald-300 hover:text-white text-sm">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
         </div>
-        <input type="text" id="edit_license_plate" required placeholder="หมายเลขทะเบียนรถ *" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
-        <textarea id="edit_address" rows="2" required placeholder="ที่อยู่ของคุณ *" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm"></textarea>
-        <button type="submit" id="btn-submit-member-edit" class="bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-extrabold px-7 py-3.5 rounded-xl text-xs sm:text-sm shadow">
+        <div id="edit-summary-details" class="grid sm:grid-cols-2 gap-2.5 text-xs bg-slate-950/60 p-4 rounded-2xl border border-emerald-800/60"></div>
+        <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
+          <p class="text-xs text-emerald-200/90">
+            <i class="fa-solid fa-clock mr-1 text-amber-400"></i> ทีมผู้ดูแลระบบจะตรวจสอบข้อมูลและอัปเดตฐานข้อมูลสมาชิกให้เรียบร้อย
+          </p>
+          <button type="button" onclick="copyEditRef()" class="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold px-4 py-2.5 rounded-xl text-xs inline-flex items-center gap-1.5 transition">
+            <i class="fa-solid fa-copy"></i> คัดลอกเลขที่คำร้อง
+          </button>
+        </div>
+      </div>
+
+      <div class="border-b border-slate-200 pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div>
+          <h2 class="text-lg sm:text-xl font-extrabold text-slate-900">แบบฟอร์มแจ้งแก้ไขข้อมูลสมาชิกเดิม</h2>
+          <p class="text-xs text-slate-500 mt-0.5">กรอกรหัสสมาชิกเดิมและข้อมูลที่ต้องการอัปเดตให้ครบถ้วน</p>
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span id="edit-draft-badge" class="text-xs font-semibold text-slate-600 bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200">
+            <i class="fa-solid fa-floppy-disk text-slate-400 mr-1"></i> พร้อมบันทึกร่าง
+          </span>
+          <button type="button" onclick="clearEditDraft()" class="text-xs font-bold text-rose-700 bg-rose-50 hover:bg-rose-100 border border-rose-200 px-3 py-1.5 rounded-xl transition">
+            <i class="fa-solid fa-eraser mr-1"></i> ล้างแบบร่าง
+          </button>
+        </div>
+      </div>
+
+      <form id="member-edit-form" onsubmit="handleMemberEditSubmit(event)" class="space-y-6">
+        <!-- หมวด 1: หัวข้อที่ต้องการแก้ไข -->
+        <div class="bg-amber-50/70 border border-amber-200 rounded-2xl p-4 sm:p-5 space-y-3">
+          <label class="block text-xs sm:text-sm font-extrabold text-slate-900">
+            1. เลือกหัวข้อที่ต้องการแก้ไข / อัปเดต <span class="text-rose-500">*</span>
+          </label>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-2.5 text-xs">
+            <label class="flex items-center gap-2.5 bg-white border border-slate-300 rounded-xl p-3 cursor-pointer hover:border-amber-500 transition">
+              <input type="checkbox" name="editTopics" value="เปลี่ยนรถยนต์ / เปลี่ยนทะเบียนรถ" class="w-4 h-4 text-amber-600 rounded focus:ring-amber-500">
+              <span class="font-semibold text-slate-800">เปลี่ยนรถ / เปลี่ยนทะเบียน</span>
+            </label>
+            <label class="flex items-center gap-2.5 bg-white border border-slate-300 rounded-xl p-3 cursor-pointer hover:border-amber-500 transition">
+              <input type="checkbox" name="editTopics" value="แก้ไขชื่อในห้อง OpenChat" class="w-4 h-4 text-amber-600 rounded focus:ring-amber-500">
+              <span class="font-semibold text-slate-800">แก้ไขชื่อในห้อง OpenChat</span>
+            </label>
+            <label class="flex items-center gap-2.5 bg-white border border-slate-300 rounded-xl p-3 cursor-pointer hover:border-amber-500 transition">
+              <input type="checkbox" name="editTopics" value="แก้ไขเบอร์โทรศัพท์ / Line ID" class="w-4 h-4 text-amber-600 rounded focus:ring-amber-500">
+              <span class="font-semibold text-slate-800">แก้ไขเบอร์โทร / Line ID</span>
+            </label>
+            <label class="flex items-center gap-2.5 bg-white border border-slate-300 rounded-xl p-3 cursor-pointer hover:border-amber-500 transition">
+              <input type="checkbox" name="editTopics" value="แก้ไขที่อยู่ปัจจุบัน" class="w-4 h-4 text-amber-600 rounded focus:ring-amber-500">
+              <span class="font-semibold text-slate-800">แก้ไขที่อยู่ปัจจุบัน</span>
+            </label>
+            <label class="flex items-center gap-2.5 bg-white border border-slate-300 rounded-xl p-3 cursor-pointer hover:border-amber-500 transition">
+              <input type="checkbox" name="editTopics" value="แก้ไขชื่อ-นามสกุลจริง" class="w-4 h-4 text-amber-600 rounded focus:ring-amber-500">
+              <span class="font-semibold text-slate-800">แก้ไขชื่อ-นามสกุลจริง</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- หมวด 2: รหัสสมาชิกและข้อมูลติดต่อ -->
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="space-y-1">
+            <label for="existing_member_code" class="block text-xs font-bold text-slate-700">หมายเลขสมาชิกเดิม <span class="text-rose-500">*</span></label>
+            <input type="text" id="existing_member_code" required placeholder="หมายเลขสมาชิกเดิม (เช่น B999) *" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-mono uppercase">
+          </div>
+          <div class="space-y-1">
+            <label for="current_chat_name" class="block text-xs font-bold text-slate-700">ชื่อในห้อง Line OpenChat (อัปเดตล่าสุด) <span class="text-rose-500">*</span></label>
+            <input type="text" id="current_chat_name" required placeholder="ชื่อในห้อง Line OpenChat ปัจจุบัน *" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
+          </div>
+          <div class="space-y-1">
+            <label for="edit_first_name" class="block text-xs font-bold text-slate-700">ชื่อจริง <span class="text-rose-500">*</span></label>
+            <input type="text" id="edit_first_name" required placeholder="ชื่อจริง *" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
+          </div>
+          <div class="space-y-1">
+            <label for="edit_last_name" class="block text-xs font-bold text-slate-700">นามสกุลจริง <span class="text-rose-500">*</span></label>
+            <input type="text" id="edit_last_name" required placeholder="นามสกุลจริง *" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
+          </div>
+          <div class="space-y-1">
+            <label for="edit_phone" class="block text-xs font-bold text-slate-700">เบอร์ติดต่อ <span class="text-rose-500">*</span></label>
+            <input type="tel" id="edit_phone" required placeholder="เบอร์ติดต่อ *" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-mono">
+          </div>
+          <div class="space-y-1">
+            <label for="edit_line_id" class="block text-xs font-bold text-slate-700">Line ID <span class="text-rose-500">*</span></label>
+            <input type="text" id="edit_line_id" required placeholder="Line ID *" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
+          </div>
+          <div class="space-y-1">
+            <label for="edit_car_brand" class="block text-xs font-bold text-slate-700">ยี่ห้อรถ <span class="text-rose-500">*</span></label>
+            <input type="text" id="edit_car_brand" required placeholder="ยี่ห้อรถ *" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
+          </div>
+          <div class="space-y-1">
+            <label for="edit_car_model" class="block text-xs font-bold text-slate-700">รุ่นรถ <span class="text-rose-500">*</span></label>
+            <input type="text" id="edit_car_model" required placeholder="รุ่นรถ *" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm">
+          </div>
+        </div>
+
+        <div class="space-y-1">
+          <label for="edit_license_plate" class="block text-xs font-bold text-slate-700">หมายเลขทะเบียนรถ <span class="text-rose-500">*</span></label>
+          <input type="text" id="edit_license_plate" required placeholder="หมายเลขทะเบียนรถ *" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold">
+        </div>
+
+        <div class="space-y-1">
+          <label for="edit_address" class="block text-xs font-bold text-slate-700">ที่อยู่ของคุณ <span class="text-rose-500">*</span></label>
+          <textarea id="edit_address" rows="2" required placeholder="ที่อยู่ของคุณ *" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm"></textarea>
+        </div>
+
+        <div class="space-y-1">
+          <label for="edit_note" class="block text-xs font-bold text-slate-700">รายละเอียดเพิ่มเติมในการแก้ไขข้อมูล (ถ้ามี)</label>
+          <textarea id="edit_note" rows="2" placeholder="ระบุรายละเอียดเพิ่มเติม เช่น เปลี่ยนจากรถคันเก่าทะเบียน... เป็นคันใหม่ทะเบียน..." class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm"></textarea>
+        </div>
+
+        <!-- หมวด 3: แนบรูปถ่ายรถยนต์คันใหม่ และรูปยืนยันตัวตน (ถ้ามี) -->
+        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 sm:p-5 grid md:grid-cols-2 gap-4">
+          <div class="bg-white border-2 border-dashed border-slate-300 rounded-2xl p-4 text-center space-y-2">
+            <p class="text-xs font-bold text-slate-800"><i class="fa-solid fa-car text-emerald-600 mr-1"></i> รูปถ่ายรถยนต์คันใหม่ / ป้ายทะเบียน (ถ้ามี)</p>
+            <label class="inline-flex items-center justify-center bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs px-4 py-2 rounded-xl cursor-pointer transition">
+              <i class="fa-solid fa-upload mr-1.5"></i> เลือกรูปถ่ายรถยนต์
+              <input type="file" id="edit_car_photo" accept="image/*" onchange="handleEditPhoto(this, 'car')" class="hidden">
+            </label>
+            <div id="preview-edit-car" class="hidden pt-1"></div>
+          </div>
+
+          <div class="bg-white border-2 border-dashed border-slate-300 rounded-2xl p-4 text-center space-y-2">
+            <p class="text-xs font-bold text-slate-800"><i class="fa-solid fa-id-card-clip text-amber-600 mr-1"></i> รูปถ่ายคู่กระดาษยืนยันตัวตน (ถ้ามี)</p>
+            <label class="inline-flex items-center justify-center bg-slate-950 hover:bg-slate-800 text-amber-400 font-semibold text-xs px-4 py-2 rounded-xl cursor-pointer transition">
+              <i class="fa-solid fa-upload mr-1.5"></i> เลือกรูปยืนยันตัวตน
+              <input type="file" id="edit_selfie_photo" accept="image/*" onchange="handleEditPhoto(this, 'selfie')" class="hidden">
+            </label>
+            <div id="preview-edit-selfie" class="hidden pt-1"></div>
+          </div>
+        </div>
+
+        <!-- ยืนยัน PDPA -->
+        <div class="bg-amber-50/70 border border-amber-200 rounded-2xl p-4 space-y-3">
+          <div class="flex flex-wrap items-center justify-between gap-2 text-xs">
+            <span id="edit-privacy-status" class="font-bold text-amber-900">
+              <i class="fa-solid fa-shield-halved text-amber-600 mr-1"></i> กรุณาเปิดอ่านประกาศความเป็นส่วนตัวก่อนติ๊กยอมรับ
+            </span>
+            <a href="privacy_policy.html" target="_blank" rel="noopener noreferrer" onclick="markEditPrivacyOpened()"
+              class="bg-slate-950 text-amber-400 font-bold px-3.5 py-2 rounded-xl text-xs inline-flex items-center gap-1.5">
+              <i class="fa-solid fa-book-open-reader"></i> เปิดอ่านประกาศความเป็นส่วนตัว
+            </a>
+          </div>
+          <label class="flex items-start gap-2.5 cursor-pointer text-xs text-slate-800">
+            <input type="checkbox" id="accept_edit_terms" required class="mt-0.5 w-4 h-4 text-amber-600 rounded border-slate-300 shrink-0">
+            <span><strong>ยอมรับและยืนยัน</strong> — ข้อมูลที่แจ้งแก้ไขเป็นความจริงและได้อ่านประกาศความเป็นส่วนตัวของกลุ่มแล้ว <span class="text-rose-500 font-bold">*</span></span>
+          </label>
+        </div>
+
+        <button type="submit" id="btn-submit-member-edit" class="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold px-7 py-3.5 rounded-xl text-xs sm:text-sm shadow transition">
           ส่งคำร้องแก้ไขข้อมูลสมาชิก
         </button>
       </form>
@@ -453,38 +602,169 @@
 
   <script>
     const SUBMIT_URL = 'https://script.google.com/macros/s/AKfycbyeDCdxBD10D_AFZQY2NxeylLOiAmAHLesSDZHXYCb3TsYs4wYer_kRTPVOs3VpK2pP/exec';
+    const EDIT_DRAFT_KEY = 'tdt_member_edit_draft_v1';
+    const PRIVACY_READ_KEY = 'tdt_privacy_policy_read_v1';
+    const EDIT_FIELD_IDS = [
+      'existing_member_code', 'current_chat_name', 'edit_first_name', 'edit_last_name',
+      'edit_phone', 'edit_line_id', 'edit_car_brand', 'edit_car_model',
+      'edit_license_plate', 'edit_address', 'edit_note'
+    ];
+    let editPhotos = { car: '', selfie: '' };
+    let lastEditRef = '';
+
+    function esc(v) {
+      return String(v ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function markEditPrivacyOpened() {
+      try { localStorage.setItem(PRIVACY_READ_KEY, 'true'); } catch (_) {}
+      const st = document.getElementById('edit-privacy-status');
+      if (st) st.innerHTML = '<i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i> เปิดอ่านประกาศความเป็นส่วนตัวแล้ว สามารถติ๊กยอมรับได้';
+    }
+
+    function compressImg(file, maxW = 900, q = 0.78) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = e => {
+          const img = new Image();
+          img.onload = () => {
+            const canvas = document.createElement('canvas');
+            let w = img.width, h = img.height;
+            if (w > maxW) { h = Math.round((h * maxW) / w); w = maxW; }
+            canvas.width = w; canvas.height = h;
+            canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+            resolve(canvas.toDataURL('image/jpeg', q));
+          };
+          img.onerror = reject;
+          img.src = e.target.result;
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    async function handleEditPhoto(inputEl, kind) {
+      const file = inputEl?.files?.[0];
+      if (!file || !file.type.startsWith('image/')) return;
+      const b64 = await compressImg(file);
+      editPhotos[kind] = b64;
+      const box = document.getElementById(kind === 'car' ? 'preview-edit-car' : 'preview-edit-selfie');
+      if (box) {
+        box.classList.remove('hidden');
+        box.innerHTML = `<div class="inline-flex items-center gap-2 bg-emerald-50 border border-emerald-200 px-2.5 py-1.5 rounded-xl text-xs font-semibold text-emerald-900"><img src="${b64}" class="w-9 h-9 rounded-lg object-cover"><span class="truncate max-w-[140px]">${esc(file.name)}</span></div>`;
+      }
+    }
+
+    function saveEditDraft() {
+      try {
+        const obj = {};
+        EDIT_FIELD_IDS.forEach(id => { const el = document.getElementById(id); if (el) obj[id] = el.value; });
+        obj.editTopics = Array.from(document.querySelectorAll('input[name="editTopics"]:checked')).map(c => c.value);
+        localStorage.setItem(EDIT_DRAFT_KEY, JSON.stringify(obj));
+        const b = document.getElementById('edit-draft-badge');
+        if (b) b.innerHTML = '<i class="fa-solid fa-floppy-disk text-emerald-600 mr-1"></i> บันทึกร่างอัตโนมัติแล้ว';
+      } catch (_) {}
+    }
+
+    function restoreEditDraft() {
+      try {
+        const raw = localStorage.getItem(EDIT_DRAFT_KEY);
+        if (!raw) return;
+        const obj = JSON.parse(raw);
+        EDIT_FIELD_IDS.forEach(id => { const el = document.getElementById(id); if (el && typeof obj[id] === 'string') el.value = obj[id]; });
+        if (Array.isArray(obj.editTopics)) {
+          document.querySelectorAll('input[name="editTopics"]').forEach(c => { c.checked = obj.editTopics.includes(c.value); });
+        }
+      } catch (_) {}
+    }
+
+    function clearEditDraft() {
+      try { localStorage.removeItem(EDIT_DRAFT_KEY); } catch (_) {}
+      document.getElementById('member-edit-form')?.reset();
+      editPhotos = { car: '', selfie: '' };
+      document.getElementById('preview-edit-car')?.classList.add('hidden');
+      document.getElementById('preview-edit-selfie')?.classList.add('hidden');
+    }
+
+    function copyEditRef() {
+      if (!lastEditRef) return;
+      const ta = document.createElement('textarea');
+      ta.value = lastEditRef;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+    }
+
     async function handleMemberEditSubmit(e) {
       e.preventDefault();
       const btn = document.getElementById('btn-submit-member-edit');
+      const msg = document.getElementById('edit-msg');
       btn.disabled = true;
       btn.textContent = 'กำลังส่งคำร้อง...';
       try {
         const refCode = 'EDT-' + Date.now().toString().slice(-6);
+        const topics = Array.from(document.querySelectorAll('input[name="editTopics"]:checked')).map(c => c.value).join(', ');
+        const payload = {
+          action: 'member_edit',
+          refCode,
+          editTopics: topics || 'อัปเดตข้อมูลสมาชิกทั่วไป',
+          memberCode: document.getElementById('existing_member_code').value.trim().toUpperCase(),
+          chatName: document.getElementById('current_chat_name').value.trim(),
+          firstName: document.getElementById('edit_first_name').value.trim(),
+          lastName: document.getElementById('edit_last_name').value.trim(),
+          phone: document.getElementById('edit_phone').value.trim(),
+          lineId: document.getElementById('edit_line_id').value.trim(),
+          carBrand: document.getElementById('edit_car_brand').value.trim(),
+          carModel: document.getElementById('edit_car_model').value.trim(),
+          licensePlate: document.getElementById('edit_license_plate').value.trim(),
+          address: document.getElementById('edit_address').value.trim(),
+          editNote: document.getElementById('edit_note').value.trim(),
+          carPhotoBase64: editPhotos.car,
+          selfiePhotoBase64: editPhotos.selfie
+        };
+
         await fetch(SUBMIT_URL, {
           method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            action: 'member_edit', refCode,
-            memberCode: document.getElementById('existing_member_code').value.trim().toUpperCase(),
-            chatName: document.getElementById('current_chat_name').value.trim(),
-            firstName: document.getElementById('edit_first_name').value.trim(),
-            lastName: document.getElementById('edit_last_name').value.trim(),
-            phone: document.getElementById('edit_phone').value.trim(),
-            lineId: document.getElementById('edit_line_id').value.trim(),
-            carBrand: document.getElementById('edit_car_brand').value.trim(),
-            carModel: document.getElementById('edit_car_model').value.trim(),
-            licensePlate: document.getElementById('edit_license_plate').value.trim(),
-            address: document.getElementById('edit_address').value.trim()
-          })
+          body: JSON.stringify(payload)
         });
-        const msg = document.getElementById('edit-msg');
+
+        lastEditRef = refCode;
+        try { localStorage.removeItem(EDIT_DRAFT_KEY); } catch (_) {}
         msg.className = 'p-4 rounded-2xl text-xs sm:text-sm font-bold bg-emerald-50 text-emerald-900 border border-emerald-300';
         msg.textContent = `ส่งคำร้องแก้ไขข้อมูลสำเร็จ เลขที่อ้างอิง: ${refCode}`;
+
+        const box = document.getElementById('edit-success-box');
+        document.getElementById('edit-ref-code').textContent = refCode;
+        document.getElementById('edit-summary-details').innerHTML = `
+          <div><span class="text-emerald-400">รหัสสมาชิก:</span> <strong class="font-mono text-amber-300">${esc(payload.memberCode)}</strong></div>
+          <div><span class="text-emerald-400">ชื่อในห้อง OpenChat:</span> <strong>${esc(payload.chatName)}</strong></div>
+          <div><span class="text-emerald-400">รถยนต์ / ทะเบียน:</span> <strong>${esc(payload.carBrand)} ${esc(payload.carModel)} (${esc(payload.licensePlate)})</strong></div>
+          <div><span class="text-emerald-400">เบอร์โทร / Line:</span> <strong>${esc(payload.phone)}</strong> (${esc(payload.lineId)})</div>
+        `;
+        box?.classList.remove('hidden');
         e.target.reset();
+        editPhotos = { car: '', selfie: '' };
+        document.getElementById('preview-edit-car')?.classList.add('hidden');
+        document.getElementById('preview-edit-selfie')?.classList.add('hidden');
       } finally {
         btn.disabled = false;
         btn.textContent = 'ส่งคำร้องแก้ไขข้อมูลสมาชิก';
       }
     }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      restoreEditDraft();
+      EDIT_FIELD_IDS.forEach(id => {
+        const el = document.getElementById(id);
+        el?.addEventListener('input', saveEditDraft);
+        el?.addEventListener('change', saveEditDraft);
+      });
+      document.querySelectorAll('input[name="editTopics"]').forEach(c => c.addEventListener('change', saveEditDraft));
+      try {
+        if (localStorage.getItem(PRIVACY_READ_KEY) === 'true') markEditPrivacyOpened();
+      } catch (_) {}
+    });
 
     (function initSharedNavAndAccessibility() {
       const SCALE_KEY = "tdt_font_scale_pct";

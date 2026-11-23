@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <script>
         tailwind.config = {
             theme: {
@@ -27,41 +27,67 @@
                     }
                 }
             }
-        }
+        };
     </script>
     <style>
-    html {
-      scroll-behavior: smooth;
-      font-size: 16px;
-      transition: font-size 0.18s ease;
-    }
-    html, body, input, select, textarea, button, code, pre, .font-mono, .font-sans {
-      font-family: 'Prompt', sans-serif !important;
-    }
-    html, body {
-      background-color: #f8fafc;
-      color: #0f172a;
-      max-width: 100%;
-      overflow-x: clip;
-    }
-    .gold-shimmer-text {
-      background: linear-gradient(90deg, #fde68a 0%, #fbbf24 35%, #f59e0b 65%, #fef08a 100%);
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: goldShimmer 5s linear infinite;
-    }
-    @keyframes goldShimmer {
-      to { background-position: 200% center; }
-    }
-    .hero-glow-bg {
-      background:
-        radial-gradient(circle at 18% 22%, rgba(245, 158, 11, 0.24) 0%, transparent 45%),
-        radial-gradient(circle at 82% 78%, rgba(244, 63, 94, 0.14) 0%, transparent 50%),
-        linear-gradient(135deg, #070a12 0%, #0f172a 52%, #172033 100%);
-    }
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+            transition: font-size 0.18s ease;
+        }
+        html, body, input, select, textarea, button, code, pre, .font-mono, .font-sans {
+            font-family: 'Prompt', sans-serif !important;
+        }
+        html, body {
+            background-color: #f8fafc;
+            color: #0f172a;
+            max-width: 100%;
+            overflow-x: clip;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .line-clamp-3 {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .gold-shimmer-text {
+            background: linear-gradient(90deg, #fde68a 0%, #fbbf24 35%, #f59e0b 65%, #fef08a 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: goldShimmer 5s linear infinite;
+        }
+        @keyframes goldShimmer {
+            to { background-position: 200% center; }
+        }
+        .hero-glow-bg {
+            background:
+                radial-gradient(circle at 18% 22%, rgba(245, 158, 11, 0.24) 0%, transparent 45%),
+                radial-gradient(circle at 82% 78%, rgba(244, 63, 94, 0.14) 0%, transparent 50%),
+                linear-gradient(135deg, #070a12 0%, #0f172a 52%, #172033 100%);
+        }
 
-    /* UNIFIED GLOBAL NAVIGATION BAR (MATCHING INDEX.HTML) */
+        /* UNIFIED GLOBAL NAVIGATION BAR (MATCHING INDEX.HTML) */
         .tdt-global-nav {
             box-sizing: border-box;
             font-family: 'Prompt', sans-serif;
@@ -76,7 +102,9 @@
             box-shadow: 0 10px 28px -8px rgba(2, 6, 23, 0.65);
             width: 100%;
         }
-        .tdt-global-nav *, .tdt-global-nav *::before, .tdt-global-nav *::after { box-sizing: border-box; }
+        .tdt-global-nav *, .tdt-global-nav *::before, .tdt-global-nav *::after {
+            box-sizing: border-box;
+        }
         .tdt-global-nav-inner {
             max-width: 1280px;
             margin: 0 auto;
@@ -88,7 +116,10 @@
             gap: 10px;
         }
         @media (min-width: 640px) {
-            .tdt-global-nav-inner { padding: 14px 24px; gap: 12px; }
+            .tdt-global-nav-inner {
+                padding: 14px 24px;
+                gap: 12px;
+            }
         }
         .tdt-nav-top-row {
             width: 100%;
@@ -158,12 +189,24 @@
             flex-shrink: 0;
             transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
         }
-        .tdt-global-brand:hover .tdt-brand-logo-img { transform: scale(1.05); border-color: #fde68a; }
-        @media (min-width: 640px) {
-            .tdt-global-brand { gap: 14px; font-size: 19px; }
-            .tdt-brand-logo-img { width: 56px; height: 56px; border-radius: 16px; }
+        .tdt-global-brand:hover .tdt-brand-logo-img {
+            transform: scale(1.05);
+            border-color: #fde68a;
         }
-        .tdt-global-brand:hover { color: #fde68a; }
+        @media (min-width: 640px) {
+            .tdt-global-brand {
+                gap: 14px;
+                font-size: 19px;
+            }
+            .tdt-brand-logo-img {
+                width: 56px;
+                height: 56px;
+                border-radius: 16px;
+            }
+        }
+        .tdt-global-brand:hover {
+            color: #fde68a;
+        }
         .tdt-global-right-controls {
             display: flex;
             flex-wrap: wrap;
@@ -180,9 +223,14 @@
             display: none;
         }
         @media (min-width: 1024px) {
-            .tdt-nav-divider { display: inline-block; }
+            .tdt-nav-divider {
+                display: inline-block;
+            }
         }
-        .tdt-cat-dropdown-wrap { position: relative; display: inline-block; }
+        .tdt-cat-dropdown-wrap {
+            position: relative;
+            display: inline-block;
+        }
         .tdt-cat-menu-panel {
             display: none;
             position: absolute;
@@ -198,7 +246,9 @@
             z-index: 1060;
             text-align: left;
         }
-        .tdt-cat-menu-panel.is-open { display: block; }
+        .tdt-cat-menu-panel.is-open {
+            display: block;
+        }
         .tdt-cat-menu-header {
             padding: 8px 12px;
             margin-bottom: 6px;
@@ -222,8 +272,14 @@
             margin-bottom: 6px;
             transition: all 0.18s ease;
         }
-        .tdt-cat-menu-link:last-child { margin-bottom: 0; }
-        .tdt-cat-menu-link:hover { background-color: #162038; border-color: rgba(251, 191, 36, 0.5); transform: translateX(2px); }
+        .tdt-cat-menu-link:last-child {
+            margin-bottom: 0;
+        }
+        .tdt-cat-menu-link:hover {
+            background-color: #162038;
+            border-color: rgba(251, 191, 36, 0.5);
+            transform: translateX(2px);
+        }
         .tdt-cat-menu-icon {
             width: 28px;
             height: 28px;
@@ -234,111 +290,141 @@
             flex-shrink: 0;
             font-size: 12px;
         }
-        .tdt-cat-menu-title { display: block; font-size: 12px; font-weight: 500; line-height: 1.3; }
-        .tdt-cat-menu-sub { display: block; font-size: 10px; font-weight: 400; color: #94a3b8; line-height: 1.25; }
+        .tdt-cat-menu-title {
+            display: block;
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 1.3;
+        }
+        .tdt-cat-menu-sub {
+            display: block;
+            font-size: 10px;
+            font-weight: 400;
+            color: #94a3b8;
+            line-height: 1.25;
+        }
         .tdt-nav-btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-  <main class="flex-grow max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-6 sm:space-y-8">
-    <!-- Hero Banner & Stats -->
-    <section class="hero-glow-bg text-white rounded-3xl p-6 sm:p-10 border border-amber-400/35 shadow-2xl space-y-5 relative overflow-hidden">
-      <div class="absolute -right-16 -top-16 w-72 h-72 bg-amber-500/15 rounded-full blur-3xl pointer-events-none"></div>
-      <div class="relative z-10 flex flex-wrap items-center justify-between gap-2">
-        <span class="inline-flex items-center gap-2 bg-amber-500/20 border border-amber-400/45 text-amber-300 text-xs font-bold px-3.5 py-1 rounded-full">
-          <i class="fa-solid fa-shield-halved"></i> DRIVER SAFETY &amp; BLACKLIST GUARD
-        </span>
-        <a href="#report-scam-section" class="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold text-xs px-4 py-2 rounded-xl shadow transition">
-          <i class="fa-solid fa-triangle-exclamation mr-1"></i> แจ้งเบาะแสคนโกง
-        </a>
-      </div>
-      <h1 class="relative z-10 text-2xl sm:text-4xl font-black leading-tight">ศูนย์เฝ้าระวังภัย <span class="gold-shimmer-text">Blacklist</span> เครือข่ายคนขับรถ</h1>
-      <p class="relative z-10 text-slate-300 text-xs sm:text-sm max-w-3xl leading-relaxed font-light">
-        ตรวจสอบประวัติเบอร์โทรศัพท์ เลขบัญชีธนาคาร ชื่อผู้ว่าจ้าง หรือเส้นทางก่อนรับงานเดินทางไกล เพื่อลดความเสี่ยงจากการถูกเบี้ยวค่าโดยสาร สลิปปลอม หรือการเทงาน
-      </p>
-      <div class="relative z-10 grid grid-cols-2 sm:grid-cols-4 gap-3 pt-1 text-xs">
-        <div class="bg-slate-950/75 border border-amber-400/25 rounded-2xl p-3.5">
-          <span class="text-slate-400 block">จำนวนเคสเตือนภัยทั้งหมด</span>
-          <strong id="statTotalCases" class="text-lg sm:text-xl font-extrabold text-amber-400">0</strong>
-        </div>
-        <div class="bg-slate-950/75 border border-rose-400/25 rounded-2xl p-3.5">
-          <span class="text-slate-400 block">ยอดความเสียหายสะสม</span>
-          <strong id="statTotalDamage" class="text-lg sm:text-xl font-extrabold text-rose-400">฿0</strong>
-        </div>
-        <div class="bg-slate-950/75 border border-amber-400/25 rounded-2xl p-3.5">
-          <span class="text-slate-400 block">พฤติการณ์ที่พบบ่อย</span>
-          <strong id="statTopType" class="text-sm sm:text-base font-bold text-amber-200 truncate block">-</strong>
-        </div>
-        <div class="bg-slate-950/75 border border-emerald-400/25 rounded-2xl p-3.5">
-          <span class="text-slate-400 block">สถานะฐานข้อมูลกลาง</span>
-          <strong id="statStorageMode" class="text-sm sm:text-base font-bold text-emerald-400">กำลังเชื่อมต่อ...</strong>
-        </div>
-      </div>
-    </section>
+            gap: 6px;
+            height: 36px;
+            min-height: 36px;
+            padding: 0 13px;
+            border-radius: 11px;
+            font-size: 12px;
+            line-height: 16px;
+            font-weight: 400;
+            text-decoration: none;
+            white-space: nowrap;
+            background-color: rgba(15, 23, 42, 0.88);
+            border: 1px solid rgba(148, 163, 184, 0.22);
+            color: #e2e8f0;
+            cursor: pointer;
+            transition: all 0.18s ease;
+        }
+        .tdt-nav-btn:hover {
+            background-color: #1e293b;
+            border-color: rgba(251, 191, 36, 0.48);
+            transform: translateY(-1px);
+        }
+        .tdt-nav-btn.is-member-cat {
+            color: #6ee7b7;
+            border-color: rgba(52, 211, 153, 0.35);
+            background-color: rgba(6, 78, 59, 0.24);
+        }
+        .tdt-nav-btn.is-member-cat i { color: #34d399; }
+        .tdt-nav-btn.is-quick-register,
+        .tdt-nav-btn.is-quick-check-code {
+            color: #5eead4;
+            border-color: rgba(45, 212, 191, 0.38);
+            background-color: rgba(19, 78, 74, 0.28);
+        }
+        .tdt-nav-btn.is-quick-register i,
+        .tdt-nav-btn.is-quick-check-code i { color: #2dd4bf; }
+        .tdt-nav-btn.is-group-cat {
+            color: #fcd34d;
+            border-color: rgba(251, 191, 36, 0.38);
+            background-color: rgba(120, 53, 15, 0.24);
+        }
+        .tdt-nav-btn.is-group-cat i { color: #fbbf24; }
+        .tdt-nav-btn.is-blacklist {
+            color: #fda4af;
+            border-color: rgba(251, 113, 133, 0.35);
+        }
+        .tdt-nav-btn.is-blacklist i { color: #fb7185; }
+        .tdt-nav-btn.is-admin-link {
+            color: #fde68a;
+            border-color: rgba(251, 191, 36, 0.45);
+            background-color: rgba(245, 158, 11, 0.14);
+        }
+        .tdt-nav-btn.is-admin-link i { color: #fbbf24; }
+        .tdt-nav-btn.active-current {
+            background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+            border-color: #fcd34d;
+            color: #060911;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.32);
+        }
+        .tdt-nav-btn.active-current i { color: #060911; }
+        .tdt-util-group {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background-color: rgba(15, 23, 42, 0.92);
+            border: 1px solid rgba(251, 191, 36, 0.28);
+            border-radius: 12px;
+            padding: 3px;
+            margin-left: auto;
+            flex-shrink: 0;
+        }
+        .tdt-util-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            height: 30px;
+            padding: 0 9px;
+            border-radius: 9px;
+            font-size: 12px;
+            font-weight: 400;
+            color: #e2e8f0;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: background-color 0.15s ease, color 0.15s ease;
+        }
+        .tdt-util-btn:hover {
+            background-color: rgba(251, 191, 36, 0.18);
+            color: #fde68a;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between bg-slate-50 text-slate-900 selection:bg-rose-500 selection:text-white">
 
-    <!-- Search & Feed Section -->
-    <section class="bg-white rounded-3xl p-5 sm:p-8 border border-slate-200/90 shadow-sm space-y-5">
-      <div class="flex flex-col sm:flex-row gap-3">
-        <div class="relative flex-1">
-          <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
-          <input type="text" id="searchInput" oninput="onSearchOrFilterChange()" placeholder="พิมพ์ชื่อผู้ก่อเหตุ, เบอร์โทรศัพท์, เลขบัญชีธนาคาร หรือเส้นทางเพื่อตรวจสอบ..."
-            class="w-full bg-slate-50 border border-slate-300 rounded-xl pl-10 pr-4 py-3 text-xs sm:text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
-        </div>
-        <select id="filterType" onchange="onSearchOrFilterChange()" class="bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-semibold focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500 transition">
-          <option value="ALL">ทุกประเภทพฤติการณ์</option>
-          <option value="สลิปปลอม">สลิปปลอม</option>
-          <option value="ไม่จ่ายค่าโดยสาร">ไม่จ่ายค่าโดยสาร</option>
-          <option value="เบี้ยวงาน / เทงาน">เบี้ยวงาน / เทงาน</option>
-          <option value="โกงเงินมัดจำ">โกงเงินมัดจำ</option>
-          <option value="อื่นๆ">อื่นๆ</option>
-        </select>
-        <button type="button" onclick="fetchDataFromCloud(true)" class="bg-slate-950 hover:bg-slate-800 text-amber-400 border border-amber-400/35 font-bold px-5 py-3 rounded-xl text-xs sm:text-sm shrink-0 transition shadow">
-          <i id="refreshSpinIcon" class="fa-solid fa-rotate mr-1"></i> อัปเดตข้อมูล
-        </button>
-      </div>
-
-      <!-- แถบประเมินความเสี่ยงด่วนเมื่อพิมพ์ค้นหา -->
-      <div id="quickRiskBanner" class="hidden"></div>
-
-      <!-- รายการเคสเตือนภัย -->
-      <div id="feedContainer" class="grid md:grid-cols-2 gap-4"></div>
-
-      <!-- กรณีไม่พบข้อมูล -->
-      <div id="emptyState" class="hidden text-center py-10 bg-slate-50 rounded-2xl border border-slate-200 space-y-1">
-        <i class="fa-solid fa-shield-check text-3xl text-emerald-500"></i>
-        <p class="font-bold text-slate-800 text-sm">ไม่พบประวัติเตือนภัยที่ตรงกับคำค้นหา</p>
-        <p class="text-xs text-slate-500">หากพบพฤติการณ์ทุจริต สามารถบันทึกข้อมูลแจ้งเตือนภัยได้ที่แบบฟอร์มด้านล่าง</p>
-      </div>
-
-      <!-- แถบเปลี่ยนหน้า Pagination -->
-      <div id="paginationBar" class="hidden flex flex-col sm:flex-row items-center justify-between gap-3 pt-3 border-t border-slate-200 text-xs text-slate-600">
-        <span>แสดงรายการที่ <strong id="showingStart">0</strong> - <strong id="showingEnd">0</strong> จากทั้งหมด <strong id="totalFilteredRecords">0</strong> เคส</span>
-        <div id="pageButtonsContainer" class="flex items-center gap-1.5 flex-wrap"></div>
-      </div>
-    </section>
-
-    <!-- Report Scam Form Section -->
-    <section id="report-scam-section" class="bg-white rounded-3xl p-5 sm:p-8 border border-slate-200/90 shadow-sm space-y-5">
-      <div class="flex items-center justify-between flex-wrap gap-2 border-b border-slate-200 pb-4">
-        <div>
-          <h2 class="text-lg sm:text-xl font-extrabold text-slate-900 border-l-4 border-amber-500 pl-3">
-            แจ้งเบาะแสเตือนภัยคนโกง / ผู้ไม่ชำระค่าบริการ
-          </h2>
-          <p class="text-xs text-slate-500 mt-1 pl-4">กรอกข้อมูลตามข้อเท็จจริงพร้อมแนบภาพหลักฐานเพื่อเตือนภัยเพื่อนสมาชิก</p>
-        </div>
-        <div class="flex items-center gap-2">
-          <span id="draftStatusText" class="text-xs font-semibold text-slate-600 bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200">
-            <i class="fa-solid fa-floppy-disk text-slate-400 mr-1"></i> พร้อมบันทึกร่างอัตโนมัติ
-          </span>
-          <button type="button" onclick="clearScamDraft()" class="text-xs font-bold text-rose-700 bg-rose-50 hover:bg-rose-100 border border-rose-200 px-3 py-1.5 rounded-xl transition">
-            ล้างร่าง
-          </button>
-        </div>
-      </div>
-          <button type="submit" id="submitBtn" class="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold text-xs sm:text-sm px-6 py-3 rounded-xl shadow-md transition">
-            <i id="submitBtnIcon" class="fa-solid fa-paper-plane mr-1"></i> <span id="submitBtnText">ลงบันทึกเตือนภัยทันที</span>
-          </button>
-        </div>
+    <!-- UNIFIED GLOBAL SITE NAVIGATION BAR -->
+    <nav class="tdt-global-nav" aria-label="แถบนำทางหลักของเว็บไซต์">
+        <div class="tdt-global-nav-inner">
+            <div class="tdt-nav-top-row">
+                <a href="index.html" class="tdt-global-brand">
+                    <img src="TheDriverTH.jpg" alt="โลโก้ The Driver Thailand"
+                        onerror="this.onerror=null;this.src='https://placehold.co/80x80/0f172a/fbbf24?text=TDT';"
+                        class="tdt-brand-logo-img">
+                    <span class="tdt-brand-text-stack">
+                        <span>🚖 The Driver TH 🇹🇭 Premium Service</span>
+                        <span class="tdt-brand-subline-row">
+                            <span class="tdt-brand-exec-pill"><i class="fa-solid fa-crown" style="font-size:9px;"></i> EXECUTIVE NETWORK</span>
+                            <span>เครือข่ายคนขับรถรับส่งผู้โดยสารและบริการมืออาชีพแห่งประเทศไทย</span>
+                        </span>
+                    </span>
+                </a>
+                <div class="tdt-util-group" title="ปรับขนาดตัวอักษร">
+                    <button type="button" onclick="tdtChangeFontScale(-1)" aria-label="ลดขนาดตัวอักษร" class="tdt-util-btn">A-</button>
+                    <span id="tdt-font-pct" style="font-size:11px;font-weight:400;color:#fde68a;padding:0 4px;">100%</span>
+                    <button type="button" onclick="tdtChangeFontScale(1)" aria-label="เพิ่มขนาดตัวอักษร" class="tdt-util-btn">A+</button>
+                </div>
+            </div>
 
             <div class="tdt-global-right-controls" aria-label="เมนูหลักของหน้าเว็บ">
                 <a href="index.html" class="tdt-nav-btn"><i class="fa-solid fa-house"></i><span>หน้าหลัก</span></a>
@@ -349,7 +435,7 @@
 
                 <div class="tdt-cat-dropdown-wrap" id="nav-drop-member">
                     <button type="button" onclick="tdtToggleDropdown('member', event)" id="nav-btn-member" aria-expanded="false" class="tdt-nav-btn is-member-cat">
-                        <i class="fa-solid fa-users"></i><span>หมวดหมู่บริการสมาชิก</span><i id="nav-chev-member" class="fa-solid fa-chevron-down text-[10px]" style="transition:transform 0.2s;"></i>
+                        <i class="fa-solid fa-users"></i><span>หมวดหมู่บริการสมาชิก</span><i id="nav-chev-member" class="fa-solid fa-chevron-down" style="font-size:10px;transition:transform 0.2s;"></i>
                     </button>
                     <div id="nav-panel-member" class="tdt-cat-menu-panel">
                         <div class="tdt-cat-menu-header" style="background:rgba(6,78,59,0.55);color:#6ee7b7;border:1px solid rgba(16,185,129,0.25);">
@@ -372,7 +458,7 @@
 
                 <div class="tdt-cat-dropdown-wrap" id="nav-drop-group">
                     <button type="button" onclick="tdtToggleDropdown('group', event)" id="nav-btn-group" aria-expanded="false" class="tdt-nav-btn is-group-cat">
-                        <i class="fa-solid fa-briefcase"></i><span>หมวดหมู่บริการของกลุ่ม</span><i id="nav-chev-group" class="fa-solid fa-chevron-down text-[10px]" style="transition:transform 0.2s;"></i>
+                        <i class="fa-solid fa-briefcase"></i><span>หมวดหมู่บริการของกลุ่ม</span><i id="nav-chev-group" class="fa-solid fa-chevron-down" style="font-size:10px;transition:transform 0.2s;"></i>
                     </button>
                     <div id="nav-panel-group" class="tdt-cat-menu-panel">
                         <div class="tdt-cat-menu-header" style="background:rgba(120,53,15,0.45);color:#fcd34d;border:1px solid rgba(251,191,36,0.25);">
@@ -437,16 +523,15 @@
     <header class="bg-white border-b border-slate-200 shadow-sm">
         <div class="max-w-6xl mx-auto px-4 sm:px-6">
             <div class="flex items-center justify-between h-16 sm:h-20 gap-2">
-                <!-- Brand Title Box -->
                 <div class="flex items-center gap-2 sm:gap-3 min-w-0">
                     <div class="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-rose-600 to-amber-500 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-sm shadow-rose-200 text-white text-lg sm:text-2xl font-black shrink-0">
                         <i class="fa-solid fa-shield-cat"></i>
                     </div>
                     <div class="min-w-0">
                         <div class="flex flex-wrap items-center gap-1 sm:gap-2">
-                            <h1 class="text-sm sm:text-lg md:text-xl font-bold tracking-tight text-slate-900 truncate">
+                            <h2 class="text-sm sm:text-lg md:text-xl font-bold tracking-tight text-slate-900 truncate">
                                 ศูนย์เฝ้าระวังภัยคนโกง
-                            </h1>
+                            </h2>
                             <span class="text-[9px] sm:text-[10px] font-semibold bg-rose-100 text-rose-700 border border-rose-200 px-1.5 sm:px-2.5 py-0.5 rounded-full uppercase tracking-wider shrink-0 whitespace-nowrap">
                                 กลุ่มรถรับจ้าง
                             </span>
@@ -457,7 +542,6 @@
                     </div>
                 </div>
 
-                <!-- Status Badge & Action Button -->
                 <div class="flex items-center gap-2 shrink-0">
                     <div id="connectionBadge" class="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">
                         <span id="connectionDot" class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
@@ -473,88 +557,79 @@
         </div>
     </header>
 
-    <!-- BANNER & LIVE STATS OVERVIEW -->
-    <section class="bg-white border-b border-slate-200 py-4 sm:py-6">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="flex-grow max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-6 sm:space-y-8">
+        <!-- Hero Banner & Live Stats -->
+        <section class="hero-glow-bg text-white rounded-3xl p-6 sm:p-10 border border-amber-400/35 shadow-2xl space-y-5 relative overflow-hidden">
+            <div class="absolute -right-16 -top-16 w-72 h-72 bg-amber-500/15 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="relative z-10 flex flex-wrap items-center justify-between gap-2">
+                <span class="inline-flex items-center gap-2 bg-amber-500/20 border border-amber-400/45 text-amber-300 text-xs font-bold px-3.5 py-1 rounded-full">
+                    <i class="fa-solid fa-shield-halved"></i> DRIVER SAFETY &amp; BLACKLIST GUARD
+                </span>
+                <a href="#reportForm" class="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold text-xs px-4 py-2 rounded-xl shadow transition">
+                    <i class="fa-solid fa-triangle-exclamation mr-1"></i> แจ้งเบาะแสคนโกง
+                </a>
+            </div>
+
+            <h1 class="relative z-10 text-2xl sm:text-4xl font-black leading-tight">
+                ศูนย์เฝ้าระวังภัย <span class="gold-shimmer-text">Blacklist</span> เครือข่ายคนขับรถ
+            </h1>
+            <p class="relative z-10 text-slate-300 text-xs sm:text-sm max-w-3xl leading-relaxed font-light">
+                ตรวจสอบประวัติเบอร์โทรศัพท์ เลขบัญชีธนาคาร ชื่อผู้ว่าจ้าง หรือเส้นทางก่อนรับงานเดินทางไกล เพื่อลดความเสี่ยงจากการถูกเบี้ยวค่าโดยสาร สลิปปลอม หรือการเทงาน
+            </p>
+
             <!-- Alert Notice Banner -->
-            <div class="mb-4 sm:mb-5 p-3.5 sm:p-4 bg-amber-50 border border-amber-200/80 rounded-2xl flex items-start gap-3 shadow-sm">
-                <div class="w-8 h-8 sm:w-9 sm:h-9 bg-amber-500/10 text-amber-600 rounded-xl flex items-center justify-center shrink-0 text-base sm:text-lg border border-amber-200">
+            <div class="relative z-10 p-3.5 sm:p-4 bg-amber-500/10 border border-amber-400/35 rounded-2xl flex items-start gap-3">
+                <div class="w-8 h-8 sm:w-9 sm:h-9 bg-amber-500/15 text-amber-300 rounded-xl flex items-center justify-center shrink-0 text-base sm:text-lg border border-amber-400/30">
                     <i class="fa-solid fa-bullhorn"></i>
                 </div>
-                <div class="text-xs sm:text-sm text-slate-700 leading-relaxed min-w-0">
-                    <strong class="text-amber-800 font-semibold">เตือนภัยพี่น้องคนขับรถทุกท่าน:</strong> กรุณาตรวจสอบเอกสาร สลิปโอนเงิน และประวัติเบอร์โทร/เลขบัญชีของผู้โดยสารหรือผู้ว่าจ้างก่อนออกเดินทางไกลทุกครั้ง ข้อมูลในนี้มาจากประสบการณ์จริงของเพื่อนสมาชิกเพื่อเฝ้าระวังร่วมกัน (หากเคลียร์ยอดแล้ว สามารถยื่น <span class="font-semibold text-rose-700">คำร้องขอลบข้อมูล</span> ให้ทีมงานตรวจสอบได้) ติดต่อทีมงาน <strong>Line @Thedrivethailand</strong>
+                <div class="text-xs sm:text-sm text-amber-100 leading-relaxed min-w-0">
+                    <strong class="text-amber-300 font-bold">เตือนภัยพี่น้องคนขับรถทุกท่าน:</strong> กรุณาตรวจสอบเอกสาร สลิปโอนเงิน และประวัติเบอร์โทร/เลขบัญชีของผู้โดยสารหรือผู้ว่าจ้างก่อนออกเดินทางไกลทุกครั้ง ข้อมูลในนี้มาจากประสบการณ์จริงของเพื่อนสมาชิกเพื่อเฝ้าระวังร่วมกัน (หากเคลียร์ยอดแล้ว สามารถยื่น <span class="font-semibold text-rose-300">คำร้องขอลบข้อมูล</span> ให้ทีมงานตรวจสอบได้) ติดต่อทีมงาน <strong>Line @Thedrivethailand</strong>
                 </div>
             </div>
 
             <!-- 4 Summary Stat Cards -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-4">
-                <div class="bg-slate-50 border border-slate-200 p-3 sm:p-4 rounded-2xl shadow-sm relative overflow-hidden">
-                    <div class="absolute -right-2 -bottom-2 text-slate-200 text-4xl sm:text-5xl pointer-events-none">
-                        <i class="fa-solid fa-users-slash"></i>
-                    </div>
-                    <div class="text-[11px] sm:text-xs text-slate-500 font-medium mb-1 flex items-center gap-1.5 truncate">
-                        <i class="fa-solid fa-triangle-exclamation text-rose-600 shrink-0"></i> เคสเตือนภัยทั้งหมด
-                    </div>
-                    <div class="text-xl sm:text-3xl font-extrabold text-slate-900" id="statTotalCases">0</div>
-                    <div class="text-[10px] sm:text-[11px] text-slate-400 mt-0.5">รายการในระบบ</div>
+            <div class="relative z-10 grid grid-cols-2 sm:grid-cols-4 gap-3 pt-1 text-xs">
+                <div class="bg-slate-950/75 border border-amber-400/25 rounded-2xl p-3.5">
+                    <span class="text-slate-400 block">เคสเตือนภัยทั้งหมด</span>
+                    <strong id="statTotalCases" class="text-lg sm:text-2xl font-extrabold text-amber-400">0</strong>
+                    <span class="text-[10px] text-slate-500 block mt-0.5">รายการในระบบ</span>
                 </div>
-
-                <div class="bg-slate-50 border border-slate-200 p-3 sm:p-4 rounded-2xl shadow-sm relative overflow-hidden">
-                    <div class="absolute -right-2 -bottom-2 text-slate-200 text-4xl sm:text-5xl pointer-events-none">
-                        <i class="fa-solid fa-hand-holding-dollar"></i>
-                    </div>
-                    <div class="text-[11px] sm:text-xs text-slate-500 font-medium mb-1 flex items-center gap-1.5 truncate">
-                        <i class="fa-solid fa-coins text-amber-600 shrink-0"></i> ยอดเสียหายรวม
-                    </div>
-                    <div class="text-xl sm:text-3xl font-extrabold text-amber-600 truncate" id="statTotalDamage">฿0</div>
-                    <div class="text-[10px] sm:text-[11px] text-slate-400 mt-0.5">ประมาณการรวม</div>
+                <div class="bg-slate-950/75 border border-rose-400/25 rounded-2xl p-3.5">
+                    <span class="text-slate-400 block">ยอดเสียหายรวม</span>
+                    <strong id="statTotalDamage" class="text-lg sm:text-2xl font-extrabold text-rose-400 truncate block">฿0</strong>
+                    <span class="text-[10px] text-slate-500 block mt-0.5">ประมาณการรวม</span>
                 </div>
-
-                <div class="bg-slate-50 border border-slate-200 p-3 sm:p-4 rounded-2xl shadow-sm relative overflow-hidden">
-                    <div class="absolute -right-2 -bottom-2 text-slate-200 text-4xl sm:text-5xl pointer-events-none">
-                        <i class="fa-solid fa-ghost"></i>
-                    </div>
-                    <div class="text-[11px] sm:text-xs text-slate-500 font-medium mb-1 flex items-center gap-1.5 truncate">
-                        <i class="fa-solid fa-mask text-indigo-600 shrink-0"></i> พฤติกรรมพบมากสุด
-                    </div>
-                    <div class="text-sm sm:text-lg font-bold text-slate-800 truncate" id="statTopType">-</div>
-                    <div class="text-[10px] sm:text-[11px] text-slate-400 mt-0.5">ประเภทที่ถูกแจ้งบ่อย</div>
+                <div class="bg-slate-950/75 border border-amber-400/25 rounded-2xl p-3.5">
+                    <span class="text-slate-400 block">พฤติกรรมพบมากสุด</span>
+                    <strong id="statTopType" class="text-sm sm:text-base font-bold text-amber-200 truncate block">-</strong>
+                    <span class="text-[10px] text-slate-500 block mt-0.5">ประเภทที่ถูกแจ้งบ่อย</span>
                 </div>
-
-                <div class="bg-slate-50 border border-slate-200 p-3 sm:p-4 rounded-2xl shadow-sm relative overflow-hidden">
-                    <div class="absolute -right-2 -bottom-2 text-slate-200 text-4xl sm:text-5xl pointer-events-none">
-                        <i class="fa-solid fa-database"></i>
-                    </div>
-                    <div class="text-[11px] sm:text-xs text-slate-500 font-medium mb-1 flex items-center gap-1.5 truncate">
-                        <i class="fa-solid fa-wifi text-emerald-600 shrink-0"></i> สถานะฐานข้อมูล
-                    </div>
-                    <div class="text-sm sm:text-base font-bold text-emerald-600 truncate" id="statStorageMode">Google Sheets</div>
-                    <div class="text-[10px] sm:text-[11px] text-slate-400 mt-0.5 truncate" id="statSyncTime">ซิงค์ออนไลน์สำเร็จ</div>
+                <div class="bg-slate-950/75 border border-emerald-400/25 rounded-2xl p-3.5">
+                    <span class="text-slate-400 block">สถานะฐานข้อมูล</span>
+                    <strong id="statStorageMode" class="text-sm sm:text-base font-bold text-emerald-400 truncate block">Google Sheets</strong>
+                    <span id="statSyncTime" class="text-[10px] text-slate-500 truncate block mt-0.5">ซิงค์ออนไลน์สำเร็จ</span>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- MAIN CONTENT CONTAINER -->
-    <main class="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-8 flex-grow w-full">
+        <!-- Two-Column Workspace -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
-            
-            <!-- LEFT COLUMN: REPORT FORM CONTAINER -->
-            <section id="reportForm" class="lg:col-span-5 bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden lg:sticky lg:top-24">
-                <div class="bg-slate-100 p-4 sm:p-5 border-b border-slate-200 flex items-center justify-between gap-2">
+            <!-- LEFT COLUMN: REPORT FORM -->
+            <section id="reportForm" class="lg:col-span-5 bg-white rounded-3xl shadow-sm border border-slate-200/90 overflow-hidden lg:sticky lg:top-24">
+                <div class="bg-slate-950 text-white p-4 sm:p-5 border-b border-amber-400/25 flex items-center justify-between gap-2">
                     <div class="flex items-center gap-2.5 min-w-0">
-                        <div class="w-8 h-8 rounded-lg bg-rose-100 text-rose-600 flex items-center justify-center border border-rose-200 shrink-0">
+                        <div class="w-8 h-8 rounded-lg bg-amber-400/15 text-amber-300 flex items-center justify-center border border-amber-400/30 shrink-0">
                             <i class="fa-solid fa-file-pen text-sm"></i>
                         </div>
-                        <h2 class="font-bold text-base sm:text-lg text-slate-900 truncate">บันทึกข้อมูลเตือนภัยคนโกง</h2>
+                        <h2 class="font-bold text-base sm:text-lg text-amber-300 truncate">บันทึกข้อมูลเตือนภัยคนโกง</h2>
                     </div>
-                    <span class="text-[10px] sm:text-[11px] font-semibold bg-rose-50 text-rose-600 border border-rose-200 px-2 py-0.5 rounded-full shrink-0 whitespace-nowrap">
+                    <span class="text-[10px] sm:text-[11px] font-bold bg-rose-500/20 text-rose-300 border border-rose-400/40 px-2.5 py-0.5 rounded-full shrink-0 whitespace-nowrap">
                         แสดงทันที
                     </span>
                 </div>
 
-                <form id="scamForm" class="p-4 sm:p-5 space-y-4 text-xs sm:text-sm">
-                    <!-- Scammer Name / Profile -->
+                <form id="scamForm" class="p-4 sm:p-6 space-y-4 text-xs sm:text-sm">
                     <div>
                         <label class="block font-semibold text-slate-700 mb-1.5">
                             ชื่อ-นามสกุล / ชื่อเล่น / FB / Line ผู้ก่อเหตุ <span class="text-rose-600">*</span>
@@ -563,12 +638,11 @@
                             <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
                                 <i class="fa-solid fa-user-ninja"></i>
                             </span>
-                            <input type="text" id="scammerName" required placeholder="เช่น นายสมชาย ใจเค็ม (FB: Somchai Taxi)" 
-                                class="w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-rose-500 focus:bg-white text-slate-900 placeholder-slate-400 outline-none transition">
+                            <input type="text" id="scammerName" required placeholder="เช่น นายสมชาย ใจเค็ม (FB: Somchai Taxi)"
+                                class="w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:bg-white text-slate-900 placeholder-slate-400 outline-none transition">
                         </div>
                     </div>
 
-                    <!-- Phone Number -->
                     <div>
                         <label class="block font-semibold text-slate-700 mb-1.5">
                             เบอร์โทรศัพท์ติดต่อผู้ก่อเหตุ
@@ -577,12 +651,11 @@
                             <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
                                 <i class="fa-solid fa-phone"></i>
                             </span>
-                            <input type="text" id="contactPhone" placeholder="เช่น 081-234-5678" 
-                                class="w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-rose-500 focus:bg-white text-slate-900 placeholder-slate-400 outline-none transition">
+                            <input type="text" id="contactPhone" placeholder="เช่น 081-234-5678"
+                                class="w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:bg-white text-slate-900 placeholder-slate-400 outline-none transition">
                         </div>
                     </div>
 
-                    <!-- Bank Account / PromptPay -->
                     <div>
                         <label class="block font-semibold text-slate-700 mb-1.5">
                             เลขบัญชีธนาคาร / พร้อมเพย์
@@ -591,19 +664,17 @@
                             <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
                                 <i class="fa-solid fa-credit-card"></i>
                             </span>
-                            <input type="text" id="bankAccount" placeholder="เช่น กสิกรไทย 012-3-45678-9" 
-                                class="w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-rose-500 focus:bg-white text-slate-900 placeholder-slate-400 outline-none transition">
+                            <input type="text" id="bankAccount" placeholder="เช่น กสิกรไทย 012-3-45678-9"
+                                class="w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:bg-white text-slate-900 placeholder-slate-400 outline-none transition">
                         </div>
                     </div>
 
-                    <!-- Scam Category & Amount Grid -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                        <!-- Category -->
                         <div>
                             <label class="block font-semibold text-slate-700 mb-1.5">
                                 ประเภทการโกง <span class="text-rose-600">*</span>
                             </label>
-                            <select id="scamType" required class="w-full px-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-rose-500 focus:bg-white text-slate-900 outline-none transition">
+                            <select id="scamType" required class="w-full px-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:bg-white text-slate-900 outline-none transition">
                                 <option value="ไม่จ่ายค่าโดยสาร">ไม่จ่ายค่าโดยสาร (ชิ่งหนี)</option>
                                 <option value="เบี้ยวงาน/เทงาน">เบี้ยวงาน / เทงานเหมา</option>
                                 <option value="หลอกโอนเงิน/สลิปปลอม">สลิปปลอม / โอนไม่ครบ</option>
@@ -613,57 +684,52 @@
                             </select>
                         </div>
 
-                        <!-- Damage Amount -->
                         <div>
                             <label class="block font-semibold text-slate-700 mb-1.5">
                                 ยอดความเสียหาย (บาท)
                             </label>
                             <div class="relative">
                                 <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">฿</span>
-                                <input type="number" id="damageAmount" min="0" placeholder="0" 
-                                    class="w-full pl-8 pr-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-rose-500 focus:bg-white text-slate-900 placeholder-slate-400 outline-none transition">
+                                <input type="number" id="damageAmount" min="0" placeholder="0"
+                                    class="w-full pl-8 pr-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:bg-white text-slate-900 placeholder-slate-400 outline-none transition">
                             </div>
                         </div>
                     </div>
 
-                    <!-- Date & Location -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                         <div>
                             <label class="block font-semibold text-slate-700 mb-1.5">
                                 วันที่เกิดเหตุ
                             </label>
-                            <input type="date" id="incidentDate" 
-                                class="w-full px-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-rose-500 focus:bg-white text-slate-900 outline-none transition">
+                            <input type="date" id="incidentDate"
+                                class="w-full px-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:bg-white text-slate-900 outline-none transition">
                         </div>
 
                         <div>
                             <label class="block font-semibold text-slate-700 mb-1.5">
                                 สถานที่ / เส้นทางวิ่งงาน
                             </label>
-                            <input type="text" id="incidentLocation" placeholder="เช่น รังสิต ไป พัทยา" 
-                                class="w-full px-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-rose-500 focus:bg-white text-slate-900 placeholder-slate-400 outline-none transition">
+                            <input type="text" id="incidentLocation" placeholder="เช่น รังสิต ไป พัทยา"
+                                class="w-full px-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:bg-white text-slate-900 placeholder-slate-400 outline-none transition">
                         </div>
                     </div>
 
-                    <!-- Details -->
                     <div>
                         <label class="block font-semibold text-slate-700 mb-1.5">
                             รายละเอียดพฤติการณ์ <span class="text-rose-600">*</span>
                         </label>
-                        <textarea id="description" rows="3" required placeholder="ระบุเหตุการณ์ เช่น เรียกรถเหมาไปส่งแล้วทำทีลงไปกดเงินเซเว่นแล้วหนี หรือส่งสลิปโอนปลอมผ่านไลน์..." 
-                            class="w-full px-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-rose-500 focus:bg-white text-slate-900 placeholder-slate-400 outline-none transition"></textarea>
+                        <textarea id="description" rows="3" required placeholder="ระบุเหตุการณ์ เช่น เรียกรถเหมาไปส่งแล้วทำทีลงไปกดเงินเซเว่นแล้วหนี หรือส่งสลิปโอนปลอมผ่านไลน์..."
+                            class="w-full px-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:bg-white text-slate-900 placeholder-slate-400 outline-none transition"></textarea>
                     </div>
 
-                    <!-- Reporter Info -->
                     <div>
                         <label class="block font-semibold text-slate-700 mb-1.5">
                             ชื่อผู้แจ้งเบาะแส / กลุ่มรถรับจ้าง
                         </label>
-                        <input type="text" id="reporterName" placeholder="เช่น พี่ชัย แท็กซี่มีนบุรี (ไม่ระบุได้)" 
-                            class="w-full px-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-rose-500 focus:bg-white text-slate-900 placeholder-slate-400 outline-none transition">
+                        <input type="text" id="reporterName" placeholder="เช่น พี่ชัย แท็กซี่มีนบุรี (ไม่ระบุได้)"
+                            class="w-full px-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:bg-white text-slate-900 placeholder-slate-400 outline-none transition">
                     </div>
 
-                    <!-- Image Attachment Uploader (Multi-Image up to 10 max) -->
                     <div>
                         <div class="flex items-center justify-between mb-1.5 gap-2">
                             <label class="block font-semibold text-slate-700 truncate">
@@ -673,7 +739,7 @@
                                 แนบรูปแล้ว 0 / 10 รูป
                             </span>
                         </div>
-                        <div class="mt-1 flex flex-col items-center justify-center p-3.5 border-2 border-slate-300 border-dashed rounded-xl bg-slate-50 hover:bg-slate-100 hover:border-slate-400 transition relative">
+                        <div class="mt-1 flex flex-col items-center justify-center p-3.5 border-2 border-slate-300 border-dashed rounded-xl bg-slate-50 hover:bg-slate-100 hover:border-amber-400 transition relative">
                             <div class="space-y-1 text-center" id="uploadPlaceholder">
                                 <i class="fa-solid fa-images text-2xl sm:text-3xl text-slate-400"></i>
                                 <div class="flex text-xs text-slate-600 justify-center">
@@ -685,7 +751,6 @@
                                 <p class="text-[10px] text-slate-400">แนบได้สูงสุด 10 รูป • ระบบจะบีบอัดรูปให้อัตโนมัติ</p>
                             </div>
 
-                            <!-- Multi-Image Thumbnails Grid Preview -->
                             <div id="imagePreviewContainer" class="hidden w-full space-y-3">
                                 <div id="imagePreviewGrid" class="grid grid-cols-3 sm:grid-cols-5 gap-2"></div>
                                 <div class="flex items-center justify-between pt-2 border-t border-slate-200">
@@ -701,9 +766,8 @@
                         </div>
                     </div>
 
-                    <!-- Submit Button -->
                     <div class="pt-2">
-                        <button type="submit" id="submitBtn" class="w-full bg-rose-600 hover:bg-rose-700 active:bg-rose-800 text-white font-bold py-3 px-4 rounded-xl shadow-md shadow-rose-200 transition flex items-center justify-center gap-2">
+                        <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold py-3 px-4 rounded-xl shadow-md transition flex items-center justify-center gap-2">
                             <i class="fa-solid fa-paper-plane" id="submitBtnIcon"></i>
                             <span id="submitBtnText">ลงบันทึกเตือนภัยทันที</span>
                         </button>
@@ -713,20 +777,17 @@
 
             <!-- RIGHT COLUMN: BLACKLIST FEED -->
             <section id="feedSectionHeader" class="lg:col-span-7 space-y-4 min-w-0">
-                
-                <!-- Search, View Mode & Filters Toolbar Card -->
-                <div class="bg-white p-4 sm:p-5 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+                <div class="bg-white p-4 sm:p-6 rounded-3xl shadow-sm border border-slate-200/90 space-y-4">
                     <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-slate-200">
                         <div class="min-w-0">
-                            <h2 class="font-bold text-base sm:text-lg text-slate-900 flex items-center gap-2">
+                            <h2 class="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-2">
                                 <i class="fa-solid fa-shield-virus text-rose-600 shrink-0"></i>
                                 <span class="truncate">รายชื่อเตือนภัยในระบบ</span>
                             </h2>
                             <p class="text-xs text-slate-500 truncate">ค้นหาเบอร์โทร เลขบัญชี หรือชื่อเพื่อเช็กความปลอดภัยก่อนรับงาน</p>
                         </div>
-                        
+
                         <div class="flex items-center justify-between w-full sm:w-auto gap-2 shrink-0">
-                            <!-- View Mode Toggle Buttons -->
                             <div class="bg-slate-100 p-1 rounded-xl border border-slate-200 flex items-center gap-1 shrink-0">
                                 <button type="button" onclick="setViewMode('detailed')" id="btnViewDetailed" title="มุมมองการ์ดรายละเอียด"
                                     class="px-2.5 py-1 rounded-lg text-xs font-semibold transition bg-white text-slate-800 shadow-sm whitespace-nowrap">
@@ -738,30 +799,28 @@
                                 </button>
                             </div>
 
-                            <!-- Manual Refresh Data Button -->
-                            <button type="button" onclick="fetchDataFromCloud()" title="รีเฟรชข้อมูลล่าสุด" 
-                                class="bg-slate-100 hover:bg-slate-200 active:bg-slate-300 text-slate-700 px-3 py-1.5 rounded-xl border border-slate-300 text-xs font-semibold transition flex items-center gap-1.5 shrink-0 whitespace-nowrap">
+                            <button type="button" onclick="fetchDataFromCloud()" title="รีเฟรชข้อมูลล่าสุด"
+                                class="bg-slate-950 hover:bg-slate-800 text-amber-400 border border-amber-400/35 px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 shrink-0 whitespace-nowrap">
                                 <i class="fa-solid fa-rotate" id="refreshSpinIcon"></i>
                                 <span>รีเฟรช</span>
                             </button>
                         </div>
                     </div>
 
-                    <!-- Search Input & Dropdown Grid -->
                     <div class="grid grid-cols-1 sm:grid-cols-12 gap-2.5 sm:gap-3">
                         <div class="sm:col-span-7 relative">
                             <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </span>
-                            <input type="text" id="searchInput" onkeyup="onSearchOrFilterChange()" placeholder="ค้นหาชื่อ, เบอร์โทร, เลขบัญชี, รหัสเคส..." 
-                                class="w-full pl-9 pr-8 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-rose-500 focus:bg-white text-slate-900 placeholder-slate-400 outline-none transition">
+                            <input type="text" id="searchInput" onkeyup="onSearchOrFilterChange()" placeholder="ค้นหาชื่อ, เบอร์โทร, เลขบัญชี, รหัสเคส..."
+                                class="w-full pl-9 pr-8 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:bg-white text-slate-900 placeholder-slate-400 outline-none transition">
                             <button type="button" id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600">
                                 <i class="fa-solid fa-xmark"></i>
                             </button>
                         </div>
 
                         <div class="sm:col-span-5">
-                            <select id="filterType" onchange="onSearchOrFilterChange()" class="w-full px-3 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-rose-500 focus:bg-white text-slate-900 outline-none transition">
+                            <select id="filterType" onchange="onSearchOrFilterChange()" class="w-full px-3 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:bg-white text-slate-900 outline-none transition">
                                 <option value="ALL">ทุกประเภทการโกง</option>
                                 <option value="ไม่จ่ายค่าโดยสาร">ไม่จ่ายค่าโดยสาร</option>
                                 <option value="เบี้ยวงาน/เทงาน">เบี้ยวงาน / เทงาน</option>
@@ -774,11 +833,9 @@
                     </div>
                 </div>
 
-                <!-- Feed Cards Dynamic Container -->
                 <div id="feedContainer" class="space-y-4"></div>
 
-                <!-- Empty State Component -->
-                <div id="emptyState" class="hidden bg-white rounded-2xl border border-slate-200 p-8 sm:p-12 text-center shadow-sm">
+                <div id="emptyState" class="hidden bg-white rounded-3xl border border-slate-200 p-8 sm:p-12 text-center shadow-sm">
                     <div class="w-14 h-14 sm:w-16 sm:h-16 bg-slate-100 text-slate-400 rounded-full flex items-center justify-center mx-auto mb-3 text-xl sm:text-2xl border border-slate-200">
                         <i class="fa-solid fa-folder-open"></i>
                     </div>
@@ -786,7 +843,6 @@
                     <p class="text-xs text-slate-500 mt-1">ลองเปลี่ยนคำค้นหา หรือกรอกข้อมูลแจ้งเบาะแสคนโกงรายใหม่</p>
                 </div>
 
-                <!-- PAGINATION CONTROLS BAR -->
                 <div id="paginationBar" class="bg-white p-3.5 sm:p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
                     <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2 text-slate-500 w-full sm:w-auto">
                         <span>แสดงหน้าละ:</span>
@@ -801,27 +857,26 @@
 
                     <div class="flex items-center gap-1.5 flex-wrap justify-center" id="pageButtonsContainer"></div>
                 </div>
-
             </section>
         </div>
     </main>
 
     <!-- MODAL 1: FULL DETAIL VIEW MODAL -->
     <div id="detailModal" class="hidden fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 overflow-y-auto" onclick="closeDetailModal()">
-        <div class="relative max-w-2xl w-full bg-white rounded-2xl overflow-hidden shadow-2xl border border-slate-200 my-auto max-h-[90vh] flex flex-col" onclick="event.stopPropagation()">
-            <div class="p-3.5 sm:p-5 bg-slate-100 border-b border-slate-200 flex justify-between items-center shrink-0 gap-2">
+        <div class="relative max-w-2xl w-full bg-white rounded-3xl overflow-hidden shadow-2xl border border-slate-200 my-auto max-h-[90vh] flex flex-col" onclick="event.stopPropagation()">
+            <div class="p-3.5 sm:p-5 bg-slate-950 text-white border-b border-amber-400/25 flex justify-between items-center shrink-0 gap-2">
                 <div class="flex items-center gap-2 min-w-0">
                     <span id="detailBadge" class="px-2.5 py-1 rounded-full text-xs font-semibold border shrink-0">ประเภท</span>
-                    <h3 class="font-bold text-sm sm:text-lg text-slate-900 truncate" id="detailScammerName">ชื่อผู้ก่อเหตุ</h3>
+                    <h3 class="font-bold text-sm sm:text-lg text-amber-300 truncate" id="detailScammerName">ชื่อผู้ก่อเหตุ</h3>
                 </div>
-                <button type="button" onclick="closeDetailModal()" class="text-slate-400 hover:text-slate-700 text-lg w-8 h-8 rounded-lg hover:bg-slate-200 flex items-center justify-center shrink-0">
+                <button type="button" onclick="closeDetailModal()" class="text-slate-400 hover:text-white text-lg w-8 h-8 rounded-lg hover:bg-slate-800 flex items-center justify-center shrink-0">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
 
             <div class="p-4 sm:p-5 overflow-y-auto space-y-4 text-xs sm:text-sm">
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 bg-slate-50 p-3.5 sm:p-4 rounded-xl border border-slate-200">
-                    <div class="flex items-center justify-between bg-white px-3 py-2 rounded-lg border border-slate-200 gap-2 min-w-0">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 bg-slate-50 p-3.5 sm:p-4 rounded-2xl border border-slate-200">
+                    <div class="flex items-center justify-between bg-white px-3 py-2 rounded-xl border border-slate-200 gap-2 min-w-0">
                         <div class="truncate">
                             <span class="text-slate-400">เบอร์โทร:</span>
                             <span id="detailPhone" class="font-bold text-slate-800 ml-1 font-mono"></span>
@@ -831,7 +886,7 @@
                         </button>
                     </div>
 
-                    <div class="flex items-center justify-between bg-white px-3 py-2 rounded-lg border border-slate-200 gap-2 min-w-0">
+                    <div class="flex items-center justify-between bg-white px-3 py-2 rounded-xl border border-slate-200 gap-2 min-w-0">
                         <div class="truncate">
                             <span class="text-slate-400">เลขบัญชี:</span>
                             <span id="detailBank" class="font-bold text-slate-800 ml-1 font-mono"></span>
@@ -857,7 +912,7 @@
                     </div>
                 </div>
 
-                <div class="bg-rose-50/50 border border-rose-100 p-3.5 sm:p-4 rounded-xl">
+                <div class="bg-rose-50/60 border border-rose-100 p-3.5 sm:p-4 rounded-2xl">
                     <div class="text-xs font-bold text-rose-700 mb-1">รายละเอียดพฤติการณ์:</div>
                     <p id="detailDescription" class="text-slate-700 whitespace-pre-line leading-relaxed text-xs sm:text-sm"></p>
                 </div>
@@ -876,7 +931,7 @@
                         <span class="mx-1.5">•</span>
                         <span>ผู้แจ้ง: <strong id="detailReporter" class="text-slate-700"></strong></span>
                     </div>
-                    <button type="button" id="btnDetailRequestDelete" class="text-amber-700 hover:text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-lg font-semibold transition flex items-center justify-center gap-1.5 shrink-0 whitespace-nowrap">
+                    <button type="button" id="btnDetailRequestDelete" class="text-amber-800 hover:text-amber-950 bg-amber-100 hover:bg-amber-200 border border-amber-300 px-3 py-1.5 rounded-xl font-bold transition flex items-center justify-center gap-1.5 shrink-0 whitespace-nowrap">
                         <i class="fa-solid fa-flag"></i> แจ้งขอลบเคสนี้
                     </button>
                 </div>
@@ -886,7 +941,7 @@
 
     <!-- MODAL 2: DELETION REQUEST MODAL -->
     <div id="deleteRequestModal" class="hidden fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 overflow-y-auto" onclick="closeDeleteRequestModal()">
-        <div class="relative max-w-md w-full bg-white rounded-2xl overflow-hidden shadow-2xl border border-slate-200 my-auto" onclick="event.stopPropagation()">
+        <div class="relative max-w-md w-full bg-white rounded-3xl overflow-hidden shadow-2xl border border-slate-200 my-auto" onclick="event.stopPropagation()">
             <div class="p-3.5 sm:p-4 bg-amber-50 border-b border-amber-200 flex items-center justify-between gap-2">
                 <div class="flex items-center gap-2.5 min-w-0">
                     <div class="w-8 h-8 rounded-lg bg-amber-500/15 text-amber-700 flex items-center justify-center shrink-0">
@@ -944,7 +999,7 @@
                     <button type="button" onclick="closeDeleteRequestModal()" class="px-4 py-2 rounded-xl border border-slate-300 text-slate-600 hover:bg-slate-100 font-semibold transition">
                         ยกเลิก
                     </button>
-                    <button type="submit" id="btnSubmitDeleteReq" class="px-4 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold shadow-sm flex items-center gap-1.5 transition">
+                    <button type="submit" id="btnSubmitDeleteReq" class="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold shadow-sm flex items-center gap-1.5 transition">
                         <i class="fa-solid fa-paper-plane"></i>
                         <span>ส่งคำร้องให้ทีมงาน</span>
                     </button>
@@ -1005,9 +1060,7 @@
         </div>
     </div>
 
-    <!-- JAVASCRIPT LOGIC -->
     <script>
-        // เชื่อมต่อฐานข้อมูลกลาง TheDriverThailand_Data (แผ่นงาน เฝ้าระวังภัย Blacklist & คำร้องขอลบ Blacklist)
         const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyeDCdxBD10D_AFZQY2NxeylLOiAmAHLesSDZHXYCb3TsYs4wYer_kRTPVOs3VpK2pP/exec';
         const LOCAL_STORAGE_KEY = 'driver_guard_reports_v2';
         const MAX_IMAGES = 10;
@@ -1021,16 +1074,15 @@
 
         let lightboxImages = [];
         let lightboxIndex = 0;
+        let toastTimer = null;
 
         document.addEventListener('DOMContentLoaded', () => {
             const dateInput = document.getElementById('incidentDate');
             if (dateInput) {
                 dateInput.value = new Date().toISOString().split('T')[0];
             }
-
-            document.getElementById('scamForm').addEventListener('submit', handleReportSubmit);
-            document.getElementById('deleteRequestForm').addEventListener('submit', handleDeleteRequestSubmit);
-
+            document.getElementById('scamForm')?.addEventListener('submit', handleReportSubmit);
+            document.getElementById('deleteRequestForm')?.addEventListener('submit', handleDeleteRequestSubmit);
             fetchDataFromCloud();
         });
 
@@ -1045,14 +1097,12 @@
                 /\/file\/d\/([a-zA-Z0-9_-]{25,})/,
                 /\/d\/([a-zA-Z0-9_-]{25,})/
             ];
-
             for (const pattern of drivePatterns) {
                 const match = cleaned.match(pattern);
                 if (match && match[1]) {
                     return `https://drive.google.com/thumbnail?id=${match[1]}&sz=w1000`;
                 }
             }
-
             return cleaned;
         }
 
@@ -1123,16 +1173,14 @@
         function saveToLocalBackup(data) {
             try {
                 localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(data));
-            } catch (e) {
-                console.warn('LocalStorage quota exceeded');
-            }
+            } catch (_) {}
         }
 
         function loadFromLocalBackup() {
             try {
                 const raw = localStorage.getItem(LOCAL_STORAGE_KEY);
                 return raw ? JSON.parse(raw) : [];
-            } catch (e) {
+            } catch (_) {
                 return [];
             }
         }
@@ -1150,7 +1198,7 @@
                 if (badgeText) badgeText.textContent = 'เชื่อมต่อ Google Sheets';
                 if (statMode) {
                     statMode.textContent = 'Google Sheets';
-                    statMode.className = 'text-sm sm:text-base font-bold text-emerald-600 truncate';
+                    statMode.className = 'text-sm sm:text-base font-bold text-emerald-400 truncate block';
                 }
                 if (statTime) statTime.textContent = 'ซิงค์ออนไลน์สำเร็จ';
             } else {
@@ -1159,7 +1207,7 @@
                 if (badgeText) badgeText.textContent = 'โหมดสำรองออฟไลน์';
                 if (statMode) {
                     statMode.textContent = 'Local Backup';
-                    statMode.className = 'text-sm sm:text-base font-bold text-amber-600 truncate';
+                    statMode.className = 'text-sm sm:text-base font-bold text-amber-300 truncate block';
                 }
                 if (statTime) statTime.textContent = 'แสดงข้อมูลสำรองในเครื่อง';
             }
@@ -1328,7 +1376,6 @@
                 });
 
                 showToast('บันทึกข้อมูลเตือนภัยเรียบร้อยแล้ว!', 'success');
-
                 document.getElementById('scamForm').reset();
                 document.getElementById('incidentDate').value = new Date().toISOString().split('T')[0];
                 removeAllImages();
@@ -1364,11 +1411,7 @@
             const typeFilter = document.getElementById('filterType').value;
             const clearBtn = document.getElementById('clearSearchBtn');
 
-            if (query.length > 0) {
-                clearBtn.classList.remove('hidden');
-            } else {
-                clearBtn.classList.add('hidden');
-            }
+            clearBtn.classList.toggle('hidden', query.length === 0);
 
             filteredReports = allReports.filter(item => {
                 const matchType = typeFilter === 'ALL' || item.scamType === typeFilter;
@@ -1488,11 +1531,9 @@
             document.getElementById('showingStart').textContent = startIdx + 1;
             document.getElementById('showingEnd').textContent = endIdx;
 
-            if (viewMode === 'compact') {
-                container.innerHTML = pageItems.map(item => renderCompactCard(item)).join('');
-            } else {
-                container.innerHTML = pageItems.map(item => renderDetailedCard(item)).join('');
-            }
+            container.innerHTML = pageItems.map(item =>
+                viewMode === 'compact' ? renderCompactCard(item) : renderDetailedCard(item)
+            ).join('');
 
             renderPaginationButtons(totalPages);
         }
@@ -1523,7 +1564,7 @@
             ` : '';
 
             return `
-                <article class="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-sm hover:border-rose-300 transition min-w-0">
+                <article class="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-sm hover:border-amber-400 transition min-w-0">
                     <div class="flex flex-wrap items-start justify-between gap-2 mb-3">
                         <div class="space-y-1 min-w-0 flex-1">
                             <div class="flex flex-wrap items-center gap-2">
@@ -1585,7 +1626,7 @@
                             <button type="button" onclick="openDeleteRequestModal('${safeId}')" class="text-slate-500 hover:text-amber-700 px-2.5 py-1.5 rounded-lg hover:bg-amber-50 border border-transparent hover:border-amber-200 transition font-medium whitespace-nowrap">
                                 <i class="fa-solid fa-flag text-[11px]"></i> ขอลบ
                             </button>
-                            <button type="button" onclick="openDetailModal('${safeId}')" class="bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold px-3 py-1.5 rounded-lg transition whitespace-nowrap">
+                            <button type="button" onclick="openDetailModal('${safeId}')" class="bg-slate-950 hover:bg-slate-800 text-amber-400 font-semibold px-3 py-1.5 rounded-lg transition whitespace-nowrap">
                                 ดูรายละเอียด
                             </button>
                         </div>
@@ -1603,7 +1644,7 @@
             const imgCount = item.images ? item.images.length : 0;
 
             return `
-                <article class="bg-white rounded-xl border border-slate-200 p-3.5 shadow-sm hover:border-rose-300 transition flex flex-col sm:flex-row sm:items-center justify-between gap-3 min-w-0">
+                <article class="bg-white rounded-xl border border-slate-200 p-3.5 shadow-sm hover:border-amber-400 transition flex flex-col sm:flex-row sm:items-center justify-between gap-3 min-w-0">
                     <div class="min-w-0 space-y-1 flex-1">
                         <div class="flex flex-wrap items-center gap-2">
                             <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold border shrink-0 ${badgeClass}">
@@ -1625,7 +1666,7 @@
                         <button type="button" onclick="openDeleteRequestModal('${safeId}')" title="แจ้งขอลบข้อมูล" class="text-slate-400 hover:text-amber-600 p-1.5 rounded-lg hover:bg-amber-50 shrink-0">
                             <i class="fa-solid fa-flag"></i>
                         </button>
-                        <button type="button" onclick="openDetailModal('${safeId}')" class="bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 font-semibold text-xs px-3 py-1.5 rounded-lg transition whitespace-nowrap shrink-0">
+                        <button type="button" onclick="openDetailModal('${safeId}')" class="bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300 font-semibold text-xs px-3 py-1.5 rounded-lg transition whitespace-nowrap shrink-0">
                             รายละเอียด
                         </button>
                     </div>
@@ -1652,7 +1693,7 @@
 
             for (let p = startPage; p <= endPage; p++) {
                 const activeClass = p === currentPage
-                    ? 'bg-rose-600 text-white border-rose-600 font-bold'
+                    ? 'bg-slate-950 text-amber-400 border-amber-400 font-bold'
                     : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-100';
                 html += `
                     <button type="button" onclick="goToPage(${p})" class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg border ${activeClass} text-xs transition">
@@ -1835,7 +1876,6 @@
             showToast(successMsg || 'คัดลอกเรียบร้อยแล้ว', 'success');
         }
 
-        let toastTimer = null;
         function showToast(message, type = 'success') {
             const toast = document.getElementById('toast');
             const icon = document.getElementById('toastIcon');
@@ -1857,7 +1897,6 @@
             }, 3000);
         }
 
-        // เมนูนำทางส่วนกลางและปุ่มปรับขนาดตัวอักษร A- / A+
         (function initSharedNavAndAccessibility() {
             const SCALE_KEY = "tdt_font_scale_pct";
             let scalePct = 100;

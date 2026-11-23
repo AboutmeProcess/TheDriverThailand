@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ศูนย์จัดการรถ เอกสารแจ้งเตือน &amp; บันทึกรายรับ-รายจ่าย | 🚖 The Driver TH 🇹🇭</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    html { font-size: 16px; transition: font-size 0.18s ease; }
+    html, body, input, select, textarea, button, code, pre { font-family: 'Prompt', sans-serif !important; }
+    body { background-color: #070a12; color: #f8fafc; overflow-x: clip; }
+    .dark-surface-card {
+      background: rgba(15, 23, 42, 0.94);
+      border: 1px solid rgba(251, 191, 36, 0.24);
+      color: #f8fafc;
+      box-shadow: 0 18px 38px -14px rgba(2, 6, 23, 0.72);
+    }
+    .dark-field {
+      background-color: #070b14;
+      border: 1px solid #334155;
+      color: #f8fafc;
+      transition: border-color 0.2s ease, background-color 0.2s ease;
+    }
+    .dark-field::placeholder { color: #64748b; }
+    .dark-field:focus { outline: none; border-color: #fbbf24; background-color: #0b1120; }
+    .hero-glow-bg {
+      background:
+        radial-gradient(circle at 18% 22%, rgba(251, 191, 36, 0.22) 0%, transparent 45%),
+        radial-gradient(circle at 82% 78%, rgba(16, 185, 129, 0.16) 0%, transparent 50%),
+        linear-gradient(145deg, #060911 0%, #0d1424 58%, #151f34 100%);
+    }
+    .gold-shimmer-text {
+      background: linear-gradient(90deg, #fde68a 0%, #fbbf24 35%, #f59e0b 65%, #fef08a 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+
+    /* UNIFIED GLOBAL NAVIGATION BAR */
+    .tdt-global-nav {
+      box-sizing: border-box;
+      font-family: 'Prompt', sans-serif;
+      background: linear-gradient(180deg, rgba(7, 11, 20, 0.98) 0%, rgba(10, 15, 28, 0.96) 100%);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      color: #e2e8f0;
+      border-bottom: 1px solid rgba(251, 191, 36, 0.28);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 10px 28px -8px rgba(2, 6, 23, 0.65);
+      width: 100%;
+    }
+    .tdt-global-nav *, .tdt-global-nav *::before, .tdt-global-nav *::after { box-sizing: border-box; }
+    .tdt-global-nav-inner { max-width: 1280px; margin: 0 auto; padding: 12px 16px; display: flex; flex-direction: column; gap: 10px; }
+    @media (min-width: 640px) { .tdt-global-nav-inner { padding: 14px 24px; gap: 12px; } }
+    .tdt-nav-top-row { width: 100%; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding-bottom: 10px; border-bottom: 1px solid rgba(148, 163, 184, 0.12); }
+    .tdt-global-brand { display: inline-flex; align-items: center; gap: 13px; font-size: 16px; font-weight: 500; color: #fbbf24; text-decoration: none; }
+    .tdt-brand-text-stack { display: inline-flex; flex-direction: column; gap: 5px; }
+    .tdt-brand-subline-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 12px; color: #cbd5e1; }
+    .tdt-brand-exec-pill { display: inline-flex; align-items: center; gap: 5px; background: rgba(251, 191, 36, 0.15); border: 1px solid rgba(251, 191, 36, 0.42); color: #fde68a; font-size: 10.5px; padding: 2px 8px; border-radius: 999px; }
+    .tdt-brand-logo-img { width: 50px; height: 50px; border-radius: 15px; object-fit: cover; background: #0f172a; border: 1.5px solid rgba(251, 191, 36, 0.85); }
+    @media (min-width: 640px) { .tdt-global-brand { font-size: 19px; } .tdt-brand-logo-img { width: 56px; height: 56px; border-radius: 16px; } }
+    .tdt-global-right-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; width: 100%; }
+    .tdt-nav-divider { width: 1px; height: 20px; background: rgba(148, 163, 184, 0.22); margin: 0 2px; display: none; }
+    @media (min-width: 1024px) { .tdt-nav-divider { display: inline-block; } }
+    .tdt-nav-btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; height: 36px; padding: 0 13px; border-radius: 11px; font-size: 12px; text-decoration: none; white-space: nowrap; background-color: rgba(15, 23, 42, 0.88); border: 1px solid rgba(148, 163, 184, 0.22); color: #e2e8f0; cursor: pointer; transition: all 0.18s ease; }
+    .tdt-nav-btn:hover { background-color: #1e293b; border-color: rgba(251, 191, 36, 0.48); transform: translateY(-1px); }
+    .tdt-nav-btn.is-quick-register, .tdt-nav-btn.is-quick-check-code { color: #5eead4; border-color: rgba(45, 212, 191, 0.38); background-color: rgba(19, 78, 74, 0.28); }
+    .tdt-nav-btn.is-blacklist { color: #fda4af; border-color: rgba(251, 113, 133, 0.35); }
+    .tdt-nav-btn.is-admin-link { color: #fde68a; border-color: rgba(251, 191, 36, 0.45); background-color: rgba(245, 158, 11, 0.14); }
+    .tdt-nav-btn.active-current { background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%); border-color: #fcd34d; color: #060911; font-weight: 600; }
+    .tdt-util-group { display: inline-flex; align-items: center; gap: 4px; background-color: rgba(15, 23, 42, 0.92); border: 1px solid rgba(251, 191, 36, 0.28); border-radius: 12px; padding: 3px; margin-left: auto; }
+    .tdt-util-btn { display: inline-flex; align-items: center; justify-content: center; height: 30px; padding: 0 9px; border-radius: 9px; font-size: 12px; color: #e2e8f0; background: transparent; border: none; cursor: pointer; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+  <div id="toast-box" class="hidden fixed bottom-5 right-5 z-[1100] bg-slate-950 text-amber-300 border border-amber-400/50 px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-2.5 text-xs sm:text-sm">
+    <i class="fa-solid fa-circle-check text-emerald-400"></i>
+    <span id="toast-text" class="text-white"></span>
+  </div>
+
+  <!-- UNIFIED GLOBAL NAVIGATION BAR -->
+  <nav class="tdt-global-nav">
+    <div class="tdt-global-nav-inner">
+      <div class="tdt-nav-top-row">
+        <a href="index.html" class="tdt-global-brand">
+          <img src="TheDriverTH.jpg" alt="โลโก้ The Driver Thailand"
+            onerror="this.onerror=null;this.src='https://placehold.co/80x80/0f172a/fbbf24?text=TDT';"
+            class="tdt-brand-logo-img">
+          <span class="tdt-brand-text-stack">
+            <span>🚖 The Driver TH 🇹🇭 Premium Service</span>
+            <span class="tdt-brand-subline-row">
+              <span class="tdt-brand-exec-pill"><i class="fa-solid fa-crown" style="font-size:9px;"></i> EXECUTIVE NETWORK</span>
+              <span>เครือข่ายคนขับรถรับส่งผู้โดยสารและบริการมืออาชีพแห่งประเทศไทย</span>
+            </span>
+          </span>
+        </a>
+        <div class="tdt-util-group" title="ปรับขนาดตัวอักษร">
+          <button type="button" onclick="changeScale(-1)" class="tdt-util-btn">A-</button>
+          <span id="font-pct" style="font-size:11px;color:#fde68a;padding:0 4px;">100%</span>
+          <button type="button" onclick="changeScale(1)" class="tdt-util-btn">A+</button>
+        </div>
+      </div>
+
+      <div class="tdt-global-right-controls">
+        <a href="index.html" class="tdt-nav-btn"><i class="fa-solid fa-house"></i><span>หน้าหลัก</span></a>
+        <a href="driver_fleet_hub.html" class="tdt-nav-btn active-current"><i class="fa-solid fa-car-on"></i><span>จัดการรถ &amp; บัญชีคนขับ</span></a>
+        <a href="captain_insurance.html" class="tdt-nav-btn is-quick-register"><i class="fa-solid fa-shield-halved"></i><span>Captain Insurance</span></a>
+        <a href="rtaf_pass_register.html" class="tdt-nav-btn is-quick-check-code"><i class="fa-solid fa-plane-departure"></i><span>บัตรผ่าน ทอ.</span></a>
+
+        <span class="tdt-nav-divider" aria-hidden="true"></span>
+
+        <a href="blacklist.html" class="tdt-nav-btn is-blacklist"><i class="fa-solid fa-user-shield"></i><span>ตรวจสอบ Blacklist</span></a>
+        <a href="admin.html" class="tdt-nav-btn is-admin-link"><i class="fa-solid fa-sliders"></i><span>ระบบหลังบ้าน (Admin)</span></a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="flex-grow max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-6">
+    <!-- Hero Banner -->
+    <section class="hero-glow-bg rounded-3xl p-6 sm:p-10 text-white border border-amber-400/35 shadow-2xl space-y-3">
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="inline-flex items-center gap-2 bg-amber-500/20 border border-amber-400/40 text-amber-300 text-xs font-bold px-3.5 py-1 rounded-full">
+          <i class="fa-solid fa-car-on"></i> DRIVER FLEET &amp; EXPENSE MANAGER
+        </span>
+        <span class="inline-flex items-center gap-1.5 bg-emerald-500/20 border border-emerald-400/35 text-emerald-300 text-xs font-bold px-3 py-1 rounded-full">
+          <i class="fa-solid fa-bell"></i> แจ้งเตือนล่วงหน้า 30 วัน
+        </span>
+      </div>
+      <h1 class="text-2xl sm:text-4xl font-black">ศูนย์บริหารจัดการรถ <span class="gold-shimmer-text">แจ้งเตือนวันหมดอายุ &amp; บัญชีคนขับ</span></h1>
+      <p class="text-slate-300 text-xs sm:text-sm max-w-3xl font-light">
+        เครื่องมือส่วนตัวสำหรับสมาชิกเครือข่าย ใช้บันทึกวันหมดอายุ พ.ร.บ. ประกันภัย ภาษีรถ ใบขับขี่สาธารณะ บัตรผ่าน ทอ. และจดบันทึกรายรับ-รายจ่ายการวิ่งงานแต่ละวัน
+      </p>
+    </section>
+
+    <!-- แถบเลือกแท็บหลัก -->
+    <div class="flex flex-wrap gap-2 bg-slate-900/95 p-2 rounded-2xl border border-amber-400/25">
+      <button type="button" onclick="switchHubTab('docs')" id="tab-btn-docs"
+        class="bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-extrabold px-4 py-2.5 rounded-xl text-xs sm:text-sm transition">
+        <i class="fa-solid fa-calendar-exclamation mr-1.5"></i> 1. แจ้งเตือนวันหมดอายุเอกสารรถ (<span id="doc-alert-count">0</span>)
+      </button>
+      <button type="button" onclick="switchHubTab('ledger')" id="tab-btn-ledger"
+        class="bg-slate-950 hover:bg-slate-800 text-slate-200 border border-slate-700 font-bold px-4 py-2.5 rounded-xl text-xs sm:text-sm transition">
+        <i class="fa-solid fa-wallet text-emerald-400 mr-1.5"></i> 2. สมุดบันทึกรายรับ - รายจ่ายคนขับ
+      </button>
+    </div>
+
+    <!-- ส่วนที่ 1: ระบบแจ้งเตือนวันหมดอายุเอกสารรถ -->
+    <div id="hub-panel-docs" class="space-y-6">
+      <section class="dark-surface-card rounded-3xl p-6 sm:p-8 space-y-5">
+        <div class="border-b border-slate-800 pb-4 flex flex-wrap items-center justify-between gap-2">
+          <div>
+            <h2 class="text-lg sm:text-xl font-extrabold text-amber-300">เพิ่มรายการแจ้งเตือนวันหมดอายุเอกสาร</h2>
+            <p class="text-xs text-slate-400">ระบบจะคำนวณวันคงเหลือและแจ้งเตือนสีแดง/เหลืองล่วงหน้า 30 วัน พร้อมปุ่มกดต่ออายุทันที</p>
+          </div>
+          <button type="button" onclick="syncDocsToCloud()" id="btn-sync-docs"
+            class="bg-emerald-600/20 hover:bg-emerald-600/35 text-emerald-300 border border-emerald-500/40 font-bold px-3.5 py-2 rounded-xl text-xs transition">
+            <i class="fa-solid fa-cloud-arrow-up mr-1"></i> สำรองข้อมูลเข้าชีตกลาง
+          </button>
+        </div>
+
+        <form onsubmit="addDocumentReminder(event)" class="grid sm:grid-cols-2 lg:grid-cols-5 gap-3 text-xs">
+          <select id="doc-type" class="dark-field rounded-xl px-3.5 py-3 font-semibold">
+            <option value="ประกันภัยรถยนต์ (ชั้น 1/2+/3+)">🛡️ ประกันภัยรถยนต์</option>
+            <option value="พ.ร.บ. และ ภาษีรถยนต์ประจำปี">📄 พ.ร.บ. และ ภาษีรถยนต์</option>
+            <option value="ใบอนุญาตขับขี่สาธารณะ / ส่วนบุคคล">🪪 ใบอนุญาตขับขี่</option>
+            <option value="บัตรผ่านยานพาหนะ ทอ. (ดอนเมือง)">✈️ บัตรผ่านยานพาหนะ ทอ.</option>
+            <option value="เช็กระยะเปลี่ยนถ่ายน้ำมันเครื่อง / ยาง">🔧 เช็กระยะบำรุงรักษารถ</option>
+          </select>
+          <input type="text" id="doc-plate" required placeholder="ทะเบียนรถ / เลขที่เอกสาร *" class="dark-field rounded-xl px-3.5 py-3 font-mono text-amber-300">
+          <input type="date" id="doc-expiry" required class="dark-field rounded-xl px-3.5 py-3">
+          <input type="text" id="doc-note" placeholder="หมายเหตุ (เช่น วิริยะ ซ่อมอู่)" class="dark-field rounded-xl px-3.5 py-3">
+          <button type="submit" class="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold rounded-xl px-4 py-3 shadow transition">
+            <i class="fa-solid fa-plus mr-1"></i> เพิ่มการแจ้งเตือน
+          </button>
+        </form>
+
+        <div id="doc-reminders-list" class="grid md:grid-cols-2 gap-4 pt-2"></div>
+      </section>
+    </div>
+
+    <!-- ส่วนที่ 2: สมุดบันทึกรายรับ-รายจ่ายคนขับ -->
+    <div id="hub-panel-ledger" class="hidden space-y-6">
+      <!-- สรุปยอดรายรับ-รายจ่าย-กำไรสุทธิ -->
+      <section class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="dark-surface-card rounded-3xl p-5 border-emerald-400/35">
+          <span class="text-xs text-slate-400 block">รายรับรวมทั้งหมด (ค่าเที่ยว / ทิป)</span>
+          <strong id="ledger-total-income" class="text-2xl sm:text-3xl font-black text-emerald-400 font-mono">฿0</strong>
+        </div>
+        <div class="dark-surface-card rounded-3xl p-5 border-rose-400/35">
+          <span class="text-xs text-slate-400 block">รายจ่ายรวมทั้งหมด (น้ำมัน / ชาร์จไฟ / ทางด่วน)</span>
+          <strong id="ledger-total-expense" class="text-2xl sm:text-3xl font-black text-rose-400 font-mono">฿0</strong>
+        </div>
+        <div class="dark-surface-card rounded-3xl p-5 border-amber-400/45">
+          <span class="text-xs text-slate-400 block">กำไรสุทธิคงเหลือ</span>
+          <strong id="ledger-net-profit" class="text-2xl sm:text-3xl font-black text-amber-400 font-mono">฿0</strong>
+        </div>
+      </section>
+
+      <section class="dark-surface-card rounded-3xl p-6 sm:p-8 space-y-5">
+        <div class="border-b border-slate-800 pb-4 flex flex-wrap items-center justify-between gap-2">
+          <div>
+            <h2 class="text-lg sm:text-xl font-extrabold text-amber-300">บันทึกรายการรายรับ - รายจ่ายประจำวัน</h2>
+            <p class="text-xs text-slate-400">บันทึกรวดเร็วบนมือถือและส่งออกเป็นไฟล์ Excel (.CSV) ได้ทุกเวลา</p>
+          </div>
+          <button type="button" onclick="exportLedgerCsv()"
+            class="bg-slate-950 hover:bg-slate-800 text-amber-300 border border-amber-400/40 font-bold px-3.5 py-2 rounded-xl text-xs transition">
+            <i class="fa-solid fa-file-csv mr-1"></i> ดาวน์โหลดไฟล์บัญชี (.CSV)
+          </button>
+        </div>
+
+        <form onsubmit="addLedgerEntry(event)" class="grid sm:grid-cols-2 lg:grid-cols-5 gap-3 text-xs">
+          <select id="ldg-kind" class="dark-field rounded-xl px-3.5 py-3 font-bold">
+            <option value="income">➕ รายรับ (ค่าโดยสาร / งานเหมา)</option>
+            <option value="expense">➖ รายจ่าย (ค่าน้ำมัน / ชาร์จ EV / ทางด่วน)</option>
+          </select>
+          <input type="text" id="ldg-title" required placeholder="รายการ (เช่น ส่งสุวรรณภูมิ-พัทยา / เติมน้ำมัน) *" class="dark-field rounded-xl px-3.5 py-3">
+          <input type="number" id="ldg-amount" min="1" required placeholder="จำนวนเงิน (บาท) *" class="dark-field rounded-xl px-3.5 py-3 font-mono text-amber-300">
+          <input type="date" id="ldg-date" required class="dark-field rounded-xl px-3.5 py-3">
+          <button type="submit" class="bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold rounded-xl px-4 py-3 shadow transition">
+            <i class="fa-solid fa-floppy-disk mr-1"></i> บันทึกรายการ
+          </button>
+        </form>
+
+        <div id="ledger-entries-list" class="space-y-2.5 pt-2"></div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="bg-slate-950 text-slate-400 border-t border-amber-500/25 py-9 px-4 text-xs mt-10">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+      <div class="text-center sm:text-left space-y-1">
+        <p class="font-bold text-amber-300">🚖 The Driver TH 🇹🇭 Premium Service Official Network</p>
+        <p class="text-[11px] text-slate-500">ศูนย์บริหารจัดการรถ เอกสารแจ้งเตือนวันหมดอายุ และสมุดบัญชีคนขับ</p>
+      </div>
+      <div class="flex flex-wrap justify-center gap-x-4 gap-y-2 font-semibold">
+        <a href="index.html" class="hover:text-amber-400 transition">หน้าหลัก</a>
+        <a href="driver_fleet_hub.html" class="text-amber-300">จัดการรถ &amp; บัญชีคนขับ</a>
+        <a href="captain_insurance.html" class="hover:text-teal-300 transition">Captain Insurance</a>
+        <a href="rtaf_pass_register.html" class="hover:text-sky-300 transition">บัตรผ่าน ทอ.</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const MASTER_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyeDCdxBD10D_AFZQY2NxeylLOiAmAHLesSDZHXYCb3TsYs4wYer_kRTPVOs3VpK2pP/exec';
+    const DOCS_STORAGE_KEY = 'tdt_driver_doc_reminders_v1';
+    const LEDGER_STORAGE_KEY = 'tdt_driver_expense_ledger_v1';
+
+    let docReminders = [];
+    let ledgerEntries = [];
+
+    function esc(s) {
+      return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    function showToast(msg) {
+      const box = document.getElementById('toast-box');
+      const txt = document.getElementById('toast-text');
+      if (!box || !txt) return;
+      txt.textContent = msg;
+      box.classList.remove('hidden');
+      setTimeout(() => box.classList.add('hidden'), 3200);
+    }
+
+    function switchHubTab(tab) {
+      const isDocs = tab === 'docs';
+      document.getElementById('hub-panel-docs').classList.toggle('hidden', !isDocs);
+      document.getElementById('hub-panel-ledger').classList.toggle('hidden', isDocs);
+      document.getElementById('tab-btn-docs').className = isDocs
+        ? 'bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-extrabold px-4 py-2.5 rounded-xl text-xs sm:text-sm transition'
+        : 'bg-slate-950 hover:bg-slate-800 text-slate-200 border border-slate-700 font-bold px-4 py-2.5 rounded-xl text-xs sm:text-sm transition';
+      document.getElementById('tab-btn-ledger').className = !isDocs
+        ? 'bg-gradient-to-r from-emerald-500 to-teal-400 text-slate-950 font-extrabold px-4 py-2.5 rounded-xl text-xs sm:text-sm transition'
+        : 'bg-slate-950 hover:bg-slate-800 text-slate-200 border border-slate-700 font-bold px-4 py-2.5 rounded-xl text-xs sm:text-sm transition';
+    }
+
+    function loadStoredData() {
+      try { docReminders = JSON.parse(localStorage.getItem(DOCS_STORAGE_KEY) || '[]'); } catch (_) { docReminders = []; }
+      try { ledgerEntries = JSON.parse(localStorage.getItem(LEDGER_STORAGE_KEY) || '[]'); } catch (_) { ledgerEntries = []; }
+    }
+
+    function saveStoredData() {
+      try { localStorage.setItem(DOCS_STORAGE_KEY, JSON.stringify(docReminders)); } catch (_) {}
+      try { localStorage.setItem(LEDGER_STORAGE_KEY, JSON.stringify(ledgerEntries)); } catch (_) {}
+    }
+
+    function getDaysRemaining(expiryStr) {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const target = new Date(expiryStr);
+      target.setHours(0, 0, 0, 0);
+      return Math.round((target - today) / 86400000);
+    }
+
+    function addDocumentReminder(e) {
+      e.preventDefault();
+      const item = {
+        id: 'DOC-' + Date.now(),
+        type: document.getElementById('doc-type').value,
+        plate: document.getElementById('doc-plate').value.trim(),
+        expiry: document.getElementById('doc-expiry').value,
+        note: document.getElementById('doc-note').value.trim()
+      };
+      docReminders.unshift(item);
+      saveStoredData();
+      e.target.reset();
+      renderDocReminders();
+      showToast('เพิ่มรายการแจ้งเตือนวันหมดอายุเรียบร้อยแล้ว');
+    }
+
+    function removeDocReminder(id) {
+      docReminders = docReminders.filter(d => d.id !== id);
+      saveStoredData();
+      renderDocReminders();
+      showToast('ลบรายการแจ้งเตือนแล้ว');
+    }
+
+    function renderDocReminders() {
+      const listEl = document.getElementById('doc-reminders-list');
+      const countEl = document.getElementById('doc-alert-count');
+      const urgentCount = docReminders.filter(d => getDaysRemaining(d.expiry) <= 30).length;
+      if (countEl) countEl.textContent = urgentCount;
+
+      if (!docReminders.length) {
+        listEl.innerHTML = '<div class="col-span-full text-center py-8 text-slate-400 text-xs">ยังไม่มีรายการเอกสารที่บันทึกไว้ กรอกข้อมูลด้านบนเพื่อเริ่มระบบแจ้งเตือนล่วงหน้า 30 วัน</div>';
+        return;
+      }
+
+      const sorted = [...docReminders].sort((a, b) => getDaysRemaining(a.expiry) - getDaysRemaining(b.expiry));
+      listEl.innerHTML = sorted.map(d => {
+        const days = getDaysRemaining(d.expiry);
+        let badgeCls = 'bg-emerald-950/80 text-emerald-300 border-emerald-500/40';
+        let statusText = `เหลืออีก ${days} วัน`;
+        if (days < 0) {
+          badgeCls = 'bg-rose-950 text-rose-300 border-rose-500/60';
+          statusText = `หมดอายุแล้ว ${Math.abs(days)} วัน!`;
+        } else if (days <= 30) {
+          badgeCls = 'bg-amber-950 text-amber-300 border-amber-400/60';
+          statusText = `ใกล้หมดอายุ! เหลือ ${days} วัน`;
+        }
+
+        const renewLink = d.type.includes('ประกัน')
+          ? `<a href="captain_insurance.html" class="text-xs font-extrabold text-teal-300 hover:underline">เช็กเบี้ยต่อประกัน →</a>`
+          : (d.type.includes('ทอ.') ? `<a href="rtaf_pass_register.html" class="text-xs font-extrabold text-sky-300 hover:underline">ยื่นต่อบัตรผ่าน ทอ. →</a>` : '');
+
+        return `
+          <div class="bg-slate-950/85 border border-slate-800 rounded-2xl p-4 space-y-2.5 flex flex-col justify-between">
+            <div class="space-y-1.5">
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-xs font-extrabold text-white">${esc(d.type)}</span>
+                <span class="text-[11px] font-extrabold px-2.5 py-0.5 rounded-full border ${badgeCls}">${statusText}</span>
+              </div>
+              <p class="text-xs text-amber-300 font-mono font-bold">ทะเบียน / เลขที่: ${esc(d.plate)}</p>
+              <p class="text-xs text-slate-400">วันหมดอายุ: <strong class="text-slate-200">${esc(d.expiry)}</strong> ${d.note ? `· ${esc(d.note)}` : ''}</p>
+            </div>
+            <div class="pt-2 border-t border-slate-800 flex items-center justify-between">
+              ${renewLink || '<span></span>'}
+              <button type="button" onclick="removeDocReminder('${esc(d.id)}')" class="text-xs text-rose-400 hover:text-rose-300 font-semibold">
+                <i class="fa-solid fa-trash mr-1"></i> ลบ
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    async function syncDocsToCloud() {
+      if (!docReminders.length) {
+        showToast('ไม่มีรายการเอกสารสำหรับสำรองข้อมูล');
+        return;
+      }
+      const btn = document.getElementById('btn-sync-docs');
+      btn.disabled = true;
+      try {
+        await fetch(MASTER_WEB_APP_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'fleet_doc_reminders',
+            items: docReminders
+          })
+        });
+        showToast('สำรองรายการแจ้งเตือนเอกสารเข้าฐานข้อมูลกลางเรียบร้อยแล้ว');
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    function addLedgerEntry(e) {
+      e.preventDefault();
+      const entry = {
+        id: 'LDG-' + Date.now(),
+        kind: document.getElementById('ldg-kind').value,
+        title: document.getElementById('ldg-title').value.trim(),
+        amount: Number(document.getElementById('ldg-amount').value || 0),
+        date: document.getElementById('ldg-date').value
+      };
+      ledgerEntries.unshift(entry);
+      saveStoredData();
+      document.getElementById('ldg-title').value = '';
+      document.getElementById('ldg-amount').value = '';
+      renderLedger();
+      showToast('บันทึกรายการบัญชีเรียบร้อยแล้ว');
+    }
+
+    function removeLedgerEntry(id) {
+      ledgerEntries = ledgerEntries.filter(x => x.id !== id);
+      saveStoredData();
+      renderLedger();
+    }
+
+    function renderLedger() {
+      let income = 0;
+      let expense = 0;
+      ledgerEntries.forEach(item => {
+        if (item.kind === 'income') income += Number(item.amount || 0);
+        else expense += Number(item.amount || 0);
+      });
+      const net = income - expense;
+
+      document.getElementById('ledger-total-income').textContent = `฿${income.toLocaleString()}`;
+      document.getElementById('ledger-total-expense').textContent = `฿${expense.toLocaleString()}`;
+      const netEl = document.getElementById('ledger-net-profit');
+      netEl.textContent = `${net < 0 ? '-' : ''}฿${Math.abs(net).toLocaleString()}`;
+      netEl.className = net >= 0
+        ? 'text-2xl sm:text-3xl font-black text-amber-400 font-mono'
+        : 'text-2xl sm:text-3xl font-black text-rose-400 font-mono';
+
+      const listEl = document.getElementById('ledger-entries-list');
+      if (!ledgerEntries.length) {
+        listEl.innerHTML = '<div class="text-center py-8 text-slate-400 text-xs">ยังไม่มีรายการรายรับ-รายจ่าย เริ่มจดบันทึกรายการแรกด้านบนได้เลยครับ</div>';
+        return;
+      }
+
+      listEl.innerHTML = ledgerEntries.map(item => {
+        const isInc = item.kind === 'income';
+        return `
+          <div class="bg-slate-950/85 border border-slate-800 rounded-2xl p-3.5 flex items-center justify-between gap-3 text-xs">
+            <div class="flex items-center gap-3 min-w-0">
+              <span class="w-8 h-8 rounded-xl flex items-center justify-center shrink-0 font-bold ${isInc ? 'bg-emerald-500/20 text-emerald-400' : 'bg-rose-500/20 text-rose-400'}">
+                <i class="fa-solid ${isInc ? 'fa-arrow-trend-up' : 'fa-arrow-trend-down'}"></i>
+              </span>
+              <div class="min-w-0">
+                <p class="font-bold text-white truncate">${esc(item.title)}</p>
+                <p class="text-[11px] text-slate-400">${esc(item.date)}</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 shrink-0">
+              <strong class="font-mono text-sm ${isInc ? 'text-emerald-400' : 'text-rose-400'}">
+                ${isInc ? '+' : '-'}฿${Number(item.amount).toLocaleString()}
+              </strong>
+              <button type="button" onclick="removeLedgerEntry('${esc(item.id)}')" class="text-slate-500 hover:text-rose-400">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function exportLedgerCsv() {
+      if (!ledgerEntries.length) {
+        showToast('ยังไม่มีข้อมูลสำหรับส่งออก CSV');
+        return;
+      }
+      const header = ['วันที่', 'ประเภท', 'รายการ', 'จำนวนเงิน (บาท)'];
+      const rows = ledgerEntries.map(r => [
+        r.date,
+        r.kind === 'income' ? 'รายรับ' : 'รายจ่าย',
+        `"${String(r.title).replace(/"/g, '""')}"`,
+        r.amount
+      ].join(','));
+      const csv = '\uFEFF' + [header.join(','), ...rows].join('\n');
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `TheDriverTH_Account_${new Date().toISOString().slice(0, 10)}.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast('ดาวน์โหลดไฟล์บัญชี CSV เรียบร้อยแล้ว');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const todayIso = new Date().toISOString().split('T')[0];
+      document.getElementById('ldg-date').value = todayIso;
+      document.getElementById('doc-expiry').value = todayIso;
+      loadStoredData();
+      renderDocReminders();
+      renderLedger();
+    });
+
+    let scalePct = Number(localStorage.getItem('tdt_font_scale_pct')) || 100;
+    function changeScale(step) {
+      scalePct = Math.min(130, Math.max(90, scalePct + step * 10));
+      document.documentElement.style.fontSize = `${(scalePct / 100) * 16}px`;
+      document.getElementById('font-pct').textContent = `${scalePct}%`;
+      localStorage.setItem('tdt_font_scale_pct', String(scalePct));
+    }
+    changeScale(0);
+  </script>
+</body>
+</html>

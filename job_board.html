@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>บัตรสมาชิกดิจิทัล & QR Code ยืนยันตัวตน | 🚖 The Driver TH 🇹🇭 Premium Service</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    html { font-size: 16px; transition: font-size 0.18s ease; }
+    html, body, input, select, textarea, button { font-family: 'Prompt', sans-serif !important; }
+    body { background-color: #f8fafc; color: #0f172a; overflow-x: clip; }
+    .digital-card-bg {
+      background:
+        radial-gradient(circle at 85% 15%, rgba(251, 191, 36, 0.35) 0%, transparent 45%),
+        radial-gradient(circle at 15% 85%, rgba(16, 185, 129, 0.22) 0%, transparent 50%),
+        linear-gradient(135deg, #060911 0%, #0f172a 55%, #1e293b 100%);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+  <nav class="bg-slate-950/95 text-slate-200 border-b border-amber-400/25 sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+      <a href="index.html" class="inline-flex items-center gap-3 text-amber-400">
+        <img src="TheDriverTH.jpg" alt="โลโก้" onerror="this.onerror=null;this.src='https://placehold.co/80x80/0f172a/fbbf24?text=TDT';" class="w-11 h-11 rounded-2xl object-cover border border-amber-400">
+        <div>
+          <span class="block text-sm sm:text-base">🚖 The Driver TH 🇹🇭 Premium Service</span>
+          <span class="block text-[11px] text-slate-400">บัตรสมาชิกดิจิทัล &amp; QR Code ยืนยันตัวตน</span>
+        </div>
+      </a>
+      <div class="flex flex-wrap items-center gap-2 text-xs">
+        <a href="index.html" class="px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 hover:border-amber-400">หน้าหลัก</a>
+        <a href="register.html" class="px-3 py-2 rounded-xl bg-slate-900 border border-emerald-500/40 text-emerald-300">ตรวจสอบรหัสสมาชิก</a>
+        <a href="tracking.html" class="px-3 py-2 rounded-xl bg-slate-900 border border-amber-500/40 text-amber-300">ติดตามคำร้อง</a>
+        <div class="inline-flex items-center bg-slate-900 border border-amber-400/30 rounded-xl p-1">
+          <button type="button" onclick="changeScale(-1)" class="px-2 py-1 hover:text-amber-300">A-</button>
+          <span id="font-pct" class="px-1.5 text-amber-300">100%</span>
+          <button type="button" onclick="changeScale(1)" class="px-2 py-1 hover:text-amber-300">A+</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="flex-grow max-w-4xl w-full mx-auto px-4 py-8 space-y-6">
+    <section class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-5">
+      <div class="space-y-1">
+        <span class="text-xs font-extrabold text-amber-800 bg-amber-100 border border-amber-300 px-3 py-1 rounded-full">DIGITAL MEMBER ID</span>
+        <h1 class="text-xl sm:text-2xl font-black text-slate-900 pt-1">เปิดบัตรสมาชิกดิจิทัลพร้อม QR Code ยืนยันตัวตน</h1>
+        <p class="text-xs sm:text-sm text-slate-500">กรอกรหัสสมาชิกและเบอร์โทรศัพท์ 4 หลักสุดท้ายเพื่อแสดงบัตรสมาชิกอิเล็กทรอนิกส์บนมือถือสำหรับให้ผู้โดยสารหรือจุดคัดกรองตรวจสอบ</p>
+      </div>
+
+      <form onsubmit="loadDigitalCard(event)" class="grid sm:grid-cols-12 gap-3">
+        <div class="sm:col-span-5">
+          <input type="text" id="card-member-code" required placeholder="รหัสสมาชิก (เช่น B2464)"
+            class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-mono uppercase">
+        </div>
+        <div class="sm:col-span-4">
+          <input type="text" id="card-phone-last4" maxlength="4" pattern="\d{4}" required placeholder="เบอร์โทร 4 หลักสุดท้าย"
+            class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-mono">
+        </div>
+        <div class="sm:col-span-3">
+          <button type="submit" id="btn-show-card" class="w-full h-full bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-extrabold py-3 px-4 rounded-xl text-xs sm:text-sm shadow">
+            แสดงบัตรสมาชิก
+          </button>
+        </div>
+      </form>
+      <p id="card-error-msg" class="hidden text-xs text-rose-600 font-bold"></p>
+    </section>
+
+    <!-- ตัวบัตรสมาชิกดิจิทัล -->
+    <section id="digital-card-wrapper" class="hidden flex justify-center">
+      <div class="digital-card-bg w-full max-w-lg rounded-3xl p-6 sm:p-8 text-white border-2 border-amber-400/70 shadow-2xl space-y-5 relative overflow-hidden">
+        <div class="flex items-center justify-between border-b border-amber-400/25 pb-4">
+          <div class="flex items-center gap-3">
+            <img src="TheDriverTH.jpg" alt="โลโก้" onerror="this.onerror=null;this.src='https://placehold.co/80x80/0f172a/fbbf24?text=TDT';" class="w-12 h-12 rounded-2xl object-cover border border-amber-400">
+            <div>
+              <p class="text-[10px] tracking-widest uppercase text-amber-300 font-bold">OFFICIAL VERIFIED DRIVER</p>
+              <h2 class="text-sm sm:text-base font-extrabold text-white">🚖 The Driver TH 🇹🇭 Premium Service</h2>
+            </div>
+          </div>
+          <span class="bg-emerald-500/20 border border-emerald-400/50 text-emerald-300 text-[11px] font-bold px-3 py-1 rounded-full">
+            <i class="fa-solid fa-circle-check mr-1"></i> ยืนยันตัวตนแล้ว
+          </span>
+        </div>
+
+        <div class="grid grid-cols-12 gap-4 items-center">
+          <div class="col-span-8 space-y-2">
+            <div>
+              <span class="text-[10px] text-amber-300/80 block">หมายเลขสมาชิก (MEMBER ID)</span>
+              <strong id="dc-code" class="text-2xl sm:text-3xl font-black text-amber-400 font-mono">-</strong>
+            </div>
+            <div>
+              <span class="text-[10px] text-slate-400 block">ชื่อในเครือข่าย / ชื่อ-นามสกุล</span>
+              <p id="dc-chat" class="text-sm sm:text-base font-bold text-white">-</p>
+              <p id="dc-name" class="text-xs text-slate-300">-</p>
+            </div>
+            <div class="grid grid-cols-2 gap-2 pt-1 text-xs">
+              <div class="bg-white/5 rounded-xl p-2.5 border border-white/10">
+                <span class="text-[10px] text-slate-400 block">รถยนต์ / รุ่นรถ</span>
+                <strong id="dc-car" class="text-white">-</strong>
+              </div>
+              <div class="bg-white/5 rounded-xl p-2.5 border border-white/10">
+                <span class="text-[10px] text-slate-400 block">ทะเบียนรถ</span>
+                <strong id="dc-plate" class="text-amber-300 font-mono">-</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-span-4 flex flex-col items-center justify-center bg-white p-2.5 rounded-2xl shadow-lg">
+            <img id="dc-qr-img" src="" alt="QR Code ยืนยันตัวตน" class="w-28 h-28 object-contain">
+            <span class="text-[9px] text-slate-800 font-bold mt-1 text-center">สแกนตรวจสอบตัวตน</span>
+          </div>
+        </div>
+
+        <div class="pt-3 border-t border-white/15 flex items-center justify-between text-[11px] text-slate-300">
+          <span>โทรติดต่อ: <strong id="dc-phone" class="font-mono text-white">-</strong></span>
+          <span class="text-emerald-300 font-semibold"><i class="fa-solid fa-shield-halved mr-1"></i>ฐานข้อมูล DATAMember แท้</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-slate-950 text-slate-400 border-t border-amber-500/20 py-8 px-4 text-xs mt-10">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+      <div class="text-center sm:text-left">
+        <p class="font-bold text-amber-300">🚖 The Driver TH 🇹🇭 Premium Service Official Network</p>
+        <p class="text-[11px] text-slate-500 mt-0.5">ศูนย์กลางระบบสมาชิก บัตรสมาชิกประเมศฐ์ และระบบเฝ้าระวังภัยกลุ่มคนขับรถรับจ้าง</p>
+      </div>
+      <div class="flex flex-wrap justify-center gap-4 font-semibold">
+        <a href="index.html" class="hover:text-amber-400 transition">หน้าหลัก</a>
+        <a href="register.html" class="hover:text-emerald-400 transition">ระบบสมาชิก</a>
+        <a href="member_register.html" class="hover:text-teal-400 transition">ลงทะเบียนสมาชิกใหม่</a>
+        <a href="pcard.html" class="hover:text-amber-400 transition">ทำบัตรสมาชิกประเมศฐ์</a>
+        <a href="unblock_request.html" class="hover:text-sky-400 transition">ขอปลดล็อก OpenChat</a>
+        <a href="blacklist.html" class="hover:text-rose-400 transition">ตรวจสอบ Blacklist</a>
+        <a href="privacy_policy.html" class="hover:text-amber-300 transition">ประกาศความเป็นส่วนตัว</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const MASTER_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyeDCdxBD10D_AFZQY2NxeylLOiAmAHLesSDZHXYCb3TsYs4wYer_kRTPVOs3VpK2pP/exec';
+
+    async function loadDigitalCard(e) {
+      if (e) e.preventDefault();
+      const code = document.getElementById('card-member-code').value.trim().toUpperCase();
+      const last4 = document.getElementById('card-phone-last4').value.trim();
+      const errEl = document.getElementById('card-error-msg');
+      const cardWrap = document.getElementById('digital-card-wrapper');
+      const btn = document.getElementById('btn-show-card');
+
+      errEl.classList.add('hidden');
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> กำลังตรวจสอบ...';
+
+      try {
+        const res = await fetch(`${MASTER_WEB_APP_URL}?action=digital_card&code=${encodeURIComponent(code)}&last4=${encodeURIComponent(last4)}&t=${Date.now()}`);
+        const json = await res.json();
+        if (!json.success || !json.member) {
+          cardWrap.classList.add('hidden');
+          errEl.textContent = json.error || 'ไม่พบรหัสสมาชิกนี้ในฐานข้อมูลที่อนุมัติแล้ว';
+          errEl.classList.remove('hidden');
+          return;
+        }
+        const m = json.member;
+        document.getElementById('dc-code').textContent = m.memberCode;
+        document.getElementById('dc-chat').textContent = m.chatName;
+        document.getElementById('dc-name').textContent = m.fullName;
+        document.getElementById('dc-car').textContent = `${m.carBrand} ${m.carModel}`.trim() || '-';
+        document.getElementById('dc-plate').textContent = m.licensePlate || '-';
+        document.getElementById('dc-phone').textContent = m.maskedPhone || '-';
+
+        const verifyUrl = `${window.location.origin}${window.location.pathname.replace('member_card_digital.html', 'register.html')}`;
+        document.getElementById('dc-qr-img').src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(verifyUrl + '?code=' + m.memberCode)}`;
+        cardWrap.classList.remove('hidden');
+      } catch (_) {
+        errEl.textContent = 'ไม่สามารถเชื่อมต่อฐานข้อมูลได้ในขณะนี้ กรุณาลองใหม่อีกครั้ง';
+        errEl.classList.remove('hidden');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'แสดงบัตรสมาชิก';
+      }
+    }
+
+    let scalePct = Number(localStorage.getItem('tdt_font_scale_pct')) || 100;
+    function changeScale(step) {
+      scalePct = Math.min(130, Math.max(90, scalePct + step * 10));
+      document.documentElement.style.fontSize = `${(scalePct / 100) * 16}px`;
+      document.getElementById('font-pct').textContent = `${scalePct}%`;
+      localStorage.setItem('tdt_font_scale_pct', String(scalePct));
+    }
+    changeScale(0);
+  </script>
+</body>
+</html>

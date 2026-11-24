@@ -14,6 +14,29 @@
     html, body, input, select, textarea, button { font-family: 'Prompt', sans-serif !important; }
     body { background-color: #070a12; color: #f8fafc; overflow-x: clip; }
     .gold-grad { background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%); }
+    .tdt-announce-pill {
+      display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px;
+      border-radius: 999px; font-size: 11px; font-weight: 800; letter-spacing: 0.03em;
+      line-height: 1.25; white-space: nowrap; flex-shrink: 0;
+    }
+    .tdt-announce-pill.is-emerald.is-solid { background: linear-gradient(135deg, #34d399 0%, #10b981 100%); color: #052e16; box-shadow: 0 3px 10px rgba(16, 185, 129, 0.3); }
+    .tdt-announce-pill.is-emerald.is-outline { background: transparent; color: #34d399; border: 1.5px solid #10b981; }
+    .tdt-announce-pill.is-emerald.is-soft { background: rgba(16, 185, 129, 0.16); color: #6ee7b7; border: 1px solid rgba(52, 211, 153, 0.35); }
+    .tdt-announce-pill.is-amber.is-solid { background: linear-gradient(135deg, #fde68a 0%, #f59e0b 100%); color: #070a12; box-shadow: 0 3px 10px rgba(245, 158, 11, 0.3); }
+    .tdt-announce-pill.is-amber.is-outline { background: transparent; color: #fbbf24; border: 1.5px solid #f59e0b; }
+    .tdt-announce-pill.is-amber.is-soft { background: rgba(245, 158, 11, 0.16); color: #fde68a; border: 1px solid rgba(251, 191, 36, 0.35); }
+    .tdt-announce-pill.is-sky.is-solid { background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%); color: #ffffff; box-shadow: 0 3px 10px rgba(14, 165, 233, 0.3); }
+    .tdt-announce-pill.is-sky.is-outline { background: transparent; color: #38bdf8; border: 1.5px solid #0ea5e9; }
+    .tdt-announce-pill.is-sky.is-soft { background: rgba(14, 165, 233, 0.16); color: #7dd3fc; border: 1px solid rgba(56, 189, 248, 0.35); }
+    .tdt-announce-pill.is-rose.is-solid { background: linear-gradient(135deg, #fb7185 0%, #e11d48 100%); color: #ffffff; box-shadow: 0 3px 10px rgba(225, 29, 72, 0.3); }
+    .tdt-announce-pill.is-rose.is-outline { background: transparent; color: #fb7185; border: 1.5px solid #f43f5e; }
+    .tdt-announce-pill.is-rose.is-soft { background: rgba(244, 63, 94, 0.16); color: #fda4af; border: 1px solid rgba(251, 113, 133, 0.35); }
+    .tdt-announce-pill.is-purple.is-solid { background: linear-gradient(135deg, #c084fc 0%, #9333ea 100%); color: #ffffff; box-shadow: 0 3px 10px rgba(147, 51, 234, 0.3); }
+    .tdt-announce-pill.is-purple.is-outline { background: transparent; color: #c084fc; border: 1.5px solid #a855f7; }
+    .tdt-announce-pill.is-purple.is-soft { background: rgba(168, 85, 247, 0.16); color: #d8b4fe; border: 1px solid rgba(192, 132, 252, 0.35); }
+    .tdt-announce-pill.is-slate.is-solid { background: linear-gradient(135deg, #cbd5e1 0%, #64748b 100%); color: #070a12; }
+    .tdt-announce-pill.is-slate.is-outline { background: transparent; color: #cbd5e1; border: 1.5px solid #64748b; }
+    .tdt-announce-pill.is-slate.is-soft { background: rgba(148, 163, 184, 0.16); color: #e2e8f0; border: 1px solid rgba(148, 163, 184, 0.35); }
   
     /* TDT Mobile-First Typography & Touch Spacing */
     html, body {
@@ -138,6 +161,66 @@
         width: 44px !important;
         height: 44px !important;
       }
+    }
+
+    /* TDT Age-Friendly (25-60) High-Contrast Dark Mode & Readability */
+    body {
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    /* High-contrast secondary text for 45-60+ eyes & daylight glare inside cars */
+    .text-slate-400 {
+      color: #cbd5e1 !important;
+    }
+    .text-slate-500 {
+      color: #94a3b8 !important;
+    }
+    input::placeholder, textarea::placeholder {
+      color: #94a3b8 !important;
+      opacity: 1;
+    }
+    /* Clearer card & form borders in bright daylight */
+    .border-slate-800 {
+      border-color: #26334d !important;
+    }
+    .border-slate-700, .border-slate-700\/80 {
+      border-color: #3b4c6b !important;
+    }
+    /* Comfortable Thai script sizing (vowels & tone marks) */
+    .text-xs {
+      font-size: 0.8125rem !important; /* 13px */
+      line-height: 1.5 !important;
+    }
+    .text-sm {
+      font-size: 0.9375rem !important; /* 15px */
+      line-height: 1.55 !important;
+    }
+    /* Clearer focus rings & tap targets */
+    input:focus, select:focus, textarea:focus, button:focus-visible, a:focus-visible {
+      outline: 2px solid rgba(251, 191, 36, 0.75);
+      outline-offset: 2px;
+    }
+    .tdt-font-btn {
+      min-width: 36px !important;
+      height: 36px !important;
+      font-size: 13.5px !important;
+      font-weight: 700 !important;
+      color: #f8fafc !important;
+    }
+    .tdt-brand-tagline {
+      font-size: 12px !important;
+      color: #e2e8f0 !important;
+    }
+    .tdt-page-announce-bar {
+      font-size: 13.5px !important;
+      border-color: rgba(251, 191, 36, 0.36) !important;
+    }
+    .tdt-drawer-link {
+      min-height: 46px !important;
+      font-size: 15px !important;
+    }
+    .tdt-drawer-cat-title {
+      font-size: 13px !important;
     }
 </style>
 </head>
@@ -302,6 +385,95 @@
             </button>
           </div>
         </form>
+
+        <!-- จัดการแถบประกาศแยกตามหน้าเว็บ (26 หน้า) -->
+        <div class="pt-6 border-t border-slate-800 space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <h3 class="text-base font-extrabold text-amber-300">
+                <i class="fa-solid fa-bullhorn mr-1.5"></i>จัดการแถบประกาศแยกตามหน้าเว็บ (26 หน้า)
+              </h3>
+              <p class="text-xs text-slate-400">กำหนดข้อความประกาศและป้ายสถานะด้านขวาให้แตกต่างกันในแต่ละหน้าได้ทันที</p>
+            </div>
+            <span id="pa-custom-count" class="text-xs bg-amber-400/15 text-amber-300 border border-amber-400/35 px-3 py-1 rounded-full font-bold">กำหนดเอง 0 หน้า</span>
+          </div>
+
+          <!-- ตัวอย่างแถบประกาศแบบเรียลไทม์ -->
+          <div class="bg-slate-950/90 border border-amber-400/25 rounded-2xl px-4 py-3 flex flex-wrap items-center justify-between gap-2.5 text-xs">
+            <div class="flex flex-wrap items-center gap-2.5 min-w-0">
+              <span id="pa-preview-pill" class="tdt-announce-pill is-amber is-solid">
+                <i id="pa-preview-icon" class="fa-solid fa-bullhorn"></i>
+                <span id="pa-preview-pill-text">OFFICIAL NETWORK</span>
+              </span>
+              <span id="pa-preview-text" class="text-slate-200 font-medium">ศูนย์รวมบริการเครือข่ายคนขับรถมืออาชีพ</span>
+            </div>
+            <span class="text-amber-300 font-semibold shrink-0">
+              <i class="fa-solid fa-calendar-check mr-1"></i><span id="pa-preview-badge">รอบส่งบัตร: 11 ธันวาคม 2569</span>
+            </span>
+          </div>
+
+          <div class="grid md:grid-cols-3 gap-4 bg-slate-950/70 border border-slate-800 rounded-2xl p-4 text-xs sm:text-sm">
+            <div class="md:col-span-3 space-y-1">
+              <label for="pa-page-select" class="block text-xs font-bold text-slate-300">เลือกหน้าเว็บที่ต้องการแก้ไขประกาศ</label>
+              <select id="pa-page-select" onchange="loadSelectedPageAnnouncement()" class="w-full bg-slate-900 border border-amber-400/40 rounded-xl px-4 py-3 text-white font-semibold focus:outline-none focus:border-amber-400"></select>
+            </div>
+
+            <div class="space-y-1">
+              <label for="pa-pill-text" class="block text-xs font-bold text-slate-300">ข้อความในกรอบป้ายแคปซูล</label>
+              <input type="text" id="pa-pill-text" oninput="updatePageAnnouncementPreview()" placeholder="เช่น NEW MEMBER REGISTRATION"
+                class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white font-semibold focus:outline-none focus:border-amber-400">
+            </div>
+
+            <div class="space-y-1">
+              <label for="pa-pill-color" class="block text-xs font-bold text-slate-300">สีของกรอบป้าย</label>
+              <select id="pa-pill-color" onchange="updatePageAnnouncementPreview()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-amber-400">
+                <option value="emerald">เขียวมรกต (Emerald)</option>
+                <option value="amber">ทองพรีเมียม (Amber/Gold)</option>
+                <option value="sky">ฟ้าสดใส (Sky Blue)</option>
+                <option value="rose">แดงแจ้งเตือน (Rose Red)</option>
+                <option value="purple">ม่วงวีไอพี (VIP Purple)</option>
+                <option value="slate">เทาเรียบหรู (Executive Slate)</option>
+              </select>
+            </div>
+
+            <div class="space-y-1">
+              <label for="pa-pill-style" class="block text-xs font-bold text-slate-300">รูปแบบกรอบป้าย</label>
+              <select id="pa-pill-style" onchange="updatePageAnnouncementPreview()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-amber-400">
+                <option value="solid">ทึบไล่เฉดเด่นชัด (Solid)</option>
+                <option value="outline">ขอบโปร่งเรืองแสง (Outline)</option>
+                <option value="soft">พื้นอ่อนละมุน (Soft Glass)</option>
+              </select>
+            </div>
+
+            <div class="md:col-span-2 space-y-1">
+              <label for="pa-text-input" class="block text-xs font-bold text-slate-300">ข้อความประกาศหลัก</label>
+              <input type="text" id="pa-text-input" oninput="updatePageAnnouncementPreview()" placeholder="พิมพ์ข้อความประกาศสำหรับหน้านี้..."
+                class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-amber-400">
+            </div>
+
+            <div class="space-y-1">
+              <label for="pa-badge-input" class="block text-xs font-bold text-slate-300">ป้ายข้อความสีทอง (ฝั่งขวา)</label>
+              <input type="text" id="pa-badge-input" oninput="updatePageAnnouncementPreview()" placeholder="เช่น รอบส่งบัตร: 11 ธันวาคม 2569"
+                class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-amber-300 font-semibold focus:outline-none focus:border-amber-400">
+            </div>
+
+            <div class="md:col-span-3 flex flex-wrap items-center justify-between gap-3 pt-1">
+              <label class="inline-flex items-center gap-2 text-xs text-slate-300 cursor-pointer select-none">
+                <input type="checkbox" id="pa-enabled-input" checked class="w-4 h-4 accent-amber-400 rounded">
+                <span>แสดงแถบประกาศบนหน้านี้</span>
+              </label>
+
+              <div class="flex flex-wrap items-center gap-2">
+                <button type="button" onclick="resetSelectedPageAnnouncement()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-bold px-4 py-2.5 rounded-xl text-xs transition">
+                  <i class="fa-solid fa-rotate-left mr-1"></i> คืนค่าเริ่มต้นหน้านี้
+                </button>
+                <button type="button" onclick="saveSelectedPageAnnouncement()" class="gold-grad text-slate-950 font-extrabold px-5 py-2.5 rounded-xl text-xs shadow transition">
+                  <i class="fa-solid fa-floppy-disk mr-1"></i> บันทึกประกาศหน้านี้
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <!-- 2. อนุมัติสมาชิกใหม่ -->
@@ -386,6 +558,172 @@
   <script>
     const MASTER_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyeDCdxBD10D_AFZQY2NxeylLOiAmAHLesSDZHXYCb3TsYs4wYer_kRTPVOs3VpK2pP/exec';
     const LOCAL_ADMINS_KEY = 'tdt_admin_accounts_v1';
+    const PAGE_ANNOUNCEMENTS_KEY = 'tdt_page_announcements_v1';
+    const DEFAULT_PAGE_ANNOUNCEMENTS = {
+      'index.html': { label: 'หน้าหลัก (index.html)', pillText: 'OFFICIAL NETWORK', pillColor: 'amber', pillStyle: 'solid', pillIcon: 'fa-solid fa-bullhorn', text: 'ศูนย์รวมบริการเครือข่ายคนขับรถมืออาชีพ', badge: 'รอบส่งบัตร: 11 ธันวาคม 2569' },
+      'member_register.html': { label: '1. สมัครสมาชิกใหม่ (member_register.html)', pillText: 'NEW MEMBER REGISTRATION', pillColor: 'emerald', pillStyle: 'solid', pillIcon: 'fa-solid fa-file-signature', text: 'กรอกข้อมูลและแนบรูปถ่ายให้ครบถ้วน เพื่อรับรหัสสมาชิกภายใน 14 วัน', badge: 'เปิดรับสมัครออนไลน์' },
+      'register.html': { label: '1. ตรวจสอบรหัสสมาชิก (register.html)', pillText: 'MEMBER DIRECTORY', pillColor: 'emerald', pillStyle: 'solid', pillIcon: 'fa-solid fa-users-viewfinder', text: 'ค้นหารหัสสมาชิกจากชื่อในห้อง เบอร์โทร 4 ตัวท้าย หรือทะเบียนรถ', badge: 'ซิงก์ฐานข้อมูลล่าสุด' },
+      'member_edit.html': { label: '1. แก้ไขข้อมูลสมาชิก (member_edit.html)', pillText: 'MEMBER UPDATE', pillColor: 'amber', pillStyle: 'solid', pillIcon: 'fa-solid fa-user-pen', text: 'แจ้งเปลี่ยนรถ ทะเบียน หรือข้อมูลติดต่อสำหรับสมาชิกที่มีรหัสแล้ว', badge: 'อัปเดตข้อมูลสมาชิก' },
+      'member_card_digital.html': { label: '1. บัตรดิจิทัล & QR (member_card_digital.html)', pillText: 'DIGITAL MEMBER CARD', pillColor: 'emerald', pillStyle: 'solid', pillIcon: 'fa-solid fa-qrcode', text: 'เปิดบัตรสมาชิกอิเล็กทรอนิกส์พร้อม QR Code ยืนยันตัวตนบนมือถือ', badge: 'บัตรดิจิทัล 24 ชม.' },
+      'luxury_car_register.html': { label: '1. สมัครห้อง Luxury Car (luxury_car_register.html)', pillText: 'LUXURY CAR CLUB', pillColor: 'purple', pillStyle: 'solid', pillIcon: 'fa-solid fa-crown', text: 'คัดกรองรถหรู Executive Van และ VIP เพื่อเข้าห้อง OpenChat เฉพาะกลุ่ม', badge: 'เฉพาะกลุ่ม Luxury' },
+      'tracking.html': { label: '1. ติดตามสถานะคำร้อง (tracking.html)', pillText: 'REQUEST TRACKING', pillColor: 'sky', pillStyle: 'solid', pillIcon: 'fa-solid fa-satellite-dish', text: 'ตรวจสอบสถานะคำร้องและเลขพัสดุทุกบริการได้ในหน้าเดียว', badge: 'ติดตามสถานะเรียลไทม์' },
+      'unblock_request.html': { label: '1. ขอปลดล็อก OpenChat (unblock_request.html)', pillText: 'OPENCHAT UNBLOCK', pillColor: 'sky', pillStyle: 'solid', pillIcon: 'fa-solid fa-unlock-keyhole', text: 'ยื่นคำร้องชี้แจงพร้อมหลักฐานกรณีถูกบล็อกหรือลบออกจากห้อง OpenChat', badge: 'ทีมแอดมินพิจารณา' },
+      'job_board.html': { label: '2. กระดานแลกเปลี่ยนงาน (job_board.html)', pillText: 'DRIVER JOB BOARD', pillColor: 'emerald', pillStyle: 'solid', pillIcon: 'fa-solid fa-handshake', text: 'กระดานปล่อยงานและรับงานแทนเฉพาะสมาชิกที่ยืนยันรหัสแล้วเท่านั้น', badge: 'แลกเปลี่ยนงานสมาชิก' },
+      'empty_leg_matcher.html': { label: '2. จับคู่รถว่างขากลับ (empty_leg_matcher.html)', pillText: 'EMPTY-LEG MATCHER', pillColor: 'sky', pillStyle: 'solid', pillIcon: 'fa-solid fa-route', text: 'ปักหมุดแจ้งพิกัดรถว่างขากลับต่างจังหวัด ลดการตีรถเปล่า', badge: 'จับคู่รถว่างขากลับ' },
+      'fare_calculator.html': { label: '2. คำนวณค่าโดยสาร (fare_calculator.html)', pillText: 'FARE CALCULATOR', pillColor: 'emerald', pillStyle: 'solid', pillIcon: 'fa-solid fa-calculator', text: 'ประเมินราคากลางงานเหมาต่างจังหวัดและรับ-ส่งสนามบินตามประเภทรถ', badge: 'มาตรฐานราคากลาง' },
+      'trip_voucher.html': { label: '2. ออกใบจอง / E-Voucher (trip_voucher.html)', pillText: 'TRIP E-VOUCHER', pillColor: 'amber', pillStyle: 'solid', pillIcon: 'fa-solid fa-file-invoice-dollar', text: 'ออกใบยืนยันการจองรถและใบเสร็จดิจิทัลพร้อม QR Code ส่งลูกค้า', badge: 'E-Voucher พร้อมส่ง' },
+      'driver_fleet_hub.html': { label: '2. จัดการรถ & บัญชี (driver_fleet_hub.html)', pillText: 'FLEET & EXPENSE HUB', pillColor: 'emerald', pillStyle: 'solid', pillIcon: 'fa-solid fa-wallet', text: 'แจ้งเตือนวันหมดอายุ พ.ร.บ. ประกันภัย บัตรผ่าน ทอ. และจดบัญชีรายรับ-จ่าย', badge: 'ผู้ช่วยจัดการรถ' },
+      'driver_pitstop_reputation.html': { label: '2. จุดพักรถ EV & เครดิต (driver_pitstop_reputation.html)', pillText: 'EV PIT-STOP & RATING', pillColor: 'amber', pillStyle: 'solid', pillIcon: 'fa-solid fa-charging-station', text: 'รวมพิกัดสถานีชาร์จ EV จุดจอดรอสนามบิน และคะแนนความน่าเชื่อถือสมาชิก', badge: 'คลังพิกัด EV & เครดิต' },
+      'pcard.html': { label: '3. ทำบัตรประเมศฐ์ & เช็กพัสดุ (pcard.html)', pillText: 'PRAMET MEMBER CARD', pillColor: 'amber', pillStyle: 'solid', pillIcon: 'fa-solid fa-id-badge', text: 'สมัครทำบัตรสมาชิกประเมศฐ์เคลือบใสกันน้ำ พร้อมเช็กเลขพัสดุย้อนหลัง', badge: 'รอบส่งบัตร: 11 ธันวาคม 2569' },
+      'grab_driver_register.html': { label: '3. สมัครคนขับ Grab (grab_driver_register.html)', pillText: 'GRAB DRIVER APPLY', pillColor: 'emerald', pillStyle: 'solid', pillIcon: 'fa-solid fa-car', text: 'สมัครขับ GrabCar / GrabTaxi / GrabSUV ออนไลน์พร้อมทีมดูแลเอกสาร', badge: 'สมัครคนขับ Grab' },
+      'bolt_driver_register.html': { label: '3. สมัครคนขับ Bolt (bolt_driver_register.html)', pillText: 'BOLT DRIVER APPLY', pillColor: 'emerald', pillStyle: 'solid', pillIcon: 'fa-solid fa-bolt', text: 'สมัครขับ Bolt Economy / Comfort / XL ออนไลน์ อนุมัติไว', badge: 'สมัครคนขับ Bolt' },
+      'captain_insurance.html': { label: '3. ประกันภัย Captain (captain_insurance.html)', pillText: 'CAPTAIN INSURANCE', pillColor: 'sky', pillStyle: 'solid', pillIcon: 'fa-solid fa-shield-halved', text: 'เช็กเบี้ยประกันภัยรถยนต์ชั้น 1, 2+, 3+, ชั้น 3 และ พ.ร.บ. ราคาสมาชิก', badge: 'Captain Insurance' },
+      'rtaf_pass_register.html': { label: '3. บัตรผ่าน ทอ. ดอนเมือง (rtaf_pass_register.html)', pillText: 'RTAF VEHICLE PASS', pillColor: 'sky', pillStyle: 'solid', pillIcon: 'fa-solid fa-plane-departure', text: 'ยื่นขอทำบัตรผ่านยานพาหนะเข้า-ออก เขตพื้นที่ ทอ. (ดอนเมือง)', badge: 'ขอใหม่ / ต่ออายุ' },
+      'vip_referral_guide.html': { label: '3. ลายแทงท่องเที่ยว VIP (vip_referral_guide.html)', pillText: 'VIP REFERRAL GUIDE', pillColor: 'purple', pillStyle: 'solid', pillIcon: 'fa-solid fa-map-location-dot', text: 'ขอรับลายแทงสถานที่ท่องเที่ยวและร้านค้าพันธมิตรเพื่อรับค่าแนะนำ', badge: 'สิทธิพิเศษ VIP' },
+      'tour_book_order.html': { label: '3. สั่งซื้อสมุดทัวร์ (tour_book_order.html)', pillText: 'TOUR BOOK ORDER', pillColor: 'emerald', pillStyle: 'solid', pillIcon: 'fa-solid fa-book', text: 'สั่งซื้อสมุดทัวร์โซน กทม.-ปริมณฑล และพัทยา-ชลบุรี จัดส่งถึงบ้าน', badge: 'พร้อมจัดส่งทั่วไทย' },
+      'blacklist.html': { label: '4. ศูนย์เช็ก Blacklist (blacklist.html)', pillText: 'BLACKLIST GUARD', pillColor: 'rose', pillStyle: 'solid', pillIcon: 'fa-solid fa-user-shield', text: 'ตรวจสอบเบอร์โทร เลขบัญชี และประวัติเตือนภัยก่อนรับงานทุกครั้ง', badge: 'เฝ้าระวังภัย 24 ชม.' },
+      'driver_news.html': { label: '4. ข่าวสารคนขับทุกแอป (driver_news.html)', pillText: 'DRIVER NEWS HUB', pillColor: 'emerald', pillStyle: 'solid', pillIcon: 'fa-solid fa-newspaper', text: 'อัปเดตข่าวสาร Grab, Bolt, Line Man, inDrive และกฎหมาย รย.17/รย.18', badge: 'ข่าวสารคนขับล่าสุด' },
+      'community.html': { label: '4. เว็บบอร์ดชุมชน (community.html)', pillText: 'COMMUNITY FORUM', pillColor: 'sky', pillStyle: 'solid', pillIcon: 'fa-solid fa-comments', text: 'พื้นที่แลกเปลี่ยนเส้นทาง รีวิวสถานที่ และพูดคุยสำหรับสมาชิกเครือข่าย', badge: 'ชุมชนสมาชิก' },
+      'guide.html': { label: '4. คู่มือ & กฎกติกา (guide.html)', pillText: 'MEMBER GUIDE', pillColor: 'slate', pillStyle: 'solid', pillIcon: 'fa-solid fa-book-open', text: 'คู่มือการใช้งาน กฎกติกาเครือข่าย วิธีตั้งชื่อ และช่องทางติดต่อแอดมิน', badge: 'คู่มือสมาชิก' },
+      'privacy_policy.html': { label: '4. นโยบาย PDPA (privacy_policy.html)', pillText: 'PDPA PRIVACY POLICY', pillColor: 'slate', pillStyle: 'solid', pillIcon: 'fa-solid fa-scale-balanced', text: 'นโยบายคุ้มครองข้อมูลส่วนบุคคล (PDPA) ของเครือข่าย The Driver Thailand', badge: 'มาตรฐาน PDPA' }
+    };
+    let pageAnnouncementsMap = {};
+
+    function getLocalPageAnnouncements() {
+      try {
+        const raw = localStorage.getItem(PAGE_ANNOUNCEMENTS_KEY);
+        const parsed = raw ? JSON.parse(raw) : {};
+        return parsed && typeof parsed === 'object' ? parsed : {};
+      } catch (_) {
+        return {};
+      }
+    }
+
+    function saveLocalPageAnnouncements(map) {
+      try {
+        localStorage.setItem(PAGE_ANNOUNCEMENTS_KEY, JSON.stringify(map || {}));
+      } catch (_) {}
+    }
+
+    function initPageAnnouncementEditor() {
+      const sel = document.getElementById('pa-page-select');
+      if (!sel) return;
+      pageAnnouncementsMap = Object.assign({}, getLocalPageAnnouncements(), pageAnnouncementsMap);
+      if (sel.options.length === 0) {
+        Object.keys(DEFAULT_PAGE_ANNOUNCEMENTS).forEach(file => {
+          const opt = document.createElement('option');
+          opt.value = file;
+          opt.textContent = DEFAULT_PAGE_ANNOUNCEMENTS[file].label;
+          sel.appendChild(opt);
+        });
+      }
+      updateCustomAnnouncementCount();
+      loadSelectedPageAnnouncement();
+    }
+
+    function updateCustomAnnouncementCount() {
+      const el = document.getElementById('pa-custom-count');
+      if (!el) return;
+      const count = Object.keys(pageAnnouncementsMap).length;
+      el.textContent = `กำหนดเอง ${count} หน้า`;
+    }
+
+    function loadSelectedPageAnnouncement() {
+      const sel = document.getElementById('pa-page-select');
+      if (!sel) return;
+      const file = sel.value || 'index.html';
+      const def = DEFAULT_PAGE_ANNOUNCEMENTS[file] || { pillText: 'ANNOUNCEMENT', pillColor: 'amber', pillStyle: 'solid', pillIcon: 'fa-solid fa-bullhorn', text: '', badge: '' };
+      const custom = pageAnnouncementsMap[file];
+      document.getElementById('pa-pill-text').value = custom && typeof custom.pillText === 'string' ? custom.pillText : def.pillText;
+      document.getElementById('pa-pill-color').value = (custom && custom.pillColor) || def.pillColor || 'amber';
+      document.getElementById('pa-pill-style').value = (custom && custom.pillStyle) || def.pillStyle || 'solid';
+      document.getElementById('pa-text-input').value = custom && typeof custom.text === 'string' ? custom.text : def.text;
+      document.getElementById('pa-badge-input').value = custom && typeof custom.badge === 'string' ? custom.badge : def.badge;
+      document.getElementById('pa-enabled-input').checked = custom ? custom.enabled !== false : true;
+      updatePageAnnouncementPreview();
+    }
+
+    function updatePageAnnouncementPreview() {
+      const file = document.getElementById('pa-page-select')?.value || 'index.html';
+      const def = DEFAULT_PAGE_ANNOUNCEMENTS[file] || { pillIcon: 'fa-solid fa-bullhorn' };
+      const pillText = document.getElementById('pa-pill-text')?.value || '';
+      const pillColor = document.getElementById('pa-pill-color')?.value || 'amber';
+      const pillStyle = document.getElementById('pa-pill-style')?.value || 'solid';
+      const text = document.getElementById('pa-text-input')?.value || '';
+      const badge = document.getElementById('pa-badge-input')?.value || '';
+      const pPill = document.getElementById('pa-preview-pill');
+      const pIcon = document.getElementById('pa-preview-icon');
+      const pPillText = document.getElementById('pa-preview-pill-text');
+      const pText = document.getElementById('pa-preview-text');
+      const pBadge = document.getElementById('pa-preview-badge');
+      if (pPill) {
+        pPill.className = `tdt-announce-pill is-${pillColor} is-${pillStyle}`;
+        pPill.style.display = pillText.trim() ? 'inline-flex' : 'none';
+      }
+      if (pIcon) pIcon.className = def.pillIcon || 'fa-solid fa-bullhorn';
+      if (pPillText) pPillText.textContent = pillText;
+      if (pText) pText.textContent = text || '(ไม่ได้ระบุข้อความประกาศ)';
+      if (pBadge) pBadge.textContent = badge || '-';
+    }
+
+    async function persistPageAnnouncementsToCloud() {
+      if (!sessionAdmin) return false;
+      try {
+        const res = await fetch(MASTER_WEB_APP_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({
+            action: 'admin_save_settings',
+            adminId: sessionAdmin.username,
+            passcode: sessionAdmin.password,
+            settings: {
+              announcement: document.getElementById('cfg-announcement')?.value.trim() || '',
+              nextRound: document.getElementById('cfg-next-round')?.value.trim() || '',
+              systemStatus: document.getElementById('cfg-system-status')?.value.trim() || '',
+              lineOfficial: document.getElementById('cfg-line-official')?.value.trim() || '',
+              priceBkk: document.getElementById('cfg-price-bkk')?.value.trim() || '',
+              pricePty: document.getElementById('cfg-price-pty')?.value.trim() || '',
+              lineChannelToken: document.getElementById('cfg-line-token')?.value.trim() || '',
+              lineAdminGroupId: document.getElementById('cfg-line-admin-group')?.value.trim() || '',
+              lineJobsGroupId: document.getElementById('cfg-line-jobs-group')?.value.trim() || '',
+              pageAnnouncements: JSON.stringify(pageAnnouncementsMap)
+            }
+          })
+        });
+        const json = await res.json();
+        return Boolean(json && json.success);
+      } catch (_) {
+        return false;
+      }
+    }
+
+    async function saveSelectedPageAnnouncement() {
+      const file = document.getElementById('pa-page-select')?.value;
+      if (!file) return;
+      pageAnnouncementsMap[file] = {
+        pillText: document.getElementById('pa-pill-text').value.trim(),
+        pillColor: document.getElementById('pa-pill-color').value || 'amber',
+        pillStyle: document.getElementById('pa-pill-style').value || 'solid',
+        text: document.getElementById('pa-text-input').value.trim(),
+        badge: document.getElementById('pa-badge-input').value.trim(),
+        enabled: document.getElementById('pa-enabled-input').checked
+      };
+      saveLocalPageAnnouncements(pageAnnouncementsMap);
+      updateCustomAnnouncementCount();
+      const cloudOk = await persistPageAnnouncementsToCloud();
+      toast(cloudOk ? `บันทึกแถบประกาศของหน้า ${file} เรียบร้อยแล้ว` : `บันทึกแถบประกาศของหน้า ${file} ลงเครื่องเรียบร้อยแล้ว`);
+    }
+
+    async function resetSelectedPageAnnouncement() {
+      const file = document.getElementById('pa-page-select')?.value;
+      if (!file) return;
+      delete pageAnnouncementsMap[file];
+      saveLocalPageAnnouncements(pageAnnouncementsMap);
+      updateCustomAnnouncementCount();
+      loadSelectedPageAnnouncement();
+      await persistPageAnnouncementsToCloud();
+      toast(`คืนค่าแถบประกาศเริ่มต้นของหน้า ${file} แล้ว`);
+    }
     const DEFAULT_ADMINS = [
       { username: 'admin', password: 'TDT2026ADMIN', displayName: 'ผู้ดูแลระบบหลัก (Super Admin)', role: 'Super Admin' }
     ];
@@ -461,6 +799,7 @@
         document.getElementById('login-view').classList.add('hidden');
         document.getElementById('dashboard-view').classList.remove('hidden');
         renderAdminAccountsList();
+        initPageAnnouncementEditor();
         refreshAllAdminData();
         toast('เข้าสู่ระบบหลังบ้านสำเร็จ');
       } finally {
@@ -561,6 +900,16 @@
         document.getElementById('cfg-line-token').value = cfg.lineChannelToken || '';
         document.getElementById('cfg-line-admin-group').value = cfg.lineAdminGroupId || '';
         document.getElementById('cfg-line-jobs-group').value = cfg.lineJobsGroupId || '';
+        if (cfg.pageAnnouncements) {
+          try {
+            const parsedPA = typeof cfg.pageAnnouncements === 'string' ? JSON.parse(cfg.pageAnnouncements) : cfg.pageAnnouncements;
+            if (parsedPA && typeof parsedPA === 'object') {
+              pageAnnouncementsMap = Object.assign({}, getLocalPageAnnouncements(), parsedPA);
+              saveLocalPageAnnouncements(pageAnnouncementsMap);
+              initPageAnnouncementEditor();
+            }
+          } catch (_) {}
+        }
 
         const pendingMembers = Array.isArray(json.pendingMembers) ? json.pendingMembers : [];
         document.getElementById('count-pending-members').textContent = pendingMembers.length;
@@ -622,7 +971,8 @@
             pricePty: document.getElementById('cfg-price-pty').value.trim(),
             lineChannelToken: document.getElementById('cfg-line-token').value.trim(),
             lineAdminGroupId: document.getElementById('cfg-line-admin-group').value.trim(),
-            lineJobsGroupId: document.getElementById('cfg-line-jobs-group').value.trim()
+            lineJobsGroupId: document.getElementById('cfg-line-jobs-group').value.trim(),
+            pageAnnouncements: JSON.stringify(pageAnnouncementsMap)
           }
         })
       });

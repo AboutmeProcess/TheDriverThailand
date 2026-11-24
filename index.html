@@ -10,13 +10,10 @@
   <meta name="apple-mobile-web-app-title" content="TheDriverTH">
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="TheDriverTH.jpg">
-  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Google Fonts: Prompt Only (Unified Typography) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <!-- FontAwesome 6 Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <script>
@@ -26,16 +23,6 @@
           fontFamily: {
             sans: ['Prompt', 'sans-serif'],
             mono: ['Prompt', 'sans-serif'],
-          },
-          colors: {
-            driver: {
-              50: '#fffbeb',
-              100: '#fef3c7',
-              400: '#fbbf24',
-              500: '#f59e0b',
-              600: '#d97706',
-              900: '#090d16',
-            }
           }
         }
       }
@@ -46,9 +33,8 @@
     html {
       scroll-behavior: smooth;
       font-size: 16px;
-      transition: font-size 0.18s ease;
     }
-    html, body, input, select, textarea, button, code, pre, .font-mono, .font-sans {
+    html, body, input, select, textarea, button {
       font-family: 'Prompt', sans-serif !important;
     }
     html, body {
@@ -58,639 +44,378 @@
       overflow-x: clip;
     }
 
-    /* Executive Obsidian & Champagne Gold Mesh (Always High Contrast for Hero Banner) */
-    .luxury-hero-bg {
-      background:
-        linear-gradient(145deg, #060911 0%, #0d1424 58%, #151f34 100%) !important;
-      color: #ffffff !important;
-    }
-
-    .luxury-glass {
-      background: rgba(10, 16, 29, 0.86);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(251, 191, 36, 0.22);
-    }
-
-    .gold-shimmer-text {
-      color: #fbbf24;
-    }
-
-    /* Bouncy & Floating Icon Animations */
-    @keyframes floatSlow {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-3px); }
-    }
-    @keyframes iconBouncePop {
-      0%, 100% { transform: translateY(0) scale(1); }
-      40% { transform: translateY(-4px) scale(1.08) rotate(-2deg); }
-      70% { transform: translateY(-1px) scale(1.02) rotate(2deg); }
-    }
-
-    .icon-float {
-      animation: floatSlow 3.6s ease-in-out infinite;
-    }
-    .group:hover .icon-bounce-hover,
-    .icon-bounce-hover:hover {
-      animation: iconBouncePop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .card-luxury {
-      transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
-      border-color: rgba(203, 213, 225, 0.9);
-    }
-    .card-luxury:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 14px 28px -10px rgba(9, 13, 22, 0.12);
-      border-color: rgba(217, 119, 6, 0.45);
-    }
-
-    .luxury-glass {
-      background: rgba(15, 23, 42, 0.78);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(251, 191, 36, 0.28);
-    }
-
-    .gold-shimmer-text {
-      background: linear-gradient(90deg, #fde68a 0%, #fbbf24 35%, #f59e0b 65%, #fef08a 100%);
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: goldShimmer 5s linear infinite;
-    }
-
-    @keyframes goldShimmer {
-      to { background-position: 200% center; }
-    }
-
-    /* Bouncy & Floating Icon Animations */
-    @keyframes floatSlow {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-5px); }
-    }
-    @keyframes iconBouncePop {
-      0%, 100% { transform: translateY(0) scale(1); }
-      40% { transform: translateY(-6px) scale(1.12) rotate(-4deg); }
-      70% { transform: translateY(-2px) scale(1.04) rotate(3deg); }
-    }
-
-    .icon-float {
-      animation: floatSlow 3.2s ease-in-out infinite;
-    }
-    .group:hover .icon-bounce-hover,
-    .icon-bounce-hover:hover {
-      animation: iconBouncePop 0.65s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .card-luxury {
-      transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
-    }
-    .card-luxury:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 16px 30px -12px rgba(9, 13, 22, 0.14), 0 0 0 1px rgba(217, 119, 6, 0.35);
-    }
-
-    /* 3D Showcase Billboard Carousel */
-    .billboard-3d-shell {
-      perspective: 1400px;
-      transform-style: preserve-3d;
-    }
-    .billboard-3d-stage {
-      position: relative;
-      border-radius: 24px;
-      overflow: hidden;
-      background:
-        radial-gradient(circle at 15% 20%, rgba(251, 191, 36, 0.16) 0%, transparent 45%),
-        radial-gradient(circle at 85% 80%, rgba(16, 185, 129, 0.11) 0%, transparent 48%),
-        linear-gradient(135deg, #060911 0%, #0d1424 55%, #151f34 100%);
-      border: 1px solid rgba(251, 191, 36, 0.32);
-      box-shadow:
-        0 24px 48px -16px rgba(2, 6, 23, 0.55),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
-      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
-    }
-    .billboard-3d-stage:hover {
-      transform: translateY(-2px);
-      border-color: rgba(251, 191, 36, 0.48);
-      box-shadow:
-        0 28px 56px -16px rgba(2, 6, 23, 0.65),
-        inset 0 1px 0 rgba(255, 255, 255, 0.14);
-    }
-    .card-luxury:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 14px 28px -10px rgba(9, 13, 22, 0.12);
-      border-color: rgba(217, 119, 6, 0.45);
-    }
-
-    .luxury-glass {
-      background: rgba(15, 23, 42, 0.78);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(251, 191, 36, 0.28);
-    }
-
-    .gold-shimmer-text {
-      background: linear-gradient(90deg, #fde68a 0%, #fbbf24 35%, #f59e0b 65%, #fef08a 100%);
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: goldShimmer 5s linear infinite;
-    }
-
-    @keyframes goldShimmer {
-      to { background-position: 200% center; }
-    }
-
-    /* Bouncy & Floating Icon Animations */
-    @keyframes floatSlow {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-5px); }
-    }
-    @keyframes iconBouncePop {
-      0%, 100% { transform: translateY(0) scale(1); }
-      40% { transform: translateY(-6px) scale(1.12) rotate(-4deg); }
-      70% { transform: translateY(-2px) scale(1.04) rotate(3deg); }
-    }
-
-    .icon-float {
-      animation: floatSlow 3.2s ease-in-out infinite;
-    }
-    .group:hover .icon-bounce-hover,
-    .icon-bounce-hover:hover {
-      animation: iconBouncePop 0.65s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .card-luxury {
-      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease, border-color 0.3s ease;
-    }
-    .card-luxury:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 22px 38px -12px rgba(9, 13, 22, 0.14), 0 0 0 1px rgba(245, 158, 11, 0.35);
-    }
-
-    /* 3D Showcase Billboard Carousel */
-    .billboard-3d-shell {
-      position: relative;
-    }
-    .billboard-3d-stage {
-      position: relative;
-      border-radius: 28px;
-      overflow: hidden;
-      background:
-        radial-gradient(circle at 15% 20%, rgba(251, 191, 36, 0.24) 0%, transparent 45%),
-        radial-gradient(circle at 85% 80%, rgba(16, 185, 129, 0.16) 0%, transparent 48%),
-        linear-gradient(135deg, #060911 0%, #0f172a 55%, #19243b 100%);
-      border: 1px solid rgba(251, 191, 36, 0.35);
-      box-shadow:
-        0 24px 48px -16px rgba(2, 6, 23, 0.55),
-        inset 0 1px 0 rgba(255, 255, 255, 0.12);
-    }
-    .billboard-depth-card {
-      background: linear-gradient(145deg, rgba(15, 23, 42, 0.92) 0%, rgba(30, 41, 59, 0.82) 100%);
-      border: 1px solid rgba(251, 191, 36, 0.35);
-      box-shadow:
-        0 14px 28px -12px rgba(0, 0, 0, 0.45),
-        0 0 0 1px rgba(255, 255, 255, 0.05) inset;
-    }
-    .billboard-nav-btn {
-      width: 40px;
-      height: 40px;
-      border-radius: 999px;
-      background: rgba(6, 9, 17, 0.82);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(251, 191, 36, 0.45);
-      color: #fde68a;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
-    }
-    .billboard-nav-btn:hover {
-      background: #fbbf24;
-      color: #060911;
-      transform: scale(1.08);
-    }
-    .billboard-dot {
-      height: 8px;
-      border-radius: 999px;
-      transition: all 0.28s ease;
-      cursor: pointer;
-      border: none;
-    }
-
-    /* REFINED EXECUTIVE GLOBAL NAVIGATION BAR */
+    /* TDT CLEAN 1-ROW HEADER & 4-CATEGORY DRAWER */
     .tdt-global-nav {
-      box-sizing: border-box;
-      font-family: 'Prompt', sans-serif;
-      background: linear-gradient(180deg, rgba(7, 11, 20, 0.98) 0%, rgba(10, 15, 28, 0.96) 100%);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      color: #e2e8f0;
-      border-bottom: 1px solid rgba(251, 191, 36, 0.28);
       position: sticky;
       top: 0;
       z-index: 1000;
-      box-shadow: 0 10px 28px -8px rgba(2, 6, 23, 0.65);
       width: 100%;
+      background: linear-gradient(180deg, rgba(7, 11, 20, 0.98) 0%, rgba(13, 21, 38, 0.96) 100%);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-top: 2px solid rgba(251, 191, 36, 0.55);
+      border-bottom: 1px solid rgba(251, 191, 36, 0.34);
+      box-shadow: 0 10px 28px -8px rgba(2, 6, 23, 0.75), 0 1px 0 rgba(251, 191, 36, 0.12) inset;
+      font-family: 'Prompt', sans-serif;
     }
-    .tdt-global-nav *, .tdt-global-nav *::before, .tdt-global-nav *::after {
+    .tdt-global-nav *, .tdt-global-nav *::before, .tdt-global-nav *::after,
+    .tdt-drawer-panel *, .tdt-drawer-panel *::before, .tdt-drawer-panel *::after {
       box-sizing: border-box;
     }
-    .tdt-global-nav-inner {
-      max-width: 1280px;
+    .tdt-nav-bar-inner {
+      max-width: 1240px;
       margin: 0 auto;
-      padding: 12px 16px;
+      padding: 10px 14px;
+      min-height: 74px;
       display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: flex-start;
-      gap: 10px;
-    }
-    @media (min-width: 640px) {
-      .tdt-global-nav-inner {
-        padding: 14px 24px;
-        gap: 12px;
-      }
-    }
-    .tdt-nav-top-row {
-      width: 100%;
-      display: flex;
-      flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+      gap: 10px;
     }
-    .tdt-global-brand {
+    .tdt-brand-link {
       display: inline-flex;
       align-items: center;
-      gap: 13px;
-      font-size: 16px;
-      line-height: 1.3;
-      font-weight: 500;
-      color: #fbbf24;
+      gap: 11px;
       text-decoration: none;
-      text-align: left;
-      transition: color 0.15s ease;
+      min-width: 0;
+      flex-shrink: 1;
     }
-    .tdt-brand-text-stack {
-      display: inline-flex;
+    .tdt-brand-logo {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      object-fit: cover;
+      border: 1.5px solid rgba(251, 191, 36, 0.88);
+      box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(251, 191, 36, 0.18);
+      background: #fff;
+      flex-shrink: 0;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .tdt-brand-link:hover .tdt-brand-logo {
+      transform: scale(1.04);
+      box-shadow: 0 10px 24px -4px rgba(0, 0, 0, 0.65), 0 0 14px rgba(251, 191, 36, 0.35);
+    }
+    @media (min-width: 640px) {
+      .tdt-brand-logo {
+        width: 52px;
+        height: 52px;
+        border-radius: 15px;
+      }
+    }
+    .tdt-brand-text-wrap {
+      display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
-      gap: 5px;
-      line-height: 1.3;
-      font-weight: 400;
+      gap: 4px;
+      min-width: 0;
     }
-    .tdt-brand-subline-row {
+    .tdt-brand-name {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #fbbf24;
+      line-height: 1.25;
+      white-space: normal;
+    }
+    .tdt-brand-gold {
+      background: linear-gradient(90deg, #fde68a 0%, #fbbf24 50%, #f59e0b 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .tdt-emoji {
+      font-style: normal;
+      -webkit-text-fill-color: initial;
+      color: initial;
+    }
+    @media (min-width: 640px) {
+      .tdt-brand-name {
+        font-size: 16.5px;
+        white-space: nowrap;
+      }
+    }
+    .tdt-brand-subline {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      justify-content: flex-start;
-      gap: 8px;
-      margin-top: 0;
-      font-size: 12px;
+      gap: 6px;
+      margin-top: 1px;
+    }
+    .tdt-brand-tagline {
+      font-size: 11px;
       font-weight: 400;
       color: #cbd5e1;
-      text-align: left;
+      line-height: 1.3;
     }
     .tdt-brand-exec-pill {
       display: inline-flex;
       align-items: center;
       gap: 5px;
-      background: rgba(251, 191, 36, 0.15);
+      width: fit-content;
+      background: rgba(251, 191, 36, 0.14);
       border: 1px solid rgba(251, 191, 36, 0.42);
       color: #fde68a;
-      font-size: 10.5px;
-      font-weight: 500;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
       padding: 2px 8px;
       border-radius: 999px;
       line-height: 1.25;
+      white-space: nowrap;
     }
-    .tdt-brand-logo-img {
-      width: 50px;
-      height: 50px;
-      border-radius: 15px;
-      object-fit: cover;
-      object-position: center;
-      background: #ffffff;
-      padding: 0;
-      border: 1.5px solid rgba(251, 191, 36, 0.85);
-      box-shadow:
-        0 8px 20px -4px rgba(0, 0, 0, 0.55),
-        0 0 0 2px rgba(251, 191, 36, 0.16);
-      flex-shrink: 0;
-      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+    .tdt-brand-exec-pill i {
+      color: #fbbf24;
+      font-size: 9px;
     }
-    .tdt-global-brand:hover .tdt-brand-logo-img {
-      transform: scale(1.05);
-      border-color: #fde68a;
-      box-shadow:
-        0 10px 24px -4px rgba(0, 0, 0, 0.65),
-        0 0 14px rgba(251, 191, 36, 0.32);
-    }
-    @media (min-width: 640px) {
-      .tdt-global-brand {
-        gap: 14px;
-        font-size: 19px;
-      }
-      .tdt-brand-logo-img {
-        width: 56px;
-        height: 56px;
-        border-radius: 16px;
-      }
-    }
-    .tdt-global-brand:hover {
-      color: #fde68a;
-    }
-    .tdt-global-brand:hover i {
-      animation: iconBouncePop 0.6s ease;
-    }
-    .tdt-global-right-controls {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: flex-start;
-      gap: 7px;
-      width: 100%;
-    }
-    .tdt-nav-divider {
-      width: 1px;
-      height: 20px;
-      background: rgba(148, 163, 184, 0.22);
-      margin: 0 2px;
+    .tdt-desktop-menu {
       display: none;
+      align-items: center;
+      gap: 6px;
     }
     @media (min-width: 1024px) {
-      .tdt-nav-divider {
-        display: inline-block;
+      .tdt-desktop-menu {
+        display: flex;
       }
     }
-    .tdt-cat-dropdown-wrap {
+    .tdt-d-wrap {
       position: relative;
-      display: inline-block;
     }
-    .tdt-cat-menu-panel {
-      display: none;
-      position: absolute;
-      left: 0;
-      top: calc(100% + 8px);
-      width: 316px;
-      max-width: calc(100vw - 32px);
-      border-radius: 16px;
-      padding: 10px;
-      background-color: #070b14;
-      border: 1px solid rgba(251, 191, 36, 0.45);
-      box-shadow: 0 24px 54px -10px rgba(0, 0, 0, 0.92), 0 0 0 1px rgba(15, 23, 42, 0.9);
-      z-index: 1060;
-      text-align: left;
-    }
-    .tdt-cat-menu-panel.is-open {
-      display: block;
-    }
-    .tdt-cat-menu-header {
-      padding: 8px 12px;
-      margin-bottom: 6px;
-      border-radius: 11px;
-      font-size: 11px;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .tdt-cat-menu-link {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 10px;
-      border-radius: 12px;
-      background-color: #0d1424;
-      border: 1px solid rgba(148, 163, 184, 0.14);
-      color: #f1f5f9;
-      text-decoration: none;
-      margin-bottom: 6px;
-      transition: all 0.18s ease;
-    }
-    .tdt-cat-menu-link:last-child {
-      margin-bottom: 0;
-    }
-    .tdt-cat-menu-link:hover {
-      background-color: #162038;
-      border-color: rgba(251, 191, 36, 0.5);
-      transform: translateX(2px);
-    }
-    .tdt-cat-menu-icon {
-      width: 28px;
-      height: 28px;
-      border-radius: 8px;
+    .tdt-d-btn {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      font-size: 12px;
-    }
-    .tdt-cat-menu-title {
-      display: block;
-      font-size: 12px;
-      font-weight: 500;
-      line-height: 1.3;
-    }
-    .tdt-cat-menu-sub {
-      display: block;
-      font-size: 10px;
-      font-weight: 400;
-      color: #94a3b8;
-      line-height: 1.25;
-    }
-    .tdt-nav-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
       gap: 6px;
-      height: 36px;
-      min-height: 36px;
-      padding: 0 13px;
+      height: 38px;
+      padding: 0 12px;
       border-radius: 11px;
-      font-size: 12px;
-      line-height: 16px;
-      font-weight: 400;
-      text-decoration: none;
-      white-space: nowrap;
-      background-color: rgba(15, 23, 42, 0.88);
-      border: 1px solid rgba(148, 163, 184, 0.22);
+      font-size: 13px;
+      font-weight: 500;
       color: #e2e8f0;
+      background: rgba(15, 23, 42, 0.72);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      text-decoration: none;
       cursor: pointer;
-      transition: all 0.18s ease;
+      white-space: nowrap;
+      transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.15s;
     }
-    .tdt-nav-btn:hover {
-      background-color: #1e293b;
-      border-color: rgba(251, 191, 36, 0.48);
+    .tdt-d-btn:hover {
+      background: rgba(30, 41, 59, 0.9);
+      border-color: rgba(251, 191, 36, 0.45);
+      color: #fde68a;
       transform: translateY(-1px);
     }
-    .tdt-nav-btn.is-member-cat {
-      color: #6ee7b7;
-      border-color: rgba(52, 211, 153, 0.35);
-      background-color: rgba(6, 78, 59, 0.24);
-    }
-    .tdt-nav-btn.is-member-cat i { color: #34d399; }
-    .tdt-nav-btn.is-quick-register,
-    .tdt-nav-btn.is-quick-check-code {
-      color: #5eead4;
-      border-color: rgba(45, 212, 191, 0.38);
-      background-color: rgba(19, 78, 74, 0.28);
-    }
-    .tdt-nav-btn.is-quick-register i,
-    .tdt-nav-btn.is-quick-check-code i { color: #2dd4bf; }
-    .tdt-nav-btn.is-group-cat {
-      color: #fcd34d;
-      border-color: rgba(251, 191, 36, 0.38);
-      background-color: rgba(120, 53, 15, 0.24);
-    }
-    .tdt-nav-btn.is-group-cat i { color: #fbbf24; }
-    .tdt-nav-btn.is-blacklist { color: #fda4af; border-color: rgba(251, 113, 133, 0.35); }
-    .tdt-nav-btn.is-blacklist i { color: #fb7185; }
-    .tdt-nav-btn.is-admin-link {
-      color: #fde68a;
-      border-color: rgba(251, 191, 36, 0.45);
-      background-color: rgba(245, 158, 11, 0.14);
-    }
-    .tdt-nav-btn.is-admin-link i { color: #fbbf24; }
-    .tdt-nav-btn.active-home {
+    .tdt-d-btn.is-active {
       background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
       border-color: #fcd34d;
       color: #060911;
-      font-weight: 600;
+      font-weight: 700;
       box-shadow: 0 4px 12px rgba(245, 158, 11, 0.32);
     }
-    .tdt-nav-btn.active-home i { color: #060911; }
-    .tdt-util-group {
-      display: inline-flex;
+    .tdt-d-panel {
+      display: none;
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      width: 280px;
+      max-height: 74vh;
+      overflow-y: auto;
+      padding: 8px;
+      border-radius: 14px;
+      background: #070b14;
+      border: 1px solid rgba(251, 191, 36, 0.42);
+      box-shadow: 0 22px 48px rgba(0, 0, 0, 0.85);
+      z-index: 1100;
+    }
+    .tdt-d-panel.is-open {
+      display: block;
+    }
+    .tdt-d-item {
+      display: flex;
       align-items: center;
-      gap: 4px;
-      background-color: rgba(15, 23, 42, 0.92);
-      border: 1px solid rgba(251, 191, 36, 0.28);
-      border-radius: 12px;
-      padding: 3px;
+      gap: 10px;
+      padding: 9px 11px;
+      border-radius: 10px;
+      color: #e2e8f0;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      transition: background 0.15s, color 0.15s;
+    }
+    .tdt-d-item:hover, .tdt-d-item.is-current {
+      background: rgba(251, 191, 36, 0.14);
+      color: #fde68a;
+    }
+    .tdt-d-item i {
+      width: 20px;
+      text-align: center;
+      color: #fbbf24;
+      font-size: 13px;
       flex-shrink: 0;
     }
-    .tdt-util-btn {
+    .tdt-nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      flex-shrink: 0;
+    }
+    .tdt-font-pill {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(15, 23, 42, 0.92);
+      border: 1px solid rgba(251, 191, 36, 0.32);
+      border-radius: 11px;
+      padding: 2px;
+    }
+    .tdt-font-btn {
+      min-width: 32px;
+      height: 34px;
+      padding: 0 7px;
+      border-radius: 8px;
+      border: none;
+      background: transparent;
+      color: #e2e8f0;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .tdt-font-btn:hover {
+      background: rgba(251, 191, 36, 0.18);
+      color: #fde68a;
+    }
+    .tdt-menu-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      height: 40px;
+      padding: 0 13px;
+      border-radius: 11px;
+      background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+      color: #060911;
+      border: 1px solid #fcd34d;
+      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.32);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    @media (min-width: 1024px) {
+      .tdt-menu-trigger {
+        display: none;
+      }
+    }
+    .tdt-drawer-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 6, 23, 0.76);
+      backdrop-filter: blur(4px);
+      z-index: 1200;
+    }
+    .tdt-drawer-backdrop.is-open {
+      display: block;
+    }
+    .tdt-drawer-panel {
+      display: none;
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: min(340px, 90vw);
+      background: #090e1a;
+      border-left: 1px solid rgba(251, 191, 36, 0.28);
+      z-index: 1210;
+      flex-direction: column;
+      box-shadow: -16px 0 40px rgba(0, 0, 0, 0.7);
+      font-family: 'Prompt', sans-serif;
+    }
+    .tdt-drawer-panel.is-open {
+      display: flex;
+    }
+    .tdt-drawer-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+    }
+    .tdt-drawer-close {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      background: rgba(15, 23, 42, 0.9);
+      color: #e2e8f0;
+      font-size: 16px;
+      cursor: pointer;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 4px;
-      height: 30px;
-      padding: 0 9px;
-      border-radius: 9px;
-      font-size: 12px;
-      font-weight: 400;
-      color: #e2e8f0;
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: background-color 0.15s ease, color 0.15s ease;
     }
-    .tdt-util-btn:hover {
-      background-color: rgba(251, 191, 36, 0.18);
-      color: #fde68a;
-    }
-  
-    /* TDT Mobile-First Typography & Touch Spacing */
-    html, body {
-      overflow-x: clip;
-      max-width: 100%;
-    }
-    .tdt-cat-menu-panel {
-      max-height: 75vh;
+    .tdt-drawer-body {
+      flex: 1;
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
+      padding: 12px 14px 24px;
     }
-    @media (max-width: 767px) {
-      .tdt-global-nav {
-        position: relative !important;
-      }
-      .tdt-global-nav-inner {
-        padding: 12px 14px !important;
-        gap: 10px !important;
-      }
-      .tdt-nav-top-row {
-        gap: 10px !important;
-        padding-bottom: 10px !important;
-      }
-      .tdt-global-brand {
-        font-size: 15px !important;
-        gap: 10px !important;
-        line-height: 1.35 !important;
-      }
-      .tdt-brand-logo-img {
-        width: 44px !important;
-        height: 44px !important;
-        border-radius: 12px !important;
-      }
-      .tdt-brand-subline-row {
-        font-size: 12px !important;
-        line-height: 1.4 !important;
-        gap: 6px !important;
-      }
-      .tdt-brand-exec-pill {
-        font-size: 11px !important;
-        padding: 3px 9px !important;
-      }
-      .tdt-util-btn {
-        min-height: 36px !important;
-        min-width: 36px !important;
-        padding: 0 10px !important;
-        font-size: 13px !important;
-      }
-      .tdt-global-right-controls {
-        gap: 8px !important;
-      }
-      .tdt-nav-btn {
-        min-height: 42px !important;
-        height: auto !important;
-        padding: 8px 13px !important;
-        font-size: 13px !important;
-        line-height: 1.35 !important;
-        white-space: normal !important;
-        text-align: left;
-      }
-      .tdt-cat-dropdown-wrap {
-        position: static !important;
-      }
-      .tdt-cat-menu-panel {
-        position: fixed !important;
-        left: 12px !important;
-        right: 12px !important;
-        top: 68px !important;
-        width: auto !important;
-        max-width: none !important;
-        max-height: 75vh !important;
-        padding: 12px !important;
-        z-index: 1200 !important;
-      }
-      .tdt-cat-menu-header {
-        font-size: 12.5px !important;
-        padding: 10px 12px !important;
-      }
-      .tdt-cat-menu-link {
-        padding: 11px 12px !important;
-        gap: 12px !important;
-        margin-bottom: 8px !important;
-      }
-      .tdt-cat-menu-title {
-        font-size: 14px !important;
-        line-height: 1.35 !important;
-      }
-      .tdt-cat-menu-sub {
-        font-size: 12px !important;
-        line-height: 1.4 !important;
-        margin-top: 2px;
-      }
+    .tdt-drawer-search {
+      width: 100%;
+      height: 42px;
+      padding: 0 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      background: #0f172a;
+      color: #f8fafc;
+      font-size: 14px;
+      margin-bottom: 12px;
+      outline: none;
     }
+    .tdt-drawer-search:focus {
+      border-color: #fbbf24;
+    }
+    .tdt-drawer-cat {
+      margin-top: 14px;
+    }
+    .tdt-drawer-cat-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: #fbbf24;
+      padding: 4px 6px 6px;
+      letter-spacing: 0.02em;
+    }
+    .tdt-drawer-link {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      min-height: 42px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      color: #e2e8f0;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 3px;
+    }
+    .tdt-drawer-link:hover, .tdt-drawer-link.is-current {
+      background: rgba(251, 191, 36, 0.14);
+      color: #fde68a;
+    }
+    .tdt-drawer-link i {
+      width: 20px;
+      text-align: center;
+      color: #fbbf24;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    /* Super App Tile & Tab Styling */
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .app-tile {
+      transition: transform 0.18s ease, border-color 0.18s ease, background-color 0.18s ease;
+    }
+    .app-tile:hover {
+      transform: translateY(-2px);
+      border-color: rgba(251, 191, 36, 0.55);
+      background-color: rgba(15, 23, 42, 0.98);
+    }
+
+    /* TDT Mobile-First Typography & Touch Spacing */
     @media (max-width: 640px) {
       h1, h2, h3, h4, p, li, label, span, a, button {
         overflow-wrap: break-word;
@@ -701,1251 +426,904 @@
         font-size: 16px !important;
         min-height: 44px;
       }
-      button:not(.tdt-util-btn):not(.billboard-dot):not(.clear-btn):not([aria-label*="ปิด"]),
-      a[class*="py-2"],
-      a[class*="py-3"],
-      a[class*="rounded-xl"],
-      a[class*="rounded-2xl"] {
-        min-height: 42px;
-        line-height: 1.35;
-      }
-      .whitespace-nowrap {
-        max-width: 100%;
-      }
-      .table-container,
-      .overflow-x-auto {
-        overflow-x: auto !important;
-        -webkit-overflow-scrolling: touch;
-        max-width: 100%;
-      }
-      .billboard-nav-btn {
-        width: 44px !important;
-        height: 44px !important;
-      }
+    }
+    /* TDT PER-PAGE ANNOUNCEMENT BAR */
+    .tdt-page-announce-wrap {
+      max-width: 1024px;
+      width: 100%;
+      margin: 14px auto 0;
+      padding: 0 16px;
+      box-sizing: border-box;
+      font-family: 'Prompt', sans-serif;
+    }
+    .tdt-page-announce-bar {
+      background: rgba(15, 23, 42, 0.92);
+      border: 1px solid rgba(251, 191, 36, 0.26);
+      border-radius: 16px;
+      padding: 10px 15px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px 14px;
+      font-size: 12.5px;
+      line-height: 1.45;
+      box-shadow: 0 8px 20px -10px rgba(0, 0, 0, 0.55);
+    }
+    .tdt-page-announce-left {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px 10px;
+      min-width: 0;
+      color: #e2e8f0;
+      font-weight: 500;
+    }
+    .tdt-announce-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      line-height: 1.25;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .tdt-announce-pill.is-emerald.is-solid { background: linear-gradient(135deg, #34d399 0%, #10b981 100%); color: #052e16; box-shadow: 0 3px 10px rgba(16, 185, 129, 0.28); }
+    .tdt-announce-pill.is-emerald.is-outline { background: transparent; color: #34d399; border: 1.5px solid #10b981; }
+    .tdt-announce-pill.is-emerald.is-soft { background: rgba(16, 185, 129, 0.16); color: #6ee7b7; border: 1px solid rgba(52, 211, 153, 0.35); }
+    .tdt-announce-pill.is-amber.is-solid { background: linear-gradient(135deg, #fde68a 0%, #f59e0b 100%); color: #070a12; box-shadow: 0 3px 10px rgba(245, 158, 11, 0.28); }
+    .tdt-announce-pill.is-amber.is-outline { background: transparent; color: #fbbf24; border: 1.5px solid #f59e0b; }
+    .tdt-announce-pill.is-amber.is-soft { background: rgba(245, 158, 11, 0.16); color: #fde68a; border: 1px solid rgba(251, 191, 36, 0.35); }
+    .tdt-announce-pill.is-sky.is-solid { background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%); color: #ffffff; box-shadow: 0 3px 10px rgba(14, 165, 233, 0.28); }
+    .tdt-announce-pill.is-sky.is-outline { background: transparent; color: #38bdf8; border: 1.5px solid #0ea5e9; }
+    .tdt-announce-pill.is-sky.is-soft { background: rgba(14, 165, 233, 0.16); color: #7dd3fc; border: 1px solid rgba(56, 189, 248, 0.35); }
+    .tdt-announce-pill.is-rose.is-solid { background: linear-gradient(135deg, #fb7185 0%, #e11d48 100%); color: #ffffff; box-shadow: 0 3px 10px rgba(225, 29, 72, 0.28); }
+    .tdt-announce-pill.is-rose.is-outline { background: transparent; color: #fb7185; border: 1.5px solid #f43f5e; }
+    .tdt-announce-pill.is-rose.is-soft { background: rgba(244, 63, 94, 0.16); color: #fda4af; border: 1px solid rgba(251, 113, 133, 0.35); }
+    .tdt-announce-pill.is-purple.is-solid { background: linear-gradient(135deg, #c084fc 0%, #9333ea 100%); color: #ffffff; box-shadow: 0 3px 10px rgba(147, 51, 234, 0.28); }
+    .tdt-announce-pill.is-purple.is-outline { background: transparent; color: #c084fc; border: 1.5px solid #a855f7; }
+    .tdt-announce-pill.is-purple.is-soft { background: rgba(168, 85, 247, 0.16); color: #d8b4fe; border: 1px solid rgba(192, 132, 252, 0.35); }
+    .tdt-announce-pill.is-slate.is-solid { background: linear-gradient(135deg, #cbd5e1 0%, #64748b 100%); color: #070a12; }
+    .tdt-announce-pill.is-slate.is-outline { background: transparent; color: #cbd5e1; border: 1.5px solid #64748b; }
+    .tdt-announce-pill.is-slate.is-soft { background: rgba(148, 163, 184, 0.16); color: #e2e8f0; border: 1px solid rgba(148, 163, 184, 0.35); }
+    .tdt-page-announce-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #fcd34d;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+
+    /* TDT Age-Friendly (25-60) High-Contrast Dark Mode & Readability */
+    body {
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    /* High-contrast secondary text for 45-60+ eyes & daylight glare inside cars */
+    .text-slate-400 {
+      color: #cbd5e1 !important;
+    }
+    .text-slate-500 {
+      color: #94a3b8 !important;
+    }
+    input::placeholder, textarea::placeholder {
+      color: #94a3b8 !important;
+      opacity: 1;
+    }
+    /* Clearer card & form borders in bright daylight */
+    .border-slate-800 {
+      border-color: #26334d !important;
+    }
+    .border-slate-700, .border-slate-700\/80 {
+      border-color: #3b4c6b !important;
+    }
+    /* Comfortable Thai script sizing (vowels & tone marks) */
+    .text-xs {
+      font-size: 0.8125rem !important; /* 13px */
+      line-height: 1.5 !important;
+    }
+    .text-sm {
+      font-size: 0.9375rem !important; /* 15px */
+      line-height: 1.55 !important;
+    }
+    /* Clearer focus rings & tap targets */
+    input:focus, select:focus, textarea:focus, button:focus-visible, a:focus-visible {
+      outline: 2px solid rgba(251, 191, 36, 0.75);
+      outline-offset: 2px;
+    }
+    .tdt-font-btn {
+      min-width: 36px !important;
+      height: 36px !important;
+      font-size: 13.5px !important;
+      font-weight: 700 !important;
+      color: #f8fafc !important;
+    }
+    .tdt-brand-tagline {
+      font-size: 12px !important;
+      color: #e2e8f0 !important;
+    }
+    .tdt-page-announce-bar {
+      font-size: 13.5px !important;
+      border-color: rgba(251, 191, 36, 0.36) !important;
+    }
+    .tdt-drawer-link {
+      min-height: 46px !important;
+      font-size: 15px !important;
+    }
+    .tdt-drawer-cat-title {
+      font-size: 13px !important;
     }
 </style>
 </head>
 <body class="antialiased min-h-screen flex flex-col">
-  <!-- กล่องแจ้งเตือน Toast -->
-  <div id="toast-box" class="hidden fixed bottom-5 right-5 z-[1100] bg-slate-950 text-amber-300 border border-amber-400/50 px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-3 text-xs sm:text-sm max-w-sm">
-    <i class="fa-solid fa-circle-check text-emerald-400 text-base shrink-0"></i>
-    <span id="toast-text" class="font-normal text-white"></span>
-    <button type="button" onclick="hideToast()" class="text-slate-400 hover:text-white ml-1">
-      <i class="fa-solid fa-xmark"></i>
-    </button>
-  </div>
 
-  <!-- ตำแหน่งแทรกแถบนำทางส่วนหัวจาก shared-layout.js -->
-  <!-- ตำแหน่งแทรกแถบนำทางส่วนหัว -->
+  <!-- CLEAN 1-ROW EXECUTIVE HEADER -->
   <nav id="tdt-direct-fallback-nav" class="tdt-global-nav" aria-label="แถบนำทางหลักของเว็บไซต์">
-    <div class="tdt-global-nav-inner">
-      <div class="tdt-nav-top-row">
-        <a href="index.html" class="tdt-global-brand">
-          <img src="TheDriverTH.jpg" alt="โลโก้ The Driver Thailand"
-            onerror="this.onerror=null;this.src='https://placehold.co/80x80/0f172a/fbbf24?text=TDT';"
-            class="tdt-brand-logo-img">
-          <span class="tdt-brand-text-stack">
-            <span>🚖 The Driver TH 🇹🇭 Premium Service</span>
-            <span class="tdt-brand-subline-row">
-              <span class="tdt-brand-exec-pill"><i class="fa-solid fa-crown text-xs"></i> EXECUTIVE NETWORK</span>
-              <span>เครือข่ายคนขับรถรับส่งผู้โดยสารและบริการมืออาชีพแห่งประเทศไทย</span>
-            </span>
+    <div class="tdt-nav-bar-inner">
+      <a href="index.html" class="tdt-brand-link">
+        <img src="TheDriverTH.jpg" alt="โลโก้ The Driver Thailand"
+          onerror="this.onerror=null;this.src='https://placehold.co/80x80/0f172a/fbbf24?text=TDT';"
+          class="tdt-brand-logo">
+        <span class="tdt-brand-text-wrap">
+          <span class="tdt-brand-name"><span class="tdt-emoji">🚖</span> <span class="tdt-brand-gold">The Driver TH</span> <span class="tdt-emoji">🇹🇭</span> <span class="tdt-brand-gold">Premium Service</span></span>
+          <span class="tdt-brand-subline">
+            <span class="tdt-brand-exec-pill"><i class="fa-solid fa-crown"></i> EXECUTIVE NETWORK</span>
+            <span class="tdt-brand-tagline">เครือข่ายคนขับรถรับส่งผู้โดยสารและบริการมืออาชีพแห่งประเทศไทย</span>
           </span>
+        </span>
+      </a>
+
+      <!-- Desktop 4-Category Menu -->
+      <div class="tdt-desktop-menu">
+        <a href="index.html" class="tdt-d-btn is-active" data-nav-href="index.html">
+          <i class="fa-solid fa-house"></i> หน้าหลัก
         </a>
 
-        <div class="tdt-util-group ml-auto" title="ปรับขนาดตัวอักษร">
-          <button type="button" onclick="changeScale(-1)" aria-label="ลดขนาดตัวอักษร" class="tdt-util-btn" title="ลดขนาดตัวอักษร">
-            <span>A-</span>
+        <div class="tdt-d-wrap">
+          <button type="button" class="tdt-d-btn" onclick="toggleNavDropdown('member', event)" id="btn-cat-member" aria-expanded="false">
+            <i class="fa-solid fa-id-card"></i> สมาชิก &amp; บัตร <i id="chevron-cat-member" class="fa-solid fa-chevron-down text-xs"></i>
           </button>
-          <span id="tdt-font-pct" class="text-xs font-normal text-amber-300 px-1 select-none">100%</span>
-          <button type="button" onclick="changeScale(1)" aria-label="เพิ่มขนาดตัวอักษร" class="tdt-util-btn" title="เพิ่มขนาดตัวอักษร">
-            <span>A+</span>
+          <div id="panel-cat-member" class="tdt-d-panel">
+            <a href="member_register.html" class="tdt-d-item"><i class="fa-solid fa-file-signature"></i> สมัครสมาชิกใหม่</a>
+            <a href="register.html" class="tdt-d-item"><i class="fa-solid fa-users-viewfinder"></i> ตรวจสอบรหัสสมาชิก</a>
+            <a href="member_edit.html" class="tdt-d-item"><i class="fa-solid fa-user-pen"></i> แก้ไขข้อมูลสมาชิก</a>
+            <a href="member_card_digital.html" class="tdt-d-item"><i class="fa-solid fa-qrcode"></i> บัตรสมาชิกดิจิทัล &amp; QR</a>
+            <a href="luxury_car_register.html" class="tdt-d-item"><i class="fa-solid fa-crown"></i> สมัครห้อง Luxury Car</a>
+            <a href="tracking.html" class="tdt-d-item"><i class="fa-solid fa-satellite-dish"></i> ติดตามสถานะคำร้อง</a>
+            <a href="unblock_request.html" class="tdt-d-item"><i class="fa-solid fa-unlock-keyhole"></i> ขอปลดล็อก OpenChat</a>
+          </div>
+        </div>
+
+        <div class="tdt-d-wrap">
+          <button type="button" class="tdt-d-btn" onclick="toggleNavDropdown('tools', event)" id="btn-cat-tools" aria-expanded="false">
+            <i class="fa-solid fa-car-on"></i> งาน &amp; เครื่องมือ <i id="chevron-cat-tools" class="fa-solid fa-chevron-down text-xs"></i>
           </button>
+          <div id="panel-cat-tools" class="tdt-d-panel">
+            <a href="job_board.html" class="tdt-d-item"><i class="fa-solid fa-handshake"></i> กระดานแลกเปลี่ยนงาน</a>
+            <a href="empty_leg_matcher.html" class="tdt-d-item"><i class="fa-solid fa-route"></i> จับคู่รถว่างขากลับ</a>
+            <a href="fare_calculator.html" class="tdt-d-item"><i class="fa-solid fa-calculator"></i> คำนวณค่าโดยสาร</a>
+            <a href="trip_voucher.html" class="tdt-d-item"><i class="fa-solid fa-file-invoice-dollar"></i> ออกใบจอง / E-Voucher</a>
+            <a href="driver_fleet_hub.html" class="tdt-d-item"><i class="fa-solid fa-wallet"></i> จัดการรถ &amp; บัญชีรายรับ-จ่าย</a>
+            <a href="driver_pitstop_reputation.html" class="tdt-d-item"><i class="fa-solid fa-charging-station"></i> จุดพักรถ EV &amp; เครดิตสมาชิก</a>
+          </div>
+        </div>
+
+        <div class="tdt-d-wrap">
+          <button type="button" class="tdt-d-btn" onclick="toggleNavDropdown('services', event)" id="btn-cat-services" aria-expanded="false">
+            <i class="fa-solid fa-briefcase"></i> ขับแอป &amp; เสริม <i id="chevron-cat-services" class="fa-solid fa-chevron-down text-xs"></i>
+          </button>
+          <div id="panel-cat-services" class="tdt-d-panel">
+            <a href="pcard.html" class="tdt-d-item"><i class="fa-solid fa-id-badge"></i> ทำบัตรประเมศฐ์ &amp; เช็กพัสดุ</a>
+            <a href="grab_driver_register.html" class="tdt-d-item"><i class="fa-solid fa-car"></i> สมัครคนขับ Grab</a>
+            <a href="bolt_driver_register.html" class="tdt-d-item"><i class="fa-solid fa-bolt"></i> สมัครคนขับ Bolt</a>
+            <a href="captain_insurance.html" class="tdt-d-item"><i class="fa-solid fa-shield-halved"></i> ประกันภัยรถยนต์ (Captain)</a>
+            <a href="rtaf_pass_register.html" class="tdt-d-item"><i class="fa-solid fa-plane-departure"></i> บัตรผ่าน ทอ. (ดอนเมือง)</a>
+            <a href="vip_referral_guide.html" class="tdt-d-item"><i class="fa-solid fa-map-location-dot"></i> ลายแทงท่องเที่ยว [VIP]</a>
+            <a href="tour_book_order.html" class="tdt-d-item"><i class="fa-solid fa-book"></i> สั่งซื้อสมุดทัวร์</a>
+          </div>
+        </div>
+
+        <div class="tdt-d-wrap">
+          <button type="button" class="tdt-d-btn" onclick="toggleNavDropdown('community', event)" id="btn-cat-community" aria-expanded="false">
+            <i class="fa-solid fa-shield-heart"></i> ชุมชน &amp; ปลอดภัย <i id="chevron-cat-community" class="fa-solid fa-chevron-down text-xs"></i>
+          </button>
+          <div id="panel-cat-community" class="tdt-d-panel" style="left:auto;right:0;">
+            <a href="blacklist.html" class="tdt-d-item"><i class="fa-solid fa-user-shield"></i> ศูนย์เช็ก Blacklist</a>
+            <a href="driver_news.html" class="tdt-d-item"><i class="fa-solid fa-newspaper"></i> ข่าวสารคนขับทุกแอป</a>
+            <a href="community.html" class="tdt-d-item"><i class="fa-solid fa-comments"></i> เว็บบอร์ดชุมชน</a>
+            <a href="guide.html" class="tdt-d-item"><i class="fa-solid fa-book-open"></i> คู่มือสมาชิก &amp; กฎกติกา</a>
+            <a href="privacy_policy.html" class="tdt-d-item"><i class="fa-solid fa-scale-balanced"></i> นโยบายความเป็นส่วนตัว (PDPA)</a>
+            <a href="admin.html" class="tdt-d-item" style="border-top:1px solid rgba(148,163,184,0.15);margin-top:4px;padding-top:10px;"><i class="fa-solid fa-sliders"></i> ระบบหลังบ้าน (Admin)</a>
+          </div>
         </div>
       </div>
 
-      <div class="tdt-global-right-controls" aria-label="เมนูหลักของหน้าเว็บ">
-        <a href="index.html" class="tdt-nav-btn active-home">
-          <i class="fa-solid fa-house"></i>
-          <span>หน้าหลัก</span>
-        </a>
-        <a href="member_register.html" class="tdt-nav-btn is-quick-register">
-          <i class="fa-solid fa-file-signature"></i>
-          <span>ลงทะเบียนสมาชิกใหม่</span>
-        </a>
-        <a href="register.html" class="tdt-nav-btn is-quick-check-code">
-          <i class="fa-solid fa-users-viewfinder"></i>
-          <span>ตรวจสอบรหัสสมาชิก</span>
-        </a>
-
-        <span class="tdt-nav-divider" aria-hidden="true"></span>
-
-        <div class="tdt-cat-dropdown-wrap" id="dropdown-member-cat">
-          <button type="button" onclick="toggleNavDropdown('member', event)" id="btn-cat-member" aria-expanded="false" class="tdt-nav-btn is-member-cat">
-            <i class="fa-solid fa-users"></i>
-            <span>หมวดหมู่บริการสมาชิก</span>
-            <i id="chevron-cat-member" class="fa-solid fa-chevron-down text-xs" style="transition:transform 0.2s;"></i>
-          </button>
-          <div id="panel-cat-member" class="tdt-cat-menu-panel">
-            <div class="tdt-cat-menu-header" style="background:rgba(6,78,59,0.55);color:#6ee7b7;border:1px solid rgba(16,185,129,0.25);">
-              <span><i class="fa-solid fa-users"></i> หมวดหมู่บริการสมาชิก</span>
-              <span style="font-size:10px;opacity:0.85;">3 เมนู</span>
-            </div>
-            <a href="member_edit.html" class="tdt-cat-menu-link">
-              <span class="tdt-cat-menu-icon" style="background:rgba(245,158,11,0.16);color:#fbbf24;border:1px solid rgba(251,191,36,0.3);"><i class="fa-solid fa-user-pen"></i></span>
-              <span><span class="tdt-cat-menu-title">แก้ไขข้อมูลสมาชิกเดิม</span><span class="tdt-cat-menu-sub">แจ้งเปลี่ยนรถ ทะเบียน หรือข้อมูลติดต่อ</span></span>
-            </a>
-            <a href="unblock_request.html" class="tdt-cat-menu-link">
-              <span class="tdt-cat-menu-icon" style="background:rgba(14,165,233,0.16);color:#38bdf8;border:1px solid rgba(56,189,248,0.3);"><i class="fa-solid fa-unlock-keyhole"></i></span>
-              <span><span class="tdt-cat-menu-title">ขอปลดล็อกห้อง Line OpenChat</span><span class="tdt-cat-menu-sub">ยื่นคำร้องชี้แจงกรณีถูกบล็อกหรือลบออก</span></span>
-            </a>
-            <a href="luxury_car_register.html" class="tdt-cat-menu-link">
-              <span class="tdt-cat-menu-icon" style="background:rgba(245,158,11,0.16);color:#fbbf24;border:1px solid rgba(251,191,36,0.3);"><i class="fa-solid fa-crown"></i></span>
-              <span><span class="tdt-cat-menu-title">ลงทะเบียนห้อง Luxury Car</span><span class="tdt-cat-menu-sub">สมัครเข้าห้องกลุ่มคนขับรถ Luxury Car</span></span>
-            </a>
-          </div>
+      <!-- Right Controls: Font Size + Mobile Drawer Trigger -->
+      <div class="tdt-nav-actions">
+        <div class="tdt-font-pill" title="ปรับขนาดตัวอักษร">
+          <button type="button" onclick="changeScale(-1)" aria-label="ลดขนาดตัวอักษร" class="tdt-font-btn">A-</button>
+          <span id="tdt-font-pct" class="text-xs text-amber-300 px-1 select-none hidden sm:inline">100%</span>
+          <button type="button" onclick="changeScale(1)" aria-label="เพิ่มขนาดตัวอักษร" class="tdt-font-btn">A+</button>
         </div>
-
-        <div class="tdt-cat-dropdown-wrap" id="dropdown-group-cat">
-          <button type="button" onclick="toggleNavDropdown('group', event)" id="btn-cat-group" aria-expanded="false" class="tdt-nav-btn is-group-cat">
-            <i class="fa-solid fa-briefcase"></i>
-            <span>หมวดหมู่บริการของกลุ่ม</span>
-            <i id="chevron-cat-group" class="fa-solid fa-chevron-down text-xs" style="transition:transform 0.2s;"></i>
-          </button>
-          <div id="panel-cat-group" class="tdt-cat-menu-panel">
-            <div class="tdt-cat-menu-header" style="background:rgba(120,53,15,0.45);color:#fcd34d;border:1px solid rgba(251,191,36,0.25);">
-              <span><i class="fa-solid fa-gem"></i> หมวดหมู่บริการของกลุ่ม</span>
-              <span style="font-size:10px;opacity:0.85;">15 เมนู</span>
-            </div>
-            <a href="driver_news.html" class="tdt-cat-menu-link">
-              <span class="tdt-cat-menu-icon" style="background:rgba(16,185,129,0.18);color:#34d399;border:1px solid rgba(52,211,153,0.35);"><i class="fa-solid fa-newspaper"></i></span>
-              <span><span class="tdt-cat-menu-title">ข่าวสารคนขับรถผ่านแอป (รวมทุกแอป)</span><span class="tdt-cat-menu-sub">อัปเดตข่าว Grab, Bolt, Line Man, inDrive &amp; กฎหมาย</span></span>
-            </a>
-            <a href="grab_driver_register.html" class="tdt-cat-menu-link">
-              <span class="tdt-cat-menu-icon" style="background:rgba(22,163,74,0.2);color:#4ade80;border:1px solid rgba(74,222,128,0.35);"><i class="fa-solid fa-car"></i></span>
-              <span><span class="tdt-cat-menu-title">บริการรับสมัครคนขับ Grab</span><span class="tdt-cat-menu-sub">สมัครขับ GrabCar / GrabTaxi / GrabSUV</span></span>
-            </a>
-            <a href="bolt_driver_register.html" class="tdt-cat-menu-link">
-              <span class="tdt-cat-menu-icon" style="background:rgba(16,185,129,0.2);color:#2dd4bf;border:1px solid rgba(45,212,191,0.35);"><i class="fa-solid fa-bolt"></i></span>
-              <span><span class="tdt-cat-menu-title">บริการรับสมัครคนขับ Bolt</span><span class="tdt-cat-menu-sub">สมัครขับ Bolt Economy / Comfort / XL</span></span>
-            </a>
-            <a href="captain_insurance.html" class="tdt-cat-menu-link">
-              <span class="tdt-cat-menu-icon" style="background:rgba(20,184,166,0.18);color:#2dd4bf;border:1px solid rgba(45,212,191,0.35);"><i class="fa-solid fa-shield-halved"></i></span>
-              <span><span class="tdt-cat-menu-title">Captain Insurance กัปตัน ประกันภัย</span><span class="tdt-cat-menu-sub">เช็กเบี้ยและทำประกันภัยรถยนต์ราคาสมาชิก</span></span>
-            </a>
-            <a href="pcard.html" class="tdt-cat-menu-link">
-              <span class="tdt-cat-menu-icon" style="background:rgba(245,158,11,0.16);color:#fbbf24;border:1px solid rgba(251,191,36,0.3);"><i class="fa-solid fa-id-badge"></i></span>
-              <span><span class="tdt-cat-menu-title">ทำบัตรสมาชิกประเมศฐ์ &amp; เช็คพัสดุ</span><span class="tdt-cat-menu-sub">สมัครทำบัตรเคลือบใสและตรวจสอบเลขพัสดุ</span></span>
-            </a>
-            <a href="vip_referral_guide.html" class="tdt-cat-menu-link">
-              <span class="tdt-cat-menu-icon" style="background:rgba(168,85,247,0.16);color:#c084fc;border:1px solid rgba(192,132,252,0.3);"><i class="fa-solid fa-map-location-dot"></i></span>
-              <span><span class="tdt-cat-menu-title">[VIP] ลายแทงสถานที่ท่องเที่ยว</span><span class="tdt-cat-menu-sub">ขอรับลายแทงร้านค้า/สถานที่เพื่อรับค่าแนะนำ</span></span>
-            </a>
-            <a href="rtaf_pass_register.html" class="tdt-cat-menu-link">
-              <span class="tdt-cat-menu-icon" style="background:rgba(59,130,246,0.16);color:#60a5fa;border:1px solid rgba(96,165,250,0.3);"><i class="fa-solid fa-plane-departure"></i></span>
-              <span><span class="tdt-cat-menu-title">ทำบัตรผ่านยานพาหนะ ทอ. (ดอนเมือง)</span><span class="tdt-cat-menu-sub">ขอทำบัตรผ่านเข้า - ออก เขตพื้นที่ ทอ.</span></span>
-            </a>
-            <a href="tour_book_order.html" class="tdt-cat-menu-link">
-              <span class="tdt-cat-menu-icon" style="background:rgba(20,184,166,0.16);color:#2dd4bf;border:1px solid rgba(45,212,191,0.3);"><i class="fa-solid fa-book"></i></span>
-              <span><span class="tdt-cat-menu-title">บริการสั่งซื้อสมุดทัวร์</span><span class="tdt-cat-menu-sub">โซนกรุงเทพฯ-ปริมณฑล และ พัทยา-ชลบุรี</span></span>
-            </a>
-            <a href="privacy_policy.html" class="tdt-cat-menu-link">
-              <span class="tdt-cat-menu-icon" style="background:rgba(148,163,184,0.16);color:#cbd5e1;border:1px solid rgba(148,163,184,0.3);"><i class="fa-solid fa-scale-balanced"></i></span>
-              <span><span class="tdt-cat-menu-title">ประกาศความเป็นส่วนตัว (PDPA)</span><span class="tdt-cat-menu-sub">นโยบายคุ้มครองข้อมูลส่วนบุคคลของกลุ่ม</span></span>
-            </a>
-            <a href="tracking.html" class="tdt-cat-menu-link">
-              <span class="tdt-cat-menu-icon" style="background:rgba(245,158,11,0.16);color:#fbbf24;border:1px solid rgba(251,191,36,0.3);"><i class="fa-solid fa-satellite-dish"></i></span>
-              <span><span class="tdt-cat-menu-title">ศูนย์ติดตามสถานะคำร้องทั้งหมด</span><span class="tdt-cat-menu-sub">เช็คความคืบหน้าและเลขพัสดุทุกบริการ</span></span>
-            </a>
-            <a href="member_card_digital.html" class="tdt-cat-menu-link">
-              <span class="tdt-cat-menu-icon" style="background:rgba(16,185,129,0.16);color:#34d399;border:1px solid rgba(52,211,153,0.3);"><i class="fa-solid fa-qrcode"></i></span>
-              <span><span class="tdt-cat-menu-title">บัตรสมาชิกดิจิทัล &amp; QR Code</span><span class="tdt-cat-menu-sub">เปิดบัตรอิเล็กทรอนิกส์ยืนยันตัวตน</span></span>
-            </a>
-            <a href="trip_voucher.html" class="tdt-cat-menu-link">
-              <span class="tdt-cat-menu-icon" style="background:rgba(245,158,11,0.16);color:#fbbf24;border:1px solid rgba(251,191,36,0.3);"><i class="fa-solid fa-file-invoice-dollar"></i></span>
-              <span><span class="tdt-cat-menu-title">ใบรับรองการเดินทาง (E-Voucher)</span><span class="tdt-cat-menu-sub">ออกใบจอง/ใบเสร็จส่งลูกค้า &amp; ตรวจคนขับ</span></span>
-            </a>
-            <a href="driver_fleet_hub.html" class="tdt-cat-menu-link">
-              <span class="tdt-cat-menu-icon" style="background:rgba(16,185,129,0.16);color:#34d399;border:1px solid rgba(52,211,153,0.3);"><i class="fa-solid fa-car-on"></i></span>
-              <span><span class="tdt-cat-menu-title">จัดการรถ &amp; บัญชีรายรับ-รายจ่าย</span><span class="tdt-cat-menu-sub">แจ้งเตือนวันหมดอายุเอกสาร &amp; จดบัญชีวิ่งงาน</span></span>
-            </a>
-            <a href="job_board.html" class="tdt-cat-menu-link">
-              <span class="tdt-cat-menu-icon" style="background:rgba(245,158,11,0.16);color:#fbbf24;border:1px solid rgba(251,191,36,0.3);"><i class="fa-solid fa-handshake"></i></span>
-              <span><span class="tdt-cat-menu-title">กระดานแลกเปลี่ยนงาน / หาคนขับแทน</span><span class="tdt-cat-menu-sub">ปล่อยงานและรับงานเฉพาะสมาชิกที่ยืนยันรหัส</span></span>
-            </a>
-            <a href="empty_leg_matcher.html" class="tdt-cat-menu-link">
-              <span class="tdt-cat-menu-icon" style="background:rgba(56,189,248,0.16);color:#38bdf8;border:1px solid rgba(56,189,248,0.3);"><i class="fa-solid fa-route"></i></span>
-              <span><span class="tdt-cat-menu-title">จับคู่รถว่างขากลับต่างจังหวัด</span><span class="tdt-cat-menu-sub">ปักหมุดรถว่างขากลับ ลดการวิ่งรถเปล่า</span></span>
-            </a>
-            <a href="driver_pitstop_reputation.html" class="tdt-cat-menu-link">
-              <span class="tdt-cat-menu-icon" style="background:rgba(245,158,11,0.16);color:#fbbf24;border:1px solid rgba(251,191,36,0.3);"><i class="fa-solid fa-charging-station"></i></span>
-              <span><span class="tdt-cat-menu-title">จุดพักรถ EV &amp; ระดับความน่าเชื่อถือ</span><span class="tdt-cat-menu-sub">พิกัดสถานีชาร์จ EV จุดจอดรอ &amp; ทำเนียบสมาชิก</span></span>
-            </a>
-            <a href="community.html" class="tdt-cat-menu-link">
-              <span class="tdt-cat-menu-icon" style="background:rgba(56,189,248,0.16);color:#38bdf8;border:1px solid rgba(56,189,248,0.3);"><i class="fa-solid fa-comments"></i></span>
-              <span><span class="tdt-cat-menu-title">ชุมชนเว็บบอร์ดสมาชิก</span><span class="tdt-cat-menu-sub">ตั้งกระทู้ รีวิวเส้นทาง และสะสมเรทติ้ง</span></span>
-            </a>
-            <a href="fare_calculator.html" class="tdt-cat-menu-link">
-              <span class="tdt-cat-menu-icon" style="background:rgba(16,185,129,0.16);color:#34d399;border:1px solid rgba(52,211,153,0.3);"><i class="fa-solid fa-calculator"></i></span>
-              <span><span class="tdt-cat-menu-title">คำนวณค่าโดยสารมาตรฐาน</span><span class="tdt-cat-menu-sub">ประเมินราคางานเหมาและคัดลอกใบเสนอราคา</span></span>
-            </a>
-            <a href="guide.html" class="tdt-cat-menu-link">
-              <span class="tdt-cat-menu-icon" style="background:rgba(148,163,184,0.16);color:#cbd5e1;border:1px solid rgba(148,163,184,0.3);"><i class="fa-solid fa-book-open"></i></span>
-              <span><span class="tdt-cat-menu-title">คู่มือสมาชิก &amp; กฎกติกาเครือข่าย</span><span class="tdt-cat-menu-sub">วิธีตั้งชื่อ ถ่ายรูปยืนยันตัวตน และติดต่อแอดมิน</span></span>
-            </a>
-          </div>
-        </div>
-
-        <span class="tdt-nav-divider" aria-hidden="true"></span>
-
-        <a href="blacklist.html" class="tdt-nav-btn is-blacklist">
-          <i class="fa-solid fa-user-shield"></i>
-          <span>ตรวจสอบ Blacklist</span>
-        </a>
-
-        <a href="admin.html" class="tdt-nav-btn is-admin-link">
-          <i class="fa-solid fa-sliders"></i>
-          <span>ระบบหลังบ้าน (Admin)</span>
-        </a>
+        <button type="button" onclick="openTdtDrawer()" aria-label="เปิดเมนูทั้งหมด" class="tdt-menu-trigger">
+          <i class="fa-solid fa-bars"></i>
+          <span>เมนู</span>
+        </button>
       </div>
     </div>
   </nav>
 
-  <!-- TOP ANNOUNCEMENT BAR -->
-  <header class="bg-slate-950 text-slate-300 text-xs py-2.5 px-4 border-b border-amber-500/15">
-    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
-      <div class="flex items-center gap-2 flex-wrap">
-        <span class="bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-extrabold px-2.5 py-0.5 rounded-full text-xs shadow-sm">
-          <i class="fa-solid fa-bullhorn mr-1"></i> OFFICIAL ANNOUNCEMENT
-        </span>
-        <span id="site-announcement-text" class="text-slate-300 font-medium">ประกาศและรอบการจัดส่งบริการสำหรับสมาชิกเครือข่าย</span>
+  <!-- 4-CATEGORY SLIDE-OVER DRAWER (MOBILE & TABLET) -->
+  <div id="tdt-nav-backdrop" class="tdt-drawer-backdrop" onclick="closeTdtDrawer()"></div>
+  <aside id="tdt-nav-drawer" class="tdt-drawer-panel" aria-label="เมนูบริการทั้งหมด">
+    <div class="tdt-drawer-head">
+      <span style="font-size:15px;font-weight:700;color:#fbbf24;">🚖 เมนูบริการทั้งหมด</span>
+      <button type="button" onclick="closeTdtDrawer()" aria-label="ปิดเมนู" class="tdt-drawer-close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <div class="tdt-drawer-body">
+      <input type="search" id="tdt-drawer-search" oninput="filterTdtDrawer(this.value)" placeholder="ค้นหาเมนูบริการ..." class="tdt-drawer-search">
+
+      <a href="index.html" class="tdt-drawer-link"><i class="fa-solid fa-house"></i> หน้าหลัก</a>
+
+      <div class="tdt-drawer-cat">
+        <div class="tdt-drawer-cat-title">1. สมาชิก &amp; บัตร (7)</div>
+        <a href="member_register.html" class="tdt-drawer-link"><i class="fa-solid fa-file-signature"></i> สมัครสมาชิกใหม่</a>
+        <a href="register.html" class="tdt-drawer-link"><i class="fa-solid fa-users-viewfinder"></i> ตรวจสอบรหัสสมาชิก</a>
+        <a href="member_edit.html" class="tdt-drawer-link"><i class="fa-solid fa-user-pen"></i> แก้ไขข้อมูลสมาชิก</a>
+        <a href="member_card_digital.html" class="tdt-drawer-link"><i class="fa-solid fa-qrcode"></i> บัตรสมาชิกดิจิทัล &amp; QR</a>
+        <a href="luxury_car_register.html" class="tdt-drawer-link"><i class="fa-solid fa-crown"></i> สมัครห้อง Luxury Car</a>
+        <a href="tracking.html" class="tdt-drawer-link"><i class="fa-solid fa-satellite-dish"></i> ติดตามสถานะคำร้อง</a>
+        <a href="unblock_request.html" class="tdt-drawer-link"><i class="fa-solid fa-unlock-keyhole"></i> ขอปลดล็อก OpenChat</a>
       </div>
-      <div class="flex items-center gap-3 text-xs">
-        <span class="text-amber-300 font-semibold">
-          <i class="fa-solid fa-calendar-check mr-1"></i> รอบส่งบัตรถัดไป: <span id="site-next-round-text">11 ธันวาคม 2569</span>
-        </span>
-        <span class="hidden md:inline text-slate-700">|</span>
-        <span class="hidden md:inline-flex items-center gap-1.5 text-emerald-400 font-semibold">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> <span id="site-system-status-text">ระบบออนไลน์พร้อมใช้งาน</span>
-        </span>
+
+      <div class="tdt-drawer-cat">
+        <div class="tdt-drawer-cat-title">2. งาน &amp; เครื่องมือคนขับ (6)</div>
+        <a href="job_board.html" class="tdt-drawer-link"><i class="fa-solid fa-handshake"></i> กระดานแลกเปลี่ยนงาน</a>
+        <a href="empty_leg_matcher.html" class="tdt-drawer-link"><i class="fa-solid fa-route"></i> จับคู่รถว่างขากลับ</a>
+        <a href="fare_calculator.html" class="tdt-drawer-link"><i class="fa-solid fa-calculator"></i> คำนวณค่าโดยสาร</a>
+        <a href="trip_voucher.html" class="tdt-drawer-link"><i class="fa-solid fa-file-invoice-dollar"></i> ออกใบจอง / E-Voucher</a>
+        <a href="driver_fleet_hub.html" class="tdt-drawer-link"><i class="fa-solid fa-wallet"></i> จัดการรถ &amp; บัญชีรายรับ-จ่าย</a>
+        <a href="driver_pitstop_reputation.html" class="tdt-drawer-link"><i class="fa-solid fa-charging-station"></i> จุดพักรถ EV &amp; เครดิตสมาชิก</a>
+      </div>
+
+      <div class="tdt-drawer-cat">
+        <div class="tdt-drawer-cat-title">3. สมัครขับแอป &amp; บริการเสริม (7)</div>
+        <a href="pcard.html" class="tdt-drawer-link"><i class="fa-solid fa-id-badge"></i> ทำบัตรประเมศฐ์ &amp; เช็กพัสดุ</a>
+        <a href="grab_driver_register.html" class="tdt-drawer-link"><i class="fa-solid fa-car"></i> สมัครคนขับ Grab</a>
+        <a href="bolt_driver_register.html" class="tdt-drawer-link"><i class="fa-solid fa-bolt"></i> สมัครคนขับ Bolt</a>
+        <a href="captain_insurance.html" class="tdt-drawer-link"><i class="fa-solid fa-shield-halved"></i> ประกันภัยรถยนต์ (Captain)</a>
+        <a href="rtaf_pass_register.html" class="tdt-drawer-link"><i class="fa-solid fa-plane-departure"></i> บัตรผ่าน ทอ. (ดอนเมือง)</a>
+        <a href="vip_referral_guide.html" class="tdt-drawer-link"><i class="fa-solid fa-map-location-dot"></i> ลายแทงท่องเที่ยว [VIP]</a>
+        <a href="tour_book_order.html" class="tdt-drawer-link"><i class="fa-solid fa-book"></i> สั่งซื้อสมุดทัวร์</a>
+      </div>
+
+      <div class="tdt-drawer-cat">
+        <div class="tdt-drawer-cat-title">4. ชุมชน &amp; ความปลอดภัย (5)</div>
+        <a href="blacklist.html" class="tdt-drawer-link"><i class="fa-solid fa-user-shield"></i> ศูนย์เช็ก Blacklist</a>
+        <a href="driver_news.html" class="tdt-drawer-link"><i class="fa-solid fa-newspaper"></i> ข่าวสารคนขับทุกแอป</a>
+        <a href="community.html" class="tdt-drawer-link"><i class="fa-solid fa-comments"></i> เว็บบอร์ดชุมชน</a>
+        <a href="guide.html" class="tdt-drawer-link"><i class="fa-solid fa-book-open"></i> คู่มือสมาชิก &amp; กฎกติกา</a>
+        <a href="privacy_policy.html" class="tdt-drawer-link"><i class="fa-solid fa-scale-balanced"></i> นโยบายความเป็นส่วนตัว (PDPA)</a>
+      </div>
+
+      <div class="tdt-drawer-cat" style="border-top:1px solid rgba(148,163,184,0.15);padding-top:10px;">
+        <a href="admin.html" class="tdt-drawer-link" style="color:#94a3b8;"><i class="fa-solid fa-sliders"></i> ระบบหลังบ้าน (Admin)</a>
       </div>
     </div>
-  </header>
+  </aside>
 
-  <!-- HERO SECTION -->
-  <section class="luxury-hero-bg text-white relative overflow-hidden border-b border-amber-500/20">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-14 relative z-10">
-      <div class="grid lg:grid-cols-12 gap-8 items-center">
-        <div class="lg:col-span-7 space-y-5">
-          <div class="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-400/30 text-amber-300 text-xs font-medium px-3.5 py-1.5 rounded-full">
-            <i class="fa-solid fa-shield-halved icon-float"></i>
-            <span>OFFICIAL COMMUNITY &amp; DRIVER NETWORK</span>
-          </div>
-
-          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black leading-tight tracking-tight">
-            ยกระดับมาตรฐาน<br>
-            <span class="gold-shimmer-text">
-              คนขับรถมืออาชีพทั่วไทย
-            </span>
-          </h1>
-
-          <p class="text-slate-300 text-sm sm:text-base leading-relaxed font-light max-w-2xl">
-            ศูนย์รวมบริการสำหรับสมาชิกกลุ่ม <strong class="text-amber-300 font-semibold">🚖 The Driver TH 🇹🇭 Premium Service</strong> ครบจบในที่เดียว ทั้งระบบตรวจสอบและลงทะเบียนสมาชิก
-            การทำบัตรสมาชิกประเมศฐ์พร้อมเช็คเลขพัสดุ การขอปลดล็อกห้อง Line OpenChat และการตรวจสอบประวัติเฝ้าระวังภัย (Blacklist)
-          </p>
-
-          <!-- Primary CTA Buttons -->
-          <div class="grid grid-cols-1 sm:flex sm:flex-wrap items-center gap-3 pt-2">
-            <a href="member_register.html" class="group w-full sm:w-auto justify-center bg-gradient-to-r from-emerald-400 to-emerald-500 hover:from-emerald-300 hover:to-emerald-400 text-slate-950 font-extrabold text-sm px-5 py-3.5 rounded-2xl shadow-lg shadow-emerald-500/25 transition inline-flex items-center gap-2 min-h-[48px]">
-              <i class="fa-solid fa-file-signature icon-bounce-hover"></i>
-              <span>ลงทะเบียนสมาชิกใหม่</span>
-            </a>
-            <a href="pcard.html" class="group w-full sm:w-auto justify-center bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 hover:from-amber-300 hover:to-yellow-400 text-slate-950 font-extrabold text-sm px-5 py-3.5 rounded-2xl shadow-lg shadow-amber-500/25 transition inline-flex items-center gap-2 min-h-[48px]">
-              <i class="fa-solid fa-id-badge icon-bounce-hover"></i>
-              <span>ทำบัตรสมาชิกประเมศฐ์</span>
-            </a>
-            <a href="unblock_request.html" class="group w-full sm:w-auto justify-center bg-sky-600/90 hover:bg-sky-500 text-white font-bold text-sm px-5 py-3.5 rounded-2xl border border-sky-400/50 shadow-lg shadow-sky-600/20 transition inline-flex items-center gap-2 min-h-[48px]">
-              <i class="fa-solid fa-unlock-keyhole icon-bounce-hover"></i>
-              <span>ขอปลดล็อก OpenChat</span>
-            </a>
-            <a href="blacklist.html" class="group w-full sm:w-auto justify-center bg-rose-600/90 hover:bg-rose-500 text-white font-bold text-sm px-5 py-3.5 rounded-2xl border border-rose-400/50 shadow-lg shadow-rose-600/20 transition inline-flex items-center gap-2 min-h-[48px]">
-              <i class="fa-solid fa-user-shield icon-bounce-hover"></i>
-              <span>เช็กประวัติ Blacklist</span>
-            </a>
-          </div>
-        </div>
-
-        <!-- Right Quick Hub Card -->
-        <div class="lg:col-span-5 mb-6 sm:mb-8">
-          <div class="luxury-glass rounded-3xl p-5 sm:p-6 shadow-2xl space-y-4">
-            <div class="flex items-center justify-between border-b border-amber-400/15 pb-3.5">
-              <div class="flex items-center gap-2.5">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400/25 to-amber-600/20 border border-amber-400/40 text-amber-300 flex items-center justify-center shadow-inner">
-                  <i class="fa-solid fa-compass text-lg icon-float"></i>
-                </div>
-                <div>
-                  <h2 class="text-sm font-bold text-white">ทางลัดเข้าใช้งานระบบทั้งหมด</h2>
-                  <p class="text-xs text-amber-200/70">เลือกเมนูบริการที่ต้องการได้ทันที</p>
-                </div>
-              </div>
-              <span class="text-xs font-extrabold bg-amber-400/20 text-amber-300 border border-amber-400/40 px-2.5 py-0.5 rounded-full">ALL SERVICES</span>
-            </div>
-
-            <div class="space-y-2.5">
-              <a href="register.html" class="block p-3.5 rounded-2xl bg-slate-950/75 hover:bg-slate-900 border border-slate-700/80 hover:border-emerald-400/70 transition group">
-                <div class="flex items-center justify-between gap-3">
-                  <div class="flex items-center gap-3 min-w-0">
-                    <div class="w-10 h-10 rounded-xl bg-emerald-500/15 border border-emerald-400/30 text-emerald-400 flex items-center justify-center text-sm shrink-0">
-                      <i class="fa-solid fa-users-gear icon-bounce-hover"></i>
-                    </div>
-                    <div class="min-w-0">
-                      <p class="text-sm font-bold text-white group-hover:text-emerald-300 transition leading-snug">1. ระบบสมาชิก &amp; ค้นหารหัส</p>
-                      <p class="text-xs text-slate-400 leading-snug mt-0.5">ตรวจสอบรายชื่อสมาชิก กติกา &amp; คำถามที่พบบ่อย</p>
-                    </div>
-                  </div>
-                  <i class="fa-solid fa-chevron-right text-slate-500 group-hover:text-emerald-400 group-hover:translate-x-1 transition text-xs shrink-0"></i>
-                </div>
-              </a>
-
-              <a href="member_register.html" class="block p-3.5 rounded-2xl bg-slate-950/75 hover:bg-slate-900 border border-slate-700/80 hover:border-teal-400/70 transition group">
-                <div class="flex items-center justify-between gap-3">
-                  <div class="flex items-center gap-3 min-w-0">
-                    <div class="w-10 h-10 rounded-xl bg-teal-500/15 border border-teal-400/30 text-teal-300 flex items-center justify-center text-sm shrink-0">
-                      <i class="fa-solid fa-file-signature icon-bounce-hover"></i>
-                    </div>
-                    <div class="min-w-0">
-                      <p class="text-sm font-bold text-white group-hover:text-teal-300 transition leading-snug">2. แบบฟอร์มลงทะเบียนสมาชิกใหม่</p>
-                      <p class="text-xs text-slate-400 leading-snug mt-0.5">สมัครสมาชิกกลุ่มทั้งคนขับทั่วไปและผู้ปล่อยงาน</p>
-                    </div>
-                  </div>
-                  <i class="fa-solid fa-chevron-right text-slate-500 group-hover:text-teal-300 group-hover:translate-x-1 transition text-xs shrink-0"></i>
-                </div>
-              </a>
-
-              <a href="pcard.html" class="block p-3.5 rounded-2xl bg-slate-950/75 hover:bg-slate-900 border border-slate-700/80 hover:border-amber-400/70 transition group">
-                <div class="flex items-center justify-between gap-3">
-                  <div class="flex items-center gap-3 min-w-0">
-                    <div class="w-10 h-10 rounded-xl bg-amber-500/15 border border-amber-400/30 text-amber-400 flex items-center justify-center text-sm shrink-0">
-                      <i class="fa-solid fa-id-card icon-bounce-hover"></i>
-                    </div>
-                    <div class="min-w-0">
-                      <p class="text-sm font-bold text-white group-hover:text-amber-300 transition leading-snug">3. ทำบัตรสมาชิกประเมศฐ์ &amp; เช็คพัสดุ</p>
-                      <p class="text-xs text-slate-400 leading-snug mt-0.5">ลงทะเบียนทำบัตรเคลือบใส &amp; ตรวจสอบเลขพัสดุ</p>
-                    </div>
-                  </div>
-                  <i class="fa-solid fa-chevron-right text-slate-500 group-hover:text-amber-400 group-hover:translate-x-1 transition text-xs shrink-0"></i>
-                </div>
-              </a>
-
-              <a href="unblock_request.html" class="block p-3.5 rounded-2xl bg-slate-950/75 hover:bg-slate-900 border border-slate-700/80 hover:border-sky-400/70 transition group">
-                <div class="flex items-center justify-between gap-3">
-                  <div class="flex items-center gap-3 min-w-0">
-                    <div class="w-10 h-10 rounded-xl bg-sky-500/15 border border-sky-400/30 text-sky-400 flex items-center justify-center text-sm shrink-0">
-                      <i class="fa-solid fa-unlock-keyhole icon-bounce-hover"></i>
-                    </div>
-                    <div class="min-w-0">
-                      <p class="text-sm font-bold text-white group-hover:text-sky-300 transition leading-snug">4. ขอปลดล็อกห้อง Line OpenChat</p>
-                      <p class="text-xs text-slate-400 leading-snug mt-0.5">ยื่นคำร้องชี้แจงกรณีถูกบล็อกหรือลบออกจากห้องแชท</p>
-                    </div>
-                  </div>
-                  <i class="fa-solid fa-chevron-right text-slate-500 group-hover:text-sky-400 group-hover:translate-x-1 transition text-xs shrink-0"></i>
-                </div>
-              </a>
-
-              <a href="blacklist.html" class="block p-3.5 rounded-2xl bg-slate-950/75 hover:bg-slate-900 border border-slate-700/80 hover:border-rose-400/70 transition group">
-                <div class="flex items-center justify-between gap-3">
-                  <div class="flex items-center gap-3 min-w-0">
-                    <div class="w-10 h-10 rounded-xl bg-rose-500/15 border border-rose-400/30 text-rose-400 flex items-center justify-center text-sm shrink-0">
-                      <i class="fa-solid fa-shield-cat icon-bounce-hover"></i>
-                    </div>
-                    <div class="min-w-0">
-                      <p class="text-sm font-bold text-white group-hover:text-rose-300 transition leading-snug">5. ศูนย์เฝ้าระวังภัย (Blacklist)</p>
-                      <p class="text-xs text-slate-400 leading-snug mt-0.5">ค้นหาเบอร์โทร/เลขบัญชีคนโกง &amp; แจ้งเบาะแส</p>
-                    </div>
-                  </div>
-                  <i class="fa-solid fa-chevron-right text-slate-500 group-hover:text-rose-400 group-hover:translate-x-1 transition text-xs shrink-0"></i>
-                </div>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-        <!-- Right Quick Hub Card replaced by Network Service Billboard Carousel -->
-        <div class="lg:col-span-5 mt-2 sm:mt-4">
-          <div id="service-billboard" aria-label="สื่อประชาสัมพันธ์บริการเครือข่าย" class="billboard-3d-shell space-y-3"
-            onmouseenter="pauseBillboardTemporarily(true)"
-            onmouseleave="pauseBillboardTemporarily(false)"
-            ontouchstart="handleBillboardTouchStart(event)"
-            ontouchend="handleBillboardTouchEnd(event)">
-            <div class="billboard-3d-stage p-5 sm:p-6 text-white relative">
-              <div id="billboard-orb-primary" class="absolute -right-16 -top-16 w-60 h-60 rounded-full bg-amber-400/20 blur-3xl pointer-events-none transition-colors duration-500"></div>
-              <div id="billboard-orb-secondary" class="absolute -left-16 -bottom-16 w-60 h-60 rounded-full bg-emerald-400/15 blur-3xl pointer-events-none transition-colors duration-500"></div>
-
-              <div class="relative z-10 space-y-4">
-                <div class="flex flex-wrap items-center justify-between gap-2.5 border-b border-amber-400/15 pb-3">
-                  <div class="flex items-center gap-2.5 min-w-0">
-                    <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-400/25 to-amber-600/20 border border-amber-400/40 text-amber-300 flex items-center justify-center shadow-inner shrink-0">
-                      <i class="fa-solid fa-tv text-sm icon-float"></i>
-                    </div>
-                    <div class="min-w-0">
-                      <h2 class="text-sm font-bold text-white leading-snug">สื่อประชาสัมพันธ์บริการเครือข่าย</h2>
-                      <p class="text-xs text-amber-200/75 leading-snug">อัปเดตบริการและสิทธิประโยชน์ของกลุ่ม</p>
-                    </div>
-                  </div>
-                  <div class="flex items-center gap-2 shrink-0">
-                    <button type="button" onclick="toggleBillboardAutoplay()" id="btn-billboard-autoplay"
-                      class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/15 text-amber-200 border border-white/15 text-xs font-bold transition">
-                      <i id="billboard-autoplay-icon" class="fa-solid fa-pause text-xs"></i>
-                      <span id="billboard-autoplay-text">เล่นอัตโนมัติ</span>
-                    </button>
-                    <span id="billboard-slide-counter" class="text-xs font-extrabold bg-amber-400/20 text-amber-300 border border-amber-400/40 px-2.5 py-1 rounded-full">1 / 5</span>
-                  </div>
-                </div>
-
-                <div class="space-y-2.5">
-                  <div class="flex flex-wrap items-center gap-2">
-                    <span id="billboard-badge" class="inline-flex items-center gap-1 text-xs font-extrabold px-2.5 py-1 rounded-full bg-amber-400/20 border border-amber-300/40 text-amber-300">
-                      <i class="fa-solid fa-id-badge"></i> บัตรสมาชิกประจำกลุ่ม
-                    </span>
-                    <span id="billboard-tag" class="text-xs font-bold px-2.5 py-1 rounded-full bg-white/10 text-slate-200 border border-white/15">
-                      เคลือบใสกันน้ำ • เช็คพัสดุได้
-                    </span>
-                  </div>
-
-                  <h3 id="billboard-title" class="text-xl sm:text-2xl font-black leading-snug tracking-tight text-white">
-                    ทำบัตรสมาชิกประเมศฐ์ &amp; เช็คเลขพัสดุ
-                  </h3>
-
-                  <p id="billboard-desc" class="text-sm text-slate-300 leading-relaxed">
-                    ยกระดับความน่าเชื่อถือของคนขับรถมืออาชีพ ด้วยบัตรสมาชิกติดรูปถ่ายหน้าตรงเคลือบใสอย่างดี พร้อมตรวจสอบสถานะการจัดส่งและเลขพัสดุย้อนหลังได้ทันที
-                  </p>
-                </div>
-
-                <div id="billboard-visual-card" class="billboard-depth-card rounded-2xl p-4 space-y-3">
-                  <div class="flex flex-wrap items-center justify-between gap-2 text-xs text-amber-200/80 border-b border-white/10 pb-2.5">
-                    <div class="flex items-center gap-2 min-w-0">
-                      <img src="TheDriverTH.jpg" alt="The Driver Thailand"
-                        onerror="this.onerror=null;this.src='https://placehold.co/48x48/0f172a/fbbf24?text=TDT';"
-                        class="w-6 h-6 object-contain bg-transparent shrink-0" style="filter:drop-shadow(0 2px 6px rgba(0,0,0,0.45));">
-                      <span id="billboard-card-kicker" class="font-extrabold tracking-wider uppercase text-amber-300 truncate">PRAMET MEMBER CARD</span>
-                    </div>
-                    <span id="billboard-card-status" class="inline-flex items-center gap-1 text-emerald-300 font-bold shrink-0">
-                      <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> รอบถัดไป 11 ธ.ค. 69
-                    </span>
-                  </div>
-
-                  <div class="flex items-center gap-3.5">
-                    <div id="billboard-icon-box" class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-400/25 to-amber-600/20 border border-amber-300/40 text-amber-300 flex items-center justify-center text-2xl shadow-inner shrink-0">
-                      <i id="billboard-main-icon" class="fa-solid fa-id-badge"></i>
-                    </div>
-                    <div class="min-w-0 space-y-1">
-                      <p id="billboard-highlight-title" class="text-sm font-extrabold text-white leading-snug">
-                        บัตรสมาชิกติดรูปถ่ายหน้าตรง
-                      </p>
-                      <p id="billboard-highlight-sub" class="text-xs text-slate-300 leading-snug">
-                        จัดส่งทั่วประเทศพร้อมแจ้งเลขติดตามพัสดุ
-                      </p>
-                    </div>
-                  </div>
-
-                  <div id="billboard-features-list" class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-                    <div class="bg-slate-950/70 border border-white/10 rounded-xl px-3 py-2 text-slate-200 font-semibold">
-                      <i class="fa-solid fa-check text-amber-400 mr-1"></i> เคลือบใสกันน้ำอย่างดี
-                    </div>
-                    <div class="bg-slate-950/70 border border-white/10 rounded-xl px-3 py-2 text-slate-200 font-semibold">
-                      <i class="fa-solid fa-check text-amber-400 mr-1"></i> เช็คเลขพัสดุย้อนหลังได้
-                    </div>
-                  </div>
-                </div>
-
-                <div class="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-2.5 pt-1">
-                  <a id="billboard-cta-link" href="pcard.html"
-                    class="flex-1 min-w-[150px] min-h-[46px] inline-flex items-center justify-center gap-2 bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 text-slate-950 font-extrabold text-sm px-4 py-3 rounded-xl shadow-lg shadow-amber-500/25 transition">
-                    <span id="billboard-cta-label">สมัครทำบัตร / เช็คพัสดุ</span>
-                    <i class="fa-solid fa-arrow-right text-xs"></i>
-                  </a>
-                  <a id="billboard-secondary-link" href="register.html"
-                    class="min-h-[46px] inline-flex items-center justify-center gap-1.5 bg-white/10 hover:bg-white/15 text-amber-200 border border-amber-400/35 font-bold text-sm px-4 py-3 rounded-xl transition">
-                    <span id="billboard-secondary-label">ตรวจสอบรหัสสมาชิก</span>
-                  </a>
-                </div>
-
-                <!-- แถบควบคุมสไลด์ Carousel (ปุ่มก่อนหน้า/ถัดไป + จุดบอกสไลด์) -->
-                <div class="flex items-center justify-between gap-3 pt-2 border-t border-white/10">
-                  <button type="button" onclick="prevBillboardSlide()" aria-label="สไลด์ก่อนหน้า" class="billboard-nav-btn">
-                    <i class="fa-solid fa-chevron-left text-xs"></i>
-                  </button>
-                  <div id="billboard-dots" class="flex items-center justify-center gap-1.5 flex-wrap"></div>
-                  <button type="button" onclick="nextBillboardSlide()" aria-label="สไลด์ถัดไป" class="billboard-nav-btn">
-                    <i class="fa-solid fa-chevron-right text-xs"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- MAIN SERVICE DIRECTORY -->
-  <main class="flex-grow max-w-6xl w-full mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-8">
-    <section class="space-y-6">
-      <div class="text-center max-w-2xl mx-auto space-y-2">
-        <span class="text-xs font-extrabold uppercase tracking-wider text-amber-300 bg-amber-500/15 border border-amber-400/35 px-3.5 py-1 rounded-full">
-          SERVICE DIRECTORY
+  <!-- PER-PAGE DYNAMIC ANNOUNCEMENT BAR -->
+  <div id="tdt-page-announce-wrap" class="tdt-page-announce-wrap" data-page="index.html">
+    <div class="tdt-page-announce-bar">
+      <div class="tdt-page-announce-left">
+        <span id="tdt-page-announcement-pill" class="tdt-announce-pill is-amber is-solid" data-color="amber" data-style="solid">
+          <i class="fa-solid fa-bullhorn"></i>
+          <span id="tdt-page-announcement-pill-text">OFFICIAL NETWORK</span>
         </span>
-        <h2 class="text-2xl sm:text-3xl font-black text-white">บริการทั้งหมดของเครือข่าย</h2>
-        <p class="text-xs sm:text-sm text-slate-300 font-light">
-          เลือกใช้งานระบบที่ต้องการได้ทันที ทุกบริการเชื่อมต่อกับฐานข้อมูลกลางของกลุ่ม 🚖 The Driver TH 🇹🇭 Premium Service
+        <span id="tdt-page-announcement-text">ศูนย์รวมบริการเครือข่ายคนขับรถมืออาชีพ</span>
+      </div>
+      <span class="tdt-page-announce-badge">
+        <i class="fa-solid fa-calendar-check"></i>
+        <span id="tdt-page-announcement-badge">รอบส่งบัตร: 11 ธันวาคม 2569</span>
+      </span>
+      <span id="site-system-status-text" style="display:none;">ระบบออนไลน์พร้อมใช้งาน</span>
+    </div>
+  </div>
+
+<!-- MAIN SUPER APP CONTENT -->
+  <main class="flex-grow max-w-5xl w-full mx-auto px-4 py-6 sm:py-8 space-y-6">
+
+    <!-- Clean Hero & Instant Search -->
+    <section class="space-y-4">
+      <div class="space-y-1">
+        <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+          เลือกบริการที่ต้องการ
+        </h1>
+        <p class="text-sm text-slate-400">
+          ครบจบในที่เดียว สำหรับสมาชิก <span class="text-amber-300 font-semibold">The Driver TH</span>
         </p>
       </div>
 
-      <div id="service-cards-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
-        <!-- Service Card: Driver App News Hub -->
-        <div data-cat="community" class="service-card-item group bg-slate-900/95 rounded-3xl p-6 border-2 border-emerald-400/70 shadow-lg card-luxury flex flex-col justify-between space-y-5 relative text-slate-100">
-          <span class="absolute top-4 right-4 text-xs font-extrabold bg-gradient-to-r from-emerald-400 to-teal-400 text-slate-950 px-3 py-0.5 rounded-full shadow-sm">
-            <i class="fa-solid fa-newspaper mr-1"></i>อัปเดตล่าสุด
-          </span>
-          <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-emerald-500/15 border border-emerald-400/35 text-emerald-300 flex items-center justify-center text-xl shadow-sm">
-              <i class="fa-solid fa-newspaper icon-bounce-hover"></i>
-            </div>
-            <h3 class="text-lg font-extrabold text-white">ข่าวสารคนขับรถผ่านแอป (รวมทุกแอป)</h3>
-            <p class="text-sm text-slate-300 leading-relaxed">
-              รวมข่าวอัปเดต Grab, Bolt, Line Man, inDrive, TADA กฎหมาย รย.17/รย.18 พร้อมหน้าย่อยรับสมัครคนขับ Grab และ Bolt
-            </p>
-          </div>
-          <a href="driver_news.html" class="w-full py-3.5 px-4 min-h-[46px] rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-extrabold text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
-            <span>อ่านข่าวสาร &amp; สมัครคนขับแอป</span>
-            <i class="fa-solid fa-arrow-right"></i>
-          </a>
-        </div>
-
-        <!-- Service Card 0: Captain Insurance -->
-        <div data-cat="safety" class="service-card-item group bg-slate-900/95 rounded-3xl p-6 border-2 border-teal-400/70 shadow-lg card-luxury flex flex-col justify-between space-y-5 relative text-slate-100">
-          <span class="absolute top-4 right-4 text-xs font-extrabold bg-gradient-to-r from-teal-400 to-emerald-400 text-slate-950 px-3 py-0.5 rounded-full shadow-sm">
-            <i class="fa-solid fa-shield-halved mr-1"></i>บริการใหม่
-          </span>
-          <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-teal-500/15 border border-teal-400/35 text-teal-300 flex items-center justify-center text-xl shadow-sm">
-              <i class="fa-solid fa-shield-halved icon-bounce-hover"></i>
-            </div>
-            <h3 class="text-lg font-extrabold text-white">CAPTAIN INSURANCE กัปตัน ประกันภัย</h3>
-            <p class="text-sm text-slate-300 leading-relaxed">
-              เช็กเบี้ยประกันภัยรถยนต์ชั้น 1, 2+, 3+, ชั้น 3 และ พ.ร.บ. สำหรับรถส่วนบุคคลและรถรับจ้าง บริการโดย The Driver Thailand
-            </p>
-          </div>
-          <a href="captain_insurance.html" class="w-full py-3.5 px-4 min-h-[46px] rounded-xl bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-400 hover:to-emerald-400 text-slate-950 font-extrabold text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
-            <span>เช็กเบี้ย Captain Insurance</span>
-            <i class="fa-solid fa-arrow-right"></i>
-          </a>
-        </div>
-
-        <!-- Service Card 1: Member Directory -->
-        <div data-cat="member" class="service-card-item group bg-slate-900/95 rounded-3xl p-6 border border-slate-800 shadow-lg card-luxury flex flex-col justify-between space-y-5 text-slate-100">
-          <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-emerald-500/15 border border-emerald-400/30 text-emerald-300 flex items-center justify-center text-xl shadow-sm">
-              <i class="fa-solid fa-users-viewfinder icon-bounce-hover"></i>
-            </div>
-            <h3 class="text-lg font-extrabold text-white">ตรวจสอบรายชื่อ &amp; รหัสสมาชิก</h3>
-            <p class="text-sm text-slate-300 leading-relaxed">
-              ค้นหารหัสสมาชิกประจำตัวจากฐานข้อมูลล่าสุด ตรวจสอบกติกาการยืนยันตัวตน และอ่านคำถามที่พบบ่อย (FAQ)
-            </p>
-          </div>
-          <a href="register.html" class="w-full py-3.5 px-4 min-h-[46px] rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-400 hover:from-emerald-400 hover:to-emerald-300 text-slate-950 font-extrabold text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
-            <span>เปิดหน้าระบบสมาชิก</span>
-            <i class="fa-solid fa-arrow-right"></i>
-          </a>
-        </div>
-
-        <!-- Service Card 2: New Member Registration Form -->
-        <div data-cat="member" class="service-card-item group bg-slate-900/95 rounded-3xl p-6 border border-slate-800 shadow-lg card-luxury flex flex-col justify-between space-y-5 text-slate-100">
-          <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-teal-500/15 border border-teal-400/30 text-teal-300 flex items-center justify-center text-xl shadow-sm">
-              <i class="fa-solid fa-file-signature icon-bounce-hover"></i>
-            </div>
-            <h3 class="text-lg font-extrabold text-white">แบบฟอร์มลงทะเบียนสมาชิกใหม่</h3>
-            <p class="text-sm text-slate-300 leading-relaxed">
-              กรอกใบสมัครสมาชิกออนไลน์ รองรับทั้งสมาชิกคนขับทั่วไปและผู้ปล่อยงานหลัก/บริษัท พร้อมระบบบันทึกร่างอัตโนมัติ
-            </p>
-          </div>
-          <a href="member_register.html" class="w-full py-3.5 px-4 min-h-[46px] rounded-xl bg-gradient-to-r from-teal-500 to-teal-400 hover:from-teal-400 hover:to-teal-300 text-slate-950 font-extrabold text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
-            <span>กรอกใบสมัครสมาชิกใหม่</span>
-            <i class="fa-solid fa-arrow-right"></i>
-          </a>
-        </div>
-
-        <!-- Service Card 3: Pramet Member Card -->
-        <div data-cat="member" class="service-card-item group bg-slate-900/95 rounded-3xl p-6 border-2 border-amber-400/70 shadow-lg card-luxury flex flex-col justify-between space-y-5 relative text-slate-100">
-          <span class="absolute top-4 right-4 text-xs font-extrabold bg-gradient-to-r from-amber-400 to-yellow-400 text-slate-950 px-3 py-0.5 rounded-full shadow-sm">
-            <i class="fa-solid fa-star mr-1"></i>แนะนำ
-          </span>
-          <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-amber-500/15 border border-amber-400/35 text-amber-300 flex items-center justify-center text-xl shadow-sm">
-              <i class="fa-solid fa-id-badge icon-bounce-hover"></i>
-            </div>
-            <h3 class="text-lg font-extrabold text-white">ทำบัตรสมาชิกประเมศฐ์ &amp; เช็คพัสดุ</h3>
-            <p class="text-sm text-slate-300 leading-relaxed">
-              สมัครทำบัตรสมาชิกประเมศฐ์แบบติดรูปถ่ายหน้าตรง เคลือบใสกันน้ำอย่างดี พร้อมระบบติดตามสถานะและเช็คเลขพัสดุย้อนหลัง
-            </p>
-          </div>
-          <a href="pcard.html" class="w-full py-3.5 px-4 min-h-[46px] rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
-            <span>สมัครทำบัตร / เช็คพัสดุ</span>
-            <i class="fa-solid fa-arrow-right"></i>
-          </a>
-        </div>
-
-        <!-- Service Card 4: OpenChat Unblock Appeal -->
-        <div data-cat="safety" class="service-card-item group bg-slate-900/95 rounded-3xl p-6 border border-slate-800 shadow-lg card-luxury flex flex-col justify-between space-y-5 text-slate-100">
-          <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-sky-500/15 border border-sky-400/30 text-sky-300 flex items-center justify-center text-xl shadow-sm">
-              <i class="fa-solid fa-unlock-keyhole icon-bounce-hover"></i>
-            </div>
-            <h3 class="text-lg font-extrabold text-white">ขอปลดล็อกห้อง Line OpenChat</h3>
-            <p class="text-sm text-slate-300 leading-relaxed">
-              ยื่นคำร้องชี้แจงสาเหตุและแนบภาพหลักฐานกรณีถูกบล็อกหรือถูกลบออกจากห้องแชทของเครือข่าย เพื่อให้ทีมผู้ดูแลพิจารณาปลดล็อก
-            </p>
-          </div>
-          <a href="unblock_request.html" class="w-full py-3.5 px-4 min-h-[46px] rounded-xl bg-gradient-to-r from-sky-500 to-sky-400 hover:from-sky-400 hover:to-sky-300 text-slate-950 font-extrabold text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
-            <span>ยื่นคำร้องขอปลดล็อก</span>
-            <i class="fa-solid fa-arrow-right"></i>
-          </a>
-        </div>
-
-        <!-- Service Card 5: Blacklist Guard -->
-        <div data-cat="safety" class="service-card-item group bg-slate-900/95 rounded-3xl p-6 border border-slate-800 shadow-lg card-luxury flex flex-col justify-between space-y-5 text-slate-100">
-          <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-rose-500/15 border border-rose-400/30 text-rose-300 flex items-center justify-center text-xl shadow-sm">
-              <i class="fa-solid fa-user-shield icon-bounce-hover"></i>
-            </div>
-            <h3 class="text-lg font-extrabold text-white">ศูนย์เฝ้าระวังภัย (Blacklist)</h3>
-            <p class="text-sm text-slate-300 leading-relaxed">
-              ตรวจสอบเบอร์โทรศัพท์ เลขบัญชีธนาคาร หรือชื่อผู้ว่าจ้างก่อนออกเดินทางไกล พร้อมช่องทางแจ้งเบาะแสเตือนภัยคนโกงร่วมกันในกลุ่ม
-            </p>
-          </div>
-          <a href="blacklist.html" class="w-full py-3.5 px-4 min-h-[46px] rounded-xl bg-gradient-to-r from-rose-500 to-rose-400 hover:from-rose-400 hover:to-rose-300 text-slate-950 font-extrabold text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
-            <span>เข้าสู่ศูนย์ตรวจสอบ Blacklist</span>
-            <i class="fa-solid fa-arrow-right"></i>
-          </a>
-        </div>
-
-        <!-- Service Card 6: Privacy Policy & Rules -->
-        <div data-cat="safety" class="service-card-item group bg-slate-900/95 rounded-3xl p-6 border border-slate-800 shadow-lg card-luxury flex flex-col justify-between space-y-5 text-slate-100">
-          <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-slate-800 border border-slate-700 text-amber-300 flex items-center justify-center text-xl shadow-sm">
-              <i class="fa-solid fa-scale-balanced icon-bounce-hover"></i>
-            </div>
-            <h3 class="text-lg font-extrabold text-white">ประกาศความเป็นส่วนตัว (PDPA)</h3>
-            <p class="text-sm text-slate-300 leading-relaxed">
-              อ่านประกาศคุ้มครองข้อมูลส่วนบุคคลและแนวทางปฏิบัติสำหรับสมาชิกกลุ่ม 🚖 The Driver TH 🇹🇭 Premium Service ฉบับสมบูรณ์
-            </p>
-          </div>
-          <a href="privacy_policy.html" class="w-full py-3.5 px-4 min-h-[46px] rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-300 border border-amber-400/35 font-bold text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
-            <span>อ่านประกาศความเป็นส่วนตัว</span>
-            <i class="fa-solid fa-arrow-right"></i>
-          </a>
-        </div>
-
-        <!-- Service Card 7: Edit Member Info -->
-        <div data-cat="member" class="service-card-item group bg-slate-900/95 rounded-3xl p-6 border border-slate-800 shadow-lg card-luxury flex flex-col justify-between space-y-5 text-slate-100">
-          <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-amber-500/15 border border-amber-400/30 text-amber-300 flex items-center justify-center text-xl shadow-sm">
-              <i class="fa-solid fa-user-pen icon-bounce-hover"></i>
-            </div>
-            <h3 class="text-lg font-extrabold text-white">แก้ไขข้อมูลสมาชิกเดิม</h3>
-            <p class="text-sm text-slate-300 leading-relaxed">
-              สำหรับสมาชิกที่มีรหัสสมาชิกอยู่แล้ว ต้องการแจ้งเปลี่ยนรถยนต์คันใหม่ เปลี่ยนทะเบียนรถ หรือแก้ไขข้อมูลติดต่อ
-            </p>
-          </div>
-          <a href="member_edit.html" class="w-full py-3.5 px-4 min-h-[46px] rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
-            <span>แจ้งแก้ไขข้อมูลสมาชิก</span>
-            <i class="fa-solid fa-arrow-right"></i>
-          </a>
-        </div>
-
-        <!-- Service Card 8: Luxury Car OpenChat -->
-        <div data-cat="community" class="service-card-item group bg-slate-900/95 rounded-3xl p-6 border border-slate-800 shadow-lg card-luxury flex flex-col justify-between space-y-5 text-slate-100">
-          <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-amber-500/15 border border-amber-400/35 text-amber-300 flex items-center justify-center text-xl shadow-sm">
-              <i class="fa-solid fa-crown icon-bounce-hover"></i>
-            </div>
-            <h3 class="text-lg font-extrabold text-white">ลงทะเบียนห้อง Luxury Car</h3>
-            <p class="text-sm text-slate-300 leading-relaxed">
-              ลงทะเบียนขอเข้าห้อง Line OpenChat สำหรับสมาชิกกลุ่มคนขับรถ Luxury Car / Executive Van / VIP โดยเฉพาะ
-            </p>
-          </div>
-          <a href="luxury_car_register.html" class="w-full py-3.5 px-4 min-h-[46px] rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-300 border border-amber-400/40 font-bold text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
-            <span>สมัครเข้าห้อง Luxury Car</span>
-            <i class="fa-solid fa-arrow-right"></i>
-          </a>
-        </div>
-
-        <!-- Service Card 9: [VIP] Tourism Referral Guide -->
-        <div data-cat="community" class="service-card-item group bg-slate-900/95 rounded-3xl p-6 border border-slate-800 shadow-lg card-luxury flex flex-col justify-between space-y-5 text-slate-100">
-          <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-purple-500/15 border border-purple-400/30 text-purple-300 flex items-center justify-center text-xl shadow-sm">
-              <i class="fa-solid fa-map-location-dot icon-bounce-hover"></i>
-            </div>
-            <h3 class="text-lg font-extrabold text-white">[VIP] ลายแทงสถานที่ท่องเที่ยว</h3>
-            <p class="text-sm text-slate-300 leading-relaxed">
-              บริการขอรับลายแทงสถานที่ท่องเที่ยว ร้านค้า ร้านอาหาร และจุดบริการพันธมิตรทั่วไทยเพื่อรับค่าแนะนำ
-            </p>
-          </div>
-          <a href="vip_referral_guide.html" class="w-full py-3.5 px-4 min-h-[46px] rounded-xl bg-gradient-to-r from-purple-500 to-indigo-500 hover:from-purple-400 hover:to-indigo-400 text-slate-950 font-extrabold text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
-            <span>ขอรับสิทธิ์ลายแทง VIP</span>
-            <i class="fa-solid fa-arrow-right"></i>
-          </a>
-        </div>
-
-        <!-- Service Card 10: RTAF Don Mueang Pass -->
-        <div data-cat="member" class="service-card-item group bg-slate-900/95 rounded-3xl p-6 border border-slate-800 shadow-lg card-luxury flex flex-col justify-between space-y-5 text-slate-100">
-          <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-blue-500/15 border border-blue-400/30 text-blue-300 flex items-center justify-center text-xl shadow-sm">
-              <i class="fa-solid fa-plane-departure icon-bounce-hover"></i>
-            </div>
-            <h3 class="text-lg font-extrabold text-white">ทำบัตรผ่านยานพาหนะ ทอ.</h3>
-            <p class="text-sm text-slate-300 leading-relaxed">
-              แบบฟอร์มขอทำบัตรผ่านยานพาหนะเข้า - ออก เขตพื้นที่กองทัพอากาศ (ดอนเมือง) ทั้งขอใหม่และต่ออายุบัตร
-            </p>
-          </div>
-          <a href="rtaf_pass_register.html" class="w-full py-3.5 px-4 min-h-[46px] rounded-xl bg-gradient-to-r from-blue-500 to-sky-400 hover:from-blue-400 hover:to-sky-300 text-slate-950 font-extrabold text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
-            <span>ยื่นขอทำบัตรผ่าน ทอ.</span>
-            <i class="fa-solid fa-arrow-right"></i>
-          </a>
-        </div>
-
-        <!-- Service Card 11: Tour Book Order -->
-        <div data-cat="community" class="service-card-item group bg-slate-900/95 rounded-3xl p-6 border border-slate-800 shadow-lg card-luxury flex flex-col justify-between space-y-5 text-slate-100">
-          <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-teal-500/15 border border-teal-400/30 text-teal-300 flex items-center justify-center text-xl shadow-sm">
-              <i class="fa-solid fa-book icon-bounce-hover"></i>
-            </div>
-            <h3 class="text-lg font-extrabold text-white">บริการสั่งซื้อสมุดทัวร์</h3>
-            <p class="text-sm text-slate-300 leading-relaxed">
-              สั่งซื้อสมุดทัวร์ออนไลน์ เลือกได้ 2 พื้นที่บริการ (กรุงเทพฯ-ปริมณฑล และ พัทยา-ชลบุรี) พร้อมจัดส่งถึงบ้าน
-            </p>
-          </div>
-          <a href="tour_book_order.html" class="w-full py-3.5 px-4 min-h-[46px] rounded-xl bg-gradient-to-r from-teal-500 to-emerald-400 hover:from-teal-400 hover:to-emerald-300 text-slate-950 font-extrabold text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
-            <span>สั่งซื้อสมุดทัวร์</span>
-            <i class="fa-solid fa-arrow-right"></i>
-          </a>
-        </div>
-
-        <!-- Service Card 12: Unified Request Tracking -->
-        <div data-cat="member" class="service-card-item group bg-slate-900/95 rounded-3xl p-6 border border-slate-800 shadow-lg card-luxury flex flex-col justify-between space-y-5 text-slate-100">
-          <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-amber-500/15 border border-amber-400/30 text-amber-300 flex items-center justify-center text-xl shadow-sm">
-              <i class="fa-solid fa-satellite-dish icon-bounce-hover"></i>
-            </div>
-            <h3 class="text-lg font-extrabold text-white">ศูนย์ติดตามสถานะคำร้องทั้งหมด</h3>
-            <p class="text-sm text-slate-300 leading-relaxed">
-              ตรวจสอบความคืบหน้าและเลขพัสดุของทุกบริการในหน้าเดียวด้วยรหัสอ้างอิงหรือเบอร์โทรศัพท์
-            </p>
-          </div>
-          <a href="tracking.html" class="w-full py-3.5 px-4 min-h-[46px] rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
-            <span>เช็คสถานะคำร้องทั้งหมด</span>
-            <i class="fa-solid fa-arrow-right"></i>
-          </a>
-        </div>
-
-        <!-- Service Card 13: Digital Member Card & QR -->
-        <div data-cat="member" class="service-card-item group bg-slate-900/95 rounded-3xl p-6 border border-slate-800 shadow-lg card-luxury flex flex-col justify-between space-y-5 text-slate-100">
-          <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-emerald-500/15 border border-emerald-400/30 text-emerald-300 flex items-center justify-center text-xl shadow-sm">
-              <i class="fa-solid fa-qrcode icon-bounce-hover"></i>
-            </div>
-            <h3 class="text-lg font-extrabold text-white">บัตรสมาชิกดิจิทัล &amp; QR Code</h3>
-            <p class="text-sm text-slate-300 leading-relaxed">
-              เปิดบัตรสมาชิกอิเล็กทรอนิกส์บนมือถือพร้อม QR Code ให้ผู้โดยสารและจุดคัดกรองสแกนตรวจสอบตัวตนได้ทันที
-            </p>
-          </div>
-          <a href="member_card_digital.html" class="w-full py-3.5 px-4 min-h-[46px] rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-400 hover:from-emerald-400 hover:to-emerald-300 text-slate-950 font-extrabold text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
-            <span>เปิดบัตรสมาชิกดิจิทัล</span>
-            <i class="fa-solid fa-arrow-right"></i>
-          </a>
-        </div>
-
-        <!-- Service Card: E-Voucher & Passenger Verification -->
-        <div data-cat="safety" class="service-card-item group bg-slate-900/95 rounded-3xl p-6 border border-amber-400/40 shadow-lg card-luxury flex flex-col justify-between space-y-5 text-slate-100">
-          <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-amber-500/15 border border-amber-400/35 text-amber-300 flex items-center justify-center text-xl shadow-sm">
-              <i class="fa-solid fa-file-invoice-dollar icon-bounce-hover"></i>
-            </div>
-            <h3 class="text-lg font-extrabold text-white">ใบรับรองการเดินทาง (E-Voucher)</h3>
-            <p class="text-sm text-slate-300 leading-relaxed">
-              ออกใบยืนยันการจองรถและใบเสร็จรับเงินดิจิทัลพร้อม QR Code ให้ผู้โดยสารสแกนตรวจสอบประวัติคนขับได้ทันที
-            </p>
-          </div>
-          <a href="trip_voucher.html" class="w-full py-3.5 px-4 min-h-[46px] rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
-            <span>ออกใบจอง / ตรวจสอบคนขับ</span>
-            <i class="fa-solid fa-arrow-right"></i>
-          </a>
-        </div>
-
-        <!-- Service Card 15: Community Forum -->
-        <div data-cat="community" class="service-card-item group bg-slate-900/95 rounded-3xl p-6 border border-slate-800 shadow-lg card-luxury flex flex-col justify-between space-y-5 text-slate-100">
-          <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-sky-500/15 border border-sky-400/30 text-sky-300 flex items-center justify-center text-xl shadow-sm">
-              <i class="fa-solid fa-comments icon-bounce-hover"></i>
-            </div>
-            <h3 class="text-lg font-extrabold text-white">ชุมชนเว็บบอร์ดสมาชิก</h3>
-            <p class="text-sm text-slate-300 leading-relaxed">
-              ตั้งกระทู้ แลกเปลี่ยนเส้นทาง รีวิวสถานที่ แนบรูปภาพ โหวตคะแนนโพสต์ และสะสมเรทติ้งสมาชิก
-            </p>
-          </div>
-          <a href="community.html" class="w-full py-3.5 px-4 min-h-[46px] rounded-xl bg-gradient-to-r from-sky-500 to-indigo-400 hover:from-sky-400 hover:to-indigo-300 text-slate-950 font-extrabold text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
-            <span>เข้าสู่เว็บบอร์ดชุมชน</span>
-            <i class="fa-solid fa-arrow-right"></i>
-          </a>
-        </div>
-
-        <!-- Service Card 16: Standard Fare Calculator -->
-        <div data-cat="safety" class="service-card-item group bg-slate-900/95 rounded-3xl p-6 border border-slate-800 shadow-lg card-luxury flex flex-col justify-between space-y-5 text-slate-100">
-          <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-emerald-500/15 border border-emerald-400/30 text-emerald-300 flex items-center justify-center text-xl shadow-sm">
-              <i class="fa-solid fa-calculator icon-bounce-hover"></i>
-            </div>
-            <h3 class="text-lg font-extrabold text-white">คำนวณค่าโดยสารมาตรฐาน</h3>
-            <p class="text-sm text-slate-300 leading-relaxed">
-              คำนวณราคากลางงานเหมาต่างจังหวัดและรับ-ส่งสนามบินตามประเภทรถ พร้อมคัดลอกใบเสนอราคาส่งลูกค้า
-            </p>
-          </div>
-          <a href="fare_calculator.html" class="w-full py-3.5 px-4 min-h-[46px] rounded-xl bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-extrabold text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
-            <span>คำนวณค่าโดยสาร</span>
-            <i class="fa-solid fa-arrow-right"></i>
-          </a>
-        </div>
-
-        <!-- Service Card: Fleet & Expense Hub -->
-        <div data-cat="member" class="service-card-item group bg-slate-900/95 rounded-3xl p-6 border border-emerald-400/40 shadow-lg card-luxury flex flex-col justify-between space-y-5 text-slate-100">
-          <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-emerald-500/15 border border-emerald-400/35 text-emerald-300 flex items-center justify-center text-xl shadow-sm">
-              <i class="fa-solid fa-car-on icon-bounce-hover"></i>
-            </div>
-            <h3 class="text-lg font-extrabold text-white">จัดการรถ &amp; บัญชีรายรับ-รายจ่าย</h3>
-            <p class="text-sm text-slate-300 leading-relaxed">
-              ระบบแจ้งเตือนวันหมดอายุ พ.ร.บ. ประกันภัย บัตรผ่าน ทอ. ล่วงหน้า 30 วัน พร้อมสมุดบัญชีรายรับ-รายจ่ายคนขับ
-            </p>
-          </div>
-          <a href="driver_fleet_hub.html" class="w-full py-3.5 px-4 min-h-[46px] rounded-xl bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-extrabold text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
-            <span>เปิดศูนย์จัดการรถ &amp; บัญชี</span>
-            <i class="fa-solid fa-arrow-right"></i>
-          </a>
-        </div>
-
-        <!-- Service Card: Empty-Leg Return Trip Matcher -->
-        <div data-cat="community" class="service-card-item group bg-slate-900/95 rounded-3xl p-6 border border-sky-400/40 shadow-lg card-luxury flex flex-col justify-between space-y-5 text-slate-100">
-          <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-sky-500/15 border border-sky-400/35 text-sky-300 flex items-center justify-center text-xl shadow-sm">
-              <i class="fa-solid fa-route icon-bounce-hover"></i>
-            </div>
-            <h3 class="text-lg font-extrabold text-white">จับคู่รถว่างขากลับต่างจังหวัด</h3>
-            <p class="text-sm text-slate-300 leading-relaxed">
-              ปักหมุดแจ้งพิกัดรถว่างขากลับต่างจังหวัด เพื่อให้เพื่อนสมาชิกส่งต่องานขากลับ ลดการตีรถเปล่า
-            </p>
-          </div>
-          <a href="empty_leg_matcher.html" class="w-full py-3.5 px-4 min-h-[46px] rounded-xl bg-gradient-to-r from-sky-500 to-indigo-400 hover:from-sky-400 hover:to-indigo-300 text-slate-950 font-extrabold text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
-            <span>เปิดระบบจับคู่รถว่างขากลับ</span>
-            <i class="fa-solid fa-arrow-right"></i>
-          </a>
-        </div>
-
-        <!-- Service Card: Pit-Stop Map & Member Reputation -->
-        <div data-cat="community" class="service-card-item group bg-slate-900/95 rounded-3xl p-6 border border-amber-400/40 shadow-lg card-luxury flex flex-col justify-between space-y-5 text-slate-100">
-          <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-amber-500/15 border border-amber-400/35 text-amber-300 flex items-center justify-center text-xl shadow-sm">
-              <i class="fa-solid fa-charging-station icon-bounce-hover"></i>
-            </div>
-            <h3 class="text-lg font-extrabold text-white">จุดพักรถ EV &amp; ระดับความน่าเชื่อถือ</h3>
-            <p class="text-sm text-slate-300 leading-relaxed">
-              คลังพิกัดสถานีชาร์จ EV จุดจอดรอสนามบิน ปั๊มสะอาด พร้อมทำเนียบคะแนนความน่าเชื่อถือสมาชิก
-            </p>
-          </div>
-          <a href="driver_pitstop_reputation.html" class="w-full py-3.5 px-4 min-h-[46px] rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
-            <span>เปิดคลังพิกัด &amp; ทำเนียบสมาชิก</span>
-            <i class="fa-solid fa-arrow-right"></i>
-          </a>
-        </div>
+      <!-- Search Input -->
+      <div class="relative">
+        <i class="fa-solid fa-magnifying-glass text-slate-400 absolute left-4 top-1/2 -translate-y-1/2 text-sm"></i>
+        <input type="search" id="home-service-search" oninput="applyHomeFilters()"
+          placeholder="ค้นหาบริการ เช่น บัตร, Blacklist, Grab, ค่าโดยสาร, EV..."
+          class="w-full bg-slate-900 border border-slate-700/80 focus:border-amber-400 rounded-2xl pl-11 pr-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none transition">
       </div>
+
+      <!-- 4 Quick Actions -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <a href="member_register.html" class="app-tile flex items-center gap-3 p-3.5 rounded-2xl bg-gradient-to-br from-amber-400 to-amber-500 text-slate-950 font-bold shadow-lg shadow-amber-500/15">
+          <span class="w-10 h-10 rounded-xl bg-slate-950/15 flex items-center justify-center text-base shrink-0">
+            <i class="fa-solid fa-file-signature"></i>
+          </span>
+          <span class="text-sm leading-tight">สมัครสมาชิก</span>
+        </a>
+        <a href="register.html" class="app-tile flex items-center gap-3 p-3.5 rounded-2xl bg-slate-900 border border-slate-800 text-white font-semibold">
+          <span class="w-10 h-10 rounded-xl bg-amber-400/15 text-amber-300 flex items-center justify-center text-base shrink-0">
+            <i class="fa-solid fa-users-viewfinder"></i>
+          </span>
+          <span class="text-sm leading-tight">เช็กรหัสสมาชิก</span>
+        </a>
+        <a href="pcard.html" class="app-tile flex items-center gap-3 p-3.5 rounded-2xl bg-slate-900 border border-slate-800 text-white font-semibold">
+          <span class="w-10 h-10 rounded-xl bg-amber-400/15 text-amber-300 flex items-center justify-center text-base shrink-0">
+            <i class="fa-solid fa-id-badge"></i>
+          </span>
+          <span class="text-sm leading-tight">ทำบัตรประเมศฐ์</span>
+        </a>
+        <a href="blacklist.html" class="app-tile flex items-center gap-3 p-3.5 rounded-2xl bg-slate-900 border border-rose-500/35 text-white font-semibold">
+          <span class="w-10 h-10 rounded-xl bg-rose-500/15 text-rose-400 flex items-center justify-center text-base shrink-0">
+            <i class="fa-solid fa-user-shield"></i>
+          </span>
+          <span class="text-sm leading-tight">เช็ก Blacklist</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Category Filter Tabs -->
+    <section class="space-y-4">
+      <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1" role="tablist" aria-label="หมวดหมู่บริการ">
+        <button type="button" data-filter="ALL" onclick="selectHomeCategory('ALL')"
+          class="home-cat-tab shrink-0 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-amber-400 text-slate-950 transition">
+          ทั้งหมด (25)
+        </button>
+        <button type="button" data-filter="member" onclick="selectHomeCategory('member')"
+          class="home-cat-tab shrink-0 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-slate-900 text-slate-300 border border-slate-800 hover:border-amber-400/40 transition">
+          สมาชิก &amp; บัตร (7)
+        </button>
+        <button type="button" data-filter="tools" onclick="selectHomeCategory('tools')"
+          class="home-cat-tab shrink-0 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-slate-900 text-slate-300 border border-slate-800 hover:border-amber-400/40 transition">
+          งาน &amp; เครื่องมือ (6)
+        </button>
+        <button type="button" data-filter="services" onclick="selectHomeCategory('services')"
+          class="home-cat-tab shrink-0 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-slate-900 text-slate-300 border border-slate-800 hover:border-amber-400/40 transition">
+          ขับแอป &amp; เสริม (7)
+        </button>
+        <button type="button" data-filter="community" onclick="selectHomeCategory('community')"
+          class="home-cat-tab shrink-0 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-slate-900 text-slate-300 border border-slate-800 hover:border-amber-400/40 transition">
+          ชุมชน &amp; ปลอดภัย (5)
+        </button>
+      </div>
+
+      <!-- Super App 2-Col Mobile / 4-Col Desktop Service Grid -->
+      <div id="home-service-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+
+        <!-- 1. สมาชิก & บัตร (7) -->
+        <a href="member_register.html" data-cat="member" data-keywords="สมัครสมาชิก ลงทะเบียนใหม่ member register"
+          class="service-tile app-tile flex flex-col gap-2.5 p-4 rounded-2xl bg-slate-900/90 border border-slate-800">
+          <span class="w-11 h-11 rounded-xl bg-amber-400/12 border border-amber-400/25 text-amber-300 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-file-signature"></i>
+          </span>
+          <div>
+            <h2 class="text-sm font-bold text-white leading-snug">สมัครสมาชิกใหม่</h2>
+            <p class="text-xs text-slate-400 mt-0.5">ลงทะเบียนรับรหัส</p>
+          </div>
+        </a>
+
+        <a href="register.html" data-cat="member" data-keywords="ตรวจสอบรหัสสมาชิก รายชื่อ ค้นหา"
+          class="service-tile app-tile flex flex-col gap-2.5 p-4 rounded-2xl bg-slate-900/90 border border-slate-800">
+          <span class="w-11 h-11 rounded-xl bg-amber-400/12 border border-amber-400/25 text-amber-300 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-users-viewfinder"></i>
+          </span>
+          <div>
+            <h2 class="text-sm font-bold text-white leading-snug">ตรวจสอบรหัสสมาชิก</h2>
+            <p class="text-xs text-slate-400 mt-0.5">ค้นหารายชื่อในระบบ</p>
+          </div>
+        </a>
+
+        <a href="member_edit.html" data-cat="member" data-keywords="แก้ไขข้อมูลสมาชิก เปลี่ยนรถ ทะเบียน"
+          class="service-tile app-tile flex flex-col gap-2.5 p-4 rounded-2xl bg-slate-900/90 border border-slate-800">
+          <span class="w-11 h-11 rounded-xl bg-amber-400/12 border border-amber-400/25 text-amber-300 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-user-pen"></i>
+          </span>
+          <div>
+            <h2 class="text-sm font-bold text-white leading-snug">แก้ไขข้อมูลสมาชิก</h2>
+            <p class="text-xs text-slate-400 mt-0.5">เปลี่ยนรถ / ทะเบียน</p>
+          </div>
+        </a>
+
+        <a href="member_card_digital.html" data-cat="member" data-keywords="บัตรสมาชิกดิจิทัล qr code ยืนยันตัวตน"
+          class="service-tile app-tile flex flex-col gap-2.5 p-4 rounded-2xl bg-slate-900/90 border border-slate-800">
+          <span class="w-11 h-11 rounded-xl bg-amber-400/12 border border-amber-400/25 text-amber-300 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-qrcode"></i>
+          </span>
+          <div>
+            <h2 class="text-sm font-bold text-white leading-snug">บัตรดิจิทัล &amp; QR</h2>
+            <p class="text-xs text-slate-400 mt-0.5">เปิดบัตรบนมือถือ</p>
+          </div>
+        </a>
+
+        <a href="luxury_car_register.html" data-cat="member" data-keywords="luxury car ห้องรถหรู vip van"
+          class="service-tile app-tile flex flex-col gap-2.5 p-4 rounded-2xl bg-slate-900/90 border border-slate-800">
+          <span class="w-11 h-11 rounded-xl bg-amber-400/12 border border-amber-400/25 text-amber-300 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-crown"></i>
+          </span>
+          <div>
+            <h2 class="text-sm font-bold text-white leading-snug">สมัครห้อง Luxury Car</h2>
+            <p class="text-xs text-slate-400 mt-0.5">กลุ่มรถหรู / VIP</p>
+          </div>
+        </a>
+
+        <a href="tracking.html" data-cat="member" data-keywords="ติดตามสถานะคำร้อง tracking พัสดุ"
+          class="service-tile app-tile flex flex-col gap-2.5 p-4 rounded-2xl bg-slate-900/90 border border-slate-800">
+          <span class="w-11 h-11 rounded-xl bg-amber-400/12 border border-amber-400/25 text-amber-300 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-satellite-dish"></i>
+          </span>
+          <div>
+            <h2 class="text-sm font-bold text-white leading-snug">ติดตามสถานะคำร้อง</h2>
+            <p class="text-xs text-slate-400 mt-0.5">เช็กความคืบหน้า</p>
+          </div>
+        </a>
+
+        <a href="unblock_request.html" data-cat="member" data-keywords="ปลดล็อก openchat line บล็อก"
+          class="service-tile app-tile flex flex-col gap-2.5 p-4 rounded-2xl bg-slate-900/90 border border-slate-800">
+          <span class="w-11 h-11 rounded-xl bg-amber-400/12 border border-amber-400/25 text-amber-300 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-unlock-keyhole"></i>
+          </span>
+          <div>
+            <h2 class="text-sm font-bold text-white leading-snug">ขอปลดล็อก OpenChat</h2>
+            <p class="text-xs text-slate-400 mt-0.5">ยื่นชี้แจงปลดบล็อก</p>
+          </div>
+        </a>
+
+        <!-- 2. งาน & เครื่องมือคนขับ (6) -->
+        <a href="job_board.html" data-cat="tools" data-keywords="กระดานงาน แลกเปลี่ยนงาน หาคนขับแทน job"
+          class="service-tile app-tile flex flex-col gap-2.5 p-4 rounded-2xl bg-slate-900/90 border border-slate-800">
+          <span class="w-11 h-11 rounded-xl bg-emerald-500/12 border border-emerald-400/25 text-emerald-300 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-handshake"></i>
+          </span>
+          <div>
+            <h2 class="text-sm font-bold text-white leading-snug">กระดานแลกเปลี่ยนงาน</h2>
+            <p class="text-xs text-slate-400 mt-0.5">ปล่อยงาน / รับงาน</p>
+          </div>
+        </a>
+
+        <a href="empty_leg_matcher.html" data-cat="tools" data-keywords="รถว่างขากลับ ต่างจังหวัด empty leg"
+          class="service-tile app-tile flex flex-col gap-2.5 p-4 rounded-2xl bg-slate-900/90 border border-slate-800">
+          <span class="w-11 h-11 rounded-xl bg-emerald-500/12 border border-emerald-400/25 text-emerald-300 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-route"></i>
+          </span>
+          <div>
+            <h2 class="text-sm font-bold text-white leading-snug">จับคู่รถว่างขากลับ</h2>
+            <p class="text-xs text-slate-400 mt-0.5">ลดการตีรถเปล่า</p>
+          </div>
+        </a>
+
+        <a href="fare_calculator.html" data-cat="tools" data-keywords="คำนวณค่าโดยสาร ราคากลาง เสนอราคา"
+          class="service-tile app-tile flex flex-col gap-2.5 p-4 rounded-2xl bg-slate-900/90 border border-slate-800">
+          <span class="w-11 h-11 rounded-xl bg-emerald-500/12 border border-emerald-400/25 text-emerald-300 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-calculator"></i>
+          </span>
+          <div>
+            <h2 class="text-sm font-bold text-white leading-snug">คำนวณค่าโดยสาร</h2>
+            <p class="text-xs text-slate-400 mt-0.5">ประเมินราคางานเหมา</p>
+          </div>
+        </a>
+
+        <a href="trip_voucher.html" data-cat="tools" data-keywords="ใบจอง ใบเสร็จ e-voucher trip"
+          class="service-tile app-tile flex flex-col gap-2.5 p-4 rounded-2xl bg-slate-900/90 border border-slate-800">
+          <span class="w-11 h-11 rounded-xl bg-emerald-500/12 border border-emerald-400/25 text-emerald-300 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-file-invoice-dollar"></i>
+          </span>
+          <div>
+            <h2 class="text-sm font-bold text-white leading-snug">ออกใบจอง / E-Voucher</h2>
+            <p class="text-xs text-slate-400 mt-0.5">ส่งใบรับรองลูกค้า</p>
+          </div>
+        </a>
+
+        <a href="driver_fleet_hub.html" data-cat="tools" data-keywords="จัดการรถ บัญชี รายรับ รายจ่าย เอกสาร หมดอายุ"
+          class="service-tile app-tile flex flex-col gap-2.5 p-4 rounded-2xl bg-slate-900/90 border border-slate-800">
+          <span class="w-11 h-11 rounded-xl bg-emerald-500/12 border border-emerald-400/25 text-emerald-300 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-wallet"></i>
+          </span>
+          <div>
+            <h2 class="text-sm font-bold text-white leading-snug">จัดการรถ &amp; บัญชี</h2>
+            <p class="text-xs text-slate-400 mt-0.5">เตือนเอกสาร / รายรับ</p>
+          </div>
+        </a>
+
+        <a href="driver_pitstop_reputation.html" data-cat="tools" data-keywords="จุดพักรถ ev charger ชาร์จไฟ เครดิต"
+          class="service-tile app-tile flex flex-col gap-2.5 p-4 rounded-2xl bg-slate-900/90 border border-slate-800">
+          <span class="w-11 h-11 rounded-xl bg-emerald-500/12 border border-emerald-400/25 text-emerald-300 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-charging-station"></i>
+          </span>
+          <div>
+            <h2 class="text-sm font-bold text-white leading-snug">จุดพักรถ EV &amp; เครดิต</h2>
+            <p class="text-xs text-slate-400 mt-0.5">สถานีชาร์จ / เรทติ้ง</p>
+          </div>
+        </a>
+
+        <!-- 3. สมัครขับแอป & บริการเสริม (7) -->
+        <a href="pcard.html" data-cat="services" data-keywords="บัตรสมาชิกประเมศฐ์ บัตรเคลือบ พัสดุ pcard"
+          class="service-tile app-tile flex flex-col gap-2.5 p-4 rounded-2xl bg-slate-900/90 border border-amber-400/35">
+          <span class="w-11 h-11 rounded-xl bg-amber-400/15 border border-amber-400/35 text-amber-300 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-id-badge"></i>
+          </span>
+          <div>
+            <h2 class="text-sm font-bold text-white leading-snug">ทำบัตรประเมศฐ์</h2>
+            <p class="text-xs text-slate-400 mt-0.5">สั่งทำบัตร &amp; เช็กพัสดุ</p>
+          </div>
+        </a>
+
+        <a href="grab_driver_register.html" data-cat="services" data-keywords="สมัครคนขับ grab แกร็บ"
+          class="service-tile app-tile flex flex-col gap-2.5 p-4 rounded-2xl bg-slate-900/90 border border-slate-800">
+          <span class="w-11 h-11 rounded-xl bg-sky-500/12 border border-sky-400/25 text-sky-300 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-car"></i>
+          </span>
+          <div>
+            <h2 class="text-sm font-bold text-white leading-snug">สมัครคนขับ Grab</h2>
+            <p class="text-xs text-slate-400 mt-0.5">สมัครขับออนไลน์</p>
+          </div>
+        </a>
+
+        <a href="bolt_driver_register.html" data-cat="services" data-keywords="สมัครคนขับ bolt โบลท์"
+          class="service-tile app-tile flex flex-col gap-2.5 p-4 rounded-2xl bg-slate-900/90 border border-slate-800">
+          <span class="w-11 h-11 rounded-xl bg-sky-500/12 border border-sky-400/25 text-sky-300 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-bolt"></i>
+          </span>
+          <div>
+            <h2 class="text-sm font-bold text-white leading-snug">สมัครคนขับ Bolt</h2>
+            <p class="text-xs text-slate-400 mt-0.5">สมัครขับออนไลน์</p>
+          </div>
+        </a>
+
+        <a href="captain_insurance.html" data-cat="services" data-keywords="ประกันภัยรถยนต์ พรบ captain insurance"
+          class="service-tile app-tile flex flex-col gap-2.5 p-4 rounded-2xl bg-slate-900/90 border border-slate-800">
+          <span class="w-11 h-11 rounded-xl bg-sky-500/12 border border-sky-400/25 text-sky-300 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-shield-halved"></i>
+          </span>
+          <div>
+            <h2 class="text-sm font-bold text-white leading-snug">ประกันภัย (Captain)</h2>
+            <p class="text-xs text-slate-400 mt-0.5">เช็กเบี้ยประกัน &amp; พ.ร.บ.</p>
+          </div>
+        </a>
+
+        <a href="rtaf_pass_register.html" data-cat="services" data-keywords="บัตรผ่าน ทอ ดอนเมือง กองทัพอากาศ rtaf"
+          class="service-tile app-tile flex flex-col gap-2.5 p-4 rounded-2xl bg-slate-900/90 border border-slate-800">
+          <span class="w-11 h-11 rounded-xl bg-sky-500/12 border border-sky-400/25 text-sky-300 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-plane-departure"></i>
+          </span>
+          <div>
+            <h2 class="text-sm font-bold text-white leading-snug">บัตรผ่าน ทอ. (ดอนเมือง)</h2>
+            <p class="text-xs text-slate-400 mt-0.5">ขอใหม่ / ต่ออายุบัตร</p>
+          </div>
+        </a>
+
+        <a href="vip_referral_guide.html" data-cat="services" data-keywords="ลายแทง ท่องเที่ยว vip ค่าแนะนำ"
+          class="service-tile app-tile flex flex-col gap-2.5 p-4 rounded-2xl bg-slate-900/90 border border-slate-800">
+          <span class="w-11 h-11 rounded-xl bg-sky-500/12 border border-sky-400/25 text-sky-300 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-map-location-dot"></i>
+          </span>
+          <div>
+            <h2 class="text-sm font-bold text-white leading-snug">ลายแทงท่องเที่ยว [VIP]</h2>
+            <p class="text-xs text-slate-400 mt-0.5">จุดรับค่าแนะนำ</p>
+          </div>
+        </a>
+
+        <a href="tour_book_order.html" data-cat="services" data-keywords="สมุดทัวร์ สั่งซื้อ พัทยา กทม"
+          class="service-tile app-tile flex flex-col gap-2.5 p-4 rounded-2xl bg-slate-900/90 border border-slate-800">
+          <span class="w-11 h-11 rounded-xl bg-sky-500/12 border border-sky-400/25 text-sky-300 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-book"></i>
+          </span>
+          <div>
+            <h2 class="text-sm font-bold text-white leading-snug">สั่งซื้อสมุดทัวร์</h2>
+            <p class="text-xs text-slate-400 mt-0.5">กทม. / พัทยา-ชลบุรี</p>
+          </div>
+        </a>
+
+        <!-- 4. ชุมชน & ความปลอดภัย (5) -->
+        <a href="blacklist.html" data-cat="community" data-keywords="blacklist แบล็กลิสต์ เตือนภัย คนโกง"
+          class="service-tile app-tile flex flex-col gap-2.5 p-4 rounded-2xl bg-slate-900/90 border border-rose-500/30">
+          <span class="w-11 h-11 rounded-xl bg-rose-500/15 border border-rose-400/30 text-rose-400 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-user-shield"></i>
+          </span>
+          <div>
+            <h2 class="text-sm font-bold text-white leading-snug">ศูนย์เช็ก Blacklist</h2>
+            <p class="text-xs text-slate-400 mt-0.5">ตรวจประวัติเตือนภัย</p>
+          </div>
+        </a>
+
+        <a href="driver_news.html" data-cat="community" data-keywords="ข่าวสาร คนขับ กฎหมาย รย17 รย18 news"
+          class="service-tile app-tile flex flex-col gap-2.5 p-4 rounded-2xl bg-slate-900/90 border border-slate-800">
+          <span class="w-11 h-11 rounded-xl bg-slate-800 border border-slate-700 text-amber-300 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-newspaper"></i>
+          </span>
+          <div>
+            <h2 class="text-sm font-bold text-white leading-snug">ข่าวสารคนขับทุกแอป</h2>
+            <p class="text-xs text-slate-400 mt-0.5">อัปเดตข่าว &amp; กฎหมาย</p>
+          </div>
+        </a>
+
+        <a href="community.html" data-cat="community" data-keywords="เว็บบอร์ด ชุมชน กระทู้ รีวิว"
+          class="service-tile app-tile flex flex-col gap-2.5 p-4 rounded-2xl bg-slate-900/90 border border-slate-800">
+          <span class="w-11 h-11 rounded-xl bg-slate-800 border border-slate-700 text-amber-300 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-comments"></i>
+          </span>
+          <div>
+            <h2 class="text-sm font-bold text-white leading-snug">เว็บบอร์ดชุมชน</h2>
+            <p class="text-xs text-slate-400 mt-0.5">พูดคุย / รีวิวเส้นทาง</p>
+          </div>
+        </a>
+
+        <a href="guide.html" data-cat="community" data-keywords="คู่มือ กฎกติกา ช่วยเหลือ faq"
+          class="service-tile app-tile flex flex-col gap-2.5 p-4 rounded-2xl bg-slate-900/90 border border-slate-800">
+          <span class="w-11 h-11 rounded-xl bg-slate-800 border border-slate-700 text-amber-300 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-book-open"></i>
+          </span>
+          <div>
+            <h2 class="text-sm font-bold text-white leading-snug">คู่มือ &amp; กฎกติกา</h2>
+            <p class="text-xs text-slate-400 mt-0.5">วิธีใช้งานเครือข่าย</p>
+          </div>
+        </a>
+
+        <a href="privacy_policy.html" data-cat="community" data-keywords="pdpa ความเป็นส่วนตัว นโยบาย"
+          class="service-tile app-tile flex flex-col gap-2.5 p-4 rounded-2xl bg-slate-900/90 border border-slate-800">
+          <span class="w-11 h-11 rounded-xl bg-slate-800 border border-slate-700 text-amber-300 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-scale-balanced"></i>
+          </span>
+          <div>
+            <h2 class="text-sm font-bold text-white leading-snug">นโยบาย (PDPA)</h2>
+            <p class="text-xs text-slate-400 mt-0.5">คุ้มครองข้อมูลส่วนตัว</p>
+          </div>
+        </a>
+      </div>
+
+      <p id="home-empty-state" class="hidden text-center text-sm text-slate-400 py-8">
+        ไม่พบบริการที่ตรงกับคำค้นหา ลองพิมพ์คำอื่นอีกครั้ง
+      </p>
     </section>
 
   </main>
 
-  <!-- FOOTER -->
-  <footer class="bg-slate-950 text-slate-400 border-t border-amber-500/25 py-10 px-4 text-xs sm:text-sm">
-    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-5">
-      <div class="text-center sm:text-left space-y-1.5">
-        <p class="font-bold text-amber-300 text-sm">🚖 The Driver TH 🇹🇭 Premium Service Official Network</p>
-        <p class="text-xs text-slate-400">ศูนย์กลางระบบสมาชิก บัตรสมาชิกประเมศฐ์ และระบบเฝ้าระวังภัยกลุ่มคนขับรถรับจ้าง</p>
-      </div>
-      <div class="flex flex-wrap justify-center gap-x-4 gap-y-3 font-semibold">
-        <a href="index.html" class="py-1 hover:text-amber-400 transition">หน้าหลัก</a>
-        <a href="register.html" class="py-1 hover:text-emerald-400 transition">ระบบสมาชิก</a>
-        <a href="member_register.html" class="py-1 hover:text-teal-400 transition">ลงทะเบียนสมาชิกใหม่</a>
-        <a href="pcard.html" class="py-1 hover:text-amber-400 transition">ทำบัตรสมาชิกประเมศฐ์</a>
-        <a href="unblock_request.html" class="py-1 hover:text-sky-400 transition">ขอปลดล็อก OpenChat</a>
-        <a href="blacklist.html" class="py-1 hover:text-rose-400 transition">ตรวจสอบ Blacklist</a>
-        <a href="privacy_policy.html" class="py-1 hover:text-amber-300 transition">ประกาศความเป็นส่วนตัว</a>
-        <a href="admin.html" class="py-1 text-amber-300 hover:text-amber-200 transition">ระบบหลังบ้าน (Admin)</a>
+  <!-- MINIMAL FOOTER -->
+  <footer class="border-t border-slate-800/80 py-6 px-4 text-xs text-slate-400">
+    <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+      <span class="font-semibold text-amber-300/90">🚖 The Driver TH 🇹🇭 Premium Service</span>
+      <div class="flex flex-wrap items-center justify-center gap-4">
+        <a href="guide.html" class="hover:text-white transition">คู่มือสมาชิก</a>
+        <a href="privacy_policy.html" class="hover:text-white transition">นโยบาย PDPA</a>
+        <a href="admin.html" class="text-amber-300/80 hover:text-amber-300 transition">ระบบหลังบ้าน (Admin)</a>
       </div>
     </div>
   </footer>
 
-  <script>
-    const FONT_SCALE_KEY = "tdt_font_scale_pct";
-    let currentFontScale = 100;
+  <script id="tdt-unified-nav-script">
+    (function () {
+      const FONT_SCALE_KEY = "tdt_font_scale_pct";
+      let scalePct = 100;
 
-    function syncFontScaleLabels(pct) {
-      ["tdt-font-pct", "font-pct", "font-scale-label"].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.textContent = `${pct}%`;
-      });
-    }
-
-    function applyFontScale(pct) {
-      currentFontScale = Math.min(130, Math.max(90, Number(pct) || 100));
-      const pxSize = (currentFontScale / 100) * 16;
-      document.documentElement.style.fontSize = `${pxSize}px`;
-      if (document.body) {
-        document.body.style.fontSize = `${pxSize}px`;
+      function syncScaleLabels(pct) {
+        ["tdt-font-pct", "font-pct", "font-scale-label"].forEach(function (id) {
+          var el = document.getElementById(id);
+          if (el) el.textContent = pct + "%";
+        });
       }
-      syncFontScaleLabels(currentFontScale);
-      try {
-        localStorage.setItem(FONT_SCALE_KEY, String(currentFontScale));
-      } catch (_) {}
-    }
 
-    function changeFontScale(step) {
-      const nextScale = currentFontScale + (step * 10);
-      applyFontScale(nextScale);
-      showToast(`ขนาดตัวอักษร: ${currentFontScale}%`);
-    }
+      function applyScalePct(pct) {
+        scalePct = Math.min(140, Math.max(90, Number(pct) || 100));
+        document.documentElement.style.fontSize = ((scalePct / 100) * 16) + "px";
+        syncScaleLabels(scalePct);
+        try { localStorage.setItem(FONT_SCALE_KEY, String(scalePct)); } catch (_) {}
+      }
 
-    window.changeScale = changeFontScale;
-    window.tdtChangeFontScale = changeFontScale;
+      function unifiedChangeScale(step) {
+        applyScalePct(scalePct + (Number(step) || 0) * 10);
+      }
 
-    (function initAccessibilityPreferences() {
-      try {
-        const savedScale = localStorage.getItem(FONT_SCALE_KEY);
-        if (savedScale) {
-          applyFontScale(Number(savedScale));
-        } else {
-          syncFontScaleLabels(currentFontScale);
+      function closeAllNavDropdowns() {
+        ["member", "tools", "services", "community"].forEach(function (cat) {
+          var panel = document.getElementById("panel-cat-" + cat);
+          var btn = document.getElementById("btn-cat-" + cat);
+          var chevron = document.getElementById("chevron-cat-" + cat);
+          if (panel) panel.classList.remove("is-open");
+          if (btn) btn.setAttribute("aria-expanded", "false");
+          if (chevron) chevron.style.transform = "rotate(0deg)";
+        });
+      }
+
+      function unifiedToggleNavDropdown(category, event) {
+        if (event) event.stopPropagation();
+        var panel = document.getElementById("panel-cat-" + category);
+        var btn = document.getElementById("btn-cat-" + category);
+        var chevron = document.getElementById("chevron-cat-" + category);
+        if (!panel) return;
+        var willOpen = !panel.classList.contains("is-open");
+        closeAllNavDropdowns();
+        if (willOpen) {
+          panel.classList.add("is-open");
+          if (btn) btn.setAttribute("aria-expanded", "true");
+          if (chevron) chevron.style.transform = "rotate(180deg)";
         }
+      }
+
+      function openTdtDrawer() {
+        closeAllNavDropdowns();
+        var b = document.getElementById("tdt-nav-backdrop");
+        var d = document.getElementById("tdt-nav-drawer");
+        if (b) b.classList.add("is-open");
+        if (d) d.classList.add("is-open");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeTdtDrawer() {
+        var b = document.getElementById("tdt-nav-backdrop");
+        var d = document.getElementById("tdt-nav-drawer");
+        if (b) b.classList.remove("is-open");
+        if (d) d.classList.remove("is-open");
+        document.body.style.overflow = "";
+      }
+
+      function filterTdtDrawer(query) {
+        var q = (query || "").trim().toLowerCase();
+        document.querySelectorAll("#tdt-nav-drawer .tdt-drawer-link").forEach(function (link) {
+          var match = !q || link.textContent.toLowerCase().indexOf(q) !== -1;
+          link.style.display = match ? "" : "none";
+        });
+        document.querySelectorAll("#tdt-nav-drawer .tdt-drawer-cat").forEach(function (cat) {
+          var anyVisible = Array.from(cat.querySelectorAll(".tdt-drawer-link")).some(function (l) {
+            return l.style.display !== "none";
+          });
+          cat.style.display = anyVisible ? "" : "none";
+        });
+      }
+
+      // Highlight current page automatically in desktop dropdowns & drawer
+      var currentFile = (window.location.pathname.split("/").pop() || "index.html").toLowerCase();
+      document.querySelectorAll(".tdt-d-btn[data-nav-href]").forEach(function (a) {
+        a.classList.toggle("is-active", a.getAttribute("data-nav-href").toLowerCase() === currentFile);
+      });
+      document.querySelectorAll(".tdt-d-item, .tdt-drawer-link").forEach(function (a) {
+        var href = (a.getAttribute("href") || "").toLowerCase();
+        if (href === currentFile) {
+          a.classList.add("is-current");
+          var wrap = a.closest(".tdt-d-wrap");
+          if (wrap) {
+            var parentBtn = wrap.querySelector(".tdt-d-btn");
+            if (parentBtn) parentBtn.classList.add("is-active");
+          }
+        }
+      });
+
+      window.toggleNavDropdown = unifiedToggleNavDropdown;
+      window.tdtToggleDropdown = unifiedToggleNavDropdown;
+      window.changeScale = unifiedChangeScale;
+      window.tdtChangeFontScale = unifiedChangeScale;
+      window.openTdtDrawer = openTdtDrawer;
+      window.closeTdtDrawer = closeTdtDrawer;
+      window.filterTdtDrawer = filterTdtDrawer;
+
+      // Per-Page Dynamic Announcement Loader (Local + Admin Cloud Settings)
+      (function loadPerPageAnnouncement() {
+        var wrap = document.getElementById("tdt-page-announce-wrap");
+        var pillEl = document.getElementById("tdt-page-announcement-pill");
+        var pillTextEl = document.getElementById("tdt-page-announcement-pill-text");
+        var textEl = document.getElementById("tdt-page-announcement-text");
+        var badgeEl = document.getElementById("tdt-page-announcement-badge");
+        if (!wrap || !textEl || !badgeEl) return;
+
+        function applyEntry(entry) {
+          if (!entry || typeof entry !== "object") return;
+          if (entry.enabled === false) {
+            wrap.style.display = "none";
+            return;
+          }
+          wrap.style.display = "";
+          if (pillEl && pillTextEl) {
+            if (typeof entry.pillText === "string") {
+              pillTextEl.textContent = entry.pillText.trim();
+              pillEl.style.display = entry.pillText.trim() ? "inline-flex" : "none";
+            }
+            var c = entry.pillColor || pillEl.getAttribute("data-color") || "amber";
+            var s = entry.pillStyle || pillEl.getAttribute("data-style") || "solid";
+            pillEl.className = "tdt-announce-pill is-" + c + " is-" + s;
+          }
+          if (typeof entry.text === "string" && entry.text.trim()) {
+            textEl.textContent = entry.text.trim();
+          }
+          if (typeof entry.badge === "string" && entry.badge.trim()) {
+            badgeEl.textContent = entry.badge.trim();
+          }
+        }
+
+        try {
+          var rawLocal = localStorage.getItem("tdt_page_announcements_v1");
+          var localMap = rawLocal ? JSON.parse(rawLocal) : {};
+          if (localMap && localMap[currentFile]) applyEntry(localMap[currentFile]);
+        } catch (_) {}
+
+        var endpoint = "https://script.google.com/macros/s/AKfycbyeDCdxBD10D_AFZQY2NxeylLOiAmAHLesSDZHXYCb3TsYs4wYer_kRTPVOs3VpK2pP/exec?action=site_settings";
+        fetch(endpoint + "&t=" + Date.now())
+          .then(function (r) { return r.json(); })
+          .then(function (json) {
+            var cfg = json && json.settings ? json.settings : {};
+            if (cfg.pageAnnouncements) {
+              var cloudMap = typeof cfg.pageAnnouncements === "string" ? JSON.parse(cfg.pageAnnouncements) : cfg.pageAnnouncements;
+              if (cloudMap && cloudMap[currentFile]) {
+                applyEntry(cloudMap[currentFile]);
+              }
+            }
+          })
+          .catch(function () {});
+      })();
+
+
+      document.addEventListener("click", function (e) {
+        if (!e.target.closest(".tdt-d-wrap")) closeAllNavDropdowns();
+      });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+          closeAllNavDropdowns();
+          closeTdtDrawer();
+        }
+      });
+
+      try {
+        var saved = localStorage.getItem(FONT_SCALE_KEY);
+        if (saved) applyScalePct(Number(saved));
+        else syncScaleLabels(scalePct);
       } catch (_) {
-        syncFontScaleLabels(currentFontScale);
+        syncScaleLabels(scalePct);
       }
     })();
+  </script>
 
-    let toastTimer = null;
+  <script>
+    let activeHomeCat = "ALL";
 
-    function closeAllDesktopDropdowns() {
-      ['member', 'group'].forEach(cat => {
-        const panel = document.getElementById(`panel-cat-${cat}`);
-        const btn = document.getElementById(`btn-cat-${cat}`);
-        const chevron = document.getElementById(`chevron-cat-${cat}`);
-        if (panel) panel.classList.remove("is-open");
-        if (btn) btn.setAttribute("aria-expanded", "false");
-        if (chevron) chevron.style.transform = "rotate(0deg)";
+    function selectHomeCategory(cat) {
+      activeHomeCat = cat;
+      document.querySelectorAll(".home-cat-tab").forEach(function (btn) {
+        const isActive = btn.getAttribute("data-filter") === cat;
+        btn.className = isActive
+          ? "home-cat-tab shrink-0 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-amber-400 text-slate-950 transition"
+          : "home-cat-tab shrink-0 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-slate-900 text-slate-300 border border-slate-800 hover:border-amber-400/40 transition";
       });
+      applyHomeFilters();
     }
 
-    function toggleNavDropdown(category, event) {
-      if (event) event.stopPropagation();
-      const targetPanel = document.getElementById(`panel-cat-${category}`);
-      const targetBtn = document.getElementById(`btn-cat-${category}`);
-      const targetChevron = document.getElementById(`chevron-cat-${category}`);
-      if (!targetPanel) return;
-
-      const willOpen = !targetPanel.classList.contains("is-open");
-      closeAllDesktopDropdowns();
-
-      if (willOpen) {
-        targetPanel.classList.add("is-open");
-        if (targetBtn) targetBtn.setAttribute("aria-expanded", "true");
-        if (targetChevron) targetChevron.style.transform = "rotate(180deg)";
-      }
-    }
-
-    function toggleMobileNavDrawer() {
-      const drawer = document.getElementById("mobile-nav-drawer");
-      const btn = document.getElementById("btn-mobile-menu");
-      const icon = document.getElementById("mobile-menu-icon");
-      if (!drawer) return;
-      const isHidden = drawer.classList.contains("hidden");
-      drawer.classList.toggle("hidden", !isHidden);
-      if (btn) btn.setAttribute("aria-expanded", String(isHidden));
-      if (icon) {
-        icon.className = isHidden ? "fa-solid fa-xmark" : "fa-solid fa-bars";
-      }
-    }
-
-    document.addEventListener("click", function (event) {
-      const memberDrop = document.getElementById("dropdown-member-cat");
-      const groupDrop = document.getElementById("dropdown-group-cat");
-      const clickedInsideMember = memberDrop && memberDrop.contains(event.target);
-      const clickedInsideGroup = groupDrop && groupDrop.contains(event.target);
-      if (!clickedInsideMember && !clickedInsideGroup) {
-        closeAllDesktopDropdowns();
-      }
-    });
-
-    function showToast(message) {
-      const box = document.getElementById("toast-box");
-      const textEl = document.getElementById("toast-text");
-      if (!box || !textEl) return;
-      textEl.textContent = message;
-      box.classList.remove("hidden");
-      if (toastTimer) clearTimeout(toastTimer);
-      toastTimer = setTimeout(hideToast, 4000);
-    }
-
-    function hideToast() {
-      const box = document.getElementById("toast-box");
-      if (box) box.classList.add("hidden");
-    }
-
-    /* 3D Multi-Slide Service Billboard Controller */
-    const BILLBOARD_SLIDES = [
-      {
-        badge: "บัตรสมาชิกประจำกลุ่ม",
-        badgeIcon: "fa-solid fa-id-badge",
-        tag: "เคลือบใสกันน้ำ • เช็คพัสดุได้",
-        title: "ทำบัตรสมาชิกประเมศฐ์ & เช็คเลขพัสดุ",
-        desc: "ยกระดับความน่าเชื่อถือของคนขับรถมืออาชีพ ด้วยบัตรสมาชิกติดรูปถ่ายหน้าตรงเคลือบใสอย่างดี พร้อมตรวจสอบสถานะการจัดส่งและเลขพัสดุย้อนหลังได้ทันที",
-        ctaLabel: "สมัครทำบัตร / เช็คพัสดุ",
-        ctaHref: "pcard.html",
-        secondaryLabel: "ตรวจสอบรหัสสมาชิก",
-        secondaryHref: "register.html",
-        kicker: "PRAMET MEMBER CARD",
-        status: "รอบถัดไป 11 ธ.ค. 69",
-        mainIcon: "fa-solid fa-id-badge",
-        highlightTitle: "บัตรสมาชิกติดรูปถ่ายหน้าตรง",
-        highlightSub: "จัดส่งทั่วประเทศพร้อมแจ้งเลขติดตามพัสดุ",
-        features: ["เคลือบใสกันน้ำอย่างดี", "เช็คเลขพัสดุย้อนหลังได้"],
-        orbPrimary: "rgba(251, 191, 36, 0.24)",
-        orbSecondary: "rgba(217, 119, 6, 0.16)"
-      },
-      {
-        badge: "ยืนยันตัวตนสมาชิกใหม่",
-        badgeIcon: "fa-solid fa-file-signature",
-        tag: "บันทึกร่างอัตโนมัติ • ตรวจใน 14 วัน",
-        title: "ลงทะเบียนสมาชิก 🚖 The Driver TH 🇹🇭 Premium Service",
-        desc: "สมัครยืนยันตัวตนสำหรับสมาชิกคนขับทั่วไปและผู้ปล่อยงานหลัก/บริษัท เพื่อรับรหัสสมาชิกประจำตัวและเข้าถึงบริการครบวงจรของเครือข่าย",
-        ctaLabel: "กรอกใบสมัครสมาชิกใหม่",
-        ctaHref: "member_register.html",
-        secondaryLabel: "แก้ไขข้อมูลสมาชิกเดิม",
-        secondaryHref: "member_edit.html",
-        kicker: "OFFICIAL MEMBER REGISTRY",
-        status: "เปิดรับสมัครออนไลน์",
-        mainIcon: "fa-solid fa-file-signature",
-        highlightTitle: "รองรับทั้งคนขับและผู้ปล่อยงาน",
-        highlightSub: "ระบบบันทึกร่างอัตโนมัติไม่หายแม้สลับหน้าจอ",
-        features: ["ออกรหัสสมาชิกทางการ", "คุ้มครองข้อมูลตาม PDPA"],
-        orbPrimary: "rgba(16, 185, 129, 0.24)",
-        orbSecondary: "rgba(251, 191, 36, 0.14)"
-      },
-      {
-        badge: "เครือข่ายรถพรีเมียม",
-        badgeIcon: "fa-solid fa-crown",
-        tag: "LUXURY SEDAN • VIP VAN • EV",
-        title: "ห้อง OpenChat สำหรับคนขับรถ Luxury Car",
-        desc: "พื้นที่เฉพาะสำหรับสมาชิกคนขับรถ Luxury Car, Executive Van และรถผู้บริหารระดับพรีเมียม เพื่อประสานงานและส่งต่อลูกค้าคุณภาพ",
-        ctaLabel: "สมัครเข้าห้อง Luxury Car",
-        ctaHref: "luxury_car_register.html",
-        secondaryLabel: "[VIP] ลายแทงท่องเที่ยว",
-        secondaryHref: "vip_referral_guide.html",
-        kicker: "LUXURY & VIP FLEET",
-        status: "คัดกรองรถ & หลักฐาน",
-        mainIcon: "fa-solid fa-crown",
-        highlightTitle: "มาตรฐานรถหรูระดับผู้บริหาร",
-        highlightSub: "ตรวจรูปภายนอก ห้องโดยสาร และยืนยันตัวตน",
-        features: ["ห้องเฉพาะกลุ่ม Luxury", "เชื่อมต่อลายแทง VIP"],
-        orbPrimary: "rgba(245, 158, 11, 0.28)",
-        orbSecondary: "rgba(168, 85, 247, 0.14)"
-      },
-      {
-        badge: "สิทธิประโยชน์ & งานบริการ",
-        badgeIcon: "fa-solid fa-map-location-dot",
-        tag: "ลายแทง VIP • บัตรผ่าน ทอ. • สมุดทัวร์",
-        title: "ครบเครื่องเรื่องลายแทง VIP บัตรผ่าน ทอ. และสมุดทัวร์",
-        desc: "รับลายแทงสถานที่ท่องเที่ยวเพื่อรับค่าแนะนำ ยื่นขอทำบัตรผ่านยานพาหนะเขตพื้นที่ ทอ. (ดอนเมือง) หรือสั่งซื้อสมุดทัวร์โซน กทม.-ปริมณฑล และพัทยา-ชลบุรี",
-        ctaLabel: "ขอรับลายแทงสถานที่ท่องเที่ยว",
-        ctaHref: "vip_referral_guide.html",
-        secondaryLabel: "สั่งซื้อสมุดทัวร์",
-        secondaryHref: "tour_book_order.html",
-        kicker: "GROUP SERVICES HUB",
-        status: "พร้อมให้บริการทุกโซน",
-        mainIcon: "fa-solid fa-map-location-dot",
-        highlightTitle: "ลายแทง VIP + บัตรผ่าน ทอ. + สมุดทัวร์",
-        highlightSub: "รวมบริการสำคัญของกลุ่มไว้ในจุดเดียว",
-        features: ["บัตรผ่านพื้นที่ ทอ. ดอนเมือง", "สมุดทัวร์ 2 โซนราคาชัดเจน"],
-        orbPrimary: "rgba(56, 189, 248, 0.22)",
-        orbSecondary: "rgba(251, 191, 36, 0.16)"
-      },
-      {
-        badge: "ความปลอดภัย & ช่วยเหลือ",
-        badgeIcon: "fa-solid fa-shield-halved",
-        tag: "เช็ก Blacklist • ขอปลดล็อก OpenChat",
-        title: "ศูนย์เฝ้าระวังภัย Blacklist & ขอปลดล็อกห้องแชท",
-        desc: "ตรวจสอบเบอร์โทร เลขบัญชี หรือประวัติเตือนภัยก่อนออกเดินทางไกล พร้อมช่องทางยื่นคำร้องขอปลดล็อกกรณีถูกบล็อกหรือลบออกจากห้อง OpenChat",
-        ctaLabel: "ตรวจสอบประวัติ Blacklist",
-        ctaHref: "blacklist.html",
-        secondaryLabel: "ขอปลดล็อกห้อง OpenChat",
-        secondaryHref: "unblock_request.html",
-        kicker: "SAFETY & UNBLOCK SUPPORT",
-        status: "เฝ้าระวังภัยตลอด 24 ชม.",
-        mainIcon: "fa-solid fa-user-shield",
-        highlightTitle: "เช็กประวัติไว ลดความเสี่ยงก่อนรับงาน",
-        highlightSub: "แจ้งเบาะแสเตือนภัยและยื่นคำร้องปลดล็อกได้ง่าย",
-        features: ["ค้นหาเบอร์/บัญชีได้ทันที", "ยื่นคำร้องปลดล็อกออนไลน์"],
-        orbPrimary: "rgba(244, 63, 94, 0.24)",
-        orbSecondary: "rgba(56, 189, 248, 0.14)"
-      }
-    ];
-
-    let currentBillboardIdx = 0;
-    let billboardTimer = null;
-    let billboardPausedByUser = false;
-    let billboardPausedByHover = false;
-    let billboardTouchStartX = 0;
-
-    function renderBillboardSlide(index) {
-      const total = BILLBOARD_SLIDES.length;
-      currentBillboardIdx = ((index % total) + total) % total;
-      const slide = BILLBOARD_SLIDES[currentBillboardIdx];
-
-      const badgeEl = document.getElementById("billboard-badge");
-      const tagEl = document.getElementById("billboard-tag");
-      const titleEl = document.getElementById("billboard-title");
-      const descEl = document.getElementById("billboard-desc");
-      const ctaLink = document.getElementById("billboard-cta-link");
-      const ctaLabel = document.getElementById("billboard-cta-label");
-      const secLink = document.getElementById("billboard-secondary-link");
-      const secLabel = document.getElementById("billboard-secondary-label");
-      const kickerEl = document.getElementById("billboard-card-kicker");
-      const statusEl = document.getElementById("billboard-card-status");
-      const mainIconEl = document.getElementById("billboard-main-icon");
-      const hlTitleEl = document.getElementById("billboard-highlight-title");
-      const hlSubEl = document.getElementById("billboard-highlight-sub");
-      const featListEl = document.getElementById("billboard-features-list");
-      const counterEl = document.getElementById("billboard-slide-counter");
-      const orb1 = document.getElementById("billboard-orb-primary");
-      const orb2 = document.getElementById("billboard-orb-secondary");
-
-      if (badgeEl) badgeEl.innerHTML = `<i class="${slide.badgeIcon}"></i> ${slide.badge}`;
-      if (tagEl) tagEl.textContent = slide.tag;
-      if (titleEl) titleEl.textContent = slide.title;
-      if (descEl) descEl.textContent = slide.desc;
-      if (ctaLink) ctaLink.href = slide.ctaHref;
-      if (ctaLabel) ctaLabel.textContent = slide.ctaLabel;
-      if (secLink) secLink.href = slide.secondaryHref;
-      if (secLabel) secLabel.textContent = slide.secondaryLabel;
-      if (kickerEl) kickerEl.textContent = slide.kicker;
-      if (statusEl) {
-        statusEl.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-400"></span> ${slide.status}`;
-      }
-      if (mainIconEl) mainIconEl.className = slide.mainIcon;
-      if (hlTitleEl) hlTitleEl.textContent = slide.highlightTitle;
-      if (hlSubEl) hlSubEl.textContent = slide.highlightSub;
-      if (counterEl) counterEl.textContent = `${currentBillboardIdx + 1} / ${total}`;
-      if (orb1) orb1.style.backgroundColor = slide.orbPrimary;
-      if (orb2) orb2.style.backgroundColor = slide.orbSecondary;
-
-      if (featListEl) {
-        featListEl.innerHTML = slide.features.map(f => `
-          <div class="bg-slate-950/70 border border-white/10 rounded-xl px-3 py-2 text-slate-200 font-semibold truncate">
-            <i class="fa-solid fa-check text-amber-400 mr-1"></i> ${f}
-          </div>
-        `).join("");
-      }
-
-      const dotsContainer = document.getElementById("billboard-dots");
-      if (dotsContainer) {
-        dotsContainer.innerHTML = BILLBOARD_SLIDES.map((_, i) => {
-          const active = i === currentBillboardIdx;
-          return `<button type="button" onclick="goToBillboardSlide(${i})" aria-label="สไลด์ที่ ${i + 1}" class="billboard-dot" style="width:${active ? "26px" : "8px"};background:${active ? "#fbbf24" : "rgba(255,255,255,0.28)"}"></button>`;
-        }).join("");
-      }
-    }
-
-    function nextBillboardSlide() {
-      renderBillboardSlide(currentBillboardIdx + 1);
-    }
-
-    function prevBillboardSlide() {
-      renderBillboardSlide(currentBillboardIdx - 1);
-    }
-
-    function goToBillboardSlide(index) {
-      renderBillboardSlide(index);
-    }
-
-    function syncBillboardTimer() {
-      if (billboardTimer) {
-        clearInterval(billboardTimer);
-        billboardTimer = null;
-      }
-      if (!billboardPausedByUser && !billboardPausedByHover) {
-        billboardTimer = setInterval(nextBillboardSlide, 5000);
-      }
-    }
-
-    function pauseBillboardTemporarily(isHovering) {
-      billboardPausedByHover = Boolean(isHovering);
-      syncBillboardTimer();
-    }
-
-    function toggleBillboardAutoplay() {
-      billboardPausedByUser = !billboardPausedByUser;
-      const iconEl = document.getElementById("billboard-autoplay-icon");
-      const textEl = document.getElementById("billboard-autoplay-text");
-      if (billboardPausedByUser) {
-        if (iconEl) iconEl.className = "fa-solid fa-play text-xs";
-        if (textEl) textEl.textContent = "หยุดชั่วคราว";
-      } else {
-        if (iconEl) iconEl.className = "fa-solid fa-pause text-xs";
-        if (textEl) textEl.textContent = "เล่นอัตโนมัติ";
-      }
-      syncBillboardTimer();
-    }
-
-    function handleBillboardTouchStart(event) {
-      if (event.changedTouches && event.changedTouches.length > 0) {
-        billboardTouchStartX = event.changedTouches[0].clientX;
-      }
-    }
-
-    function handleBillboardTouchEnd(event) {
-      if (!event.changedTouches || event.changedTouches.length === 0) return;
-      const diffX = event.changedTouches[0].clientX - billboardTouchStartX;
-      if (Math.abs(diffX) > 45) {
-        if (diffX < 0) nextBillboardSlide();
-        else prevBillboardSlide();
-      }
-    }
-
-    document.addEventListener("DOMContentLoaded", function () {
-      renderBillboardSlide(0);
-      syncBillboardTimer();
-      loadAdminSiteSettings();
-      if ("serviceWorker" in navigator) {
-        navigator.serviceWorker.register("./sw.js").catch(() => {});
-      }
-    });
-
-    function filterServiceCards(cat) {
-      document.querySelectorAll(".service-filter-btn").forEach(btn => {
-        const active = btn.getAttribute("data-filter") === cat;
-        btn.className = active
-          ? "service-filter-btn bg-amber-400 text-slate-950 font-bold text-xs px-4 py-2 rounded-full shadow-sm transition"
-          : "service-filter-btn bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 font-semibold text-xs px-4 py-2 rounded-full transition";
+    function applyHomeFilters() {
+      const q = (document.getElementById("home-service-search")?.value || "").trim().toLowerCase();
+      let visibleCount = 0;
+      document.querySelectorAll(".service-tile").forEach(function (tile) {
+        const cat = tile.getAttribute("data-cat");
+        const haystack = (tile.textContent + " " + (tile.getAttribute("data-keywords") || "")).toLowerCase();
+        const catMatch = activeHomeCat === "ALL" || cat === activeHomeCat;
+        const textMatch = !q || haystack.indexOf(q) !== -1;
+        const show = catMatch && textMatch;
+        tile.style.display = show ? "" : "none";
+        if (show) visibleCount++;
       });
-      document.querySelectorAll(".service-card-item").forEach(card => {
-        const match = cat === "ALL" || card.getAttribute("data-cat") === cat;
-        card.style.display = match ? "" : "none";
-      });
+      const emptyEl = document.getElementById("home-empty-state");
+      if (emptyEl) emptyEl.classList.toggle("hidden", visibleCount > 0);
     }
 
     async function loadAdminSiteSettings() {
@@ -1968,6 +1346,13 @@
         }
       } catch (_) {}
     }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      loadAdminSiteSettings();
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("./sw.js").catch(() => {});
+      }
+    });
   </script>
 </body>
 </html>

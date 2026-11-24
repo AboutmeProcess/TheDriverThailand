@@ -164,6 +164,66 @@
         height: auto !important;
       }
     }
+
+    /* TDT Age-Friendly (25-60) High-Contrast Dark Mode & Readability */
+    body {
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    /* High-contrast secondary text for 45-60+ eyes & daylight glare inside cars */
+    .text-slate-400 {
+      color: #cbd5e1 !important;
+    }
+    .text-slate-500 {
+      color: #94a3b8 !important;
+    }
+    input::placeholder, textarea::placeholder {
+      color: #94a3b8 !important;
+      opacity: 1;
+    }
+    /* Clearer card & form borders in bright daylight */
+    .border-slate-800 {
+      border-color: #26334d !important;
+    }
+    .border-slate-700, .border-slate-700\/80 {
+      border-color: #3b4c6b !important;
+    }
+    /* Comfortable Thai script sizing (vowels & tone marks) */
+    .text-xs {
+      font-size: 0.8125rem !important; /* 13px */
+      line-height: 1.5 !important;
+    }
+    .text-sm {
+      font-size: 0.9375rem !important; /* 15px */
+      line-height: 1.55 !important;
+    }
+    /* Clearer focus rings & tap targets */
+    input:focus, select:focus, textarea:focus, button:focus-visible, a:focus-visible {
+      outline: 2px solid rgba(251, 191, 36, 0.75);
+      outline-offset: 2px;
+    }
+    .tdt-font-btn {
+      min-width: 36px !important;
+      height: 36px !important;
+      font-size: 13.5px !important;
+      font-weight: 700 !important;
+      color: #f8fafc !important;
+    }
+    .tdt-brand-tagline {
+      font-size: 12px !important;
+      color: #e2e8f0 !important;
+    }
+    .tdt-page-announce-bar {
+      font-size: 13.5px !important;
+      border-color: rgba(251, 191, 36, 0.36) !important;
+    }
+    .tdt-drawer-link {
+      min-height: 46px !important;
+      font-size: 15px !important;
+    }
+    .tdt-drawer-cat-title {
+      font-size: 13px !important;
+    }
 </style>
 </head>
 <body class="flex flex-col h-screen select-none">

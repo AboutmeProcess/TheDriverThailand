@@ -379,6 +379,25 @@
             </div>
           </div>
 
+          <div class="md:col-span-2 pt-3 border-t border-slate-800 space-y-3">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <span class="text-xs sm:text-sm font-extrabold text-sky-400">
+                <i class="fa-solid fa-chart-line mr-1.5"></i>ตั้งค่าระบบวิเคราะห์สถิติผู้เข้าชม (Web Analytics — ทำงานอัตโนมัติทั้ง 26 หน้า)
+              </span>
+              <span class="text-[11px] text-slate-400">ใส่รหัสอย่างใดอย่างหนึ่งหรือทั้งคู่ก็ได้</span>
+            </div>
+            <div class="grid md:grid-cols-2 gap-3">
+              <div class="space-y-1">
+                <label for="cfg-ga4-id" class="block text-xs font-bold text-slate-300">Google Analytics 4 Measurement ID</label>
+                <input type="text" id="cfg-ga4-id" placeholder="เช่น G-XXXXXXXXXX" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-sky-300 font-mono">
+              </div>
+              <div class="space-y-1">
+                <label for="cfg-cf-analytics-token" class="block text-xs font-bold text-slate-300">Cloudflare Web Analytics Token</label>
+                <input type="text" id="cfg-cf-analytics-token" placeholder="วาง Token จาก Cloudflare Web Analytics" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-amber-300 font-mono">
+              </div>
+            </div>
+          </div>
+
           <div class="md:col-span-2 pt-2">
             <button type="submit" class="gold-grad text-slate-950 font-extrabold px-6 py-3 rounded-xl text-xs sm:text-sm shadow">
               <i class="fa-solid fa-floppy-disk mr-1.5"></i> บันทึกการตั้งค่าเว็บไซต์
@@ -473,6 +492,70 @@
               </div>
             </div>
           </div>
+        </div>
+
+        <!-- จัดการข่าวสารคนขับ (Driver News CMS สำหรับหน้า driver_news.html) -->
+        <div class="pt-6 border-t border-slate-800 space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <h3 class="text-base font-extrabold text-emerald-400">
+                <i class="fa-solid fa-newspaper mr-1.5"></i>จัดการข่าวสารคนขับ (Driver News CMS)
+              </h3>
+              <p class="text-xs text-slate-400">เพิ่ม แก้ไข หรือลบข่าวสารในหน้า <a href="driver_news.html" target="_blank" class="text-amber-300 underline">driver_news.html</a> ได้ทันทีโดยไม่ต้องแก้โค้ด HTML</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <span id="news-cms-count" class="text-xs bg-emerald-500/15 text-emerald-300 border border-emerald-500/35 px-3 py-1 rounded-full font-bold">ทั้งหมด 6 ข่าว</span>
+              <button type="button" onclick="resetDriverNewsCms()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 font-bold px-3 py-1.5 rounded-xl text-xs transition">
+                <i class="fa-solid fa-rotate-left mr-1"></i> คืนค่าเริ่มต้น
+              </button>
+            </div>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-3 bg-slate-950/70 border border-slate-800 rounded-2xl p-4 text-xs sm:text-sm">
+            <input type="hidden" id="news-cms-edit-idx" value="-1">
+            <div class="space-y-1">
+              <label for="news-cms-app" class="block text-xs font-bold text-slate-300">หมวดหมู่ / แอปพลิเคชัน</label>
+              <select id="news-cms-app" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-white">
+                <option value="Grab">🟢 Grab</option>
+                <option value="Bolt">⚡ Bolt</option>
+                <option value="Line Man / Lalamove">🟩 Line Man / Lalamove</option>
+                <option value="inDrive / TADA / Robinhood">🔵 inDrive / TADA / Robinhood</option>
+                <option value="กฎหมาย & ขนส่ง">⚖️ กฎหมาย &amp; ขนส่ง</option>
+              </select>
+            </div>
+            <div class="space-y-1">
+              <label for="news-cms-date" class="block text-xs font-bold text-slate-300">วันที่ / แท็กข่าว</label>
+              <input type="text" id="news-cms-date" placeholder="เช่น อัปเดตล่าสุด • พฤศจิกายน 2569" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-white">
+            </div>
+            <div class="md:col-span-2 space-y-1">
+              <label for="news-cms-title" class="block text-xs font-bold text-slate-300">หัวข้อข่าว *</label>
+              <input type="text" id="news-cms-title" placeholder="ระบุพาดหัวข่าวสารสำหรับคนขับ..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-white">
+            </div>
+            <div class="md:col-span-2 space-y-1">
+              <label for="news-cms-summary" class="block text-xs font-bold text-slate-300">เนื้อหาย่อ *</label>
+              <textarea id="news-cms-summary" rows="2" placeholder="สรุปรายละเอียดสำคัญของข่าว..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-white"></textarea>
+            </div>
+            <div class="md:col-span-2 space-y-1">
+              <label for="news-cms-highlights" class="block text-xs font-bold text-slate-300">จุดเด่น / ข้อควรรู้ (ขึ้นบรรทัดใหม่เพื่อแยกแต่ละข้อ)</label>
+              <textarea id="news-cms-highlights" rows="3" placeholder="ข้อที่ 1&#10;ข้อที่ 2&#10;ข้อที่ 3" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-white"></textarea>
+            </div>
+            <div class="space-y-1">
+              <label for="news-cms-cta-label" class="block text-xs font-bold text-slate-300">ข้อความบนปุ่มลิงก์</label>
+              <input type="text" id="news-cms-cta-label" placeholder="เช่น สมัครคนขับ Grab ออนไลน์" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-white">
+            </div>
+            <div class="space-y-1">
+              <label for="news-cms-cta-href" class="block text-xs font-bold text-slate-300">ลิงก์ปลายทาง (หน้าเว็บหรือ URL)</label>
+              <input type="text" id="news-cms-cta-href" placeholder="เช่น grab_driver_register.html" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-amber-300 font-mono">
+            </div>
+            <div class="md:col-span-2 flex flex-wrap items-center justify-end gap-2 pt-1">
+              <button type="button" id="news-cms-cancel-btn" onclick="clearDriverNewsForm()" class="hidden bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold px-4 py-2.5 rounded-xl text-xs">ยกเลิกการแก้ไข</button>
+              <button type="button" onclick="saveDriverNewsItem()" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold px-5 py-2.5 rounded-xl text-xs shadow transition">
+                <i class="fa-solid fa-plus mr-1"></i> <span id="news-cms-submit-label">เพิ่มและเผยแพร่ข่าว</span>
+              </button>
+            </div>
+          </div>
+
+          <div id="news-cms-list" class="space-y-2.5"></div>
         </div>
       </section>
 
@@ -686,7 +769,10 @@
               lineChannelToken: document.getElementById('cfg-line-token')?.value.trim() || '',
               lineAdminGroupId: document.getElementById('cfg-line-admin-group')?.value.trim() || '',
               lineJobsGroupId: document.getElementById('cfg-line-jobs-group')?.value.trim() || '',
-              pageAnnouncements: JSON.stringify(pageAnnouncementsMap)
+              ga4Id: document.getElementById('cfg-ga4-id')?.value.trim() || '',
+              cfAnalyticsToken: document.getElementById('cfg-cf-analytics-token')?.value.trim() || '',
+              pageAnnouncements: JSON.stringify(pageAnnouncementsMap),
+              driverNewsItems: JSON.stringify(driverNewsCmsList)
             }
           })
         });
@@ -723,6 +809,201 @@
       loadSelectedPageAnnouncement();
       await persistPageAnnouncementsToCloud();
       toast(`คืนค่าแถบประกาศเริ่มต้นของหน้า ${file} แล้ว`);
+    }
+
+    // =========================================================================
+    // DRIVER NEWS CMS (จัดการข่าวสารใน driver_news.html)
+    // =========================================================================
+    const DRIVER_NEWS_KEY = 'tdt_driver_news_v1';
+    const DEFAULT_DRIVER_NEWS_CMS = [
+      {
+        app: 'กฎหมาย & ขนส่ง',
+        date: 'อัปเดตล่าสุด • กฎระเบียบรถรับจ้างผ่านแอป',
+        title: 'แนวทางการจดทะเบียนรถยนต์รับจ้างผ่านระบบอิเล็กทรอนิกส์ (รย.17 / รย.18) และใบขับขี่สาธารณะ',
+        summary: 'สรุปขั้นตอนการเปลี่ยนประเภทจดทะเบียนเป็น รย.17 / รย.18 การขอใบอนุญาตขับรถยนต์สาธารณะ และการทำประกันภัยคุ้มครองผู้โดยสารให้ถูกต้องตามประกาศกรมการขนส่งทางบก',
+        highlights: ['ใช้ใบขับขี่สาธารณะในการวิ่งงานผ่านแอปทุกค่าย', 'สามารถจดทะเบียน รย.17 ควบคู่การใช้งานส่วนบุคคลได้ตามเกณฑ์', 'เพิ่มความมั่นใจเมื่อรับงานจุดคัดกรองสนามบินและแหล่งท่องเที่ยว'],
+        ctaLabel: 'เช็กประกันภัยรถรับจ้าง Captain Insurance',
+        ctaHref: 'captain_insurance.html'
+      },
+      {
+        app: 'Grab',
+        date: 'ข่าวสารแพลตฟอร์ม • Grab Thailand',
+        title: 'เปิดรับสมัครคนขับ GrabCar / GrabTaxi / GrabSUV รอบใหม่ พร้อมจุดรับผู้โดยสารสนามบินสุวรรณภูมิ-ดอนเมือง',
+        summary: 'อัปเดตเกณฑ์อายุรถ เอกสารประกอบการสมัคร และระบบคิวจุดรับผู้โดยสารสนามบินสุวรรณภูมิ (ชั้น 1 ประตู 4) และดอนเมือง สำหรับคนขับที่ผ่านการยืนยันตัวตนครบถ้วน',
+        highlights: ['รองรับทั้งรถเก๋ง 4 ประตู รถ SUV 7 ที่นั่ง และแท็กซี่', 'มีโบนัสอินเซนทีฟช่วงชั่วโมงเร่งด่วนและวันหยุดสุดสัปดาห์', 'สมัครผ่านทีมงาน The Driver Thailand ช่วยตรวจเอกสารก่อนยื่น'],
+        ctaLabel: 'สมัครคนขับ Grab ออนไลน์',
+        ctaHref: 'grab_driver_register.html'
+      },
+      {
+        app: 'Bolt',
+        date: 'ข่าวสารแพลตฟอร์ม • Bolt Thailand',
+        title: 'Bolt ขยายพื้นที่ให้บริการทั่วไทย พร้อมปรับโครงสร้างค่าคอมมิชชั่นและหมวด Bolt Comfort / XL',
+        summary: 'อัปเดตพื้นที่เปิดให้บริการของ Bolt ทั้งกรุงเทพฯ-ปริมณฑล พัทยา เชียงใหม่ ภูเก็ต หาดใหญ่ ขอนแก่น และอุดรธานี รวมถึงเกณฑ์การอัปเกรดประเภทรถเพื่อรับค่าโดยสารที่สูงขึ้น',
+        highlights: ['สมัครง่าย เปิดบัญชีคนขับได้รวดเร็วเมื่อเอกสารครบ', 'เลือกเวลาวิ่งงานได้อย่างอิสระทั้งพาร์ทไทม์และฟูลไทม์', 'มีบริการช่วยตรวจเอกสารและสมัครผ่านหน้าเว็บของเรา'],
+        ctaLabel: 'สมัครคนขับ Bolt ออนไลน์',
+        ctaHref: 'bolt_driver_register.html'
+      },
+      {
+        app: 'Line Man / Lalamove',
+        date: 'ข่าวสารแพลตฟอร์ม • Line Man Ride & Lalamove',
+        title: 'อัปเดตงานรับส่งผู้โดยสาร Line Man Ride และงานขนส่งด่วนรถยนต์ 4-5 ประตู Lalamove',
+        summary: 'แนวทางการรับงานควบคู่หลายแอปพลิเคชันอย่างปลอดภัย ทั้งงานรับส่งผู้โดยสารในเขตเมืองของ Line Man Ride และงานส่งพัสดุ/เหมาคันของ Lalamove',
+        highlights: ['เหมาะสำหรับรถเก๋ง Eco Car, รถกระบะตู้ทึบ และรถ SUV', 'บริหารจัดการตารางวิ่งงานช่วงกลางวัน-กลางคืนให้คุ้มค่าน้ำมัน', 'ตรวจสอบประวัติผู้ว่าจ้างก่อนรับงานโอนเงินนอกระบบเสมอ'],
+        ctaLabel: 'ตรวจสอบประวัติผู้ว่าจ้าง Blacklist',
+        ctaHref: 'blacklist.html'
+      },
+      {
+        app: 'inDrive / TADA / Robinhood',
+        date: 'ข่าวสารแพลตฟอร์ม • inDrive, TADA & Robinhood Ride',
+        title: 'สรุปจุดเด่นแอปทางเลือก: ระบบเสนอราคาเอง (inDrive) และระบบเก็บค่าคอมมิชชั่นต่ำ (TADA / Robinhood)',
+        summary: 'เปรียบเทียบเงื่อนไขการรับงานของแอปทางเลือกที่คนขับนิยมเปิดคู่กัน เพื่อเพิ่มโอกาสได้งานขาไป-ขากลับโดยไม่ต้องตีรถเปล่า',
+        highlights: ['inDrive: คนขับสามารถกดเสนอราคาค่าโดยสารที่เหมาะสมกับระยะทางได้', 'TADA: เน้นความโปร่งใสของค่าบริการและรอบโอนเงิน', 'ควรตั้งค่ารับงานเฉพาะพื้นที่ที่คุ้นเคยและตรวจสอบจุดรับให้ชัดเจน'],
+        ctaLabel: 'คำนวณราคากลางงานเหมา',
+        ctaHref: 'fare_calculator.html'
+      },
+      {
+        app: 'กฎหมาย & ขนส่ง',
+        date: 'เตือนภัยคนขับแอป • ความปลอดภัยในการทำงาน',
+        title: 'ข้อควรระวังมิจฉาชีพแฝงตัวในรูปแบบผู้โดยสารเรียกรถผ่านแอปและขอยืมเงิน/หลอกโอนค่าสินค้า',
+        summary: 'รวบรวมรูปแบบกลโกงที่พบบ่อยกับคนขับรถผ่านแอป เช่น การขอให้คนขับสำรองจ่ายค่าพัสดุปลายทาง การส่งสลิปปลอม หรือการขอให้ยกเลิกงานในแอปเพื่อจ่ายเงินสดแล้วชิ่งหนี',
+        highlights: ['ห้ามสำรองจ่ายเงินสดให้ผู้โดยสารที่ไม่รู้จักทุกกรณี', 'ตรวจสอบชื่อและยอดเงินเข้าบัญชีก่อนจบงานทุกครั้ง', 'หากพบผู้ก่อเหตุสามารถแจ้งเบาะแสเข้าศูนย์ Blacklist ของกลุ่มได้ทันที'],
+        ctaLabel: 'เข้าสู่ศูนย์เฝ้าระวังภัย Blacklist',
+        ctaHref: 'blacklist.html'
+      }
+    ];
+    let driverNewsCmsList = DEFAULT_DRIVER_NEWS_CMS.slice();
+
+    function getLocalDriverNews() {
+      try {
+        const raw = localStorage.getItem(DRIVER_NEWS_KEY);
+        const parsed = raw ? JSON.parse(raw) : null;
+        return Array.isArray(parsed) && parsed.length ? parsed : null;
+      } catch (_) { return null; }
+    }
+
+    function saveLocalDriverNews(list) {
+      try { localStorage.setItem(DRIVER_NEWS_KEY, JSON.stringify(list || [])); } catch (_) {}
+    }
+
+    function initDriverNewsCms(cloudRaw) {
+      if (cloudRaw) {
+        try {
+          const parsed = typeof cloudRaw === 'string' ? JSON.parse(cloudRaw) : cloudRaw;
+          if (Array.isArray(parsed) && parsed.length) {
+            driverNewsCmsList = parsed;
+            saveLocalDriverNews(parsed);
+          }
+        } catch (_) {}
+      } else {
+        const local = getLocalDriverNews();
+        if (local) driverNewsCmsList = local;
+      }
+      renderDriverNewsCmsList();
+    }
+
+    function renderDriverNewsCmsList() {
+      const box = document.getElementById('news-cms-list');
+      const cnt = document.getElementById('news-cms-count');
+      if (cnt) cnt.textContent = `ทั้งหมด ${driverNewsCmsList.length} ข่าว`;
+      if (!box) return;
+      if (!driverNewsCmsList.length) {
+        box.innerHTML = '<p class="text-xs text-slate-400 text-center py-4">ยังไม่มีข่าวสาร</p>';
+        return;
+      }
+      box.innerHTML = driverNewsCmsList.map((item, idx) => `
+        <div class="bg-slate-950 border border-slate-800 rounded-2xl p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+          <div class="space-y-1 min-w-0">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="bg-amber-400/15 text-amber-300 border border-amber-400/35 px-2.5 py-0.5 rounded-full font-bold">${esc(item.app)}</span>
+              <span class="text-slate-400">${esc(item.date)}</span>
+            </div>
+            <p class="font-bold text-white truncate">${esc(item.title)}</p>
+            <p class="text-slate-400 line-clamp-1">${esc(item.summary)}</p>
+          </div>
+          <div class="flex items-center gap-2 shrink-0">
+            <button type="button" onclick="editDriverNewsItem(${idx})" class="bg-slate-800 hover:bg-slate-700 text-amber-300 font-bold px-3 py-1.5 rounded-xl">แก้ไข</button>
+            <button type="button" onclick="deleteDriverNewsItem(${idx})" class="bg-rose-950 hover:bg-rose-900 text-rose-300 border border-rose-500/35 font-bold px-3 py-1.5 rounded-xl">ลบ</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function clearDriverNewsForm() {
+      document.getElementById('news-cms-edit-idx').value = '-1';
+      document.getElementById('news-cms-app').value = 'Grab';
+      document.getElementById('news-cms-date').value = '';
+      document.getElementById('news-cms-title').value = '';
+      document.getElementById('news-cms-summary').value = '';
+      document.getElementById('news-cms-highlights').value = '';
+      document.getElementById('news-cms-cta-label').value = '';
+      document.getElementById('news-cms-cta-href').value = '';
+      document.getElementById('news-cms-submit-label').textContent = 'เพิ่มและเผยแพร่ข่าว';
+      document.getElementById('news-cms-cancel-btn').classList.add('hidden');
+    }
+
+    function editDriverNewsItem(idx) {
+      const item = driverNewsCmsList[idx];
+      if (!item) return;
+      document.getElementById('news-cms-edit-idx').value = String(idx);
+      document.getElementById('news-cms-app').value = item.app || 'Grab';
+      document.getElementById('news-cms-date').value = item.date || '';
+      document.getElementById('news-cms-title').value = item.title || '';
+      document.getElementById('news-cms-summary').value = item.summary || '';
+      document.getElementById('news-cms-highlights').value = Array.isArray(item.highlights) ? item.highlights.join('\n') : '';
+      document.getElementById('news-cms-cta-label').value = item.ctaLabel || '';
+      document.getElementById('news-cms-cta-href').value = item.ctaHref || '';
+      document.getElementById('news-cms-submit-label').textContent = 'บันทึกการแก้ไขข่าว';
+      document.getElementById('news-cms-cancel-btn').classList.remove('hidden');
+      document.getElementById('news-cms-title').focus();
+    }
+
+    async function saveDriverNewsItem() {
+      const title = document.getElementById('news-cms-title').value.trim();
+      const summary = document.getElementById('news-cms-summary').value.trim();
+      if (!title || !summary) {
+        toast('กรุณาระบุหัวข้อข่าวและเนื้อหาย่อก่อนบันทึก', false);
+        return;
+      }
+      const entry = {
+        app: document.getElementById('news-cms-app').value || 'Grab',
+        date: document.getElementById('news-cms-date').value.trim() || 'อัปเดตล่าสุด • The Driver TH',
+        title,
+        summary,
+        highlights: document.getElementById('news-cms-highlights').value.split('\n').map(s => s.trim()).filter(Boolean),
+        ctaLabel: document.getElementById('news-cms-cta-label').value.trim() || 'ดูรายละเอียดเพิ่มเติม',
+        ctaHref: document.getElementById('news-cms-cta-href').value.trim() || 'index.html'
+      };
+      const editIdx = Number(document.getElementById('news-cms-edit-idx').value);
+      if (editIdx >= 0 && editIdx < driverNewsCmsList.length) {
+        driverNewsCmsList[editIdx] = entry;
+      } else {
+        driverNewsCmsList.unshift(entry);
+      }
+      saveLocalDriverNews(driverNewsCmsList);
+      renderDriverNewsCmsList();
+      clearDriverNewsForm();
+      const ok = await persistPageAnnouncementsToCloud();
+      toast(ok ? 'เผยแพร่ข่าวสารขึ้นเว็บไซต์เรียบร้อยแล้ว' : 'บันทึกข่าวสารลงเครื่องเรียบร้อยแล้ว');
+    }
+
+    async function deleteDriverNewsItem(idx) {
+      if (idx < 0 || idx >= driverNewsCmsList.length) return;
+      if (!confirm('ยืนยันลบข่าวนี้ใช่หรือไม่?')) return;
+      driverNewsCmsList.splice(idx, 1);
+      saveLocalDriverNews(driverNewsCmsList);
+      renderDriverNewsCmsList();
+      await persistPageAnnouncementsToCloud();
+      toast('ลบข่าวสารเรียบร้อยแล้ว');
+    }
+
+    async function resetDriverNewsCms() {
+      if (!confirm('คืนค่าข่าวสารเริ่มต้นทั้ง 6 รายการใช่หรือไม่?')) return;
+      driverNewsCmsList = DEFAULT_DRIVER_NEWS_CMS.slice();
+      saveLocalDriverNews(driverNewsCmsList);
+      renderDriverNewsCmsList();
+      clearDriverNewsForm();
+      await persistPageAnnouncementsToCloud();
+      toast('คืนค่าข่าวสารเริ่มต้นเรียบร้อยแล้ว');
     }
     const DEFAULT_ADMINS = [];
 
@@ -798,6 +1079,7 @@
         document.getElementById('dashboard-view').classList.remove('hidden');
         renderAdminAccountsList();
         initPageAnnouncementEditor();
+        initDriverNewsCms();
         refreshAllAdminData();
         toast('เข้าสู่ระบบหลังบ้านสำเร็จ');
       } finally {
@@ -898,6 +1180,8 @@
         document.getElementById('cfg-line-token').value = cfg.lineChannelToken || '';
         document.getElementById('cfg-line-admin-group').value = cfg.lineAdminGroupId || '';
         document.getElementById('cfg-line-jobs-group').value = cfg.lineJobsGroupId || '';
+        document.getElementById('cfg-ga4-id').value = cfg.ga4Id || '';
+        document.getElementById('cfg-cf-analytics-token').value = cfg.cfAnalyticsToken || '';
         if (cfg.pageAnnouncements) {
           try {
             const parsedPA = typeof cfg.pageAnnouncements === 'string' ? JSON.parse(cfg.pageAnnouncements) : cfg.pageAnnouncements;
@@ -908,6 +1192,7 @@
             }
           } catch (_) {}
         }
+        initDriverNewsCms(cfg.driverNewsItems);
 
         const pendingMembers = Array.isArray(json.pendingMembers) ? json.pendingMembers : [];
         document.getElementById('count-pending-members').textContent = pendingMembers.length;
@@ -970,7 +1255,10 @@
             lineChannelToken: document.getElementById('cfg-line-token').value.trim(),
             lineAdminGroupId: document.getElementById('cfg-line-admin-group').value.trim(),
             lineJobsGroupId: document.getElementById('cfg-line-jobs-group').value.trim(),
-            pageAnnouncements: JSON.stringify(pageAnnouncementsMap)
+            ga4Id: document.getElementById('cfg-ga4-id').value.trim(),
+            cfAnalyticsToken: document.getElementById('cfg-cf-analytics-token').value.trim(),
+            pageAnnouncements: JSON.stringify(pageAnnouncementsMap),
+            driverNewsItems: JSON.stringify(driverNewsCmsList)
           }
         })
       });

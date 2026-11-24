@@ -1684,6 +1684,45 @@
     .tdt-drawer-cat-title {
       font-size: 13px !important;
     }
+
+    /* TDT Desktop 2-Tier Executive Alignment (>= 1024px) */
+    .tdt-page-announce-wrap {
+      max-width: 1120px !important;
+      padding: 0 16px !important;
+    }
+    @media (min-width: 1024px) {
+      .tdt-nav-bar-inner {
+        max-width: 1120px !important;
+        padding: 12px 20px 10px !important;
+        flex-wrap: wrap !important;
+        row-gap: 10px !important;
+        min-height: auto !important;
+      }
+      .tdt-brand-link {
+        order: 1 !important;
+        flex: 1 1 auto !important;
+      }
+      .tdt-nav-actions {
+        order: 2 !important;
+      }
+      .tdt-desktop-menu {
+        order: 3 !important;
+        flex: 0 0 100% !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+        padding-top: 10px !important;
+        border-top: 1px solid rgba(148, 163, 184, 0.14) !important;
+      }
+      .tdt-d-btn {
+        height: 40px !important;
+        padding: 0 15px !important;
+        font-size: 13.5px !important;
+      }
+      .tdt-page-announce-wrap {
+        padding: 0 20px !important;
+      }
+    }
 </style>
 </head>
 <body>

@@ -256,8 +256,8 @@
       </form>
 
       <div class="bg-slate-950/80 border border-slate-800 rounded-2xl p-3 text-xs text-slate-400 text-center space-y-0.5">
-        <p>บัญชีเริ่มต้นสำหรับทดสอบ: <strong class="text-amber-300">admin</strong> / รหัสผ่าน: <strong class="text-amber-300">TDT2026ADMIN</strong></p>
-        <p>(เมื่อล็อกอินแล้ว สามารถเพิ่ม/ลบ Username ผู้ดูแลคนอื่นๆ ได้ในแท็บ <strong>“จัดการบัญชีผู้ดูแล”</strong>)</p>
+        <p><i class="fa-solid fa-lock text-amber-400 mr-1"></i> เฉพาะผู้ดูแลระบบที่ได้รับสิทธิ์จาก The Driver Thailand เท่านั้น</p>
+        <p>(ตรวจสอบสิทธิ์ผ่านเซิร์ฟเวอร์กลางอย่างปลอดภัย)</p>
       </div>
 
       <div class="text-center">
@@ -724,9 +724,7 @@
       await persistPageAnnouncementsToCloud();
       toast(`คืนค่าแถบประกาศเริ่มต้นของหน้า ${file} แล้ว`);
     }
-    const DEFAULT_ADMINS = [
-      { username: 'admin', password: 'TDT2026ADMIN', displayName: 'ผู้ดูแลระบบหลัก (Super Admin)', role: 'Super Admin' }
-    ];
+    const DEFAULT_ADMINS = [];
 
     let sessionAdmin = null;
 

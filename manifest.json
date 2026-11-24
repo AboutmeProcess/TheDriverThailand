@@ -1,0 +1,20 @@
+{
+  "name": "The Driver TH Premium Service",
+  "short_name": "TheDriverTH",
+  "description": "ศูนย์กลางเครือข่ายคนขับรถรับส่งผู้โดยสารและบริการมืออาชีพแห่งประเทศไทย",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#070a12",
+  "theme_color": "#070a12",
+  "lang": "th",
+  "icons": [
+    {
+      "src": "TheDriverTH.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ]
+}

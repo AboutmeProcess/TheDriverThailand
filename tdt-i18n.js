@@ -1,14 +1,10 @@
-/* The Driver TH — Professional Bilingual (TH / EN) i18n Engine */
+/* The Driver TH — Hybrid Bilingual (TH / EN) 100% Full-Page i18n Engine */
 (function () {
   const LANG_KEY = "tdt_lang";
 
-  // Curated, natural Thai -> English dictionary covering:
-  // 1) Header, 4-Category Menu & Drawer (all 26 pages)
-  // 2) All 26 Per-Page Announcements & Badges
-  // 3) Homepage Super App Grid (100%)
-  // 4) Passenger-facing & Core Pages (Trip Voucher, Digital Card, Fare Calculator, Register, Blacklist, Guide)
+  // Curated Thai -> English dictionary for brand, menu, announcements & homepage
+  // (marked notranslate so machine translation never mangles brand/menu labels)
   const EXACT_DICT = {
-    // Header & Global UI
     "เครือข่ายคนขับรถรับส่งผู้โดยสารและบริการมืออาชีพแห่งประเทศไทย": "Professional Passenger Transport & Driver Network of Thailand",
     "หน้าหลัก": "Home",
     "เมนู": "Menu",
@@ -26,7 +22,6 @@
     "คู่มือสมาชิก": "Member Guide",
     "นโยบาย PDPA": "PDPA Policy",
 
-    // Menu Items (25 pages)
     "สมัครสมาชิกใหม่": "New Member Registration",
     "ตรวจสอบรหัสสมาชิก": "Verify Member ID",
     "แก้ไขข้อมูลสมาชิก": "Edit Member Info",
@@ -60,7 +55,6 @@
     "นโยบายความเป็นส่วนตัว (PDPA)": "Privacy Policy (PDPA)",
     "นโยบาย (PDPA)": "Privacy Policy (PDPA)",
 
-    // Homepage (index.html)
     "เลือกบริการที่ต้องการ": "Select a Service",
     "ครบจบในที่เดียว สำหรับสมาชิก": "All-in-one hub for members of",
     "สมัครสมาชิก": "Register",
@@ -73,7 +67,6 @@
     "ชุมชน & ปลอดภัย (5)": "Community & Safety (5)",
     "ไม่พบบริการที่ตรงกับคำค้นหา ลองพิมพ์คำอื่นอีกครั้ง": "No matching services found. Please try another keyword.",
 
-    // Homepage Service Tile Subtitles
     "ลงทะเบียนรับรหัส": "Apply for Member ID",
     "ค้นหารายชื่อในระบบ": "Search member directory",
     "เปลี่ยนรถ / ทะเบียน": "Update car / plate",
@@ -99,7 +92,6 @@
     "วิธีใช้งานเครือข่าย": "How to use the network",
     "คุ้มครองข้อมูลส่วนตัว": "Personal data protection",
 
-    // Per-Page Default Announcements & Badges (all 26 pages)
     "ศูนย์รวมบริการเครือข่ายคนขับรถมืออาชีพ": "Central Service Hub for Professional Drivers in Thailand",
     "รอบส่งบัตร: 11 ธันวาคม 2569": "Next Card Dispatch: 11 Dec 2026",
     "กรอกข้อมูลและแนบรูปถ่ายให้ครบถ้วน เพื่อรับรหัสสมาชิกภายใน 14 วัน": "Complete your details & photos to receive your Member ID within 14 days",
@@ -146,29 +138,7 @@
     "ชุมชนสมาชิก": "Member Community",
     "คู่มือการใช้งาน กฎกติกาเครือข่าย วิธีตั้งชื่อ และช่องทางติดต่อแอดมิน": "Network guidelines, profile naming rules & admin support contacts",
     "นโยบายคุ้มครองข้อมูลส่วนบุคคล (PDPA) ของเครือข่าย The Driver Thailand": "Personal Data Protection Act (PDPA) Privacy Policy of The Driver Thailand",
-    "มาตรฐาน PDPA": "PDPA Compliant",
-
-    // Passenger-facing & Core Pages (Trip Voucher, Digital Card, Fare Calculator, Register, Blacklist)
-    "ใบรับรองการเดินทาง (E-Voucher) & ตรวจสอบคนขับ": "Trip E-Voucher & Driver Verification",
-    "สร้างใบจอง / ใบเสร็จ (สำหรับคนขับ)": "Create Booking / Receipt (Driver)",
-    "ตรวจสอบคนขับ (สำหรับผู้โดยสาร)": "Verify Driver (Passenger)",
-    "พิมพ์ / บันทึก PDF": "Print / Save PDF",
-    "คัดลอกลิงก์ตรวจสอบ": "Copy Verification Link",
-    "ตรวจสอบตัวตนคนขับ": "Verify Driver Identity",
-    "บัตรสมาชิกดิจิทัล & QR Code ยืนยันตัวตน": "Digital Member Card & Verification QR",
-    "ค้นหาบัตรสมาชิกของคุณ": "Find Your Member Card",
-    "คำนวณค่าโดยสารมาตรฐาน": "Standard Fare Calculator",
-    "คำนวณราคา": "Calculate Fare",
-    "คัดลอกใบเสนอราคา": "Copy Quote",
-    "ระบบสมาชิก & ตรวจสอบรหัสสมาชิก": "Member System & ID Verification",
-    "ค้นหารหัสสมาชิกของคุณ": "Search Your Member ID",
-    "สถานะจำนวนสมาชิกปัจจุบัน": "Current Verified Members",
-    "ซิงก์ข้อมูลอัตโนมัติจากระบบ": "Auto-synced with database",
-    "ศูนย์เฝ้าระวังและแจ้งเตือนภัยกลุ่มขับรถรับจ้าง": "Driver Safety & Blacklist Alert Center",
-    "แจ้งเบาะแสเตือนภัย": "Report Scammer Alert",
-    "กลับหน้าหลัก": "Back to Home",
-    "ส่งแบบฟอร์ม": "Submit Form",
-    "ล้างข้อมูล": "Clear Form"
+    "มาตรฐาน PDPA": "PDPA Compliant"
   };
 
   const PLACEHOLDER_DICT = {
@@ -179,8 +149,105 @@
 
   const originalTextMap = new WeakMap();
   const originalPlaceholderMap = new WeakMap();
+  let gtScriptLoaded = false;
 
-  function walkAndTranslate(lang) {
+  // Inject CSS to completely hide Google Translate's top banner & tooltips
+  function injectGtHideStyles() {
+    if (document.getElementById("tdt-gt-hide-style")) return;
+    const st = document.createElement("style");
+    st.id = "tdt-gt-hide-style";
+    st.textContent = `
+      iframe.goog-te-banner-frame,
+      .goog-te-banner-frame,
+      .goog-te-balloon-frame,
+      #goog-gt-tt,
+      .goog-te-spinner-pos,
+      .VIpgJd-ZVi9od-ORHb-OEVmcd,
+      .VIpgJd-ZVi9od-aZ2wEe-wOHMyf,
+      #tdt-gt-hidden-container {
+        display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+      }
+      body {
+        top: 0 !important;
+        position: static !important;
+      }
+    `;
+    document.head.appendChild(st);
+  }
+
+  function setGoogTransCookie(value) {
+    const expires = value ? "" : "; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    document.cookie = "googtrans=" + value + "; path=/" + expires;
+    try {
+      const host = window.location.hostname;
+      if (host && host !== "localhost" && !/^\d+\.\d+\.\d+\.\d+$/.test(host)) {
+        document.cookie = "googtrans=" + value + "; path=/; domain=." + host + expires;
+      }
+    } catch (_) {}
+  }
+
+  function triggerGoogleTranslate(targetLang) {
+    injectGtHideStyles();
+    if (targetLang === "en") {
+      setGoogTransCookie("/th/en");
+    } else {
+      setGoogTransCookie("");
+    }
+
+    if (!document.getElementById("tdt-gt-hidden-container")) {
+      const div = document.createElement("div");
+      div.id = "tdt-gt-hidden-container";
+      div.style.display = "none";
+      document.body.appendChild(div);
+    }
+
+    window.tdtGoogleTranslateInit = function () {
+      if (window.google && window.google.translate && window.google.translate.TranslateElement) {
+        new window.google.translate.TranslateElement(
+          {
+            pageLanguage: "th",
+            includedLanguages: "en,th",
+            autoDisplay: false
+          },
+          "tdt-gt-hidden-container"
+        );
+        setTimeout(function () {
+          selectGtCombo(targetLang);
+        }, 450);
+      }
+    };
+
+    if (!gtScriptLoaded && targetLang === "en") {
+      gtScriptLoaded = true;
+      const s = document.createElement("script");
+      s.src = "https://translate.google.com/translate_a/element.js?cb=tdtGoogleTranslateInit";
+      s.async = true;
+      document.head.appendChild(s);
+    } else {
+      selectGtCombo(targetLang);
+    }
+  }
+
+  function selectGtCombo(targetLang) {
+    const combo = document.querySelector(".goog-te-combo");
+    if (!combo) return false;
+    combo.value = targetLang;
+    combo.dispatchEvent(new Event("change"));
+    return true;
+  }
+
+  function walkAndTranslateCurated(lang) {
+    // Protect brand logo/title, language button, and font buttons from machine translation
+    ["tdt-lang-toggle", "tdt-theme-toggle", "tdt-font-pct"].forEach(function (id) {
+      const el = document.getElementById(id);
+      if (el) el.classList.add("notranslate");
+    });
+    document.querySelectorAll(".tdt-brand-name, .tdt-brand-exec-pill, .tdt-font-pill").forEach(function (el) {
+      el.classList.add("notranslate");
+    });
+
     const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
       acceptNode: function (node) {
         if (!node.parentElement) return NodeFilter.FILTER_REJECT;
@@ -210,10 +277,10 @@
         const leading = orig.match(/^\s*/)[0];
         const trailing = orig.match(/\s*$/)[0];
         node.nodeValue = leading + EXACT_DICT[trimmed] + trailing;
+        if (node.parentElement) node.parentElement.classList.add("notranslate");
       }
     });
 
-    // Placeholders
     document.querySelectorAll("input[placeholder], textarea[placeholder]").forEach(function (el) {
       if (!originalPlaceholderMap.has(el)) {
         originalPlaceholderMap.set(el, el.getAttribute("placeholder") || "");
@@ -227,7 +294,7 @@
     });
   }
 
-  function applyTdtLang(lang) {
+  function applyTdtLang(lang, isUserClick) {
     const target = lang === "en" ? "en" : "th";
     document.documentElement.setAttribute("lang", target);
     document.documentElement.setAttribute("data-lang", target);
@@ -236,22 +303,41 @@
     if (labelEl) labelEl.textContent = target === "en" ? "TH" : "EN";
     if (btnEl) btnEl.title = target === "en" ? "เปลี่ยนเป็นภาษาไทย (Switch to Thai)" : "Switch to English (เปลี่ยนเป็นภาษาอังกฤษ)";
     try { localStorage.setItem(LANG_KEY, target); } catch (_) {}
-    walkAndTranslate(target);
+
+    if (target === "en") {
+      walkAndTranslateCurated("en");
+      // On subpages (anything other than index.html which is 100% covered by EXACT_DICT),
+      // trigger hidden Google Translate for all remaining Thai paragraphs/forms/FAQs
+      const file = (window.location.pathname.split("/").pop() || "index.html").toLowerCase();
+      if (file !== "index.html") {
+        triggerGoogleTranslate("en");
+      }
+    } else {
+      setGoogTransCookie("");
+      walkAndTranslateCurated("th");
+      // If Google Translate had translated the page, cleanly reload to restore 100% pure Thai DOM
+      if (isUserClick && document.documentElement.classList.contains("translated-ltr")) {
+        window.location.reload();
+      }
+    }
   }
 
   function toggleTdtLang() {
     const cur = document.documentElement.getAttribute("data-lang") === "en" ? "en" : "th";
-    applyTdtLang(cur === "en" ? "th" : "en");
+    applyTdtLang(cur === "en" ? "th" : "en", true);
   }
 
   window.toggleTdtLang = toggleTdtLang;
   window.applyTdtLang = applyTdtLang;
 
   function initLang() {
+    injectGtHideStyles();
     try {
       const saved = localStorage.getItem(LANG_KEY);
-      if (saved === "en") applyTdtLang("en");
-      else {
+      if (saved === "en") {
+        applyTdtLang("en", false);
+      } else {
+        setGoogTransCookie("");
         document.documentElement.setAttribute("data-lang", "th");
         const labelEl = document.getElementById("tdt-lang-label");
         if (labelEl) labelEl.textContent = "EN";

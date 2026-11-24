@@ -1770,149 +1770,106 @@
         </div>
 
         <!-- หมวดที่ 4: แนบรูปถ่ายรถยนต์ Luxury Car และรูปยืนยันตัวตน -->
-        <div class="dark-sub-panel rounded-3xl p-5 sm:p-6 space-y-5">
-          <div class="border-b border-slate-800 pb-3 flex flex-wrap items-center justify-between gap-2">
-            <h3 class="font-extrabold text-amber-300 text-sm sm:text-base flex items-center gap-2">
+        <div class="dark-sub-panel rounded-3xl p-4 sm:p-6 space-y-5">
+          <div class="border-b border-slate-800 pb-3.5 space-y-1">
+            <h3 class="font-extrabold text-amber-300 text-base sm:text-lg flex items-center gap-2">
               <i class="fa-solid fa-camera-retro text-amber-400"></i>
-              <span>แนบรูปถ่ายรถยนต์ Luxury Car และรูปถ่ายยืนยันตัวตน</span>
+              <span>แนบรูปยืนยันความเป็นเจ้าของรถและโปรไฟล์แอปขับรถ (2 รายการ)</span>
             </h3>
-            <span class="text-xs text-slate-400">ดูตัวอย่างรูปแบบการถ่ายภาพที่ถูกต้องได้ในแต่ละกล่องด้านล่าง</span>
+            <p class="text-xs sm:text-sm text-slate-300">แนบภาพทั้ง 2 รายการตามตัวอย่างด้านล่าง เพื่อให้ทีมงานตรวจสอบและอนุมัติเข้าห้อง Luxury Car ได้รวดเร็ว</p>
           </div>
 
-          <div class="grid md:grid-cols-3 gap-5">
-            <!-- กล่อง 1: รูปถ่ายภายนอกรถยนต์ Luxury Car -->
-            <div class="border-2 border-dashed border-slate-700 bg-slate-900 rounded-2xl p-4 hover:border-amber-400 transition flex flex-col justify-between space-y-4">
-              <div class="space-y-3">
-                <div class="flex items-center justify-between gap-1.5">
-                  <span class="text-xs font-extrabold text-emerald-300 bg-emerald-500/15 border border-emerald-400/35 px-2.5 py-1 rounded-lg">
-                    <i class="fa-solid fa-car mr-1"></i> รูปภายนอกรถ
-                  </span>
-                  <span class="text-xs font-bold text-rose-300 bg-rose-500/15 border border-rose-400/35 px-2 py-0.5 rounded-full">
-                    จำเป็น *
+          <div class="grid md:grid-cols-2 gap-5">
+            <!-- กล่อง 1: รูปภายนอกรถคู่กับสมาชิกเพื่อยืนยันความเป็นเจ้าของ -->
+            <div class="bg-slate-900/95 border border-slate-700 rounded-2xl p-4 sm:p-5 flex flex-col justify-between gap-4 hover:border-emerald-400/60 transition">
+              <div class="space-y-3.5">
+                <div class="flex items-center justify-between gap-2">
+                  <h4 class="text-sm sm:text-base font-extrabold text-white flex items-center gap-2">
+                    <span class="w-7 h-7 rounded-lg bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 inline-flex items-center justify-center text-xs font-black shrink-0">1</span>
+                    <span>รูปภายนอกรถคู่กับสมาชิก (ยืนยันความเป็นเจ้าของ)</span>
+                  </h4>
+                  <span class="text-xs font-bold text-rose-300 bg-rose-500/15 border border-rose-400/35 px-2.5 py-0.5 rounded-full shrink-0">จำเป็น *</span>
+                </div>
+
+                <div class="relative rounded-xl overflow-hidden border border-slate-700 bg-slate-950">
+                  <img src="example_luxury_owner_car.jpg" alt="ตัวอย่างรูปถ่ายภายนอกรถ Luxury Car คู่กับสมาชิกเพื่อยืนยันความเป็นเจ้าของ"
+                    loading="lazy" class="w-full aspect-video object-cover">
+                  <span class="absolute top-2.5 left-2.5 inline-flex items-center gap-1.5 bg-emerald-500 text-slate-950 font-extrabold text-xs px-2.5 py-1 rounded-full shadow">
+                    <i class="fa-solid fa-circle-check"></i> ตัวอย่างที่ถูกต้อง
                   </span>
                 </div>
 
-                <div class="bg-slate-950 rounded-xl p-3 text-white border border-slate-800 space-y-2">
-                  <div class="flex items-center justify-between text-xs text-amber-300 font-bold">
-                    <span>ตัวอย่างรูปภายนอกรถ</span>
-                    <span class="text-emerald-400">เห็นป้ายทะเบียน</span>
-                  </div>
-                  <div class="bg-slate-900 rounded-lg p-2.5 border border-slate-800 flex flex-col items-center justify-center gap-1.5">
-                    <div class="flex items-center justify-center">
-                      <i class="fa-solid fa-car-side text-3xl text-amber-400"></i>
-                      <span class="ml-2 bg-slate-950 text-amber-300 font-mono font-black text-xs px-1.5 py-0.5 rounded border border-amber-400/50">
-                        1กข 9999
-                      </span>
-                    </div>
-                    <p class="text-xs text-slate-300 text-center leading-snug">
-                      ถ่ายเห็นตัวรถหรูภายนอกพร้อมป้ายทะเบียนชัดเจนตรงกับข้อมูลที่กรอก
-                    </p>
-                  </div>
-                </div>
-
-                <div class="text-center space-y-1">
-                  <p class="text-xs font-bold text-white">
-                    รูปถ่ายภายนอกรถของคุณ (เห็นป้ายทะเบียน) <span class="text-rose-400">*</span>
-                  </p>
-                  <p class="text-xs text-slate-400">ไฟล์ JPG หรือ PNG</p>
-                </div>
+                <ul class="space-y-2 text-xs sm:text-sm text-slate-200">
+                  <li class="flex items-start gap-2">
+                    <i class="fa-solid fa-check text-emerald-400 mt-1 shrink-0"></i>
+                    <span>ยืนถ่ายคู่กับตัวรถ Luxury Car ของคุณ เห็นใบหน้าชัดเจน (ไม่สวมแว่นดำ/หน้ากาก)</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <i class="fa-solid fa-check text-emerald-400 mt-1 shrink-0"></i>
+                    <span>เห็นตัวรถภายนอกและป้ายทะเบียนชัดเจน <strong>ตรงกับข้อมูลที่กรอก</strong></span>
+                  </li>
+                </ul>
               </div>
 
-              <div class="text-center space-y-2">
-                <label class="inline-flex items-center justify-center bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-extrabold text-xs px-4 py-2.5 rounded-xl cursor-pointer transition shadow-sm">
-                  <i class="fa-solid fa-upload mr-1.5"></i> เลือกรูปภายนอกรถ
+              <div class="space-y-1.5 pt-2 border-t border-slate-800">
+                <label class="w-full min-h-[48px] inline-flex items-center justify-center gap-2 bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-extrabold text-sm px-5 py-3 rounded-xl cursor-pointer transition shadow-md">
+                  <i class="fa-solid fa-upload"></i>
+                  <span>เลือกรูปถ่ายรถคู่กับสมาชิก</span>
                   <input type="file" id="lux_car_ext_file" accept="image/*" required onchange="handleLuxPhotoUpload(this, 'ext')" class="hidden">
                 </label>
+                <p class="text-xs text-slate-400 text-center">รองรับไฟล์ภาพ JPG หรือ PNG</p>
                 <div id="preview-lux-ext" class="hidden pt-1"></div>
               </div>
             </div>
 
-            <!-- กล่อง 2: รูปถ่ายภายในห้องโดยสาร -->
-            <div class="border-2 border-dashed border-slate-700 bg-slate-900 rounded-2xl p-4 hover:border-amber-400 transition flex flex-col justify-between space-y-4">
-              <div class="space-y-3">
-                <div class="flex items-center justify-between gap-1.5">
-                  <span class="text-xs font-extrabold text-amber-300 bg-amber-500/15 border border-amber-400/35 px-2.5 py-1 rounded-lg">
-                    <i class="fa-solid fa-couch mr-1"></i> รูปห้องโดยสาร
-                  </span>
-                  <span class="text-xs font-bold text-rose-300 bg-rose-500/15 border border-rose-400/35 px-2 py-0.5 rounded-full">
-                    จำเป็น *
-                  </span>
+            <!-- กล่อง 2: รูป Capture จากแอป Grab หรือ Bolt เพื่อยืนยันตัวตน -->
+            <div class="bg-slate-900/95 border border-slate-700 rounded-2xl p-4 sm:p-5 flex flex-col justify-between gap-4 hover:border-amber-400/60 transition">
+              <div class="space-y-3.5">
+                <div class="flex items-center justify-between gap-2">
+                  <h4 class="text-sm sm:text-base font-extrabold text-white flex items-center gap-2">
+                    <span class="w-7 h-7 rounded-lg bg-amber-500/20 border border-amber-400/40 text-amber-300 inline-flex items-center justify-center text-xs font-black shrink-0">2</span>
+                    <span>รูป Capture แอป Grab หรือ Bolt (อย่างใดอย่างหนึ่ง)</span>
+                  </h4>
+                  <span class="text-xs font-bold text-rose-300 bg-rose-500/15 border border-rose-400/35 px-2.5 py-0.5 rounded-full shrink-0">จำเป็น *</span>
                 </div>
 
-                <div class="bg-slate-950 rounded-xl p-3 text-white border border-slate-800 space-y-2">
-                  <div class="flex items-center justify-between text-xs text-amber-300 font-bold">
-                    <span>ตัวอย่างรูปห้องโดยสาร</span>
-                    <span class="text-emerald-400">เบาะและภายในสะอาด</span>
+                <!-- ตัวอย่างหน้าจอ Grab และ Bolt คู่กัน -->
+                <div class="grid grid-cols-2 gap-2.5">
+                  <div class="relative rounded-xl overflow-hidden border border-emerald-400/40 bg-slate-950">
+                    <img src="example_grab_profile.jpg?v=3" alt="ตัวอย่างหน้าจอโปรไฟล์คนขับแอป Grab"
+                      loading="lazy" class="w-full h-56 sm:h-60 object-cover object-top">
+                    <span class="absolute bottom-2 left-2 inline-flex items-center gap-1 bg-emerald-500 text-slate-950 font-extrabold text-xs px-2 py-0.5 rounded-full shadow">
+                      ตัวอย่าง Grab
+                    </span>
                   </div>
-                  <div class="bg-slate-900 rounded-lg p-2.5 border border-slate-800 flex flex-col items-center justify-center gap-1.5">
-                    <i class="fa-solid fa-chair text-3xl text-amber-400"></i>
-                    <p class="text-xs text-slate-300 text-center leading-snug">
-                      ถ่ายให้เห็นเบาะนั่งผู้โดยสารตอนหลังและห้องโดยสารที่สะอาดเรียบร้อยพร้อมรับแขก VIP
-                    </p>
+                  <div class="relative rounded-xl overflow-hidden border border-sky-400/40 bg-slate-950">
+                    <img src="example_bolt_profile.jpg?v=3" alt="ตัวอย่างหน้าจอโปรไฟล์คนขับแอป Bolt"
+                      loading="lazy" class="w-full h-56 sm:h-60 object-cover object-top">
+                    <span class="absolute bottom-2 left-2 inline-flex items-center gap-1 bg-sky-400 text-slate-950 font-extrabold text-xs px-2 py-0.5 rounded-full shadow">
+                      ตัวอย่าง Bolt
+                    </span>
                   </div>
                 </div>
 
-                <div class="text-center space-y-1">
-                  <p class="text-xs font-bold text-white">
-                    รูปถ่ายภายในห้องโดยสารรถของคุณ <span class="text-rose-400">*</span>
-                  </p>
-                  <p class="text-xs text-slate-400">ไฟล์ JPG หรือ PNG</p>
-                </div>
+                <ul class="space-y-2 text-xs sm:text-sm text-slate-200">
+                  <li class="flex items-start gap-2">
+                    <i class="fa-solid fa-check text-emerald-400 mt-1 shrink-0"></i>
+                    <span>แคปหน้าโปรไฟล์คนขับจากแอป <strong class="text-emerald-300">Grab</strong> หรือ <strong class="text-sky-300">Bolt</strong> (แนบอย่างใดอย่างหนึ่ง)</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <i class="fa-solid fa-check text-emerald-400 mt-1 shrink-0"></i>
+                    <span>ต้องเห็น <strong>ชื่อ-นามสกุล</strong> และ <strong>เลขทะเบียนรถ</strong> ในแอปชัดเจน</span>
+                  </li>
+                </ul>
               </div>
 
-              <div class="text-center space-y-2">
-                <label class="inline-flex items-center justify-center bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold text-xs px-4 py-2.5 rounded-xl cursor-pointer transition shadow-sm">
-                  <i class="fa-solid fa-upload mr-1.5"></i> เลือกรูปภายในรถ
-                  <input type="file" id="lux_car_int_file" accept="image/*" required onchange="handleLuxPhotoUpload(this, 'int')" class="hidden">
-                </label>
-                <div id="preview-lux-int" class="hidden pt-1"></div>
-              </div>
-            </div>
-
-            <!-- กล่อง 3: รูปคู่กระดาษเขียนลายมือยืนยันตัวตน -->
-            <div class="border-2 border-dashed border-slate-700 bg-slate-900 rounded-2xl p-4 hover:border-amber-400 transition flex flex-col justify-between space-y-4">
-              <div class="space-y-3">
-                <div class="flex items-center justify-between gap-1.5">
-                  <span class="text-xs font-extrabold text-amber-300 bg-amber-500/15 border border-amber-400/35 px-2.5 py-1 rounded-lg">
-                    <i class="fa-solid fa-id-card-clip mr-1"></i> รูปคู่กระดาษ
-                  </span>
-                  <span class="text-xs font-bold text-rose-300 bg-rose-500/15 border border-rose-400/35 px-2 py-0.5 rounded-full">
-                    จำเป็น *
-                  </span>
-                </div>
-
-                <div class="bg-slate-950 rounded-xl p-3 text-white border border-amber-400/40 space-y-2">
-                  <div class="flex items-center justify-between text-xs text-amber-300 font-bold">
-                    <span>ตัวอย่างภาพคู่กระดาษ</span>
-                    <span class="text-emerald-400">ลายมือจริง</span>
-                  </div>
-                  <div class="bg-slate-900 rounded-lg p-2 border border-slate-800 flex items-center gap-2">
-                    <div class="w-10 h-10 rounded-full bg-slate-800 border border-amber-400/70 flex items-center justify-center text-amber-300 shrink-0">
-                      <i class="fa-solid fa-user-check"></i>
-                    </div>
-                    <div class="bg-slate-950 text-amber-200 rounded p-1.5 border border-dashed border-amber-400/60 text-left flex-1">
-                      <p class="text-xs font-extrabold text-amber-300 leading-tight">“สมัครห้อง Luxury Car”</p>
-                      <p class="text-xs text-slate-300">รหัสสมาชิก / ทะเบียนรถ</p>
-                    </div>
-                  </div>
-                  <p class="text-xs text-slate-300 text-center leading-snug">
-                    เขียนด้วยลายมือจริงคู่ใบหน้า ห้ามตัดต่อ ห้ามใช้ AI
-                  </p>
-                </div>
-
-                <div class="text-center space-y-1">
-                  <p class="text-xs font-bold text-white">
-                    แนบรูปคู่กับกระดาษดังรูปตัวอย่างด้านบน <span class="text-rose-400">*</span>
-                  </p>
-                  <p class="text-xs text-slate-400">ไฟล์ JPG หรือ PNG</p>
-                </div>
-              </div>
-
-              <div class="text-center space-y-2">
-                <label class="inline-flex items-center justify-center bg-slate-950 hover:bg-slate-800 text-amber-300 border border-amber-400/40 font-semibold text-xs px-4 py-2.5 rounded-xl cursor-pointer transition shadow-sm">
-                  <i class="fa-solid fa-upload mr-1.5"></i> เลือกรูปคู่กระดาษ
+              <div class="space-y-1.5 pt-2 border-t border-slate-800">
+                <label class="w-full min-h-[48px] inline-flex items-center justify-center gap-2 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold text-sm px-5 py-3 rounded-xl cursor-pointer transition shadow-md">
+                  <i class="fa-solid fa-upload"></i>
+                  <span>เลือกรูป Capture จากแอป Grab / Bolt</span>
                   <input type="file" id="lux_selfie_file" accept="image/*" required onchange="handleLuxPhotoUpload(this, 'selfie')" class="hidden">
                 </label>
+                <p class="text-xs text-slate-400 text-center">รองรับไฟล์ภาพ JPG หรือ PNG</p>
                 <div id="preview-lux-selfie" class="hidden pt-1"></div>
               </div>
             </div>
@@ -2289,15 +2246,11 @@
 
       try {
         if (!uploadedLuxPhotos.ext.base64) {
-          showToast('ข้อมูลไม่ครบถ้วน', 'กรุณาแนบรูปถ่ายภายนอกรถยนต์ Luxury Car ให้ครบถ้วนครับ', 'error');
-          return;
-        }
-        if (!uploadedLuxPhotos.int.base64) {
-          showToast('ข้อมูลไม่ครบถ้วน', 'กรุณาแนบรูปถ่ายภายในห้องโดยสารรถยนต์ครับ', 'error');
+          showToast('ข้อมูลไม่ครบถ้วน', 'กรุณาแนบรูปถ่ายภายนอกรถคู่กับสมาชิกเพื่อยืนยันความเป็นเจ้าของครับ', 'error');
           return;
         }
         if (!uploadedLuxPhotos.selfie.base64) {
-          showToast('ข้อมูลไม่ครบถ้วน', 'กรุณาแนบรูปถ่ายคู่กับกระดาษยืนยันตัวตนครับ', 'error');
+          showToast('ข้อมูลไม่ครบถ้วน', 'กรุณาแนบรูป Capture โปรไฟล์จากแอป Grab หรือ Bolt ครับ', 'error');
           return;
         }
         if (!hasReadPrivacyPolicy() || !document.getElementById('accept_luxury_terms')?.checked) {

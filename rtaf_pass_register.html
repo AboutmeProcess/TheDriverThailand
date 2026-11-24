@@ -1804,70 +1804,142 @@
         </div>
 
         <!-- หมวดที่ 4: แนบเอกสารประกอบการขอทำบัตรผ่าน ทอ. (ดอนเมือง) -->
-        <div class="dark-sub-panel rounded-3xl p-5 sm:p-6 space-y-5">
-          <div class="border-b border-slate-800 pb-3 flex flex-wrap items-center justify-between gap-2">
-            <h3 class="font-extrabold text-amber-300 text-sm sm:text-base flex items-center gap-2">
+        <div class="dark-sub-panel rounded-3xl p-4 sm:p-6 space-y-5">
+          <div class="border-b border-slate-800 pb-3.5 space-y-1">
+            <h3 class="font-extrabold text-amber-300 text-base sm:text-lg flex items-center gap-2">
               <i class="fa-solid fa-folder-open text-amber-400"></i>
-              <span>แนบเอกสารประกอบการขอทำบัตรผ่านยานพาหนะ</span>
+              <span>เอกสารที่ต้องใช้งาน (4 รายการหลัก)</span>
             </h3>
-            <span class="text-xs text-slate-400">ถ่ายภาพเอกสารให้ชัดเจน อ่านตัวอักษรได้ครบถ้วน (JPG หรือ PNG)</span>
+            <p class="text-xs sm:text-sm text-slate-300">เตรียมเอกสารและถ่ายภาพให้ชัดเจนตามรูปตัวอย่างทั้ง 4 รายการด้านล่าง (รองรับไฟล์ JPG หรือ PNG)</p>
           </div>
 
-          <div class="grid md:grid-cols-2 gap-4">
+          <div class="grid md:grid-cols-2 gap-5">
             <!-- เอกสารที่ 1: สำเนาบัตรประจำตัวประชาชน -->
-            <div class="border-2 border-dashed border-slate-700 bg-slate-900 rounded-2xl p-4 hover:border-amber-400 transition space-y-2.5 text-center">
-              <i class="fa-solid fa-address-card text-2xl text-amber-400"></i>
-              <p class="text-xs sm:text-sm font-bold text-white">
-                1. สำเนาบัตรประจำตัวประชาชน (เซ็นรับรองสำเนาถูกต้อง) <span class="text-rose-400">*</span>
-              </p>
-              <p class="text-xs text-slate-400">ขีดคร่อมระบุ “ใช้สำหรับทำบัตรผ่านยานพาหนะเข้า-ออก ทอ. เท่านั้น”</p>
-              <label class="inline-flex items-center justify-center bg-slate-950 hover:bg-slate-800 text-amber-300 border border-amber-400/40 font-semibold text-xs px-4 py-2 rounded-xl cursor-pointer transition">
-                <i class="fa-solid fa-upload mr-1.5"></i> เลือกไฟล์บัตรประชาชน
-                <input type="file" id="doc_id_card" accept="image/*" required onchange="handleRtafDocUpload(this, 'idCard')" class="hidden">
-              </label>
-              <div id="preview-doc-idCard" class="hidden pt-1"></div>
+            <div class="bg-slate-900/95 border border-slate-700 hover:border-amber-400/60 rounded-2xl p-4 flex flex-col justify-between gap-3.5 transition">
+              <div class="space-y-3">
+                <div class="flex items-center justify-between gap-2">
+                  <h4 class="text-xs sm:text-sm font-extrabold text-white flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-lg bg-amber-500/20 border border-amber-400/40 text-amber-300 inline-flex items-center justify-center text-xs font-black shrink-0">1</span>
+                    <span>สำเนาบัตรประจำตัวประชาชน (เซ็นรับรองสำเนาถูกต้อง)</span>
+                  </h4>
+                  <span class="text-xs font-bold text-rose-300 bg-rose-500/15 border border-rose-400/35 px-2 py-0.5 rounded-full shrink-0">จำเป็น *</span>
+                </div>
+                <div class="relative rounded-xl overflow-hidden border border-slate-700 bg-slate-950">
+                  <img src="example_rtaf_idcard.svg" alt="ตัวอย่างสำเนาบัตรประจำตัวประชาชนขีดคร่อมและเซ็นรับรองสำเนาถูกต้อง"
+                    loading="lazy" class="w-full aspect-video object-cover">
+                  <span class="absolute top-2 left-2 inline-flex items-center gap-1 bg-amber-400 text-slate-950 font-extrabold text-xs px-2.5 py-0.5 rounded-full shadow">
+                    <i class="fa-solid fa-circle-check"></i> ตัวอย่างที่ถูกต้อง
+                  </span>
+                </div>
+                <p class="text-xs text-slate-200 flex items-start gap-1.5">
+                  <i class="fa-solid fa-check text-emerald-400 mt-1 shrink-0"></i>
+                  <span>ขีดคร่อมระบุ <strong class="text-amber-300">“ใช้สำหรับทำบัตรผ่านยานพาหนะเข้า-ออก ทอ. เท่านั้น”</strong> พร้อมเซ็นรับรองสำเนาถูกต้อง</span>
+                </p>
+              </div>
+              <div class="space-y-1.5 pt-2 border-t border-slate-800">
+                <label class="w-full min-h-[46px] inline-flex items-center justify-center gap-2 bg-slate-950 hover:bg-slate-800 text-amber-300 border border-amber-400/45 font-extrabold text-sm px-4 py-2.5 rounded-xl cursor-pointer transition shadow-sm">
+                  <i class="fa-solid fa-upload"></i>
+                  <span>เลือกไฟล์บัตรประชาชน</span>
+                  <input type="file" id="doc_id_card" accept="image/*" required onchange="handleRtafDocUpload(this, 'idCard')" class="hidden">
+                </label>
+                <div id="preview-doc-idCard" class="hidden pt-1"></div>
+              </div>
             </div>
 
             <!-- เอกสารที่ 2: สำเนาใบอนุญาตขับขี่ -->
-            <div class="border-2 border-dashed border-slate-700 bg-slate-900 rounded-2xl p-4 hover:border-amber-400 transition space-y-2.5 text-center">
-              <i class="fa-solid fa-id-card text-2xl text-emerald-400"></i>
-              <p class="text-xs sm:text-sm font-bold text-white">
-                2. สำเนาใบอนุญาตขับขี่รถยนต์ (ยังไม่หมดอายุ) <span class="text-rose-400">*</span>
-              </p>
-              <p class="text-xs text-slate-400">ขีดคร่อมระบุ “ใช้สำหรับทำบัตรผ่านยานพาหนะเข้า-ออก ทอ. เท่านั้น”</p>
-              <label class="inline-flex items-center justify-center bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-extrabold text-xs px-4 py-2 rounded-xl cursor-pointer transition">
-                <i class="fa-solid fa-upload mr-1.5"></i> เลือกไฟล์ใบขับขี่
-                <input type="file" id="doc_driver_license" accept="image/*" required onchange="handleRtafDocUpload(this, 'driverLicense')" class="hidden">
-              </label>
-              <div id="preview-doc-driverLicense" class="hidden pt-1"></div>
+            <div class="bg-slate-900/95 border border-slate-700 hover:border-emerald-400/60 rounded-2xl p-4 flex flex-col justify-between gap-3.5 transition">
+              <div class="space-y-3">
+                <div class="flex items-center justify-between gap-2">
+                  <h4 class="text-xs sm:text-sm font-extrabold text-white flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-lg bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 inline-flex items-center justify-center text-xs font-black shrink-0">2</span>
+                    <span>สำเนาใบอนุญาตขับขี่รถยนต์ (ยังไม่หมดอายุ)</span>
+                  </h4>
+                  <span class="text-xs font-bold text-rose-300 bg-rose-500/15 border border-rose-400/35 px-2 py-0.5 rounded-full shrink-0">จำเป็น *</span>
+                </div>
+                <div class="relative rounded-xl overflow-hidden border border-slate-700 bg-slate-950">
+                  <img src="example_rtaf_license.svg" alt="ตัวอย่างสำเนาใบอนุญาตขับขี่รถยนต์ที่ยังไม่หมดอายุและขีดคร่อมรับรอง"
+                    loading="lazy" class="w-full aspect-video object-cover">
+                  <span class="absolute top-2 left-2 inline-flex items-center gap-1 bg-emerald-500 text-slate-950 font-extrabold text-xs px-2.5 py-0.5 rounded-full shadow">
+                    <i class="fa-solid fa-circle-check"></i> ตัวอย่างที่ถูกต้อง
+                  </span>
+                </div>
+                <p class="text-xs text-slate-200 flex items-start gap-1.5">
+                  <i class="fa-solid fa-check text-emerald-400 mt-1 shrink-0"></i>
+                  <span>ขีดคร่อมระบุ <strong class="text-amber-300">“ใช้สำหรับทำบัตรผ่านยานพาหนะเข้า-ออก ทอ. เท่านั้น”</strong> และเห็นวันหมดอายุชัดเจน</span>
+                </p>
+              </div>
+              <div class="space-y-1.5 pt-2 border-t border-slate-800">
+                <label class="w-full min-h-[46px] inline-flex items-center justify-center gap-2 bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-extrabold text-sm px-4 py-2.5 rounded-xl cursor-pointer transition shadow-sm">
+                  <i class="fa-solid fa-upload"></i>
+                  <span>เลือกไฟล์ใบขับขี่</span>
+                  <input type="file" id="doc_driver_license" accept="image/*" required onchange="handleRtafDocUpload(this, 'driverLicense')" class="hidden">
+                </label>
+                <div id="preview-doc-driverLicense" class="hidden pt-1"></div>
+              </div>
             </div>
 
             <!-- เอกสารที่ 3: สำเนารายการจดทะเบียนรถยนต์ -->
-            <div class="border-2 border-dashed border-slate-700 bg-slate-900 rounded-2xl p-4 hover:border-amber-400 transition space-y-2.5 text-center">
-              <i class="fa-solid fa-book text-2xl text-sky-400"></i>
-              <p class="text-xs sm:text-sm font-bold text-white">
-                3. สำเนารายการจดทะเบียนรถยนต์ (หน้าเล่มทะเบียนรถ) <span class="text-rose-400">*</span>
-              </p>
-              <p class="text-xs text-slate-400">แสดงชื่อผู้ถือกรรมสิทธิ์/ผู้ครอบครอง และเลขทะเบียนตรงกับรถที่ยื่น</p>
-              <label class="inline-flex items-center justify-center bg-slate-950 hover:bg-slate-800 text-sky-300 border border-sky-400/40 font-semibold text-xs px-4 py-2 rounded-xl cursor-pointer transition">
-                <i class="fa-solid fa-upload mr-1.5"></i> เลือกไฟล์สำเนาทะเบียนรถ
-                <input type="file" id="doc_car_reg" accept="image/*" required onchange="handleRtafDocUpload(this, 'carReg')" class="hidden">
-              </label>
-              <div id="preview-doc-carReg" class="hidden pt-1"></div>
+            <div class="bg-slate-900/95 border border-slate-700 hover:border-sky-400/60 rounded-2xl p-4 flex flex-col justify-between gap-3.5 transition">
+              <div class="space-y-3">
+                <div class="flex items-center justify-between gap-2">
+                  <h4 class="text-xs sm:text-sm font-extrabold text-white flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-lg bg-sky-500/20 border border-sky-400/40 text-sky-300 inline-flex items-center justify-center text-xs font-black shrink-0">3</span>
+                    <span>สำเนารายการจดทะเบียนรถยนต์ (หน้าเล่มทะเบียนรถ)</span>
+                  </h4>
+                  <span class="text-xs font-bold text-rose-300 bg-rose-500/15 border border-rose-400/35 px-2 py-0.5 rounded-full shrink-0">จำเป็น *</span>
+                </div>
+                <div class="relative rounded-xl overflow-hidden border border-slate-700 bg-slate-950">
+                  <img src="example_rtaf_carreg.jpg" alt="ตัวอย่างสำเนารายการจดทะเบียนรถยนต์แสดงชื่อผู้ถือกรรมสิทธิ์และเลขทะเบียน"
+                    loading="lazy" class="w-full aspect-video object-cover">
+                  <span class="absolute top-2 left-2 inline-flex items-center gap-1 bg-sky-400 text-slate-950 font-extrabold text-xs px-2.5 py-0.5 rounded-full shadow">
+                    <i class="fa-solid fa-circle-check"></i> ตัวอย่างที่ถูกต้อง
+                  </span>
+                </div>
+                <p class="text-xs text-slate-200 flex items-start gap-1.5">
+                  <i class="fa-solid fa-check text-emerald-400 mt-1 shrink-0"></i>
+                  <span>แสดงชื่อผู้ถือกรรมสิทธิ์/ผู้ครอบครอง และเลขทะเบียนตรงกับรถที่ยื่น</span>
+                </p>
+              </div>
+              <div class="space-y-1.5 pt-2 border-t border-slate-800">
+                <label class="w-full min-h-[46px] inline-flex items-center justify-center gap-2 bg-slate-950 hover:bg-slate-800 text-sky-300 border border-sky-400/45 font-extrabold text-sm px-4 py-2.5 rounded-xl cursor-pointer transition shadow-sm">
+                  <i class="fa-solid fa-upload"></i>
+                  <span>เลือกไฟล์สำเนาทะเบียนรถ</span>
+                  <input type="file" id="doc_car_reg" accept="image/*" required onchange="handleRtafDocUpload(this, 'carReg')" class="hidden">
+                </label>
+                <div id="preview-doc-carReg" class="hidden pt-1"></div>
+              </div>
             </div>
 
             <!-- เอกสารที่ 4: รูปถ่ายรถยนต์พร้อมแผ่นป้ายทะเบียน -->
-            <div class="border-2 border-dashed border-slate-700 bg-slate-900 rounded-2xl p-4 hover:border-amber-400 transition space-y-2.5 text-center">
-              <i class="fa-solid fa-car text-2xl text-amber-400"></i>
-              <p class="text-xs sm:text-sm font-bold text-white">
-                4. รูปถ่ายรถยนต์ที่ยื่นขอทำบัตรผ่าน (เห็นป้ายทะเบียนชัดเจน) <span class="text-rose-400">*</span>
-              </p>
-              <p class="text-xs text-slate-400">ถ่ายมุมเฉียงด้านหน้าเห็นตัวรถและเลขทะเบียนชัดเจน</p>
-              <label class="inline-flex items-center justify-center bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-bold text-xs px-4 py-2 rounded-xl cursor-pointer transition">
-                <i class="fa-solid fa-upload mr-1.5"></i> เลือกรูปถ่ายรถยนต์
-                <input type="file" id="doc_car_photo" accept="image/*" required onchange="handleRtafDocUpload(this, 'carPhoto')" class="hidden">
-              </label>
-              <div id="preview-doc-carPhoto" class="hidden pt-1"></div>
+            <div class="bg-slate-900/95 border border-slate-700 hover:border-amber-400/60 rounded-2xl p-4 flex flex-col justify-between gap-3.5 transition">
+              <div class="space-y-3">
+                <div class="flex items-center justify-between gap-2">
+                  <h4 class="text-xs sm:text-sm font-extrabold text-white flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-lg bg-amber-500/20 border border-amber-400/40 text-amber-300 inline-flex items-center justify-center text-xs font-black shrink-0">4</span>
+                    <span>รูปถ่ายรถยนต์ (เห็นป้ายทะเบียนชัดเจน)</span>
+                  </h4>
+                  <span class="text-xs font-bold text-rose-300 bg-rose-500/15 border border-rose-400/35 px-2 py-0.5 rounded-full shrink-0">จำเป็น *</span>
+                </div>
+                <div class="relative rounded-xl overflow-hidden border border-slate-700 bg-slate-950">
+                  <img src="example_car_photo.jpg" alt="ตัวอย่างรูปถ่ายรถยนต์ที่ถูกต้อง เห็นตัวรถเต็มคันและป้ายทะเบียนชัดเจน"
+                    loading="lazy" class="w-full aspect-video object-cover">
+                  <span class="absolute top-2 left-2 inline-flex items-center gap-1 bg-emerald-500 text-slate-950 font-extrabold text-xs px-2.5 py-0.5 rounded-full shadow">
+                    <i class="fa-solid fa-circle-check"></i> ตัวอย่างที่ถูกต้อง
+                  </span>
+                </div>
+                <p class="text-xs text-slate-200 flex items-start gap-1.5">
+                  <i class="fa-solid fa-check text-emerald-400 mt-1 shrink-0"></i>
+                  <span>ถ่ายมุมเฉียงด้านหน้าเห็นตัวรถเต็มคันและเลขทะเบียนชัดเจนตรงกับที่ยื่น</span>
+                </p>
+              </div>
+              <div class="space-y-1.5 pt-2 border-t border-slate-800">
+                <label class="w-full min-h-[46px] inline-flex items-center justify-center gap-2 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold text-sm px-4 py-2.5 rounded-xl cursor-pointer transition shadow-sm">
+                  <i class="fa-solid fa-upload"></i>
+                  <span>เลือกรูปถ่ายรถยนต์</span>
+                  <input type="file" id="doc_car_photo" accept="image/*" required onchange="handleRtafDocUpload(this, 'carPhoto')" class="hidden">
+                </label>
+                <div id="preview-doc-carPhoto" class="hidden pt-1"></div>
+              </div>
             </div>
           </div>
 

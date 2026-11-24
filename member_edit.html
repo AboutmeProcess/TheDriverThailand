@@ -1606,23 +1606,108 @@
         </div>
 
         <!-- หมวด 3: แนบรูปถ่ายรถยนต์คันใหม่ และรูปยืนยันตัวตน (ถ้ามี) -->
-        <div class="bg-slate-950/80 border border-slate-800 rounded-2xl p-4 sm:p-5 grid md:grid-cols-2 gap-4">
-          <div class="bg-slate-900 border-2 border-dashed border-slate-700 hover:border-amber-400 rounded-2xl p-4 text-center space-y-2 transition">
-            <p class="text-xs font-bold text-slate-200"><i class="fa-solid fa-car text-emerald-400 mr-1"></i> รูปถ่ายรถยนต์คันใหม่ / ป้ายทะเบียน (ถ้ามี)</p>
-            <label class="inline-flex items-center justify-center bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-extrabold text-xs px-4 py-2 rounded-xl cursor-pointer transition">
-              <i class="fa-solid fa-upload mr-1.5"></i> เลือกรูปถ่ายรถยนต์
-              <input type="file" id="edit_car_photo" accept="image/*" onchange="handleEditPhoto(this, 'car')" class="hidden">
-            </label>
-            <div id="preview-edit-car" class="hidden pt-1"></div>
+        <div class="bg-slate-950/80 border border-slate-800 rounded-3xl p-4 sm:p-6 space-y-5">
+          <div class="border-b border-slate-800 pb-3.5 space-y-1">
+            <h3 class="font-extrabold text-amber-300 text-base sm:text-lg flex items-center gap-2">
+              <i class="fa-solid fa-camera-retro text-amber-400"></i>
+              <span>แนบรูปถ่ายรถยนต์คันใหม่และรูปถ่ายยืนยันตัวตน</span>
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-300">หากแจ้งเปลี่ยนรถหรือทะเบียน แนะนำแนบภาพตามตัวอย่างด้านล่างเพื่อให้ทีมงานตรวจสอบได้รวดเร็ว</p>
           </div>
 
-          <div class="bg-slate-900 border-2 border-dashed border-slate-700 hover:border-amber-400 rounded-2xl p-4 text-center space-y-2 transition">
-            <p class="text-xs font-bold text-slate-200"><i class="fa-solid fa-id-card-clip text-amber-400 mr-1"></i> รูปถ่ายคู่กระดาษยืนยันตัวตน (ถ้ามี)</p>
-            <label class="inline-flex items-center justify-center bg-slate-950 hover:bg-slate-800 text-amber-300 border border-amber-400/40 font-bold text-xs px-4 py-2 rounded-xl cursor-pointer transition">
-              <i class="fa-solid fa-upload mr-1.5"></i> เลือกรูปยืนยันตัวตน
-              <input type="file" id="edit_selfie_photo" accept="image/*" onchange="handleEditPhoto(this, 'selfie')" class="hidden">
-            </label>
-            <div id="preview-edit-selfie" class="hidden pt-1"></div>
+          <div class="grid md:grid-cols-2 gap-5">
+            <!-- กล่อง 1: รูปถ่ายรถยนต์คันใหม่ -->
+            <div class="bg-slate-900/95 border border-slate-700 rounded-2xl p-4 sm:p-5 flex flex-col justify-between gap-4 hover:border-emerald-400/60 transition">
+              <div class="space-y-3.5">
+                <div class="flex items-center justify-between gap-2">
+                  <h4 class="text-sm sm:text-base font-extrabold text-white flex items-center gap-2">
+                    <span class="w-7 h-7 rounded-lg bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 inline-flex items-center justify-center text-xs font-black">1</span>
+                    <span>รูปถ่ายรถยนต์คันใหม่</span>
+                  </h4>
+                  <span class="text-xs font-bold text-slate-300 bg-slate-800 border border-slate-700 px-2.5 py-0.5 rounded-full shrink-0">
+                    ถ้ามี
+                  </span>
+                </div>
+
+                <div class="relative rounded-xl overflow-hidden border border-slate-700 bg-slate-950">
+                  <img src="example_car_photo.jpg" alt="ตัวอย่างรูปถ่ายรถยนต์ที่ถูกต้อง เห็นตัวรถเต็มคันและป้ายทะเบียนชัดเจน"
+                    loading="lazy" class="w-full aspect-video object-cover">
+                  <span class="absolute top-2.5 left-2.5 inline-flex items-center gap-1.5 bg-emerald-500 text-slate-950 font-extrabold text-xs px-2.5 py-1 rounded-full shadow">
+                    <i class="fa-solid fa-circle-check"></i> ตัวอย่างที่ถูกต้อง
+                  </span>
+                </div>
+
+                <ul class="space-y-2 text-xs sm:text-sm text-slate-200">
+                  <li class="flex items-start gap-2">
+                    <i class="fa-solid fa-check text-emerald-400 mt-1 shrink-0"></i>
+                    <span>ถ่ายมุมเฉียงด้านหน้าหรือด้านหลัง เห็นตัวรถยนต์เต็มคัน</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <i class="fa-solid fa-check text-emerald-400 mt-1 shrink-0"></i>
+                    <span>เห็นแผ่นป้ายทะเบียนชัดเจน <strong>ตรงกับเลขทะเบียนที่แจ้งแก้ไข</strong></span>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="space-y-2 pt-2 border-t border-slate-800">
+                <label class="w-full min-h-[48px] inline-flex items-center justify-center gap-2 bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-extrabold text-sm px-5 py-3 rounded-xl cursor-pointer transition shadow-md">
+                  <i class="fa-solid fa-upload"></i>
+                  <span>เลือกรูปถ่ายรถยนต์</span>
+                  <input type="file" id="edit_car_photo" accept="image/*" onchange="handleEditPhoto(this, 'car')" class="hidden">
+                </label>
+                <p class="text-xs text-slate-400 text-center">รองรับไฟล์ภาพ JPG หรือ PNG</p>
+                <div id="preview-edit-car" class="hidden pt-1"></div>
+              </div>
+            </div>
+
+            <!-- กล่อง 2: รูปถ่ายคู่กระดาษยืนยันตัวตน -->
+            <div class="bg-slate-900/95 border border-slate-700 rounded-2xl p-4 sm:p-5 flex flex-col justify-between gap-4 hover:border-amber-400/60 transition">
+              <div class="space-y-3.5">
+                <div class="flex items-center justify-between gap-2">
+                  <h4 class="text-sm sm:text-base font-extrabold text-white flex items-center gap-2">
+                    <span class="w-7 h-7 rounded-lg bg-amber-500/20 border border-amber-400/40 text-amber-300 inline-flex items-center justify-center text-xs font-black">2</span>
+                    <span>รูปหน้าตรงคู่กระดาษลายมือ</span>
+                  </h4>
+                  <span class="text-xs font-bold text-slate-300 bg-slate-800 border border-slate-700 px-2.5 py-0.5 rounded-full shrink-0">
+                    ถ้ามี
+                  </span>
+                </div>
+
+                <div class="relative rounded-xl overflow-hidden border border-amber-400/35 bg-slate-950">
+                  <img src="example_selfie_paper.jpg" alt="ตัวอย่างรูปถ่ายหน้าตรงคู่กระดาษเขียนด้วยลายมือจริง"
+                    loading="lazy" class="w-full aspect-video object-cover">
+                  <span class="absolute top-2.5 left-2.5 inline-flex items-center gap-1.5 bg-amber-400 text-slate-950 font-extrabold text-xs px-2.5 py-1 rounded-full shadow">
+                    <i class="fa-solid fa-circle-check"></i> ตัวอย่างที่ถูกต้อง
+                  </span>
+                </div>
+
+                <ul class="space-y-2 text-xs sm:text-sm text-slate-200">
+                  <li class="flex items-start gap-2">
+                    <i class="fa-solid fa-check text-emerald-400 mt-1 shrink-0"></i>
+                    <span>เขียนด้วยลายมือจริงพร้อม ชื่อ-นามสกุล / รหัสสมาชิก / ทะเบียนรถ</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <i class="fa-solid fa-check text-emerald-400 mt-1 shrink-0"></i>
+                    <span>เห็นใบหน้าตรงชัดเจน ไม่สวมแว่นดำหรือหน้ากาก</span>
+                  </li>
+                </ul>
+
+                <div class="bg-rose-950/50 border border-rose-500/40 rounded-xl px-3 py-2 text-xs text-rose-200 font-semibold flex items-start gap-2">
+                  <i class="fa-solid fa-triangle-exclamation text-rose-400 mt-0.5 shrink-0"></i>
+                  <span>ห้ามตัดต่อ ห้ามใช้ AI และห้ามถือคู่กับบัตรประชาชน</span>
+                </div>
+              </div>
+
+              <div class="space-y-2 pt-2 border-t border-slate-800">
+                <label class="w-full min-h-[48px] inline-flex items-center justify-center gap-2 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold text-sm px-5 py-3 rounded-xl cursor-pointer transition shadow-md">
+                  <i class="fa-solid fa-upload"></i>
+                  <span>เลือกรูปยืนยันตัวตน</span>
+                  <input type="file" id="edit_selfie_photo" accept="image/*" onchange="handleEditPhoto(this, 'selfie')" class="hidden">
+                </label>
+                <p class="text-xs text-slate-400 text-center">รองรับไฟล์ภาพ JPG หรือ PNG</p>
+                <div id="preview-edit-selfie" class="hidden pt-1"></div>
+              </div>
+            </div>
           </div>
         </div>
 

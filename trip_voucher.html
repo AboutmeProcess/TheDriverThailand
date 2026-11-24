@@ -1108,6 +1108,370 @@
     body {
       padding-bottom: 80px;
     }
+
+    /* TDT BULLETPROOF LIGHT / DARK MODE TOGGLE */
+    .tdt-theme-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      background: rgba(15, 23, 42, 0.92);
+      border: 1px solid rgba(251, 191, 36, 0.35);
+      color: #fde68a;
+      font-size: 15px;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background 0.15s ease, transform 0.15s ease;
+    }
+    .tdt-theme-btn:hover {
+      background: rgba(251, 191, 36, 0.2);
+      transform: scale(1.04);
+    }
+
+    /* LIGHT MODE (keeps Executive Dark Header & Drawer intact; turns page body, cards, forms crisp & readable) */
+    html[data-theme="light"],
+    html[data-theme="light"] body {
+      background-color: #f1f5f9 !important;
+      color: #0f172a !important;
+    }
+    html[data-theme="light"] .tdt-page-announce-bar {
+      background: #ffffff !important;
+      border-color: rgba(217, 119, 6, 0.4) !important;
+      box-shadow: 0 4px 14px -4px rgba(15, 23, 42, 0.08) !important;
+    }
+    html[data-theme="light"] .tdt-page-announce-left {
+      color: #0f172a !important;
+    }
+    html[data-theme="light"] .tdt-page-announce-badge {
+      color: #b45309 !important;
+    }
+
+    /* Light Surfaces (exclude dark header, drawer, floating LINE btn, and solid colored buttons) */
+    html[data-theme="light"] main [class*="bg-slate-950"]:not([class*="from-"]):not(button),
+    html[data-theme="light"] main [class*="bg-slate-900"]:not([class*="from-"]):not(button),
+    html[data-theme="light"] section [class*="bg-slate-950"]:not([class*="from-"]):not(button),
+    html[data-theme="light"] section [class*="bg-slate-900"]:not([class*="from-"]):not(button),
+    html[data-theme="light"] form [class*="bg-slate-950"]:not([class*="from-"]):not(button),
+    html[data-theme="light"] form [class*="bg-slate-900"]:not([class*="from-"]):not(button),
+    html[data-theme="light"] .dark-sub-panel,
+    html[data-theme="light"] footer {
+      background-color: #ffffff !important;
+      background-image: none !important;
+      box-shadow: 0 4px 16px -6px rgba(15, 23, 42, 0.08);
+    }
+    html[data-theme="light"] main [class*="bg-slate-800"]:not([class*="from-"]),
+    html[data-theme="light"] form [class*="bg-slate-800"]:not([class*="from-"]),
+    html[data-theme="light"] button.bg-slate-900,
+    html[data-theme="light"] button.bg-slate-950,
+    html[data-theme="light"] button.bg-slate-800,
+    html[data-theme="light"] a.bg-slate-900,
+    html[data-theme="light"] a.bg-slate-950,
+    html[data-theme="light"] a.bg-slate-800,
+    html[data-theme="light"] label.bg-slate-950,
+    html[data-theme="light"] label.bg-slate-900 {
+      background-color: #f8fafc !important;
+      color: #0f172a !important;
+      border-color: #cbd5e1 !important;
+    }
+    html[data-theme="light"] .app-tile:hover {
+      background-color: #fffbeb !important;
+      border-color: #d97706 !important;
+    }
+    html[data-theme="light"] [class*="bg-rose-950"] {
+      background-color: #fff1f2 !important;
+      border-color: #fda4af !important;
+    }
+    html[data-theme="light"] [class*="bg-emerald-950"] {
+      background-color: #ecfdf5 !important;
+      border-color: #6ee7b7 !important;
+    }
+    html[data-theme="light"] [class*="bg-amber-950"] {
+      background-color: #fffbeb !important;
+      border-color: #fcd34d !important;
+    }
+
+    /* Light Borders */
+    html[data-theme="light"] main [class*="border-slate-"],
+    html[data-theme="light"] form [class*="border-slate-"],
+    html[data-theme="light"] footer {
+      border-color: #cbd5e1 !important;
+    }
+
+    /* High-Contrast Dark Text on Light Surfaces (NEVER override inside nav, drawer, pills, or solid colored buttons) */
+    html[data-theme="light"] :is(main, footer, section, form, .card) :is(.text-white, .text-slate-100, .text-slate-200) {
+      color: #0f172a !important;
+    }
+    html[data-theme="light"] :is(main, footer, section, form, .card) :is(.text-slate-300, .text-slate-400, .text-slate-500) {
+      color: #334155 !important;
+    }
+    html[data-theme="light"] :is(main, footer, section, form, .card) :is(.text-amber-200, .text-amber-300, .text-amber-400) {
+      color: #b45309 !important;
+    }
+    html[data-theme="light"] :is(main, footer, section, form, .card) :is(.text-emerald-200, .text-emerald-300, .text-emerald-400) {
+      color: #047857 !important;
+    }
+    html[data-theme="light"] :is(main, footer, section, form, .card) :is(.text-sky-200, .text-sky-300, .text-sky-400) {
+      color: #0369a1 !important;
+    }
+    html[data-theme="light"] :is(main, footer, section, form, .card) :is(.text-rose-200, .text-rose-300, .text-rose-400) {
+      color: #be123c !important;
+    }
+    html[data-theme="light"] :is(main, footer, section, form, .card) :is(.text-purple-200, .text-purple-300) {
+      color: #7e22ce !important;
+    }
+
+    /* Preserve dark text on bright gold/emerald/sky gradient CTA buttons & badges */
+    html[data-theme="light"] [class*="from-amber-"],
+    html[data-theme="light"] [class*="from-emerald-"],
+    html[data-theme="light"] .bg-amber-400,
+    html[data-theme="light"] .bg-emerald-500,
+    html[data-theme="light"] .bg-sky-400 {
+      color: #070a12 !important;
+    }
+    html[data-theme="light"] [class*="from-amber-"] *,
+    html[data-theme="light"] [class*="from-emerald-"] *,
+    html[data-theme="light"] .bg-amber-400 *,
+    html[data-theme="light"] .bg-emerald-500 *,
+    html[data-theme="light"] .bg-sky-400 * {
+      color: #070a12 !important;
+    }
+    /* Preserve white text on solid dark-colored buttons (rose-600, emerald-600, sky-600, blue-600) */
+    html[data-theme="light"] :is(.bg-rose-600, .bg-emerald-600, .bg-sky-600, .bg-blue-600),
+    html[data-theme="light"] :is(.bg-rose-600, .bg-emerald-600, .bg-sky-600, .bg-blue-600) * {
+      color: #ffffff !important;
+    }
+
+    /* Crisp Light Form Controls */
+    html[data-theme="light"] input:not([type="checkbox"]):not([type="radio"]),
+    html[data-theme="light"] select,
+    html[data-theme="light"] textarea,
+    html[data-theme="light"] .dark-input {
+      background-color: #ffffff !important;
+      color: #0f172a !important;
+      border-color: #94a3b8 !important;
+    }
+    html[data-theme="light"] input::placeholder,
+    html[data-theme="light"] textarea::placeholder {
+      color: #64748b !important;
+    }
+
+    /* Non-Tailwind custom pages (e.g. register.html) */
+    html[data-theme="light"] .card,
+    html[data-theme="light"] .hero-card,
+    html[data-theme="light"] .stat-card,
+    html[data-theme="light"] .step-card,
+    html[data-theme="light"] .faq-item {
+      background: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      color: #0f172a !important;
+    }
+    html[data-theme="light"] .hero-card h1,
+    html[data-theme="light"] .section-title,
+    html[data-theme="light"] .sec-title,
+    html[data-theme="light"] .step-title {
+      color: #0f172a !important;
+    }
+    html[data-theme="light"] .hero-card p,
+    html[data-theme="light"] .section-desc,
+    html[data-theme="light"] .step-text {
+      color: #334155 !important;
+    }
+    html[data-theme="light"] table,
+    html[data-theme="light"] th,
+    html[data-theme="light"] td {
+      background-color: #ffffff !important;
+      color: #0f172a !important;
+      border-color: #e2e8f0 !important;
+    }
+    html[data-theme="light"] thead th {
+      background-color: #f8fafc !important;
+      color: #0f172a !important;
+    }
+
+    /* Edge-case contrast fixes for Light Mode (Hero gradients, warning boxes, footer, register.html FAQ/rules) */
+    html[data-theme="light"] main [class*="from-slate-9"],
+    html[data-theme="light"] main [class*="from-slate-8"],
+    html[data-theme="light"] section[class*="from-slate-9"],
+    html[data-theme="light"] section[class*="from-slate-8"],
+    html[data-theme="light"] .luxury-hero-bg,
+    html[data-theme="light"] .hero-card {
+      background: #ffffff !important;
+      background-image: none !important;
+      border-color: rgba(217, 119, 6, 0.32) !important;
+      color: #0f172a !important;
+    }
+    html[data-theme="light"] :is(main, footer, section, form, .card) [class*="text-rose-"] {
+      color: #9f1239 !important;
+    }
+    html[data-theme="light"] :is(main, footer, section, form, .card) [class*="text-amber-"] {
+      color: #b45309 !important;
+    }
+    html[data-theme="light"] :is(main, footer, section, form, .card) [class*="text-emerald-"] {
+      color: #065f46 !important;
+    }
+    html[data-theme="light"] :is(main, footer, section, form, .card) [class*="text-sky-"] {
+      color: #075985 !important;
+    }
+    html[data-theme="light"] footer,
+    html[data-theme="light"] footer a,
+    html[data-theme="light"] footer p,
+    html[data-theme="light"] footer span {
+      color: #334155 !important;
+    }
+    html[data-theme="light"] footer [class*="text-amber-"] {
+      color: #b45309 !important;
+    }
+    /* register.html specific Light Mode elements */
+    html[data-theme="light"] .result-count {
+      background: #fffbeb !important;
+      color: #92400e !important;
+      border-color: #f59e0b !important;
+    }
+    html[data-theme="light"] .rule-box.rule-do {
+      background: #ecfdf5 !important;
+      border-color: #6ee7b7 !important;
+      color: #064e3b !important;
+    }
+    html[data-theme="light"] .rule-box.rule-dont {
+      background: #fff1f2 !important;
+      border-color: #fda4af !important;
+      color: #881337 !important;
+    }
+    html[data-theme="light"] .rule-box .rule-header,
+    html[data-theme="light"] .rule-box .rule-list,
+    html[data-theme="light"] .rule-box .rule-list li,
+    html[data-theme="light"] .rule-box .rule-list strong {
+      color: inherit !important;
+    }
+    html[data-theme="light"] .highlight-box {
+      background: #fffbeb !important;
+      border-color: #f59e0b !important;
+      color: #78350f !important;
+    }
+    html[data-theme="light"] .highlight-box span {
+      color: #92400e !important;
+    }
+    html[data-theme="light"] .faq-title,
+    html[data-theme="light"] .faq-question,
+    html[data-theme="light"] .q-text,
+    html[data-theme="light"] .chevron {
+      color: #0f172a !important;
+    }
+    html[data-theme="light"] .faq-question {
+      background: #f8fafc !important;
+    }
+    html[data-theme="light"] details.faq-item[open] > .faq-question {
+      background: #fffbeb !important;
+      border-bottom: 1px solid #fde68a !important;
+    }
+    html[data-theme="light"] .faq-subtitle,
+    html[data-theme="light"] .faq-answer {
+      color: #334155 !important;
+      background: #ffffff !important;
+    }
+    html[data-theme="light"] .faq-answer strong {
+      color: #0f172a !important;
+    }
+    /* Re-enforce bright solid button text contrast so it always wins */
+    html[data-theme="light"] [class*="from-amber-"],
+    html[data-theme="light"] [class*="from-amber-"] *,
+    html[data-theme="light"] [class*="from-emerald-"],
+    html[data-theme="light"] [class*="from-emerald-"] *,
+    html[data-theme="light"] .bg-amber-400,
+    html[data-theme="light"] .bg-amber-400 *,
+    html[data-theme="light"] .bg-emerald-500,
+    html[data-theme="light"] .bg-emerald-500 * {
+      color: #070a12 !important;
+    }
+    html[data-theme="light"] :is(.bg-rose-600, .bg-emerald-600, .bg-sky-600, .bg-blue-600),
+    html[data-theme="light"] :is(.bg-rose-600, .bg-emerald-600, .bg-sky-600, .bg-blue-600) * {
+      color: #ffffff !important;
+    }
+
+    /* Final Light Mode Polish (.hero-glow-bg, .gold-shimmer-text, .alert-title, .faq-badge) */
+    html[data-theme="light"] .hero-glow-bg,
+    html[data-theme="light"] [class*="hero-bg"],
+    html[data-theme="light"] [class*="hero-glow"] {
+      background: #ffffff !important;
+      background-image: none !important;
+      color: #0f172a !important;
+      border-color: rgba(217, 119, 6, 0.35) !important;
+    }
+    html[data-theme="light"] .gold-shimmer-text {
+      background: none !important;
+      color: #b45309 !important;
+      -webkit-text-fill-color: #b45309 !important;
+    }
+    html[data-theme="light"] .alert-box,
+    html[data-theme="light"] .alert-banner {
+      background: #fffbeb !important;
+      border-color: #f59e0b !important;
+      color: #78350f !important;
+    }
+    html[data-theme="light"] .alert-title {
+      color: #92400e !important;
+    }
+    html[data-theme="light"] .alert-desc,
+    html[data-theme="light"] .alert-text,
+    html[data-theme="light"] .alert-box p,
+    html[data-theme="light"] .alert-box div {
+      color: #451a03 !important;
+    }
+    html[data-theme="light"] .faq-badge {
+      background: #fef3c7 !important;
+      color: #92400e !important;
+      border-color: #f59e0b !important;
+    }
+
+    /* TDT BILINGUAL TH / EN TOGGLE */
+    .tdt-lang-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 38px;
+      height: 38px;
+      padding: 0 8px;
+      border-radius: 11px;
+      background: rgba(15, 23, 42, 0.92);
+      border: 1px solid rgba(251, 191, 36, 0.35);
+      color: #fde68a;
+      font-size: 12.5px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background 0.15s ease, transform 0.15s ease;
+    }
+    .tdt-lang-btn:hover {
+      background: rgba(251, 191, 36, 0.2);
+      transform: scale(1.04);
+    }
+
+    /* Mobile Header 2-Row Clean Layout (< 768px) so brand never squeezes */
+    @media (max-width: 767px) {
+      .tdt-nav-bar-inner {
+        flex-wrap: wrap !important;
+        padding: 10px 14px !important;
+        row-gap: 8px !important;
+        min-height: auto !important;
+      }
+      .tdt-brand-link {
+        flex: 0 0 100% !important;
+        width: 100% !important;
+      }
+      .tdt-nav-actions {
+        flex: 0 0 100% !important;
+        width: 100% !important;
+        justify-content: space-between !important;
+        padding-top: 8px !important;
+        border-top: 1px solid rgba(148, 163, 184, 0.14) !important;
+      }
+      .tdt-menu-trigger {
+        margin-left: auto !important;
+      }
+    }
 </style>
 </head>
 <body class="min-h-screen flex flex-col">
@@ -1201,6 +1565,12 @@
 
       <!-- Right Controls: Font Size + Mobile Drawer Trigger -->
       <div class="tdt-nav-actions">
+                        <button type="button" id="tdt-lang-toggle" onclick="toggleTdtLang()" aria-label="Switch Language TH / EN" title="Switch to English (เปลี่ยนเป็นภาษาอังกฤษ)" class="tdt-lang-btn">
+          <span id="tdt-lang-label">EN</span>
+        </button>
+        <button type="button" id="tdt-theme-toggle" onclick="toggleTdtTheme()" aria-label="สลับโหมดสว่างหรือมืด" title="สลับโหมดสว่าง / มืด" class="tdt-theme-btn">
+          <i id="tdt-theme-icon" class="fa-solid fa-sun"></i>
+        </button>
         <div class="tdt-font-pill" title="ปรับขนาดตัวอักษร">
           <button type="button" onclick="changeScale(-1)" aria-label="ลดขนาดตัวอักษร" class="tdt-font-btn">A-</button>
           <span id="tdt-font-pct" class="text-xs text-amber-300 px-1 select-none hidden sm:inline">100%</span>
@@ -1826,6 +2196,28 @@ The Driver TH Premium Service
       window.closeTdtDrawer = closeTdtDrawer;
       window.filterTdtDrawer = filterTdtDrawer;
 
+      // Bulletproof Light / Dark Theme Toggle (persisted across all pages)
+      var THEME_KEY = "tdt_theme_mode";
+      function applyTdtTheme(mode) {
+        var isLight = mode === "light";
+        document.documentElement.setAttribute("data-theme", isLight ? "light" : "dark");
+        var icon = document.getElementById("tdt-theme-icon");
+        var btn = document.getElementById("tdt-theme-toggle");
+        if (icon) icon.className = isLight ? "fa-solid fa-moon" : "fa-solid fa-sun";
+        if (btn) btn.title = isLight ? "สลับเป็นโหมดมืด (Dark Mode)" : "สลับเป็นโหมดสว่าง (Light Mode)";
+        try { localStorage.setItem(THEME_KEY, isLight ? "light" : "dark"); } catch (_) {}
+      }
+      function toggleTdtTheme() {
+        var cur = document.documentElement.getAttribute("data-theme") === "light" ? "light" : "dark";
+        applyTdtTheme(cur === "light" ? "dark" : "light");
+      }
+      window.toggleTdtTheme = toggleTdtTheme;
+      try {
+        var savedTheme = localStorage.getItem(THEME_KEY);
+        if (savedTheme === "light") applyTdtTheme("light");
+      } catch (_) {}
+
+
       // Per-Page Dynamic Announcement Loader (Local + Admin Cloud Settings)
       (function loadPerPageAnnouncement() {
         var wrap = document.getElementById("tdt-page-announce-wrap");
@@ -1907,5 +2299,6 @@ The Driver TH Premium Service
       }
     })();
   </script>
+  <script src="tdt-i18n.js"></script>
 </body>
 </html>

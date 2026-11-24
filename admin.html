@@ -14,7 +14,132 @@
     html, body, input, select, textarea, button { font-family: 'Prompt', sans-serif !important; }
     body { background-color: #070a12; color: #f8fafc; overflow-x: clip; }
     .gold-grad { background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%); }
-  </style>
+  
+    /* TDT Mobile-First Typography & Touch Spacing */
+    html, body {
+      overflow-x: clip;
+      max-width: 100%;
+    }
+    .tdt-cat-menu-panel {
+      max-height: 75vh;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    @media (max-width: 767px) {
+      .tdt-global-nav {
+        position: relative !important;
+      }
+      .tdt-global-nav-inner {
+        padding: 12px 14px !important;
+        gap: 10px !important;
+      }
+      .tdt-nav-top-row {
+        gap: 10px !important;
+        padding-bottom: 10px !important;
+      }
+      .tdt-global-brand {
+        font-size: 15px !important;
+        gap: 10px !important;
+        line-height: 1.35 !important;
+      }
+      .tdt-brand-logo-img {
+        width: 44px !important;
+        height: 44px !important;
+        border-radius: 12px !important;
+      }
+      .tdt-brand-subline-row {
+        font-size: 12px !important;
+        line-height: 1.4 !important;
+        gap: 6px !important;
+      }
+      .tdt-brand-exec-pill {
+        font-size: 11px !important;
+        padding: 3px 9px !important;
+      }
+      .tdt-util-btn {
+        min-height: 36px !important;
+        min-width: 36px !important;
+        padding: 0 10px !important;
+        font-size: 13px !important;
+      }
+      .tdt-global-right-controls {
+        gap: 8px !important;
+      }
+      .tdt-nav-btn {
+        min-height: 42px !important;
+        height: auto !important;
+        padding: 8px 13px !important;
+        font-size: 13px !important;
+        line-height: 1.35 !important;
+        white-space: normal !important;
+        text-align: left;
+      }
+      .tdt-cat-dropdown-wrap {
+        position: static !important;
+      }
+      .tdt-cat-menu-panel {
+        position: fixed !important;
+        left: 12px !important;
+        right: 12px !important;
+        top: 68px !important;
+        width: auto !important;
+        max-width: none !important;
+        max-height: 75vh !important;
+        padding: 12px !important;
+        z-index: 1200 !important;
+      }
+      .tdt-cat-menu-header {
+        font-size: 12.5px !important;
+        padding: 10px 12px !important;
+      }
+      .tdt-cat-menu-link {
+        padding: 11px 12px !important;
+        gap: 12px !important;
+        margin-bottom: 8px !important;
+      }
+      .tdt-cat-menu-title {
+        font-size: 14px !important;
+        line-height: 1.35 !important;
+      }
+      .tdt-cat-menu-sub {
+        font-size: 12px !important;
+        line-height: 1.4 !important;
+        margin-top: 2px;
+      }
+    }
+    @media (max-width: 640px) {
+      h1, h2, h3, h4, p, li, label, span, a, button {
+        overflow-wrap: break-word;
+      }
+      input:not([type="checkbox"]):not([type="radio"]),
+      select,
+      textarea {
+        font-size: 16px !important;
+        min-height: 44px;
+      }
+      button:not(.tdt-util-btn):not(.billboard-dot):not(.clear-btn):not([aria-label*="ปิด"]),
+      a[class*="py-2"],
+      a[class*="py-3"],
+      a[class*="rounded-xl"],
+      a[class*="rounded-2xl"] {
+        min-height: 42px;
+        line-height: 1.35;
+      }
+      .whitespace-nowrap {
+        max-width: 100%;
+      }
+      .table-container,
+      .overflow-x-auto {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+        max-width: 100%;
+      }
+      .billboard-nav-btn {
+        width: 44px !important;
+        height: 44px !important;
+      }
+    }
+</style>
 </head>
 <body class="min-h-screen flex flex-col">
   <!-- กล่องแจ้งเตือน Toast -->
@@ -47,7 +172,7 @@
         </button>
       </form>
 
-      <div class="bg-slate-950/80 border border-slate-800 rounded-2xl p-3 text-[11px] text-slate-400 text-center space-y-0.5">
+      <div class="bg-slate-950/80 border border-slate-800 rounded-2xl p-3 text-xs text-slate-400 text-center space-y-0.5">
         <p>บัญชีเริ่มต้นสำหรับทดสอบ: <strong class="text-amber-300">admin</strong> / รหัสผ่าน: <strong class="text-amber-300">TDT2026ADMIN</strong></p>
         <p>(เมื่อล็อกอินแล้ว สามารถเพิ่ม/ลบ Username ผู้ดูแลคนอื่นๆ ได้ในแท็บ <strong>“จัดการบัญชีผู้ดูแล”</strong>)</p>
       </div>
@@ -68,7 +193,7 @@
           <img src="TheDriverTH.jpg" alt="โลโก้" onerror="this.onerror=null;this.src='https://placehold.co/80x80/0f172a/fbbf24?text=TDT';" class="w-10 h-10 rounded-xl object-cover border border-amber-400">
           <div>
             <span class="text-sm font-extrabold text-amber-300 block">🚖 The Driver TH — ระบบหลังบ้านครอบคลุมทุกหน้า</span>
-            <span class="text-[11px] text-emerald-400"><i class="fa-solid fa-circle-check mr-1"></i>ผู้ดูแล: <strong id="current-admin-label">-</strong></span>
+            <span class="text-xs text-emerald-400"><i class="fa-solid fa-circle-check mr-1"></i>ผู้ดูแล: <strong id="current-admin-label">-</strong></span>
           </div>
         </div>
         <div class="flex items-center gap-2 text-xs">
@@ -379,7 +504,7 @@
           </div>
           ${acc.username.toLowerCase() !== 'admin'
             ? `<button type="button" onclick="removeAdminAccount(${idx})" class="bg-rose-600/20 hover:bg-rose-600/35 text-rose-300 border border-rose-500/40 px-3 py-1.5 rounded-xl font-bold">ลบบัญชี</button>`
-            : `<span class="text-[11px] bg-amber-400/15 text-amber-300 border border-amber-400/30 px-2.5 py-1 rounded-full">บัญชีหลัก</span>`}
+            : `<span class="text-xs bg-amber-400/15 text-amber-300 border border-amber-400/30 px-2.5 py-1 rounded-full">บัญชีหลัก</span>`}
         </div>
       `).join('');
     }

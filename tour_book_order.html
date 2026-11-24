@@ -354,7 +354,132 @@
       transition: background-color 0.15s ease, color 0.15s ease;
     }
     .tdt-util-btn:hover { background-color: rgba(251, 191, 36, 0.18); color: #fde68a; }
-  </style>
+  
+    /* TDT Mobile-First Typography & Touch Spacing */
+    html, body {
+      overflow-x: clip;
+      max-width: 100%;
+    }
+    .tdt-cat-menu-panel {
+      max-height: 75vh;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    @media (max-width: 767px) {
+      .tdt-global-nav {
+        position: relative !important;
+      }
+      .tdt-global-nav-inner {
+        padding: 12px 14px !important;
+        gap: 10px !important;
+      }
+      .tdt-nav-top-row {
+        gap: 10px !important;
+        padding-bottom: 10px !important;
+      }
+      .tdt-global-brand {
+        font-size: 15px !important;
+        gap: 10px !important;
+        line-height: 1.35 !important;
+      }
+      .tdt-brand-logo-img {
+        width: 44px !important;
+        height: 44px !important;
+        border-radius: 12px !important;
+      }
+      .tdt-brand-subline-row {
+        font-size: 12px !important;
+        line-height: 1.4 !important;
+        gap: 6px !important;
+      }
+      .tdt-brand-exec-pill {
+        font-size: 11px !important;
+        padding: 3px 9px !important;
+      }
+      .tdt-util-btn {
+        min-height: 36px !important;
+        min-width: 36px !important;
+        padding: 0 10px !important;
+        font-size: 13px !important;
+      }
+      .tdt-global-right-controls {
+        gap: 8px !important;
+      }
+      .tdt-nav-btn {
+        min-height: 42px !important;
+        height: auto !important;
+        padding: 8px 13px !important;
+        font-size: 13px !important;
+        line-height: 1.35 !important;
+        white-space: normal !important;
+        text-align: left;
+      }
+      .tdt-cat-dropdown-wrap {
+        position: static !important;
+      }
+      .tdt-cat-menu-panel {
+        position: fixed !important;
+        left: 12px !important;
+        right: 12px !important;
+        top: 68px !important;
+        width: auto !important;
+        max-width: none !important;
+        max-height: 75vh !important;
+        padding: 12px !important;
+        z-index: 1200 !important;
+      }
+      .tdt-cat-menu-header {
+        font-size: 12.5px !important;
+        padding: 10px 12px !important;
+      }
+      .tdt-cat-menu-link {
+        padding: 11px 12px !important;
+        gap: 12px !important;
+        margin-bottom: 8px !important;
+      }
+      .tdt-cat-menu-title {
+        font-size: 14px !important;
+        line-height: 1.35 !important;
+      }
+      .tdt-cat-menu-sub {
+        font-size: 12px !important;
+        line-height: 1.4 !important;
+        margin-top: 2px;
+      }
+    }
+    @media (max-width: 640px) {
+      h1, h2, h3, h4, p, li, label, span, a, button {
+        overflow-wrap: break-word;
+      }
+      input:not([type="checkbox"]):not([type="radio"]),
+      select,
+      textarea {
+        font-size: 16px !important;
+        min-height: 44px;
+      }
+      button:not(.tdt-util-btn):not(.billboard-dot):not(.clear-btn):not([aria-label*="ปิด"]),
+      a[class*="py-2"],
+      a[class*="py-3"],
+      a[class*="rounded-xl"],
+      a[class*="rounded-2xl"] {
+        min-height: 42px;
+        line-height: 1.35;
+      }
+      .whitespace-nowrap {
+        max-width: 100%;
+      }
+      .table-container,
+      .overflow-x-auto {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+        max-width: 100%;
+      }
+      .billboard-nav-btn {
+        width: 44px !important;
+        height: 44px !important;
+      }
+    }
+</style>
 </head>
 <body class="text-slate-800 antialiased min-h-screen flex flex-col selection:bg-amber-400 selection:text-slate-950 relative">
   <!-- กล่องแจ้งเตือน Toast มุมขวาบน -->
@@ -480,7 +605,7 @@
   <header class="bg-slate-900/95 text-slate-300 text-xs py-2.5 px-4 border-b border-amber-500/15">
     <div class="max-w-6xl mx-auto flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
       <div class="flex items-center gap-2 flex-wrap">
-        <span class="bg-gradient-to-r from-amber-400 to-yellow-500 text-slate-950 font-extrabold px-2.5 py-0.5 rounded-full text-[11px] shadow-sm">
+        <span class="bg-gradient-to-r from-amber-400 to-yellow-500 text-slate-950 font-extrabold px-2.5 py-0.5 rounded-full text-xs shadow-sm">
           <i class="fa-solid fa-book-open mr-1"></i> TOUR BOOK SERVICE
         </span>
         <span class="text-slate-300 font-medium">สมุดทัวร์สำหรับแนะนำการท่องเที่ยว (โซนกรุงเทพฯ-ปริมณฑล และ โซนพัทยา-ชลบุรี)</span>
@@ -590,11 +715,11 @@
                   </div>
                 </div>
                 <div id="badge-price-bkk" class="bg-amber-400 text-slate-950 font-black px-3 py-1.5 rounded-xl text-xs sm:text-sm shrink-0 text-right leading-tight">
-                  <span class="line-through text-[10px] text-slate-700 font-bold block">ปกติ 999 บ.</span>
+                  <span class="line-through text-xs text-slate-700 font-bold block">ปกติ 999 บ.</span>
                   <span>เหลือ 799 บาท/เล่ม</span>
                 </div>
               </div>
-              <div class="pt-2 border-t border-slate-800 flex items-center justify-between text-[11px] text-slate-300">
+              <div class="pt-2 border-t border-slate-800 flex items-center justify-between text-xs text-slate-300">
                 <span><i class="fa-solid fa-truck text-emerald-400 mr-1"></i> รวมค่าจัดส่งพัสดุแล้ว</span>
               </div>
             </label>
@@ -610,11 +735,11 @@
                   </div>
                 </div>
                 <div id="badge-price-pty" class="bg-slate-800 text-amber-300 border border-amber-400/30 font-black px-3 py-1.5 rounded-xl text-xs sm:text-sm shrink-0 text-right leading-tight">
-                  <span class="line-through text-[10px] text-slate-400 font-bold block">ปกติ 1,199 บ.</span>
+                  <span class="line-through text-xs text-slate-400 font-bold block">ปกติ 1,199 บ.</span>
                   <span>เหลือ 999 บาท/เล่ม</span>
                 </div>
               </div>
-              <div class="pt-2 border-t border-slate-800 flex items-center justify-between text-[11px] text-slate-300">
+              <div class="pt-2 border-t border-slate-800 flex items-center justify-between text-xs text-slate-300">
                 <span><i class="fa-solid fa-truck text-emerald-400 mr-1"></i> รวมค่าจัดส่งพัสดุแล้ว</span>
               </div>
             </label>
@@ -639,7 +764,7 @@
 
             <div class="bg-slate-950 text-white rounded-2xl p-4 border border-amber-400/40 flex items-center justify-between gap-3">
               <div>
-                <span class="text-[11px] text-amber-300 font-bold block uppercase">ยอดรวมที่ต้องชำระทั้งหมด</span>
+                <span class="text-xs text-amber-300 font-bold block uppercase">ยอดรวมที่ต้องชำระทั้งหมด</span>
                 <span id="calc-formula-text" class="text-xs text-slate-300">กรุงเทพ และ ปริมณฑล (799 บาท × 1 เล่ม)</span>
               </div>
               <div class="text-right shrink-0">
@@ -726,7 +851,7 @@
             <p class="text-xs sm:text-sm font-bold text-white">
               แนบสลิปหลักฐานการโอนเงิน <span class="text-rose-400">*</span>
             </p>
-            <p class="text-[11px] text-slate-400">ไฟล์ภาพสลิปโอนเงินที่เห็นยอดเงิน วันเวลา และเลขที่รายการชัดเจน (JPG หรือ PNG)</p>
+            <p class="text-xs text-slate-400">ไฟล์ภาพสลิปโอนเงินที่เห็นยอดเงิน วันเวลา และเลขที่รายการชัดเจน (JPG หรือ PNG)</p>
             <div>
               <label class="inline-flex items-center justify-center bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-extrabold text-xs sm:text-sm px-5 py-2.5 rounded-xl cursor-pointer shadow-sm transition">
                 <i class="fa-solid fa-upload mr-1.5"></i> แนบไฟล์สลิปโอนเงิน
@@ -753,7 +878,7 @@
     <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
       <div class="text-center sm:text-left space-y-1">
         <p class="font-bold text-amber-300">🚖 The Driver TH 🇹🇭 Premium Service Official Network</p>
-        <p class="text-[11px] text-slate-500">ศูนย์กลางระบบสมาชิก บัตรสมาชิกประเมศฐ์ และระบบเฝ้าระวังภัยกลุ่มคนขับรถรับจ้าง</p>
+        <p class="text-xs text-slate-500">ศูนย์กลางระบบสมาชิก บัตรสมาชิกประเมศฐ์ และระบบเฝ้าระวังภัยกลุ่มคนขับรถรับจ้าง</p>
       </div>
       <div class="flex flex-wrap justify-center gap-x-4 gap-y-2 font-semibold">
         <a href="index.html" class="hover:text-amber-400 transition">หน้าหลัก</a>

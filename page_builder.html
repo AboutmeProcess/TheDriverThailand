@@ -32,7 +32,139 @@
       border-color: rgba(251, 191, 36, 0.6);
       color: #fde68a;
     }
-  </style>
+  
+    /* TDT Mobile-First Typography & Touch Spacing */
+    html, body {
+      overflow-x: clip;
+      max-width: 100%;
+    }
+    .tdt-cat-menu-panel {
+      max-height: 75vh;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    @media (max-width: 767px) {
+      .tdt-global-nav {
+        position: relative !important;
+      }
+      .tdt-global-nav-inner {
+        padding: 12px 14px !important;
+        gap: 10px !important;
+      }
+      .tdt-nav-top-row {
+        gap: 10px !important;
+        padding-bottom: 10px !important;
+      }
+      .tdt-global-brand {
+        font-size: 15px !important;
+        gap: 10px !important;
+        line-height: 1.35 !important;
+      }
+      .tdt-brand-logo-img {
+        width: 44px !important;
+        height: 44px !important;
+        border-radius: 12px !important;
+      }
+      .tdt-brand-subline-row {
+        font-size: 12px !important;
+        line-height: 1.4 !important;
+        gap: 6px !important;
+      }
+      .tdt-brand-exec-pill {
+        font-size: 11px !important;
+        padding: 3px 9px !important;
+      }
+      .tdt-util-btn {
+        min-height: 36px !important;
+        min-width: 36px !important;
+        padding: 0 10px !important;
+        font-size: 13px !important;
+      }
+      .tdt-global-right-controls {
+        gap: 8px !important;
+      }
+      .tdt-nav-btn {
+        min-height: 42px !important;
+        height: auto !important;
+        padding: 8px 13px !important;
+        font-size: 13px !important;
+        line-height: 1.35 !important;
+        white-space: normal !important;
+        text-align: left;
+      }
+      .tdt-cat-dropdown-wrap {
+        position: static !important;
+      }
+      .tdt-cat-menu-panel {
+        position: fixed !important;
+        left: 12px !important;
+        right: 12px !important;
+        top: 68px !important;
+        width: auto !important;
+        max-width: none !important;
+        max-height: 75vh !important;
+        padding: 12px !important;
+        z-index: 1200 !important;
+      }
+      .tdt-cat-menu-header {
+        font-size: 12.5px !important;
+        padding: 10px 12px !important;
+      }
+      .tdt-cat-menu-link {
+        padding: 11px 12px !important;
+        gap: 12px !important;
+        margin-bottom: 8px !important;
+      }
+      .tdt-cat-menu-title {
+        font-size: 14px !important;
+        line-height: 1.35 !important;
+      }
+      .tdt-cat-menu-sub {
+        font-size: 12px !important;
+        line-height: 1.4 !important;
+        margin-top: 2px;
+      }
+    }
+    @media (max-width: 640px) {
+      h1, h2, h3, h4, p, li, label, span, a, button {
+        overflow-wrap: break-word;
+      }
+      input:not([type="checkbox"]):not([type="radio"]),
+      select,
+      textarea {
+        font-size: 16px !important;
+        min-height: 44px;
+      }
+      button:not(.tdt-util-btn):not(.billboard-dot):not(.clear-btn):not([aria-label*="ปิด"]),
+      a[class*="py-2"],
+      a[class*="py-3"],
+      a[class*="rounded-xl"],
+      a[class*="rounded-2xl"] {
+        min-height: 42px;
+        line-height: 1.35;
+      }
+      .whitespace-nowrap {
+        max-width: 100%;
+      }
+      .table-container,
+      .overflow-x-auto {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+        max-width: 100%;
+      }
+      .billboard-nav-btn {
+        width: 44px !important;
+        height: 44px !important;
+      }
+    }
+
+    @media (max-width: 767px) {
+      html, body {
+        overflow-y: auto !important;
+        height: auto !important;
+      }
+    }
+</style>
 </head>
 <body class="flex flex-col h-screen select-none">
 
@@ -56,7 +188,7 @@
           </span>
           <div>
             <h1 class="text-xs sm:text-sm font-extrabold text-amber-300 leading-tight">Visual Website Builder (แก้ไขหน้าเว็บจริงทุกหน้า)</h1>
-            <p id="live-page-load-status" class="text-[10px] text-slate-400">กำลังเตรียมโหลดหน้าเว็บปัจจุบัน...</p>
+            <p id="live-page-load-status" class="text-xs text-slate-400">กำลังเตรียมโหลดหน้าเว็บปัจจุบัน...</p>
           </div>
         </div>
       </div>
@@ -168,50 +300,50 @@
     <aside class="w-64 bg-slate-900 border-r border-slate-800 flex flex-col shrink-0 overflow-y-auto p-3 space-y-5">
       <div class="space-y-2">
         <div class="flex items-center justify-between px-1">
-          <span class="text-[11px] font-extrabold text-amber-300 uppercase tracking-wider">หน้าเว็บทั้งหมด (22 หน้า)</span>
+          <span class="text-xs font-extrabold text-amber-300 uppercase tracking-wider">หน้าเว็บทั้งหมด (22 หน้า)</span>
         </div>
         <div id="sidebar-pages-list" class="space-y-1 max-h-56 overflow-y-auto pr-1"></div>
       </div>
 
       <div class="border-t border-slate-800 pt-4 space-y-2">
-        <span class="text-[11px] font-extrabold text-emerald-300 uppercase tracking-wider px-1 block">ลากบล็อกไปวางในหน้าจริง</span>
-        <p class="text-[10px] text-slate-400 px-1">ลากบล็อกด้านล่างไปวางบนหน้าเว็บ หรือกดคลิกเพื่อแทรกต่อท้าย</p>
+        <span class="text-xs font-extrabold text-emerald-300 uppercase tracking-wider px-1 block">ลากบล็อกไปวางในหน้าจริง</span>
+        <p class="text-xs text-slate-400 px-1">ลากบล็อกด้านล่างไปวางบนหน้าเว็บ หรือกดคลิกเพื่อแทรกต่อท้าย</p>
 
         <div class="grid grid-cols-2 gap-2 text-xs">
           <button type="button" draggable="true" ondragstart="onDragNewBlock(event, 'heading')" onclick="insertBlockIntoFrame('heading')"
             class="bg-slate-950 hover:bg-slate-800 border border-slate-700/80 rounded-xl p-2.5 text-left transition cursor-grab active:cursor-grabbing">
             <i class="fa-solid fa-heading text-amber-400 block mb-1"></i>
-            <span class="font-bold text-[11px] text-white block">หัวข้อใหม่</span>
+            <span class="font-bold text-xs text-white block">หัวข้อใหม่</span>
           </button>
 
           <button type="button" draggable="true" ondragstart="onDragNewBlock(event, 'text')" onclick="insertBlockIntoFrame('text')"
             class="bg-slate-950 hover:bg-slate-800 border border-slate-700/80 rounded-xl p-2.5 text-left transition cursor-grab active:cursor-grabbing">
             <i class="fa-solid fa-paragraph text-sky-400 block mb-1"></i>
-            <span class="font-bold text-[11px] text-white block">กล่องข้อความ</span>
+            <span class="font-bold text-xs text-white block">กล่องข้อความ</span>
           </button>
 
           <button type="button" draggable="true" ondragstart="onDragNewBlock(event, 'card')" onclick="insertBlockIntoFrame('card')"
             class="bg-slate-950 hover:bg-slate-800 border border-slate-700/80 rounded-xl p-2.5 text-left transition cursor-grab active:cursor-grabbing">
             <i class="fa-solid fa-square-plus text-emerald-400 block mb-1"></i>
-            <span class="font-bold text-[11px] text-white block">การ์ดประกาศ</span>
+            <span class="font-bold text-xs text-white block">การ์ดประกาศ</span>
           </button>
 
           <button type="button" draggable="true" ondragstart="onDragNewBlock(event, 'button')" onclick="insertBlockIntoFrame('button')"
             class="bg-slate-950 hover:bg-slate-800 border border-slate-700/80 rounded-xl p-2.5 text-left transition cursor-grab active:cursor-grabbing">
             <i class="fa-solid fa-link text-amber-300 block mb-1"></i>
-            <span class="font-bold text-[11px] text-white block">ปุ่มลิงก์</span>
+            <span class="font-bold text-xs text-white block">ปุ่มลิงก์</span>
           </button>
 
           <button type="button" draggable="true" ondragstart="onDragNewBlock(event, 'image')" onclick="insertBlockIntoFrame('image')"
             class="bg-slate-950 hover:bg-slate-800 border border-slate-700/80 rounded-xl p-2.5 text-left transition cursor-grab active:cursor-grabbing">
             <i class="fa-solid fa-image text-purple-400 block mb-1"></i>
-            <span class="font-bold text-[11px] text-white block">แทรกรูปภาพ</span>
+            <span class="font-bold text-xs text-white block">แทรกรูปภาพ</span>
           </button>
 
           <button type="button" draggable="true" ondragstart="onDragNewBlock(event, 'divider')" onclick="insertBlockIntoFrame('divider')"
             class="bg-slate-950 hover:bg-slate-800 border border-slate-700/80 rounded-xl p-2.5 text-left transition cursor-grab active:cursor-grabbing">
             <i class="fa-solid fa-minus text-slate-400 block mb-1"></i>
-            <span class="font-bold text-[11px] text-white block">เส้นคั่น</span>
+            <span class="font-bold text-xs text-white block">เส้นคั่น</span>
           </button>
         </div>
       </div>
@@ -224,7 +356,7 @@
           <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
           <span>กำลังแก้ไข: <strong id="current-editing-page-label" class="text-amber-300 font-mono">index.html</strong></span>
         </div>
-        <span class="text-[11px] text-slate-400 hidden sm:inline">คลิกที่ข้อความเพื่อพิมพ์แก้ได้โดยตรง • คลิกที่รูปภาพเพื่อเปลี่ยนลิงก์/ไฟล์รูป</span>
+        <span class="text-xs text-slate-400 hidden sm:inline">คลิกที่ข้อความเพื่อพิมพ์แก้ได้โดยตรง • คลิกที่รูปภาพเพื่อเปลี่ยนลิงก์/ไฟล์รูป</span>
       </div>
 
       <div id="viewport-frame-wrapper" style="width: 100%; transition: width 0.25s ease;" class="flex-1 min-h-[540px] bg-white rounded-2xl overflow-hidden shadow-2xl border border-slate-700">
@@ -236,7 +368,7 @@
     <aside class="w-72 bg-slate-900 border-l border-slate-800 shrink-0 overflow-y-auto p-4 space-y-4">
       <div class="border-b border-slate-800 pb-3">
         <h2 class="text-xs font-extrabold text-amber-300 uppercase tracking-wider">คุณสมบัติองค์ประกอบที่เลือก</h2>
-        <p id="selected-element-tag" class="text-[11px] text-slate-400 mt-1">ยังไม่ได้คลิกเลือกองค์ประกอบบนหน้าเว็บ</p>
+        <p id="selected-element-tag" class="text-xs text-slate-400 mt-1">ยังไม่ได้คลิกเลือกองค์ประกอบบนหน้าเว็บ</p>
       </div>
 
       <div id="inspector-controls" class="space-y-3.5 text-xs">
@@ -256,8 +388,8 @@
         <div id="prop-image-group" class="hidden space-y-2 bg-slate-950 p-3 rounded-2xl border border-slate-800">
           <label class="block text-slate-300 font-bold">เปลี่ยนรูปภาพ</label>
           <input type="text" id="prop-img-src-input" oninput="applySelectedImageUrl(this.value)" placeholder="ลิงก์รูปภาพ URL"
-            class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-[11px] text-white font-mono">
-          <label class="block w-full text-center bg-amber-400/20 hover:bg-amber-400/30 text-amber-300 border border-amber-400/40 font-bold py-2 rounded-xl cursor-pointer text-[11px]">
+            class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white font-mono">
+          <label class="block w-full text-center bg-amber-400/20 hover:bg-amber-400/30 text-amber-300 border border-amber-400/40 font-bold py-2 rounded-xl cursor-pointer text-xs">
             <i class="fa-solid fa-upload mr-1"></i> อัปโหลดรูปจากเครื่อง
             <input type="file" accept="image/*" onchange="applySelectedImageFile(this)" class="hidden">
           </label>
@@ -265,29 +397,29 @@
 
         <div class="grid grid-cols-2 gap-2 pt-1">
           <div class="space-y-1">
-            <label class="block text-[11px] text-slate-400">สีตัวอักษร</label>
+            <label class="block text-xs text-slate-400">สีตัวอักษร</label>
             <input type="color" id="prop-color-input" onchange="applySelectedStyleProp('color', this.value)" class="w-full h-9 rounded-lg bg-slate-950 border border-slate-700 cursor-pointer">
           </div>
           <div class="space-y-1">
-            <label class="block text-[11px] text-slate-400">สีพื้นหลัง</label>
+            <label class="block text-xs text-slate-400">สีพื้นหลัง</label>
             <input type="color" id="prop-bg-input" onchange="applySelectedStyleProp('backgroundColor', this.value)" class="w-full h-9 rounded-lg bg-slate-950 border border-slate-700 cursor-pointer">
           </div>
         </div>
 
         <div class="flex gap-2 pt-2 border-t border-slate-800">
-          <button type="button" onclick="copySelectedElement()" class="flex-1 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-400/40 font-bold py-2 px-2.5 rounded-xl text-[11px]">
+          <button type="button" onclick="copySelectedElement()" class="flex-1 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-400/40 font-bold py-2 px-2.5 rounded-xl text-xs">
             <i class="fa-solid fa-copy mr-1"></i> Copy
           </button>
-          <button type="button" onclick="duplicateSelectedElement()" class="flex-1 bg-slate-800 hover:bg-slate-700 text-emerald-300 font-bold py-2 px-2.5 rounded-xl text-[11px]">
+          <button type="button" onclick="duplicateSelectedElement()" class="flex-1 bg-slate-800 hover:bg-slate-700 text-emerald-300 font-bold py-2 px-2.5 rounded-xl text-xs">
             <i class="fa-solid fa-clone mr-1"></i> ทำซ้ำ
           </button>
-          <button type="button" onclick="deleteSelectedElement()" class="flex-1 bg-rose-600/20 hover:bg-rose-600/30 text-rose-300 border border-rose-500/40 font-bold py-2 px-2.5 rounded-xl text-[11px]">
+          <button type="button" onclick="deleteSelectedElement()" class="flex-1 bg-rose-600/20 hover:bg-rose-600/30 text-rose-300 border border-rose-500/40 font-bold py-2 px-2.5 rounded-xl text-xs">
             <i class="fa-solid fa-trash mr-1"></i> ลบออก
           </button>
         </div>
 
         <button type="button" id="btn-paste-copied-el" onclick="pasteCopiedElement()" disabled
-          class="w-full bg-emerald-600/20 disabled:opacity-35 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/40 font-bold py-2 px-3 rounded-xl text-[11px] transition">
+          class="w-full bg-emerald-600/20 disabled:opacity-35 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/40 font-bold py-2 px-3 rounded-xl text-xs transition">
           <i class="fa-solid fa-paste mr-1"></i> วางองค์ประกอบที่ Copy ไว้
         </button>
       </div>
@@ -388,9 +520,9 @@
         const isInFolder = localFolderHtmlMap.has(p.file);
         return `
           <button type="button" onclick="switchTargetPage('${p.file}')"
-            class="page-item-btn w-full text-left px-3 py-2 rounded-xl border text-[11px] font-semibold flex items-center justify-between gap-1.5 transition ${isCur ? 'is-active' : 'bg-slate-950/70 border-slate-800 text-slate-300 hover:bg-slate-800'}">
+            class="page-item-btn w-full text-left px-3 py-2 rounded-xl border text-xs font-semibold flex items-center justify-between gap-1.5 transition ${isCur ? 'is-active' : 'bg-slate-950/70 border-slate-800 text-slate-300 hover:bg-slate-800'}">
             <span class="truncate">${p.title}</span>
-            ${isInFolder ? '<span class="text-[9px] bg-emerald-500/20 text-emerald-300 px-1.5 py-0.5 rounded shrink-0">ไฟล์เครื่อง</span>' : ''}
+            ${isInFolder ? '<span class="text-xs bg-emerald-500/20 text-emerald-300 px-1.5 py-0.5 rounded shrink-0">ไฟล์เครื่อง</span>' : ''}
           </button>
         `;
       }).join('');

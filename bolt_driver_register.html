@@ -83,7 +83,132 @@
     .tdt-nav-btn.active-current { background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%); border-color: #fcd34d; color: #060911; font-weight: 600; }
     .tdt-util-group { display: inline-flex; align-items: center; gap: 4px; background-color: rgba(15, 23, 42, 0.92); border: 1px solid rgba(251, 191, 36, 0.28); border-radius: 12px; padding: 3px; }
     .tdt-util-btn { display: inline-flex; align-items: center; justify-content: center; height: 30px; padding: 0 9px; border-radius: 9px; font-size: 12px; color: #e2e8f0; background: transparent; border: none; cursor: pointer; }
-  </style>
+  
+    /* TDT Mobile-First Typography & Touch Spacing */
+    html, body {
+      overflow-x: clip;
+      max-width: 100%;
+    }
+    .tdt-cat-menu-panel {
+      max-height: 75vh;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    @media (max-width: 767px) {
+      .tdt-global-nav {
+        position: relative !important;
+      }
+      .tdt-global-nav-inner {
+        padding: 12px 14px !important;
+        gap: 10px !important;
+      }
+      .tdt-nav-top-row {
+        gap: 10px !important;
+        padding-bottom: 10px !important;
+      }
+      .tdt-global-brand {
+        font-size: 15px !important;
+        gap: 10px !important;
+        line-height: 1.35 !important;
+      }
+      .tdt-brand-logo-img {
+        width: 44px !important;
+        height: 44px !important;
+        border-radius: 12px !important;
+      }
+      .tdt-brand-subline-row {
+        font-size: 12px !important;
+        line-height: 1.4 !important;
+        gap: 6px !important;
+      }
+      .tdt-brand-exec-pill {
+        font-size: 11px !important;
+        padding: 3px 9px !important;
+      }
+      .tdt-util-btn {
+        min-height: 36px !important;
+        min-width: 36px !important;
+        padding: 0 10px !important;
+        font-size: 13px !important;
+      }
+      .tdt-global-right-controls {
+        gap: 8px !important;
+      }
+      .tdt-nav-btn {
+        min-height: 42px !important;
+        height: auto !important;
+        padding: 8px 13px !important;
+        font-size: 13px !important;
+        line-height: 1.35 !important;
+        white-space: normal !important;
+        text-align: left;
+      }
+      .tdt-cat-dropdown-wrap {
+        position: static !important;
+      }
+      .tdt-cat-menu-panel {
+        position: fixed !important;
+        left: 12px !important;
+        right: 12px !important;
+        top: 68px !important;
+        width: auto !important;
+        max-width: none !important;
+        max-height: 75vh !important;
+        padding: 12px !important;
+        z-index: 1200 !important;
+      }
+      .tdt-cat-menu-header {
+        font-size: 12.5px !important;
+        padding: 10px 12px !important;
+      }
+      .tdt-cat-menu-link {
+        padding: 11px 12px !important;
+        gap: 12px !important;
+        margin-bottom: 8px !important;
+      }
+      .tdt-cat-menu-title {
+        font-size: 14px !important;
+        line-height: 1.35 !important;
+      }
+      .tdt-cat-menu-sub {
+        font-size: 12px !important;
+        line-height: 1.4 !important;
+        margin-top: 2px;
+      }
+    }
+    @media (max-width: 640px) {
+      h1, h2, h3, h4, p, li, label, span, a, button {
+        overflow-wrap: break-word;
+      }
+      input:not([type="checkbox"]):not([type="radio"]),
+      select,
+      textarea {
+        font-size: 16px !important;
+        min-height: 44px;
+      }
+      button:not(.tdt-util-btn):not(.billboard-dot):not(.clear-btn):not([aria-label*="ปิด"]),
+      a[class*="py-2"],
+      a[class*="py-3"],
+      a[class*="rounded-xl"],
+      a[class*="rounded-2xl"] {
+        min-height: 42px;
+        line-height: 1.35;
+      }
+      .whitespace-nowrap {
+        max-width: 100%;
+      }
+      .table-container,
+      .overflow-x-auto {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+        max-width: 100%;
+      }
+      .billboard-nav-btn {
+        width: 44px !important;
+        height: 44px !important;
+      }
+    }
+</style>
 </head>
 <body class="text-slate-100 antialiased min-h-screen flex flex-col">
 
@@ -98,14 +223,14 @@
           <span class="tdt-brand-text-stack">
             <span>🚖 The Driver TH 🇹🇭 Premium Service</span>
             <span class="tdt-brand-subline-row">
-              <span class="tdt-brand-exec-pill"><i class="fa-solid fa-crown text-[9px]"></i> EXECUTIVE NETWORK</span>
+              <span class="tdt-brand-exec-pill"><i class="fa-solid fa-crown text-xs"></i> EXECUTIVE NETWORK</span>
               <span>เครือข่ายคนขับรถรับส่งผู้โดยสารและบริการมืออาชีพแห่งประเทศไทย</span>
             </span>
           </span>
         </a>
         <div class="tdt-util-group ml-auto">
           <button type="button" onclick="tdtChangeFontScale(-1)" class="tdt-util-btn">A-</button>
-          <span id="tdt-font-pct" class="text-[11px] text-amber-300 px-1 select-none">100%</span>
+          <span id="tdt-font-pct" class="text-xs text-amber-300 px-1 select-none">100%</span>
           <button type="button" onclick="tdtChangeFontScale(1)" class="tdt-util-btn">A+</button>
         </div>
       </div>
@@ -265,7 +390,7 @@
     <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
       <div class="text-center sm:text-left space-y-1">
         <p class="font-bold text-amber-300">🚖 The Driver TH 🇹🇭 Premium Service Official Network</p>
-        <p class="text-[11px] text-slate-500">ศูนย์กลางระบบสมาชิก ข่าวสารคนขับรถผ่านแอป และบริการรับสมัครคนขับ Grab &amp; Bolt</p>
+        <p class="text-xs text-slate-500">ศูนย์กลางระบบสมาชิก ข่าวสารคนขับรถผ่านแอป และบริการรับสมัครคนขับ Grab &amp; Bolt</p>
       </div>
       <div class="flex flex-wrap justify-center gap-x-4 gap-y-2 font-semibold">
         <a href="index.html" class="hover:text-amber-400 transition">หน้าหลัก</a>

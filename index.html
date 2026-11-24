@@ -598,7 +598,132 @@
       background-color: rgba(251, 191, 36, 0.18);
       color: #fde68a;
     }
-  </style>
+  
+    /* TDT Mobile-First Typography & Touch Spacing */
+    html, body {
+      overflow-x: clip;
+      max-width: 100%;
+    }
+    .tdt-cat-menu-panel {
+      max-height: 75vh;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    @media (max-width: 767px) {
+      .tdt-global-nav {
+        position: relative !important;
+      }
+      .tdt-global-nav-inner {
+        padding: 12px 14px !important;
+        gap: 10px !important;
+      }
+      .tdt-nav-top-row {
+        gap: 10px !important;
+        padding-bottom: 10px !important;
+      }
+      .tdt-global-brand {
+        font-size: 15px !important;
+        gap: 10px !important;
+        line-height: 1.35 !important;
+      }
+      .tdt-brand-logo-img {
+        width: 44px !important;
+        height: 44px !important;
+        border-radius: 12px !important;
+      }
+      .tdt-brand-subline-row {
+        font-size: 12px !important;
+        line-height: 1.4 !important;
+        gap: 6px !important;
+      }
+      .tdt-brand-exec-pill {
+        font-size: 11px !important;
+        padding: 3px 9px !important;
+      }
+      .tdt-util-btn {
+        min-height: 36px !important;
+        min-width: 36px !important;
+        padding: 0 10px !important;
+        font-size: 13px !important;
+      }
+      .tdt-global-right-controls {
+        gap: 8px !important;
+      }
+      .tdt-nav-btn {
+        min-height: 42px !important;
+        height: auto !important;
+        padding: 8px 13px !important;
+        font-size: 13px !important;
+        line-height: 1.35 !important;
+        white-space: normal !important;
+        text-align: left;
+      }
+      .tdt-cat-dropdown-wrap {
+        position: static !important;
+      }
+      .tdt-cat-menu-panel {
+        position: fixed !important;
+        left: 12px !important;
+        right: 12px !important;
+        top: 68px !important;
+        width: auto !important;
+        max-width: none !important;
+        max-height: 75vh !important;
+        padding: 12px !important;
+        z-index: 1200 !important;
+      }
+      .tdt-cat-menu-header {
+        font-size: 12.5px !important;
+        padding: 10px 12px !important;
+      }
+      .tdt-cat-menu-link {
+        padding: 11px 12px !important;
+        gap: 12px !important;
+        margin-bottom: 8px !important;
+      }
+      .tdt-cat-menu-title {
+        font-size: 14px !important;
+        line-height: 1.35 !important;
+      }
+      .tdt-cat-menu-sub {
+        font-size: 12px !important;
+        line-height: 1.4 !important;
+        margin-top: 2px;
+      }
+    }
+    @media (max-width: 640px) {
+      h1, h2, h3, h4, p, li, label, span, a, button {
+        overflow-wrap: break-word;
+      }
+      input:not([type="checkbox"]):not([type="radio"]),
+      select,
+      textarea {
+        font-size: 16px !important;
+        min-height: 44px;
+      }
+      button:not(.tdt-util-btn):not(.billboard-dot):not(.clear-btn):not([aria-label*="ปิด"]),
+      a[class*="py-2"],
+      a[class*="py-3"],
+      a[class*="rounded-xl"],
+      a[class*="rounded-2xl"] {
+        min-height: 42px;
+        line-height: 1.35;
+      }
+      .whitespace-nowrap {
+        max-width: 100%;
+      }
+      .table-container,
+      .overflow-x-auto {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+        max-width: 100%;
+      }
+      .billboard-nav-btn {
+        width: 44px !important;
+        height: 44px !important;
+      }
+    }
+</style>
 </head>
 <body class="antialiased min-h-screen flex flex-col">
   <!-- กล่องแจ้งเตือน Toast -->
@@ -622,7 +747,7 @@
           <span class="tdt-brand-text-stack">
             <span>🚖 The Driver TH 🇹🇭 Premium Service</span>
             <span class="tdt-brand-subline-row">
-              <span class="tdt-brand-exec-pill"><i class="fa-solid fa-crown text-[9px]"></i> EXECUTIVE NETWORK</span>
+              <span class="tdt-brand-exec-pill"><i class="fa-solid fa-crown text-xs"></i> EXECUTIVE NETWORK</span>
               <span>เครือข่ายคนขับรถรับส่งผู้โดยสารและบริการมืออาชีพแห่งประเทศไทย</span>
             </span>
           </span>
@@ -632,7 +757,7 @@
           <button type="button" onclick="changeScale(-1)" aria-label="ลดขนาดตัวอักษร" class="tdt-util-btn" title="ลดขนาดตัวอักษร">
             <span>A-</span>
           </button>
-          <span id="tdt-font-pct" class="text-[11px] font-normal text-amber-300 px-1 select-none">100%</span>
+          <span id="tdt-font-pct" class="text-xs font-normal text-amber-300 px-1 select-none">100%</span>
           <button type="button" onclick="changeScale(1)" aria-label="เพิ่มขนาดตัวอักษร" class="tdt-util-btn" title="เพิ่มขนาดตัวอักษร">
             <span>A+</span>
           </button>
@@ -659,7 +784,7 @@
           <button type="button" onclick="toggleNavDropdown('member', event)" id="btn-cat-member" aria-expanded="false" class="tdt-nav-btn is-member-cat">
             <i class="fa-solid fa-users"></i>
             <span>หมวดหมู่บริการสมาชิก</span>
-            <i id="chevron-cat-member" class="fa-solid fa-chevron-down text-[10px]" style="transition:transform 0.2s;"></i>
+            <i id="chevron-cat-member" class="fa-solid fa-chevron-down text-xs" style="transition:transform 0.2s;"></i>
           </button>
           <div id="panel-cat-member" class="tdt-cat-menu-panel">
             <div class="tdt-cat-menu-header" style="background:rgba(6,78,59,0.55);color:#6ee7b7;border:1px solid rgba(16,185,129,0.25);">
@@ -685,7 +810,7 @@
           <button type="button" onclick="toggleNavDropdown('group', event)" id="btn-cat-group" aria-expanded="false" class="tdt-nav-btn is-group-cat">
             <i class="fa-solid fa-briefcase"></i>
             <span>หมวดหมู่บริการของกลุ่ม</span>
-            <i id="chevron-cat-group" class="fa-solid fa-chevron-down text-[10px]" style="transition:transform 0.2s;"></i>
+            <i id="chevron-cat-group" class="fa-solid fa-chevron-down text-xs" style="transition:transform 0.2s;"></i>
           </button>
           <div id="panel-cat-group" class="tdt-cat-menu-panel">
             <div class="tdt-cat-menu-header" style="background:rgba(120,53,15,0.45);color:#fcd34d;border:1px solid rgba(251,191,36,0.25);">
@@ -790,7 +915,7 @@
   <header class="bg-slate-950 text-slate-300 text-xs py-2.5 px-4 border-b border-amber-500/15">
     <div class="max-w-6xl mx-auto flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
       <div class="flex items-center gap-2 flex-wrap">
-        <span class="bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-extrabold px-2.5 py-0.5 rounded-full text-[11px] shadow-sm">
+        <span class="bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-extrabold px-2.5 py-0.5 rounded-full text-xs shadow-sm">
           <i class="fa-solid fa-bullhorn mr-1"></i> OFFICIAL ANNOUNCEMENT
         </span>
         <span id="site-announcement-text" class="text-slate-300 font-medium">ประกาศและรอบการจัดส่งบริการสำหรับสมาชิกเครือข่าย</span>
@@ -830,20 +955,20 @@
           </p>
 
           <!-- Primary CTA Buttons -->
-          <div class="flex flex-wrap items-center gap-3 pt-2">
-            <a href="member_register.html" class="group bg-gradient-to-r from-emerald-400 to-emerald-500 hover:from-emerald-300 hover:to-emerald-400 text-slate-950 font-extrabold text-xs sm:text-sm px-5 py-3.5 rounded-2xl shadow-lg shadow-emerald-500/25 transition inline-flex items-center gap-2">
+          <div class="grid grid-cols-1 sm:flex sm:flex-wrap items-center gap-3 pt-2">
+            <a href="member_register.html" class="group w-full sm:w-auto justify-center bg-gradient-to-r from-emerald-400 to-emerald-500 hover:from-emerald-300 hover:to-emerald-400 text-slate-950 font-extrabold text-sm px-5 py-3.5 rounded-2xl shadow-lg shadow-emerald-500/25 transition inline-flex items-center gap-2 min-h-[48px]">
               <i class="fa-solid fa-file-signature icon-bounce-hover"></i>
               <span>ลงทะเบียนสมาชิกใหม่</span>
             </a>
-            <a href="pcard.html" class="group bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 hover:from-amber-300 hover:to-yellow-400 text-slate-950 font-extrabold text-xs sm:text-sm px-5 py-3.5 rounded-2xl shadow-lg shadow-amber-500/25 transition inline-flex items-center gap-2">
+            <a href="pcard.html" class="group w-full sm:w-auto justify-center bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 hover:from-amber-300 hover:to-yellow-400 text-slate-950 font-extrabold text-sm px-5 py-3.5 rounded-2xl shadow-lg shadow-amber-500/25 transition inline-flex items-center gap-2 min-h-[48px]">
               <i class="fa-solid fa-id-badge icon-bounce-hover"></i>
               <span>ทำบัตรสมาชิกประเมศฐ์</span>
             </a>
-            <a href="unblock_request.html" class="group bg-sky-600/90 hover:bg-sky-500 text-white font-bold text-xs sm:text-sm px-5 py-3.5 rounded-2xl border border-sky-400/50 shadow-lg shadow-sky-600/20 transition inline-flex items-center gap-2">
+            <a href="unblock_request.html" class="group w-full sm:w-auto justify-center bg-sky-600/90 hover:bg-sky-500 text-white font-bold text-sm px-5 py-3.5 rounded-2xl border border-sky-400/50 shadow-lg shadow-sky-600/20 transition inline-flex items-center gap-2 min-h-[48px]">
               <i class="fa-solid fa-unlock-keyhole icon-bounce-hover"></i>
               <span>ขอปลดล็อก OpenChat</span>
             </a>
-            <a href="blacklist.html" class="group bg-rose-600/90 hover:bg-rose-500 text-white font-bold text-xs sm:text-sm px-5 py-3.5 rounded-2xl border border-rose-400/50 shadow-lg shadow-rose-600/20 transition inline-flex items-center gap-2">
+            <a href="blacklist.html" class="group w-full sm:w-auto justify-center bg-rose-600/90 hover:bg-rose-500 text-white font-bold text-sm px-5 py-3.5 rounded-2xl border border-rose-400/50 shadow-lg shadow-rose-600/20 transition inline-flex items-center gap-2 min-h-[48px]">
               <i class="fa-solid fa-user-shield icon-bounce-hover"></i>
               <span>เช็กประวัติ Blacklist</span>
             </a>
@@ -860,85 +985,85 @@
                 </div>
                 <div>
                   <h2 class="text-sm font-bold text-white">ทางลัดเข้าใช้งานระบบทั้งหมด</h2>
-                  <p class="text-[11px] text-amber-200/70">เลือกเมนูบริการที่ต้องการได้ทันที</p>
+                  <p class="text-xs text-amber-200/70">เลือกเมนูบริการที่ต้องการได้ทันที</p>
                 </div>
               </div>
-              <span class="text-[10px] font-extrabold bg-amber-400/20 text-amber-300 border border-amber-400/40 px-2.5 py-0.5 rounded-full">ALL SERVICES</span>
+              <span class="text-xs font-extrabold bg-amber-400/20 text-amber-300 border border-amber-400/40 px-2.5 py-0.5 rounded-full">ALL SERVICES</span>
             </div>
 
-            <div class="space-y-2">
-              <a href="register.html" class="block p-3 rounded-2xl bg-slate-950/75 hover:bg-slate-900 border border-slate-700/80 hover:border-emerald-400/70 transition group">
+            <div class="space-y-2.5">
+              <a href="register.html" class="block p-3.5 rounded-2xl bg-slate-950/75 hover:bg-slate-900 border border-slate-700/80 hover:border-emerald-400/70 transition group">
                 <div class="flex items-center justify-between gap-3">
                   <div class="flex items-center gap-3 min-w-0">
-                    <div class="w-9 h-9 rounded-xl bg-emerald-500/15 border border-emerald-400/30 text-emerald-400 flex items-center justify-center text-sm shrink-0">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-500/15 border border-emerald-400/30 text-emerald-400 flex items-center justify-center text-sm shrink-0">
                       <i class="fa-solid fa-users-gear icon-bounce-hover"></i>
                     </div>
                     <div class="min-w-0">
-                      <p class="text-xs sm:text-sm font-bold text-white group-hover:text-emerald-300 transition truncate">1. ระบบสมาชิก &amp; ค้นหารหัส</p>
-                      <p class="text-[11px] text-slate-400 truncate">ตรวจสอบรายชื่อสมาชิก กติกา &amp; คำถามที่พบบ่อย</p>
+                      <p class="text-sm font-bold text-white group-hover:text-emerald-300 transition leading-snug">1. ระบบสมาชิก &amp; ค้นหารหัส</p>
+                      <p class="text-xs text-slate-400 leading-snug mt-0.5">ตรวจสอบรายชื่อสมาชิก กติกา &amp; คำถามที่พบบ่อย</p>
                     </div>
                   </div>
-                  <i class="fa-solid fa-chevron-right text-slate-500 group-hover:text-emerald-400 group-hover:translate-x-1 transition text-xs"></i>
+                  <i class="fa-solid fa-chevron-right text-slate-500 group-hover:text-emerald-400 group-hover:translate-x-1 transition text-xs shrink-0"></i>
                 </div>
               </a>
 
-              <a href="member_register.html" class="block p-3 rounded-2xl bg-slate-950/75 hover:bg-slate-900 border border-slate-700/80 hover:border-teal-400/70 transition group">
+              <a href="member_register.html" class="block p-3.5 rounded-2xl bg-slate-950/75 hover:bg-slate-900 border border-slate-700/80 hover:border-teal-400/70 transition group">
                 <div class="flex items-center justify-between gap-3">
                   <div class="flex items-center gap-3 min-w-0">
-                    <div class="w-9 h-9 rounded-xl bg-teal-500/15 border border-teal-400/30 text-teal-300 flex items-center justify-center text-sm shrink-0">
+                    <div class="w-10 h-10 rounded-xl bg-teal-500/15 border border-teal-400/30 text-teal-300 flex items-center justify-center text-sm shrink-0">
                       <i class="fa-solid fa-file-signature icon-bounce-hover"></i>
                     </div>
                     <div class="min-w-0">
-                      <p class="text-xs sm:text-sm font-bold text-white group-hover:text-teal-300 transition truncate">2. แบบฟอร์มลงทะเบียนสมาชิกใหม่</p>
-                      <p class="text-[11px] text-slate-400 truncate">สมัครสมาชิกกลุ่มทั้งคนขับทั่วไปและผู้ปล่อยงาน</p>
+                      <p class="text-sm font-bold text-white group-hover:text-teal-300 transition leading-snug">2. แบบฟอร์มลงทะเบียนสมาชิกใหม่</p>
+                      <p class="text-xs text-slate-400 leading-snug mt-0.5">สมัครสมาชิกกลุ่มทั้งคนขับทั่วไปและผู้ปล่อยงาน</p>
                     </div>
                   </div>
-                  <i class="fa-solid fa-chevron-right text-slate-500 group-hover:text-teal-300 group-hover:translate-x-1 transition text-xs"></i>
+                  <i class="fa-solid fa-chevron-right text-slate-500 group-hover:text-teal-300 group-hover:translate-x-1 transition text-xs shrink-0"></i>
                 </div>
               </a>
 
-              <a href="pcard.html" class="block p-3 rounded-2xl bg-slate-950/75 hover:bg-slate-900 border border-slate-700/80 hover:border-amber-400/70 transition group">
+              <a href="pcard.html" class="block p-3.5 rounded-2xl bg-slate-950/75 hover:bg-slate-900 border border-slate-700/80 hover:border-amber-400/70 transition group">
                 <div class="flex items-center justify-between gap-3">
                   <div class="flex items-center gap-3 min-w-0">
-                    <div class="w-9 h-9 rounded-xl bg-amber-500/15 border border-amber-400/30 text-amber-400 flex items-center justify-center text-sm shrink-0">
+                    <div class="w-10 h-10 rounded-xl bg-amber-500/15 border border-amber-400/30 text-amber-400 flex items-center justify-center text-sm shrink-0">
                       <i class="fa-solid fa-id-card icon-bounce-hover"></i>
                     </div>
                     <div class="min-w-0">
-                      <p class="text-xs sm:text-sm font-bold text-white group-hover:text-amber-300 transition truncate">3. ทำบัตรสมาชิกประเมศฐ์ &amp; เช็คพัสดุ</p>
-                      <p class="text-[11px] text-slate-400 truncate">ลงทะเบียนทำบัตรเคลือบใส &amp; ตรวจสอบเลขพัสดุ</p>
+                      <p class="text-sm font-bold text-white group-hover:text-amber-300 transition leading-snug">3. ทำบัตรสมาชิกประเมศฐ์ &amp; เช็คพัสดุ</p>
+                      <p class="text-xs text-slate-400 leading-snug mt-0.5">ลงทะเบียนทำบัตรเคลือบใส &amp; ตรวจสอบเลขพัสดุ</p>
                     </div>
                   </div>
-                  <i class="fa-solid fa-chevron-right text-slate-500 group-hover:text-amber-400 group-hover:translate-x-1 transition text-xs"></i>
+                  <i class="fa-solid fa-chevron-right text-slate-500 group-hover:text-amber-400 group-hover:translate-x-1 transition text-xs shrink-0"></i>
                 </div>
               </a>
 
-              <a href="unblock_request.html" class="block p-3 rounded-2xl bg-slate-950/75 hover:bg-slate-900 border border-slate-700/80 hover:border-sky-400/70 transition group">
+              <a href="unblock_request.html" class="block p-3.5 rounded-2xl bg-slate-950/75 hover:bg-slate-900 border border-slate-700/80 hover:border-sky-400/70 transition group">
                 <div class="flex items-center justify-between gap-3">
                   <div class="flex items-center gap-3 min-w-0">
-                    <div class="w-9 h-9 rounded-xl bg-sky-500/15 border border-sky-400/30 text-sky-400 flex items-center justify-center text-sm shrink-0">
+                    <div class="w-10 h-10 rounded-xl bg-sky-500/15 border border-sky-400/30 text-sky-400 flex items-center justify-center text-sm shrink-0">
                       <i class="fa-solid fa-unlock-keyhole icon-bounce-hover"></i>
                     </div>
                     <div class="min-w-0">
-                      <p class="text-xs sm:text-sm font-bold text-white group-hover:text-sky-300 transition truncate">4. ขอปลดล็อกห้อง Line OpenChat</p>
-                      <p class="text-[11px] text-slate-400 truncate">ยื่นคำร้องชี้แจงกรณีถูกบล็อกหรือลบออกจากห้องแชท</p>
+                      <p class="text-sm font-bold text-white group-hover:text-sky-300 transition leading-snug">4. ขอปลดล็อกห้อง Line OpenChat</p>
+                      <p class="text-xs text-slate-400 leading-snug mt-0.5">ยื่นคำร้องชี้แจงกรณีถูกบล็อกหรือลบออกจากห้องแชท</p>
                     </div>
                   </div>
-                  <i class="fa-solid fa-chevron-right text-slate-500 group-hover:text-sky-400 group-hover:translate-x-1 transition text-xs"></i>
+                  <i class="fa-solid fa-chevron-right text-slate-500 group-hover:text-sky-400 group-hover:translate-x-1 transition text-xs shrink-0"></i>
                 </div>
               </a>
 
-              <a href="blacklist.html" class="block p-3 rounded-2xl bg-slate-950/75 hover:bg-slate-900 border border-slate-700/80 hover:border-rose-400/70 transition group">
+              <a href="blacklist.html" class="block p-3.5 rounded-2xl bg-slate-950/75 hover:bg-slate-900 border border-slate-700/80 hover:border-rose-400/70 transition group">
                 <div class="flex items-center justify-between gap-3">
                   <div class="flex items-center gap-3 min-w-0">
-                    <div class="w-9 h-9 rounded-xl bg-rose-500/15 border border-rose-400/30 text-rose-400 flex items-center justify-center text-sm shrink-0">
+                    <div class="w-10 h-10 rounded-xl bg-rose-500/15 border border-rose-400/30 text-rose-400 flex items-center justify-center text-sm shrink-0">
                       <i class="fa-solid fa-shield-cat icon-bounce-hover"></i>
                     </div>
                     <div class="min-w-0">
-                      <p class="text-xs sm:text-sm font-bold text-white group-hover:text-rose-300 transition truncate">5. ศูนย์เฝ้าระวังภัย (Blacklist)</p>
-                      <p class="text-[11px] text-slate-400 truncate">ค้นหาเบอร์โทร/เลขบัญชีคนโกง &amp; แจ้งเบาะแส</p>
+                      <p class="text-sm font-bold text-white group-hover:text-rose-300 transition leading-snug">5. ศูนย์เฝ้าระวังภัย (Blacklist)</p>
+                      <p class="text-xs text-slate-400 leading-snug mt-0.5">ค้นหาเบอร์โทร/เลขบัญชีคนโกง &amp; แจ้งเบาะแส</p>
                     </div>
                   </div>
-                  <i class="fa-solid fa-chevron-right text-slate-500 group-hover:text-rose-400 group-hover:translate-x-1 transition text-xs"></i>
+                  <i class="fa-solid fa-chevron-right text-slate-500 group-hover:text-rose-400 group-hover:translate-x-1 transition text-xs shrink-0"></i>
                 </div>
               </a>
             </div>
@@ -957,32 +1082,32 @@
               <div id="billboard-orb-secondary" class="absolute -left-16 -bottom-16 w-60 h-60 rounded-full bg-emerald-400/15 blur-3xl pointer-events-none transition-colors duration-500"></div>
 
               <div class="relative z-10 space-y-4">
-                <div class="flex items-center justify-between gap-2 border-b border-amber-400/15 pb-3">
+                <div class="flex flex-wrap items-center justify-between gap-2.5 border-b border-amber-400/15 pb-3">
                   <div class="flex items-center gap-2.5 min-w-0">
                     <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-400/25 to-amber-600/20 border border-amber-400/40 text-amber-300 flex items-center justify-center shadow-inner shrink-0">
                       <i class="fa-solid fa-tv text-sm icon-float"></i>
                     </div>
                     <div class="min-w-0">
-                      <h2 class="text-xs sm:text-sm font-bold text-white truncate">สื่อประชาสัมพันธ์บริการเครือข่าย</h2>
-                      <p class="text-[10.5px] text-amber-200/75 truncate">อัปเดตบริการและสิทธิประโยชน์ของกลุ่ม</p>
+                      <h2 class="text-sm font-bold text-white leading-snug">สื่อประชาสัมพันธ์บริการเครือข่าย</h2>
+                      <p class="text-xs text-amber-200/75 leading-snug">อัปเดตบริการและสิทธิประโยชน์ของกลุ่ม</p>
                     </div>
                   </div>
-                  <div class="flex items-center gap-1.5 shrink-0">
+                  <div class="flex items-center gap-2 shrink-0">
                     <button type="button" onclick="toggleBillboardAutoplay()" id="btn-billboard-autoplay"
-                      class="inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-white/10 hover:bg-white/15 text-amber-200 border border-white/15 text-[10px] font-bold transition">
-                      <i id="billboard-autoplay-icon" class="fa-solid fa-pause text-[9px]"></i>
+                      class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/15 text-amber-200 border border-white/15 text-xs font-bold transition">
+                      <i id="billboard-autoplay-icon" class="fa-solid fa-pause text-xs"></i>
                       <span id="billboard-autoplay-text">เล่นอัตโนมัติ</span>
                     </button>
-                    <span id="billboard-slide-counter" class="text-[10px] font-extrabold bg-amber-400/20 text-amber-300 border border-amber-400/40 px-2 py-0.5 rounded-full">1 / 5</span>
+                    <span id="billboard-slide-counter" class="text-xs font-extrabold bg-amber-400/20 text-amber-300 border border-amber-400/40 px-2.5 py-1 rounded-full">1 / 5</span>
                   </div>
                 </div>
 
                 <div class="space-y-2.5">
-                  <div class="flex flex-wrap items-center gap-1.5">
-                    <span id="billboard-badge" class="inline-flex items-center gap-1 text-[10.5px] font-extrabold px-2.5 py-0.5 rounded-full bg-amber-400/20 border border-amber-300/40 text-amber-300">
+                  <div class="flex flex-wrap items-center gap-2">
+                    <span id="billboard-badge" class="inline-flex items-center gap-1 text-xs font-extrabold px-2.5 py-1 rounded-full bg-amber-400/20 border border-amber-300/40 text-amber-300">
                       <i class="fa-solid fa-id-badge"></i> บัตรสมาชิกประจำกลุ่ม
                     </span>
-                    <span id="billboard-tag" class="text-[10.5px] font-bold px-2.5 py-0.5 rounded-full bg-white/10 text-slate-200 border border-white/15">
+                    <span id="billboard-tag" class="text-xs font-bold px-2.5 py-1 rounded-full bg-white/10 text-slate-200 border border-white/15">
                       เคลือบใสกันน้ำ • เช็คพัสดุได้
                     </span>
                   </div>
@@ -991,13 +1116,13 @@
                     ทำบัตรสมาชิกประเมศฐ์ &amp; เช็คเลขพัสดุ
                   </h3>
 
-                  <p id="billboard-desc" class="text-xs text-slate-300 leading-relaxed">
+                  <p id="billboard-desc" class="text-sm text-slate-300 leading-relaxed">
                     ยกระดับความน่าเชื่อถือของคนขับรถมืออาชีพ ด้วยบัตรสมาชิกติดรูปถ่ายหน้าตรงเคลือบใสอย่างดี พร้อมตรวจสอบสถานะการจัดส่งและเลขพัสดุย้อนหลังได้ทันที
                   </p>
                 </div>
 
                 <div id="billboard-visual-card" class="billboard-depth-card rounded-2xl p-4 space-y-3">
-                  <div class="flex items-center justify-between text-[10.5px] text-amber-200/80 border-b border-white/10 pb-2.5">
+                  <div class="flex flex-wrap items-center justify-between gap-2 text-xs text-amber-200/80 border-b border-white/10 pb-2.5">
                     <div class="flex items-center gap-2 min-w-0">
                       <img src="TheDriverTH.jpg" alt="The Driver Thailand"
                         onerror="this.onerror=null;this.src='https://placehold.co/48x48/0f172a/fbbf24?text=TDT';"
@@ -1013,34 +1138,34 @@
                     <div id="billboard-icon-box" class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-400/25 to-amber-600/20 border border-amber-300/40 text-amber-300 flex items-center justify-center text-2xl shadow-inner shrink-0">
                       <i id="billboard-main-icon" class="fa-solid fa-id-badge"></i>
                     </div>
-                    <div class="min-w-0 space-y-0.5">
-                      <p id="billboard-highlight-title" class="text-xs sm:text-sm font-extrabold text-white leading-snug truncate">
+                    <div class="min-w-0 space-y-1">
+                      <p id="billboard-highlight-title" class="text-sm font-extrabold text-white leading-snug">
                         บัตรสมาชิกติดรูปถ่ายหน้าตรง
                       </p>
-                      <p id="billboard-highlight-sub" class="text-[11px] text-slate-300 leading-snug">
+                      <p id="billboard-highlight-sub" class="text-xs text-slate-300 leading-snug">
                         จัดส่งทั่วประเทศพร้อมแจ้งเลขติดตามพัสดุ
                       </p>
                     </div>
                   </div>
 
-                  <div id="billboard-features-list" class="grid grid-cols-2 gap-2 text-[10.5px]">
-                    <div class="bg-slate-950/70 border border-white/10 rounded-xl px-2.5 py-1.5 text-slate-200 font-semibold truncate">
+                  <div id="billboard-features-list" class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                    <div class="bg-slate-950/70 border border-white/10 rounded-xl px-3 py-2 text-slate-200 font-semibold">
                       <i class="fa-solid fa-check text-amber-400 mr-1"></i> เคลือบใสกันน้ำอย่างดี
                     </div>
-                    <div class="bg-slate-950/70 border border-white/10 rounded-xl px-2.5 py-1.5 text-slate-200 font-semibold truncate">
+                    <div class="bg-slate-950/70 border border-white/10 rounded-xl px-3 py-2 text-slate-200 font-semibold">
                       <i class="fa-solid fa-check text-amber-400 mr-1"></i> เช็คเลขพัสดุย้อนหลังได้
                     </div>
                   </div>
                 </div>
 
-                <div class="flex flex-wrap items-center gap-2.5 pt-0.5">
+                <div class="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-2.5 pt-1">
                   <a id="billboard-cta-link" href="pcard.html"
-                    class="flex-1 min-w-[150px] inline-flex items-center justify-center gap-2 bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 text-slate-950 font-extrabold text-xs px-4 py-3 rounded-xl shadow-lg shadow-amber-500/25 transition">
+                    class="flex-1 min-w-[150px] min-h-[46px] inline-flex items-center justify-center gap-2 bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 text-slate-950 font-extrabold text-sm px-4 py-3 rounded-xl shadow-lg shadow-amber-500/25 transition">
                     <span id="billboard-cta-label">สมัครทำบัตร / เช็คพัสดุ</span>
-                    <i class="fa-solid fa-arrow-right text-[11px]"></i>
+                    <i class="fa-solid fa-arrow-right text-xs"></i>
                   </a>
                   <a id="billboard-secondary-link" href="register.html"
-                    class="inline-flex items-center justify-center gap-1.5 bg-white/10 hover:bg-white/15 text-amber-200 border border-amber-400/35 font-bold text-xs px-3.5 py-3 rounded-xl transition">
+                    class="min-h-[46px] inline-flex items-center justify-center gap-1.5 bg-white/10 hover:bg-white/15 text-amber-200 border border-amber-400/35 font-bold text-sm px-4 py-3 rounded-xl transition">
                     <span id="billboard-secondary-label">ตรวจสอบรหัสสมาชิก</span>
                   </a>
                 </div>
@@ -1079,7 +1204,7 @@
       <div id="service-cards-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
         <!-- Service Card: Driver App News Hub -->
         <div data-cat="community" class="service-card-item group bg-slate-900/95 rounded-3xl p-6 border-2 border-emerald-400/70 shadow-lg card-luxury flex flex-col justify-between space-y-5 relative text-slate-100">
-          <span class="absolute top-4 right-4 text-[10px] font-extrabold bg-gradient-to-r from-emerald-400 to-teal-400 text-slate-950 px-3 py-0.5 rounded-full shadow-sm">
+          <span class="absolute top-4 right-4 text-xs font-extrabold bg-gradient-to-r from-emerald-400 to-teal-400 text-slate-950 px-3 py-0.5 rounded-full shadow-sm">
             <i class="fa-solid fa-newspaper mr-1"></i>อัปเดตล่าสุด
           </span>
           <div class="space-y-3">
@@ -1087,11 +1212,11 @@
               <i class="fa-solid fa-newspaper icon-bounce-hover"></i>
             </div>
             <h3 class="text-lg font-extrabold text-white">ข่าวสารคนขับรถผ่านแอป (รวมทุกแอป)</h3>
-            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            <p class="text-sm text-slate-300 leading-relaxed">
               รวมข่าวอัปเดต Grab, Bolt, Line Man, inDrive, TADA กฎหมาย รย.17/รย.18 พร้อมหน้าย่อยรับสมัครคนขับ Grab และ Bolt
             </p>
           </div>
-          <a href="driver_news.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-extrabold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
+          <a href="driver_news.html" class="w-full py-3.5 px-4 min-h-[46px] rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-extrabold text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
             <span>อ่านข่าวสาร &amp; สมัครคนขับแอป</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
@@ -1099,7 +1224,7 @@
 
         <!-- Service Card 0: Captain Insurance -->
         <div data-cat="safety" class="service-card-item group bg-slate-900/95 rounded-3xl p-6 border-2 border-teal-400/70 shadow-lg card-luxury flex flex-col justify-between space-y-5 relative text-slate-100">
-          <span class="absolute top-4 right-4 text-[10px] font-extrabold bg-gradient-to-r from-teal-400 to-emerald-400 text-slate-950 px-3 py-0.5 rounded-full shadow-sm">
+          <span class="absolute top-4 right-4 text-xs font-extrabold bg-gradient-to-r from-teal-400 to-emerald-400 text-slate-950 px-3 py-0.5 rounded-full shadow-sm">
             <i class="fa-solid fa-shield-halved mr-1"></i>บริการใหม่
           </span>
           <div class="space-y-3">
@@ -1107,11 +1232,11 @@
               <i class="fa-solid fa-shield-halved icon-bounce-hover"></i>
             </div>
             <h3 class="text-lg font-extrabold text-white">CAPTAIN INSURANCE กัปตัน ประกันภัย</h3>
-            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            <p class="text-sm text-slate-300 leading-relaxed">
               เช็กเบี้ยประกันภัยรถยนต์ชั้น 1, 2+, 3+, ชั้น 3 และ พ.ร.บ. สำหรับรถส่วนบุคคลและรถรับจ้าง บริการโดย The Driver Thailand
             </p>
           </div>
-          <a href="captain_insurance.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-400 hover:to-emerald-400 text-slate-950 font-extrabold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
+          <a href="captain_insurance.html" class="w-full py-3.5 px-4 min-h-[46px] rounded-xl bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-400 hover:to-emerald-400 text-slate-950 font-extrabold text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
             <span>เช็กเบี้ย Captain Insurance</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
@@ -1124,11 +1249,11 @@
               <i class="fa-solid fa-users-viewfinder icon-bounce-hover"></i>
             </div>
             <h3 class="text-lg font-extrabold text-white">ตรวจสอบรายชื่อ &amp; รหัสสมาชิก</h3>
-            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            <p class="text-sm text-slate-300 leading-relaxed">
               ค้นหารหัสสมาชิกประจำตัวจากฐานข้อมูลล่าสุด ตรวจสอบกติกาการยืนยันตัวตน และอ่านคำถามที่พบบ่อย (FAQ)
             </p>
           </div>
-          <a href="register.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-400 hover:from-emerald-400 hover:to-emerald-300 text-slate-950 font-extrabold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
+          <a href="register.html" class="w-full py-3.5 px-4 min-h-[46px] rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-400 hover:from-emerald-400 hover:to-emerald-300 text-slate-950 font-extrabold text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
             <span>เปิดหน้าระบบสมาชิก</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
@@ -1141,11 +1266,11 @@
               <i class="fa-solid fa-file-signature icon-bounce-hover"></i>
             </div>
             <h3 class="text-lg font-extrabold text-white">แบบฟอร์มลงทะเบียนสมาชิกใหม่</h3>
-            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            <p class="text-sm text-slate-300 leading-relaxed">
               กรอกใบสมัครสมาชิกออนไลน์ รองรับทั้งสมาชิกคนขับทั่วไปและผู้ปล่อยงานหลัก/บริษัท พร้อมระบบบันทึกร่างอัตโนมัติ
             </p>
           </div>
-          <a href="member_register.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-teal-500 to-teal-400 hover:from-teal-400 hover:to-teal-300 text-slate-950 font-extrabold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
+          <a href="member_register.html" class="w-full py-3.5 px-4 min-h-[46px] rounded-xl bg-gradient-to-r from-teal-500 to-teal-400 hover:from-teal-400 hover:to-teal-300 text-slate-950 font-extrabold text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
             <span>กรอกใบสมัครสมาชิกใหม่</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
@@ -1153,7 +1278,7 @@
 
         <!-- Service Card 3: Pramet Member Card -->
         <div data-cat="member" class="service-card-item group bg-slate-900/95 rounded-3xl p-6 border-2 border-amber-400/70 shadow-lg card-luxury flex flex-col justify-between space-y-5 relative text-slate-100">
-          <span class="absolute top-4 right-4 text-[10px] font-extrabold bg-gradient-to-r from-amber-400 to-yellow-400 text-slate-950 px-3 py-0.5 rounded-full shadow-sm">
+          <span class="absolute top-4 right-4 text-xs font-extrabold bg-gradient-to-r from-amber-400 to-yellow-400 text-slate-950 px-3 py-0.5 rounded-full shadow-sm">
             <i class="fa-solid fa-star mr-1"></i>แนะนำ
           </span>
           <div class="space-y-3">
@@ -1161,11 +1286,11 @@
               <i class="fa-solid fa-id-badge icon-bounce-hover"></i>
             </div>
             <h3 class="text-lg font-extrabold text-white">ทำบัตรสมาชิกประเมศฐ์ &amp; เช็คพัสดุ</h3>
-            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            <p class="text-sm text-slate-300 leading-relaxed">
               สมัครทำบัตรสมาชิกประเมศฐ์แบบติดรูปถ่ายหน้าตรง เคลือบใสกันน้ำอย่างดี พร้อมระบบติดตามสถานะและเช็คเลขพัสดุย้อนหลัง
             </p>
           </div>
-          <a href="pcard.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
+          <a href="pcard.html" class="w-full py-3.5 px-4 min-h-[46px] rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
             <span>สมัครทำบัตร / เช็คพัสดุ</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
@@ -1178,11 +1303,11 @@
               <i class="fa-solid fa-unlock-keyhole icon-bounce-hover"></i>
             </div>
             <h3 class="text-lg font-extrabold text-white">ขอปลดล็อกห้อง Line OpenChat</h3>
-            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            <p class="text-sm text-slate-300 leading-relaxed">
               ยื่นคำร้องชี้แจงสาเหตุและแนบภาพหลักฐานกรณีถูกบล็อกหรือถูกลบออกจากห้องแชทของเครือข่าย เพื่อให้ทีมผู้ดูแลพิจารณาปลดล็อก
             </p>
           </div>
-          <a href="unblock_request.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-sky-500 to-sky-400 hover:from-sky-400 hover:to-sky-300 text-slate-950 font-extrabold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
+          <a href="unblock_request.html" class="w-full py-3.5 px-4 min-h-[46px] rounded-xl bg-gradient-to-r from-sky-500 to-sky-400 hover:from-sky-400 hover:to-sky-300 text-slate-950 font-extrabold text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
             <span>ยื่นคำร้องขอปลดล็อก</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
@@ -1195,11 +1320,11 @@
               <i class="fa-solid fa-user-shield icon-bounce-hover"></i>
             </div>
             <h3 class="text-lg font-extrabold text-white">ศูนย์เฝ้าระวังภัย (Blacklist)</h3>
-            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            <p class="text-sm text-slate-300 leading-relaxed">
               ตรวจสอบเบอร์โทรศัพท์ เลขบัญชีธนาคาร หรือชื่อผู้ว่าจ้างก่อนออกเดินทางไกล พร้อมช่องทางแจ้งเบาะแสเตือนภัยคนโกงร่วมกันในกลุ่ม
             </p>
           </div>
-          <a href="blacklist.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-rose-500 to-rose-400 hover:from-rose-400 hover:to-rose-300 text-slate-950 font-extrabold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
+          <a href="blacklist.html" class="w-full py-3.5 px-4 min-h-[46px] rounded-xl bg-gradient-to-r from-rose-500 to-rose-400 hover:from-rose-400 hover:to-rose-300 text-slate-950 font-extrabold text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
             <span>เข้าสู่ศูนย์ตรวจสอบ Blacklist</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
@@ -1212,11 +1337,11 @@
               <i class="fa-solid fa-scale-balanced icon-bounce-hover"></i>
             </div>
             <h3 class="text-lg font-extrabold text-white">ประกาศความเป็นส่วนตัว (PDPA)</h3>
-            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            <p class="text-sm text-slate-300 leading-relaxed">
               อ่านประกาศคุ้มครองข้อมูลส่วนบุคคลและแนวทางปฏิบัติสำหรับสมาชิกกลุ่ม 🚖 The Driver TH 🇹🇭 Premium Service ฉบับสมบูรณ์
             </p>
           </div>
-          <a href="privacy_policy.html" class="w-full py-3 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-300 border border-amber-400/35 font-bold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
+          <a href="privacy_policy.html" class="w-full py-3.5 px-4 min-h-[46px] rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-300 border border-amber-400/35 font-bold text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
             <span>อ่านประกาศความเป็นส่วนตัว</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
@@ -1229,11 +1354,11 @@
               <i class="fa-solid fa-user-pen icon-bounce-hover"></i>
             </div>
             <h3 class="text-lg font-extrabold text-white">แก้ไขข้อมูลสมาชิกเดิม</h3>
-            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            <p class="text-sm text-slate-300 leading-relaxed">
               สำหรับสมาชิกที่มีรหัสสมาชิกอยู่แล้ว ต้องการแจ้งเปลี่ยนรถยนต์คันใหม่ เปลี่ยนทะเบียนรถ หรือแก้ไขข้อมูลติดต่อ
             </p>
           </div>
-          <a href="member_edit.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
+          <a href="member_edit.html" class="w-full py-3.5 px-4 min-h-[46px] rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
             <span>แจ้งแก้ไขข้อมูลสมาชิก</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
@@ -1246,11 +1371,11 @@
               <i class="fa-solid fa-crown icon-bounce-hover"></i>
             </div>
             <h3 class="text-lg font-extrabold text-white">ลงทะเบียนห้อง Luxury Car</h3>
-            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            <p class="text-sm text-slate-300 leading-relaxed">
               ลงทะเบียนขอเข้าห้อง Line OpenChat สำหรับสมาชิกกลุ่มคนขับรถ Luxury Car / Executive Van / VIP โดยเฉพาะ
             </p>
           </div>
-          <a href="luxury_car_register.html" class="w-full py-3 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-300 border border-amber-400/40 font-bold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
+          <a href="luxury_car_register.html" class="w-full py-3.5 px-4 min-h-[46px] rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-300 border border-amber-400/40 font-bold text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
             <span>สมัครเข้าห้อง Luxury Car</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
@@ -1263,11 +1388,11 @@
               <i class="fa-solid fa-map-location-dot icon-bounce-hover"></i>
             </div>
             <h3 class="text-lg font-extrabold text-white">[VIP] ลายแทงสถานที่ท่องเที่ยว</h3>
-            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            <p class="text-sm text-slate-300 leading-relaxed">
               บริการขอรับลายแทงสถานที่ท่องเที่ยว ร้านค้า ร้านอาหาร และจุดบริการพันธมิตรทั่วไทยเพื่อรับค่าแนะนำ
             </p>
           </div>
-          <a href="vip_referral_guide.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-purple-500 to-indigo-500 hover:from-purple-400 hover:to-indigo-400 text-slate-950 font-extrabold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
+          <a href="vip_referral_guide.html" class="w-full py-3.5 px-4 min-h-[46px] rounded-xl bg-gradient-to-r from-purple-500 to-indigo-500 hover:from-purple-400 hover:to-indigo-400 text-slate-950 font-extrabold text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
             <span>ขอรับสิทธิ์ลายแทง VIP</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
@@ -1280,11 +1405,11 @@
               <i class="fa-solid fa-plane-departure icon-bounce-hover"></i>
             </div>
             <h3 class="text-lg font-extrabold text-white">ทำบัตรผ่านยานพาหนะ ทอ.</h3>
-            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            <p class="text-sm text-slate-300 leading-relaxed">
               แบบฟอร์มขอทำบัตรผ่านยานพาหนะเข้า - ออก เขตพื้นที่กองทัพอากาศ (ดอนเมือง) ทั้งขอใหม่และต่ออายุบัตร
             </p>
           </div>
-          <a href="rtaf_pass_register.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-blue-500 to-sky-400 hover:from-blue-400 hover:to-sky-300 text-slate-950 font-extrabold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
+          <a href="rtaf_pass_register.html" class="w-full py-3.5 px-4 min-h-[46px] rounded-xl bg-gradient-to-r from-blue-500 to-sky-400 hover:from-blue-400 hover:to-sky-300 text-slate-950 font-extrabold text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
             <span>ยื่นขอทำบัตรผ่าน ทอ.</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
@@ -1297,11 +1422,11 @@
               <i class="fa-solid fa-book icon-bounce-hover"></i>
             </div>
             <h3 class="text-lg font-extrabold text-white">บริการสั่งซื้อสมุดทัวร์</h3>
-            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            <p class="text-sm text-slate-300 leading-relaxed">
               สั่งซื้อสมุดทัวร์ออนไลน์ เลือกได้ 2 พื้นที่บริการ (กรุงเทพฯ-ปริมณฑล และ พัทยา-ชลบุรี) พร้อมจัดส่งถึงบ้าน
             </p>
           </div>
-          <a href="tour_book_order.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-teal-500 to-emerald-400 hover:from-teal-400 hover:to-emerald-300 text-slate-950 font-extrabold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
+          <a href="tour_book_order.html" class="w-full py-3.5 px-4 min-h-[46px] rounded-xl bg-gradient-to-r from-teal-500 to-emerald-400 hover:from-teal-400 hover:to-emerald-300 text-slate-950 font-extrabold text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
             <span>สั่งซื้อสมุดทัวร์</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
@@ -1314,11 +1439,11 @@
               <i class="fa-solid fa-satellite-dish icon-bounce-hover"></i>
             </div>
             <h3 class="text-lg font-extrabold text-white">ศูนย์ติดตามสถานะคำร้องทั้งหมด</h3>
-            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            <p class="text-sm text-slate-300 leading-relaxed">
               ตรวจสอบความคืบหน้าและเลขพัสดุของทุกบริการในหน้าเดียวด้วยรหัสอ้างอิงหรือเบอร์โทรศัพท์
             </p>
           </div>
-          <a href="tracking.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
+          <a href="tracking.html" class="w-full py-3.5 px-4 min-h-[46px] rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
             <span>เช็คสถานะคำร้องทั้งหมด</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
@@ -1331,11 +1456,11 @@
               <i class="fa-solid fa-qrcode icon-bounce-hover"></i>
             </div>
             <h3 class="text-lg font-extrabold text-white">บัตรสมาชิกดิจิทัล &amp; QR Code</h3>
-            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            <p class="text-sm text-slate-300 leading-relaxed">
               เปิดบัตรสมาชิกอิเล็กทรอนิกส์บนมือถือพร้อม QR Code ให้ผู้โดยสารและจุดคัดกรองสแกนตรวจสอบตัวตนได้ทันที
             </p>
           </div>
-          <a href="member_card_digital.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-400 hover:from-emerald-400 hover:to-emerald-300 text-slate-950 font-extrabold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
+          <a href="member_card_digital.html" class="w-full py-3.5 px-4 min-h-[46px] rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-400 hover:from-emerald-400 hover:to-emerald-300 text-slate-950 font-extrabold text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
             <span>เปิดบัตรสมาชิกดิจิทัล</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
@@ -1348,11 +1473,11 @@
               <i class="fa-solid fa-file-invoice-dollar icon-bounce-hover"></i>
             </div>
             <h3 class="text-lg font-extrabold text-white">ใบรับรองการเดินทาง (E-Voucher)</h3>
-            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            <p class="text-sm text-slate-300 leading-relaxed">
               ออกใบยืนยันการจองรถและใบเสร็จรับเงินดิจิทัลพร้อม QR Code ให้ผู้โดยสารสแกนตรวจสอบประวัติคนขับได้ทันที
             </p>
           </div>
-          <a href="trip_voucher.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
+          <a href="trip_voucher.html" class="w-full py-3.5 px-4 min-h-[46px] rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
             <span>ออกใบจอง / ตรวจสอบคนขับ</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
@@ -1365,11 +1490,11 @@
               <i class="fa-solid fa-comments icon-bounce-hover"></i>
             </div>
             <h3 class="text-lg font-extrabold text-white">ชุมชนเว็บบอร์ดสมาชิก</h3>
-            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            <p class="text-sm text-slate-300 leading-relaxed">
               ตั้งกระทู้ แลกเปลี่ยนเส้นทาง รีวิวสถานที่ แนบรูปภาพ โหวตคะแนนโพสต์ และสะสมเรทติ้งสมาชิก
             </p>
           </div>
-          <a href="community.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-sky-500 to-indigo-400 hover:from-sky-400 hover:to-indigo-300 text-slate-950 font-extrabold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
+          <a href="community.html" class="w-full py-3.5 px-4 min-h-[46px] rounded-xl bg-gradient-to-r from-sky-500 to-indigo-400 hover:from-sky-400 hover:to-indigo-300 text-slate-950 font-extrabold text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
             <span>เข้าสู่เว็บบอร์ดชุมชน</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
@@ -1382,11 +1507,11 @@
               <i class="fa-solid fa-calculator icon-bounce-hover"></i>
             </div>
             <h3 class="text-lg font-extrabold text-white">คำนวณค่าโดยสารมาตรฐาน</h3>
-            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            <p class="text-sm text-slate-300 leading-relaxed">
               คำนวณราคากลางงานเหมาต่างจังหวัดและรับ-ส่งสนามบินตามประเภทรถ พร้อมคัดลอกใบเสนอราคาส่งลูกค้า
             </p>
           </div>
-          <a href="fare_calculator.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-extrabold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
+          <a href="fare_calculator.html" class="w-full py-3.5 px-4 min-h-[46px] rounded-xl bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-extrabold text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
             <span>คำนวณค่าโดยสาร</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
@@ -1399,11 +1524,11 @@
               <i class="fa-solid fa-car-on icon-bounce-hover"></i>
             </div>
             <h3 class="text-lg font-extrabold text-white">จัดการรถ &amp; บัญชีรายรับ-รายจ่าย</h3>
-            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            <p class="text-sm text-slate-300 leading-relaxed">
               ระบบแจ้งเตือนวันหมดอายุ พ.ร.บ. ประกันภัย บัตรผ่าน ทอ. ล่วงหน้า 30 วัน พร้อมสมุดบัญชีรายรับ-รายจ่ายคนขับ
             </p>
           </div>
-          <a href="driver_fleet_hub.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-extrabold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
+          <a href="driver_fleet_hub.html" class="w-full py-3.5 px-4 min-h-[46px] rounded-xl bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-extrabold text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
             <span>เปิดศูนย์จัดการรถ &amp; บัญชี</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
@@ -1416,11 +1541,11 @@
               <i class="fa-solid fa-route icon-bounce-hover"></i>
             </div>
             <h3 class="text-lg font-extrabold text-white">จับคู่รถว่างขากลับต่างจังหวัด</h3>
-            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            <p class="text-sm text-slate-300 leading-relaxed">
               ปักหมุดแจ้งพิกัดรถว่างขากลับต่างจังหวัด เพื่อให้เพื่อนสมาชิกส่งต่องานขากลับ ลดการตีรถเปล่า
             </p>
           </div>
-          <a href="empty_leg_matcher.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-sky-500 to-indigo-400 hover:from-sky-400 hover:to-indigo-300 text-slate-950 font-extrabold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
+          <a href="empty_leg_matcher.html" class="w-full py-3.5 px-4 min-h-[46px] rounded-xl bg-gradient-to-r from-sky-500 to-indigo-400 hover:from-sky-400 hover:to-indigo-300 text-slate-950 font-extrabold text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
             <span>เปิดระบบจับคู่รถว่างขากลับ</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
@@ -1433,11 +1558,11 @@
               <i class="fa-solid fa-charging-station icon-bounce-hover"></i>
             </div>
             <h3 class="text-lg font-extrabold text-white">จุดพักรถ EV &amp; ระดับความน่าเชื่อถือ</h3>
-            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            <p class="text-sm text-slate-300 leading-relaxed">
               คลังพิกัดสถานีชาร์จ EV จุดจอดรอสนามบิน ปั๊มสะอาด พร้อมทำเนียบคะแนนความน่าเชื่อถือสมาชิก
             </p>
           </div>
-          <a href="driver_pitstop_reputation.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold text-xs sm:text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
+          <a href="driver_pitstop_reputation.html" class="w-full py-3.5 px-4 min-h-[46px] rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold text-sm text-center transition flex items-center justify-center gap-2 shadow-md">
             <span>เปิดคลังพิกัด &amp; ทำเนียบสมาชิก</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
@@ -1448,21 +1573,21 @@
   </main>
 
   <!-- FOOTER -->
-  <footer class="bg-slate-950 text-slate-400 border-t border-amber-500/25 py-9 px-4 text-xs">
-    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-      <div class="text-center sm:text-left space-y-1">
-        <p class="font-bold text-amber-300">🚖 The Driver TH 🇹🇭 Premium Service Official Network</p>
-        <p class="text-[11px] text-slate-500">ศูนย์กลางระบบสมาชิก บัตรสมาชิกประเมศฐ์ และระบบเฝ้าระวังภัยกลุ่มคนขับรถรับจ้าง</p>
+  <footer class="bg-slate-950 text-slate-400 border-t border-amber-500/25 py-10 px-4 text-xs sm:text-sm">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-5">
+      <div class="text-center sm:text-left space-y-1.5">
+        <p class="font-bold text-amber-300 text-sm">🚖 The Driver TH 🇹🇭 Premium Service Official Network</p>
+        <p class="text-xs text-slate-400">ศูนย์กลางระบบสมาชิก บัตรสมาชิกประเมศฐ์ และระบบเฝ้าระวังภัยกลุ่มคนขับรถรับจ้าง</p>
       </div>
-      <div class="flex flex-wrap justify-center gap-x-4 gap-y-2 font-semibold">
-        <a href="index.html" class="hover:text-amber-400 transition">หน้าหลัก</a>
-        <a href="register.html" class="hover:text-emerald-400 transition">ระบบสมาชิก</a>
-        <a href="member_register.html" class="hover:text-teal-400 transition">ลงทะเบียนสมาชิกใหม่</a>
-        <a href="pcard.html" class="hover:text-amber-400 transition">ทำบัตรสมาชิกประเมศฐ์</a>
-        <a href="unblock_request.html" class="hover:text-sky-400 transition">ขอปลดล็อก OpenChat</a>
-        <a href="blacklist.html" class="hover:text-rose-400 transition">ตรวจสอบ Blacklist</a>
-        <a href="privacy_policy.html" class="hover:text-amber-300 transition">ประกาศความเป็นส่วนตัว</a>
-        <a href="admin.html" class="text-amber-300 hover:text-amber-200 transition">ระบบหลังบ้าน (Admin)</a>
+      <div class="flex flex-wrap justify-center gap-x-4 gap-y-3 font-semibold">
+        <a href="index.html" class="py-1 hover:text-amber-400 transition">หน้าหลัก</a>
+        <a href="register.html" class="py-1 hover:text-emerald-400 transition">ระบบสมาชิก</a>
+        <a href="member_register.html" class="py-1 hover:text-teal-400 transition">ลงทะเบียนสมาชิกใหม่</a>
+        <a href="pcard.html" class="py-1 hover:text-amber-400 transition">ทำบัตรสมาชิกประเมศฐ์</a>
+        <a href="unblock_request.html" class="py-1 hover:text-sky-400 transition">ขอปลดล็อก OpenChat</a>
+        <a href="blacklist.html" class="py-1 hover:text-rose-400 transition">ตรวจสอบ Blacklist</a>
+        <a href="privacy_policy.html" class="py-1 hover:text-amber-300 transition">ประกาศความเป็นส่วนตัว</a>
+        <a href="admin.html" class="py-1 text-amber-300 hover:text-amber-200 transition">ระบบหลังบ้าน (Admin)</a>
       </div>
     </div>
   </footer>
@@ -1777,10 +1902,10 @@
       const iconEl = document.getElementById("billboard-autoplay-icon");
       const textEl = document.getElementById("billboard-autoplay-text");
       if (billboardPausedByUser) {
-        if (iconEl) iconEl.className = "fa-solid fa-play text-[10px]";
+        if (iconEl) iconEl.className = "fa-solid fa-play text-xs";
         if (textEl) textEl.textContent = "หยุดชั่วคราว";
       } else {
-        if (iconEl) iconEl.className = "fa-solid fa-pause text-[10px]";
+        if (iconEl) iconEl.className = "fa-solid fa-pause text-xs";
         if (textEl) textEl.textContent = "เล่นอัตโนมัติ";
       }
       syncBillboardTimer();

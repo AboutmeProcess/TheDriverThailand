@@ -301,7 +301,132 @@
       transition: background-color 0.15s ease, color 0.15s ease;
     }
     .tdt-util-btn:hover { background-color: rgba(251, 191, 36, 0.18); color: #fde68a; }
-  </style>
+  
+    /* TDT Mobile-First Typography & Touch Spacing */
+    html, body {
+      overflow-x: clip;
+      max-width: 100%;
+    }
+    .tdt-cat-menu-panel {
+      max-height: 75vh;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    @media (max-width: 767px) {
+      .tdt-global-nav {
+        position: relative !important;
+      }
+      .tdt-global-nav-inner {
+        padding: 12px 14px !important;
+        gap: 10px !important;
+      }
+      .tdt-nav-top-row {
+        gap: 10px !important;
+        padding-bottom: 10px !important;
+      }
+      .tdt-global-brand {
+        font-size: 15px !important;
+        gap: 10px !important;
+        line-height: 1.35 !important;
+      }
+      .tdt-brand-logo-img {
+        width: 44px !important;
+        height: 44px !important;
+        border-radius: 12px !important;
+      }
+      .tdt-brand-subline-row {
+        font-size: 12px !important;
+        line-height: 1.4 !important;
+        gap: 6px !important;
+      }
+      .tdt-brand-exec-pill {
+        font-size: 11px !important;
+        padding: 3px 9px !important;
+      }
+      .tdt-util-btn {
+        min-height: 36px !important;
+        min-width: 36px !important;
+        padding: 0 10px !important;
+        font-size: 13px !important;
+      }
+      .tdt-global-right-controls {
+        gap: 8px !important;
+      }
+      .tdt-nav-btn {
+        min-height: 42px !important;
+        height: auto !important;
+        padding: 8px 13px !important;
+        font-size: 13px !important;
+        line-height: 1.35 !important;
+        white-space: normal !important;
+        text-align: left;
+      }
+      .tdt-cat-dropdown-wrap {
+        position: static !important;
+      }
+      .tdt-cat-menu-panel {
+        position: fixed !important;
+        left: 12px !important;
+        right: 12px !important;
+        top: 68px !important;
+        width: auto !important;
+        max-width: none !important;
+        max-height: 75vh !important;
+        padding: 12px !important;
+        z-index: 1200 !important;
+      }
+      .tdt-cat-menu-header {
+        font-size: 12.5px !important;
+        padding: 10px 12px !important;
+      }
+      .tdt-cat-menu-link {
+        padding: 11px 12px !important;
+        gap: 12px !important;
+        margin-bottom: 8px !important;
+      }
+      .tdt-cat-menu-title {
+        font-size: 14px !important;
+        line-height: 1.35 !important;
+      }
+      .tdt-cat-menu-sub {
+        font-size: 12px !important;
+        line-height: 1.4 !important;
+        margin-top: 2px;
+      }
+    }
+    @media (max-width: 640px) {
+      h1, h2, h3, h4, p, li, label, span, a, button {
+        overflow-wrap: break-word;
+      }
+      input:not([type="checkbox"]):not([type="radio"]),
+      select,
+      textarea {
+        font-size: 16px !important;
+        min-height: 44px;
+      }
+      button:not(.tdt-util-btn):not(.billboard-dot):not(.clear-btn):not([aria-label*="ปิด"]),
+      a[class*="py-2"],
+      a[class*="py-3"],
+      a[class*="rounded-xl"],
+      a[class*="rounded-2xl"] {
+        min-height: 42px;
+        line-height: 1.35;
+      }
+      .whitespace-nowrap {
+        max-width: 100%;
+      }
+      .table-container,
+      .overflow-x-auto {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+        max-width: 100%;
+      }
+      .billboard-nav-btn {
+        width: 44px !important;
+        height: 44px !important;
+      }
+    }
+</style>
 </head>
 <body class="text-slate-100 antialiased min-h-screen flex flex-col bg-[#070a12] selection:bg-teal-400 selection:text-slate-950 relative">
   <!-- กล่องแจ้งเตือน Toast มุมขวาบน -->
@@ -318,14 +443,14 @@
           <span class="tdt-brand-text-stack">
             <span>🚖 The Driver TH 🇹🇭 Premium Service</span>
             <span class="tdt-brand-subline-row">
-              <span class="tdt-brand-exec-pill"><i class="fa-solid fa-crown text-[9px]"></i> EXECUTIVE NETWORK</span>
+              <span class="tdt-brand-exec-pill"><i class="fa-solid fa-crown text-xs"></i> EXECUTIVE NETWORK</span>
               <span>เครือข่ายคนขับรถรับส่งผู้โดยสารและบริการมืออาชีพแห่งประเทศไทย</span>
             </span>
           </span>
         </a>
         <div class="tdt-util-group ml-auto" title="ปรับขนาดตัวอักษร">
           <button type="button" onclick="tdtChangeFontScale(-1)" aria-label="ลดขนาดตัวอักษร" class="tdt-util-btn">A-</button>
-          <span id="tdt-font-pct" class="text-[11px] font-normal text-amber-300 px-1 select-none">100%</span>
+          <span id="tdt-font-pct" class="text-xs font-normal text-amber-300 px-1 select-none">100%</span>
           <button type="button" onclick="tdtChangeFontScale(1)" aria-label="เพิ่มขนาดตัวอักษร" class="tdt-util-btn">A+</button>
         </div>
       </div>
@@ -339,7 +464,7 @@
 
         <div class="tdt-cat-dropdown-wrap" id="nav-drop-member">
           <button type="button" onclick="tdtToggleDropdown('member', event)" id="nav-btn-member" aria-expanded="false" class="tdt-nav-btn is-member-cat">
-            <i class="fa-solid fa-users"></i><span>หมวดหมู่บริการสมาชิก</span><i id="nav-chev-member" class="fa-solid fa-chevron-down text-[10px]" style="transition:transform 0.2s;"></i>
+            <i class="fa-solid fa-users"></i><span>หมวดหมู่บริการสมาชิก</span><i id="nav-chev-member" class="fa-solid fa-chevron-down text-xs" style="transition:transform 0.2s;"></i>
           </button>
           <div id="nav-panel-member" class="tdt-cat-menu-panel">
             <div class="tdt-cat-menu-header" style="background:rgba(6,78,59,0.55);color:#6ee7b7;border:1px solid rgba(16,185,129,0.25);">
@@ -362,7 +487,7 @@
 
         <div class="tdt-cat-dropdown-wrap" id="nav-drop-group">
           <button type="button" onclick="tdtToggleDropdown('group', event)" id="nav-btn-group" aria-expanded="false" class="tdt-nav-btn is-group-cat active-current">
-            <i class="fa-solid fa-briefcase"></i><span>หมวดหมู่บริการของกลุ่ม</span><i id="nav-chev-group" class="fa-solid fa-chevron-down text-[10px]" style="transition:transform 0.2s;"></i>
+            <i class="fa-solid fa-briefcase"></i><span>หมวดหมู่บริการของกลุ่ม</span><i id="nav-chev-group" class="fa-solid fa-chevron-down text-xs" style="transition:transform 0.2s;"></i>
           </button>
           <div id="nav-panel-group" class="tdt-cat-menu-panel">
             <div class="tdt-cat-menu-header" style="background:rgba(120,53,15,0.45);color:#fcd34d;border:1px solid rgba(251,191,36,0.25);">
@@ -530,7 +655,7 @@
 
             <div class="border-t border-slate-800 pt-3 flex items-center justify-between text-xs">
               <span class="font-bold text-teal-300"><i class="fa-solid fa-circle-check text-emerald-400 mr-1"></i> คุ้มครองไว ผ่อน 0% ได้</span>
-              <span class="bg-amber-400/15 text-amber-300 border border-amber-400/35 font-extrabold px-2.5 py-1 rounded-lg text-[11px]">by The Driver Thailand</span>
+              <span class="bg-amber-400/15 text-amber-300 border border-amber-400/35 font-extrabold px-2.5 py-1 rounded-lg text-xs">by The Driver Thailand</span>
             </div>
           </div>
         </div>
@@ -831,7 +956,7 @@
     <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
       <div class="text-center sm:text-left space-y-1">
         <p class="font-bold text-amber-300">🚖 The Driver TH 🇹🇭 Premium Service Official Network</p>
-        <p class="text-[11px] text-slate-500">ศูนย์กลางระบบสมาชิก บัตรสมาชิกประเมศฐ์ ประกันภัยรถยนต์ Captain Insurance และระบบเฝ้าระวังภัยกลุ่มคนขับรถรับจ้าง</p>
+        <p class="text-xs text-slate-500">ศูนย์กลางระบบสมาชิก บัตรสมาชิกประเมศฐ์ ประกันภัยรถยนต์ Captain Insurance และระบบเฝ้าระวังภัยกลุ่มคนขับรถรับจ้าง</p>
       </div>
       <div class="flex flex-wrap justify-center gap-x-4 gap-y-2 font-semibold">
         <a href="index.html" class="hover:text-amber-400 transition">หน้าหลัก</a>

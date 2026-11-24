@@ -303,7 +303,132 @@
       transition: background-color 0.15s ease, color 0.15s ease;
     }
     .tdt-util-btn:hover { background-color: rgba(251, 191, 36, 0.18); color: #fde68a; }
-  </style>
+  
+    /* TDT Mobile-First Typography & Touch Spacing */
+    html, body {
+      overflow-x: clip;
+      max-width: 100%;
+    }
+    .tdt-cat-menu-panel {
+      max-height: 75vh;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    @media (max-width: 767px) {
+      .tdt-global-nav {
+        position: relative !important;
+      }
+      .tdt-global-nav-inner {
+        padding: 12px 14px !important;
+        gap: 10px !important;
+      }
+      .tdt-nav-top-row {
+        gap: 10px !important;
+        padding-bottom: 10px !important;
+      }
+      .tdt-global-brand {
+        font-size: 15px !important;
+        gap: 10px !important;
+        line-height: 1.35 !important;
+      }
+      .tdt-brand-logo-img {
+        width: 44px !important;
+        height: 44px !important;
+        border-radius: 12px !important;
+      }
+      .tdt-brand-subline-row {
+        font-size: 12px !important;
+        line-height: 1.4 !important;
+        gap: 6px !important;
+      }
+      .tdt-brand-exec-pill {
+        font-size: 11px !important;
+        padding: 3px 9px !important;
+      }
+      .tdt-util-btn {
+        min-height: 36px !important;
+        min-width: 36px !important;
+        padding: 0 10px !important;
+        font-size: 13px !important;
+      }
+      .tdt-global-right-controls {
+        gap: 8px !important;
+      }
+      .tdt-nav-btn {
+        min-height: 42px !important;
+        height: auto !important;
+        padding: 8px 13px !important;
+        font-size: 13px !important;
+        line-height: 1.35 !important;
+        white-space: normal !important;
+        text-align: left;
+      }
+      .tdt-cat-dropdown-wrap {
+        position: static !important;
+      }
+      .tdt-cat-menu-panel {
+        position: fixed !important;
+        left: 12px !important;
+        right: 12px !important;
+        top: 68px !important;
+        width: auto !important;
+        max-width: none !important;
+        max-height: 75vh !important;
+        padding: 12px !important;
+        z-index: 1200 !important;
+      }
+      .tdt-cat-menu-header {
+        font-size: 12.5px !important;
+        padding: 10px 12px !important;
+      }
+      .tdt-cat-menu-link {
+        padding: 11px 12px !important;
+        gap: 12px !important;
+        margin-bottom: 8px !important;
+      }
+      .tdt-cat-menu-title {
+        font-size: 14px !important;
+        line-height: 1.35 !important;
+      }
+      .tdt-cat-menu-sub {
+        font-size: 12px !important;
+        line-height: 1.4 !important;
+        margin-top: 2px;
+      }
+    }
+    @media (max-width: 640px) {
+      h1, h2, h3, h4, p, li, label, span, a, button {
+        overflow-wrap: break-word;
+      }
+      input:not([type="checkbox"]):not([type="radio"]),
+      select,
+      textarea {
+        font-size: 16px !important;
+        min-height: 44px;
+      }
+      button:not(.tdt-util-btn):not(.billboard-dot):not(.clear-btn):not([aria-label*="ปิด"]),
+      a[class*="py-2"],
+      a[class*="py-3"],
+      a[class*="rounded-xl"],
+      a[class*="rounded-2xl"] {
+        min-height: 42px;
+        line-height: 1.35;
+      }
+      .whitespace-nowrap {
+        max-width: 100%;
+      }
+      .table-container,
+      .overflow-x-auto {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+        max-width: 100%;
+      }
+      .billboard-nav-btn {
+        width: 44px !important;
+        height: 44px !important;
+      }
+    }
+</style>
 </head>
 <body class="text-slate-100 antialiased min-h-screen flex flex-col bg-[#070a12] selection:bg-amber-400 selection:text-slate-950 relative">
   <!-- กล่องแจ้งเตือน Toast มุมขวาบน -->
@@ -320,14 +445,14 @@
           <span class="tdt-brand-text-stack">
             <span>🚖 The Driver TH 🇹🇭 Premium Service</span>
             <span class="tdt-brand-subline-row">
-              <span class="tdt-brand-exec-pill"><i class="fa-solid fa-crown text-[9px]"></i> EXECUTIVE NETWORK</span>
+              <span class="tdt-brand-exec-pill"><i class="fa-solid fa-crown text-xs"></i> EXECUTIVE NETWORK</span>
               <span>เครือข่ายคนขับรถรับส่งผู้โดยสารและบริการมืออาชีพแห่งประเทศไทย</span>
             </span>
           </span>
         </a>
         <div class="tdt-util-group ml-auto" title="ปรับขนาดตัวอักษร">
           <button type="button" onclick="tdtChangeFontScale(-1)" aria-label="ลดขนาดตัวอักษร" class="tdt-util-btn">A-</button>
-          <span id="tdt-font-pct" class="text-[11px] font-normal text-amber-300 px-1 select-none">100%</span>
+          <span id="tdt-font-pct" class="text-xs font-normal text-amber-300 px-1 select-none">100%</span>
           <button type="button" onclick="tdtChangeFontScale(1)" aria-label="เพิ่มขนาดตัวอักษร" class="tdt-util-btn">A+</button>
         </div>
       </div>
@@ -341,7 +466,7 @@
 
         <div class="tdt-cat-dropdown-wrap" id="nav-drop-member">
           <button type="button" onclick="tdtToggleDropdown('member', event)" id="nav-btn-member" aria-expanded="false" class="tdt-nav-btn is-member-cat">
-            <i class="fa-solid fa-users"></i><span>หมวดหมู่บริการสมาชิก</span><i id="nav-chev-member" class="fa-solid fa-chevron-down text-[10px]" style="transition:transform 0.2s;"></i>
+            <i class="fa-solid fa-users"></i><span>หมวดหมู่บริการสมาชิก</span><i id="nav-chev-member" class="fa-solid fa-chevron-down text-xs" style="transition:transform 0.2s;"></i>
           </button>
           <div id="nav-panel-member" class="tdt-cat-menu-panel">
             <div class="tdt-cat-menu-header" style="background:rgba(6,78,59,0.55);color:#6ee7b7;border:1px solid rgba(16,185,129,0.25);">
@@ -364,7 +489,7 @@
 
         <div class="tdt-cat-dropdown-wrap" id="nav-drop-group">
           <button type="button" onclick="tdtToggleDropdown('group', event)" id="nav-btn-group" aria-expanded="false" class="tdt-nav-btn is-group-cat">
-            <i class="fa-solid fa-briefcase"></i><span>หมวดหมู่บริการของกลุ่ม</span><i id="nav-chev-group" class="fa-solid fa-chevron-down text-[10px]" style="transition:transform 0.2s;"></i>
+            <i class="fa-solid fa-briefcase"></i><span>หมวดหมู่บริการของกลุ่ม</span><i id="nav-chev-group" class="fa-solid fa-chevron-down text-xs" style="transition:transform 0.2s;"></i>
           </button>
           <div id="nav-panel-group" class="tdt-cat-menu-panel">
             <div class="tdt-cat-menu-header" style="background:rgba(120,53,15,0.45);color:#fcd34d;border:1px solid rgba(251,191,36,0.25);">
@@ -429,7 +554,7 @@
   <header class="bg-slate-900/95 text-slate-300 text-xs py-2.5 px-4 border-b border-amber-500/15">
     <div class="max-w-6xl mx-auto flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
       <div class="flex items-center gap-2 flex-wrap">
-        <span class="bg-gradient-to-r from-emerald-400 to-emerald-500 text-slate-950 font-extrabold px-2.5 py-0.5 rounded-full text-[11px] shadow-sm">
+        <span class="bg-gradient-to-r from-emerald-400 to-emerald-500 text-slate-950 font-extrabold px-2.5 py-0.5 rounded-full text-xs shadow-sm">
           <i class="fa-solid fa-file-signature mr-1"></i> NEW MEMBER REGISTRATION
         </span>
         <span class="text-slate-300 font-medium">แบบฟอร์มลงทะเบียนสมาชิกใหม่ 🚖 The Driver TH 🇹🇭 Premium Service</span>
@@ -554,7 +679,7 @@
               <input type="radio" name="dispatcherRole" value="สมาชิกคนขับรถทั่วไป (Driver)" checked onchange="handleRoleChange()" class="mt-1 w-4 h-4 text-amber-500 focus:ring-amber-400 shrink-0">
               <div class="min-w-0">
                 <span class="font-bold text-white block">สมาชิกคนขับรถทั่วไป (Driver)</span>
-                <span class="text-[11px] text-slate-400 block mt-0.5">สำหรับคนขับรถรับ-ส่งผู้โดยสารทั่วไป งานเหมา และรับ-ส่งสนามบิน</span>
+                <span class="text-xs text-slate-400 block mt-0.5">สำหรับคนขับรถรับ-ส่งผู้โดยสารทั่วไป งานเหมา และรับ-ส่งสนามบิน</span>
               </div>
             </label>
 
@@ -562,7 +687,7 @@
               <input type="radio" name="dispatcherRole" value="ผู้ปล่อยงานหลัก / บริษัท / เอเจนซี่ (Dispatcher)" onchange="handleRoleChange()" class="mt-1 w-4 h-4 text-amber-500 focus:ring-amber-400 shrink-0">
               <div class="min-w-0">
                 <span class="font-bold text-white block">ผู้ปล่อยงานหลัก / บริษัท / เอเจนซี่</span>
-                <span class="text-[11px] text-slate-400 block mt-0.5">สำหรับผู้ประสานงานปล่อยงานประจำให้สมาชิกในเครือข่าย</span>
+                <span class="text-xs text-slate-400 block mt-0.5">สำหรับผู้ประสานงานปล่อยงานประจำให้สมาชิกในเครือข่าย</span>
               </div>
             </label>
           </div>
@@ -582,7 +707,7 @@
               </label>
               <input type="text" id="member_chat_name" name="chatName" required placeholder="เช่น แทนไทย Camry (ห้ามใส่เบอร์โทรศัพท์)"
                 class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-amber-400 transition">
-              <p class="text-[11px] text-slate-400">ตั้งชื่อเล่นตามด้วยรุ่นรถ ห้ามใส่เบอร์โทรในชื่อโปรไฟล์</p>
+              <p class="text-xs text-slate-400">ตั้งชื่อเล่นตามด้วยรุ่นรถ ห้ามใส่เบอร์โทรในชื่อโปรไฟล์</p>
             </div>
 
             <div class="space-y-1.5">
@@ -683,25 +808,25 @@
                   <span class="text-xs font-extrabold text-emerald-300 bg-emerald-500/15 border border-emerald-400/35 px-2.5 py-1 rounded-lg">
                     <i class="fa-solid fa-car-side mr-1"></i> รูปถ่ายรถยนต์
                   </span>
-                  <span class="text-[11px] font-bold text-rose-300 bg-rose-500/15 border border-rose-400/35 px-2.5 py-0.5 rounded-full">
+                  <span class="text-xs font-bold text-rose-300 bg-rose-500/15 border border-rose-400/35 px-2.5 py-0.5 rounded-full">
                     จำเป็นต้องแนบ *
                   </span>
                 </div>
 
                 <!-- ตัวอย่างภาพถ่ายรถยนต์ -->
                 <div class="bg-slate-950 rounded-xl p-3.5 text-white border border-slate-800 space-y-2">
-                  <div class="flex items-center justify-between text-[10px] text-amber-300 font-bold">
+                  <div class="flex items-center justify-between text-xs text-amber-300 font-bold">
                     <span><i class="fa-solid fa-image mr-1"></i> ตัวอย่างภาพถ่ายรถยนต์ที่ถูกต้อง</span>
                     <span class="text-emerald-400">เห็นตัวรถ + ป้ายทะเบียน</span>
                   </div>
                   <div class="bg-slate-900 rounded-lg p-3 border border-slate-800 flex flex-col items-center justify-center gap-2">
                     <div class="flex items-center justify-center">
                       <i class="fa-solid fa-taxi text-3xl text-amber-400"></i>
-                      <span class="ml-2.5 bg-slate-950 text-amber-300 font-mono font-black text-[10px] px-2 py-0.5 rounded border border-amber-400/50">
+                      <span class="ml-2.5 bg-slate-950 text-amber-300 font-mono font-black text-xs px-2 py-0.5 rounded border border-amber-400/50">
                         1กข 1234
                       </span>
                     </div>
-                    <p class="text-[10px] text-slate-300 text-center leading-snug">
+                    <p class="text-xs text-slate-300 text-center leading-snug">
                       ถ่ายมุมเฉียงด้านหน้าหรือด้านหลังให้เห็นตัวรถยนต์เต็มคันพร้อมแผ่นป้ายทะเบียนชัดเจนตรงกับที่กรอก
                     </p>
                   </div>
@@ -711,7 +836,7 @@
                   <p class="text-xs sm:text-sm font-bold text-white">
                     รูปถ่ายรถยนต์ของคุณ (เห็นแผ่นป้ายทะเบียนชัดเจน) <span class="text-rose-400">*</span>
                   </p>
-                  <p class="text-[11px] text-slate-400">รองรับไฟล์ภาพ JPG หรือ PNG</p>
+                  <p class="text-xs text-slate-400">รองรับไฟล์ภาพ JPG หรือ PNG</p>
                 </div>
               </div>
 
@@ -731,14 +856,14 @@
                   <span class="text-xs font-extrabold text-amber-300 bg-amber-500/15 border border-amber-400/35 px-2.5 py-1 rounded-lg">
                     <i class="fa-solid fa-id-card-clip mr-1"></i> รูปถ่ายคู่กระดาษลายมือ
                   </span>
-                  <span class="text-[11px] font-bold text-rose-300 bg-rose-500/15 border border-rose-400/35 px-2.5 py-0.5 rounded-full">
+                  <span class="text-xs font-bold text-rose-300 bg-rose-500/15 border border-rose-400/35 px-2.5 py-0.5 rounded-full">
                     จำเป็นต้องแนบ *
                   </span>
                 </div>
 
                 <!-- ตัวอย่างภาพคู่กระดาษ -->
                 <div class="bg-slate-950 rounded-xl p-3.5 text-white border border-amber-400/35 space-y-2">
-                  <div class="flex items-center justify-between text-[10px] text-amber-300 font-bold">
+                  <div class="flex items-center justify-between text-xs text-amber-300 font-bold">
                     <span><i class="fa-solid fa-camera mr-1"></i> ตัวอย่างภาพคู่กระดาษที่ถูกต้อง</span>
                     <span class="text-emerald-400">ลายมือจริงเท่านั้น</span>
                   </div>
@@ -747,11 +872,11 @@
                       <i class="fa-solid fa-user-check"></i>
                     </div>
                     <div class="bg-slate-950 text-amber-200 rounded-lg p-2 border border-dashed border-amber-400/60 text-left flex-1">
-                      <p class="text-[9px] font-extrabold text-amber-300 leading-tight">“สมัครสมาชิก The Driver Thailand”</p>
+                      <p class="text-xs font-extrabold text-amber-300 leading-tight">“สมัครสมาชิก The Driver Thailand”</p>
                       <p class="text-[8.5px] text-slate-300 mt-0.5">ชื่อ-นามสกุล / วันที่สมัคร / ทะเบียนรถ</p>
                     </div>
                   </div>
-                  <p class="text-[10px] text-rose-300 text-center leading-snug font-semibold">
+                  <p class="text-xs text-rose-300 text-center leading-snug font-semibold">
                     * ห้ามตัดต่อ ห้ามใช้ AI และห้ามถือคู่กับบัตรประชาชน *
                   </p>
                 </div>
@@ -760,7 +885,7 @@
                   <p class="text-xs sm:text-sm font-bold text-white">
                     รูปถ่ายหน้าตรงคู่กระดาษเขียนด้วยลายมือจริง <span class="text-rose-400">*</span>
                   </p>
-                  <p class="text-[11px] text-slate-400">รองรับไฟล์ภาพ JPG หรือ PNG</p>
+                  <p class="text-xs text-slate-400">รองรับไฟล์ภาพ JPG หรือ PNG</p>
                 </div>
               </div>
 
@@ -786,7 +911,7 @@
               <p class="text-xs text-slate-300 leading-relaxed">
                 กรุณากดอ่านประกาศความเป็นส่วนตัวฉบับเต็มในหน้าถัดไปก่อน จึงจะสามารถติ๊กช่อง <strong>“ยอมรับและยืนยัน”</strong> ด้านล่างได้
               </p>
-              <div id="privacy-read-status" class="text-[11px] font-bold text-amber-300 inline-flex items-center gap-1.5 pt-0.5">
+              <div id="privacy-read-status" class="text-xs font-bold text-amber-300 inline-flex items-center gap-1.5 pt-0.5">
                 <i class="fa-solid fa-lock text-amber-400"></i>
                 <span>สถานะ: ยังไม่ได้เปิดอ่านประกาศความเป็นส่วนตัว</span>
               </div>
@@ -796,7 +921,7 @@
               class="shrink-0 inline-flex items-center justify-center gap-2 bg-slate-950 hover:bg-slate-800 text-amber-300 border border-amber-400/45 font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow transition">
               <i class="fa-solid fa-book-open-reader"></i>
               <span>เปิดอ่านประกาศความเป็นส่วนตัว</span>
-              <i class="fa-solid fa-arrow-up-right-from-square text-[11px]"></i>
+              <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
             </a>
           </div>
 
@@ -828,7 +953,7 @@
     <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
       <div class="text-center sm:text-left space-y-1">
         <p class="font-bold text-amber-300">🚖 The Driver TH 🇹🇭 Premium Service Official Network</p>
-        <p class="text-[11px] text-slate-500">ศูนย์กลางระบบสมาชิก บัตรสมาชิกประเมศฐ์ และระบบเฝ้าระวังภัยกลุ่มคนขับรถรับจ้าง</p>
+        <p class="text-xs text-slate-500">ศูนย์กลางระบบสมาชิก บัตรสมาชิกประเมศฐ์ และระบบเฝ้าระวังภัยกลุ่มคนขับรถรับจ้าง</p>
       </div>
       <div class="flex flex-wrap justify-center gap-x-4 gap-y-2 font-semibold">
         <a href="index.html" class="hover:text-amber-400 transition">หน้าหลัก</a>
@@ -940,10 +1065,10 @@
       const statusEl = document.getElementById('privacy-read-status');
       if (!statusEl) return;
       if (hasReadPrivacyPolicy()) {
-        statusEl.className = 'text-[11px] font-bold text-emerald-300 inline-flex items-center gap-1.5 pt-0.5';
+        statusEl.className = 'text-xs font-bold text-emerald-300 inline-flex items-center gap-1.5 pt-0.5';
         statusEl.innerHTML = '<i class="fa-solid fa-circle-check text-emerald-400"></i><span>สถานะ: เปิดอ่านประกาศความเป็นส่วนตัวแล้ว สามารถติ๊กยอมรับและยืนยันได้</span>';
       } else {
-        statusEl.className = 'text-[11px] font-bold text-amber-300 inline-flex items-center gap-1.5 pt-0.5';
+        statusEl.className = 'text-xs font-bold text-amber-300 inline-flex items-center gap-1.5 pt-0.5';
         statusEl.innerHTML = '<i class="fa-solid fa-lock text-amber-400"></i><span>สถานะ: ยังไม่ได้เปิดอ่านประกาศความเป็นส่วนตัว</span>';
       }
     }

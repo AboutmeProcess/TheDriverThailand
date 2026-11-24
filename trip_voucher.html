@@ -88,7 +88,132 @@
       }
       #voucher-preview-card * { color: #0f172a !important; }
     }
-  </style>
+  
+    /* TDT Mobile-First Typography & Touch Spacing */
+    html, body {
+      overflow-x: clip;
+      max-width: 100%;
+    }
+    .tdt-cat-menu-panel {
+      max-height: 75vh;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    @media (max-width: 767px) {
+      .tdt-global-nav {
+        position: relative !important;
+      }
+      .tdt-global-nav-inner {
+        padding: 12px 14px !important;
+        gap: 10px !important;
+      }
+      .tdt-nav-top-row {
+        gap: 10px !important;
+        padding-bottom: 10px !important;
+      }
+      .tdt-global-brand {
+        font-size: 15px !important;
+        gap: 10px !important;
+        line-height: 1.35 !important;
+      }
+      .tdt-brand-logo-img {
+        width: 44px !important;
+        height: 44px !important;
+        border-radius: 12px !important;
+      }
+      .tdt-brand-subline-row {
+        font-size: 12px !important;
+        line-height: 1.4 !important;
+        gap: 6px !important;
+      }
+      .tdt-brand-exec-pill {
+        font-size: 11px !important;
+        padding: 3px 9px !important;
+      }
+      .tdt-util-btn {
+        min-height: 36px !important;
+        min-width: 36px !important;
+        padding: 0 10px !important;
+        font-size: 13px !important;
+      }
+      .tdt-global-right-controls {
+        gap: 8px !important;
+      }
+      .tdt-nav-btn {
+        min-height: 42px !important;
+        height: auto !important;
+        padding: 8px 13px !important;
+        font-size: 13px !important;
+        line-height: 1.35 !important;
+        white-space: normal !important;
+        text-align: left;
+      }
+      .tdt-cat-dropdown-wrap {
+        position: static !important;
+      }
+      .tdt-cat-menu-panel {
+        position: fixed !important;
+        left: 12px !important;
+        right: 12px !important;
+        top: 68px !important;
+        width: auto !important;
+        max-width: none !important;
+        max-height: 75vh !important;
+        padding: 12px !important;
+        z-index: 1200 !important;
+      }
+      .tdt-cat-menu-header {
+        font-size: 12.5px !important;
+        padding: 10px 12px !important;
+      }
+      .tdt-cat-menu-link {
+        padding: 11px 12px !important;
+        gap: 12px !important;
+        margin-bottom: 8px !important;
+      }
+      .tdt-cat-menu-title {
+        font-size: 14px !important;
+        line-height: 1.35 !important;
+      }
+      .tdt-cat-menu-sub {
+        font-size: 12px !important;
+        line-height: 1.4 !important;
+        margin-top: 2px;
+      }
+    }
+    @media (max-width: 640px) {
+      h1, h2, h3, h4, p, li, label, span, a, button {
+        overflow-wrap: break-word;
+      }
+      input:not([type="checkbox"]):not([type="radio"]),
+      select,
+      textarea {
+        font-size: 16px !important;
+        min-height: 44px;
+      }
+      button:not(.tdt-util-btn):not(.billboard-dot):not(.clear-btn):not([aria-label*="ปิด"]),
+      a[class*="py-2"],
+      a[class*="py-3"],
+      a[class*="rounded-xl"],
+      a[class*="rounded-2xl"] {
+        min-height: 42px;
+        line-height: 1.35;
+      }
+      .whitespace-nowrap {
+        max-width: 100%;
+      }
+      .table-container,
+      .overflow-x-auto {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+        max-width: 100%;
+      }
+      .billboard-nav-btn {
+        width: 44px !important;
+        height: 44px !important;
+      }
+    }
+</style>
 </head>
 <body class="min-h-screen flex flex-col">
   <!-- กล่องแจ้งเตือน Toast -->
@@ -243,23 +368,23 @@
               <img src="TheDriverTH.jpg" alt="โลโก้" onerror="this.onerror=null;this.src='https://placehold.co/80x80/0f172a/fbbf24?text=TDT';"
                 class="w-12 h-12 rounded-2xl object-cover border border-amber-400">
               <div>
-                <p class="text-[10px] tracking-widest uppercase text-amber-300 font-extrabold" id="prev-doc-type">ใบยืนยันการจองรถ (BOOKING VOUCHER)</p>
+                <p class="text-xs tracking-widest uppercase text-amber-300 font-extrabold" id="prev-doc-type">ใบยืนยันการจองรถ (BOOKING VOUCHER)</p>
                 <h2 class="text-base sm:text-lg font-black text-white">🚖 The Driver TH 🇹🇭 Premium Service</h2>
-                <p class="text-[11px] text-slate-400">เครือข่ายคนขับรถรับส่งผู้โดยสารและบริการมืออาชีพแห่งประเทศไทย</p>
+                <p class="text-xs text-slate-400">เครือข่ายคนขับรถรับส่งผู้โดยสารและบริการมืออาชีพแห่งประเทศไทย</p>
               </div>
             </div>
             <div class="text-right">
-              <span class="inline-flex items-center gap-1 bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-[11px] font-bold px-3 py-1 rounded-full">
+              <span class="inline-flex items-center gap-1 bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-xs font-bold px-3 py-1 rounded-full">
                 <i class="fa-solid fa-shield-check"></i> VERIFIED DRIVER
               </span>
-              <p class="text-[11px] font-mono text-slate-400 mt-1" id="prev-doc-id">VCH-20261123-01</p>
+              <p class="text-xs font-mono text-slate-400 mt-1" id="prev-doc-id">VCH-20261123-01</p>
             </div>
           </div>
 
           <div class="grid sm:grid-cols-12 gap-4 items-center">
             <div class="sm:col-span-8 space-y-3 text-xs sm:text-sm">
               <div class="bg-slate-950/75 border border-slate-800 rounded-2xl p-3.5 space-y-1.5">
-                <p class="text-[11px] text-amber-300 font-bold uppercase">ข้อมูลผู้โดยสารและกำหนดการเดินทาง</p>
+                <p class="text-xs text-amber-300 font-bold uppercase">ข้อมูลผู้โดยสารและกำหนดการเดินทาง</p>
                 <p><span class="text-slate-400">ผู้โดยสาร:</span> <strong id="prev-passenger" class="text-white">-</strong></p>
                 <p><span class="text-slate-400">วัน-เวลานัดรับ:</span> <strong id="prev-time" class="text-amber-300">-</strong></p>
                 <p><span class="text-slate-400">จุดรับ:</span> <strong id="prev-pickup" class="text-emerald-300">-</strong></p>
@@ -267,7 +392,7 @@
               </div>
 
               <div class="bg-slate-950/75 border border-slate-800 rounded-2xl p-3.5 space-y-1.5">
-                <p class="text-[11px] text-emerald-300 font-bold uppercase">ข้อมูลคนขับรถที่ยืนยันตัวตนในเครือข่าย</p>
+                <p class="text-xs text-emerald-300 font-bold uppercase">ข้อมูลคนขับรถที่ยืนยันตัวตนในเครือข่าย</p>
                 <p><span class="text-slate-400">รหัสสมาชิก / ชื่อคนขับ:</span> <strong id="prev-driver" class="text-white">[ตัวอย่าง] คนขับมืออาชีพ</strong></p>
                 <p><span class="text-slate-400">รถยนต์ / ทะเบียน:</span> <strong id="prev-vehicle" class="text-amber-300">-</strong></p>
                 <p><span class="text-slate-400">เบอร์โทรติดต่อ:</span> <strong id="prev-phone" class="font-mono text-white">-</strong></p>
@@ -276,8 +401,8 @@
 
             <div class="sm:col-span-4 flex flex-col items-center justify-center bg-white p-3 rounded-2xl shadow-lg text-center">
               <img id="prev-qr-img" src="" alt="QR Code ตรวจสอบคนขับ" class="w-32 h-32 object-contain">
-              <span class="text-[10px] text-slate-900 font-extrabold mt-1.5">สแกนตรวจสอบประวัติคนขับ</span>
-              <span class="text-[9px] text-slate-500">ฐานข้อมูล The Driver TH แท้</span>
+              <span class="text-xs text-slate-900 font-extrabold mt-1.5">สแกนตรวจสอบประวัติคนขับ</span>
+              <span class="text-xs text-slate-500">ฐานข้อมูล The Driver TH แท้</span>
             </div>
           </div>
 
@@ -286,7 +411,7 @@
               <span>ศูนย์ประสานงานเครือข่าย: <strong class="text-emerald-400">Line @Thedrivethailand</strong></span>
             </div>
             <div class="text-right">
-              <span class="text-[11px] text-slate-400 block">ค่าบริการรวมสุทธิ</span>
+              <span class="text-xs text-slate-400 block">ค่าบริการรวมสุทธิ</span>
               <strong id="prev-amount" class="text-2xl font-black text-amber-400 font-mono">฿1,800</strong>
             </div>
           </div>
@@ -321,7 +446,7 @@
     <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
       <div class="text-center sm:text-left space-y-1">
         <p class="font-bold text-amber-300">🚖 The Driver TH 🇹🇭 Premium Service Official Network</p>
-        <p class="text-[11px] text-slate-500">ระบบออกใบรับรองการเดินทางและตรวจสอบความปลอดภัยสำหรับผู้โดยสาร</p>
+        <p class="text-xs text-slate-500">ระบบออกใบรับรองการเดินทางและตรวจสอบความปลอดภัยสำหรับผู้โดยสาร</p>
       </div>
       <div class="flex flex-wrap justify-center gap-x-4 gap-y-2 font-semibold">
         <a href="index.html" class="hover:text-amber-400 transition">หน้าหลัก</a>
@@ -455,7 +580,7 @@
                   <i class="fa-solid fa-user-check"></i>
                 </div>
                 <div>
-                  <span class="text-[10px] font-extrabold uppercase text-emerald-300 tracking-wider">VERIFIED NETWORK MEMBER</span>
+                  <span class="text-xs font-extrabold uppercase text-emerald-300 tracking-wider">VERIFIED NETWORK MEMBER</span>
                   <h3 class="text-base sm:text-lg font-black text-white">[${esc(m.memberCode)}] ${esc(m.fullName)}</h3>
                 </div>
               </div>

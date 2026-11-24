@@ -1264,6 +1264,45 @@
         padding: 0 20px !important;
       }
     }
+
+    /* TDT FLOATING LINE ADMIN BUTTON */
+    .tdt-floating-line-btn {
+      position: fixed;
+      right: 16px;
+      bottom: 20px;
+      z-index: 950;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      min-height: 48px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #06c755 0%, #059669 100%);
+      color: #ffffff !important;
+      font-family: 'Prompt', sans-serif !important;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none !important;
+      box-shadow: 0 10px 26px -4px rgba(6, 199, 85, 0.48), 0 0 0 2px rgba(255, 255, 255, 0.16) inset;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+    .tdt-floating-line-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 14px 30px -4px rgba(6, 199, 85, 0.6), 0 0 0 2px rgba(255, 255, 255, 0.25) inset;
+    }
+    .tdt-floating-line-btn i {
+      font-size: 20px;
+      line-height: 1;
+    }
+    @media (min-width: 640px) {
+      .tdt-floating-line-btn {
+        right: 24px;
+        bottom: 24px;
+      }
+    }
+    body {
+      padding-bottom: 80px;
+    }
 </style>
 </head>
 <body class="min-h-screen flex flex-col">
@@ -1601,6 +1640,15 @@
     changeScale(0);
   </script>
 
+  
+  <!-- FLOATING LINE ADMIN CONTACT BUTTON -->
+  <a id="tdt-floating-line-btn" href="https://line.me/R/ti/p/@Thedrivethailand" target="_blank" rel="noopener noreferrer"
+    aria-label="ติดต่อแอดมินผ่าน LINE Official @Thedrivethailand"
+    class="tdt-floating-line-btn">
+    <i class="fa-brands fa-line"></i>
+    <span>ติดต่อแอดมิน</span>
+  </a>
+
   <script id="tdt-unified-nav-script">
     (function () {
       const FONT_SCALE_KEY = "tdt_font_scale_pct";
@@ -1750,6 +1798,13 @@
           .then(function (r) { return r.json(); })
           .then(function (json) {
             var cfg = json && json.settings ? json.settings : {};
+            if (cfg.lineOfficial) {
+              var lineBtn = document.getElementById("tdt-floating-line-btn");
+              if (lineBtn) {
+                var handle = String(cfg.lineOfficial).trim().replace(/^@?/, "@");
+                lineBtn.href = "https://line.me/R/ti/p/" + encodeURIComponent(handle);
+              }
+            }
             if (cfg.pageAnnouncements) {
               var cloudMap = typeof cfg.pageAnnouncements === "string" ? JSON.parse(cfg.pageAnnouncements) : cfg.pageAnnouncements;
               if (cloudMap && cloudMap[currentFile]) {

@@ -615,6 +615,20 @@
           <h3 class="text-xs font-extrabold text-slate-300 uppercase">รายชื่อผู้ดูแลระบบในระบบ</h3>
           <div id="admin-accounts-list" class="space-y-2.5"></div>
         </div>
+
+        <div class="pt-5 border-t border-slate-800 space-y-3">
+          <div>
+            <h3 class="text-sm font-extrabold text-emerald-400"><i class="fa-solid fa-key mr-1.5"></i>เปลี่ยนรหัสผ่านหลักของระบบหลังบ้าน (Master Passcode)</h3>
+            <p class="text-xs text-slate-400">รหัสผ่านใหม่จะถูกจัดเก็บใน Google Script Properties อย่างปลอดภัย (ไม่อยู่ในโค้ดสาธารณะ) — แนะนำให้เปลี่ยนจากรหัสเริ่มต้นทันที</p>
+          </div>
+          <form onsubmit="changeMasterPasscode(event)" class="bg-slate-950 border border-emerald-500/30 rounded-2xl p-4 grid sm:grid-cols-3 gap-3 text-xs">
+            <input type="password" id="new-master-passcode" required minlength="8" placeholder="รหัสผ่านหลังบ้านใหม่ (อย่างน้อย 8 ตัวอักษร) *" class="bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-white">
+            <input type="password" id="confirm-master-passcode" required minlength="8" placeholder="ยืนยันรหัสผ่านหลังบ้านใหม่อีกครั้ง *" class="bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-white">
+            <button type="submit" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold rounded-xl px-4 py-2.5 shadow transition">
+              <i class="fa-solid fa-shield-halved mr-1"></i> เปลี่ยนรหัสผ่านหลังบ้านทันที
+            </button>
+          </form>
+        </div>
       </section>
 
       <!-- 6. สำรองข้อมูลส่วนตัวเฉพาะแอดมิน -->
@@ -1264,6 +1278,44 @@
       });
       const json = await res.json();
       toast(json.success ? 'บันทึกการตั้งค่าเว็บไซต์เรียบร้อยแล้ว' : (json.error || 'บันทึกไม่สำเร็จ'), Boolean(json.success));
+    }
+
+    async function changeMasterPasscode(e) {
+      e.preventDefault();
+      if (!sessionAdmin) return;
+      const p1 = document.getElementById('new-master-passcode').value.trim();
+      const p2 = document.getElementById('confirm-master-passcode').value.trim();
+      if (p1.length < 8) {
+        toast('รหัสผ่านใหม่ต้องมีอย่างน้อย 8 ตัวอักษร', false);
+        return;
+      }
+      if (p1 !== p2) {
+        toast('รหัสผ่านใหม่ทั้งสองช่องไม่ตรงกัน', false);
+        return;
+      }
+      try {
+        const res = await fetch(MASTER_WEB_APP_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({
+            action: 'admin_change_passcode',
+            adminId: sessionAdmin.username,
+            passcode: sessionAdmin.password,
+            newPasscode: p1
+          })
+        });
+        const json = await res.json();
+        if (json && json.success) {
+          sessionAdmin.password = p1;
+          document.getElementById('new-master-passcode').value = '';
+          document.getElementById('confirm-master-passcode').value = '';
+          toast('เปลี่ยนรหัสผ่านหลังบ้านสำเร็จแล้ว! กรุณาจดจำรหัสใหม่ไว้ใช้งานครั้งถัดไป');
+        } else {
+          toast((json && json.error) || 'เปลี่ยนรหัสผ่านไม่สำเร็จ', false);
+        }
+      } catch (_) {
+        toast('ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์เพื่อเปลี่ยนรหัสผ่านได้', false);
+      }
     }
 
     async function testLineNotifyFromAdmin() {

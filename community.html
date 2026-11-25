@@ -839,6 +839,7 @@
           body: JSON.stringify({
             action: 'forum_create_topic',
             memberCode: forumState.user.memberCode,
+            sessionToken: forumState.user.sessionToken || '',
             authorName: forumState.user.displayName,
             category,
             title,
@@ -900,6 +901,7 @@
             action: 'forum_add_comment',
             topicId,
             memberCode: forumState.user.memberCode,
+            sessionToken: forumState.user.sessionToken || '',
             authorName: forumState.user.displayName,
             content: text,
             imageBase64: imgB64

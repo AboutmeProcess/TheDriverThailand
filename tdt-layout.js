@@ -308,6 +308,9 @@
             '</div>' +
           '</div>' +
           '<div class="tdt-nav-actions">' +
+            '<button type="button" id="tdt-quick-search-btn" onclick="openTdtQuickSearch()" aria-label="ค้นหาบริการด่วนทั่วเว็บ" title="ค้นหาบริการด่วน (Ctrl+K)" class="tdt-theme-btn">' +
+              '<i class="fa-solid fa-magnifying-glass"></i>' +
+            '</button>' +
             '<button type="button" id="tdt-lang-toggle" onclick="toggleTdtLang()" aria-label="Switch Language TH / EN" title="Switch to English (เปลี่ยนเป็นภาษาอังกฤษ)" class="tdt-lang-btn">' +
               '<span id="tdt-lang-label">EN</span>' +
             '</button>' +
@@ -856,7 +859,123 @@
   });
 
   /* ------------------------------------------------------------------
-   * 8. BOOT ON DOM READY
+   * 8. GLOBAL QUICK SEARCH OVERLAY (CTRL+K / CMD+K)
+   * ------------------------------------------------------------------ */
+  var QUICK_SEARCH_ITEMS = [
+    { href: "index.html", icon: "fa-solid fa-house", title: "หน้าหลัก (ศูนย์รวมบริการทั้งหมด)", cat: "หน้าหลัก", kw: "home หน้าแรก เมนู รวมบริการ" },
+    { href: "member_register.html", icon: "fa-solid fa-file-signature", title: "สมัครสมาชิกใหม่", cat: "สมาชิก & บัตร", kw: "register สมัคร เข้ากลุ่ม ลงทะเบียน" },
+    { href: "register.html", icon: "fa-solid fa-users-viewfinder", title: "ตรวจสอบรหัสสมาชิก", cat: "สมาชิก & บัตร", kw: "เช็กรหัส ค้นหารหัส สมาชิก datamember" },
+    { href: "member_edit.html", icon: "fa-solid fa-user-pen", title: "แก้ไขข้อมูลสมาชิก / เปลี่ยนรถ", cat: "สมาชิก & บัตร", kw: "เปลี่ยนรถ แก้ทะเบียน แก้เบอร์ แก้ข้อมูล" },
+    { href: "member_card_digital.html", icon: "fa-solid fa-qrcode", title: "บัตรสมาชิกดิจิทัล & QR Code", cat: "สมาชิก & บัตร", kw: "digital card บัตรดิจิทัล qr บันทึกบัตร" },
+    { href: "luxury_car_register.html", icon: "fa-solid fa-crown", title: "สมัครห้อง Luxury Car", cat: "สมาชิก & บัตร", kw: "รถหรู alphard benz bmw vip luxury" },
+    { href: "tracking.html", icon: "fa-solid fa-satellite-dish", title: "ติดตามสถานะคำร้อง", cat: "สมาชิก & บัตร", kw: "เช็กสถานะ อนุมัติหรือยัง tracking" },
+    { href: "unblock_request.html", icon: "fa-solid fa-unlock-keyhole", title: "ขอปลดล็อก OpenChat", cat: "สมาชิก & บัตร", kw: "โดนเตะ โดนบล็อก ปลดบล็อก ปลดล็อก line openchat" },
+    { href: "job_board.html", icon: "fa-solid fa-handshake", title: "กระดานแลกเปลี่ยนงาน", cat: "งาน & เครื่องมือ", kw: "ปล่อยงาน รับงาน หางาน job board" },
+    { href: "empty_leg_matcher.html", icon: "fa-solid fa-route", title: "จับคู่รถว่างขากลับ (Empty-Leg)", cat: "งาน & เครื่องมือ", kw: "รถเปล่า ขากลับ ต่างจังหวัด empty leg" },
+    { href: "fare_calculator.html", icon: "fa-solid fa-calculator", title: "คำนวณค่าโดยสาร / งานเหมา", cat: "งาน & เครื่องมือ", kw: "คิดราคา เสนอราคา สนามบิน พัทยา หัวหิน fare" },
+    { href: "trip_voucher.html", icon: "fa-solid fa-file-invoice-dollar", title: "ออกใบจอง / E-Voucher 2 ภาษา", cat: "งาน & เครื่องมือ", kw: "ใบเสร็จ ใบยืนยัน ลูกค้าต่างชาติ voucher receipt" },
+    { href: "driver_fleet_hub.html", icon: "fa-solid fa-wallet", title: "จัดการรถ & บัญชีรายรับ-จ่าย", cat: "งาน & เครื่องมือ", kw: "บัญชี รายรับ รายจ่าย ค่าน้ำมัน หมดอายุ fleet" },
+    { href: "driver_pitstop_reputation.html", icon: "fa-solid fa-charging-station", title: "จุดพักรถ EV & คูปองส่วนลดพาร์ทเนอร์", cat: "งาน & เครื่องมือ", kw: "ev ชาร์จไฟ จุดจอด สนามบิน คูปอง ส่วนลด ล้างรถ" },
+    { href: "pcard.html", icon: "fa-solid fa-id-badge", title: "ทำบัตรประเมศฐ์ & เช็กเลขพัสดุ", cat: "ขับแอป & เสริม", kw: "บัตรแข็ง เช็กพัสดุ จัดส่งบัตร pcard" },
+    { href: "grab_driver_register.html", icon: "fa-solid fa-car", title: "สมัครคนขับ Grab", cat: "ขับแอป & เสริม", kw: "grabcar grabtaxi grabsuv แกร็บ" },
+    { href: "bolt_driver_register.html", icon: "fa-solid fa-bolt", title: "สมัครคนขับ Bolt", cat: "ขับแอป & เสริม", kw: "โบลท์ bolt economy comfort xl" },
+    { href: "captain_insurance.html", icon: "fa-solid fa-shield-halved", title: "ประกันภัยรถยนต์ & พ.ร.บ. (Captain)", cat: "ขับแอป & เสริม", kw: "ประกันชั้น 1 2+ 3+ พรบ ผ่อน 0% captain insurance" },
+    { href: "rtaf_pass_register.html", icon: "fa-solid fa-plane-departure", title: "บัตรผ่าน ทอ. (ดอนเมือง)", cat: "ขับแอป & เสริม", kw: "ดอนเมือง กองทัพอากาศ บัตรผ่านรถ rtaf" },
+    { href: "vip_referral_guide.html", icon: "fa-solid fa-map-location-dot", title: "ลายแทงท่องเที่ยว [VIP]", cat: "ขับแอป & เสริม", kw: "ค่าคอม ลายแทง ร้านค้า ท่องเที่ยว vip" },
+    { href: "tour_book_order.html", icon: "fa-solid fa-book", title: "สั่งซื้อสมุดทัวร์", cat: "ขับแอป & เสริม", kw: "สมุดทัวร์ กทม พัทยา tour book" },
+    { href: "blacklist.html", icon: "fa-solid fa-user-shield", title: "ศูนย์เช็ก Blacklist เตือนภัย", cat: "ชุมชน & ปลอดภัย", kw: "มิจฉาชีพ โกง เบี้ยวเงิน เช็กเบอร์ เช็กบัญชี blacklist" },
+    { href: "driver_news.html", icon: "fa-solid fa-newspaper", title: "ข่าวสารคนขับทุกแอป", cat: "ชุมชน & ปลอดภัย", kw: "ข่าว รย.17 รย.18 กรมขนส่ง news" },
+    { href: "community.html", icon: "fa-solid fa-comments", title: "เว็บบอร์ดชุมชนสมาชิก", cat: "ชุมชน & ปลอดภัย", kw: "กระทู้ พูดคุย รีวิว forum community" },
+    { href: "guide.html", icon: "fa-solid fa-book-open", title: "คู่มือสมาชิก & กฎกติกา", cat: "ชุมชน & ปลอดภัย", kw: "กฎกลุ่ม ตั้งชื่อ วิธีใช้งาน guide" },
+    { href: "privacy_policy.html", icon: "fa-solid fa-scale-balanced", title: "นโยบายความเป็นส่วนตัว (PDPA)", cat: "ชุมชน & ปลอดภัย", kw: "pdpa นโยบาย ความเป็นส่วนตัว" },
+    { href: "admin.html", icon: "fa-solid fa-sliders", title: "ระบบหลังบ้าน (Admin Center)", cat: "ผู้ดูแลระบบ", kw: "admin แอดมิน หลังบ้าน จัดการเว็บ" }
+  ];
+
+  function renderQuickSearchList(query) {
+    var listEl = document.getElementById("tdt-qs-list");
+    if (!listEl) return;
+    var q = (query || "").trim().toLowerCase();
+    var hits = QUICK_SEARCH_ITEMS.filter(function (it) {
+      if (!q) return true;
+      return (it.title + " " + it.cat + " " + it.kw + " " + it.href).toLowerCase().indexOf(q) !== -1;
+    });
+    if (!hits.length) {
+      listEl.innerHTML = '<div style="text-align:center;padding:24px 12px;color:#94a3b8;font-size:13px;">ไม่พบบริการที่ตรงกับคำค้นหา "' + escHtml(query) + '"</div>';
+      return;
+    }
+    listEl.innerHTML = hits.map(function (it) {
+      return (
+        '<a href="' + escHtml(it.href) + '" style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 12px;border-radius:12px;text-decoration:none;color:#f8fafc;background:rgba(15,23,42,0.85);border:1px solid rgba(148,163,184,0.16);margin-bottom:6px;transition:border-color 0.15s;" onmouseover="this.style.borderColor=\'rgba(251,191,36,0.65)\'" onmouseout="this.style.borderColor=\'rgba(148,163,184,0.16)\'">' +
+          '<span style="display:flex;align-items:center;gap:10px;min-width:0;">' +
+            '<i class="' + escHtml(it.icon) + '" style="color:#fbbf24;width:20px;text-align:center;flex-shrink:0;"></i>' +
+            '<span style="font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + escHtml(it.title) + '</span>' +
+          '</span>' +
+          '<span style="font-size:11px;color:#fde68a;background:rgba(251,191,36,0.14);border:1px solid rgba(251,191,36,0.3);padding:2px 8px;border-radius:999px;flex-shrink:0;">' + escHtml(it.cat) + '</span>' +
+        '</a>'
+      );
+    }).join("");
+  }
+
+  function openTdtQuickSearch() {
+    closeAllNavDropdowns();
+    closeTdtDrawer();
+    var modal = document.getElementById("tdt-quick-search-modal");
+    if (!modal && document.body) {
+      modal = document.createElement("div");
+      modal.id = "tdt-quick-search-modal";
+      modal.style.cssText =
+        "position:fixed;inset:0;z-index:9995;background:rgba(2,6,23,0.78);backdrop-filter:blur(6px);" +
+        "display:flex;align-items:flex-start;justify-content:center;padding:64px 14px 20px;";
+      modal.innerHTML =
+        '<div id="tdt-qs-box" style="width:100%;max-width:560px;background:#090e1a;border:1px solid rgba(251,191,36,0.48);border-radius:20px;box-shadow:0 24px 60px rgba(0,0,0,0.8);overflow:hidden;">' +
+          '<div style="display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid rgba(148,163,184,0.18);">' +
+            '<i class="fa-solid fa-magnifying-glass" style="color:#fbbf24;font-size:16px;"></i>' +
+            '<input type="search" id="tdt-qs-input" placeholder="ค้นหาบริการด่วน เช่น ดอนเมือง, ประกัน, ใบจอง, ปลดล็อก, พัสดุ..." style="flex:1;background:transparent;border:none;outline:none;color:#f8fafc;font-size:15px;font-family:Prompt,sans-serif;">' +
+            '<button type="button" id="tdt-qs-close" aria-label="ปิดหน้าต่างค้นหา" style="background:rgba(30,41,59,0.9);border:1px solid rgba(148,163,184,0.25);color:#cbd5e1;border-radius:8px;padding:4px 9px;font-size:12px;cursor:pointer;">ESC</button>' +
+          '</div>' +
+          '<div id="tdt-qs-list" style="max-height:60vh;overflow-y:auto;padding:10px 12px;"></div>' +
+        '</div>';
+      modal.addEventListener("click", function (ev) {
+        if (ev.target === modal) closeTdtQuickSearch();
+      });
+      document.body.appendChild(modal);
+      var inp = document.getElementById("tdt-qs-input");
+      if (inp) {
+        inp.addEventListener("input", function () { renderQuickSearchList(inp.value); });
+      }
+      var cls = document.getElementById("tdt-qs-close");
+      if (cls) cls.addEventListener("click", closeTdtQuickSearch);
+    }
+    if (modal) {
+      modal.style.display = "flex";
+      var input = document.getElementById("tdt-qs-input");
+      if (input) {
+        input.value = "";
+        renderQuickSearchList("");
+        setTimeout(function () { input.focus(); }, 30);
+      }
+    }
+  }
+
+  function closeTdtQuickSearch() {
+    var modal = document.getElementById("tdt-quick-search-modal");
+    if (modal) modal.style.display = "none";
+  }
+
+  window.openTdtQuickSearch = openTdtQuickSearch;
+  window.closeTdtQuickSearch = closeTdtQuickSearch;
+
+  document.addEventListener("keydown", function (e) {
+    if ((e.metaKey || e.ctrlKey) && String(e.key || "").toLowerCase() === "k") {
+      e.preventDefault();
+      openTdtQuickSearch();
+    } else if (e.key === "Escape") {
+      closeTdtQuickSearch();
+    }
+  });
+
+  /* ------------------------------------------------------------------
+   * 9. BOOT ON DOM READY
    * ------------------------------------------------------------------ */
   function boot() {
     ensureFloatingLineBtn();

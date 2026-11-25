@@ -321,7 +321,7 @@
   <!-- UNIFIED GLOBAL SITE NAVIGATION BAR -->
   <!-- SHARED EXECUTIVE HEADER, DRAWER & ANNOUNCEMENT BAR -->
   <div id="tdt-layout-header" data-page="captain_insurance.html"></div>
-  <script src="tdt-layout.js?v=20261125"></script>
+  <script src="tdt-layout.js?v=20261125b"></script>
 
 <!-- พื้นที่เนื้อหาหลัก -->
   <main class="flex-grow max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-6 sm:space-y-8">
@@ -527,6 +527,65 @@
             </tr>
           </tbody>
         </table>
+      </div>
+    </section>
+
+    <!-- เครื่องมือประเมินเบี้ยประกันภัย & ยอดผ่อน 0% เบื้องต้น -->
+    <section id="ins-estimator-section" class="bg-slate-900/95 rounded-3xl p-5 sm:p-8 border border-teal-400/35 shadow-xl space-y-5 text-slate-100">
+      <div class="border-b border-slate-800 pb-4 flex flex-wrap items-center justify-between gap-2">
+        <div>
+          <span class="text-xs font-extrabold text-amber-300 bg-amber-500/15 border border-amber-400/35 px-3 py-1 rounded-full">INSTANT PREMIUM ESTIMATOR</span>
+          <h2 class="text-lg sm:text-xl font-extrabold text-teal-300 mt-1.5"><i class="fa-solid fa-calculator text-amber-400 mr-1.5"></i>ประเมินเบี้ยประกันภัย &amp; ยอดผ่อน 0% เบื้องต้น</h2>
+          <p class="text-xs text-slate-400">เลือกประเภทรถและชั้นประกันเพื่อดูช่วงราคาโดยประมาณและค่างวดผ่อน 0% ทันที</p>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-4 text-xs sm:text-sm">
+        <div class="space-y-1.5">
+          <label for="est-car-type" class="block text-xs font-bold text-slate-300">1. ประเภทรถยนต์</label>
+          <select id="est-car-type" onchange="updateInsEstimate()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-white font-semibold">
+            <option value="sedan">รถเก๋งส่วนบุคคล (รหัส 110)</option>
+            <option value="suv">รถ SUV / PPV / รถตู้ส่วนบุคคล (รหัส 210)</option>
+            <option value="ev">รถยนต์ไฟฟ้า (EV)</option>
+            <option value="commercial">รถรับจ้างสาธารณะ รย.17 / รย.18 / ป้ายเขียว-เหลือง</option>
+          </select>
+        </div>
+        <div class="space-y-1.5">
+          <label for="est-plan-tier" class="block text-xs font-bold text-slate-300">2. ชั้นประกันภัยที่ต้องการ</label>
+          <select id="est-plan-tier" onchange="updateInsEstimate()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-white font-semibold">
+            <option value="1_garage">ประกันชั้น 1 (ซ่อมอู่มาตรฐาน)</option>
+            <option value="1_dealer">ประกันชั้น 1 (ซ่อมห้าง / ศูนย์บริการ)</option>
+            <option value="2plus">ประกันชั้น 2+ (ชนรถ + หาย/ไฟไหม้)</option>
+            <option value="3plus">ประกันชั้น 3+ (คุ้มครองรถชนรถ)</option>
+            <option value="3">ประกันชั้น 3 (คุ้มครองคู่กรณี)</option>
+            <option value="prb">พ.ร.บ. อย่างเดียว</option>
+          </select>
+        </div>
+        <div class="flex items-end">
+          <label class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 flex items-center gap-2.5 cursor-pointer select-none">
+            <input type="checkbox" id="est-include-prb" checked onchange="updateInsEstimate()" class="w-4 h-4 accent-emerald-400 rounded">
+            <span class="text-xs font-bold text-emerald-300">รวม พ.ร.บ. คุ้มครองผู้ประสบภัยด้วย</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="bg-slate-950/90 border border-amber-400/35 rounded-2xl p-5 grid sm:grid-cols-3 gap-4 items-center">
+        <div>
+          <span class="text-xs text-slate-400 block">ช่วงเบี้ยประมาณการต่อปี</span>
+          <strong id="est-annual-range" class="text-2xl sm:text-3xl font-black text-amber-400 font-mono">฿12,145 – ฿16,545</strong>
+          <span id="est-prb-note" class="text-[11px] text-emerald-300 block mt-0.5">รวม พ.ร.บ. แล้ว (ประมาณ 645 บ.)</span>
+        </div>
+        <div class="space-y-1 text-xs bg-slate-900/90 border border-slate-800 rounded-xl p-3.5">
+          <p class="font-bold text-teal-300"><i class="fa-solid fa-credit-card mr-1"></i> ตัวอย่างยอดผ่อน 0%</p>
+          <p class="text-slate-200">ผ่อน 6 เดือน: <strong id="est-m6" class="text-amber-300 font-mono">~2,025 บ./เดือน</strong></p>
+          <p class="text-slate-200">ผ่อน 10 เดือน: <strong id="est-m10" class="text-emerald-300 font-mono">~1,215 บ./เดือน</strong></p>
+        </div>
+        <div class="flex flex-col gap-2">
+          <button type="button" onclick="applyEstimateToQuoteForm()" class="w-full bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-extrabold py-3 px-4 rounded-xl text-xs sm:text-sm shadow transition">
+            <i class="fa-solid fa-arrow-down mr-1.5"></i> นำแผนนี้ไปขอใบเสนอราคาจริง
+          </button>
+          <span class="text-[11px] text-slate-400 text-center">* ราคาจริงขึ้นกับรุ่นรถ ปีรถ และประวัติเคลม</span>
+        </div>
       </div>
     </section>
 
@@ -916,7 +975,74 @@
       }
     }
 
+    // เครื่องมือประเมินเบี้ยประกันภัย & ผ่อน 0% เบื้องต้น
+    const INS_EST_TABLE = {
+      sedan:      { prb: 645,  '1_garage': [11500, 15900], '1_dealer': [15900, 21900], '2plus': [5500, 7900], '3plus': [4500, 6200], '3': [1890, 2600] },
+      suv:        { prb: 967,  '1_garage': [13500, 18900], '1_dealer': [18500, 25500], '2plus': [6500, 8900], '3plus': [5200, 6900], '3': [2200, 3100] },
+      ev:         { prb: 645,  '1_garage': [17900, 24900], '1_dealer': [21900, 29900], '2plus': [8500, 11500], '3plus': [6200, 8500], '3': [2400, 3200] },
+      commercial: { prb: 2041, '1_garage': [16500, 23900], '1_dealer': [21500, 29500], '2plus': [7900, 10900], '3plus': [6200, 8400], '3': [2900, 3900] }
+    };
+
+    function updateInsEstimate() {
+      const carType = document.getElementById('est-car-type')?.value || 'sedan';
+      const planTier = document.getElementById('est-plan-tier')?.value || '1_garage';
+      const incPrb = document.getElementById('est-include-prb')?.checked ?? true;
+      const row = INS_EST_TABLE[carType] || INS_EST_TABLE.sedan;
+      const prbAmt = row.prb;
+
+      let low = 0, high = 0;
+      if (planTier === 'prb') {
+        low = prbAmt;
+        high = prbAmt;
+      } else {
+        const range = row[planTier] || [11500, 15900];
+        low = range[0] + (incPrb ? prbAmt : 0);
+        high = range[1] + (incPrb ? prbAmt : 0);
+      }
+
+      const rangeEl = document.getElementById('est-annual-range');
+      const noteEl = document.getElementById('est-prb-note');
+      const m6El = document.getElementById('est-m6');
+      const m10El = document.getElementById('est-m10');
+
+      if (rangeEl) rangeEl.textContent = low === high ? `฿${low.toLocaleString()}` : `฿${low.toLocaleString()} – ฿${high.toLocaleString()}`;
+      if (noteEl) {
+        noteEl.textContent = planTier === 'prb'
+          ? 'อัตรา พ.ร.บ. มาตรฐานตามประเภทรถ'
+          : (incPrb ? `รวม พ.ร.บ. แล้ว (ประมาณ ${prbAmt.toLocaleString()} บ.)` : 'ยังไม่รวม พ.ร.บ.');
+      }
+      if (m6El) m6El.textContent = `เริ่มต้น ~${Math.ceil(low / 6).toLocaleString()} บ./เดือน`;
+      if (m10El) m10El.textContent = `เริ่มต้น ~${Math.ceil(low / 10).toLocaleString()} บ./เดือน`;
+    }
+
+    function applyEstimateToQuoteForm() {
+      const carType = document.getElementById('est-car-type')?.value || 'sedan';
+      const planTier = document.getElementById('est-plan-tier')?.value || '1_garage';
+      const planMap = {
+        '1_garage': 'ประกันภัยรถยนต์ ชั้น 1 (ซ่อมอู่ / ซ่อมห้าง)',
+        '1_dealer': 'ประกันภัยรถยนต์ ชั้น 1 (ซ่อมอู่ / ซ่อมห้าง)',
+        '2plus': 'ประกันภัยรถยนต์ ชั้น 2+ (คุ้มครองรถชนรถ + สูญหาย/ไฟไหม้)',
+        '3plus': 'ประกันภัยรถยนต์ ชั้น 3+ (คุ้มครองรถชนรถ)',
+        '3': 'ประกันภัยรถยนต์ ชั้น 3 (คุ้มครองคู่กรณี)',
+        'prb': 'ต่ออายุ พ.ร.บ. รถยนต์ / รถรับจ้าง'
+      };
+      const usageMap = {
+        sedan: 'รถเก๋งส่วนบุคคล (รหัส 110 - ป้ายขาวตัวอักษรดำ)',
+        suv: 'รถโดยสาร / รถตู้ส่วนบุคคล (รหัส 210 - ป้ายขาวตัวอักษรฟ้า)',
+        ev: 'รถยนต์ไฟฟ้า (EV)',
+        commercial: 'รถรับจ้างสาธารณะ / รถเช่าพร้อมคนขับ (ป้ายเขียว / ป้ายเหลือง)'
+      };
+      const planSel = document.getElementById('ins_plan_type');
+      const usageSel = document.getElementById('ins_usage_type');
+      if (planSel && planMap[planTier]) planSel.value = planMap[planTier];
+      if (usageSel && usageMap[carType]) usageSel.value = usageMap[carType];
+      if (typeof saveInsDraft === 'function') saveInsDraft();
+      document.getElementById('quote-form-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      showToast('เลือกแผนเรียบร้อย', 'นำข้อมูลจากเครื่องประเมินเบี้ยมากรอกในแบบฟอร์มด้านล่างแล้วครับ', 'success');
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
+      updateInsEstimate();
       restoreInsDraft();
       INS_FIELD_IDS.forEach(id => {
         const el = document.getElementById(id);

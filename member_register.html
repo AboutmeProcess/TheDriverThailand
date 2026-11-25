@@ -458,23 +458,13 @@
             <span>2. ข้อมูลส่วนตัวและช่องทางติดต่อ</span>
           </h3>
 
-          <div class="grid md:grid-cols-2 gap-4">
-            <div class="space-y-1.5">
-              <label for="member_chat_name" class="block text-xs font-bold text-slate-200">
-                ชื่อที่ใช้ในห้อง Line OpenChat <span class="text-rose-400">*</span>
-              </label>
-              <input type="text" id="member_chat_name" name="chatName" required placeholder="เช่น แทนไทย Camry (ห้ามใส่เบอร์โทรศัพท์)"
-                class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-amber-400 transition">
-              <p class="text-xs text-slate-400">ตั้งชื่อเล่นตามด้วยรุ่นรถ ห้ามใส่เบอร์โทรในชื่อโปรไฟล์</p>
-            </div>
-
-            <div class="space-y-1.5">
-              <label for="member_phone" class="block text-xs font-bold text-slate-200">
-                เบอร์ติดต่อ <span class="text-rose-400">*</span>
-              </label>
-              <input type="tel" id="member_phone" name="phone" required pattern="[0-9\-+\s]{9,15}" placeholder="เช่น 0812345678"
-                class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-xs sm:text-sm font-mono text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-amber-400 transition">
-            </div>
+          <div class="space-y-1.5">
+            <label for="member_chat_name" class="block text-xs font-bold text-slate-200">
+              ชื่อที่ใช้ในห้อง Line OpenChat <span class="text-rose-400">*</span>
+            </label>
+            <input type="text" id="member_chat_name" name="chatName" required placeholder="เช่น แทนไทย Camry (ห้ามใส่เบอร์โทรศัพท์)"
+              class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-amber-400 transition">
+            <p class="text-xs text-slate-400">ตั้งชื่อเล่นตามด้วยรุ่นรถ ห้ามใส่เบอร์โทรในชื่อโปรไฟล์</p>
           </div>
 
           <div class="grid md:grid-cols-2 gap-4">
@@ -497,20 +487,28 @@
 
           <div class="grid md:grid-cols-2 gap-4">
             <div class="space-y-1.5">
+              <label for="member_phone" class="block text-xs font-bold text-slate-200">
+                เบอร์ติดต่อ <span class="text-rose-400">*</span>
+              </label>
+              <input type="tel" id="member_phone" name="phone" required pattern="[0-9\-+\s]{9,15}" placeholder="เช่น 0812345678"
+                class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-xs sm:text-sm font-mono text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-amber-400 transition">
+            </div>
+
+            <div class="space-y-1.5">
               <label for="member_line_id" class="block text-xs font-bold text-slate-200">
                 Line ID <span class="text-rose-400">*</span>
               </label>
               <input type="text" id="member_line_id" name="lineId" required placeholder="ระบุ Line ID (กรุณาเปิดอนุญาตให้เพิ่มเพื่อนด้วย ID)"
                 class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-amber-400 transition">
             </div>
+          </div>
 
-            <div class="space-y-1.5">
-              <label for="member_address" class="block text-xs font-bold text-slate-200">
-                ที่อยู่ของคุณ <span class="text-rose-400">*</span>
-              </label>
-              <input type="text" id="member_address" name="address" required placeholder="บ้านเลขที่ หมู่ ซอย ถนน แขวง/ตำบล เขต/อำเภอ จังหวัด รหัสไปรษณีย์"
-                class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-amber-400 transition">
-            </div>
+          <div class="space-y-1.5">
+            <label for="member_address" class="block text-xs font-bold text-slate-200">
+              ที่อยู่ของคุณ <span class="text-rose-400">*</span>
+            </label>
+            <input type="text" id="member_address" name="address" required placeholder="บ้านเลขที่ หมู่ ซอย ถนน แขวง/ตำบล เขต/อำเภอ จังหวัด รหัสไปรษณีย์"
+              class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-amber-400 transition">
           </div>
         </div>
 

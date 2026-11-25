@@ -1,0 +1,22 @@
+# macOS / OS metadata
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+Desktop.ini
+
+# Editor & temporary files
+*.swp
+*.swo
+*.bak
+*.tmp
+*~
+.vscode/
+.idea/
+
+# Private backend & credentials (never commit to public repo)
+.env
+.env.*
+.clasp.json
+.clasprc.json
+AppsScript_Live/

@@ -1065,6 +1065,122 @@
       color: #92400e !important;
       border-color: #f59e0b !important;
     }
+    html[data-theme="light"] .example-tag strong {
+      color: #78350f !important;
+    }
+
+    /* Complete Light Mode Contrast Fix for register.html (Custom Non-Tailwind Classes) */
+    html[data-theme="light"] :is(.card, .step-card, .highlight-box, details.faq-item) {
+      background: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      color: #0f172a !important;
+      box-shadow: 0 4px 16px -6px rgba(15, 23, 42, 0.08) !important;
+    }
+    html[data-theme="light"] .step-card {
+      background: #f8fafc !important;
+      border-top-color: #d97706 !important;
+    }
+    html[data-theme="light"] :is(.hero-title, .section-title, .step-title, .faq-title, summary.faq-question) {
+      color: #0f172a !important;
+    }
+    html[data-theme="light"] :is(.hero-subtitle, .section-desc, .step-text, .faq-subtitle, .faq-answer, .stat-label, .cta-note, .pdpa-footer) {
+      color: #334155 !important;
+    }
+    html[data-theme="light"] :is(.sec-title, .stat-number, .pdpa-footer strong, .highlight-box span, .tdt-footer-title) {
+      color: #92400e !important;
+    }
+    html[data-theme="light"] :is(.badge, .result-count, .step-num, .q-num, .highlight-pill) {
+      background: #fef3c7 !important;
+      color: #92400e !important;
+      border-color: #f59e0b !important;
+    }
+    html[data-theme="light"] .stat-update {
+      background: #ecfdf5 !important;
+      color: #065f46 !important;
+      border-color: #6ee7b7 !important;
+    }
+    html[data-theme="light"] #search {
+      background: #ffffff !important;
+      color: #0f172a !important;
+      border-color: #94a3b8 !important;
+    }
+    html[data-theme="light"] #search::placeholder {
+      color: #64748b !important;
+    }
+    html[data-theme="light"] .clear-btn {
+      background: #e2e8f0 !important;
+      color: #0f172a !important;
+      border-color: #cbd5e1 !important;
+    }
+    html[data-theme="light"] .table-container th {
+      background: #f1f5f9 !important;
+      color: #92400e !important;
+      border-bottom-color: #cbd5e1 !important;
+    }
+    html[data-theme="light"] .table-container td {
+      background: #ffffff !important;
+      color: #0f172a !important;
+      border-bottom-color: #e2e8f0 !important;
+    }
+    html[data-theme="light"] .table-container tbody tr:nth-child(even) td {
+      background: #f8fafc !important;
+    }
+    html[data-theme="light"] .table-container tbody tr:hover td {
+      background: #fef3c7 !important;
+      color: #78350f !important;
+    }
+    html[data-theme="light"] .cta-btn.secondary {
+      background: #fffbeb !important;
+      color: #92400e !important;
+      border-color: #d97706 !important;
+    }
+    html[data-theme="light"] .rule-do {
+      background: #ecfdf5 !important;
+      border-color: #6ee7b7 !important;
+    }
+    html[data-theme="light"] .rule-do .rule-header,
+    html[data-theme="light"] .rule-do .rule-list li {
+      color: #065f46 !important;
+    }
+    html[data-theme="light"] .rule-dont {
+      background: #fff1f2 !important;
+      border-color: #fda4af !important;
+    }
+    html[data-theme="light"] .rule-dont .rule-header,
+    html[data-theme="light"] .rule-dont .rule-list li {
+      color: #9f1239 !important;
+    }
+    html[data-theme="light"] summary.faq-question {
+      background: #f8fafc !important;
+    }
+    html[data-theme="light"] details.faq-item[open] summary.faq-question {
+      background: #fef3c7 !important;
+      color: #78350f !important;
+    }
+    html[data-theme="light"] .faq-answer {
+      background: #ffffff !important;
+      border-top-color: #e2e8f0 !important;
+    }
+    html[data-theme="light"] .faq-answer strong {
+      color: #0f172a !important;
+    }
+    html[data-theme="light"] .chevron {
+      color: #475569 !important;
+    }
+    html[data-theme="light"] .tdt-global-footer {
+      background: #f1f5f9 !important;
+      color: #334155 !important;
+      border-top-color: #cbd5e1 !important;
+    }
+    html[data-theme="light"] .tdt-footer-sub {
+      color: #475569 !important;
+    }
+    html[data-theme="light"] .tdt-footer-links a {
+      color: #1e293b !important;
+    }
+    html[data-theme="light"] .tdt-footer-links a:hover {
+      color: #b45309 !important;
+    }
 
 /* TDT Mobile-First Typography & Touch Spacing */
 html, body {

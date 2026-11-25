@@ -626,112 +626,110 @@
           </div>
         </div>
 
-        <!-- ส่วนที่ 4: แนบภาพหลักฐานประกอบ -->
-        <div class="dark-sub-panel rounded-3xl p-5 sm:p-6 space-y-5">
-          <div class="border-b border-slate-800 pb-3 flex flex-wrap items-center justify-between gap-2">
-            <h3 class="font-extrabold text-amber-300 text-sm sm:text-base flex items-center gap-2">
+        <!-- ส่วนที่ 4: แนบรูปถ่ายรถยนต์ และรูปถ่ายคู่กระดาษยืนยันตัวตน (เหมือน member_register.html 100%) -->
+        <div class="bg-slate-950/80 border border-slate-800 rounded-3xl p-4 sm:p-6 space-y-5">
+          <div class="border-b border-slate-800 pb-3.5 space-y-1">
+            <h3 class="font-extrabold text-amber-300 text-base sm:text-lg flex items-center gap-2">
               <i class="fa-solid fa-camera-retro text-amber-400"></i>
-              <span>แนบภาพหลักฐานประกอบการขอปลดล็อก</span>
+              <span>4. แนบรูปถ่ายรถยนต์และรูปถ่ายยืนยันตัวตน</span>
             </h3>
-            <span class="text-xs text-slate-400">ดูตัวอย่างรูปแบบภาพหลักฐานที่ถูกต้องได้ในแต่ละกล่องด้านล่าง</span>
+            <p class="text-xs sm:text-sm text-slate-300">ถ่ายภาพให้ใกล้เคียงกับรูปตัวอย่างด้านล่าง เพื่อให้ทีมงานตรวจสอบและปลดล็อกได้รวดเร็ว</p>
           </div>
 
           <div class="grid md:grid-cols-2 gap-5">
-            <!-- ภาพที่ 1: ภาพหน้าจอโปรไฟล์ OpenChat ปัจจุบัน หรือหน้าแจ้งเตือนถูกบล็อก -->
-            <div class="border-2 border-dashed border-slate-700 bg-slate-900 rounded-2xl p-5 hover:border-amber-400 transition flex flex-col justify-between space-y-4">
-              <div class="space-y-3">
+            <!-- กล่อง 1: รูปถ่ายรถยนต์ -->
+            <div class="bg-slate-900/95 border border-slate-700 rounded-2xl p-4 sm:p-5 flex flex-col justify-between gap-4 hover:border-emerald-400/60 transition">
+              <div class="space-y-3.5">
                 <div class="flex items-center justify-between gap-2">
-                  <span class="text-xs font-extrabold text-amber-300 bg-amber-500/15 border border-amber-400/35 px-2.5 py-1 rounded-lg">
-                    <i class="fa-solid fa-mobile-screen-button mr-1"></i> หลักฐานที่ 1 (โปรไฟล์ / แจ้งเตือน)
-                  </span>
-                  <span class="text-xs font-bold text-rose-300 bg-rose-500/15 border border-rose-400/35 px-2.5 py-0.5 rounded-full">
-                    จำเป็นต้องแนบ *
+                  <h4 class="text-sm sm:text-base font-extrabold text-white flex items-center gap-2">
+                    <span class="w-7 h-7 rounded-lg bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 inline-flex items-center justify-center text-xs font-black">1</span>
+                    <span>รูปถ่ายรถยนต์เต็มคัน</span>
+                  </h4>
+                  <span class="text-xs font-bold text-rose-300 bg-rose-500/15 border border-rose-400/35 px-2.5 py-0.5 rounded-full shrink-0">
+                    จำเป็น *
                   </span>
                 </div>
 
-                <!-- ตัวอย่างภาพหลักฐานที่ 1 -->
-                <div class="bg-slate-950 rounded-xl p-3.5 text-white border border-amber-400/40 space-y-2">
-                  <div class="flex items-center justify-between text-xs text-amber-300 font-bold">
-                    <span><i class="fa-solid fa-image mr-1"></i> ตัวอย่างภาพหน้าจอที่ถูกต้อง</span>
-                    <span class="text-emerald-400">เห็นชื่อ + รูปโปรไฟล์ชัดเจน</span>
-                  </div>
-                  <div class="bg-slate-900 rounded-lg p-2.5 border border-slate-800 grid grid-cols-12 gap-2.5 items-center">
-                    <div class="col-span-4 flex flex-col items-center justify-center text-center">
-                      <div class="w-12 h-12 rounded-full bg-slate-800 border-2 border-emerald-400/70 flex items-center justify-center text-emerald-300 text-xl">
-                        <i class="fa-solid fa-user-check"></i>
-                      </div>
-                      <span class="text-xs text-slate-300 mt-1 leading-tight">รูปจริงเห็นใบหน้า</span>
-                    </div>
-                    <div class="col-span-8 bg-slate-950 text-slate-100 rounded-lg p-2 border border-slate-800 text-left space-y-1">
-                      <p class="text-xs font-extrabold text-amber-300">ตัวอย่างโปรไฟล์ OpenChat:</p>
-                      <p class="text-xs font-bold text-white leading-tight">[B999] แทนไทย Camry</p>
-                      <p class="text-xs text-emerald-400"><i class="fa-solid fa-check mr-1"></i>ไม่มีเบอร์โทรในชื่อ</p>
-                    </div>
-                  </div>
-                  <p class="text-xs text-slate-300 text-center leading-snug">
-                    แคปหน้าจอโปรไฟล์ในห้อง OpenChat ที่แก้ไขเรียบร้อยแล้ว หรือหน้าแจ้งเตือนถูกบล็อก
-                  </p>
+                <!-- รูปตัวอย่างรถยนต์จริง -->
+                <div class="relative rounded-xl overflow-hidden border border-slate-700 bg-slate-950">
+                  <img src="example_car_photo.jpg" alt="ตัวอย่างรูปถ่ายรถยนต์ที่ถูกต้อง เห็นตัวรถเต็มคันและป้ายทะเบียนชัดเจน"
+                    loading="lazy" class="w-full aspect-video object-cover">
+                  <span class="absolute top-2.5 left-2.5 inline-flex items-center gap-1.5 bg-emerald-500 text-slate-950 font-extrabold text-xs px-2.5 py-1 rounded-full shadow">
+                    <i class="fa-solid fa-circle-check"></i> ตัวอย่างที่ถูกต้อง
+                  </span>
                 </div>
 
-                <div class="text-center space-y-1">
-                  <p class="text-xs sm:text-sm font-bold text-white">
-                    ภาพหน้าจอโปรไฟล์ OpenChat ปัจจุบัน หรือหน้าแจ้งเตือนถูกบล็อก <span class="text-rose-400">*</span>
-                  </p>
-                  <p class="text-xs text-slate-400">แสดงให้เห็นว่าได้แก้ไขชื่อและรูปโปรไฟล์ตามกติกาเรียบร้อยแล้ว (ไฟล์ JPG หรือ PNG)</p>
-                </div>
+                <!-- เช็กลิสต์สั้นอ่านง่าย -->
+                <ul class="space-y-2 text-xs sm:text-sm text-slate-200">
+                  <li class="flex items-start gap-2">
+                    <i class="fa-solid fa-check text-emerald-400 mt-1 shrink-0"></i>
+                    <span>ถ่ายมุมเฉียงด้านหน้าหรือด้านหลัง ให้เห็นตัวรถยนต์เต็มคัน</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <i class="fa-solid fa-check text-emerald-400 mt-1 shrink-0"></i>
+                    <span>เห็นแผ่นป้ายทะเบียนชัดเจน <strong>ตรงกับเลขทะเบียนที่กรอก</strong></span>
+                  </li>
+                </ul>
               </div>
 
-              <div class="text-center space-y-2">
-                <label class="inline-flex items-center justify-center bg-slate-950 hover:bg-slate-800 text-amber-300 border border-amber-400/40 font-semibold text-xs sm:text-sm px-5 py-2.5 rounded-xl cursor-pointer transition shadow-sm">
-                  <i class="fa-solid fa-upload mr-1.5"></i> เลือกรูปหลักฐานที่ 1
+              <div class="space-y-2 pt-2 border-t border-slate-800">
+                <label class="w-full min-h-[48px] inline-flex items-center justify-center gap-2 bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-extrabold text-sm px-5 py-3 rounded-xl cursor-pointer transition shadow-md">
+                  <i class="fa-solid fa-upload"></i>
+                  <span>เลือกรูปถ่ายรถยนต์</span>
                   <input type="file" id="proof_screen_file" accept="image/*" required onchange="handleProofUpload(this, 'screen')" class="hidden">
                 </label>
+                <p class="text-xs text-slate-400 text-center">รองรับไฟล์ภาพ JPG หรือ PNG</p>
                 <div id="preview-proof-screen" class="hidden pt-1"></div>
               </div>
             </div>
 
-            <!-- ภาพที่ 2: หลักฐานเพิ่มเติม -->
-            <div class="border-2 border-dashed border-slate-700 bg-slate-900 rounded-2xl p-5 hover:border-amber-400 transition flex flex-col justify-between space-y-4">
-              <div class="space-y-3">
+            <!-- กล่อง 2: รูปถ่ายคู่กระดาษยืนยันตัวตน -->
+            <div class="bg-slate-900/95 border border-slate-700 rounded-2xl p-4 sm:p-5 flex flex-col justify-between gap-4 hover:border-amber-400/60 transition">
+              <div class="space-y-3.5">
                 <div class="flex items-center justify-between gap-2">
-                  <span class="text-xs font-extrabold text-emerald-300 bg-emerald-500/15 border border-emerald-400/35 px-2.5 py-1 rounded-lg">
-                    <i class="fa-solid fa-file-shield mr-1"></i> หลักฐานที่ 2 (ชี้แจงเพิ่มเติม)
-                  </span>
-                  <span class="text-xs font-bold text-slate-300 bg-slate-800 border border-slate-700 px-2.5 py-0.5 rounded-full">
-                    แนบเพิ่มเติม (ถ้ามี)
+                  <h4 class="text-sm sm:text-base font-extrabold text-white flex items-center gap-2">
+                    <span class="w-7 h-7 rounded-lg bg-amber-500/20 border border-amber-400/40 text-amber-300 inline-flex items-center justify-center text-xs font-black">2</span>
+                    <span>รูปหน้าตรงคู่กระดาษลายมือ</span>
+                  </h4>
+                  <span class="text-xs font-bold text-rose-300 bg-rose-500/15 border border-rose-400/35 px-2.5 py-0.5 rounded-full shrink-0">
+                    จำเป็น *
                   </span>
                 </div>
 
-                <!-- ตัวอย่างภาพหลักฐานที่ 2 -->
-                <div class="bg-slate-950 rounded-xl p-3.5 text-white border border-slate-800 space-y-2">
-                  <div class="flex items-center justify-between text-xs text-amber-300 font-bold">
-                    <span><i class="fa-solid fa-camera mr-1"></i> ตัวอย่างภาพหลักฐานเพิ่มเติม</span>
-                    <span class="text-emerald-400">ภาพแชท / ยืนยันตัวตน</span>
-                  </div>
-                  <div class="bg-slate-900 rounded-lg p-3 border border-slate-800 flex flex-col items-center justify-center gap-2">
-                    <div class="flex items-center justify-center gap-3">
-                      <i class="fa-solid fa-comments text-3xl text-emerald-400"></i>
-                      <i class="fa-solid fa-id-card-clip text-3xl text-amber-400"></i>
-                    </div>
-                    <p class="text-xs text-slate-300 text-center leading-snug">
-                      ภาพแคปหน้าจอแชทชี้แจงข้อเท็จจริง หรือรูปถ่ายยืนยันตัวตนเพื่อประกอบการพิจารณาของแอดมิน
-                    </p>
-                  </div>
+                <!-- รูปตัวอย่างคู่กระดาษลายมือจริง -->
+                <div class="relative rounded-xl overflow-hidden border border-amber-400/35 bg-slate-950">
+                  <img src="example_selfie_paper.jpg" alt="ตัวอย่างรูปถ่ายหน้าตรงคู่กระดาษเขียนด้วยลายมือจริง"
+                    loading="lazy" class="w-full aspect-video object-cover">
+                  <span class="absolute top-2.5 left-2.5 inline-flex items-center gap-1.5 bg-amber-400 text-slate-950 font-extrabold text-xs px-2.5 py-1 rounded-full shadow">
+                    <i class="fa-solid fa-circle-check"></i> ตัวอย่างที่ถูกต้อง
+                  </span>
                 </div>
 
-                <div class="text-center space-y-1">
-                  <p class="text-xs sm:text-sm font-bold text-white">
-                    ภาพหลักฐานชี้แจงเพิ่มเติม / รูปยืนยันตัวตน (ถ้ามี)
-                  </p>
-                  <p class="text-xs text-slate-400">เช่น ภาพแชทชี้แจง หรือหลักฐานยืนยันความบริสุทธิ์ใจ (ไฟล์ JPG หรือ PNG)</p>
+                <!-- เช็กลิสต์สั้นอ่านง่าย -->
+                <ul class="space-y-2 text-xs sm:text-sm text-slate-200">
+                  <li class="flex items-start gap-2">
+                    <i class="fa-solid fa-check text-emerald-400 mt-1 shrink-0"></i>
+                    <span>เขียนด้วยลายมือจริง: <strong class="text-amber-300">“ขอปลดล็อก The Driver Thailand”</strong> พร้อม ชื่อ-นามสกุล / วันที่ / ทะเบียนรถ</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <i class="fa-solid fa-check text-emerald-400 mt-1 shrink-0"></i>
+                    <span>เห็นใบหน้าตรงชัดเจน ไม่สวมแว่นดำหรือหน้ากาก</span>
+                  </li>
+                </ul>
+
+                <div class="bg-rose-950/50 border border-rose-500/40 rounded-xl px-3 py-2 text-xs text-rose-200 font-semibold flex items-start gap-2">
+                  <i class="fa-solid fa-triangle-exclamation text-rose-400 mt-0.5 shrink-0"></i>
+                  <span>ห้ามตัดต่อ ห้ามใช้ AI และห้ามถือคู่กับบัตรประชาชน</span>
                 </div>
               </div>
 
-              <div class="text-center space-y-2">
-                <label class="inline-flex items-center justify-center bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-extrabold text-xs sm:text-sm px-5 py-2.5 rounded-xl cursor-pointer transition shadow-sm">
-                  <i class="fa-solid fa-upload mr-1.5"></i> เลือกรูปหลักฐานที่ 2
-                  <input type="file" id="proof_extra_file" accept="image/*" onchange="handleProofUpload(this, 'extra')" class="hidden">
+              <div class="space-y-2 pt-2 border-t border-slate-800">
+                <label class="w-full min-h-[48px] inline-flex items-center justify-center gap-2 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold text-sm px-5 py-3 rounded-xl cursor-pointer transition shadow-md">
+                  <i class="fa-solid fa-upload"></i>
+                  <span>เลือกรูปคู่กระดาษยืนยันตัวตน</span>
+                  <input type="file" id="proof_extra_file" accept="image/*" required onchange="handleProofUpload(this, 'extra')" class="hidden">
                 </label>
+                <p class="text-xs text-slate-400 text-center">รองรับไฟล์ภาพ JPG หรือ PNG</p>
                 <div id="preview-proof-extra" class="hidden pt-1"></div>
               </div>
             </div>

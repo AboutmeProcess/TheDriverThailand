@@ -1543,16 +1543,8 @@
           password: password,
           displayName: localMatch ? localMatch.displayName : username
         };
-
-        document.getElementById('current-admin-label').textContent = `${sessionAdmin.displayName} (${sessionAdmin.username})`;
-        document.getElementById('login-view').classList.add('hidden');
-        document.getElementById('dashboard-view').classList.remove('hidden');
-        renderAdminAccountsList();
-        initPageAnnouncementEditor();
-        initDriverNewsCms();
-        initPartnerPerksCms();
-        initTourBookStock();
-        refreshAllAdminData();
+        persistAdminSession(sessionAdmin);
+        enterAdminDashboard(false);
         toast('เข้าสู่ระบบหลังบ้านสำเร็จ');
       } finally {
         btn.disabled = false;
@@ -1560,14 +1552,75 @@
       }
     }
 
+    const ADMIN_SESSION_STORAGE_KEY = 'tdt_admin_session_v1';
+    const ADMIN_ACTIVE_TAB_KEY = 'tdt_admin_active_tab_v1';
+    const ADMIN_SESSION_TTL_MS = 15 * 60 * 1000; // คงสถานะล็อกอิน 15 นาที (ต่ออายุอัตโนมัติเมื่อรีเฟรช)
+
+    function persistAdminSession(adminObj) {
+      if (!adminObj) return;
+      try {
+        sessionStorage.setItem(ADMIN_SESSION_STORAGE_KEY, JSON.stringify({
+          username: adminObj.username,
+          password: adminObj.password,
+          displayName: adminObj.displayName,
+          expiresAt: Date.now() + ADMIN_SESSION_TTL_MS
+        }));
+      } catch (_) {}
+    }
+
+    function enterAdminDashboard(isRestore) {
+      if (!sessionAdmin) return;
+      document.getElementById('current-admin-label').textContent = `${sessionAdmin.displayName} (${sessionAdmin.username})`;
+      document.getElementById('login-view').classList.add('hidden');
+      document.getElementById('dashboard-view').classList.remove('hidden');
+      renderAdminAccountsList();
+      initPageAnnouncementEditor();
+      initDriverNewsCms();
+      initPartnerPerksCms();
+      initTourBookStock();
+      if (isRestore) {
+        try {
+          const savedTab = sessionStorage.getItem(ADMIN_ACTIVE_TAB_KEY);
+          if (savedTab && document.getElementById(`tab-panel-${savedTab}`)) {
+            switchTab(savedTab);
+          }
+        } catch (_) {}
+      }
+      refreshAllAdminData();
+    }
+
+    function restoreAdminSessionIfValid() {
+      try {
+        const raw = sessionStorage.getItem(ADMIN_SESSION_STORAGE_KEY);
+        if (!raw) return;
+        const parsed = JSON.parse(raw);
+        if (parsed && parsed.username && parsed.password && Number(parsed.expiresAt || 0) > Date.now()) {
+          sessionAdmin = {
+            username: parsed.username,
+            password: parsed.password,
+            displayName: parsed.displayName || parsed.username
+          };
+          persistAdminSession(sessionAdmin); // ต่ออายุเซสชันอีก 15 นาที
+          enterAdminDashboard(true);
+        } else {
+          sessionStorage.removeItem(ADMIN_SESSION_STORAGE_KEY);
+        }
+      } catch (_) {}
+    }
+
     function handleLogout() {
       sessionAdmin = null;
+      try {
+        sessionStorage.removeItem(ADMIN_SESSION_STORAGE_KEY);
+        sessionStorage.removeItem(ADMIN_ACTIVE_TAB_KEY);
+      } catch (_) {}
       document.getElementById('dashboard-view').classList.add('hidden');
       document.getElementById('login-view').classList.remove('hidden');
       document.getElementById('login-password').value = '';
     }
 
     function switchTab(tabName) {
+      try { sessionStorage.setItem(ADMIN_ACTIVE_TAB_KEY, tabName); } catch (_) {}
       ['site', 'members', 'forum', 'shipping', 'admins', 'tourbook', 'backup'].forEach(t => {
         document.getElementById(`tab-panel-${t}`).classList.toggle('hidden', t !== tabName);
       });
@@ -1583,6 +1636,8 @@
       if (tabName === 'admins') renderAdminAccountsList();
       if (tabName === 'tourbook') renderTourBookStockTable();
     }
+
+    document.addEventListener('DOMContentLoaded', restoreAdminSessionIfValid);
 
     function renderAdminAccountsList() {
       const list = getAdminAccounts();
@@ -1777,6 +1832,7 @@
         const json = await res.json();
         if (json && json.success) {
           sessionAdmin.password = p1;
+          persistAdminSession(sessionAdmin);
           document.getElementById('new-master-passcode').value = '';
           document.getElementById('confirm-master-passcode').value = '';
           toast('เปลี่ยนรหัสผ่านหลังบ้านสำเร็จแล้ว! กรุณาจดจำรหัสใหม่ไว้ใช้งานครั้งถัดไป');

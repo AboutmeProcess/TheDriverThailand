@@ -416,34 +416,115 @@
       </div>
     </section>
 
-    <!-- แถบหมวดหมู่และค้นหากระทู้ -->
-    <section class="dark-surface-card rounded-3xl p-4 sm:p-6 space-y-4">
-      <div class="flex flex-col md:flex-row gap-3 justify-between">
-        <div class="flex flex-wrap items-center gap-2">
-          <button type="button" onclick="setCategoryFilter('ALL')" data-cat="ALL" class="cat-tab-btn bg-amber-400 text-slate-950 font-extrabold text-xs px-3.5 py-2 rounded-xl transition">ทั้งหมด</button>
-          <button type="button" onclick="setCategoryFilter('ข่าวสารและเส้นทางจราจร')" data-cat="ข่าวสารและเส้นทางจราจร" class="cat-tab-btn bg-slate-950 text-slate-300 hover:bg-slate-800 hover:text-amber-300 border border-slate-700 font-semibold text-xs px-3.5 py-2 rounded-xl transition">🚦 ข่าวสาร &amp; เส้นทาง</button>
-          <button type="button" onclick="setCategoryFilter('แลกเปลี่ยนประสบการณ์คนขับ')" data-cat="แลกเปลี่ยนประสบการณ์คนขับ" class="cat-tab-btn bg-slate-950 text-slate-300 hover:bg-slate-800 hover:text-amber-300 border border-slate-700 font-semibold text-xs px-3.5 py-2 rounded-xl transition">🚖 ประสบการณ์คนขับ</button>
-          <button type="button" onclick="setCategoryFilter('รีวิวสถานที่ท่องเที่ยวและร้านค้า')" data-cat="รีวิวสถานที่ท่องเที่ยวและร้านค้า" class="cat-tab-btn bg-slate-950 text-slate-300 hover:bg-slate-800 hover:text-amber-300 border border-slate-700 font-semibold text-xs px-3.5 py-2 rounded-xl transition">🗺️ รีวิวสถานที่ &amp; ร้านค้า</button>
-          <button type="button" onclick="setCategoryFilter('ซื้อ-ขาย อุปกรณ์และยานยนต์')" data-cat="ซื้อ-ขาย อุปกรณ์และยานยนต์" class="cat-tab-btn bg-slate-950 text-slate-300 hover:bg-slate-800 hover:text-amber-300 border border-slate-700 font-semibold text-xs px-3.5 py-2 rounded-xl transition">🔧 ซื้อ-ขาย อุปกรณ์รถ</button>
-          <button type="button" onclick="setCategoryFilter('สอบถามแอดมินและกติกา')" data-cat="สอบถามแอดมินและกติกา" class="cat-tab-btn bg-slate-950 text-slate-300 hover:bg-slate-800 hover:text-amber-300 border border-slate-700 font-semibold text-xs px-3.5 py-2 rounded-xl transition">📢 สอบถามแอดมิน</button>
-        </div>
-
-        <div class="flex items-center gap-2">
-          <input type="text" id="forum-search-input" oninput="renderTopicsFeed()" placeholder="ค้นหากระทู้, ชื่อผู้ตั้ง..."
-            class="dark-field w-full md:w-64 rounded-xl px-3.5 py-2 text-xs">
-          <button type="button" onclick="loadForumData(true)" title="รีเฟรชกระทู้" class="bg-slate-950 hover:bg-slate-800 text-amber-400 border border-amber-400/35 px-3.5 py-2 rounded-xl text-xs font-bold shrink-0 transition">
-            <i id="forum-refresh-icon" class="fa-solid fa-rotate"></i>
-          </button>
+    <!-- สถิติชุมชนแบบเรียลไทม์ -->
+    <section class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+      <div class="dark-surface-card rounded-2xl p-4 flex items-center gap-3">
+        <span class="w-10 h-10 rounded-xl bg-amber-400/15 border border-amber-400/35 text-amber-300 flex items-center justify-center shrink-0"><i class="fa-solid fa-newspaper"></i></span>
+        <div>
+          <strong id="stat-forum-topics" class="text-xl font-black text-white font-mono leading-none block">-</strong>
+          <span class="text-[11px] text-slate-400">กระทู้ทั้งหมด</span>
         </div>
       </div>
-
-      <!-- รายการกระทู้ทั้งหมด -->
-      <div id="topics-feed-container" class="space-y-4">
-        <div class="text-center py-10 text-slate-400 text-sm">
-          <i class="fa-solid fa-spinner fa-spin mr-1.5"></i> กำลังโหลดกระทู้ชุมชน...
+      <div class="dark-surface-card rounded-2xl p-4 flex items-center gap-3">
+        <span class="w-10 h-10 rounded-xl bg-sky-500/15 border border-sky-400/35 text-sky-300 flex items-center justify-center shrink-0"><i class="fa-solid fa-comments"></i></span>
+        <div>
+          <strong id="stat-forum-comments" class="text-xl font-black text-white font-mono leading-none block">-</strong>
+          <span class="text-[11px] text-slate-400">ความคิดเห็นรวม</span>
+        </div>
+      </div>
+      <div class="dark-surface-card rounded-2xl p-4 flex items-center gap-3">
+        <span class="w-10 h-10 rounded-xl bg-emerald-500/15 border border-emerald-400/35 text-emerald-300 flex items-center justify-center shrink-0"><i class="fa-solid fa-users"></i></span>
+        <div>
+          <strong id="stat-forum-members" class="text-xl font-black text-white font-mono leading-none block">-</strong>
+          <span class="text-[11px] text-slate-400">สมาชิกในบอร์ด</span>
+        </div>
+      </div>
+      <div class="dark-surface-card rounded-2xl p-4 flex items-center gap-3">
+        <span class="w-10 h-10 rounded-xl bg-purple-500/15 border border-purple-400/35 text-purple-300 flex items-center justify-center shrink-0"><i class="fa-solid fa-bookmark"></i></span>
+        <div>
+          <strong id="stat-forum-saved" class="text-xl font-black text-amber-300 font-mono leading-none block">0</strong>
+          <span class="text-[11px] text-slate-400">กระทู้ที่บันทึกไว้</span>
         </div>
       </div>
     </section>
+
+    <!-- โครงสร้าง 2 คอลัมน์: ฟีดกระทู้ (ซ้าย) + อันดับสมาชิก & กระทู้มาแรง (ขวา) -->
+    <div class="grid lg:grid-cols-12 gap-6 items-start">
+      <!-- ซ้าย: แถบหมวดหมู่ การเรียงลำดับ และฟีดกระทู้ -->
+      <section class="lg:col-span-8 dark-surface-card rounded-3xl p-4 sm:p-6 space-y-4">
+        <div class="space-y-3">
+          <div class="flex flex-wrap items-center gap-2">
+            <button type="button" onclick="setCategoryFilter('ALL')" data-cat="ALL" class="cat-tab-btn bg-amber-400 text-slate-950 font-extrabold text-xs px-3.5 py-2 rounded-xl transition">ทั้งหมด</button>
+            <button type="button" onclick="setCategoryFilter('ข่าวสารและเส้นทางจราจร')" data-cat="ข่าวสารและเส้นทางจราจร" class="cat-tab-btn bg-slate-950 text-slate-300 hover:bg-slate-800 hover:text-amber-300 border border-slate-700 font-semibold text-xs px-3.5 py-2 rounded-xl transition">🚦 ข่าวสาร &amp; เส้นทาง</button>
+            <button type="button" onclick="setCategoryFilter('แลกเปลี่ยนประสบการณ์คนขับ')" data-cat="แลกเปลี่ยนประสบการณ์คนขับ" class="cat-tab-btn bg-slate-950 text-slate-300 hover:bg-slate-800 hover:text-amber-300 border border-slate-700 font-semibold text-xs px-3.5 py-2 rounded-xl transition">🚖 ประสบการณ์คนขับ</button>
+            <button type="button" onclick="setCategoryFilter('รีวิวสถานที่ท่องเที่ยวและร้านค้า')" data-cat="รีวิวสถานที่ท่องเที่ยวและร้านค้า" class="cat-tab-btn bg-slate-950 text-slate-300 hover:bg-slate-800 hover:text-amber-300 border border-slate-700 font-semibold text-xs px-3.5 py-2 rounded-xl transition">🗺️ รีวิวสถานที่ &amp; ร้านค้า</button>
+            <button type="button" onclick="setCategoryFilter('ซื้อ-ขาย อุปกรณ์และยานยนต์')" data-cat="ซื้อ-ขาย อุปกรณ์และยานยนต์" class="cat-tab-btn bg-slate-950 text-slate-300 hover:bg-slate-800 hover:text-amber-300 border border-slate-700 font-semibold text-xs px-3.5 py-2 rounded-xl transition">🔧 ซื้อ-ขาย อุปกรณ์รถ</button>
+            <button type="button" onclick="setCategoryFilter('สอบถามแอดมินและกติกา')" data-cat="สอบถามแอดมินและกติกา" class="cat-tab-btn bg-slate-950 text-slate-300 hover:bg-slate-800 hover:text-amber-300 border border-slate-700 font-semibold text-xs px-3.5 py-2 rounded-xl transition">📢 สอบถามแอดมิน</button>
+          </div>
+
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2 pt-1 border-t border-slate-800/80">
+            <div class="flex flex-wrap items-center gap-1.5 text-xs">
+              <button type="button" onclick="setSortMode('latest')" data-sort="latest" class="sort-tab-btn bg-amber-400/20 text-amber-300 border border-amber-400/45 font-bold px-3 py-1.5 rounded-lg transition">🕒 ล่าสุด</button>
+              <button type="button" onclick="setSortMode('top')" data-sort="top" class="sort-tab-btn bg-slate-950 text-slate-400 hover:text-white border border-slate-800 font-semibold px-3 py-1.5 rounded-lg transition">⭐ คะแนนสูงสุด</button>
+              <button type="button" onclick="setSortMode('discussed')" data-sort="discussed" class="sort-tab-btn bg-slate-950 text-slate-400 hover:text-white border border-slate-800 font-semibold px-3 py-1.5 rounded-lg transition">💬 คุยเยอะสุด</button>
+              <button type="button" onclick="setSortMode('saved')" data-sort="saved" class="sort-tab-btn bg-slate-950 text-slate-400 hover:text-white border border-slate-800 font-semibold px-3 py-1.5 rounded-lg transition">🔖 ที่บันทึกไว้</button>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="relative flex-1 sm:w-56">
+                <i class="fa-solid fa-magnifying-glass text-slate-500 absolute left-3 top-1/2 -translate-y-1/2 text-xs"></i>
+                <input type="text" id="forum-search-input" oninput="renderTopicsFeed()" placeholder="ค้นหากระทู้, ชื่อผู้ตั้ง..."
+                  class="dark-field w-full rounded-xl pl-8 pr-3 py-2 text-xs">
+              </div>
+              <button type="button" onclick="loadForumData(true)" title="รีเฟรชกระทู้" class="bg-slate-950 hover:bg-slate-800 text-amber-400 border border-amber-400/35 px-3.5 py-2 rounded-xl text-xs font-bold shrink-0 transition">
+                <i id="forum-refresh-icon" class="fa-solid fa-rotate"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- รายการกระทู้ทั้งหมด -->
+        <div id="topics-feed-container" class="space-y-4">
+          <div class="text-center py-10 text-slate-400 text-sm">
+            <i class="fa-solid fa-spinner fa-spin mr-1.5"></i> กำลังโหลดกระทู้ชุมชน...
+          </div>
+        </div>
+      </section>
+
+      <!-- ขวา: Sidebar อันดับสมาชิก + กระทู้มาแรง + ระบบเรทติ้ง -->
+      <aside class="lg:col-span-4 space-y-4">
+        <!-- กระทู้มาแรง -->
+        <div class="dark-surface-card rounded-3xl p-5 space-y-3">
+          <h3 class="text-sm font-extrabold text-amber-300 flex items-center gap-2">
+            <i class="fa-solid fa-fire text-orange-400"></i> กระทู้มาแรงในชุมชน
+          </h3>
+          <div id="sidebar-trending-list" class="space-y-2 text-xs">
+            <p class="text-slate-500">กำลังโหลด...</p>
+          </div>
+        </div>
+
+        <!-- อันดับสมาชิกยอดเยี่ยม -->
+        <div class="dark-surface-card rounded-3xl p-5 space-y-3">
+          <h3 class="text-sm font-extrabold text-emerald-300 flex items-center gap-2">
+            <i class="fa-solid fa-trophy text-amber-400"></i> สมาชิกเรทติ้งสูงสุด (Top 5)
+          </h3>
+          <div id="sidebar-leaderboard-list" class="space-y-2 text-xs">
+            <p class="text-slate-500">กำลังโหลด...</p>
+          </div>
+        </div>
+
+        <!-- กติกา & แต้มสะสม -->
+        <div class="bg-slate-950/90 border border-slate-800 rounded-3xl p-5 space-y-2.5 text-xs">
+          <h3 class="text-sm font-extrabold text-sky-300 flex items-center gap-2">
+            <i class="fa-solid fa-award text-sky-400"></i> ระบบแต้มและระดับยศสมาชิก
+          </h3>
+          <ul class="space-y-1.5 text-slate-300">
+            <li>• ตั้งกระทู้ใหม่ที่เป็นประโยชน์ <strong class="text-emerald-300">+5 แต้ม</strong></li>
+            <li>• ร่วมตอบความคิดเห็นช่วยเพื่อนสมาชิก <strong class="text-emerald-300">+2 แต้ม</strong></li>
+            <li>• ยศระดับ: ⭐ เริ่มต้น → ✨ ดีเด่น (15+) → 🌟 มือโปร (50+) → 🏆 กูรู (100+)</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
   </main>
 
   <!-- Modal สมัครสมาชิกเว็บบอร์ด / เข้าสู่ระบบ -->
@@ -475,17 +556,17 @@
 
       <!-- ฟอร์มสมัครสมาชิกเว็บบอร์ด -->
       <form id="form-forum-register" onsubmit="handleForumRegister(event)" class="hidden space-y-3.5">
-        <div class="bg-amber-950/60 border border-amber-400/35 rounded-xl p-3 text-xs text-amber-200">
-          <strong>เงื่อนไขการสมัคร:</strong> ต้องมีรหัสสมาชิกที่อนุมัติแล้วในระบบ และหลังจากส่งคำขอสมัคร <strong>แอดมินจะตรวจสอบและกดอนุมัติ</strong> จึงจะเริ่มตั้งกระทู้และตอบคอมเมนต์ได้
+        <div class="bg-emerald-950/60 border border-emerald-400/35 rounded-xl p-3 text-xs text-emerald-200">
+          <strong>อนุมัติอัตโนมัติทันที:</strong> ระบบจะตรวจสอบ <strong>รหัสสมาชิก</strong> และ <strong>เบอร์ที่ลงทะเบียนสมาชิก</strong> (10 หลัก) กับฐานข้อมูลสมาชิก หากข้อมูลตรงกันจะ <strong>อนุมัติและเข้าสู่ระบบให้ใช้งานได้ทันที</strong> (ไม่เปิดเผยเบอร์เต็มต่อสาธารณะ)
         </div>
-        <div class="grid grid-cols-2 gap-3">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div class="space-y-1">
             <label class="block text-xs font-bold text-slate-300">รหัสสมาชิก <span class="text-rose-400">*</span></label>
             <input type="text" id="reg-member-code" required placeholder="เช่น B2464" class="dark-field w-full rounded-xl px-3.5 py-2.5 text-xs font-mono uppercase text-amber-300">
           </div>
           <div class="space-y-1">
-            <label class="block text-xs font-bold text-slate-300">เบอร์โทร 4 หลักท้าย <span class="text-rose-400">*</span></label>
-            <input type="text" id="reg-phone-last4" required maxlength="4" pattern="\d{4}" placeholder="เช่น 9683" class="dark-field w-full rounded-xl px-3.5 py-2.5 text-xs font-mono">
+            <label class="block text-xs font-bold text-slate-300">เบอร์ที่ลงทะเบียนสมาชิก <span class="text-rose-400">*</span></label>
+            <input type="tel" id="reg-phone-full" required maxlength="10" pattern="0\d{9}" inputmode="numeric" placeholder="เช่น 0812345678" class="dark-field w-full rounded-xl px-3.5 py-2.5 text-xs font-mono">
           </div>
         </div>
         <div class="space-y-1">
@@ -510,6 +591,13 @@
         <i class="fa-solid fa-xmark"></i>
       </button>
       <h3 class="text-lg font-extrabold text-amber-300"><i class="fa-solid fa-pen-to-square text-amber-400 mr-2"></i>ตั้งกระทู้ใหม่</h3>
+      <!-- เทมเพลตลัดสำหรับคนขับ -->
+      <div class="flex flex-wrap items-center gap-1.5 text-[11px]">
+        <span class="text-slate-400 font-semibold">เทมเพลตด่วน:</span>
+        <button type="button" onclick="applyTopicTemplate('traffic')" class="bg-slate-950 hover:bg-slate-800 text-amber-300 border border-slate-700 px-2.5 py-1 rounded-lg font-semibold">🚦 แจ้งเส้นทาง/รถติด</button>
+        <button type="button" onclick="applyTopicTemplate('review')" class="bg-slate-950 hover:bg-slate-800 text-emerald-300 border border-slate-700 px-2.5 py-1 rounded-lg font-semibold">🗺️ รีวิวสถานที่</button>
+        <button type="button" onclick="applyTopicTemplate('market')" class="bg-slate-950 hover:bg-slate-800 text-sky-300 border border-slate-700 px-2.5 py-1 rounded-lg font-semibold">🔧 ซื้อ-ขายอุปกรณ์</button>
+      </div>
       <form onsubmit="handleCreateTopic(event)" class="space-y-3.5">
         <div class="space-y-1">
           <label class="block text-xs font-bold text-slate-300">หมวดหมู่กระทู้ <span class="text-rose-400">*</span></label>
@@ -543,6 +631,14 @@
     </div>
   </div>
 
+  <!-- Image Lightbox Modal -->
+  <div id="forum-lightbox" onclick="closeForumLightbox()" class="hidden fixed inset-0 z-[1200] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 cursor-zoom-out">
+    <button type="button" onclick="closeForumLightbox()" aria-label="ปิดรูปภาพ" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-slate-900 border border-slate-700 text-white flex items-center justify-center text-lg hover:border-amber-400">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <img id="forum-lightbox-img" src="" alt="รูปภาพขยาย" onclick="event.stopPropagation()" class="max-w-full max-h-[88vh] rounded-2xl border border-amber-400/40 shadow-2xl object-contain cursor-default">
+  </div>
+
   <!-- FOOTER -->
   <footer class="bg-slate-950 text-slate-400 border-t border-amber-500/25 py-9 px-4 text-xs mt-10">
     <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
@@ -567,14 +663,167 @@
     const FORUM_API_URL = 'https://script.google.com/macros/s/AKfycbyeDCdxBD10D_AFZQY2NxeylLOiAmAHLesSDZHXYCb3TsYs4wYer_kRTPVOs3VpK2pP/exec';
     const FORUM_SESSION_KEY = 'tdt_forum_user_session_v1';
 
+    const FORUM_SAVED_KEY = 'tdt_forum_saved_topics_v1';
+
     let forumState = {
       user: null,
+      users: [],
       topics: [],
       comments: [],
       category: 'ALL',
+      sortMode: 'latest',
+      savedIds: [],
+      expandedComments: {},
       newTopicImageBase64: '',
       commentImages: {}
     };
+
+    function loadSavedTopicIds() {
+      try {
+        const raw = localStorage.getItem(FORUM_SAVED_KEY);
+        const arr = raw ? JSON.parse(raw) : [];
+        forumState.savedIds = Array.isArray(arr) ? arr : [];
+      } catch (_) { forumState.savedIds = []; }
+    }
+
+    function toggleSaveTopic(topicId) {
+      const idx = forumState.savedIds.indexOf(topicId);
+      if (idx >= 0) {
+        forumState.savedIds.splice(idx, 1);
+        showToast('ยกเลิกบันทึกแล้ว', 'นำกระทู้ออกจากรายการที่บันทึกไว้แล้ว', 'info');
+      } else {
+        forumState.savedIds.push(topicId);
+        showToast('บันทึกกระทู้แล้ว', 'สามารถดูย้อนหลังได้ในแถบ “ที่บันทึกไว้”', 'success');
+      }
+      try { localStorage.setItem(FORUM_SAVED_KEY, JSON.stringify(forumState.savedIds)); } catch (_) {}
+      renderForumSidebarAndStats();
+      renderTopicsFeed();
+    }
+
+    function shareTopicLink(topicId) {
+      const url = `${window.location.origin}${window.location.pathname}?topic=${encodeURIComponent(topicId)}`;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(() => {
+          showToast('คัดลอกลิงก์กระทู้แล้ว', 'สามารถวางส่งให้เพื่อนสมาชิกในห้อง OpenChat ได้เลย', 'success');
+        }).catch(() => showToast('ลิงก์กระทู้', url, 'info'));
+      } else {
+        showToast('ลิงก์กระทู้', url, 'info');
+      }
+    }
+
+    function openForumLightbox(imgUrl) {
+      const modal = document.getElementById('forum-lightbox');
+      const img = document.getElementById('forum-lightbox-img');
+      if (!modal || !img || !imgUrl) return;
+      img.src = imgUrl;
+      modal.classList.remove('hidden');
+    }
+
+    function closeForumLightbox() {
+      document.getElementById('forum-lightbox')?.classList.add('hidden');
+    }
+
+    function toggleExpandComments(topicId) {
+      forumState.expandedComments[topicId] = !forumState.expandedComments[topicId];
+      renderTopicsFeed();
+    }
+
+    function setSortMode(mode) {
+      forumState.sortMode = mode;
+      document.querySelectorAll('.sort-tab-btn').forEach(btn => {
+        const active = btn.getAttribute('data-sort') === mode;
+        btn.className = active
+          ? 'sort-tab-btn bg-amber-400/20 text-amber-300 border border-amber-400/45 font-bold px-3 py-1.5 rounded-lg transition'
+          : 'sort-tab-btn bg-slate-950 text-slate-400 hover:text-white border border-slate-800 font-semibold px-3 py-1.5 rounded-lg transition';
+      });
+      renderTopicsFeed();
+    }
+
+    function applyTopicTemplate(kind) {
+      const catEl = document.getElementById('topic-category');
+      const titleEl = document.getElementById('topic-title');
+      const contentEl = document.getElementById('topic-content');
+      if (!catEl || !titleEl || !contentEl) return;
+      if (kind === 'traffic') {
+        catEl.value = 'ข่าวสารและเส้นทางจราจร';
+        titleEl.value = '[แจ้งเตือนเส้นทาง] ';
+        contentEl.value = '📍 พิกัด/ถนน:\n🕒 เวลาที่พบ:\n🚦 สภาพการจราจร/ข้อแนะนำเส้นทางเลี่ยง:\n';
+      } else if (kind === 'review') {
+        catEl.value = 'รีวิวสถานที่ท่องเที่ยวและร้านค้า';
+        titleEl.value = '[รีวิว] ';
+        contentEl.value = '📍 ชื่อสถานที่/ร้านค้า:\n🅿️ ที่จอดรถสำหรับคนขับ:\n⭐ ความประทับใจ/ข้อแนะนำ:\n';
+      } else if (kind === 'market') {
+        catEl.value = 'ซื้อ-ขาย อุปกรณ์และยานยนต์';
+        titleEl.value = '[ส่งต่อ/ขาย] ';
+        contentEl.value = '🔧 รายการสินค้า:\n💰 ราคา:\n📍 นัดรับ/จัดส่ง:\n📞 ช่องทางติดต่อ:\n';
+      }
+      titleEl.focus();
+    }
+
+    function jumpToTopic(topicId) {
+      setCategoryFilter('ALL');
+      setSortMode('latest');
+      setTimeout(() => {
+        const el = document.getElementById(`topic-card-${topicId}`);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          el.classList.add('ring-2', 'ring-amber-400');
+          setTimeout(() => el.classList.remove('ring-2', 'ring-amber-400'), 2400);
+        }
+      }, 80);
+    }
+
+    function renderForumSidebarAndStats() {
+      const setTxt = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+      setTxt('stat-forum-topics', forumState.topics.length.toLocaleString());
+      setTxt('stat-forum-comments', forumState.comments.length.toLocaleString());
+      setTxt('stat-forum-members', (forumState.users || []).length.toLocaleString());
+      setTxt('stat-forum-saved', forumState.savedIds.length.toLocaleString());
+
+      // Trending top 3
+      const trendBox = document.getElementById('sidebar-trending-list');
+      if (trendBox) {
+        const ranked = [...forumState.topics].map(t => {
+          const cCnt = forumState.comments.filter(c => c.topicId === t.id).length;
+          const rCnt = Object.values(t.reactions || {}).reduce((a, b) => a + Number(b || 0), 0);
+          return { topic: t, score: cCnt * 3 + rCnt * 2 + Number(t.ratingCount || 0) * 2, cCnt, rCnt };
+        }).sort((a, b) => b.score - a.score).slice(0, 3);
+        trendBox.innerHTML = ranked.length === 0
+          ? '<p class="text-slate-500">ยังไม่มีกระทู้ในขณะนี้</p>'
+          : ranked.map((item, i) => `
+            <button type="button" onclick="jumpToTopic('${escapeHtml(item.topic.id)}')" class="w-full text-left bg-slate-950/90 hover:bg-slate-900 border border-slate-800 hover:border-amber-400/40 rounded-2xl p-3 transition space-y-1">
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-amber-400/15 text-amber-300">#${i + 1} มาแรง</span>
+                <span class="text-[10px] text-slate-400">💬 ${item.cCnt} · 👍 ${item.rCnt}</span>
+              </div>
+              <p class="font-bold text-slate-100 line-clamp-2 leading-snug">${escapeHtml(item.topic.title)}</p>
+            </button>
+          `).join('');
+      }
+
+      // Top 5 Contributors Leaderboard
+      const lbBox = document.getElementById('sidebar-leaderboard-list');
+      if (lbBox) {
+        const topUsers = [...(forumState.users || [])]
+          .sort((a, b) => Number(b.rating || 0) - Number(a.rating || 0))
+          .slice(0, 5);
+        const medals = ['🥇', '🥈', '🥉', '4.', '5.'];
+        lbBox.innerHTML = topUsers.length === 0
+          ? '<p class="text-slate-500">ยังไม่มีข้อมูลอันดับสมาชิก</p>'
+          : topUsers.map((u, idx) => `
+            <div class="bg-slate-950/90 border border-slate-800 rounded-2xl px-3 py-2.5 flex items-center justify-between gap-2">
+              <div class="flex items-center gap-2 min-w-0">
+                <span class="text-sm font-black w-5 text-center shrink-0">${medals[idx]}</span>
+                <div class="min-w-0">
+                  <p class="font-bold text-white truncate">${escapeHtml(u.displayName || u.memberCode)}</p>
+                  <p class="text-[10px] text-slate-400 font-mono">${escapeHtml(u.memberCode)}</p>
+                </div>
+              </div>
+              <span class="px-2 py-0.5 rounded-full bg-amber-400/15 text-amber-300 border border-amber-400/35 font-extrabold text-[11px] shrink-0">⭐ ${Number(u.rating || 0)}</span>
+            </div>
+          `).join('');
+      }
+    }
 
     const REACTION_TYPES = [
       { key: 'like', emoji: '👍', label: 'ถูกใจ' },
@@ -696,10 +945,15 @@
       btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> กำลังตรวจสอบรหัสสมาชิก...';
 
       try {
-        const memberCode = document.getElementById('reg-member-code').value.trim().toUpperCase();
-        const phoneLast4 = document.getElementById('reg-phone-last4').value.trim();
+        const memberCode = document.getElementById('reg-member-code').value.trim().toUpperCase().replace(/^\[|\]$/g, '');
+        const phoneFull = document.getElementById('reg-phone-full').value.replace(/\D/g, '');
         const displayName = document.getElementById('reg-display-name').value.trim();
         const password = document.getElementById('reg-password').value;
+
+        if (!/^0\d{9}$/.test(phoneFull)) {
+          showToast('ข้อมูลไม่ครบถ้วน', 'กรุณากรอกเบอร์โทรศัพท์ติดต่อให้ครบ 10 หลัก (ขึ้นต้นด้วย 0 เช่น 0812345678)', 'error');
+          return;
+        }
 
         const res = await fetch(FORUM_API_URL, {
           method: 'POST',
@@ -707,19 +961,27 @@
           body: JSON.stringify({
             action: 'forum_register',
             memberCode,
-            phoneLast4,
+            phone: phoneFull,
             displayName,
             password
           })
         });
         const json = await res.json();
         if (!json.success) {
-          showToast('สมัครไม่สำเร็จ', json.error || 'ไม่พบรหัสสมาชิกหรือเบอร์โทรไม่ตรงกับฐานข้อมูล DATAMember', 'error');
+          showToast('สมัครไม่สำเร็จ', json.error || 'ไม่พบรหัสสมาชิกหรือเบอร์โทร 10 หลักไม่ตรงกับฐานข้อมูล DATAMember', 'error');
           return;
         }
         closeAuthModal();
         document.getElementById('form-forum-register')?.reset();
-        showToast('ส่งคำขอสมัครสำเร็จ!', 'บันทึกข้อมูลเรียบร้อยแล้ว กรุณารอแอดมินกดอนุมัติสิทธิ์ในระบบจึงจะเข้าสู่ระบบได้ครับ', 'success');
+        if (json.user) {
+          forumState.user = json.user;
+          try { localStorage.setItem(FORUM_SESSION_KEY, JSON.stringify(json.user)); } catch (_) {}
+          syncUserHeaderUI();
+          renderTopicsFeed();
+          showToast('อนุมัติและเข้าสู่ระบบสำเร็จ!', `ยินดีต้อนรับ ${json.user.displayName} สามารถตั้งกระทู้และตอบคอมเมนต์ได้ทันทีครับ`, 'success');
+        } else {
+          showToast('สมัครและอนุมัติสำเร็จ!', 'สามารถเข้าสู่ระบบด้วยรหัสสมาชิกและรหัสผ่านที่ตั้งไว้ได้ทันทีครับ', 'success');
+        }
       } catch (err) {
         showToast('เกิดข้อผิดพลาด', 'ไม่สามารถเชื่อมต่อระบบได้ กรุณาลองใหม่อีกครั้ง', 'error');
       } finally {
@@ -988,6 +1250,7 @@
         if (json.success) {
           forumState.topics = Array.isArray(json.topics) ? json.topics : [];
           forumState.comments = Array.isArray(json.comments) ? json.comments : [];
+          forumState.users = Array.isArray(json.users) ? json.users : [];
           if (forumState.user && Array.isArray(json.users)) {
             const freshMe = json.users.find(u => u.memberCode === forumState.user.memberCode);
             if (freshMe) {
@@ -996,6 +1259,7 @@
               syncUserHeaderUI();
             }
           }
+          renderForumSidebarAndStats();
           renderTopicsFeed();
           if (showNotice) showToast('อัปเดตแล้ว', 'โหลดข้อมูลกระทู้ล่าสุดเรียบร้อยแล้ว', 'success');
         }
@@ -1012,17 +1276,28 @@
       if (!container) return;
       const kw = (document.getElementById('forum-search-input')?.value || '').trim().toLowerCase();
 
-      const filtered = forumState.topics.filter(t => {
+      let filtered = forumState.topics.filter(t => {
+        if (forumState.sortMode === 'saved' && !forumState.savedIds.includes(t.id)) return false;
         if (forumState.category !== 'ALL' && t.category !== forumState.category) return false;
         if (!kw) return true;
         return `${t.title} ${t.content} ${t.authorName} ${t.memberCode}`.toLowerCase().includes(kw);
       });
 
+      if (forumState.sortMode === 'top') {
+        filtered = [...filtered].sort((a, b) => (Number(b.avgRating || 0) - Number(a.avgRating || 0)) || (Number(b.ratingCount || 0) - Number(a.ratingCount || 0)));
+      } else if (forumState.sortMode === 'discussed') {
+        filtered = [...filtered].sort((a, b) => {
+          const ca = forumState.comments.filter(c => c.topicId === a.id).length;
+          const cb = forumState.comments.filter(c => c.topicId === b.id).length;
+          return cb - ca;
+        });
+      }
+
       if (filtered.length === 0) {
         container.innerHTML = `
           <div class="text-center py-12 bg-slate-950/80 rounded-2xl border border-slate-800 space-y-2">
             <i class="fa-solid fa-comments text-3xl text-slate-600"></i>
-            <p class="text-sm font-bold text-slate-200">ยังไม่มีกระทู้ในหมวดหมู่นี้</p>
+            <p class="text-sm font-bold text-slate-200">${forumState.sortMode === 'saved' ? 'ยังไม่มีกระทู้ที่คุณบันทึกไว้' : 'ยังไม่มีกระทู้ในหมวดหมู่นี้'}</p>
             <p class="text-xs text-slate-400">สมาชิกที่อนุมัติแล้วสามารถกดปุ่ม “ตั้งกระทู้ใหม่” เพื่อเริ่มพูดคุยได้เลยครับ</p>
           </div>
         `;
@@ -1034,13 +1309,16 @@
         const topicImg = resolveDriveImageUrl(topic.imageUrl);
         const reactions = topic.reactions || {};
         const topicComments = forumState.comments.filter(c => c.topicId === topic.id);
+        const isExpanded = !!forumState.expandedComments[topic.id];
+        const visibleComments = isExpanded || topicComments.length <= 3 ? topicComments : topicComments.slice(-3);
+        const isSaved = forumState.savedIds.includes(topic.id);
         const avgStars = Number(topic.avgRating || 0).toFixed(1);
         const voteCount = Number(topic.ratingCount || 0);
 
         return `
-          <article class="bg-slate-950/85 border border-slate-800 rounded-3xl p-5 sm:p-6 space-y-4">
+          <article id="topic-card-${escapeHtml(topic.id)}" class="bg-slate-950/85 border border-slate-800 hover:border-amber-400/25 rounded-3xl p-5 sm:p-6 space-y-4 transition">
             <div class="flex flex-wrap items-start justify-between gap-2 border-b border-slate-800 pb-3">
-              <div class="space-y-1 min-w-0">
+              <div class="space-y-1 min-w-0 flex-1">
                 <div class="flex flex-wrap items-center gap-2">
                   <span class="text-xs font-bold bg-amber-400/15 text-amber-300 border border-amber-400/40 px-2.5 py-0.5 rounded-full">${escapeHtml(topic.category)}</span>
                   <span class="text-xs font-bold border px-2.5 py-0.5 rounded-full ${tier.tierClass}">${tier.tierLabel}</span>
@@ -1049,10 +1327,18 @@
                 <h2 class="text-base sm:text-lg font-extrabold text-white pt-1">${escapeHtml(topic.title)}</h2>
                 <p class="text-xs text-slate-400">โดย <strong class="text-slate-200">${escapeHtml(topic.authorName)}</strong> · ${escapeHtml(topic.createdAt)}</p>
               </div>
-              <div class="bg-slate-900 border border-amber-400/30 rounded-xl px-3 py-1.5 text-right shrink-0">
-                <span class="text-xs text-slate-400 block">คะแนนโพสต์</span>
-                <strong class="text-xs sm:text-sm text-amber-400"><i class="fa-solid fa-star"></i> ${avgStars} / 5.0</strong>
-                <span class="text-xs text-slate-500">(${voteCount} โหวต)</span>
+              <div class="flex items-start gap-2 shrink-0">
+                <button type="button" onclick="toggleSaveTopic('${escapeHtml(topic.id)}')" title="${isSaved ? 'ยกเลิกบันทึก' : 'บันทึกกระทู้ไว้ดูภายหลัง'}" class="w-9 h-9 rounded-xl border flex items-center justify-center text-xs transition ${isSaved ? 'bg-amber-400/20 text-amber-300 border-amber-400/50' : 'bg-slate-900 text-slate-400 hover:text-amber-300 border-slate-700'}">
+                  <i class="fa-${isSaved ? 'solid' : 'regular'} fa-bookmark"></i>
+                </button>
+                <button type="button" onclick="shareTopicLink('${escapeHtml(topic.id)}')" title="คัดลอกลิงก์แชร์กระทู้" class="w-9 h-9 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-sky-300 border border-slate-700 flex items-center justify-center text-xs transition">
+                  <i class="fa-solid fa-share-nodes"></i>
+                </button>
+                <div class="bg-slate-900 border border-amber-400/30 rounded-xl px-3 py-1.5 text-right">
+                  <span class="text-[11px] text-slate-400 block">คะแนนโพสต์</span>
+                  <strong class="text-xs sm:text-sm text-amber-400"><i class="fa-solid fa-star"></i> ${avgStars} / 5.0</strong>
+                  <span class="text-[11px] text-slate-500">(${voteCount})</span>
+                </div>
               </div>
             </div>
 
@@ -1060,7 +1346,7 @@
 
             ${topicImg ? `
               <div class="pt-1">
-                <img src="${escapeHtml(topicImg)}" alt="รูปประกอบกระทู้" onerror="this.style.display='none'" class="max-h-80 rounded-2xl border border-slate-800 object-contain bg-slate-900">
+                <img src="${escapeHtml(topicImg)}" alt="รูปประกอบกระทู้" onclick="openForumLightbox('${escapeHtml(topicImg)}')" onerror="this.style.display='none'" class="max-h-80 rounded-2xl border border-slate-800 hover:border-amber-400/50 object-contain bg-slate-900 cursor-zoom-in transition">
               </div>
             ` : ''}
 
@@ -1093,12 +1379,19 @@
 
             <!-- ส่วนความคิดเห็น -->
             <div class="bg-slate-900/95 rounded-2xl p-4 border border-slate-800 space-y-3">
-              <p class="text-xs font-extrabold text-amber-300">
-                <i class="fa-solid fa-reply text-amber-400 mr-1"></i> ความคิดเห็น (${topicComments.length})
-              </p>
+              <div class="flex items-center justify-between gap-2">
+                <p class="text-xs font-extrabold text-amber-300">
+                  <i class="fa-solid fa-reply text-amber-400 mr-1"></i> ความคิดเห็น (${topicComments.length})
+                </p>
+                ${topicComments.length > 3 ? `
+                  <button type="button" onclick="toggleExpandComments('${escapeHtml(topic.id)}')" class="text-[11px] font-bold text-sky-300 hover:text-sky-200 underline">
+                    ${isExpanded ? 'ย่อความคิดเห็น' : `ดูความคิดเห็นทั้งหมด (${topicComments.length})`}
+                  </button>
+                ` : ''}
+              </div>
 
               <div class="space-y-2.5">
-                ${topicComments.map(c => {
+                ${visibleComments.map(c => {
                   const cTier = getMemberTierInfo(c.memberCode, c.authorRating);
                   const cImg = resolveDriveImageUrl(c.imageUrl);
                   return `
@@ -1112,7 +1405,7 @@
                         <span class="text-slate-500">${escapeHtml(c.createdAt)}</span>
                       </div>
                       ${c.content ? `<p class="text-xs text-slate-300 leading-relaxed whitespace-pre-line">${escapeHtml(c.content)}</p>` : ''}
-                      ${cImg ? `<img src="${escapeHtml(cImg)}" alt="รูปในคอมเมนต์" onerror="this.style.display='none'" class="max-h-48 rounded-lg border border-slate-800 mt-1">` : ''}
+                      ${cImg ? `<img src="${escapeHtml(cImg)}" alt="รูปในคอมเมนต์" onclick="openForumLightbox('${escapeHtml(cImg)}')" onerror="this.style.display='none'" class="max-h-48 rounded-lg border border-slate-800 hover:border-amber-400/50 mt-1 cursor-zoom-in">` : ''}
                     </div>
                   `;
                 }).join('')}
@@ -1121,7 +1414,7 @@
               <!-- ช่องตอบคอมเมนต์ + แนบรูปภาพ -->
               <div class="pt-2 border-t border-slate-800 space-y-2">
                 <div class="flex flex-col sm:flex-row gap-2">
-                  <input type="text" id="comment-input-${escapeHtml(topic.id)}" placeholder="${forumState.user ? 'เขียนความคิดเห็นตอบกลับ...' : 'กรุณาเข้าสู่ระบบเพื่อตอบคอมเมนต์...'}"
+                  <input type="text" id="comment-input-${escapeHtml(topic.id)}" onkeydown="if(event.key==='Enter'){event.preventDefault();submitTopicComment('${escapeHtml(topic.id)}');}" placeholder="${forumState.user ? 'เขียนความคิดเห็นตอบกลับ... (กด Enter เพื่อส่ง)' : 'กรุณาเข้าสู่ระบบเพื่อตอบคอมเมนต์...'}"
                     class="dark-field flex-1 rounded-xl px-3.5 py-2 text-xs">
                   <div class="flex items-center gap-2 shrink-0">
                     <label title="แนบรูปภาพในคอมเมนต์" class="bg-slate-950 hover:bg-slate-800 text-slate-200 border border-slate-700 px-3 py-2 rounded-xl text-xs font-bold cursor-pointer transition">
@@ -1142,13 +1435,17 @@
       }).join('');
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', async () => {
+      loadSavedTopicIds();
       try {
         const saved = localStorage.getItem(FORUM_SESSION_KEY);
         if (saved) forumState.user = JSON.parse(saved);
       } catch (_) {}
       syncUserHeaderUI();
-      loadForumData(false);
+      await loadForumData(false);
+      const urlParams = new URLSearchParams(window.location.search);
+      const targetTopic = urlParams.get('topic');
+      if (targetTopic) jumpToTopic(targetTopic);
     });
 
     (function initSharedNavAndAccessibility() {

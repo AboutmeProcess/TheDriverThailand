@@ -316,7 +316,7 @@
             '</button>' +
             '<div class="tdt-font-pill" title="ปรับขนาดตัวอักษร">' +
               '<button type="button" onclick="changeScale(-1)" aria-label="ลดขนาดตัวอักษร" class="tdt-font-btn">A-</button>' +
-              '<span id="tdt-font-pct" class="text-xs text-amber-300 px-1 select-none hidden sm:inline">100%</span>' +
+              '<span id="tdt-font-pct" class="text-xs px-1 select-none hidden sm:inline" style="color:#fde68a;font-weight:700;">100%</span>' +
               '<button type="button" onclick="changeScale(1)" aria-label="เพิ่มขนาดตัวอักษร" class="tdt-font-btn">A+</button>' +
             '</div>' +
             '<button type="button" onclick="openTdtDrawer()" aria-label="เปิดเมนูทั้งหมด" class="tdt-menu-trigger">' +

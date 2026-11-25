@@ -939,58 +939,58 @@
       }
     }
 
-    /* TDT Universal Light Mode Readability Shield (covers ALL 26 pages & pastel classes) */
-    html[data-theme="light"] body > :not(.tdt-global-nav):not(.tdt-drawer-panel):not(.tdt-drawer-backdrop):not(.tdt-floating-line-btn) [class*="bg-slate-950"]:not([class*="from-"]):not(button),
-    html[data-theme="light"] body > :not(.tdt-global-nav):not(.tdt-drawer-panel):not(.tdt-drawer-backdrop):not(.tdt-floating-line-btn) [class*="bg-slate-900"]:not([class*="from-"]):not(button),
-    html[data-theme="light"] body > :not(.tdt-global-nav):not(.tdt-drawer-panel):not(.tdt-drawer-backdrop):not(.tdt-floating-line-btn) [class*="bg-[#0"]:not(button),
-    html[data-theme="light"] body > :not(.tdt-global-nav):not(.tdt-drawer-panel):not(.tdt-drawer-backdrop):not(.tdt-floating-line-btn) header[class*="bg-slate-9"] {
+    /* TDT Universal Light Mode Readability Shield (covers ALL 26 pages & pastel classes, excludes dark navbar) */
+    html[data-theme="light"] body > :not(#tdt-layout-header):not(.tdt-global-nav):not(.tdt-drawer-panel):not(.tdt-drawer-backdrop):not(.tdt-floating-line-btn) [class*="bg-slate-950"]:not([class*="from-"]):not(button),
+    html[data-theme="light"] body > :not(#tdt-layout-header):not(.tdt-global-nav):not(.tdt-drawer-panel):not(.tdt-drawer-backdrop):not(.tdt-floating-line-btn) [class*="bg-slate-900"]:not([class*="from-"]):not(button),
+    html[data-theme="light"] body > :not(#tdt-layout-header):not(.tdt-global-nav):not(.tdt-drawer-panel):not(.tdt-drawer-backdrop):not(.tdt-floating-line-btn) [class*="bg-[#0"]:not(button),
+    html[data-theme="light"] body > :not(#tdt-layout-header):not(.tdt-global-nav):not(.tdt-drawer-panel):not(.tdt-drawer-backdrop):not(.tdt-floating-line-btn) header[class*="bg-slate-9"] {
       background-color: #ffffff !important;
       background-image: none !important;
       border-color: #cbd5e1 !important;
     }
-    html[data-theme="light"] body > :not(.tdt-global-nav):not(.tdt-drawer-panel):not(.tdt-drawer-backdrop):not(.tdt-floating-line-btn) [class*="bg-teal-950"],
-    html[data-theme="light"] body > :not(.tdt-global-nav):not(.tdt-drawer-panel):not(.tdt-drawer-backdrop):not(.tdt-floating-line-btn) [class*="bg-emerald-950"] {
+    html[data-theme="light"] body > :not(#tdt-layout-header):not(.tdt-global-nav):not(.tdt-drawer-panel):not(.tdt-drawer-backdrop):not(.tdt-floating-line-btn) [class*="bg-teal-950"],
+    html[data-theme="light"] body > :not(#tdt-layout-header):not(.tdt-global-nav):not(.tdt-drawer-panel):not(.tdt-drawer-backdrop):not(.tdt-floating-line-btn) [class*="bg-emerald-950"] {
       background-color: #ecfdf5 !important;
       border-color: #6ee7b7 !important;
     }
-    html[data-theme="light"] body > :not(.tdt-global-nav):not(.tdt-drawer-panel):not(.tdt-drawer-backdrop):not(.tdt-floating-line-btn) [class*="bg-sky-950"] {
+    html[data-theme="light"] body > :not(#tdt-layout-header):not(.tdt-global-nav):not(.tdt-drawer-panel):not(.tdt-drawer-backdrop):not(.tdt-floating-line-btn) [class*="bg-sky-950"] {
       background-color: #f0f9ff !important;
       border-color: #7dd3fc !important;
     }
-    html[data-theme="light"] body > :not(.tdt-global-nav):not(.tdt-drawer-panel):not(.tdt-drawer-backdrop):not(.tdt-floating-line-btn) [class*="bg-amber-950"] {
+    html[data-theme="light"] body > :not(#tdt-layout-header):not(.tdt-global-nav):not(.tdt-drawer-panel):not(.tdt-drawer-backdrop):not(.tdt-floating-line-btn) [class*="bg-amber-950"] {
       background-color: #fffbeb !important;
       border-color: #fcd34d !important;
     }
-    html[data-theme="light"] body > :not(.tdt-global-nav):not(.tdt-drawer-panel):not(.tdt-drawer-backdrop):not(.tdt-floating-line-btn) [class*="bg-rose-950"] {
+    html[data-theme="light"] body > :not(#tdt-layout-header):not(.tdt-global-nav):not(.tdt-drawer-panel):not(.tdt-drawer-backdrop):not(.tdt-floating-line-btn) [class*="bg-rose-950"] {
       background-color: #fff1f2 !important;
       border-color: #fda4af !important;
     }
-    html[data-theme="light"] body > :not(.tdt-global-nav):not(.tdt-drawer-panel):not(.tdt-drawer-backdrop):not(.tdt-floating-line-btn) :is(.text-white, [class*="text-slate-100"], [class*="text-slate-200"]) {
+    html[data-theme="light"] body > :not(#tdt-layout-header):not(.tdt-global-nav):not(.tdt-drawer-panel):not(.tdt-drawer-backdrop):not(.tdt-floating-line-btn) :is(.text-white, [class*="text-slate-100"], [class*="text-slate-200"]) {
       color: #0f172a !important;
     }
-    html[data-theme="light"] body > :not(.tdt-global-nav):not(.tdt-drawer-panel):not(.tdt-drawer-backdrop):not(.tdt-floating-line-btn) :is([class*="text-slate-300"], [class*="text-slate-400"], [class*="text-slate-500"]) {
+    html[data-theme="light"] body > :not(#tdt-layout-header):not(.tdt-global-nav):not(.tdt-drawer-panel):not(.tdt-drawer-backdrop):not(.tdt-floating-line-btn) :is([class*="text-slate-300"], [class*="text-slate-400"], [class*="text-slate-500"]) {
       color: #334155 !important;
     }
-    html[data-theme="light"] body > :not(.tdt-global-nav):not(.tdt-drawer-panel):not(.tdt-drawer-backdrop):not(.tdt-floating-line-btn) [class*="text-amber-"],
-    html[data-theme="light"] body > :not(.tdt-global-nav):not(.tdt-drawer-panel):not(.tdt-drawer-backdrop):not(.tdt-floating-line-btn) [class*="text-yellow-"] {
+    html[data-theme="light"] body > :not(#tdt-layout-header):not(.tdt-global-nav):not(.tdt-drawer-panel):not(.tdt-drawer-backdrop):not(.tdt-floating-line-btn) [class*="text-amber-"],
+    html[data-theme="light"] body > :not(#tdt-layout-header):not(.tdt-global-nav):not(.tdt-drawer-panel):not(.tdt-drawer-backdrop):not(.tdt-floating-line-btn) [class*="text-yellow-"] {
       color: #92400e !important;
     }
-    html[data-theme="light"] body > :not(.tdt-global-nav):not(.tdt-drawer-panel):not(.tdt-drawer-backdrop):not(.tdt-floating-line-btn) [class*="text-emerald-"],
-    html[data-theme="light"] body > :not(.tdt-global-nav):not(.tdt-drawer-panel):not(.tdt-drawer-backdrop):not(.tdt-floating-line-btn) [class*="text-teal-"],
-    html[data-theme="light"] body > :not(.tdt-global-nav):not(.tdt-drawer-panel):not(.tdt-drawer-backdrop):not(.tdt-floating-line-btn) [class*="text-green-"] {
+    html[data-theme="light"] body > :not(#tdt-layout-header):not(.tdt-global-nav):not(.tdt-drawer-panel):not(.tdt-drawer-backdrop):not(.tdt-floating-line-btn) [class*="text-emerald-"],
+    html[data-theme="light"] body > :not(#tdt-layout-header):not(.tdt-global-nav):not(.tdt-drawer-panel):not(.tdt-drawer-backdrop):not(.tdt-floating-line-btn) [class*="text-teal-"],
+    html[data-theme="light"] body > :not(#tdt-layout-header):not(.tdt-global-nav):not(.tdt-drawer-panel):not(.tdt-drawer-backdrop):not(.tdt-floating-line-btn) [class*="text-green-"] {
       color: #065f46 !important;
     }
-    html[data-theme="light"] body > :not(.tdt-global-nav):not(.tdt-drawer-panel):not(.tdt-drawer-backdrop):not(.tdt-floating-line-btn) [class*="text-sky-"],
-    html[data-theme="light"] body > :not(.tdt-global-nav):not(.tdt-drawer-panel):not(.tdt-drawer-backdrop):not(.tdt-floating-line-btn) [class*="text-blue-"],
-    html[data-theme="light"] body > :not(.tdt-global-nav):not(.tdt-drawer-panel):not(.tdt-drawer-backdrop):not(.tdt-floating-line-btn) [class*="text-cyan-"] {
+    html[data-theme="light"] body > :not(#tdt-layout-header):not(.tdt-global-nav):not(.tdt-drawer-panel):not(.tdt-drawer-backdrop):not(.tdt-floating-line-btn) [class*="text-sky-"],
+    html[data-theme="light"] body > :not(#tdt-layout-header):not(.tdt-global-nav):not(.tdt-drawer-panel):not(.tdt-drawer-backdrop):not(.tdt-floating-line-btn) [class*="text-blue-"],
+    html[data-theme="light"] body > :not(#tdt-layout-header):not(.tdt-global-nav):not(.tdt-drawer-panel):not(.tdt-drawer-backdrop):not(.tdt-floating-line-btn) [class*="text-cyan-"] {
       color: #075985 !important;
     }
-    html[data-theme="light"] body > :not(.tdt-global-nav):not(.tdt-drawer-panel):not(.tdt-drawer-backdrop):not(.tdt-floating-line-btn) [class*="text-rose-"],
-    html[data-theme="light"] body > :not(.tdt-global-nav):not(.tdt-drawer-panel):not(.tdt-drawer-backdrop):not(.tdt-floating-line-btn) [class*="text-red-"] {
+    html[data-theme="light"] body > :not(#tdt-layout-header):not(.tdt-global-nav):not(.tdt-drawer-panel):not(.tdt-drawer-backdrop):not(.tdt-floating-line-btn) [class*="text-rose-"],
+    html[data-theme="light"] body > :not(#tdt-layout-header):not(.tdt-global-nav):not(.tdt-drawer-panel):not(.tdt-drawer-backdrop):not(.tdt-floating-line-btn) [class*="text-red-"] {
       color: #9f1239 !important;
     }
-    html[data-theme="light"] body > :not(.tdt-global-nav):not(.tdt-drawer-panel):not(.tdt-drawer-backdrop):not(.tdt-floating-line-btn) [class*="text-purple-"],
-    html[data-theme="light"] body > :not(.tdt-global-nav):not(.tdt-drawer-panel):not(.tdt-drawer-backdrop):not(.tdt-floating-line-btn) [class*="text-indigo-"] {
+    html[data-theme="light"] body > :not(#tdt-layout-header):not(.tdt-global-nav):not(.tdt-drawer-panel):not(.tdt-drawer-backdrop):not(.tdt-floating-line-btn) [class*="text-purple-"],
+    html[data-theme="light"] body > :not(#tdt-layout-header):not(.tdt-global-nav):not(.tdt-drawer-panel):not(.tdt-drawer-backdrop):not(.tdt-floating-line-btn) [class*="text-indigo-"] {
       color: #6b21a8 !important;
     }
     /* Keep crisp dark text on bright solid pills/buttons & white text on deep solid buttons */
@@ -1180,6 +1180,13 @@
     }
     html[data-theme="light"] .tdt-footer-links a:hover {
       color: #b45309 !important;
+    }
+
+    /* Keep #tdt-font-pct ("100%") crisp bright gold inside dark navbar in Light Mode */
+    html[data-theme="light"] .tdt-global-nav #tdt-font-pct,
+    html[data-theme="light"] .tdt-global-nav .tdt-font-pill span {
+      color: #fde68a !important;
+      font-weight: 700 !important;
     }
 
 /* TDT Mobile-First Typography & Touch Spacing */

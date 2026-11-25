@@ -228,6 +228,75 @@
 </head>
 <body class="flex flex-col h-screen select-none">
 
+  <!-- ระบบล็อกสิทธิ์ผู้ดูแลระบบ (Admin Login Gate) -->
+  <div id="builder-login-gate" class="fixed inset-0 z-[1500] bg-[#070a12]/95 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="w-full max-w-md bg-slate-900 border border-amber-400/40 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-5">
+      <div class="text-center space-y-2">
+        <span class="w-14 h-14 mx-auto rounded-2xl gold-grad text-slate-950 font-black flex items-center justify-center text-2xl shadow-lg">
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+        </span>
+        <h2 class="text-lg font-extrabold text-amber-300">Visual Website Builder (เฉพาะแอดมิน)</h2>
+        <p class="text-xs text-slate-400">กรุณายืนยันตัวตนด้วยบัญชีผู้ดูแลระบบชุดเดียวกับหน้า Admin Center</p>
+      </div>
+      <form onsubmit="handleBuilderAdminLogin(event)" class="space-y-3.5 text-xs sm:text-sm">
+        <div class="space-y-1">
+          <label class="block text-xs font-bold text-slate-300">Username ผู้ดูแลระบบ</label>
+          <input type="text" id="builder-login-user" required placeholder="เช่น admin" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-white focus:border-amber-400 focus:outline-none">
+        </div>
+        <div class="space-y-1">
+          <label class="block text-xs font-bold text-slate-300">รหัสผ่านหลังบ้าน</label>
+          <input type="password" id="builder-login-pass" required placeholder="รหัสผ่าน Master Passcode" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-white focus:border-amber-400 focus:outline-none">
+        </div>
+        <p id="builder-login-err" class="hidden text-xs text-rose-400 font-bold"></p>
+        <button type="submit" id="btn-builder-login" class="w-full gold-grad text-slate-950 font-extrabold py-3 rounded-xl text-sm shadow-lg transition">
+          <i class="fa-solid fa-right-to-bracket mr-1.5"></i> เข้าสู่ Visual Website Builder
+        </button>
+      </form>
+      <div class="text-center pt-1">
+        <a href="admin.html" class="text-xs text-slate-400 hover:text-amber-300 underline">กลับไปหน้า Admin Center</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal เผยแพร่ขึ้น GitHub โดยตรง (1-Click Publish) -->
+  <div id="github-publish-modal" class="hidden fixed inset-0 z-[1400] bg-slate-950/85 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="w-full max-w-lg bg-slate-900 border border-emerald-400/40 rounded-3xl p-6 space-y-4 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <h3 class="text-base font-extrabold text-emerald-400"><i class="fa-brands fa-github mr-1.5"></i>เผยแพร่ขึ้น GitHub โดยตรง (1-Click Publish)</h3>
+        <button type="button" onclick="document.getElementById('github-publish-modal').classList.add('hidden')" class="text-slate-400 hover:text-white text-lg px-2">✕</button>
+      </div>
+      <p class="text-xs text-slate-300 leading-relaxed">
+        ระบบจะทำความสะอาดโค้ดอัตโนมัติ (ไม่ให้ Header ซ้อน) แล้ว Commit ไฟล์ <strong id="gh-target-file-label" class="text-amber-300 font-mono">index.html</strong> ขึ้น GitHub ทันที (Token เก็บเฉพาะชั่วคราวในเบราว์เซอร์นี้เท่านั้น)
+      </p>
+      <form onsubmit="publishCurrentPageToGithub(event)" class="space-y-3 text-xs">
+        <div class="grid sm:grid-cols-2 gap-3">
+          <div class="space-y-1">
+            <label class="block font-bold text-slate-300">GitHub Repository</label>
+            <input type="text" id="gh-repo-input" value="AboutmeProcess/TheDriverThailand" required class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-amber-300 font-mono">
+          </div>
+          <div class="space-y-1">
+            <label class="block font-bold text-slate-300">Branch</label>
+            <input type="text" id="gh-branch-input" value="main" required class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-white font-mono">
+          </div>
+        </div>
+        <div class="space-y-1">
+          <label class="block font-bold text-slate-300">GitHub Personal Access Token (สิทธิ์ Contents: Read &amp; Write) *</label>
+          <input type="password" id="gh-token-input" required placeholder="github_pat_... หรือ ghp_..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-white font-mono">
+        </div>
+        <div class="space-y-1">
+          <label class="block font-bold text-slate-300">ข้อความ Commit</label>
+          <input type="text" id="gh-commit-msg" value="Update page via Visual Website Builder" required class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-white">
+        </div>
+        <div class="flex justify-end gap-2 pt-2">
+          <button type="button" onclick="document.getElementById('github-publish-modal').classList.add('hidden')" class="bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold px-4 py-2.5 rounded-xl">ยกเลิก</button>
+          <button type="submit" id="btn-gh-publish-submit" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold px-5 py-2.5 rounded-xl shadow transition">
+            <i class="fa-solid fa-cloud-arrow-up mr-1"></i> เผยแพร่ขึ้นเว็บจริงทันที
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <!-- กล่องแจ้งเตือน Toast -->
   <div id="builder-toast" class="hidden fixed bottom-5 right-5 z-[1300] bg-slate-900 border border-amber-400/50 text-amber-200 px-4 py-3 rounded-2xl shadow-2xl text-xs font-bold flex items-center gap-2.5">
     <i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i>
@@ -274,6 +343,10 @@
           <option value="blacklist.html">ศูนย์เฝ้าระวังภัย Blacklist (blacklist.html)</option>
           <option value="community.html">ชุมชนเว็บบอร์ด (community.html)</option>
           <option value="job_board.html">กระดานแลกเปลี่ยนงาน (job_board.html)</option>
+          <option value="empty_leg_matcher.html">จับคู่รถว่างขากลับ (empty_leg_matcher.html)</option>
+          <option value="driver_fleet_hub.html">จัดการรถ &amp; บัญชีรายรับ-จ่าย (driver_fleet_hub.html)</option>
+          <option value="driver_pitstop_reputation.html">จุดพักรถ EV &amp; คูปองพาร์ทเนอร์ (driver_pitstop_reputation.html)</option>
+          <option value="trip_voucher.html">ออกใบจอง / E-Voucher (trip_voucher.html)</option>
           <option value="tracking.html">ติดตามสถานะคำร้อง (tracking.html)</option>
           <option value="member_card_digital.html">บัตรสมาชิกดิจิทัล QR (member_card_digital.html)</option>
           <option value="fare_calculator.html">คำนวณค่าโดยสาร (fare_calculator.html)</option>
@@ -321,6 +394,16 @@
           </button>
         </div>
 
+        <button type="button" onclick="toggleBuilderPreviewTheme()" id="btn-preview-theme" title="สลับพรีวิวโหมดมืด / โหมดสว่าง"
+          class="bg-slate-800 hover:bg-slate-700 text-amber-300 px-2.5 py-2 rounded-xl text-xs font-bold border border-amber-400/35 transition">
+          <i id="preview-theme-icon" class="fa-solid fa-sun mr-1"></i><span id="preview-theme-label">โหมดมืด</span>
+        </button>
+
+        <button type="button" onclick="restoreBuilderDraft()" id="btn-restore-draft" title="กู้คืนแบบร่างที่บันทึกอัตโนมัติ"
+          class="hidden bg-sky-600/25 hover:bg-sky-600/40 text-sky-300 border border-sky-400/40 px-2.5 py-2 rounded-xl text-xs font-bold transition">
+          <i class="fa-solid fa-clock-rotate-left mr-1"></i> กู้คืนแบบร่าง
+        </button>
+
         <button type="button" onclick="undoBuilderAction()" id="btn-undo" disabled title="ย้อนกลับ (Undo)"
           class="bg-slate-800 disabled:opacity-35 hover:bg-slate-700 text-slate-200 px-2.5 py-2 rounded-xl text-xs font-bold border border-slate-700">
           <i class="fa-solid fa-rotate-left"></i>
@@ -330,9 +413,19 @@
           <i class="fa-solid fa-rotate-right"></i>
         </button>
 
+        <button type="button" onclick="openGithubPublishModal()"
+          class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold px-3 py-2 rounded-xl text-xs shadow transition">
+          <i class="fa-brands fa-github mr-1"></i> เผยแพร่ขึ้น GitHub
+        </button>
+
         <button type="button" onclick="exportCurrentHtmlFile()"
           class="gold-grad hover:opacity-95 text-slate-950 font-extrabold px-3.5 py-2 rounded-xl text-xs shadow transition">
           <i class="fa-solid fa-file-export mr-1"></i> ส่งออกไฟล์ .HTML
+        </button>
+
+        <button type="button" onclick="logoutBuilderAdmin()" title="ออกจากระบบแอดมิน"
+          class="bg-rose-600/20 hover:bg-rose-600/35 text-rose-300 border border-rose-500/40 px-2.5 py-2 rounded-xl text-xs font-bold transition">
+          <i class="fa-solid fa-right-from-bracket"></i>
         </button>
       </div>
     </div>
@@ -360,7 +453,7 @@
     <aside class="w-64 bg-slate-900 border-r border-slate-800 flex flex-col shrink-0 overflow-y-auto p-3 space-y-5">
       <div class="space-y-2">
         <div class="flex items-center justify-between px-1">
-          <span class="text-xs font-extrabold text-amber-300 uppercase tracking-wider">หน้าเว็บทั้งหมด (22 หน้า)</span>
+          <span class="text-xs font-extrabold text-amber-300 uppercase tracking-wider">หน้าเว็บทั้งหมด (26 หน้า)</span>
         </div>
         <div id="sidebar-pages-list" class="space-y-1 max-h-56 overflow-y-auto pr-1"></div>
       </div>
@@ -405,6 +498,32 @@
             <i class="fa-solid fa-minus text-slate-400 block mb-1"></i>
             <span class="font-bold text-xs text-white block">เส้นคั่น</span>
           </button>
+        </div>
+
+        <div class="pt-3 border-t border-slate-800 space-y-2">
+          <span class="text-xs font-extrabold text-amber-300 uppercase tracking-wider px-1 block">บล็อกสำเร็จรูป The Driver TH</span>
+          <div class="grid grid-cols-2 gap-2 text-xs">
+            <button type="button" draggable="true" ondragstart="onDragNewBlock(event, 'tdt_promo')" onclick="insertBlockIntoFrame('tdt_promo')"
+              class="bg-slate-950 hover:bg-slate-800 border border-amber-400/40 rounded-xl p-2.5 text-left transition cursor-grab">
+              <i class="fa-solid fa-crown text-amber-400 block mb-1"></i>
+              <span class="font-bold text-xs text-amber-200 block">การ์ดโปรสีทอง</span>
+            </button>
+            <button type="button" draggable="true" ondragstart="onDragNewBlock(event, 'tdt_line_cta')" onclick="insertBlockIntoFrame('tdt_line_cta')"
+              class="bg-slate-950 hover:bg-slate-800 border border-emerald-400/40 rounded-xl p-2.5 text-left transition cursor-grab">
+              <i class="fa-brands fa-line text-emerald-400 block mb-1"></i>
+              <span class="font-bold text-xs text-emerald-200 block">ปุ่มติดต่อ LINE</span>
+            </button>
+            <button type="button" draggable="true" ondragstart="onDragNewBlock(event, 'tdt_alert')" onclick="insertBlockIntoFrame('tdt_alert')"
+              class="bg-slate-950 hover:bg-slate-800 border border-rose-400/40 rounded-xl p-2.5 text-left transition cursor-grab">
+              <i class="fa-solid fa-triangle-exclamation text-rose-400 block mb-1"></i>
+              <span class="font-bold text-xs text-rose-200 block">กล่องคำเตือน</span>
+            </button>
+            <button type="button" draggable="true" ondragstart="onDragNewBlock(event, 'tdt_faq')" onclick="insertBlockIntoFrame('tdt_faq')"
+              class="bg-slate-950 hover:bg-slate-800 border border-sky-400/40 rounded-xl p-2.5 text-left transition cursor-grab">
+              <i class="fa-solid fa-circle-question text-sky-400 block mb-1"></i>
+              <span class="font-bold text-xs text-sky-200 block">กล่อง FAQ</span>
+            </button>
+          </div>
         </div>
       </div>
     </aside>
@@ -524,12 +643,22 @@
       { file: 'blacklist.html', title: 'ศูนย์เฝ้าระวังภัย Blacklist (blacklist.html)' },
       { file: 'community.html', title: 'ชุมชนเว็บบอร์ด (community.html)' },
       { file: 'job_board.html', title: 'กระดานแลกเปลี่ยนงาน (job_board.html)' },
+      { file: 'empty_leg_matcher.html', title: 'จับคู่รถว่างขากลับ (empty_leg_matcher.html)' },
+      { file: 'driver_fleet_hub.html', title: 'จัดการรถ & บัญชีรายรับ-จ่าย (driver_fleet_hub.html)' },
+      { file: 'driver_pitstop_reputation.html', title: 'จุดพักรถ EV & คูปองพาร์ทเนอร์ (driver_pitstop_reputation.html)' },
+      { file: 'trip_voucher.html', title: 'ออกใบจอง / E-Voucher (trip_voucher.html)' },
       { file: 'tracking.html', title: 'ติดตามสถานะคำร้อง (tracking.html)' },
       { file: 'member_card_digital.html', title: 'บัตรสมาชิกดิจิทัล QR (member_card_digital.html)' },
       { file: 'fare_calculator.html', title: 'คำนวณค่าโดยสาร (fare_calculator.html)' },
       { file: 'guide.html', title: 'คู่มือสมาชิก (guide.html)' },
       { file: 'privacy_policy.html', title: 'ประกาศความเป็นส่วนตัว (privacy_policy.html)' }
     ];
+
+    const MASTER_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyeDCdxBD10D_AFZQY2NxeylLOiAmAHLesSDZHXYCb3TsYs4wYer_kRTPVOs3VpK2pP/exec';
+    const BUILDER_ADMIN_SESS_KEY = 'tdt_builder_admin_sess_v1';
+    const BUILDER_GH_TOKEN_KEY = 'tdt_builder_gh_token_sess';
+    let previewThemeMode = 'dark';
+    let draftSaveTimer = null;
 
     let currentTargetPage = 'index.html';
     let currentLoadedFileName = 'index.html';
@@ -726,6 +855,7 @@
       if (undoStack.length > 25) undoStack.shift();
       redoStack = [];
       updateUndoRedoButtons();
+      scheduleAutoSaveDraft();
     }
 
     function undoBuilderAction() {
@@ -832,6 +962,14 @@
         wrap.innerHTML = '<a href="index.html" style="display:inline-block;background:#0f172a;color:#fbbf24;font-weight:700;padding:12px 24px;border-radius:14px;text-decoration:none;font-size:14px;">ปุ่มดำเนินการ</a>';
       } else if (type === 'image') {
         wrap.innerHTML = '<img src="https://placehold.co/960x360/0f172a/fbbf24?text=The+Driver+Thailand+Banner" alt="แบนเนอร์" style="width:100%;max-height:360px;object-fit:cover;border-radius:18px;">';
+      } else if (type === 'tdt_promo') {
+        wrap.innerHTML = '<div class="dark-surface-card rounded-3xl p-6 border border-amber-400/50 space-y-2"><span class="inline-block bg-amber-400 text-slate-950 font-extrabold text-xs px-3 py-1 rounded-full">👑 สิทธิพิเศษสมาชิก The Driver TH</span><h3 class="text-xl font-extrabold text-amber-300">หัวข้อโปรโมชันหรือประกาศพิเศษ</h3><p class="text-sm text-slate-300">พิมพ์รายละเอียดสิทธิพิเศษ ส่วนลด หรือรอบบริการสำหรับสมาชิกเครือข่ายที่นี่</p></div>';
+      } else if (type === 'tdt_line_cta') {
+        wrap.innerHTML = '<div class="bg-emerald-950/80 border border-emerald-400/45 rounded-2xl p-5 flex flex-wrap items-center justify-between gap-3"><div><h4 class="text-base font-extrabold text-emerald-300">ต้องการสอบถามแอดมินเพิ่มเติม?</h4><p class="text-xs text-slate-300">ติดต่อทีมงาน The Driver TH Official ผ่าน LINE ได้ตลอด 24 ชม.</p></div><a href="https://line.me/R/ti/p/@Thedrivethailand" target="_blank" rel="noopener noreferrer" class="bg-emerald-500 text-slate-950 font-extrabold text-xs px-5 py-3 rounded-xl">แอด LINE @Thedrivethailand</a></div>';
+      } else if (type === 'tdt_alert') {
+        wrap.innerHTML = '<div class="bg-rose-950/70 border border-rose-500/45 rounded-2xl p-4 text-xs sm:text-sm text-rose-200"><strong class="text-rose-300 block mb-1">⚠️ ข้อควรระวัง / เงื่อนไขสำคัญ</strong><span>ระบุข้อห้าม กฎกติกา หรือคำเตือนที่ต้องการเน้นย้ำให้สมาชิกทราบ</span></div>';
+      } else if (type === 'tdt_faq') {
+        wrap.innerHTML = '<details open class="bg-slate-900 border border-slate-700 rounded-2xl p-4 text-sm text-slate-200"><summary class="font-bold text-amber-300 cursor-pointer">คำถามที่พบบ่อย: ระบุหัวข้อคำถามที่นี่?</summary><p class="text-xs text-slate-300 mt-2 leading-relaxed">พิมพ์คำตอบที่ชัดเจนและเข้าใจง่ายสำหรับสมาชิกที่นี่</p></details>';
       } else {
         wrap.innerHTML = '<hr style="border:0;border-top:2px solid #e2e8f0;margin:8px 0;">';
       }
@@ -997,6 +1135,80 @@
       const doc = getFrameDoc();
       if (!doc || !doc.body) return;
       bindEditableHandlersInFrame(doc);
+      doc.documentElement.setAttribute('data-theme', previewThemeMode);
+      doc.body.addEventListener('input', scheduleAutoSaveDraft);
+      updateDraftRestoreBtn();
+    }
+
+    function toggleBuilderPreviewTheme() {
+      previewThemeMode = previewThemeMode === 'dark' ? 'light' : 'dark';
+      const doc = getFrameDoc();
+      if (doc && doc.documentElement) {
+        doc.documentElement.setAttribute('data-theme', previewThemeMode);
+      }
+      const icon = document.getElementById('preview-theme-icon');
+      const lbl = document.getElementById('preview-theme-label');
+      if (icon) icon.className = previewThemeMode === 'light' ? 'fa-solid fa-moon mr-1' : 'fa-solid fa-sun mr-1';
+      if (lbl) lbl.textContent = previewThemeMode === 'light' ? 'โหมดสว่าง' : 'โหมดมืด';
+    }
+
+    function getDraftKey(file) {
+      return `tdt_builder_draft_v1_${file || currentTargetPage || 'index.html'}`;
+    }
+
+    function updateDraftRestoreBtn() {
+      const btn = document.getElementById('btn-restore-draft');
+      if (!btn) return;
+      let hasDraft = false;
+      try { hasDraft = Boolean(localStorage.getItem(getDraftKey(currentTargetPage))); } catch (_) {}
+      btn.classList.toggle('hidden', !hasDraft);
+    }
+
+    function scheduleAutoSaveDraft() {
+      clearTimeout(draftSaveTimer);
+      draftSaveTimer = setTimeout(() => {
+        const html = buildCleanExportHtml();
+        if (!html) return;
+        try {
+          localStorage.setItem(getDraftKey(currentTargetPage), html);
+          updateDraftRestoreBtn();
+        } catch (_) {}
+      }, 900);
+    }
+
+    function restoreBuilderDraft() {
+      try {
+        const saved = localStorage.getItem(getDraftKey(currentTargetPage));
+        if (!saved) {
+          showBuilderToast('ไม่พบแบบร่างที่บันทึกไว้สำหรับหน้านี้');
+          return;
+        }
+        renderHtmlIntoEditorFrame(saved, currentTargetPage, `กู้คืนแบบร่างอัตโนมัติของหน้า ${currentTargetPage} แล้ว`);
+        showBuilderToast(`กู้คืนแบบร่างของ ${currentTargetPage} เรียบร้อยแล้ว`);
+      } catch (_) {}
+    }
+
+    function buildCleanExportHtml() {
+      const doc = getFrameDoc();
+      if (!doc || !doc.documentElement) return '';
+      if (selectedEl) selectedEl.style.outline = '';
+      const clone = doc.documentElement.cloneNode(true);
+      clone.removeAttribute('data-theme');
+      clone.style.fontSize = '';
+
+      // ลบ <base> ที่ Builder แทรกชั่วคราว และลบ DOM ที่ tdt-layout.js สร้างตอนรันเพื่อไม่ให้ซ้อนกัน
+      clone.querySelectorAll('base').forEach(b => b.remove());
+      const layoutMount = clone.querySelector('#tdt-layout-header');
+      if (layoutMount) layoutMount.innerHTML = '';
+      ['#tdt-floating-line-btn', '#tdt-pwa-banner', '#tdt-compress-toast', '#google_translate_element'].forEach(sel => {
+        clone.querySelectorAll(sel).forEach(el => el.remove());
+      });
+      clone.querySelectorAll('[contenteditable]').forEach(el => el.removeAttribute('contenteditable'));
+      clone.querySelectorAll('[data-builder-orig-href]').forEach(el => {
+        el.removeAttribute('data-builder-orig-href');
+      });
+      clone.querySelectorAll('[data-builder-guard-bound]').forEach(el => el.removeAttribute('data-builder-guard-bound'));
+      return '<!DOCTYPE html>\n' + clone.outerHTML;
     }
 
     function setViewportSize(widthVal) {
@@ -1013,13 +1225,11 @@
     }
 
     function exportCurrentHtmlFile() {
-      const doc = getFrameDoc();
-      if (!doc) {
+      const cleanHtml = buildCleanExportHtml();
+      if (!cleanHtml) {
         showBuilderToast('ไม่สามารถส่งออกโค้ดจากหน้าข้ามโดเมนได้ กรุณาเปิดไฟล์จากเครื่อง');
         return;
       }
-      if (selectedEl) selectedEl.style.outline = '';
-      const cleanHtml = '<!DOCTYPE html>\n' + doc.documentElement.outerHTML;
       const blob = new Blob([cleanHtml], { type: 'text/html;charset=utf-8' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
@@ -1027,10 +1237,135 @@
       a.download = currentLoadedFileName || currentTargetPage || 'index.html';
       a.click();
       URL.revokeObjectURL(url);
-      showBuilderToast(`ส่งออกไฟล์ ${a.download} เรียบร้อยแล้ว`);
+      showBuilderToast(`ส่งออกไฟล์ ${a.download} (ทำความสะอาดโค้ดแล้ว) เรียบร้อย`);
+    }
+
+    function openGithubPublishModal() {
+      const fname = currentLoadedFileName || currentTargetPage || 'index.html';
+      const lbl = document.getElementById('gh-target-file-label');
+      const msgInput = document.getElementById('gh-commit-msg');
+      const tokInput = document.getElementById('gh-token-input');
+      if (lbl) lbl.textContent = fname;
+      if (msgInput) msgInput.value = `Update ${fname} via Visual Website Builder`;
+      try {
+        const savedTok = sessionStorage.getItem(BUILDER_GH_TOKEN_KEY);
+        if (savedTok && tokInput) tokInput.value = savedTok;
+      } catch (_) {}
+      document.getElementById('github-publish-modal')?.classList.remove('hidden');
+    }
+
+    function utf8ToBase64(str) {
+      const bytes = new TextEncoder().encode(str);
+      let bin = '';
+      bytes.forEach(b => { bin += String.fromCharCode(b); });
+      return btoa(bin);
+    }
+
+    async function publishCurrentPageToGithub(e) {
+      e.preventDefault();
+      const cleanHtml = buildCleanExportHtml();
+      if (!cleanHtml) {
+        showBuilderToast('ไม่สามารถอ่านโค้ดหน้าเว็บได้ กรุณาลองโหลดหน้าใหม่');
+        return;
+      }
+      const repo = document.getElementById('gh-repo-input').value.trim();
+      const branch = document.getElementById('gh-branch-input').value.trim() || 'main';
+      const token = document.getElementById('gh-token-input').value.trim();
+      const message = document.getElementById('gh-commit-msg').value.trim() || 'Update via Visual Builder';
+      const filePath = currentLoadedFileName || currentTargetPage || 'index.html';
+      const btn = document.getElementById('btn-gh-publish-submit');
+      const orig = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin mr-1"></i> กำลังเผยแพร่ขึ้น GitHub...';
+
+      try {
+        try { sessionStorage.setItem(BUILDER_GH_TOKEN_KEY, token); } catch (_) {}
+        const apiUrl = `https://api.github.com/repos/${repo}/contents/${encodeURIComponent(filePath)}`;
+        const headers = {
+          'Authorization': `Bearer ${token}`,
+          'Accept': 'application/vnd.github+json',
+          'Content-Type': 'application/json'
+        };
+        let sha = undefined;
+        const getRes = await fetch(`${apiUrl}?ref=${encodeURIComponent(branch)}`, { headers });
+        if (getRes.ok) {
+          const getJson = await getRes.json();
+          sha = getJson.sha;
+        }
+        const putRes = await fetch(apiUrl, {
+          method: 'PUT',
+          headers,
+          body: JSON.stringify({
+            message,
+            content: utf8ToBase64(cleanHtml),
+            branch,
+            ...(sha ? { sha } : {})
+          })
+        });
+        const putJson = await putRes.json();
+        if (!putRes.ok) {
+          showBuilderToast(`เผยแพร่ไม่สำเร็จ: ${putJson.message || putRes.status}`);
+          return;
+        }
+        try { localStorage.removeItem(getDraftKey(filePath)); updateDraftRestoreBtn(); } catch (_) {}
+        document.getElementById('github-publish-modal')?.classList.add('hidden');
+        showBuilderToast(`เผยแพร่ ${filePath} ขึ้น GitHub (${branch}) สำเร็จ! เว็บจริงจะอัปเดตใน ~1 นาที`);
+      } catch (err) {
+        showBuilderToast('เชื่อมต่อ GitHub API ไม่สำเร็จ กรุณาตรวจสอบ Token หรืออินเทอร์เน็ต');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = orig;
+      }
+    }
+
+    async function handleBuilderAdminLogin(e) {
+      e.preventDefault();
+      const user = document.getElementById('builder-login-user').value.trim();
+      const pass = document.getElementById('builder-login-pass').value;
+      const errEl = document.getElementById('builder-login-err');
+      const btn = document.getElementById('btn-builder-login');
+      errEl.classList.add('hidden');
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin mr-1.5"></i> กำลังตรวจสอบสิทธิ์...';
+      try {
+        const res = await fetch(MASTER_WEB_APP_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({ action: 'admin_login', adminId: user, passcode: pass })
+        });
+        const json = await res.json();
+        if (!json || !json.success) {
+          errEl.textContent = (json && json.error) || 'ชื่อผู้ดูแลหรือรหัสผ่านไม่ถูกต้อง';
+          errEl.classList.remove('hidden');
+          return;
+        }
+        try { sessionStorage.setItem(BUILDER_ADMIN_SESS_KEY, JSON.stringify({ user, ts: Date.now() })); } catch (_) {}
+        document.getElementById('builder-login-gate')?.classList.add('hidden');
+        showBuilderToast(`ยินดีต้อนรับผู้ดูแล ${user}`);
+      } catch (_) {
+        errEl.textContent = 'ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์ตรวจสอบสิทธิ์ได้';
+        errEl.classList.remove('hidden');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-right-to-bracket mr-1.5"></i> เข้าสู่ Visual Website Builder';
+      }
+    }
+
+    function logoutBuilderAdmin() {
+      try {
+        sessionStorage.removeItem(BUILDER_ADMIN_SESS_KEY);
+        sessionStorage.removeItem(BUILDER_GH_TOKEN_KEY);
+      } catch (_) {}
+      document.getElementById('builder-login-gate')?.classList.remove('hidden');
+      showBuilderToast('ออกจากระบบ Visual Builder แล้ว');
     }
 
     document.addEventListener('DOMContentLoaded', () => {
+      try {
+        if (sessionStorage.getItem(BUILDER_ADMIN_SESS_KEY)) {
+          document.getElementById('builder-login-gate')?.classList.add('hidden');
+        }
+      } catch (_) {}
       renderSidebarPagesList();
       updateUndoRedoButtons();
       const frame = document.getElementById('live-page-frame');

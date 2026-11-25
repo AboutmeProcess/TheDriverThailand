@@ -276,11 +276,14 @@
           <img src="TheDriverTH.jpg" alt="โลโก้" onerror="this.onerror=null;this.src='https://placehold.co/80x80/0f172a/fbbf24?text=TDT';" class="w-10 h-10 rounded-xl object-cover border border-amber-400">
           <div>
             <span class="text-sm font-extrabold text-amber-300 block">🚖 The Driver TH — ระบบหลังบ้านครอบคลุมทุกหน้า</span>
-            <span class="text-xs text-emerald-400"><i class="fa-solid fa-circle-check mr-1"></i>ผู้ดูแล: <strong id="current-admin-label">-</strong></span>
+            <span class="text-xs text-emerald-400 flex flex-wrap items-center gap-1.5">
+              <span><i class="fa-solid fa-circle-check mr-1"></i>ผู้ดูแล: <strong id="current-admin-label">-</strong></span>
+              <span id="current-admin-role-badge" class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-amber-400/15 text-amber-300 border border-amber-400/35"></span>
+            </span>
           </div>
         </div>
         <div class="flex items-center gap-2 text-xs">
-          <a href="page_builder.html" class="px-3.5 py-2 rounded-xl gold-grad text-slate-950 font-extrabold shadow">
+          <a id="header-visual-builder-link" href="page_builder.html" class="px-3.5 py-2 rounded-xl gold-grad text-slate-950 font-extrabold shadow">
             <i class="fa-solid fa-wand-magic-sparkles mr-1"></i> แก้ไขหน้าเว็บ (Visual Builder)
           </a>
           <a href="index.html" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700">
@@ -294,6 +297,12 @@
     </header>
 
     <main class="flex-grow max-w-7xl w-full mx-auto px-4 py-6 space-y-6">
+      <!-- แถบแจ้งเตือนโหมดดูข้อมูลอย่างเดียว (Read-Only) -->
+      <div id="readonly-mode-banner" class="hidden bg-sky-500/15 border border-sky-400/40 text-sky-200 rounded-2xl px-4 py-3 text-xs flex items-center gap-2">
+        <i class="fa-solid fa-eye text-sky-300 text-sm shrink-0"></i>
+        <span><strong>โหมดดูข้อมูลอย่างเดียว (Read-Only):</strong> บัญชีผู้ช่วยนี้ได้รับสิทธิ์ดูข้อมูลตามแท็บที่แอดมินหลักกำหนดเท่านั้น ไม่สามารถแก้ไข บันทึก หรืออนุมัติรายการได้</span>
+      </div>
+
       <!-- แดชบอร์ดสรุปสถิติภาพรวมแบบเรียลไทม์ -->
       <section class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
         <div class="bg-slate-900 border border-amber-400/35 rounded-2xl p-4 space-y-1">
@@ -659,31 +668,117 @@
         </form>
       </section>
 
-      <!-- 5. เพิ่ม/จัดการ Username และรหัสผ่านของผู้ดูแลระบบ -->
-      <section id="tab-panel-admins" class="hidden bg-slate-900 border border-amber-400/30 rounded-3xl p-6 space-y-6">
-        <div class="border-b border-slate-800 pb-4">
-          <h2 class="text-lg font-extrabold text-amber-300"><i class="fa-solid fa-users-gear mr-2"></i>เพิ่มและจัดการ Username / รหัสผ่านผู้ดูแลระบบ</h2>
-          <p class="text-xs text-slate-400">เพิ่มบัญชีผู้ดูแลใหม่ กำหนดสิทธิ์ และลบสิทธิ์ผู้ดูแลที่ไม่ใช้งานได้ทันที</p>
+      <!-- 5. แบ่งระดับและจัดการบัญชีผู้ช่วยผู้ดูแลระบบ (Super Admin เท่านั้น) -->
+      <section id="tab-panel-admins" class="hidden bg-slate-900 border border-amber-400/30 rounded-3xl p-5 sm:p-6 space-y-6">
+        <div class="border-b border-slate-800 pb-4 flex flex-wrap items-start justify-between gap-3">
+          <div>
+            <span class="inline-flex items-center gap-1 text-[11px] font-extrabold bg-amber-400/15 text-amber-300 border border-amber-400/35 px-3 py-0.5 rounded-full mb-1.5">
+              <i class="fa-solid fa-crown"></i> เฉพาะแอดมินหลัก (Super Admin) เท่านั้น
+            </span>
+            <h2 class="text-lg font-extrabold text-amber-300"><i class="fa-solid fa-users-gear mr-2"></i>จัดการระดับสิทธิ์และบัญชีผู้ช่วยผู้ดูแลระบบ</h2>
+            <p class="text-xs text-slate-400">สร้างไอดีผู้ช่วย เลือกระดับสิทธิ์ กำหนดแท็บที่เข้าถึงได้ แยกสิทธิ์แก้ไข/ดูอย่างเดียว และอนุมัติหรือระงับไอดีได้โดยแอดมินหลักเพียงคนเดียว (ซิงก์บน Cloud ปลอดภัย)</p>
+          </div>
+          <button type="button" onclick="refreshAllAdminData()" class="text-xs bg-slate-800 hover:bg-slate-700 px-3.5 py-2 rounded-xl text-amber-300 font-bold">
+            <i class="fa-solid fa-rotate mr-1"></i> โหลดรายชื่อล่าสุด
+          </button>
         </div>
 
-        <form onsubmit="addAdminAccount(event)" class="bg-slate-950 border border-slate-800 rounded-2xl p-4 sm:p-5 grid sm:grid-cols-4 gap-3 text-xs">
-          <input type="text" id="new-admin-username" required placeholder="Username ใหม่ (เช่น admin_somchai) *" class="bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-white">
-          <input type="password" id="new-admin-password" required minlength="4" placeholder="รหัสผ่านผู้ดูแลใหม่ *" class="bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-white">
-          <input type="text" id="new-admin-display" required placeholder="ชื่อเรียกผู้ดูแล (เช่น แอดมินสมชาย) *" class="bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-white">
-          <button type="submit" class="gold-grad text-slate-950 font-extrabold rounded-xl px-4 py-2.5 shadow">
-            <i class="fa-solid fa-user-plus mr-1"></i> เพิ่มผู้ดูแลระบบ
-          </button>
+        <form id="admin-account-form" onsubmit="saveAdminAccount(event)" class="bg-slate-950 border border-slate-800 rounded-2xl p-4 sm:p-5 space-y-4 text-xs">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <h3 id="admin-form-title" class="text-sm font-extrabold text-amber-300"><i class="fa-solid fa-user-plus mr-1.5"></i>สร้างไอดีผู้ช่วยผู้ดูแลใหม่</h3>
+            <button type="button" id="btn-cancel-edit-admin" onclick="resetAdminAccountForm()" class="hidden text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-1.5 rounded-lg font-bold">
+              <i class="fa-solid fa-xmark mr-1"></i> ยกเลิกการแก้ไข
+            </button>
+          </div>
+
+          <div class="grid sm:grid-cols-3 gap-3">
+            <div class="space-y-1">
+              <label class="block text-[11px] font-bold text-slate-400">Username ผู้ช่วย *</label>
+              <input type="text" id="new-admin-username" required pattern="[A-Za-z0-9_.\-]{3,32}" placeholder="เช่น staff_somchai" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-white font-mono">
+            </div>
+            <div class="space-y-1">
+              <label class="block text-[11px] font-bold text-slate-400">รหัสผ่าน <span id="new-admin-pass-hint" class="text-amber-300">(อย่างน้อย 4 ตัวอักษร) *</span></label>
+              <input type="password" id="new-admin-password" minlength="4" placeholder="ตั้งรหัสผ่านให้ผู้ช่วย" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-white">
+            </div>
+            <div class="space-y-1">
+              <label class="block text-[11px] font-bold text-slate-400">ชื่อเรียกผู้ช่วย *</label>
+              <input type="text" id="new-admin-display" required placeholder="เช่น แอดมินสมชาย" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-white">
+            </div>
+          </div>
+
+          <div class="grid sm:grid-cols-3 gap-3">
+            <div class="space-y-1">
+              <label class="block text-[11px] font-bold text-slate-400">ระดับผู้ช่วย (Role Preset)</label>
+              <select id="new-admin-role" onchange="applyRolePresetToForm(this.value)" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-amber-300 font-bold">
+                <option value="senior_admin">🛡️ ระดับ 1: ผู้ช่วยระดับสูง (จัดการหลักทั้งหมด)</option>
+                <option value="staff_ops" selected>📋 ระดับ 2: เจ้าหน้าที่สมาชิก &amp; พัสดุ</option>
+                <option value="tourbook_staff">📚 ระดับ 3: เจ้าหน้าที่สต็อกสมุดทัวร์</option>
+                <option value="viewer">👁️ ระดับ 4: ผู้ช่วยดูข้อมูลอย่างเดียว (Read-Only)</option>
+                <option value="custom">⚙️ กำหนดสิทธิ์เอง (Custom)</option>
+              </select>
+            </div>
+            <div class="space-y-1">
+              <label class="block text-[11px] font-bold text-slate-400">สิทธิ์การแก้ไข (Edit Permission)</label>
+              <select id="new-admin-mode" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-white font-bold">
+                <option value="edit">✏️ ดูและแก้ไข / อนุมัติรายการได้</option>
+                <option value="view">👁️ ดูข้อมูลอย่างเดียว (ห้ามแก้ไข/ห้ามอนุมัติ)</option>
+              </select>
+            </div>
+            <div class="space-y-1">
+              <label class="block text-[11px] font-bold text-slate-400">สถานะอนุมัติโดยแอดมินหลัก</label>
+              <select id="new-admin-status" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-emerald-300 font-bold">
+                <option value="อนุมัติ">✅ อนุมัติให้เข้าใช้งาน</option>
+                <option value="ระงับ">⛔ ระงับสิทธิ์ชั่วคราว</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="space-y-2 pt-1">
+            <label class="block text-[11px] font-bold text-slate-300"><i class="fa-solid fa-sliders text-amber-400 mr-1"></i>สิทธิ์การเข้าถึงแต่ละแท็บ (เลือกได้หลายแท็บ — แท็บจัดการผู้ดูแลสงวนไว้ให้แอดมินหลักเท่านั้น)</label>
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
+              <label class="flex items-center gap-2 bg-slate-900 border border-slate-700/80 hover:border-amber-400/50 rounded-xl px-3 py-2 cursor-pointer">
+                <input type="checkbox" class="admin-perm-chk accent-amber-400 w-4 h-4" value="site">
+                <span class="text-slate-200">1. ตั้งค่าเว็บ</span>
+              </label>
+              <label class="flex items-center gap-2 bg-slate-900 border border-slate-700/80 hover:border-amber-400/50 rounded-xl px-3 py-2 cursor-pointer">
+                <input type="checkbox" class="admin-perm-chk accent-amber-400 w-4 h-4" value="members" checked>
+                <span class="text-slate-200">2. อนุมัติสมาชิก</span>
+              </label>
+              <label class="flex items-center gap-2 bg-slate-900 border border-slate-700/80 hover:border-amber-400/50 rounded-xl px-3 py-2 cursor-pointer">
+                <input type="checkbox" class="admin-perm-chk accent-amber-400 w-4 h-4" value="forum" checked>
+                <span class="text-slate-200">3. เว็บบอร์ด</span>
+              </label>
+              <label class="flex items-center gap-2 bg-slate-900 border border-slate-700/80 hover:border-amber-400/50 rounded-xl px-3 py-2 cursor-pointer">
+                <input type="checkbox" class="admin-perm-chk accent-amber-400 w-4 h-4" value="shipping" checked>
+                <span class="text-slate-200">4. พัสดุ/สถานะ</span>
+              </label>
+              <label class="flex items-center gap-2 bg-slate-900 border border-slate-700/80 hover:border-amber-400/50 rounded-xl px-3 py-2 cursor-pointer">
+                <input type="checkbox" class="admin-perm-chk accent-amber-400 w-4 h-4" value="tourbook" checked>
+                <span class="text-slate-200">6. สมุดทัวร์</span>
+              </label>
+              <label class="flex items-center gap-2 bg-slate-900 border border-slate-700/80 hover:border-amber-400/50 rounded-xl px-3 py-2 cursor-pointer">
+                <input type="checkbox" class="admin-perm-chk accent-amber-400 w-4 h-4" value="backup">
+                <span class="text-slate-200">7. สำรองข้อมูล</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center justify-end gap-2 pt-1">
+            <button type="submit" id="btn-save-admin-account" class="gold-grad text-slate-950 font-extrabold rounded-xl px-5 py-2.5 shadow transition">
+              <i class="fa-solid fa-user-check mr-1"></i> บันทึกและอนุมัติไอดีผู้ช่วย
+            </button>
+          </div>
         </form>
 
-        <div class="space-y-2">
-          <h3 class="text-xs font-extrabold text-slate-300 uppercase">รายชื่อผู้ดูแลระบบในระบบ</h3>
+        <div class="space-y-2.5">
+          <h3 class="text-xs font-extrabold text-slate-300 uppercase">รายชื่อผู้ดูแลและผู้ช่วยผู้ดูแลในระบบ (Cloud)</h3>
           <div id="admin-accounts-list" class="space-y-2.5"></div>
         </div>
 
         <div class="pt-5 border-t border-slate-800 space-y-3">
           <div>
             <h3 class="text-sm font-extrabold text-emerald-400"><i class="fa-solid fa-key mr-1.5"></i>เปลี่ยนรหัสผ่านหลักของระบบหลังบ้าน (Master Passcode)</h3>
-            <p class="text-xs text-slate-400">รหัสผ่านใหม่จะถูกจัดเก็บใน Google Script Properties อย่างปลอดภัย (ไม่อยู่ในโค้ดสาธารณะ) — แนะนำให้เปลี่ยนจากรหัสเริ่มต้นทันที</p>
+            <p class="text-xs text-slate-400">รหัสผ่านใหม่จะถูกจัดเก็บใน Google Script Properties อย่างปลอดภัย (ไม่อยู่ในโค้ดสาธารณะ) — สิทธิ์เปลี่ยนรหัสหลักสงวนไว้ให้แอดมินหลักเท่านั้น</p>
           </div>
           <form onsubmit="changeMasterPasscode(event)" class="bg-slate-950 border border-emerald-500/30 rounded-2xl p-4 grid sm:grid-cols-3 gap-3 text-xs">
             <input type="password" id="new-master-passcode" required minlength="8" placeholder="รหัสผ่านหลังบ้านใหม่ (อย่างน้อย 8 ตัวอักษร) *" class="bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-white">
@@ -1492,20 +1587,133 @@
       setTimeout(() => div.remove(), 3800);
     }
 
-    function getAdminAccounts() {
-      try {
-        const raw = localStorage.getItem(LOCAL_ADMINS_KEY);
-        const parsed = raw ? JSON.parse(raw) : [];
-        return Array.isArray(parsed) && parsed.length > 0 ? parsed : [...DEFAULT_ADMINS];
-      } catch (_) {
-        return [...DEFAULT_ADMINS];
+    const ADMIN_ROLE_PRESETS = {
+      super_admin: {
+        label: '👑 แอดมินหลัก (Super Admin)',
+        badgeClass: 'bg-amber-400/20 text-amber-300 border-amber-400/50',
+        accessMode: 'edit',
+        permissions: ['site', 'members', 'forum', 'shipping', 'admins', 'tourbook', 'backup']
+      },
+      senior_admin: {
+        label: '🛡️ ผู้ช่วยระดับสูง',
+        badgeClass: 'bg-emerald-500/15 text-emerald-300 border-emerald-400/40',
+        accessMode: 'edit',
+        permissions: ['site', 'members', 'forum', 'shipping', 'tourbook']
+      },
+      staff_ops: {
+        label: '📋 เจ้าหน้าที่สมาชิก & พัสดุ',
+        badgeClass: 'bg-sky-500/15 text-sky-300 border-sky-400/40',
+        accessMode: 'edit',
+        permissions: ['members', 'forum', 'shipping', 'tourbook']
+      },
+      tourbook_staff: {
+        label: '📚 เจ้าหน้าที่สมุดทัวร์',
+        badgeClass: 'bg-indigo-500/15 text-indigo-300 border-indigo-400/40',
+        accessMode: 'edit',
+        permissions: ['tourbook', 'shipping']
+      },
+      viewer: {
+        label: '👁️ ผู้ช่วยดูข้อมูลอย่างเดียว',
+        badgeClass: 'bg-slate-700/60 text-slate-200 border-slate-500/50',
+        accessMode: 'view',
+        permissions: ['site', 'members', 'forum', 'shipping', 'tourbook']
+      },
+      custom: {
+        label: '⚙️ ผู้ช่วยกำหนดสิทธิ์เอง',
+        badgeClass: 'bg-purple-500/15 text-purple-300 border-purple-400/40',
+        accessMode: 'edit',
+        permissions: ['members', 'shipping']
       }
+    };
+
+    const ADMIN_TAB_LABELS = {
+      site: 'ตั้งค่าเว็บ',
+      members: 'อนุมัติสมาชิก',
+      forum: 'เว็บบอร์ด',
+      shipping: 'พัสดุ/สถานะ',
+      admins: 'จัดการผู้ดูแล',
+      tourbook: 'สมุดทัวร์',
+      backup: 'สำรองข้อมูล'
+    };
+
+    let cloudAdminAccounts = [];
+    let editingAdminUsername = null;
+
+    function getRoleMeta(role) {
+      return ADMIN_ROLE_PRESETS[role] || ADMIN_ROLE_PRESETS.custom;
     }
 
-    function saveAdminAccounts(list) {
-      try {
-        localStorage.setItem(LOCAL_ADMINS_KEY, JSON.stringify(list));
-      } catch (_) {}
+    function canAccessTab(tabName) {
+      if (!sessionAdmin) return false;
+      if (sessionAdmin.isSuperAdmin) return true;
+      if (tabName === 'admins') return false;
+      const perms = Array.isArray(sessionAdmin.permissions) ? sessionAdmin.permissions : [];
+      return perms.includes(tabName);
+    }
+
+    function canEditCurrentAdmin() {
+      if (!sessionAdmin) return false;
+      if (sessionAdmin.isSuperAdmin) return true;
+      return sessionAdmin.accessMode === 'edit';
+    }
+
+    function applyAdminRolePermissions() {
+      if (!sessionAdmin) return;
+      const isSuper = !!sessionAdmin.isSuperAdmin;
+      const isEditable = canEditCurrentAdmin();
+      const roleMeta = getRoleMeta(isSuper ? 'super_admin' : sessionAdmin.role);
+
+      const badge = document.getElementById('current-admin-role-badge');
+      if (badge) {
+        const modeTag = isSuper ? '' : (isEditable ? ' · แก้ไขได้' : ' · ดูอย่างเดียว');
+        badge.className = `inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold border ${roleMeta.badgeClass}`;
+        badge.textContent = `${roleMeta.label}${modeTag}`;
+      }
+
+      const vbLink = document.getElementById('header-visual-builder-link');
+      if (vbLink) {
+        vbLink.classList.toggle('hidden', !(isSuper || (isEditable && canAccessTab('site'))));
+      }
+
+      const roBanner = document.getElementById('readonly-mode-banner');
+      if (roBanner) {
+        roBanner.classList.toggle('hidden', isEditable);
+      }
+
+      // แสดง/ซ่อนปุ่มแท็บตามสิทธิ์
+      const allowedTabs = [];
+      document.querySelectorAll('.admin-nav-tab').forEach(btn => {
+        const t = btn.getAttribute('data-tab');
+        const ok = canAccessTab(t);
+        btn.classList.toggle('hidden', !ok);
+        if (ok) allowedTabs.push(t);
+      });
+
+      // ปิดปุ่มบันทึก/แก้ไขในแท็บเนื้อหาสำหรับโหมด Read-Only
+      const readOnlyPanels = ['site', 'members', 'forum', 'shipping', 'tourbook'];
+      readOnlyPanels.forEach(tabId => {
+        const panel = document.getElementById(`tab-panel-${tabId}`);
+        if (!panel) return;
+        panel.querySelectorAll('button[type="submit"], button[onclick*="save"], button[onclick*="Save"], button[onclick*="decide"], button[onclick*="update"], button[onclick*="testLine"], button[onclick*="add"], button[onclick*="remove"], button[onclick*="bulk"], button[onclick*="deduct"], button[onclick*="adjust"], button[onclick*="resetTourBook"]').forEach(btn => {
+          if (!isEditable) {
+            btn.disabled = true;
+            btn.classList.add('opacity-40', 'cursor-not-allowed', 'pointer-events-none');
+            btn.title = 'บัญชีนี้มีสิทธิ์ดูข้อมูลอย่างเดียว (Read-Only)';
+          } else {
+            btn.disabled = false;
+            btn.classList.remove('opacity-40', 'cursor-not-allowed', 'pointer-events-none');
+            if (btn.title === 'บัญชีนี้มีสิทธิ์ดูข้อมูลอย่างเดียว (Read-Only)') btn.title = '';
+          }
+        });
+      });
+
+      // ตรวจสอบว่าแท็บปัจจุบันเข้าถึงได้หรือไม่ หากไม่ได้ให้สลับไปแท็บแรกที่มีสิทธิ์
+      const currentTab = (() => {
+        try { return sessionStorage.getItem(ADMIN_ACTIVE_TAB_KEY); } catch (_) { return null; }
+      })();
+      if (allowedTabs.length > 0 && (!currentTab || !canAccessTab(currentTab))) {
+        switchTab(allowedTabs[0]);
+      }
     }
 
     async function handleLogin(e) {
@@ -1514,38 +1722,36 @@
       const password = document.getElementById('login-password').value;
       const btn = document.getElementById('btn-login');
       btn.disabled = true;
-      btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin mr-1.5"></i> กำลังตรวจสอบ...';
+      btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin mr-1.5"></i> กำลังตรวจสอบสิทธิ์...';
 
       try {
-        const localAccounts = getAdminAccounts();
-        const localMatch = localAccounts.find(
-          a => String(a.username).toLowerCase() === username.toLowerCase() && String(a.password) === password
-        );
+        const res = await fetch(MASTER_WEB_APP_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({ action: 'admin_login', adminId: username, passcode: password })
+        });
+        const json = await res.json();
 
-        let apiOk = false;
-        try {
-          const res = await fetch(MASTER_WEB_APP_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-            body: JSON.stringify({ action: 'admin_login', adminId: username, passcode: password })
-          });
-          const json = await res.json();
-          if (json && json.success) apiOk = true;
-        } catch (_) {}
-
-        if (!localMatch && !apiOk) {
-          toast('Username หรือรหัสผ่านไม่ถูกต้อง', false);
+        if (!json || !json.success) {
+          toast((json && json.message) ? json.message : 'Username หรือรหัสผ่านไม่ถูกต้อง', false);
           return;
         }
 
+        const profile = json.admin || {};
         sessionAdmin = {
-          username: localMatch ? localMatch.username : username,
+          username: profile.username || username,
           password: password,
-          displayName: localMatch ? localMatch.displayName : username
+          displayName: profile.displayName || username,
+          role: profile.role || (profile.isSuperAdmin ? 'super_admin' : 'staff_ops'),
+          isSuperAdmin: !!profile.isSuperAdmin,
+          accessMode: profile.accessMode || (profile.isSuperAdmin ? 'edit' : 'view'),
+          permissions: Array.isArray(profile.permissions) ? profile.permissions : (profile.isSuperAdmin ? ['site', 'members', 'forum', 'shipping', 'admins', 'tourbook', 'backup'] : [])
         };
         persistAdminSession(sessionAdmin);
         enterAdminDashboard(false);
-        toast('เข้าสู่ระบบหลังบ้านสำเร็จ');
+        toast(`เข้าสู่ระบบสำเร็จ (${getRoleMeta(sessionAdmin.role).label})`);
+      } catch (err) {
+        toast('ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์ตรวจสอบสิทธิ์ได้ กรุณาลองใหม่', false);
       } finally {
         btn.disabled = false;
         btn.innerHTML = '<i class="fa-solid fa-right-to-bracket mr-1.5"></i> เข้าสู่ระบบหลังบ้าน';
@@ -1563,6 +1769,10 @@
           username: adminObj.username,
           password: adminObj.password,
           displayName: adminObj.displayName,
+          role: adminObj.role || 'super_admin',
+          isSuperAdmin: !!adminObj.isSuperAdmin,
+          accessMode: adminObj.accessMode || 'edit',
+          permissions: Array.isArray(adminObj.permissions) ? adminObj.permissions : [],
           expiresAt: Date.now() + ADMIN_SESSION_TTL_MS
         }));
       } catch (_) {}
@@ -1570,9 +1780,10 @@
 
     function enterAdminDashboard(isRestore) {
       if (!sessionAdmin) return;
-      document.getElementById('current-admin-label').textContent = `${sessionAdmin.displayName} (${sessionAdmin.username})`;
+      document.getElementById('current-admin-label').textContent = `${sessionAdmin.displayName} (@${sessionAdmin.username})`;
       document.getElementById('login-view').classList.add('hidden');
       document.getElementById('dashboard-view').classList.remove('hidden');
+      applyAdminRolePermissions();
       renderAdminAccountsList();
       initPageAnnouncementEditor();
       initDriverNewsCms();
@@ -1581,10 +1792,13 @@
       if (isRestore) {
         try {
           const savedTab = sessionStorage.getItem(ADMIN_ACTIVE_TAB_KEY);
-          if (savedTab && document.getElementById(`tab-panel-${savedTab}`)) {
+          if (savedTab && canAccessTab(savedTab) && document.getElementById(`tab-panel-${savedTab}`)) {
             switchTab(savedTab);
           }
         } catch (_) {}
+      } else {
+        const firstAllowed = ['site', 'members', 'forum', 'shipping', 'tourbook', 'backup', 'admins'].find(t => canAccessTab(t));
+        if (firstAllowed) switchTab(firstAllowed);
       }
       refreshAllAdminData();
     }
@@ -1595,10 +1809,17 @@
         if (!raw) return;
         const parsed = JSON.parse(raw);
         if (parsed && parsed.username && parsed.password && Number(parsed.expiresAt || 0) > Date.now()) {
+          const fallbackSuper = String(parsed.username).toUpperCase() === 'ADMIN' || String(parsed.username).toUpperCase() === 'SUPERADMIN';
           sessionAdmin = {
             username: parsed.username,
             password: parsed.password,
-            displayName: parsed.displayName || parsed.username
+            displayName: parsed.displayName || parsed.username,
+            role: parsed.role || (fallbackSuper ? 'super_admin' : 'staff_ops'),
+            isSuperAdmin: typeof parsed.isSuperAdmin === 'boolean' ? parsed.isSuperAdmin : fallbackSuper,
+            accessMode: parsed.accessMode || (fallbackSuper ? 'edit' : 'view'),
+            permissions: Array.isArray(parsed.permissions) && parsed.permissions.length > 0
+              ? parsed.permissions
+              : (fallbackSuper ? ['site', 'members', 'forum', 'shipping', 'admins', 'tourbook', 'backup'] : [])
           };
           persistAdminSession(sessionAdmin); // ต่ออายุเซสชันอีก 15 นาที
           enterAdminDashboard(true);
@@ -1610,6 +1831,8 @@
 
     function handleLogout() {
       sessionAdmin = null;
+      cloudAdminAccounts = [];
+      editingAdminUsername = null;
       try {
         sessionStorage.removeItem(ADMIN_SESSION_STORAGE_KEY);
         sessionStorage.removeItem(ADMIN_ACTIVE_TAB_KEY);
@@ -1620,16 +1843,28 @@
     }
 
     function switchTab(tabName) {
+      if (!canAccessTab(tabName)) {
+        const fallback = ['site', 'members', 'forum', 'shipping', 'tourbook', 'backup', 'admins'].find(t => canAccessTab(t));
+        if (!fallback) return;
+        tabName = fallback;
+      }
       try { sessionStorage.setItem(ADMIN_ACTIVE_TAB_KEY, tabName); } catch (_) {}
       ['site', 'members', 'forum', 'shipping', 'admins', 'tourbook', 'backup'].forEach(t => {
-        document.getElementById(`tab-panel-${t}`).classList.toggle('hidden', t !== tabName);
+        const panel = document.getElementById(`tab-panel-${t}`);
+        if (panel) panel.classList.toggle('hidden', t !== tabName);
       });
       document.querySelectorAll('.admin-nav-tab').forEach(btn => {
-        const active = btn.getAttribute('data-tab') === tabName;
+        const t = btn.getAttribute('data-tab');
+        const allowed = canAccessTab(t);
+        const active = t === tabName;
+        if (!allowed) {
+          btn.classList.add('hidden');
+          return;
+        }
         if (active) {
           btn.className = 'admin-nav-tab gold-grad text-slate-950 font-extrabold px-4 py-2.5 rounded-xl text-xs';
         } else {
-          const extra = btn.getAttribute('data-tab') === 'backup' ? ' ml-auto text-emerald-300' : ' text-slate-300 hover:text-white';
+          const extra = t === 'backup' ? ' ml-auto text-emerald-300' : ' text-slate-300 hover:text-white';
           btn.className = `admin-nav-tab bg-slate-800 font-bold px-4 py-2.5 rounded-xl text-xs${extra}`;
         }
       });
@@ -1639,48 +1874,258 @@
 
     document.addEventListener('DOMContentLoaded', restoreAdminSessionIfValid);
 
-    function renderAdminAccountsList() {
-      const list = getAdminAccounts();
-      const box = document.getElementById('admin-accounts-list');
-      if (!box) return;
-      box.innerHTML = list.map((acc, idx) => `
-        <div class="bg-slate-950 border border-slate-800 rounded-2xl p-3.5 flex items-center justify-between gap-3 text-xs">
-          <div>
-            <p class="font-bold text-white">${esc(acc.displayName)} <span class="text-amber-300 font-mono">(@${esc(acc.username)})</span></p>
-            <p class="text-slate-400">รหัสผ่าน: <span class="font-mono text-slate-200">${esc(acc.password)}</span></p>
-          </div>
-          ${acc.username.toLowerCase() !== 'admin'
-            ? `<button type="button" onclick="removeAdminAccount(${idx})" class="bg-rose-600/20 hover:bg-rose-600/35 text-rose-300 border border-rose-500/40 px-3 py-1.5 rounded-xl font-bold">ลบบัญชี</button>`
-            : `<span class="text-xs bg-amber-400/15 text-amber-300 border border-amber-400/30 px-2.5 py-1 rounded-full">บัญชีหลัก</span>`}
-        </div>
-      `).join('');
+    function applyRolePresetToForm(roleKey) {
+      const preset = ADMIN_ROLE_PRESETS[roleKey];
+      if (!preset || roleKey === 'custom') return;
+      const modeEl = document.getElementById('new-admin-mode');
+      if (modeEl) modeEl.value = preset.accessMode;
+      document.querySelectorAll('.admin-perm-chk').forEach(chk => {
+        chk.checked = preset.permissions.includes(chk.value);
+      });
     }
 
-    function addAdminAccount(e) {
+    function resetAdminAccountForm() {
+      editingAdminUsername = null;
+      const form = document.getElementById('admin-account-form');
+      if (form) form.reset();
+      const userEl = document.getElementById('new-admin-username');
+      if (userEl) {
+        userEl.readOnly = false;
+        userEl.classList.remove('opacity-60');
+      }
+      const passEl = document.getElementById('new-admin-password');
+      if (passEl) {
+        passEl.required = true;
+        passEl.placeholder = 'ตั้งรหัสผ่านให้ผู้ช่วย';
+      }
+      const passHint = document.getElementById('new-admin-pass-hint');
+      if (passHint) passHint.textContent = '(อย่างน้อย 4 ตัวอักษร) *';
+      const titleEl = document.getElementById('admin-form-title');
+      if (titleEl) titleEl.innerHTML = '<i class="fa-solid fa-user-plus mr-1.5"></i>สร้างไอดีผู้ช่วยผู้ดูแลใหม่';
+      const btnSave = document.getElementById('btn-save-admin-account');
+      if (btnSave) btnSave.innerHTML = '<i class="fa-solid fa-user-check mr-1"></i> บันทึกและอนุมัติไอดีผู้ช่วย';
+      const btnCancel = document.getElementById('btn-cancel-edit-admin');
+      if (btnCancel) btnCancel.classList.add('hidden');
+      const roleEl = document.getElementById('new-admin-role');
+      if (roleEl) {
+        roleEl.value = 'staff_ops';
+        applyRolePresetToForm('staff_ops');
+      }
+    }
+
+    function editAdminAccount(username) {
+      const target = cloudAdminAccounts.find(a => String(a.username).toLowerCase() === String(username).toLowerCase());
+      if (!target) return;
+      editingAdminUsername = target.username;
+      const userEl = document.getElementById('new-admin-username');
+      userEl.value = target.username;
+      userEl.readOnly = true;
+      userEl.classList.add('opacity-60');
+
+      const passEl = document.getElementById('new-admin-password');
+      passEl.value = '';
+      passEl.required = false;
+      passEl.placeholder = 'เว้นว่างไว้ = ใช้รหัสผ่านเดิม';
+      document.getElementById('new-admin-pass-hint').textContent = '(เว้นว่าง = ไม่เปลี่ยนรหัสผ่าน)';
+
+      document.getElementById('new-admin-display').value = target.displayName || '';
+      document.getElementById('new-admin-role').value = ADMIN_ROLE_PRESETS[target.role] ? target.role : 'custom';
+      document.getElementById('new-admin-mode').value = target.accessMode === 'view' ? 'view' : 'edit';
+      document.getElementById('new-admin-status').value = target.status === 'ระงับ' ? 'ระงับ' : 'อนุมัติ';
+
+      const perms = Array.isArray(target.permissions) ? target.permissions : [];
+      document.querySelectorAll('.admin-perm-chk').forEach(chk => {
+        chk.checked = perms.includes(chk.value);
+      });
+
+      document.getElementById('admin-form-title').innerHTML = `<i class="fa-solid fa-pen-to-square mr-1.5"></i>แก้ไขสิทธิ์ผู้ช่วย <span class="font-mono text-white">@${esc(target.username)}</span>`;
+      document.getElementById('btn-save-admin-account').innerHTML = '<i class="fa-solid fa-floppy-disk mr-1"></i> บันทึกการแก้ไขสิทธิ์';
+      document.getElementById('btn-cancel-edit-admin').classList.remove('hidden');
+      document.getElementById('admin-account-form').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function renderAdminAccountsList() {
+      const box = document.getElementById('admin-accounts-list');
+      if (!box) return;
+
+      const superRow = `
+        <div class="bg-amber-400/10 border border-amber-400/40 rounded-2xl p-4 flex flex-wrap items-center justify-between gap-3 text-xs">
+          <div class="space-y-1">
+            <div class="flex flex-wrap items-center gap-2">
+              <p class="font-extrabold text-amber-200">ผู้ดูแลระบบหลัก <span class="text-amber-300 font-mono">(@admin)</span></p>
+              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-400/20 text-amber-300 border border-amber-400/40">👑 แอดมินหลัก (Super Admin)</span>
+              <span class="px-2 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-400/35">สิทธิ์เต็มทุกแท็บ</span>
+            </div>
+            <p class="text-slate-300 text-[11px]">เป็นบัญชีเดียวที่สามารถสร้าง แก้ไขสิทธิ์ อนุมัติ/ระงับไอดีผู้ช่วย และเปลี่ยน Master Passcode ได้</p>
+          </div>
+          <span class="text-[11px] font-bold bg-slate-950/80 text-amber-300 border border-amber-400/30 px-3 py-1 rounded-full">Master Account</span>
+        </div>
+      `;
+
+      if (!cloudAdminAccounts || cloudAdminAccounts.length === 0) {
+        box.innerHTML = superRow + `
+          <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4 text-center text-xs text-slate-400">
+            ยังไม่มีไอดีผู้ช่วยผู้ดูแลในระบบ — แอดมินหลักสามารถสร้างและกำหนดสิทธิ์ได้จากแบบฟอร์มด้านบน
+          </div>
+        `;
+        return;
+      }
+
+      const rows = cloudAdminAccounts.map(acc => {
+        const meta = getRoleMeta(acc.role);
+        const isApproved = acc.status === 'อนุมัติ';
+        const isEdit = acc.accessMode === 'edit';
+        const permPills = (Array.isArray(acc.permissions) ? acc.permissions : []).map(p =>
+          `<span class="px-2 py-0.5 rounded-md bg-slate-800 text-slate-200 border border-slate-700 text-[11px]">${esc(ADMIN_TAB_LABELS[p] || p)}</span>`
+        ).join('');
+        return `
+          <div class="bg-slate-950 border ${isApproved ? 'border-slate-800' : 'border-rose-500/40 opacity-85'} rounded-2xl p-4 flex flex-col lg:flex-row lg:items-center justify-between gap-3 text-xs">
+            <div class="space-y-1.5">
+              <div class="flex flex-wrap items-center gap-2">
+                <p class="font-extrabold text-white">${esc(acc.displayName)} <span class="text-amber-300 font-mono">(@${esc(acc.username)})</span></p>
+                <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold border ${meta.badgeClass}">${esc(meta.label)}</span>
+                <span class="px-2 py-0.5 rounded-full text-[11px] font-bold border ${isEdit ? 'bg-emerald-500/15 text-emerald-300 border-emerald-400/35' : 'bg-sky-500/15 text-sky-300 border-sky-400/35'}">${isEdit ? '✏️ แก้ไข/อนุมัติได้' : '👁️ ดูอย่างเดียว'}</span>
+                <span class="px-2 py-0.5 rounded-full text-[11px] font-bold border ${isApproved ? 'bg-emerald-500/20 text-emerald-300 border-emerald-400/40' : 'bg-rose-500/20 text-rose-300 border-rose-400/40'}">${isApproved ? '✅ อนุมัติแล้ว' : '⛔ ระงับสิทธิ์'}</span>
+              </div>
+              <div class="flex flex-wrap items-center gap-1.5 pt-0.5">
+                <span class="text-[11px] text-slate-400">แท็บที่เข้าถึงได้:</span>
+                ${permPills || '<span class="text-[11px] text-rose-300">ไม่ได้กำหนดแท็บ</span>'}
+              </div>
+              ${acc.updatedAt ? `<p class="text-[11px] text-slate-500">อัปเดตล่าสุด: ${esc(acc.updatedAt)}</p>` : ''}
+            </div>
+            <div class="flex flex-wrap items-center gap-2 shrink-0">
+              <button type="button" onclick="editAdminAccount('${esc(acc.username)}')" class="bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-400/40 px-3 py-1.5 rounded-xl font-bold">
+                <i class="fa-solid fa-pen mr-1"></i> แก้ไขสิทธิ์
+              </button>
+              <button type="button" onclick="toggleAdminAccountStatus('${esc(acc.username)}', '${isApproved ? 'ระงับ' : 'อนุมัติ'}')" class="${isApproved ? 'bg-slate-800 hover:bg-slate-700 text-amber-200 border-slate-600' : 'bg-emerald-600/20 hover:bg-emerald-600/35 text-emerald-300 border-emerald-500/40'} border px-3 py-1.5 rounded-xl font-bold">
+                <i class="fa-solid ${isApproved ? 'fa-ban' : 'fa-check'} mr-1"></i> ${isApproved ? 'ระงับสิทธิ์' : 'อนุมัติอีกครั้ง'}
+              </button>
+              <button type="button" onclick="deleteAdminAccount('${esc(acc.username)}')" class="bg-rose-600/20 hover:bg-rose-600/35 text-rose-300 border border-rose-500/40 px-3 py-1.5 rounded-xl font-bold">
+                <i class="fa-solid fa-trash mr-1"></i> ลบไอดี
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      box.innerHTML = superRow + rows;
+    }
+
+    async function saveAdminAccount(e) {
       e.preventDefault();
+      if (!sessionAdmin || !sessionAdmin.isSuperAdmin) {
+        toast('เฉพาะแอดมินหลักเท่านั้นที่จัดการบัญชีผู้ช่วยได้', false);
+        return;
+      }
       const username = document.getElementById('new-admin-username').value.trim();
       const password = document.getElementById('new-admin-password').value;
       const displayName = document.getElementById('new-admin-display').value.trim();
-      const list = getAdminAccounts();
-      if (list.some(a => a.username.toLowerCase() === username.toLowerCase())) {
-        toast('มี Username นี้อยู่แล้วในระบบ', false);
+      const role = document.getElementById('new-admin-role').value;
+      const accessMode = document.getElementById('new-admin-mode').value;
+      const status = document.getElementById('new-admin-status').value;
+      const permissions = Array.from(document.querySelectorAll('.admin-perm-chk:checked')).map(c => c.value);
+
+      if (!editingAdminUsername && password.length < 4) {
+        toast('กรุณาตั้งรหัสผ่านผู้ช่วยอย่างน้อย 4 ตัวอักษร', false);
         return;
       }
-      list.push({ username, password, displayName, role: 'Admin' });
-      saveAdminAccounts(list);
-      e.target.reset();
-      renderAdminAccountsList();
-      toast(`เพิ่มบัญชีผู้ดูแล @${username} เรียบร้อยแล้ว`);
+      if (permissions.length === 0) {
+        toast('กรุณาเลือกสิทธิ์การเข้าถึงอย่างน้อย 1 แท็บ', false);
+        return;
+      }
+
+      const btn = document.getElementById('btn-save-admin-account');
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin mr-1"></i> กำลังบันทึกขึ้น Cloud...';
+
+      try {
+        const res = await fetch(MASTER_WEB_APP_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({
+            action: 'admin_manage_accounts',
+            adminId: sessionAdmin.username,
+            passcode: sessionAdmin.password,
+            op: 'save',
+            account: { username, password, displayName, role, accessMode, status, permissions }
+          })
+        });
+        const json = await res.json();
+        if (json && json.success) {
+          cloudAdminAccounts = Array.isArray(json.adminAccounts) ? json.adminAccounts : cloudAdminAccounts;
+          resetAdminAccountForm();
+          renderAdminAccountsList();
+          toast(json.message || 'บันทึกบัญชีผู้ช่วยเรียบร้อยแล้ว');
+        } else {
+          toast((json && json.message) ? json.message : 'บันทึกไม่สำเร็จ', false);
+        }
+      } catch (_) {
+        toast('เชื่อมต่อเซิร์ฟเวอร์ไม่สำเร็จ กรุณาลองใหม่', false);
+      } finally {
+        btn.disabled = false;
+        if (!editingAdminUsername) {
+          btn.innerHTML = '<i class="fa-solid fa-user-check mr-1"></i> บันทึกและอนุมัติไอดีผู้ช่วย';
+        }
+      }
     }
 
-    function removeAdminAccount(idx) {
-      const list = getAdminAccounts();
-      const target = list[idx];
-      if (!target || target.username.toLowerCase() === 'admin') return;
-      list.splice(idx, 1);
-      saveAdminAccounts(list);
-      renderAdminAccountsList();
-      toast(`ลบบัญชีผู้ดูแล @${target.username} แล้ว`);
+    async function toggleAdminAccountStatus(username, nextStatus) {
+      if (!sessionAdmin || !sessionAdmin.isSuperAdmin) return;
+      try {
+        const res = await fetch(MASTER_WEB_APP_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({
+            action: 'admin_manage_accounts',
+            adminId: sessionAdmin.username,
+            passcode: sessionAdmin.password,
+            op: 'toggle',
+            targetUsername: username,
+            status: nextStatus
+          })
+        });
+        const json = await res.json();
+        if (json && json.success) {
+          cloudAdminAccounts = Array.isArray(json.adminAccounts) ? json.adminAccounts : cloudAdminAccounts;
+          renderAdminAccountsList();
+          toast(json.message || 'อัปเดตสถานะแล้ว');
+        } else {
+          toast((json && json.message) ? json.message : 'อัปเดตสถานะไม่สำเร็จ', false);
+        }
+      } catch (_) {
+        toast('เชื่อมต่อเซิร์ฟเวอร์ไม่สำเร็จ', false);
+      }
+    }
+
+    async function deleteAdminAccount(username) {
+      if (!sessionAdmin || !sessionAdmin.isSuperAdmin) return;
+      if (!confirm(`ยืนยันการลบบัญชีผู้ช่วย @${username} ออกจากระบบถาวร?`)) return;
+      try {
+        const res = await fetch(MASTER_WEB_APP_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({
+            action: 'admin_manage_accounts',
+            adminId: sessionAdmin.username,
+            passcode: sessionAdmin.password,
+            op: 'delete',
+            targetUsername: username
+          })
+        });
+        const json = await res.json();
+        if (json && json.success) {
+          cloudAdminAccounts = Array.isArray(json.adminAccounts) ? json.adminAccounts : cloudAdminAccounts;
+          if (editingAdminUsername && editingAdminUsername.toLowerCase() === username.toLowerCase()) {
+            resetAdminAccountForm();
+          }
+          renderAdminAccountsList();
+          toast(json.message || 'ลบบัญชีผู้ช่วยแล้ว');
+        } else {
+          toast((json && json.message) ? json.message : 'ลบบัญชีไม่สำเร็จ', false);
+        }
+      } catch (_) {
+        toast('เชื่อมต่อเซิร์ฟเวอร์ไม่สำเร็จ', false);
+      }
     }
 
     async function refreshAllAdminData() {
@@ -1696,7 +2141,28 @@
           })
         });
         const json = await res.json();
-        if (!json || !json.success) return;
+        if (!json || !json.success) {
+          if (json && json.message && (json.message.includes('ระงับ') || json.message.includes('ไม่ถูกต้อง'))) {
+            toast(json.message, false);
+            handleLogout();
+          }
+          return;
+        }
+
+        if (json.admin) {
+          sessionAdmin.displayName = json.admin.displayName || sessionAdmin.displayName;
+          sessionAdmin.role = json.admin.role || sessionAdmin.role;
+          sessionAdmin.isSuperAdmin = !!json.admin.isSuperAdmin;
+          sessionAdmin.accessMode = json.admin.accessMode || sessionAdmin.accessMode;
+          sessionAdmin.permissions = Array.isArray(json.admin.permissions) ? json.admin.permissions : sessionAdmin.permissions;
+          persistAdminSession(sessionAdmin);
+          document.getElementById('current-admin-label').textContent = `${sessionAdmin.displayName} (@${sessionAdmin.username})`;
+          applyAdminRolePermissions();
+        }
+        if (Array.isArray(json.adminAccounts)) {
+          cloudAdminAccounts = json.adminAccounts;
+          renderAdminAccountsList();
+        }
 
         const cfg = json.settings || {};
         document.getElementById('cfg-announcement').value = cfg.announcement || 'ประกาศและรอบการจัดส่งบริการสำหรับสมาชิกเครือข่าย';
@@ -1769,6 +2235,7 @@
               </div>
             </div>
           `).join('');
+        applyAdminRolePermissions();
       } catch (_) {}
     }
 

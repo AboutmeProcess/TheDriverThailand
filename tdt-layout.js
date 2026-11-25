@@ -96,6 +96,14 @@
     "text": "คู่มือการใช้งาน กฎกติกาเครือข่าย วิธีตั้งชื่อ และช่องทางติดต่อแอดมิน",
     "badge": "คู่มือสมาชิก"
   },
+  "member_portal.html": {
+    "pillColor": "amber",
+    "pillStyle": "solid",
+    "pillIcon": "fa-solid fa-id-card-clip",
+    "pillText": "MEMBER PORTAL",
+    "text": "ศูนย์รวมสมาชิก — บัตรดิจิทัล สถานะคำร้อง พัสดุ และสิทธิพิเศษพาร์ทเนอร์ในหน้าเดียว",
+    "badge": "ล็อกอินครั้งเดียวจบ"
+  },
   "index.html": {
     "pillColor": "amber",
     "pillStyle": "solid",
@@ -257,6 +265,7 @@
                 '<i class="fa-solid fa-id-card"></i> สมาชิก &amp; บัตร <i id="chevron-cat-member" class="fa-solid fa-chevron-down text-xs"></i>' +
               '</button>' +
               '<div id="panel-cat-member" class="tdt-d-panel">' +
+                '<a href="member_portal.html" class="tdt-d-item" style="color:#fde68a;font-weight:700;"><i class="fa-solid fa-id-card-clip"></i> Member Portal (ศูนย์รวมสมาชิก)</a>' +
                 '<a href="member_register.html" class="tdt-d-item"><i class="fa-solid fa-file-signature"></i> สมัครสมาชิกใหม่</a>' +
                 '<a href="register.html" class="tdt-d-item"><i class="fa-solid fa-users-viewfinder"></i> ตรวจสอบรหัสสมาชิก</a>' +
                 '<a href="member_edit.html" class="tdt-d-item"><i class="fa-solid fa-user-pen"></i> แก้ไขข้อมูลสมาชิก</a>' +
@@ -338,7 +347,8 @@
           '<input type="search" id="tdt-drawer-search" oninput="filterTdtDrawer(this.value)" placeholder="ค้นหาเมนูบริการ..." class="tdt-drawer-search">' +
           '<a href="index.html" class="tdt-drawer-link"><i class="fa-solid fa-house"></i> หน้าหลัก</a>' +
           '<div class="tdt-drawer-cat">' +
-            '<div class="tdt-drawer-cat-title">1. สมาชิก &amp; บัตร (7)</div>' +
+            '<div class="tdt-drawer-cat-title">1. สมาชิก &amp; บัตร (8)</div>' +
+            '<a href="member_portal.html" class="tdt-drawer-link" style="color:#fde68a;font-weight:700;"><i class="fa-solid fa-id-card-clip"></i> Member Portal (ศูนย์รวมสมาชิก)</a>' +
             '<a href="member_register.html" class="tdt-drawer-link"><i class="fa-solid fa-file-signature"></i> สมัครสมาชิกใหม่</a>' +
             '<a href="register.html" class="tdt-drawer-link"><i class="fa-solid fa-users-viewfinder"></i> ตรวจสอบรหัสสมาชิก</a>' +
             '<a href="member_edit.html" class="tdt-drawer-link"><i class="fa-solid fa-user-pen"></i> แก้ไขข้อมูลสมาชิก</a>' +

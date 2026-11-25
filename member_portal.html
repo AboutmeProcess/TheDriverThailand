@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Member Portal ศูนย์รวมสมาชิก | 🚖 The Driver TH 🇹🇭 Premium Service</title>
+  <meta name="description" content="Member Portal รวมศูนย์สำหรับสมาชิก The Driver Thailand — ดูบัตรสมาชิกดิจิทัล ติดตามสถานะคำร้องและพัสดุ สิทธิประโยชน์พาร์ทเนอร์ และเครื่องมือคนขับในหน้าเดียว">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#070a12">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="tdt-theme.css?v=20261126">
+  <style>
+    html, body, input, select, textarea, button { font-family: 'Prompt', sans-serif !important; }
+    body { background-color: #070a12; color: #f8fafc; overflow-x: clip; }
+    .gold-grad { background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%); }
+    .portal-card-bg {
+      background:
+        radial-gradient(circle at 15% 20%, rgba(251, 191, 36, 0.22) 0%, transparent 48%),
+        radial-gradient(circle at 85% 80%, rgba(16, 185, 129, 0.16) 0%, transparent 50%),
+        linear-gradient(145deg, #0b1120 0%, #111c33 55%, #070b14 100%);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+  <div id="tdt-layout-header" data-page="member_portal.html"></div>
+
+  <main class="flex-grow max-w-6xl w-full mx-auto px-4 py-6 sm:py-8 space-y-6">
+    <!-- Hero Banner -->
+    <section class="portal-card-bg border border-amber-400/30 rounded-3xl p-5 sm:p-7 shadow-2xl">
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <div class="space-y-1.5">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-extrabold bg-amber-400/15 text-amber-300 border border-amber-400/35">
+            <i class="fa-solid fa-crown"></i> ONE-STOP MEMBER PORTAL
+          </span>
+          <h1 class="text-2xl sm:text-3xl font-black text-white">ศูนย์รวมสมาชิก <span class="text-amber-300">The Driver TH</span></h1>
+          <p class="text-xs sm:text-sm text-slate-300 max-w-2xl">ยืนยันรหัสสมาชิกครั้งเดียว ดูบัตรสมาชิกดิจิทัล สถานะคำร้อง/พัสดุทั้งหมด สิทธิประโยชน์ส่วนลดพาร์ทเนอร์ และทางลัดเครื่องมือคนขับครบในหน้าเดียว</p>
+        </div>
+        <button type="button" id="btn-portal-logout" onclick="portalLogout()" class="hidden px-4 py-2.5 rounded-xl bg-rose-600/20 hover:bg-rose-600/30 text-rose-300 border border-rose-500/40 text-xs font-bold">
+          <i class="fa-solid fa-right-from-bracket mr-1"></i> สลับรหัสสมาชิก / ออก
+        </button>
+      </div>
+    </section>
+
+    <!-- Login Card -->
+    <section id="portal-login-section" class="max-w-lg mx-auto bg-slate-900 border border-amber-400/35 rounded-3xl p-6 sm:p-7 shadow-2xl space-y-5">
+      <div class="text-center space-y-1.5">
+        <div class="w-14 h-14 rounded-2xl bg-amber-400/15 border border-amber-400/45 text-amber-300 flex items-center justify-center text-2xl mx-auto">
+          <i class="fa-solid fa-id-card-clip"></i>
+        </div>
+        <h2 class="text-lg font-extrabold text-amber-300">ยืนยันตัวตนเข้าสู่ Member Portal</h2>
+        <p class="text-xs text-slate-400">กรอกรหัสสมาชิก (เช่น <span class="font-mono text-amber-200">B2464</span>) และเบอร์โทร 4 หลักท้ายที่ลงทะเบียนไว้</p>
+      </div>
+
+      <form onsubmit="handlePortalLogin(event)" class="space-y-4 text-xs sm:text-sm">
+        <div class="space-y-1">
+          <label class="block text-xs font-bold text-slate-300">รหัสสมาชิก (Member Code) *</label>
+          <input type="text" id="portal-code-input" required placeholder="เช่น B2464 หรือ A1025" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-amber-300 font-mono uppercase focus:outline-none focus:border-amber-400">
+        </div>
+        <div class="space-y-1">
+          <label class="block text-xs font-bold text-slate-300">เบอร์โทรศัพท์ 4 หลักสุดท้าย *</label>
+          <input type="tel" id="portal-phone4-input" required maxlength="4" pattern="\d{4}" inputmode="numeric" placeholder="เช่น 9683" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-white font-mono tracking-widest focus:outline-none focus:border-amber-400">
+        </div>
+        <p id="portal-login-error" class="hidden text-xs text-rose-300 bg-rose-500/15 border border-rose-500/40 rounded-xl px-3.5 py-2.5"></p>
+        <button type="submit" id="btn-portal-login" class="w-full gold-grad hover:opacity-95 text-slate-950 font-extrabold py-3.5 rounded-xl text-sm shadow-lg transition">
+          <i class="fa-solid fa-unlock-keyhole mr-1.5"></i> เปิดใช้งาน Member Portal
+        </button>
+      </form>
+
+      <div class="text-center text-xs text-slate-400 pt-2 border-t border-slate-800 space-y-1">
+        <p>จำรหัสสมาชิกไม่ได้? <a href="register.html" class="text-amber-300 underline font-bold">ตรวจสอบรหัสสมาชิกที่นี่</a></p>
+        <p>ยังไม่ได้เป็นสมาชิก? <a href="member_register.html" class="text-emerald-300 underline font-bold">สมัครสมาชิกเครือข่าย</a></p>
+      </div>
+    </section>
+
+    <!-- Portal Dashboard (Shown after login) -->
+    <div id="portal-dashboard-section" class="hidden space-y-6">
+      <!-- Top Grid: Digital Card Preview + Member Info -->
+      <section class="grid lg:grid-cols-12 gap-5">
+        <!-- Digital Member Card -->
+        <div class="lg:col-span-5 portal-card-bg border border-amber-400/50 rounded-3xl p-5 sm:p-6 shadow-2xl flex flex-col justify-between gap-4 relative overflow-hidden">
+          <div class="flex items-center justify-between gap-3">
+            <div class="flex items-center gap-2.5">
+              <img src="TheDriverTH.jpg" alt="TDT" onerror="this.onerror=null;this.src='https://placehold.co/64x64/0f172a/fbbf24?text=TDT';" class="w-11 h-11 rounded-xl border border-amber-400 object-cover">
+              <div>
+                <span class="text-xs font-black text-amber-300 block">THE DRIVER THAILAND</span>
+                <span class="text-[11px] text-emerald-300 font-bold"><i class="fa-solid fa-circle-check mr-1"></i>VERIFIED MEMBER</span>
+              </div>
+            </div>
+            <span id="card-member-code" class="px-3 py-1 rounded-xl bg-amber-400/20 border border-amber-400/50 text-amber-200 font-mono font-black text-sm">-</span>
+          </div>
+
+          <div class="space-y-1.5 pt-2">
+            <p id="card-chat-name" class="text-lg font-black text-white">-</p>
+            <p id="card-full-name" class="text-xs text-slate-300">-</p>
+            <div class="flex flex-wrap gap-2 pt-2 text-[11px]">
+              <span class="px-2.5 py-1 rounded-lg bg-slate-950/70 border border-slate-700 text-slate-200"><i class="fa-solid fa-car text-amber-400 mr-1"></i><span id="card-vehicle">-</span></span>
+              <span class="px-2.5 py-1 rounded-lg bg-slate-950/70 border border-slate-700 text-amber-200 font-mono"><i class="fa-solid fa-rectangle-list text-amber-400 mr-1"></i><span id="card-plate">-</span></span>
+            </div>
+          </div>
+
+          <div class="pt-3 border-t border-amber-400/20 flex flex-wrap items-center justify-between gap-2 text-xs">
+            <span class="text-slate-400 text-[11px]">เบอร์โทร: <strong id="card-phone" class="text-slate-200 font-mono">-</strong></span>
+            <a href="member_card_digital.html" class="px-3.5 py-1.5 rounded-xl gold-grad text-slate-950 font-extrabold text-xs shadow">
+              <i class="fa-solid fa-qrcode mr-1"></i> เปิดบัตรเต็ม &amp; โหลด PNG
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Member Tools Hub -->
+        <div class="lg:col-span-7 bg-slate-900 border border-slate-800 rounded-3xl p-5 sm:p-6 space-y-4">
+          <div class="flex items-center justify-between gap-2">
+            <h2 class="text-base font-extrabold text-amber-300"><i class="fa-solid fa-grid-2 mr-1.5"></i>ทางลัดบริการด่วนสำหรับสมาชิก</h2>
+            <span id="portal-next-round" class="text-[11px] bg-emerald-500/15 text-emerald-300 border border-emerald-400/35 px-3 py-1 rounded-full font-bold">รอบส่งบัตร: -</span>
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs">
+            <a href="job_board.html" class="bg-slate-950 hover:bg-slate-800/80 border border-slate-800 hover:border-amber-400/50 rounded-2xl p-3.5 transition space-y-1">
+              <i class="fa-solid fa-handshake text-emerald-400 text-lg"></i>
+              <p class="font-bold text-white">กระดานแลกเปลี่ยนงาน</p>
+              <p class="text-[11px] text-slate-400">รับงาน-ปล่อยงานสมาชิก</p>
+            </a>
+            <a href="empty_leg_matcher.html" class="bg-slate-950 hover:bg-slate-800/80 border border-slate-800 hover:border-amber-400/50 rounded-2xl p-3.5 transition space-y-1">
+              <i class="fa-solid fa-route text-sky-400 text-lg"></i>
+              <p class="font-bold text-white">จับคู่รถว่างขากลับ</p>
+              <p class="text-[11px] text-slate-400">ลดการตีรถเปล่าต่างจังหวัด</p>
+            </a>
+            <a href="trip_voucher.html" class="bg-slate-950 hover:bg-slate-800/80 border border-slate-800 hover:border-amber-400/50 rounded-2xl p-3.5 transition space-y-1">
+              <i class="fa-solid fa-file-invoice-dollar text-amber-400 text-lg"></i>
+              <p class="font-bold text-white">ออกใบจอง E-Voucher</p>
+              <p class="text-[11px] text-slate-400">ใบยืนยันงาน 2 ภาษา</p>
+            </a>
+            <a href="fare_calculator.html" class="bg-slate-950 hover:bg-slate-800/80 border border-slate-800 hover:border-amber-400/50 rounded-2xl p-3.5 transition space-y-1">
+              <i class="fa-solid fa-calculator text-teal-400 text-lg"></i>
+              <p class="font-bold text-white">คำนวณค่าโดยสาร</p>
+              <p class="text-[11px] text-slate-400">เช็กราคากลางเหมา/สนามบิน</p>
+            </a>
+            <a href="member_edit.html" class="bg-slate-950 hover:bg-slate-800/80 border border-slate-800 hover:border-amber-400/50 rounded-2xl p-3.5 transition space-y-1">
+              <i class="fa-solid fa-user-pen text-purple-400 text-lg"></i>
+              <p class="font-bold text-white">แจ้งแก้ไขข้อมูล/เปลี่ยนรถ</p>
+              <p class="text-[11px] text-slate-400">อัปเดตทะเบียนรถหรือเบอร์</p>
+            </a>
+            <a href="vip_referral_guide.html" class="bg-slate-950 hover:bg-slate-800/80 border border-slate-800 hover:border-amber-400/50 rounded-2xl p-3.5 transition space-y-1">
+              <i class="fa-solid fa-map-location-dot text-rose-400 text-lg"></i>
+              <p class="font-bold text-white">ลายแทงท่องเที่ยว [VIP]</p>
+              <p class="text-[11px] text-slate-400">รับค่าแนะนำร้านค้าพันธมิตร</p>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tracking & Requests History -->
+      <section class="bg-slate-900 border border-slate-800 rounded-3xl p-5 sm:p-6 space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+          <div>
+            <h2 class="text-base font-extrabold text-sky-300"><i class="fa-solid fa-truck-fast mr-1.5"></i>สถานะคำร้องและเลขพัสดุของคุณ</h2>
+            <p class="text-xs text-slate-400">ดึงข้อมูลล่าสุดจากทุกบริการ (บัตรประเมศฐ์, สมุดทัวร์, บัตรผ่าน ทอ., แก้ไขข้อมูล, Luxury Car, VIP)</p>
+          </div>
+          <a href="tracking.html" class="text-xs bg-slate-800 hover:bg-slate-700 text-amber-300 px-3.5 py-2 rounded-xl font-bold">
+            <i class="fa-solid fa-magnifying-glass mr-1"></i> ค้นหาเพิ่มเติม
+          </a>
+        </div>
+        <div id="portal-requests-list" class="space-y-2.5 text-xs"></div>
+      </section>
+
+      <!-- Partner Perks & Member Benefits -->
+      <section class="bg-slate-900 border border-amber-400/25 rounded-3xl p-5 sm:p-6 space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+          <div>
+            <h2 class="text-base font-extrabold text-amber-300"><i class="fa-solid fa-gift mr-1.5"></i>สิทธิพิเศษและส่วนลดพาร์ทเนอร์สำหรับสมาชิก</h2>
+            <p class="text-xs text-slate-400">แสดงบัตรสมาชิกดิจิทัลด้านบนเพื่อรับสิทธิ์กับร้านค้าและพันธมิตรของเครือข่าย</p>
+          </div>
+        </div>
+        <div id="portal-perks-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs"></div>
+      </section>
+    </div>
+  </main>
+
+  <div id="tdt-layout-footer"></div>
+  <script src="tdt-layout.js?v=20261126"></script>
+  <script>
+    const MASTER_API_URL = 'https://script.google.com/macros/s/AKfycbyeDCdxBD10D_AFZQY2NxeylLOiAmAHLesSDZHXYCb3TsYs4wYer_kRTPVOs3VpK2pP/exec';
+    const PORTAL_STORAGE_KEY = 'tdt_member_portal_session_v1';
+
+    function esc(s) {
+      return String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    async function fetchPortalData(memberCode, phoneLast4) {
+      const url = `${MASTER_API_URL}?action=member_portal_lookup&memberCode=${encodeURIComponent(memberCode)}&phoneLast4=${encodeURIComponent(phoneLast4)}`;
+      const res = await fetch(url);
+      return await res.json();
+    }
+
+    function renderPortalDashboard(data) {
+      const m = data.member || {};
+      document.getElementById('portal-login-section').classList.add('hidden');
+      document.getElementById('portal-dashboard-section').classList.remove('hidden');
+      document.getElementById('btn-portal-logout').classList.remove('hidden');
+
+      document.getElementById('card-member-code').textContent = `[${m.memberCode || '-'}]`;
+      document.getElementById('card-chat-name').textContent = m.chatName || '-';
+      document.getElementById('card-full-name').textContent = m.fullName || '-';
+      document.getElementById('card-vehicle').textContent = `${m.carBrand || ''} ${m.carModel || ''}`.trim() || '-';
+      document.getElementById('card-plate').textContent = m.licensePlate || '-';
+      document.getElementById('card-phone').textContent = m.phoneMasked || '-';
+      document.getElementById('portal-next-round').textContent = `รอบส่งบัตร: ${data.nextRound || 'รอบวันที่ 11 ธันวาคม 2569'}`;
+
+      const reqs = Array.isArray(data.requests) ? data.requests : [];
+      const reqBox = document.getElementById('portal-requests-list');
+      if (reqs.length === 0) {
+        reqBox.innerHTML = '<div class="bg-slate-950 border border-slate-800 rounded-2xl p-4 text-center text-slate-400">ยังไม่มีประวัติคำร้องหรือรายการจัดส่งเพิ่มเติมในระบบ</div>';
+      } else {
+        reqBox.innerHTML = reqs.map(r => {
+          const done = String(r.status || '').includes('จัดส่งแล้ว') || String(r.status || '').includes('อนุมัติ');
+          return `
+            <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div class="space-y-0.5">
+                <p class="font-bold text-white">${esc(r.service)} <span class="text-amber-300 font-mono">(${esc(r.refCode)})</span></p>
+                <p class="text-[11px] text-slate-400">วันที่รายการ: ${esc(r.date)}</p>
+              </div>
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="px-2.5 py-1 rounded-full text-[11px] font-bold border ${done ? 'bg-emerald-500/15 text-emerald-300 border-emerald-400/35' : 'bg-amber-500/15 text-amber-300 border-amber-400/35'}">${esc(r.status)}</span>
+                ${r.trackingNo && r.trackingNo !== '-' ? `<span class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-700 text-sky-300 font-mono text-[11px]"><i class="fa-solid fa-barcode mr-1"></i>${esc(r.trackingNo)}</span>` : ''}
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      const perks = Array.isArray(data.partnerPerks) && data.partnerPerks.length > 0 ? data.partnerPerks : [
+        { title: 'ส่วนลดประกันภัย Captain Insurance', desc: 'เช็กเบี้ยราคาพิเศษเฉพาะสมาชิก ผ่อน 0% สูงสุด 10 เดือน', tag: 'ประกันภัย', link: 'captain_insurance.html' },
+        { title: 'ส่วนลดสั่งซื้อสมุดทัวร์สมาชิก', desc: 'สมุดทัวร์ กทม.-พัทยา พร้อมลายแทงและค่าแนะนำ VIP', tag: 'สมุดทัวร์', link: 'tour_book_order.html' },
+        { title: 'คลังจุดพักรถ EV & เครดิตสมาชิก', desc: 'รวมพิกัดจุดชาร์จเร็วและจุดจอดรอรับสนามบินทั่วไทย', tag: 'สิทธิประโยชน์', link: 'driver_pitstop_reputation.html' }
+      ];
+      document.getElementById('portal-perks-grid').innerHTML = perks.map(p => `
+        <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4 flex flex-col justify-between gap-2">
+          <div class="space-y-1">
+            <span class="inline-block px-2 py-0.5 rounded-md bg-amber-400/15 text-amber-300 border border-amber-400/30 text-[10px] font-bold">${esc(p.tag || 'PARTNER PERK')}</span>
+            <p class="font-bold text-white text-sm">${esc(p.title || p.name || '-')}</p>
+            <p class="text-slate-400 text-xs">${esc(p.desc || p.detail || '')}</p>
+          </div>
+          ${p.link ? `<a href="${esc(p.link)}" class="text-xs text-amber-300 hover:text-amber-200 font-bold pt-1">ดูรายละเอียด <i class="fa-solid fa-arrow-right ml-1"></i></a>` : ''}
+        </div>
+      `).join('');
+    }
+
+    async function handlePortalLogin(e) {
+      e.preventDefault();
+      const code = document.getElementById('portal-code-input').value.trim().toUpperCase().replace(/^\[|\]$/g, '');
+      const phone4 = document.getElementById('portal-phone4-input').value.replace(/\D/g, '');
+      const errEl = document.getElementById('portal-login-error');
+      const btn = document.getElementById('btn-portal-login');
+      errEl.classList.add('hidden');
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin mr-1.5"></i> กำลังตรวจสอบข้อมูลสมาชิก...';
+
+      try {
+        const json = await fetchPortalData(code, phone4);
+        if (!json || !json.success) {
+          errEl.textContent = (json && json.error) || 'ไม่พบข้อมูลสมาชิก หรือเบอร์โทร 4 หลักท้ายไม่ตรงกัน';
+          errEl.classList.remove('hidden');
+          return;
+        }
+        try {
+          sessionStorage.setItem(PORTAL_STORAGE_KEY, JSON.stringify({ code, phone4, cached: json, savedAt: Date.now() }));
+        } catch (_) {}
+        renderPortalDashboard(json);
+      } catch (_) {
+        errEl.textContent = 'ไม่สามารถเชื่อมต่อฐานข้อมูลสมาชิกได้ กรุณาลองใหม่อีกครั้ง';
+        errEl.classList.remove('hidden');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-unlock-keyhole mr-1.5"></i> เปิดใช้งาน Member Portal';
+      }
+    }
+
+    function portalLogout() {
+      try { sessionStorage.removeItem(PORTAL_STORAGE_KEY); } catch (_) {}
+      document.getElementById('portal-dashboard-section').classList.add('hidden');
+      document.getElementById('btn-portal-logout').classList.add('hidden');
+      document.getElementById('portal-login-section').classList.remove('hidden');
+      document.getElementById('portal-phone4-input').value = '';
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      try {
+        const raw = sessionStorage.getItem(PORTAL_STORAGE_KEY);
+        if (!raw) return;
+        const parsed = JSON.parse(raw);
+        if (parsed && parsed.cached && Date.now() - Number(parsed.savedAt || 0) < 30 * 60 * 1000) {
+          renderPortalDashboard(parsed.cached);
+        }
+      } catch (_) {}
+    });
+  </script>
+</body>
+</html>

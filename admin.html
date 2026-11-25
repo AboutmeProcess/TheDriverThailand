@@ -222,6 +222,57 @@
     .tdt-drawer-cat-title {
       font-size: 13px !important;
     }
+    /* Flux-Inspired Executive Sidebar & Bento Analytics Styles */
+    .admin-shell-bg {
+      background:
+        radial-gradient(circle at 0% 0%, rgba(251, 191, 36, 0.08) 0%, transparent 38%),
+        radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.07) 0%, transparent 40%),
+        #05080f;
+    }
+    .admin-nav-pill {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      width: 100%;
+      padding: 11px 14px;
+      border-radius: 9999px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #cbd5e1;
+      transition: all 0.18s ease;
+      text-align: left;
+    }
+    .admin-nav-pill:hover {
+      background: rgba(30, 41, 59, 0.85);
+      color: #ffffff;
+    }
+    .admin-nav-pill.is-active {
+      background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+      color: #070a12 !important;
+      font-weight: 800;
+      box-shadow: 0 8px 24px -6px rgba(251, 191, 36, 0.45);
+    }
+    .admin-nav-pill.is-active .nav-badge-pill {
+      background: #070a12 !important;
+      color: #fbbf24 !important;
+      border-color: transparent !important;
+    }
+    .bento-card {
+      background: linear-gradient(160deg, rgba(15, 23, 42, 0.96) 0%, rgba(11, 17, 32, 0.98) 100%);
+      border: 1px solid rgba(148, 163, 184, 0.16);
+      border-radius: 26px;
+      box-shadow: 0 18px 40px -18px rgba(2, 6, 23, 0.85);
+    }
+    .bento-bar-track {
+      background: repeating-linear-gradient(
+        -45deg,
+        rgba(148, 163, 184, 0.12),
+        rgba(148, 163, 184, 0.12) 4px,
+        rgba(15, 23, 42, 0.4) 4px,
+        rgba(15, 23, 42, 0.4) 8px
+      );
+    }
 </style>
 </head>
 <body class="min-h-screen flex flex-col">
@@ -268,92 +319,285 @@
     </div>
   </div>
 
-  <!-- หน้าแดชบอร์ดหลังบ้านหลัก -->
-  <div id="dashboard-view" class="hidden flex-grow flex flex-col">
-    <header class="bg-slate-900 border-b border-amber-400/25 sticky top-0 z-40">
-      <div class="max-w-7xl mx-auto px-4 py-3.5 flex flex-wrap items-center justify-between gap-3">
-        <div class="flex items-center gap-3">
-          <img src="TheDriverTH.jpg" alt="โลโก้" onerror="this.onerror=null;this.src='https://placehold.co/80x80/0f172a/fbbf24?text=TDT';" class="w-10 h-10 rounded-xl object-cover border border-amber-400">
-          <div>
-            <span class="text-sm font-extrabold text-amber-300 block">🚖 The Driver TH — ระบบหลังบ้านครอบคลุมทุกหน้า</span>
-            <span class="text-xs text-emerald-400 flex flex-wrap items-center gap-1.5">
-              <span><i class="fa-solid fa-circle-check mr-1"></i>ผู้ดูแล: <strong id="current-admin-label">-</strong></span>
-              <span id="current-admin-role-badge" class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-amber-400/15 text-amber-300 border border-amber-400/35"></span>
-            </span>
+  <!-- หน้าแดชบอร์ดหลังบ้านหลัก (Flux-Inspired Executive Sidebar + Bento Layout) -->
+  <div id="dashboard-view" class="hidden min-h-screen flex admin-shell-bg lg:p-3 lg:gap-3">
+    <!-- Backdrop สำหรับ Sidebar มือถือ -->
+    <div id="admin-sidebar-backdrop" onclick="closeAdminSidebar()" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-40 lg:hidden"></div>
+
+    <!-- ซ้าย: Executive Dark Sidebar -->
+    <aside id="admin-sidebar" class="fixed lg:sticky top-0 lg:top-3 left-0 z-50 h-screen lg:h-[calc(100vh-1.5rem)] w-64 shrink-0 bg-[#0b101d] border-r lg:border border-slate-800/90 lg:rounded-[28px] flex flex-col justify-between p-4 transform -translate-x-full lg:translate-x-0 transition-transform duration-200 overflow-y-auto">
+      <div class="space-y-5">
+        <!-- Brand -->
+        <div class="flex items-center justify-between gap-2 px-1 pt-1">
+          <div class="flex items-center gap-2.5">
+            <img src="TheDriverTH.jpg" alt="โลโก้" onerror="this.onerror=null;this.src='https://placehold.co/80x80/0f172a/fbbf24?text=TDT';" class="w-10 h-10 rounded-2xl object-cover border border-amber-400 shadow">
+            <div>
+              <span class="text-sm font-black text-amber-300 block leading-tight">The Driver TH</span>
+              <span class="text-[11px] text-slate-400 font-semibold">Admin OS • Control</span>
+            </div>
           </div>
-        </div>
-        <div class="flex items-center gap-2 text-xs">
-          <a id="header-visual-builder-link" href="page_builder.html" class="px-3.5 py-2 rounded-xl gold-grad text-slate-950 font-extrabold shadow">
-            <i class="fa-solid fa-wand-magic-sparkles mr-1"></i> แก้ไขหน้าเว็บ (Visual Builder)
-          </a>
-          <a href="index.html" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700">
-            <i class="fa-solid fa-house mr-1"></i> หน้าหลักเว็บ
-          </a>
-          <button type="button" onclick="handleLogout()" class="px-3.5 py-2 rounded-xl bg-rose-600/20 hover:bg-rose-600/30 text-rose-300 border border-rose-500/40 font-bold">
-            <i class="fa-solid fa-right-from-bracket mr-1"></i> ออกจากระบบ
+          <button type="button" onclick="closeAdminSidebar()" class="lg:hidden w-8 h-8 rounded-full bg-slate-800 text-slate-300 flex items-center justify-center">
+            <i class="fa-solid fa-xmark"></i>
           </button>
         </div>
-      </div>
-    </header>
 
-    <main class="flex-grow max-w-7xl w-full mx-auto px-4 py-6 space-y-6">
-      <!-- แถบแจ้งเตือนโหมดดูข้อมูลอย่างเดียว (Read-Only) -->
-      <div id="readonly-mode-banner" class="hidden bg-sky-500/15 border border-sky-400/40 text-sky-200 rounded-2xl px-4 py-3 text-xs flex items-center gap-2">
-        <i class="fa-solid fa-eye text-sky-300 text-sm shrink-0"></i>
-        <span><strong>โหมดดูข้อมูลอย่างเดียว (Read-Only):</strong> บัญชีผู้ช่วยนี้ได้รับสิทธิ์ดูข้อมูลตามแท็บที่แอดมินหลักกำหนดเท่านั้น ไม่สามารถแก้ไข บันทึก หรืออนุมัติรายการได้</span>
-      </div>
-
-      <!-- แดชบอร์ดสรุปสถิติภาพรวมแบบเรียลไทม์ -->
-      <section class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-        <div class="bg-slate-900 border border-amber-400/35 rounded-2xl p-4 space-y-1">
-          <span class="text-[11px] font-bold text-slate-400 block"><i class="fa-solid fa-users text-amber-400 mr-1"></i>สมาชิกอนุมัติแล้ว</span>
-          <strong id="kpi-approved-members" class="text-2xl font-black text-amber-300 font-mono">-</strong>
-        </div>
-        <div class="bg-slate-900 border border-emerald-500/35 rounded-2xl p-4 space-y-1">
-          <span class="text-[11px] font-bold text-slate-400 block"><i class="fa-solid fa-user-clock text-emerald-400 mr-1"></i>คำร้องสมาชิกรอตรวจ</span>
-          <strong id="kpi-pending-members" class="text-2xl font-black text-emerald-300 font-mono">-</strong>
-        </div>
-        <div class="bg-slate-900 border border-sky-500/35 rounded-2xl p-4 space-y-1">
-          <span class="text-[11px] font-bold text-slate-400 block"><i class="fa-solid fa-handshake text-sky-400 mr-1"></i>งานเปิดรับบนกระดาน</span>
-          <strong id="kpi-open-jobs" class="text-2xl font-black text-sky-300 font-mono">-</strong>
-        </div>
-        <div class="bg-slate-900 border border-rose-500/35 rounded-2xl p-4 space-y-1">
-          <span class="text-[11px] font-bold text-slate-400 block"><i class="fa-solid fa-user-shield text-rose-400 mr-1"></i>เคส Blacklist ทั้งหมด</span>
-          <strong id="kpi-blacklist-cases" class="text-2xl font-black text-rose-300 font-mono">-</strong>
-        </div>
-        <div class="bg-slate-900 border border-purple-500/35 rounded-2xl p-4 space-y-1 col-span-2 sm:col-span-1">
-          <span class="text-[11px] font-bold text-slate-400 block"><i class="fa-solid fa-comments text-purple-400 mr-1"></i>เว็บบอร์ดรออนุมัติ</span>
-          <strong id="kpi-pending-forum" class="text-2xl font-black text-purple-300 font-mono">-</strong>
-        </div>
-      </section>
-
-      <!-- เมนูแท็บการทำงานทั้งหมด -->
-      <div class="flex flex-wrap gap-2 bg-slate-900 p-2 rounded-2xl border border-slate-800">
-        <button type="button" onclick="switchTab('site')" data-tab="site" class="admin-nav-tab gold-grad text-slate-950 font-extrabold px-4 py-2.5 rounded-xl text-xs">
-          <i class="fa-solid fa-globe mr-1"></i> 1. ตั้งค่าหน้าเว็บทั้งหมด
-        </button>
-        <button type="button" onclick="switchTab('members')" data-tab="members" class="admin-nav-tab bg-slate-800 text-slate-300 hover:text-white font-bold px-4 py-2.5 rounded-xl text-xs">
-          <i class="fa-solid fa-user-check mr-1"></i> 2. อนุมัติสมาชิกใหม่ (<span id="count-pending-members">0</span>)
-        </button>
-        <button type="button" onclick="switchTab('forum')" data-tab="forum" class="admin-nav-tab bg-slate-800 text-slate-300 hover:text-white font-bold px-4 py-2.5 rounded-xl text-xs">
-          <i class="fa-solid fa-comments mr-1"></i> 3. อนุมัติบัญชีเว็บบอร์ด (<span id="count-pending-forum">0</span>)
-        </button>
-        <button type="button" onclick="switchTab('shipping')" data-tab="shipping" class="admin-nav-tab bg-slate-800 text-slate-300 hover:text-white font-bold px-4 py-2.5 rounded-xl text-xs">
-          <i class="fa-solid fa-truck-fast mr-1"></i> 4. อัปเดตสถานะ &amp; เลขพัสดุ
-        </button>
-        <button type="button" onclick="switchTab('admins')" data-tab="admins" class="admin-nav-tab bg-slate-800 text-amber-300 hover:text-amber-200 font-bold px-4 py-2.5 rounded-xl text-xs">
-          <i class="fa-solid fa-users-gear mr-1"></i> 5. เพิ่ม/จัดการ Username ผู้ดูแล
-        </button>
-        <button type="button" onclick="switchTab('tourbook')" data-tab="tourbook" class="admin-nav-tab bg-slate-800 text-sky-300 hover:text-sky-200 font-bold px-4 py-2.5 rounded-xl text-xs">
-          <i class="fa-solid fa-book-open mr-1"></i> 6. สต็อกสมุดทัวร์พัทยา (<span id="nav-tb-stock">0</span> เล่ม)
-        </button>
-        <button type="button" onclick="switchTab('backup')" data-tab="backup" class="admin-nav-tab bg-slate-800 text-emerald-300 hover:text-emerald-200 font-bold px-4 py-2.5 rounded-xl text-xs ml-auto">
-          <i class="fa-solid fa-database mr-1"></i> 7. สำรองข้อมูลส่วนตัว
-        </button>
+        <!-- Sidebar Pill Menu -->
+        <nav class="space-y-1.5" aria-label="เมนูระบบหลังบ้าน">
+          <button type="button" onclick="switchTab('overview')" data-tab="overview" class="admin-nav-tab admin-nav-pill is-active">
+            <span class="flex items-center gap-2.5"><i class="fa-solid fa-grid-2 w-4 text-center"></i> ภาพรวมระบบ</span>
+            <span id="sidebar-total-pending" class="nav-badge-pill px-2 py-0.5 rounded-full text-[11px] font-extrabold bg-amber-400/20 text-amber-300 border border-amber-400/35">0</span>
+          </button>
+          <button type="button" onclick="switchTab('site')" data-tab="site" class="admin-nav-tab admin-nav-pill">
+            <span class="flex items-center gap-2.5"><i class="fa-solid fa-globe w-4 text-center"></i> ตั้งค่าหน้าเว็บ</span>
+          </button>
+          <button type="button" onclick="switchTab('members')" data-tab="members" class="admin-nav-tab admin-nav-pill">
+            <span class="flex items-center gap-2.5"><i class="fa-solid fa-user-check w-4 text-center"></i> อนุมัติสมาชิก</span>
+            <span id="count-pending-members" class="nav-badge-pill px-2 py-0.5 rounded-full text-[11px] font-extrabold bg-emerald-500/20 text-emerald-300 border border-emerald-400/35">0</span>
+          </button>
+          <button type="button" onclick="switchTab('forum')" data-tab="forum" class="admin-nav-tab admin-nav-pill">
+            <span class="flex items-center gap-2.5"><i class="fa-solid fa-comments w-4 text-center"></i> อนุมัติเว็บบอร์ด</span>
+            <span id="count-pending-forum" class="nav-badge-pill px-2 py-0.5 rounded-full text-[11px] font-extrabold bg-purple-500/20 text-purple-300 border border-purple-400/35">0</span>
+          </button>
+          <button type="button" onclick="switchTab('shipping')" data-tab="shipping" class="admin-nav-tab admin-nav-pill">
+            <span class="flex items-center gap-2.5"><i class="fa-solid fa-truck-fast w-4 text-center"></i> พัสดุ &amp; สถานะ</span>
+          </button>
+          <button type="button" onclick="switchTab('tourbook')" data-tab="tourbook" class="admin-nav-tab admin-nav-pill">
+            <span class="flex items-center gap-2.5"><i class="fa-solid fa-book-open w-4 text-center"></i> สมุดทัวร์พัทยา</span>
+            <span class="nav-badge-pill px-2 py-0.5 rounded-full text-[11px] font-extrabold bg-sky-500/20 text-sky-300 border border-sky-400/35"><span id="nav-tb-stock">0</span></span>
+          </button>
+          <button type="button" onclick="switchTab('admins')" data-tab="admins" class="admin-nav-tab admin-nav-pill">
+            <span class="flex items-center gap-2.5"><i class="fa-solid fa-users-gear w-4 text-center"></i> ผู้ดูแล &amp; Audit Log</span>
+          </button>
+          <button type="button" onclick="switchTab('backup')" data-tab="backup" class="admin-nav-tab admin-nav-pill">
+            <span class="flex items-center gap-2.5"><i class="fa-solid fa-database w-4 text-center"></i> สำรองข้อมูล</span>
+          </button>
+        </nav>
       </div>
 
-      <!-- 1. ตั้งค่าหน้าเว็บทั้งหมด -->
-      <section id="tab-panel-site" class="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-5">
+      <!-- Bottom Promo Action Card (Visual Builder) -->
+      <div id="header-visual-builder-link" class="mt-5 rounded-3xl p-4 bg-gradient-to-br from-amber-300 via-amber-400 to-amber-500 text-slate-950 space-y-2.5 shadow-xl">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-black tracking-tight">Visual Page Builder</span>
+          <i class="fa-solid fa-wand-magic-sparkles text-base"></i>
+        </div>
+        <p class="text-[11px] font-semibold text-slate-900/85 leading-snug">ปรับแต่งข้อความ โทนสี และเผยแพร่หน้าเว็บทั้ง 28 หน้าแบบเรียลไทม์</p>
+        <a href="page_builder.html" class="block text-center w-full py-2 rounded-full bg-slate-950 hover:bg-slate-900 text-amber-300 text-xs font-extrabold transition shadow">
+          เปิด Visual Builder
+        </a>
+      </div>
+    </aside>
+
+    <!-- ขวา: Rounded Main Canvas -->
+    <div class="flex-1 min-w-0 bg-[#0d1424] lg:border border-slate-800/90 lg:rounded-[28px] flex flex-col overflow-hidden shadow-2xl">
+      <!-- Top Utility Bar -->
+      <header class="bg-[#0d1424]/95 backdrop-blur-md border-b border-slate-800/80 sticky top-0 z-30 px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center gap-3 min-w-0">
+          <button type="button" onclick="openAdminSidebar()" class="lg:hidden w-10 h-10 rounded-full bg-slate-800 hover:bg-slate-700 text-amber-300 flex items-center justify-center shrink-0" aria-label="เปิดเมนูหลังบ้าน">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <img src="TheDriverTH.jpg" alt="Avatar" onerror="this.onerror=null;this.src='https://placehold.co/64x64/0f172a/fbbf24?text=AD';" class="w-10 h-10 rounded-full object-cover border-2 border-amber-400/70 shrink-0 hidden sm:block">
+          <div class="min-w-0">
+            <div class="flex flex-wrap items-center gap-1.5">
+              <strong id="current-admin-label" class="text-sm font-extrabold text-white truncate">-</strong>
+              <span id="current-admin-role-badge" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-400/15 text-amber-300 border border-amber-400/35"></span>
+            </div>
+            <span class="text-[11px] text-emerald-400 block"><i class="fa-solid fa-shield-check mr-1"></i>Signed Token Session Active</span>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2 text-xs">
+          <div class="relative hidden md:block">
+            <i class="fa-solid fa-magnifying-glass text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 text-xs"></i>
+            <input type="search" id="admin-quick-jump" oninput="handleQuickJumpSearch(this.value)" placeholder="ค้นหาแท็บ... (เช่น สต็อก, สมาชิก)" class="bg-slate-950/90 border border-slate-700/80 rounded-full pl-9 pr-4 py-2 text-xs text-white w-56 focus:border-amber-400">
+          </div>
+          <button type="button" onclick="refreshAllAdminData()" title="รีเฟรชข้อมูลล่าสุด" class="relative w-10 h-10 rounded-full bg-slate-900 hover:bg-slate-800 border border-slate-700/80 text-amber-300 flex items-center justify-center transition">
+            <i class="fa-solid fa-rotate"></i>
+            <span id="topbar-pending-dot" class="hidden absolute top-1.5 right-1.5 w-2.5 h-2.5 rounded-full bg-emerald-400 ring-2 ring-[#0d1424]"></span>
+          </button>
+          <a href="index.html" class="px-3.5 py-2 rounded-full bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700/80 font-semibold">
+            <i class="fa-solid fa-house mr-1"></i><span class="hidden sm:inline">หน้าหลักเว็บ</span>
+          </a>
+          <button type="button" onclick="handleLogout()" class="px-3.5 py-2 rounded-full bg-rose-600/20 hover:bg-rose-600/30 text-rose-300 border border-rose-500/40 font-bold">
+            <i class="fa-solid fa-right-from-bracket sm:mr-1"></i><span class="hidden sm:inline">ออก</span>
+          </button>
+        </div>
+      </header>
+
+      <main class="flex-1 p-4 sm:p-6 lg:p-7 space-y-6">
+        <!-- แถบแจ้งเตือนโหมดดูข้อมูลอย่างเดียว (Read-Only) -->
+        <div id="readonly-mode-banner" class="hidden bg-sky-500/15 border border-sky-400/40 text-sky-200 rounded-2xl px-4 py-3 text-xs flex items-center gap-2">
+          <i class="fa-solid fa-eye text-sky-300 text-sm shrink-0"></i>
+          <span><strong>โหมดดูข้อมูลอย่างเดียว (Read-Only):</strong> บัญชีผู้ช่วยนี้ได้รับสิทธิ์ดูข้อมูลตามแท็บที่แอดมินหลักกำหนดเท่านั้น ไม่สามารถแก้ไข บันทึก หรืออนุมัติรายการได้</span>
+        </div>
+
+        <!-- 0. Executive Bento Overview (Flux-Inspired) -->
+        <section id="tab-panel-overview" class="space-y-5">
+          <div class="flex flex-wrap items-end justify-between gap-3">
+            <div>
+              <h1 class="text-2xl sm:text-3xl font-black text-white tracking-tight">ภาพรวมระบบหลังบ้าน</h1>
+              <p class="text-xs sm:text-sm text-slate-400 mt-0.5">ติดตามสถานะสมาชิก คำร้องรอตรวจสอบ งานบนกระดาน และสต็อกสมุดทัวร์แบบเรียลไทม์</p>
+            </div>
+            <span id="overview-today-pill" class="px-4 py-2 rounded-full bg-slate-900 border border-slate-700/80 text-xs font-bold text-amber-300">
+              <i class="fa-regular fa-calendar mr-1.5"></i>วันนี้
+            </span>
+          </div>
+
+          <div class="grid lg:grid-cols-12 gap-5">
+            <!-- Left Tall Bento Card: Network Overview + Overlapping Bubbles + Progress Bars -->
+            <div class="lg:col-span-5 bento-card p-5 sm:p-6 flex flex-col justify-between gap-5">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-300 flex items-center gap-2">
+                  <span class="w-8 h-8 rounded-full bg-amber-400/15 text-amber-300 flex items-center justify-center"><i class="fa-solid fa-bolt"></i></span>
+                  ฐานข้อมูลสมาชิกเครือข่าย
+                </span>
+                <span class="px-2.5 py-0.5 rounded-full text-[11px] font-extrabold bg-emerald-500/20 text-emerald-300 border border-emerald-400/35">Live</span>
+              </div>
+
+              <div>
+                <div class="flex items-baseline gap-2.5">
+                  <strong id="kpi-approved-members" class="text-4xl sm:text-5xl font-black text-white font-mono">-</strong>
+                  <span class="text-xs text-slate-400 font-semibold">สมาชิกอนุมัติแล้ว</span>
+                </div>
+              </div>
+
+              <!-- Overlapping Bubble Visual (Ref-inspired) -->
+              <div class="relative h-52 flex items-start justify-center pt-2 select-none my-1">
+                <div class="w-32 h-32 rounded-full bg-gradient-to-br from-amber-300/95 to-amber-500/95 text-slate-950 flex flex-col items-center justify-center shadow-xl -mr-5 z-10 border-4 border-[#0d1424] pb-2">
+                  <strong id="bubble-members" class="text-xl font-black font-mono leading-none">-</strong>
+                  <span class="text-[10px] font-extrabold mt-0.5">สมาชิก</span>
+                </div>
+                <div class="w-28 h-28 rounded-full bg-gradient-to-br from-indigo-400/95 to-violet-500/95 text-white flex flex-col items-center justify-center shadow-xl mt-1 border-4 border-[#0d1424] pb-2">
+                  <strong id="bubble-blacklist" class="text-lg font-black font-mono leading-none">-</strong>
+                  <span class="text-[10px] font-bold mt-0.5">Blacklist</span>
+                </div>
+                <div class="w-24 h-24 rounded-full bg-gradient-to-br from-emerald-300/95 to-emerald-500/95 text-slate-950 flex flex-col items-center justify-center shadow-xl absolute bottom-1 left-1/2 -translate-x-1/2 z-20 border-4 border-[#0d1424]">
+                  <strong id="bubble-jobs" class="text-lg font-black font-mono leading-none">-</strong>
+                  <span class="text-[10px] font-extrabold mt-0.5">งานเปิดรับ</span>
+                </div>
+              </div>
+
+              <!-- 3 Progress Bars -->
+              <div class="space-y-3 text-xs pt-2 border-t border-slate-800/80">
+                <div class="space-y-1">
+                  <div class="flex items-center justify-between">
+                    <strong id="prog-pct-members" class="text-sm font-black text-white font-mono">100%</strong>
+                    <span class="text-slate-400 flex items-center gap-1.5">สมาชิกยืนยันแล้ว <span class="w-2 h-2 rounded-full bg-amber-400"></span></span>
+                  </div>
+                  <div class="h-2.5 rounded-full bg-slate-800 overflow-hidden">
+                    <div id="prog-bar-members" class="h-full rounded-full bg-gradient-to-r from-amber-300 to-amber-500 transition-all duration-500" style="width:92%"></div>
+                  </div>
+                </div>
+                <div class="space-y-1">
+                  <div class="flex items-center justify-between">
+                    <strong id="prog-pct-pending" class="text-sm font-black text-emerald-300 font-mono">0%</strong>
+                    <span class="text-slate-400 flex items-center gap-1.5">คำร้องรอตรวจ <span class="w-2 h-2 rounded-full bg-emerald-400"></span></span>
+                  </div>
+                  <div class="h-2.5 rounded-full bg-slate-800 overflow-hidden">
+                    <div id="prog-bar-pending" class="h-full rounded-full bg-emerald-400 transition-all duration-500" style="width:15%"></div>
+                  </div>
+                </div>
+                <div class="space-y-1">
+                  <div class="flex items-center justify-between">
+                    <strong id="prog-pct-tourbook" class="text-sm font-black text-sky-300 font-mono">0%</strong>
+                    <span class="text-slate-400 flex items-center gap-1.5">ความพร้อมสมุดทัวร์ 22 แผ่น <span class="w-2 h-2 rounded-full bg-sky-400"></span></span>
+                  </div>
+                  <div class="h-2.5 rounded-full bg-slate-800 overflow-hidden">
+                    <div id="prog-bar-tourbook" class="h-full rounded-full bg-sky-400 transition-all duration-500" style="width:0%"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right 7-Col Stack -->
+            <div class="lg:col-span-7 flex flex-col gap-5">
+              <!-- Top Metric Tiles + Dot-Matrix Card -->
+              <div class="grid sm:grid-cols-12 gap-4">
+                <div class="sm:col-span-6 grid grid-cols-2 gap-3">
+                  <button type="button" onclick="switchTab('members')" class="bento-card p-4 text-left hover:border-emerald-400/50 transition space-y-2">
+                    <div class="flex items-center justify-between">
+                      <span class="w-8 h-8 rounded-full bg-emerald-500/15 text-emerald-300 flex items-center justify-center text-xs"><i class="fa-solid fa-user-clock"></i></span>
+                      <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-slate-500"></i>
+                    </div>
+                    <strong id="kpi-pending-members" class="text-2xl font-black text-emerald-300 font-mono block">-</strong>
+                    <span class="text-[11px] font-bold text-slate-400 block">สมาชิกรอตรวจ</span>
+                  </button>
+
+                  <button type="button" onclick="switchTab('forum')" class="bento-card p-4 text-left hover:border-purple-400/50 transition space-y-2">
+                    <div class="flex items-center justify-between">
+                      <span class="w-8 h-8 rounded-full bg-purple-500/15 text-purple-300 flex items-center justify-center text-xs"><i class="fa-solid fa-comments"></i></span>
+                      <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-slate-500"></i>
+                    </div>
+                    <strong id="kpi-pending-forum" class="text-2xl font-black text-purple-300 font-mono block">-</strong>
+                    <span class="text-[11px] font-bold text-slate-400 block">เว็บบอร์ดรอตรวจ</span>
+                  </button>
+
+                  <div class="bento-card p-4 space-y-2">
+                    <span class="w-8 h-8 rounded-full bg-sky-500/15 text-sky-300 flex items-center justify-center text-xs"><i class="fa-solid fa-handshake"></i></span>
+                    <strong id="kpi-open-jobs" class="text-2xl font-black text-sky-300 font-mono block">-</strong>
+                    <span class="text-[11px] font-bold text-slate-400 block">งานเปิดรับบนกระดาน</span>
+                  </div>
+
+                  <div class="bento-card p-4 space-y-2">
+                    <span class="w-8 h-8 rounded-full bg-rose-500/15 text-rose-300 flex items-center justify-center text-xs"><i class="fa-solid fa-user-shield"></i></span>
+                    <strong id="kpi-blacklist-cases" class="text-2xl font-black text-rose-300 font-mono block">-</strong>
+                    <span class="text-[11px] font-bold text-slate-400 block">เคส Blacklist</span>
+                  </div>
+                </div>
+
+                <!-- Dot-Matrix Tour Book Readiness Card (Ref-inspired Wellness Index) -->
+                <button type="button" onclick="switchTab('tourbook')" class="sm:col-span-6 bento-card p-5 text-left hover:border-amber-400/50 transition flex flex-col justify-between gap-3">
+                  <div class="flex items-center justify-between w-full">
+                    <span class="text-xs font-bold text-slate-300 flex items-center gap-2">
+                      <span class="w-8 h-8 rounded-full bg-sky-500/15 text-sky-300 flex items-center justify-center"><i class="fa-solid fa-book-open"></i></span>
+                      สมุดทัวร์พัทยา V5
+                    </span>
+                    <span id="ov-tb-pct-badge" class="px-2 py-0.5 rounded-full text-[11px] font-extrabold bg-amber-400/20 text-amber-300">0/22 แผ่น</span>
+                  </div>
+                  <div class="flex items-baseline gap-2">
+                    <strong id="ov-tb-ready-books" class="text-4xl font-black text-white font-mono">0</strong>
+                    <span class="text-xs font-bold text-emerald-300">เล่มพร้อมเข้าเล่ม</span>
+                  </div>
+                  <div id="ov-tb-dot-matrix" class="grid grid-cols-11 gap-1.5 pt-1" title="สถานะทั้ง 22 แผ่น (เขียว=เคลือบแล้ว, เหลือง=ปริ้นแล้ว, เทา=ยังไม่มี)"></div>
+                  <span class="text-[11px] text-slate-400">คลิกเพื่อจัดการสต็อกทั้ง 22 แผ่น →</span>
+                </button>
+              </div>
+
+              <!-- Bottom Dark Contrast Bar Analytics Card (Ref-inspired Sleep Analysis) -->
+              <div class="rounded-[26px] bg-[#070a12] border border-slate-800 p-5 sm:p-6 space-y-5 shadow-2xl">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                  <span class="text-xs font-bold text-slate-300 flex items-center gap-2">
+                    <span class="w-8 h-8 rounded-full bg-slate-800 text-amber-300 flex items-center justify-center"><i class="fa-solid fa-chart-column"></i></span>
+                    สรุปยอดการผลิต &amp; ภาระงานหลังบ้าน
+                  </span>
+                  <span class="px-3 py-1 rounded-full bg-slate-900 border border-slate-700 text-[11px] font-bold text-slate-300">Real-Time</span>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-6">
+                  <div class="flex items-center gap-2.5">
+                    <span class="w-1.5 h-8 rounded-full bg-amber-400"></span>
+                    <div>
+                      <strong id="ov-tb-lam-total" class="text-2xl font-black text-white font-mono leading-none block">0</strong>
+                      <span class="text-[11px] text-slate-400">แผ่นเคลือบแล้วรวม</span>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-2.5">
+                    <span class="w-1.5 h-8 rounded-full bg-indigo-400"></span>
+                    <div>
+                      <strong id="ov-pending-total" class="text-2xl font-black text-white font-mono leading-none block">0</strong>
+                      <span class="text-[11px] text-slate-400">รายการรอแอดมินตรวจ</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Vertical Pill Bars -->
+                <div id="ov-bar-chart" class="grid grid-cols-6 gap-2.5 sm:gap-4 items-end h-32 pt-2"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 1. ตั้งค่าหน้าเว็บทั้งหมด -->
+        <section id="tab-panel-site" class="hidden bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-5">
         <div class="border-b border-slate-800 pb-4 flex items-center justify-between flex-wrap gap-2">
           <div>
             <h2 class="text-lg font-extrabold text-amber-300">ตั้งค่าข้อความประกาศ ราคา และรอบจัดส่งของเว็บไซต์</h2>
@@ -775,6 +1019,25 @@
           <div id="admin-accounts-list" class="space-y-2.5"></div>
         </div>
 
+        <!-- ประวัติการทำงานของผู้ดูแลระบบ (Admin Audit Log - Super Admin เท่านั้น) -->
+        <div class="pt-5 border-t border-slate-800 space-y-3">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <h3 class="text-sm font-extrabold text-sky-300"><i class="fa-solid fa-clock-rotate-left mr-1.5"></i>ประวัติการทำงานของผู้ดูแลระบบ (Audit Log)</h3>
+              <p class="text-xs text-slate-400">บันทึกทุกการเข้าสู่ระบบ การอนุมัติสมาชิก การอัปเดตพัสดุ สต็อกสมุดทัวร์ และการปรับสิทธิ์ผู้ช่วย (สูงสุด 120 รายการล่าสุด)</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <input type="search" id="audit-log-filter" oninput="renderAdminAuditLogs()" placeholder="ค้นหาชื่อผู้ดูแล / คำสั่ง / เป้าหมาย..." class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white w-52 sm:w-64">
+              <button type="button" onclick="loadAdminAuditLogs()" class="text-xs bg-slate-800 hover:bg-slate-700 text-sky-300 px-3 py-1.5 rounded-xl font-bold">
+                <i class="fa-solid fa-rotate mr-1"></i> โหลดใหม่
+              </button>
+            </div>
+          </div>
+          <div id="admin-audit-logs-list" class="bg-slate-950 border border-slate-800 rounded-2xl p-3 max-h-80 overflow-y-auto space-y-2 text-xs">
+            <p class="text-slate-400 text-center py-4">กำลังโหลดประวัติการทำงาน...</p>
+          </div>
+        </div>
+
         <div class="pt-5 border-t border-slate-800 space-y-3">
           <div>
             <h3 class="text-sm font-extrabold text-emerald-400"><i class="fa-solid fa-key mr-1.5"></i>เปลี่ยนรหัสผ่านหลักของระบบหลังบ้าน (Master Passcode)</h3>
@@ -900,7 +1163,8 @@
           </button>
         </div>
       </section>
-    </main>
+      </main>
+    </div>
   </div>
 
   <script>
@@ -1017,33 +1281,26 @@
     async function persistPageAnnouncementsToCloud() {
       if (!sessionAdmin) return false;
       try {
-        const res = await fetch(MASTER_WEB_APP_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify({
-            action: 'admin_save_settings',
-            adminId: sessionAdmin.username,
-            passcode: sessionAdmin.password,
-            settings: {
-              announcement: document.getElementById('cfg-announcement')?.value.trim() || '',
-              nextRound: document.getElementById('cfg-next-round')?.value.trim() || '',
-              systemStatus: document.getElementById('cfg-system-status')?.value.trim() || '',
-              lineOfficial: document.getElementById('cfg-line-official')?.value.trim() || '',
-              priceBkk: document.getElementById('cfg-price-bkk')?.value.trim() || '',
-              pricePty: document.getElementById('cfg-price-pty')?.value.trim() || '',
-              lineChannelToken: document.getElementById('cfg-line-token')?.value.trim() || '',
-              lineAdminGroupId: document.getElementById('cfg-line-admin-group')?.value.trim() || '',
-              lineJobsGroupId: document.getElementById('cfg-line-jobs-group')?.value.trim() || '',
-              ga4Id: document.getElementById('cfg-ga4-id')?.value.trim() || '',
-              cfAnalyticsToken: document.getElementById('cfg-cf-analytics-token')?.value.trim() || '',
-              pageAnnouncements: JSON.stringify(pageAnnouncementsMap),
-              driverNewsItems: JSON.stringify(driverNewsCmsList),
-              partnerPerks: JSON.stringify(partnerPerksCmsList),
-              tourBookStockPattaya: JSON.stringify(tourBookStockList)
-            }
-          })
+        const json = await adminPost({
+          action: 'admin_save_settings',
+          settings: {
+            announcement: document.getElementById('cfg-announcement')?.value.trim() || '',
+            nextRound: document.getElementById('cfg-next-round')?.value.trim() || '',
+            systemStatus: document.getElementById('cfg-system-status')?.value.trim() || '',
+            lineOfficial: document.getElementById('cfg-line-official')?.value.trim() || '',
+            priceBkk: document.getElementById('cfg-price-bkk')?.value.trim() || '',
+            pricePty: document.getElementById('cfg-price-pty')?.value.trim() || '',
+            lineChannelToken: document.getElementById('cfg-line-token')?.value.trim() || '',
+            lineAdminGroupId: document.getElementById('cfg-line-admin-group')?.value.trim() || '',
+            lineJobsGroupId: document.getElementById('cfg-line-jobs-group')?.value.trim() || '',
+            ga4Id: document.getElementById('cfg-ga4-id')?.value.trim() || '',
+            cfAnalyticsToken: document.getElementById('cfg-cf-analytics-token')?.value.trim() || '',
+            pageAnnouncements: JSON.stringify(pageAnnouncementsMap),
+            driverNewsItems: JSON.stringify(driverNewsCmsList),
+            partnerPerks: JSON.stringify(partnerPerksCmsList),
+            tourBookStockPattaya: JSON.stringify(tourBookStockList)
+          }
         });
-        const json = await res.json();
         return Boolean(json && json.success);
       } catch (_) {
         return false;
@@ -1637,7 +1894,32 @@
     };
 
     let cloudAdminAccounts = [];
+    let cloudAuditLogs = [];
     let editingAdminUsername = null;
+
+    async function adminPost(payload) {
+      if (!sessionAdmin || !sessionAdmin.sessionToken) {
+        return { success: false, error: 'เซสชันหมดอายุ กรุณาเข้าสู่ระบบใหม่', sessionExpired: true };
+      }
+      const res = await fetch(MASTER_WEB_APP_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(Object.assign({}, payload, {
+          adminId: sessionAdmin.username,
+          sessionToken: sessionAdmin.sessionToken
+        }))
+      });
+      const json = await res.json();
+      if (json && json.sessionToken && sessionAdmin) {
+        sessionAdmin.sessionToken = json.sessionToken;
+        persistAdminSession(sessionAdmin);
+      }
+      if (json && !json.success && json.sessionExpired) {
+        toast(json.error || json.message || 'เซสชันหมดอายุหรือถูกบังคับออกจากระบบ กรุณาเข้าสู่ระบบใหม่', false);
+        handleLogout();
+      }
+      return json;
+    }
 
     function getRoleMeta(role) {
       return ADMIN_ROLE_PRESETS[role] || ADMIN_ROLE_PRESETS.custom;
@@ -1645,10 +1927,130 @@
 
     function canAccessTab(tabName) {
       if (!sessionAdmin) return false;
+      if (tabName === 'overview') return true;
       if (sessionAdmin.isSuperAdmin) return true;
       if (tabName === 'admins') return false;
       const perms = Array.isArray(sessionAdmin.permissions) ? sessionAdmin.permissions : [];
       return perms.includes(tabName);
+    }
+
+    function openAdminSidebar() {
+      const sb = document.getElementById('admin-sidebar');
+      const bd = document.getElementById('admin-sidebar-backdrop');
+      if (sb) sb.classList.remove('-translate-x-full');
+      if (bd) bd.classList.remove('hidden');
+    }
+
+    function closeAdminSidebar() {
+      const sb = document.getElementById('admin-sidebar');
+      const bd = document.getElementById('admin-sidebar-backdrop');
+      if (sb) sb.classList.add('-translate-x-full');
+      if (bd) bd.classList.add('hidden');
+    }
+
+    function handleQuickJumpSearch(val) {
+      const q = String(val || '').trim().toLowerCase();
+      if (!q) return;
+      const map = [
+        { k: ['ภาพรวม', 'overview', 'dashboard', 'สรุป'], tab: 'overview' },
+        { k: ['ตั้งค่า', 'เว็บ', 'site', 'ข่าว', 'ประกาศ'], tab: 'site' },
+        { k: ['สมาชิก', 'member', 'อนุมัติ'], tab: 'members' },
+        { k: ['บอร์ด', 'forum', 'ชุมชน'], tab: 'forum' },
+        { k: ['พัสดุ', 'tracking', 'ส่ง', 'shipping'], tab: 'shipping' },
+        { k: ['สมุด', 'ทัวร์', 'สต็อก', 'tour', 'พัทยา'], tab: 'tourbook' },
+        { k: ['ผู้ดูแล', 'ผู้ช่วย', 'admin', 'log', 'สิทธิ์'], tab: 'admins' },
+        { k: ['สำรอง', 'backup', 'csv', 'json'], tab: 'backup' }
+      ];
+      const hit = map.find(m => m.k.some(w => q.includes(w)));
+      if (hit && canAccessTab(hit.tab)) switchTab(hit.tab);
+    }
+
+    let lastOverviewStats = { approvedMembers: 0, pendingMembers: 0, openJobs: 0, blacklistCases: 0, pendingForumUsers: 0 };
+
+    function renderOverviewBentoVisuals() {
+      const todayEl = document.getElementById('overview-today-pill');
+      if (todayEl) {
+        const now = new Date();
+        todayEl.innerHTML = `<i class="fa-regular fa-calendar mr-1.5"></i>${now.toLocaleDateString('th-TH', { day: 'numeric', month: 'short', year: 'numeric' })}`;
+      }
+      const st = lastOverviewStats || {};
+      const approved = Number(st.approvedMembers || 0);
+      const pendingM = Number(st.pendingMembers || 0);
+      const pendingF = Number(st.pendingForumUsers || 0);
+      const openJobs = Number(st.openJobs || 0);
+      const blacklist = Number(st.blacklistCases || 0);
+      const totalPending = pendingM + pendingF;
+
+      const setTxt = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+      setTxt('sidebar-total-pending', totalPending.toLocaleString());
+      setTxt('bubble-members', approved >= 1000 ? `${(approved / 1000).toFixed(1)}k` : String(approved));
+      setTxt('bubble-blacklist', blacklist.toLocaleString());
+      setTxt('bubble-jobs', openJobs.toLocaleString());
+      setTxt('ov-pending-total', totalPending.toLocaleString());
+
+      const dot = document.getElementById('topbar-pending-dot');
+      if (dot) dot.classList.toggle('hidden', totalPending <= 0);
+
+      // Progress bars
+      const totalMemPool = Math.max(1, approved + pendingM);
+      const memPct = Math.round((approved / totalMemPool) * 100);
+      const pendPct = Math.min(100, Math.round((totalPending / Math.max(10, totalPending + 20)) * 100));
+      setTxt('prog-pct-members', `${memPct}%`);
+      setTxt('prog-pct-pending', `${totalPending} รายการ`);
+      const b1 = document.getElementById('prog-bar-members'); if (b1) b1.style.width = `${memPct}%`;
+      const b2 = document.getElementById('prog-bar-pending'); if (b2) b2.style.width = `${Math.max(8, pendPct)}%`;
+
+      // Tour book 22-sheet dot matrix
+      const list = Array.isArray(tourBookStockList) ? tourBookStockList : [];
+      let readyBooks = list.length > 0 ? Math.min(...list.map(x => Number(x.lam || 0))) : 0;
+      let lamSheetsCount = list.filter(x => Number(x.lam || 0) > 0).length;
+      let sumP1 = list.reduce((a, x) => a + Number(x.p1 || 0), 0);
+      let sumP2 = list.reduce((a, x) => a + Number(x.p2 || 0), 0);
+      let sumLam = list.reduce((a, x) => a + Number(x.lam || 0), 0);
+      const tbPct = list.length > 0 ? Math.round((lamSheetsCount / list.length) * 100) : 0;
+
+      setTxt('ov-tb-ready-books', readyBooks.toLocaleString());
+      setTxt('ov-tb-pct-badge', `${lamSheetsCount}/${list.length || 22} แผ่น`);
+      setTxt('ov-tb-lam-total', sumLam.toLocaleString());
+      setTxt('prog-pct-tourbook', `${tbPct}%`);
+      const b3 = document.getElementById('prog-bar-tourbook'); if (b3) b3.style.width = `${tbPct}%`;
+
+      const matrixEl = document.getElementById('ov-tb-dot-matrix');
+      if (matrixEl) {
+        const dots = (list.length > 0 ? list : Array.from({ length: 22 }, (_, i) => ({ sheetNo: i + 1, p1: 0, p2: 0, lam: 0 }))).map((it, idx) => {
+          const cls = Number(it.lam || 0) > 0
+            ? 'bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)]'
+            : (Number(it.p2 || 0) > 0 || Number(it.p1 || 0) > 0 ? 'bg-amber-400' : 'bg-slate-700/80');
+          return `<span class="w-3 h-3 rounded-full ${cls} inline-block" title="แผ่นที่ ${it.sheetNo || (idx + 1)}: เคลือบ ${it.lam || 0}"></span>`;
+        }).join('');
+        matrixEl.innerHTML = dots;
+      }
+
+      // Vertical Pill Bar Chart
+      const barEl = document.getElementById('ov-bar-chart');
+      if (barEl) {
+        const series = [
+          { label: 'รอตรวจ', val: pendingM, color: 'from-emerald-300 to-emerald-500' },
+          { label: 'บอร์ด', val: pendingF, color: 'from-purple-300 to-purple-500' },
+          { label: 'งานเปิด', val: openJobs, color: 'from-sky-300 to-sky-500' },
+          { label: '1 หน้า', val: sumP1, color: 'from-slate-300 to-slate-500' },
+          { label: 'หน้า-หลัง', val: sumP2, color: 'from-indigo-300 to-violet-500' },
+          { label: 'เคลือบ', val: sumLam, color: 'from-amber-300 to-amber-500' }
+        ];
+        const maxVal = Math.max(1, ...series.map(s => s.val));
+        barEl.innerHTML = series.map(s => {
+          const h = Math.max(14, Math.round((s.val / maxVal) * 100));
+          return `
+            <div class="flex flex-col items-center gap-1.5 h-full justify-end">
+              <span class="text-[10px] font-mono font-bold text-slate-300">${s.val}</span>
+              <div class="w-full max-w-[34px] h-20 rounded-full bento-bar-track p-0.5 flex items-end">
+                <div class="w-full rounded-full bg-gradient-to-t ${s.color} transition-all duration-500" style="height:${h}%"></div>
+              </div>
+              <span class="text-[10px] text-slate-400 font-semibold truncate max-w-full">${s.label}</span>
+            </div>
+          `;
+        }).join('');
+      }
     }
 
     function canEditCurrentAdmin() {
@@ -1740,13 +2142,17 @@
         const profile = json.admin || {};
         sessionAdmin = {
           username: profile.username || username,
-          password: password,
+          sessionToken: json.sessionToken || '',
           displayName: profile.displayName || username,
           role: profile.role || (profile.isSuperAdmin ? 'super_admin' : 'staff_ops'),
           isSuperAdmin: !!profile.isSuperAdmin,
           accessMode: profile.accessMode || (profile.isSuperAdmin ? 'edit' : 'view'),
           permissions: Array.isArray(profile.permissions) ? profile.permissions : (profile.isSuperAdmin ? ['site', 'members', 'forum', 'shipping', 'admins', 'tourbook', 'backup'] : [])
         };
+        if (!sessionAdmin.sessionToken) {
+          toast('เซิร์ฟเวอร์ไม่ได้ออก Session Token กรุณาลองใหม่', false);
+          return;
+        }
         persistAdminSession(sessionAdmin);
         enterAdminDashboard(false);
         toast(`เข้าสู่ระบบสำเร็จ (${getRoleMeta(sessionAdmin.role).label})`);
@@ -1758,16 +2164,16 @@
       }
     }
 
-    const ADMIN_SESSION_STORAGE_KEY = 'tdt_admin_session_v1';
+    const ADMIN_SESSION_STORAGE_KEY = 'tdt_admin_session_v2';
     const ADMIN_ACTIVE_TAB_KEY = 'tdt_admin_active_tab_v1';
-    const ADMIN_SESSION_TTL_MS = 15 * 60 * 1000; // คงสถานะล็อกอิน 15 นาที (ต่ออายุอัตโนมัติเมื่อรีเฟรช)
+    const ADMIN_SESSION_TTL_MS = 30 * 60 * 1000; // คงสถานะล็อกอินด้วย Signed Session Token 30 นาที (ไม่เก็บรหัสผ่านจริง)
 
     function persistAdminSession(adminObj) {
-      if (!adminObj) return;
+      if (!adminObj || !adminObj.sessionToken) return;
       try {
         sessionStorage.setItem(ADMIN_SESSION_STORAGE_KEY, JSON.stringify({
           username: adminObj.username,
-          password: adminObj.password,
+          sessionToken: adminObj.sessionToken,
           displayName: adminObj.displayName,
           role: adminObj.role || 'super_admin',
           isSuperAdmin: !!adminObj.isSuperAdmin,
@@ -1785,6 +2191,7 @@
       document.getElementById('dashboard-view').classList.remove('hidden');
       applyAdminRolePermissions();
       renderAdminAccountsList();
+      renderAdminAuditLogs();
       initPageAnnouncementEditor();
       initDriverNewsCms();
       initPartnerPerksCms();
@@ -1797,22 +2204,23 @@
           }
         } catch (_) {}
       } else {
-        const firstAllowed = ['site', 'members', 'forum', 'shipping', 'tourbook', 'backup', 'admins'].find(t => canAccessTab(t));
-        if (firstAllowed) switchTab(firstAllowed);
+        switchTab('overview');
       }
+      renderOverviewBentoVisuals();
       refreshAllAdminData();
     }
 
     function restoreAdminSessionIfValid() {
       try {
+        sessionStorage.removeItem('tdt_admin_session_v1'); // ล้างรูปแบบเก่าที่เก็บรหัสผ่านออกอัตโนมัติ
         const raw = sessionStorage.getItem(ADMIN_SESSION_STORAGE_KEY);
         if (!raw) return;
         const parsed = JSON.parse(raw);
-        if (parsed && parsed.username && parsed.password && Number(parsed.expiresAt || 0) > Date.now()) {
+        if (parsed && parsed.username && parsed.sessionToken && Number(parsed.expiresAt || 0) > Date.now()) {
           const fallbackSuper = String(parsed.username).toUpperCase() === 'ADMIN' || String(parsed.username).toUpperCase() === 'SUPERADMIN';
           sessionAdmin = {
             username: parsed.username,
-            password: parsed.password,
+            sessionToken: parsed.sessionToken,
             displayName: parsed.displayName || parsed.username,
             role: parsed.role || (fallbackSuper ? 'super_admin' : 'staff_ops'),
             isSuperAdmin: typeof parsed.isSuperAdmin === 'boolean' ? parsed.isSuperAdmin : fallbackSuper,
@@ -1821,7 +2229,7 @@
               ? parsed.permissions
               : (fallbackSuper ? ['site', 'members', 'forum', 'shipping', 'admins', 'tourbook', 'backup'] : [])
           };
-          persistAdminSession(sessionAdmin); // ต่ออายุเซสชันอีก 15 นาที
+          persistAdminSession(sessionAdmin);
           enterAdminDashboard(true);
         } else {
           sessionStorage.removeItem(ADMIN_SESSION_STORAGE_KEY);
@@ -1832,9 +2240,11 @@
     function handleLogout() {
       sessionAdmin = null;
       cloudAdminAccounts = [];
+      cloudAuditLogs = [];
       editingAdminUsername = null;
       try {
         sessionStorage.removeItem(ADMIN_SESSION_STORAGE_KEY);
+        sessionStorage.removeItem('tdt_admin_session_v1');
         sessionStorage.removeItem(ADMIN_ACTIVE_TAB_KEY);
       } catch (_) {}
       document.getElementById('dashboard-view').classList.add('hidden');
@@ -1844,12 +2254,12 @@
 
     function switchTab(tabName) {
       if (!canAccessTab(tabName)) {
-        const fallback = ['site', 'members', 'forum', 'shipping', 'tourbook', 'backup', 'admins'].find(t => canAccessTab(t));
+        const fallback = ['overview', 'site', 'members', 'forum', 'shipping', 'tourbook', 'backup', 'admins'].find(t => canAccessTab(t));
         if (!fallback) return;
         tabName = fallback;
       }
       try { sessionStorage.setItem(ADMIN_ACTIVE_TAB_KEY, tabName); } catch (_) {}
-      ['site', 'members', 'forum', 'shipping', 'admins', 'tourbook', 'backup'].forEach(t => {
+      ['overview', 'site', 'members', 'forum', 'shipping', 'admins', 'tourbook', 'backup'].forEach(t => {
         const panel = document.getElementById(`tab-panel-${t}`);
         if (panel) panel.classList.toggle('hidden', t !== tabName);
       });
@@ -1857,18 +2267,12 @@
         const t = btn.getAttribute('data-tab');
         const allowed = canAccessTab(t);
         const active = t === tabName;
-        if (!allowed) {
-          btn.classList.add('hidden');
-          return;
-        }
-        if (active) {
-          btn.className = 'admin-nav-tab gold-grad text-slate-950 font-extrabold px-4 py-2.5 rounded-xl text-xs';
-        } else {
-          const extra = t === 'backup' ? ' ml-auto text-emerald-300' : ' text-slate-300 hover:text-white';
-          btn.className = `admin-nav-tab bg-slate-800 font-bold px-4 py-2.5 rounded-xl text-xs${extra}`;
-        }
+        btn.classList.toggle('hidden', !allowed);
+        btn.classList.toggle('is-active', active);
       });
-      if (tabName === 'admins') renderAdminAccountsList();
+      closeAdminSidebar();
+      if (tabName === 'overview') renderOverviewBentoVisuals();
+      if (tabName === 'admins') { renderAdminAccountsList(); renderAdminAuditLogs(); }
       if (tabName === 'tourbook') renderTourBookStockTable();
     }
 
@@ -1997,6 +2401,9 @@
               <button type="button" onclick="editAdminAccount('${esc(acc.username)}')" class="bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-400/40 px-3 py-1.5 rounded-xl font-bold">
                 <i class="fa-solid fa-pen mr-1"></i> แก้ไขสิทธิ์
               </button>
+              <button type="button" onclick="forceLogoutAdminAccount('${esc(acc.username)}')" class="bg-sky-500/15 hover:bg-sky-500/25 text-sky-300 border border-sky-400/40 px-3 py-1.5 rounded-xl font-bold" title="บังคับให้ผู้ช่วยต้องล็อกอินใหม่ทันที">
+                <i class="fa-solid fa-power-off mr-1"></i> เตะออก
+              </button>
               <button type="button" onclick="toggleAdminAccountStatus('${esc(acc.username)}', '${isApproved ? 'ระงับ' : 'อนุมัติ'}')" class="${isApproved ? 'bg-slate-800 hover:bg-slate-700 text-amber-200 border-slate-600' : 'bg-emerald-600/20 hover:bg-emerald-600/35 text-emerald-300 border-emerald-500/40'} border px-3 py-1.5 rounded-xl font-bold">
                 <i class="fa-solid ${isApproved ? 'fa-ban' : 'fa-check'} mr-1"></i> ${isApproved ? 'ระงับสิทธิ์' : 'อนุมัติอีกครั้ง'}
               </button>
@@ -2039,25 +2446,19 @@
       btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin mr-1"></i> กำลังบันทึกขึ้น Cloud...';
 
       try {
-        const res = await fetch(MASTER_WEB_APP_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify({
-            action: 'admin_manage_accounts',
-            adminId: sessionAdmin.username,
-            passcode: sessionAdmin.password,
-            op: 'save',
-            account: { username, password, displayName, role, accessMode, status, permissions }
-          })
+        const json = await adminPost({
+          action: 'admin_manage_accounts',
+          op: 'save',
+          account: { username, password, displayName, role, accessMode, status, permissions }
         });
-        const json = await res.json();
         if (json && json.success) {
           cloudAdminAccounts = Array.isArray(json.adminAccounts) ? json.adminAccounts : cloudAdminAccounts;
+          if (Array.isArray(json.auditLogs)) { cloudAuditLogs = json.auditLogs; renderAdminAuditLogs(); }
           resetAdminAccountForm();
           renderAdminAccountsList();
           toast(json.message || 'บันทึกบัญชีผู้ช่วยเรียบร้อยแล้ว');
         } else {
-          toast((json && json.message) ? json.message : 'บันทึกไม่สำเร็จ', false);
+          toast((json && (json.message || json.error)) ? (json.message || json.error) : 'บันทึกไม่สำเร็จ', false);
         }
       } catch (_) {
         toast('เชื่อมต่อเซิร์ฟเวอร์ไม่สำเร็จ กรุณาลองใหม่', false);
@@ -2069,28 +2470,42 @@
       }
     }
 
+    async function forceLogoutAdminAccount(username) {
+      if (!sessionAdmin || !sessionAdmin.isSuperAdmin) return;
+      if (!confirm(`บังคับเตะ @${username} ออกจากระบบทันที (ต้องกรอกรหัสผ่านเข้าใหม่)?`)) return;
+      try {
+        const json = await adminPost({
+          action: 'admin_manage_accounts',
+          op: 'force_logout',
+          targetUsername: username
+        });
+        if (json && json.success) {
+          if (Array.isArray(json.auditLogs)) { cloudAuditLogs = json.auditLogs; renderAdminAuditLogs(); }
+          toast(json.message || `บังคับเตะ @${username} ออกจากระบบแล้ว`);
+        } else {
+          toast((json && (json.message || json.error)) || 'ดำเนินการไม่สำเร็จ', false);
+        }
+      } catch (_) {
+        toast('เชื่อมต่อเซิร์ฟเวอร์ไม่สำเร็จ', false);
+      }
+    }
+
     async function toggleAdminAccountStatus(username, nextStatus) {
       if (!sessionAdmin || !sessionAdmin.isSuperAdmin) return;
       try {
-        const res = await fetch(MASTER_WEB_APP_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify({
-            action: 'admin_manage_accounts',
-            adminId: sessionAdmin.username,
-            passcode: sessionAdmin.password,
-            op: 'toggle',
-            targetUsername: username,
-            status: nextStatus
-          })
+        const json = await adminPost({
+          action: 'admin_manage_accounts',
+          op: 'toggle',
+          targetUsername: username,
+          status: nextStatus
         });
-        const json = await res.json();
         if (json && json.success) {
           cloudAdminAccounts = Array.isArray(json.adminAccounts) ? json.adminAccounts : cloudAdminAccounts;
+          if (Array.isArray(json.auditLogs)) { cloudAuditLogs = json.auditLogs; renderAdminAuditLogs(); }
           renderAdminAccountsList();
           toast(json.message || 'อัปเดตสถานะแล้ว');
         } else {
-          toast((json && json.message) ? json.message : 'อัปเดตสถานะไม่สำเร็จ', false);
+          toast((json && (json.message || json.error)) || 'อัปเดตสถานะไม่สำเร็จ', false);
         }
       } catch (_) {
         toast('เชื่อมต่อเซิร์ฟเวอร์ไม่สำเร็จ', false);
@@ -2101,53 +2516,91 @@
       if (!sessionAdmin || !sessionAdmin.isSuperAdmin) return;
       if (!confirm(`ยืนยันการลบบัญชีผู้ช่วย @${username} ออกจากระบบถาวร?`)) return;
       try {
-        const res = await fetch(MASTER_WEB_APP_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify({
-            action: 'admin_manage_accounts',
-            adminId: sessionAdmin.username,
-            passcode: sessionAdmin.password,
-            op: 'delete',
-            targetUsername: username
-          })
+        const json = await adminPost({
+          action: 'admin_manage_accounts',
+          op: 'delete',
+          targetUsername: username
         });
-        const json = await res.json();
         if (json && json.success) {
           cloudAdminAccounts = Array.isArray(json.adminAccounts) ? json.adminAccounts : cloudAdminAccounts;
+          if (Array.isArray(json.auditLogs)) { cloudAuditLogs = json.auditLogs; renderAdminAuditLogs(); }
           if (editingAdminUsername && editingAdminUsername.toLowerCase() === username.toLowerCase()) {
             resetAdminAccountForm();
           }
           renderAdminAccountsList();
           toast(json.message || 'ลบบัญชีผู้ช่วยแล้ว');
         } else {
-          toast((json && json.message) ? json.message : 'ลบบัญชีไม่สำเร็จ', false);
+          toast((json && (json.message || json.error)) || 'ลบบัญชีไม่สำเร็จ', false);
         }
       } catch (_) {
         toast('เชื่อมต่อเซิร์ฟเวอร์ไม่สำเร็จ', false);
       }
     }
 
+    const AUDIT_ACTION_META = {
+      admin_login: { label: 'เข้าสู่ระบบ', cls: 'bg-sky-500/15 text-sky-300 border-sky-400/35' },
+      approve_member: { label: 'อนุมัติสมาชิก', cls: 'bg-emerald-500/15 text-emerald-300 border-emerald-400/35' },
+      reject_member: { label: 'ไม่อนุมัติสมาชิก', cls: 'bg-rose-500/15 text-rose-300 border-rose-400/35' },
+      decide_forum_user: { label: 'อนุมัติเว็บบอร์ด', cls: 'bg-purple-500/15 text-purple-300 border-purple-400/35' },
+      update_tracking: { label: 'อัปเดตพัสดุ', cls: 'bg-amber-500/15 text-amber-300 border-amber-400/35' },
+      save_site_settings: { label: 'ตั้งค่าเว็บ', cls: 'bg-amber-500/15 text-amber-300 border-amber-400/35' },
+      save_tourbook_stock: { label: 'สต็อกสมุดทัวร์', cls: 'bg-indigo-500/15 text-indigo-300 border-indigo-400/35' },
+      create_assistant: { label: 'สร้างผู้ช่วย', cls: 'bg-emerald-500/15 text-emerald-300 border-emerald-400/35' },
+      update_assistant: { label: 'แก้สิทธิ์ผู้ช่วย', cls: 'bg-amber-500/15 text-amber-300 border-amber-400/35' },
+      toggle_assistant_status: { label: 'เปลี่ยนสถานะผู้ช่วย', cls: 'bg-orange-500/15 text-orange-300 border-orange-400/35' },
+      force_logout: { label: 'บังคับเตะออก', cls: 'bg-rose-500/15 text-rose-300 border-rose-400/35' },
+      delete_assistant: { label: 'ลบผู้ช่วย', cls: 'bg-rose-500/15 text-rose-300 border-rose-400/35' },
+      change_master_passcode: { label: 'เปลี่ยนรหัสหลัก', cls: 'bg-rose-500/20 text-rose-200 border-rose-400/45' },
+      export_backup: { label: 'สำรองข้อมูล', cls: 'bg-teal-500/15 text-teal-300 border-teal-400/35' }
+    };
+
+    function renderAdminAuditLogs() {
+      const box = document.getElementById('admin-audit-logs-list');
+      if (!box) return;
+      const q = (document.getElementById('audit-log-filter')?.value || '').trim().toLowerCase();
+      const filtered = (cloudAuditLogs || []).filter(item => {
+        if (!q) return true;
+        return `${item.timestamp} ${item.username} ${item.displayName} ${item.action} ${item.target} ${item.detail}`.toLowerCase().includes(q);
+      });
+      if (filtered.length === 0) {
+        box.innerHTML = '<p class="text-slate-400 text-center py-4">ยังไม่มีประวัติการทำงานที่ตรงกับคำค้นหา</p>';
+        return;
+      }
+      box.innerHTML = filtered.map(item => {
+        const meta = AUDIT_ACTION_META[item.action] || { label: item.action || '-', cls: 'bg-slate-800 text-slate-300 border-slate-700' };
+        return `
+          <div class="bg-slate-900/80 border border-slate-800 rounded-xl px-3 py-2 flex flex-col sm:flex-row sm:items-center justify-between gap-1.5">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="font-mono text-[11px] text-slate-400">${esc(item.timestamp)}</span>
+              <span class="px-2 py-0.5 rounded-md border text-[11px] font-bold ${meta.cls}">${esc(meta.label)}</span>
+              <span class="font-bold text-amber-300 font-mono">@${esc(item.username)}</span>
+              <span class="text-white font-semibold">${esc(item.target)}</span>
+              <span class="text-slate-300">${esc(item.detail)}</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    async function loadAdminAuditLogs() {
+      if (!sessionAdmin || !sessionAdmin.isSuperAdmin) return;
+      try {
+        const json = await adminPost({ action: 'admin_audit_logs', limit: 120 });
+        if (json && json.success && Array.isArray(json.logs)) {
+          cloudAuditLogs = json.logs;
+          renderAdminAuditLogs();
+          toast(`โหลดประวัติการทำงานล่าสุด ${json.logs.length} รายการแล้ว`);
+        }
+      } catch (_) {
+        toast('โหลดประวัติการทำงานไม่สำเร็จ', false);
+      }
+    }
+
     async function refreshAllAdminData() {
       if (!sessionAdmin) return;
       try {
-        const res = await fetch(MASTER_WEB_APP_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify({
-            action: 'admin_overview',
-            adminId: sessionAdmin.username,
-            passcode: sessionAdmin.password
-          })
-        });
-        const json = await res.json();
-        if (!json || !json.success) {
-          if (json && json.message && (json.message.includes('ระงับ') || json.message.includes('ไม่ถูกต้อง'))) {
-            toast(json.message, false);
-            handleLogout();
-          }
-          return;
-        }
+        const json = await adminPost({ action: 'admin_overview' });
+        if (!json || !json.success) return;
 
         if (json.admin) {
           sessionAdmin.displayName = json.admin.displayName || sessionAdmin.displayName;
@@ -2162,6 +2615,10 @@
         if (Array.isArray(json.adminAccounts)) {
           cloudAdminAccounts = json.adminAccounts;
           renderAdminAccountsList();
+        }
+        if (Array.isArray(json.auditLogs)) {
+          cloudAuditLogs = json.auditLogs;
+          renderAdminAuditLogs();
         }
 
         const cfg = json.settings || {};
@@ -2191,11 +2648,19 @@
         initTourBookStock(cfg.tourBookStockPattaya);
 
         const st = json.stats || {};
-        if (document.getElementById('kpi-approved-members')) document.getElementById('kpi-approved-members').textContent = Number(st.approvedMembers || 0).toLocaleString();
-        if (document.getElementById('kpi-pending-members')) document.getElementById('kpi-pending-members').textContent = Number(st.pendingMembers ?? (json.pendingMembers || []).length).toLocaleString();
-        if (document.getElementById('kpi-open-jobs')) document.getElementById('kpi-open-jobs').textContent = Number(st.openJobs || 0).toLocaleString();
-        if (document.getElementById('kpi-blacklist-cases')) document.getElementById('kpi-blacklist-cases').textContent = Number(st.blacklistCases || 0).toLocaleString();
-        if (document.getElementById('kpi-pending-forum')) document.getElementById('kpi-pending-forum').textContent = Number(st.pendingForumUsers ?? (json.pendingForumUsers || []).length).toLocaleString();
+        lastOverviewStats = {
+          approvedMembers: Number(st.approvedMembers || 0),
+          pendingMembers: Number(st.pendingMembers ?? (json.pendingMembers || []).length),
+          openJobs: Number(st.openJobs || 0),
+          blacklistCases: Number(st.blacklistCases || 0),
+          pendingForumUsers: Number(st.pendingForumUsers ?? (json.pendingForumUsers || []).length)
+        };
+        if (document.getElementById('kpi-approved-members')) document.getElementById('kpi-approved-members').textContent = lastOverviewStats.approvedMembers.toLocaleString();
+        if (document.getElementById('kpi-pending-members')) document.getElementById('kpi-pending-members').textContent = lastOverviewStats.pendingMembers.toLocaleString();
+        if (document.getElementById('kpi-open-jobs')) document.getElementById('kpi-open-jobs').textContent = lastOverviewStats.openJobs.toLocaleString();
+        if (document.getElementById('kpi-blacklist-cases')) document.getElementById('kpi-blacklist-cases').textContent = lastOverviewStats.blacklistCases.toLocaleString();
+        if (document.getElementById('kpi-pending-forum')) document.getElementById('kpi-pending-forum').textContent = lastOverviewStats.pendingForumUsers.toLocaleString();
+        renderOverviewBentoVisuals();
 
         const pendingMembers = Array.isArray(json.pendingMembers) ? json.pendingMembers : [];
         document.getElementById('count-pending-members').textContent = pendingMembers.length;
@@ -2242,33 +2707,26 @@
     async function saveSiteConfig(e) {
       e.preventDefault();
       if (!sessionAdmin) return;
-      const res = await fetch(MASTER_WEB_APP_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify({
-          action: 'admin_save_settings',
-          adminId: sessionAdmin.username,
-          passcode: sessionAdmin.password,
-          settings: {
-            announcement: document.getElementById('cfg-announcement').value.trim(),
-            nextRound: document.getElementById('cfg-next-round').value.trim(),
-            systemStatus: document.getElementById('cfg-system-status').value.trim(),
-            lineOfficial: document.getElementById('cfg-line-official').value.trim(),
-            priceBkk: document.getElementById('cfg-price-bkk').value.trim(),
-            pricePty: document.getElementById('cfg-price-pty').value.trim(),
-            lineChannelToken: document.getElementById('cfg-line-token').value.trim(),
-            lineAdminGroupId: document.getElementById('cfg-line-admin-group').value.trim(),
-            lineJobsGroupId: document.getElementById('cfg-line-jobs-group').value.trim(),
-            ga4Id: document.getElementById('cfg-ga4-id').value.trim(),
-            cfAnalyticsToken: document.getElementById('cfg-cf-analytics-token').value.trim(),
-            pageAnnouncements: JSON.stringify(pageAnnouncementsMap),
-            driverNewsItems: JSON.stringify(driverNewsCmsList),
-            partnerPerks: JSON.stringify(partnerPerksCmsList),
-            tourBookStockPattaya: JSON.stringify(tourBookStockList)
-          }
-        })
+      const json = await adminPost({
+        action: 'admin_save_settings',
+        settings: {
+          announcement: document.getElementById('cfg-announcement').value.trim(),
+          nextRound: document.getElementById('cfg-next-round').value.trim(),
+          systemStatus: document.getElementById('cfg-system-status').value.trim(),
+          lineOfficial: document.getElementById('cfg-line-official').value.trim(),
+          priceBkk: document.getElementById('cfg-price-bkk').value.trim(),
+          pricePty: document.getElementById('cfg-price-pty').value.trim(),
+          lineChannelToken: document.getElementById('cfg-line-token').value.trim(),
+          lineAdminGroupId: document.getElementById('cfg-line-admin-group').value.trim(),
+          lineJobsGroupId: document.getElementById('cfg-line-jobs-group').value.trim(),
+          ga4Id: document.getElementById('cfg-ga4-id').value.trim(),
+          cfAnalyticsToken: document.getElementById('cfg-cf-analytics-token').value.trim(),
+          pageAnnouncements: JSON.stringify(pageAnnouncementsMap),
+          driverNewsItems: JSON.stringify(driverNewsCmsList),
+          partnerPerks: JSON.stringify(partnerPerksCmsList),
+          tourBookStockPattaya: JSON.stringify(tourBookStockList)
+        }
       });
-      const json = await res.json();
       toast(json.success ? 'บันทึกการตั้งค่าเว็บไซต์เรียบร้อยแล้ว' : (json.error || 'บันทึกไม่สำเร็จ'), Boolean(json.success));
     }
 
@@ -2286,23 +2744,14 @@
         return;
       }
       try {
-        const res = await fetch(MASTER_WEB_APP_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify({
-            action: 'admin_change_passcode',
-            adminId: sessionAdmin.username,
-            passcode: sessionAdmin.password,
-            newPasscode: p1
-          })
+        const json = await adminPost({
+          action: 'admin_change_passcode',
+          newPasscode: p1
         });
-        const json = await res.json();
         if (json && json.success) {
-          sessionAdmin.password = p1;
-          persistAdminSession(sessionAdmin);
           document.getElementById('new-master-passcode').value = '';
           document.getElementById('confirm-master-passcode').value = '';
-          toast('เปลี่ยนรหัสผ่านหลังบ้านสำเร็จแล้ว! กรุณาจดจำรหัสใหม่ไว้ใช้งานครั้งถัดไป');
+          toast('เปลี่ยนรหัสผ่านหลังบ้านสำเร็จแล้ว! (ยกเลิกเซสชันเครื่องอื่นอัตโนมัติ)');
         } else {
           toast((json && json.error) || 'เปลี่ยนรหัสผ่านไม่สำเร็จ', false);
         }
@@ -2314,54 +2763,33 @@
     async function testLineNotifyFromAdmin() {
       if (!sessionAdmin) return;
       toast('กำลังทดสอบส่งข้อความเข้า LINE...');
-      const res = await fetch(MASTER_WEB_APP_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify({
-          action: 'admin_test_line_notify',
-          adminId: sessionAdmin.username,
-          passcode: sessionAdmin.password,
-          channel: 'admin'
-        })
+      const json = await adminPost({
+        action: 'admin_test_line_notify',
+        channel: 'admin'
       });
-      const json = await res.json();
       toast(json.message || json.error || 'ทดสอบเสร็จสิ้น', Boolean(json.success));
     }
 
     async function decideMember(refCode, decision) {
       if (!sessionAdmin) return;
       const customCode = (document.getElementById(`mcode-${refCode}`)?.value || '').trim().toUpperCase();
-      const res = await fetch(MASTER_WEB_APP_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify({
-          action: 'admin_decide_member',
-          adminId: sessionAdmin.username,
-          passcode: sessionAdmin.password,
-          refCode,
-          customCode,
-          decision
-        })
+      const json = await adminPost({
+        action: 'admin_decide_member',
+        refCode,
+        customCode,
+        decision
       });
-      const json = await res.json();
       toast(json.message || (json.success ? 'ดำเนินการเรียบร้อย' : 'ผิดพลาด'), Boolean(json.success));
       refreshAllAdminData();
     }
 
     async function decideForum(memberCode, decision) {
       if (!sessionAdmin) return;
-      const res = await fetch(MASTER_WEB_APP_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify({
-          action: 'admin_decide_forum_user',
-          adminId: sessionAdmin.username,
-          passcode: sessionAdmin.password,
-          memberCode,
-          decision
-        })
+      const json = await adminPost({
+        action: 'admin_decide_forum_user',
+        memberCode,
+        decision
       });
-      const json = await res.json();
       toast(json.success ? `อัปเดตบัญชี ${memberCode} เรียบร้อยแล้ว` : 'ผิดพลาด', Boolean(json.success));
       refreshAllAdminData();
     }
@@ -2369,36 +2797,22 @@
     async function submitTrackingUpdate(e) {
       e.preventDefault();
       if (!sessionAdmin) return;
-      const res = await fetch(MASTER_WEB_APP_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify({
-          action: 'admin_update_tracking',
-          adminId: sessionAdmin.username,
-          passcode: sessionAdmin.password,
-          refCode: document.getElementById('track-ref-input').value.trim(),
-          status: document.getElementById('track-status-input').value,
-          trackingNo: document.getElementById('track-no-input').value.trim() || '-'
-        })
+      const json = await adminPost({
+        action: 'admin_update_tracking',
+        refCode: document.getElementById('track-ref-input').value.trim(),
+        status: document.getElementById('track-status-input').value,
+        trackingNo: document.getElementById('track-no-input').value.trim() || '-'
       });
-      const json = await res.json();
       toast(json.message || (json.success ? 'อัปเดตเรียบร้อย' : 'ไม่พบรหัสอ้างอิงนี้'), Boolean(json.success));
     }
 
     async function downloadBackupFile(scope) {
       if (!sessionAdmin) return;
       toast('กำลังเตรียมไฟล์สำรองข้อมูล...');
-      const res = await fetch(MASTER_WEB_APP_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify({
-          action: 'admin_export_backup',
-          adminId: sessionAdmin.username,
-          passcode: sessionAdmin.password,
-          scope
-        })
+      const json = await adminPost({
+        action: 'admin_export_backup',
+        scope
       });
-      const json = await res.json();
       if (!json.success) {
         toast(json.error || 'ไม่มีสิทธิ์สำรองข้อมูล', false);
         return;

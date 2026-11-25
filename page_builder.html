@@ -245,7 +245,12 @@
         </div>
         <div class="space-y-1">
           <label class="block text-xs font-bold text-slate-300">รหัสผ่านหลังบ้าน</label>
-          <input type="password" id="builder-login-pass" required placeholder="รหัสผ่าน Master Passcode" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-white focus:border-amber-400 focus:outline-none">
+          <div class="relative">
+            <input type="password" id="builder-login-pass" required placeholder="รหัสผ่าน Master Passcode" class="w-full bg-slate-950 border border-slate-700 rounded-xl pl-4 pr-11 py-3 text-white focus:border-amber-400 focus:outline-none">
+            <button type="button" onclick="toggleBuilderPassVis()" aria-label="แสดงหรือซ่อนรหัสผ่าน" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-amber-300 px-1">
+              <i id="builder-pass-eye" class="fa-solid fa-eye"></i>
+            </button>
+          </div>
         </div>
         <p id="builder-login-err" class="hidden text-xs text-rose-400 font-bold"></p>
         <button type="submit" id="btn-builder-login" class="w-full gold-grad text-slate-950 font-extrabold py-3 rounded-xl text-sm shadow-lg transition">
@@ -1318,10 +1323,33 @@
       }
     }
 
+    function toggleBuilderPassVis() {
+      const inp = document.getElementById('builder-login-pass');
+      const eye = document.getElementById('builder-pass-eye');
+      if (!inp) return;
+      const show = inp.type === 'password';
+      inp.type = show ? 'text' : 'password';
+      if (eye) eye.className = show ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye';
+    }
+
+    function hasValidSharedAdminSession() {
+      try {
+        const raw = sessionStorage.getItem('tdt_admin_session_v2');
+        if (!raw) return null;
+        const parsed = JSON.parse(raw);
+        if (!parsed || !parsed.sessionToken || Number(parsed.expiresAt || 0) <= Date.now()) return null;
+        const perms = Array.isArray(parsed.permissions) ? parsed.permissions : [];
+        if (parsed.isSuperAdmin || (parsed.accessMode === 'edit' && perms.includes('site'))) {
+          return parsed;
+        }
+      } catch (_) {}
+      return null;
+    }
+
     async function handleBuilderAdminLogin(e) {
       e.preventDefault();
       const user = document.getElementById('builder-login-user').value.trim();
-      const pass = document.getElementById('builder-login-pass').value;
+      const pass = document.getElementById('builder-login-pass').value.trim();
       const errEl = document.getElementById('builder-login-err');
       const btn = document.getElementById('btn-builder-login');
       errEl.classList.add('hidden');
@@ -1335,13 +1363,35 @@
         });
         const json = await res.json();
         if (!json || !json.success) {
-          errEl.textContent = (json && json.error) || 'ชื่อผู้ดูแลหรือรหัสผ่านไม่ถูกต้อง';
+          errEl.textContent = (json && (json.error || json.message)) || 'ชื่อผู้ดูแลหรือรหัสผ่านไม่ถูกต้อง (ตรวจสอบภาษาคีย์บอร์ด TH/EN)';
           errEl.classList.remove('hidden');
           return;
         }
-        try { sessionStorage.setItem(BUILDER_ADMIN_SESS_KEY, JSON.stringify({ user, ts: Date.now() })); } catch (_) {}
+        const profile = json.admin || {};
+        const perms = Array.isArray(profile.permissions) ? profile.permissions : [];
+        const canUseBuilder = !!profile.isSuperAdmin || (profile.accessMode === 'edit' && perms.includes('site'));
+        if (!canUseBuilder) {
+          errEl.textContent = 'บัญชีผู้ช่วยนี้ไม่มีสิทธิ์แก้ไขหน้าเว็บ (Visual Builder) — ต้องได้รับสิทธิ์แก้ไขแท็บตั้งค่าเว็บจากแอดมินหลัก';
+          errEl.classList.remove('hidden');
+          return;
+        }
+        try {
+          sessionStorage.setItem(BUILDER_ADMIN_SESS_KEY, JSON.stringify({ user: profile.username || user, ts: Date.now() }));
+          if (json.sessionToken) {
+            sessionStorage.setItem('tdt_admin_session_v2', JSON.stringify({
+              username: profile.username || user,
+              sessionToken: json.sessionToken,
+              displayName: profile.displayName || user,
+              role: profile.role || (profile.isSuperAdmin ? 'super_admin' : 'staff_ops'),
+              isSuperAdmin: !!profile.isSuperAdmin,
+              accessMode: profile.accessMode || 'edit',
+              permissions: perms,
+              expiresAt: Date.now() + (30 * 60 * 1000)
+            }));
+          }
+        } catch (_) {}
         document.getElementById('builder-login-gate')?.classList.add('hidden');
-        showBuilderToast(`ยินดีต้อนรับผู้ดูแล ${user}`);
+        showBuilderToast(`ยินดีต้อนรับผู้ดูแล ${profile.displayName || user}`);
       } catch (_) {
         errEl.textContent = 'ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์ตรวจสอบสิทธิ์ได้';
         errEl.classList.remove('hidden');
@@ -1354,6 +1404,7 @@
     function logoutBuilderAdmin() {
       try {
         sessionStorage.removeItem(BUILDER_ADMIN_SESS_KEY);
+        sessionStorage.removeItem('tdt_admin_session_v2');
         sessionStorage.removeItem(BUILDER_GH_TOKEN_KEY);
       } catch (_) {}
       document.getElementById('builder-login-gate')?.classList.remove('hidden');
@@ -1362,7 +1413,7 @@
 
     document.addEventListener('DOMContentLoaded', () => {
       try {
-        if (sessionStorage.getItem(BUILDER_ADMIN_SESS_KEY)) {
+        if (hasValidSharedAdminSession() || sessionStorage.getItem(BUILDER_ADMIN_SESS_KEY)) {
           document.getElementById('builder-login-gate')?.classList.add('hidden');
         }
       } catch (_) {}

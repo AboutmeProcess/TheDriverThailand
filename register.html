@@ -974,10 +974,39 @@
     return Object.values(row).some(v => String(v ?? "").trim() !== "");
   }
 
+  let memberCountAnimFrame = null;
+  function animateMemberCount(el, targetValue, durationMs = 1400) {
+    if (!el) return;
+    if (memberCountAnimFrame) cancelAnimationFrame(memberCountAnimFrame);
+    const target = Math.max(0, Number(targetValue) || 0);
+    el.style.fontVariantNumeric = "tabular-nums";
+    if (target === 0) {
+      el.textContent = "0 ท่าน";
+      return;
+    }
+    const startTime = performance.now();
+    function tick(now) {
+      const elapsed = now - startTime;
+      const progress = Math.min(1, elapsed / durationMs);
+      // Ease-out cubic: เริ่มนับไวแล้วค่อยๆ ชะลอลงอย่างนุ่มนวลเมื่อใกล้ยอดจริง
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = Math.round(eased * target);
+      el.textContent = `${current.toLocaleString()} ท่าน`;
+      if (progress < 1) {
+        memberCountAnimFrame = requestAnimationFrame(tick);
+      } else {
+        el.textContent = `${target.toLocaleString()} ท่าน`;
+        memberCountAnimFrame = null;
+      }
+    }
+    el.textContent = "0 ท่าน";
+    memberCountAnimFrame = requestAnimationFrame(tick);
+  }
+
   function updateMemberCounter(totalRows) {
     const el = document.getElementById("memberCount");
     const syncEl = document.getElementById("lastSync");
-    el.textContent = `${totalRows.toLocaleString()} ท่าน`;
+    animateMemberCount(el, totalRows, 1500);
 
     const now = new Date();
     const formatted = now.toLocaleString("th-TH", {

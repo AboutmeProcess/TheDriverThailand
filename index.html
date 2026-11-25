@@ -436,6 +436,102 @@
       </p>
     </section>
 
+    <!-- มุมผู้ช่วย & ลูกเล่นคนขับประจำวัน (Voice Phrases 3 ภาษา + วงแหวนเป้ารายได้วันนี้) -->
+    <section id="driver-lounge-section" class="space-y-4 pt-2">
+      <div class="flex flex-wrap items-center justify-between gap-2">
+        <div>
+          <span class="text-xs font-extrabold text-amber-300 bg-amber-500/15 border border-amber-400/35 px-3 py-1 rounded-full">DRIVER INTERACTIVE LOUNGE</span>
+          <h2 class="text-lg sm:text-xl font-extrabold text-white mt-1.5"><i class="fa-solid fa-sparkles text-amber-400 mr-1.5"></i>มุมผู้ช่วยและลูกเล่นคนขับประจำวัน</h2>
+        </div>
+        <span class="text-xs text-slate-400">ใช้งานได้จริงระหว่างวิ่งงานและรอผู้โดยสาร</span>
+      </div>
+
+      <div class="grid lg:grid-cols-12 gap-5">
+        <!-- ข้อ 3: ปุ่มพูดสื่อสารลูกค้าต่างชาติ 3 ภาษา -->
+        <div class="lg:col-span-7 bg-slate-900/95 border border-amber-400/25 rounded-3xl p-5 sm:p-6 space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+            <div>
+              <h3 class="text-base font-extrabold text-amber-300"><i class="fa-solid fa-volume-high mr-1.5"></i>ปุ่มพูดต้อนรับลูกค้าต่างชาติ (3 ภาษา)</h3>
+              <p class="text-xs text-slate-400">แตะที่ประโยคเพื่อให้มือถือออกเสียงพูดให้ผู้โดยสารฟังได้ทันที</p>
+            </div>
+            <div class="inline-flex bg-slate-950 p-1 rounded-xl border border-slate-800 gap-1">
+              <button type="button" onclick="setVoiceLang('en')" id="vlang-en" class="voice-lang-btn px-3 py-1.5 rounded-lg text-xs font-extrabold bg-amber-400 text-slate-950 transition">🇬🇧 EN</button>
+              <button type="button" onclick="setVoiceLang('zh')" id="vlang-zh" class="voice-lang-btn px-3 py-1.5 rounded-lg text-xs font-bold text-slate-300 hover:text-white transition">🇨🇳 จีน</button>
+              <button type="button" onclick="setVoiceLang('ja')" id="vlang-ja" class="voice-lang-btn px-3 py-1.5 rounded-lg text-xs font-bold text-slate-300 hover:text-white transition">🇯🇵 ญี่ปุ่น</button>
+            </div>
+          </div>
+
+          <div id="voice-phrases-grid" class="grid sm:grid-cols-2 gap-2.5"></div>
+
+          <div id="voice-now-playing" class="hidden bg-emerald-950/80 border border-emerald-400/40 rounded-2xl p-3.5 text-xs flex items-center justify-between gap-3">
+            <div class="min-w-0">
+              <span class="text-emerald-300 font-bold block"><i class="fa-solid fa-volume-high mr-1"></i>กำลังออกเสียงให้ผู้โดยสารฟัง:</span>
+              <strong id="voice-playing-text" class="text-white text-sm block mt-0.5 break-words">-</strong>
+            </div>
+            <button type="button" onclick="stopVoicePhrase()" class="shrink-0 bg-slate-900 hover:bg-slate-800 text-rose-300 border border-rose-500/40 font-bold px-3 py-1.5 rounded-xl">หยุด</button>
+          </div>
+        </div>
+
+        <!-- ข้อ 4: วงแหวนเป้าหมายรายได้วันนี้ + พลุฉลองเมื่อทะลุเป้า -->
+        <div class="lg:col-span-5 bg-slate-900/95 border border-emerald-400/30 rounded-3xl p-5 sm:p-6 flex flex-col justify-between gap-4">
+          <div class="flex items-center justify-between gap-2 border-b border-slate-800 pb-3">
+            <div>
+              <h3 class="text-base font-extrabold text-emerald-300"><i class="fa-solid fa-bullseye mr-1.5"></i>เป้าหมายรายได้วันนี้</h3>
+              <p class="text-xs text-slate-400">กดบวกยอดทุกเที่ยวที่จบงาน สะสมให้ครบ 100%!</p>
+            </div>
+            <button type="button" onclick="resetDailyGoal()" title="รีเซ็ตยอดวันนี้" class="text-xs text-slate-400 hover:text-rose-300 font-bold px-2.5 py-1 rounded-lg bg-slate-950 border border-slate-800">
+              รีเซ็ต
+            </button>
+          </div>
+
+          <!-- วงแหวนความคืบหน้า SVG -->
+          <div class="flex items-center justify-center gap-5 py-1">
+            <div class="relative w-32 h-32 shrink-0 flex items-center justify-center">
+              <svg class="w-32 h-32 -rotate-90" viewBox="0 0 120 120">
+                <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(148,163,184,0.22)" stroke-width="10"></circle>
+                <circle id="goal-ring-circle" cx="60" cy="60" r="50" fill="none" stroke="#fbbf24" stroke-width="10" stroke-linecap="round"
+                  stroke-dasharray="314.16" stroke-dashoffset="314.16" style="transition: stroke-dashoffset 0.55s ease, stroke 0.35s ease;"></circle>
+              </svg>
+              <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+                <strong id="goal-pct-label" class="text-2xl font-black text-amber-300 font-mono">0%</strong>
+                <span id="goal-trips-label" class="text-[11px] text-slate-400">0 เที่ยว</span>
+              </div>
+            </div>
+
+            <div class="space-y-2 flex-1 min-w-0">
+              <div>
+                <span class="text-xs text-slate-400 block">ยอดสะสมวันนี้</span>
+                <strong id="goal-earned-label" class="text-2xl font-black text-white font-mono">฿0</strong>
+              </div>
+              <div class="space-y-1">
+                <label for="goal-target-input" class="text-[11px] text-slate-400 block">ตั้งเป้ารายได้ (บาท)</label>
+                <input type="number" id="goal-target-input" min="100" step="100" value="2500" onchange="updateDailyGoalTarget(this.value)"
+                  class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5 text-xs font-mono font-bold text-amber-300">
+              </div>
+            </div>
+          </div>
+
+          <div id="goal-celebrate-banner" class="hidden bg-amber-400/15 border border-amber-400/50 text-amber-200 rounded-xl px-3.5 py-2 text-xs font-extrabold text-center">
+            🎉 ยินดีด้วยครับ! ทะลุเป้าหมายรายได้วันนี้แล้ว!
+          </div>
+
+          <div class="space-y-2.5 pt-2 border-t border-slate-800">
+            <div class="grid grid-cols-3 gap-2 text-xs">
+              <button type="button" onclick="addDailyIncome(200)" class="bg-slate-950 hover:bg-slate-800 border border-emerald-500/40 text-emerald-300 font-extrabold py-2.5 rounded-xl transition">+฿200</button>
+              <button type="button" onclick="addDailyIncome(500)" class="bg-slate-950 hover:bg-slate-800 border border-emerald-500/40 text-emerald-300 font-extrabold py-2.5 rounded-xl transition">+฿500</button>
+              <button type="button" onclick="addDailyIncome(1000)" class="bg-slate-950 hover:bg-slate-800 border border-amber-400/50 text-amber-300 font-extrabold py-2.5 rounded-xl transition">+฿1,000</button>
+            </div>
+            <form onsubmit="addCustomDailyIncome(event)" class="flex gap-2 text-xs">
+              <input type="number" id="goal-custom-add" min="1" placeholder="ระบุยอดรับงาน (บาท)..." class="flex-1 bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white font-mono">
+              <button type="submit" class="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold px-4 py-2 rounded-xl shrink-0 transition">
+                + เพิ่มยอด
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <!-- MINIMAL FOOTER -->
@@ -516,5 +612,246 @@
     });
   </script>
   <script src="tdt-i18n.js"></script>
+  <script>
+    // =========================================================================
+    // 1. 1-TAP PASSENGER VOICE PHRASES (EN / ZH / JA)
+    // =========================================================================
+    const TDT_VOICE_PHRASES = [
+      {
+        th: 'ยินดีต้อนรับสู่ประเทศไทยครับ',
+        en: 'Welcome to Thailand. Please have a comfortable ride.',
+        zh: '欢迎来到泰国，祝您旅途愉快。',
+        ja: 'タイへようこそ。ごゆっくりどうぞ。'
+      },
+      {
+        th: 'กรุณาคาดเข็มขัดนิรภัยครับ',
+        en: 'Please fasten your seatbelt for your safety.',
+        zh: '为了您的安全，请系好安全带。',
+        ja: '安全のためシートベルトをお締めください。'
+      },
+      {
+        th: 'แอร์เย็นพอดีไหมครับ?',
+        en: 'Is the air conditioning comfortable for you?',
+        zh: '请问空调温度合适吗？',
+        ja: 'エアコンの温度はちょうどいいですか？'
+      },
+      {
+        th: 'ต้องการแวะห้องน้ำไหมครับ?',
+        en: 'Would you like to stop at a restroom?',
+        zh: '您需要去洗手间吗？',
+        ja: 'お手洗いに寄りますか？'
+      },
+      {
+        th: 'รวมค่าทางด่วนเรียบร้อยแล้วครับ',
+        en: 'The expressway toll fee is already included.',
+        zh: '高速公路费已经包含在内了。',
+        ja: '高速道路料金は含まれています。'
+      },
+      {
+        th: 'ถึงจุดหมายแล้ว ตรวจสอบสัมภาระด้วยครับ',
+        en: 'We have arrived. Please check your belongings. Thank you!',
+        zh: '已经到达目的地，请检查您的随身物品，谢谢！',
+        ja: '目的地に到着しました。お忘れ物のないようご確認ください。'
+      }
+    ];
+    let currentVoiceLang = 'en';
+
+    function setVoiceLang(lang) {
+      currentVoiceLang = lang;
+      ['en', 'zh', 'ja'].forEach(l => {
+        const b = document.getElementById('vlang-' + l);
+        if (!b) return;
+        b.className = l === lang
+          ? 'voice-lang-btn px-3 py-1.5 rounded-lg text-xs font-extrabold bg-amber-400 text-slate-950 transition'
+          : 'voice-lang-btn px-3 py-1.5 rounded-lg text-xs font-bold text-slate-300 hover:text-white transition';
+      });
+      renderVoicePhrases();
+    }
+
+    function renderVoicePhrases() {
+      const grid = document.getElementById('voice-phrases-grid');
+      if (!grid) return;
+      grid.innerHTML = TDT_VOICE_PHRASES.map((p, idx) => `
+        <button type="button" onclick="speakVoicePhrase(${idx})"
+          class="text-left p-3.5 rounded-2xl bg-slate-950/90 hover:bg-slate-800 border border-slate-800 hover:border-amber-400/60 transition flex items-start gap-2.5 group">
+          <span class="w-8 h-8 rounded-xl bg-amber-400/15 border border-amber-400/35 text-amber-300 flex items-center justify-center shrink-0 mt-0.5 group-hover:bg-amber-400 group-hover:text-slate-950 transition">
+            <i class="fa-solid fa-volume-high text-xs"></i>
+          </span>
+          <span class="min-w-0">
+            <strong class="block text-xs sm:text-sm font-bold text-white leading-snug">${p.th}</strong>
+            <span class="block text-xs text-slate-400 mt-0.5 leading-snug notranslate">${p[currentVoiceLang]}</span>
+          </span>
+        </button>
+      `).join('');
+    }
+
+    function speakVoicePhrase(idx) {
+      const p = TDT_VOICE_PHRASES[idx];
+      if (!p) return;
+      const text = p[currentVoiceLang] || p.en;
+      const langCode = currentVoiceLang === 'zh' ? 'zh-CN' : (currentVoiceLang === 'ja' ? 'ja-JP' : 'en-US');
+      const box = document.getElementById('voice-now-playing');
+      const txtEl = document.getElementById('voice-playing-text');
+      if (txtEl) txtEl.textContent = text;
+      if (box) box.classList.remove('hidden');
+
+      if ('speechSynthesis' in window) {
+        try {
+          window.speechSynthesis.cancel();
+          const utter = new SpeechSynthesisUtterance(text);
+          utter.lang = langCode;
+          utter.rate = 0.94;
+          utter.onend = () => { if (box) setTimeout(() => box.classList.add('hidden'), 1800); };
+          window.speechSynthesis.speak(utter);
+        } catch (_) {}
+      }
+    }
+
+    function stopVoicePhrase() {
+      if ('speechSynthesis' in window) {
+        try { window.speechSynthesis.cancel(); } catch (_) {}
+      }
+      document.getElementById('voice-now-playing')?.classList.add('hidden');
+    }
+
+    // =========================================================================
+    // 2. DAILY INCOME GOAL RING + GOLDEN CONFETTI CELEBRATION
+    // =========================================================================
+    const DAILY_GOAL_KEY = 'tdt_daily_goal_v1';
+    function getTodayDateStr() {
+      const d = new Date();
+      return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+    }
+
+    let dailyGoalState = { date: getTodayDateStr(), target: 2500, earned: 0, trips: 0, celebrated: false };
+
+    function loadDailyGoalState() {
+      try {
+        const raw = localStorage.getItem(DAILY_GOAL_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (parsed && parsed.date === getTodayDateStr()) {
+            dailyGoalState = Object.assign(dailyGoalState, parsed);
+          } else if (parsed && parsed.target) {
+            dailyGoalState.target = Number(parsed.target) || 2500;
+          }
+        }
+      } catch (_) {}
+      const inp = document.getElementById('goal-target-input');
+      if (inp) inp.value = dailyGoalState.target;
+      renderDailyGoalRing();
+    }
+
+    function saveDailyGoalState() {
+      try { localStorage.setItem(DAILY_GOAL_KEY, JSON.stringify(dailyGoalState)); } catch (_) {}
+    }
+
+    function renderDailyGoalRing() {
+      const target = Math.max(100, Number(dailyGoalState.target) || 2500);
+      const earned = Math.max(0, Number(dailyGoalState.earned) || 0);
+      const pct = Math.min(999, Math.round((earned / target) * 100));
+      const ringPct = Math.min(100, (earned / target) * 100);
+      const circ = 314.16;
+      const offset = circ - (circ * ringPct) / 100;
+
+      const circle = document.getElementById('goal-ring-circle');
+      if (circle) {
+        circle.style.strokeDashoffset = String(offset);
+        circle.style.stroke = pct >= 100 ? '#34d399' : '#fbbf24';
+      }
+      const pctEl = document.getElementById('goal-pct-label');
+      const tripsEl = document.getElementById('goal-trips-label');
+      const earnedEl = document.getElementById('goal-earned-label');
+      const celEl = document.getElementById('goal-celebrate-banner');
+      if (pctEl) pctEl.textContent = `${pct}%`;
+      if (tripsEl) tripsEl.textContent = `${dailyGoalState.trips} เที่ยว`;
+      if (earnedEl) earnedEl.textContent = `฿${earned.toLocaleString()}`;
+      if (celEl) celEl.classList.toggle('hidden', pct < 100);
+    }
+
+    function launchGoldConfetti() {
+      const canvas = document.createElement('canvas');
+      canvas.id = 'tdt-confetti-canvas';
+      canvas.style.cssText = 'position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:9999;';
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      document.body.appendChild(canvas);
+      const ctx = canvas.getContext('2d');
+      const colors = ['#fbbf24', '#fde68a', '#34d399', '#38bdf8', '#f59e0b', '#ffffff'];
+      const particles = Array.from({ length: 85 }, () => ({
+        x: Math.random() * canvas.width,
+        y: -20 - Math.random() * 160,
+        r: 4 + Math.random() * 6,
+        vx: (Math.random() - 0.5) * 4.5,
+        vy: 3 + Math.random() * 5,
+        rot: Math.random() * 360,
+        vrot: (Math.random() - 0.5) * 10,
+        color: colors[Math.floor(Math.random() * colors.length)]
+      }));
+      let frames = 0;
+      function tick() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+          p.x += p.vx;
+          p.y += p.vy;
+          p.rot += p.vrot;
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate((p.rot * Math.PI) / 180);
+          ctx.fillStyle = p.color;
+          ctx.fillRect(-p.r / 2, -p.r / 2, p.r, p.r * 0.65);
+          ctx.restore();
+        });
+        frames++;
+        if (frames < 130) requestAnimationFrame(tick);
+        else canvas.remove();
+      }
+      requestAnimationFrame(tick);
+    }
+
+    function addDailyIncome(amount) {
+      const val = Number(amount) || 0;
+      if (val <= 0) return;
+      const wasDone = dailyGoalState.earned >= dailyGoalState.target;
+      dailyGoalState.earned += val;
+      dailyGoalState.trips += 1;
+      saveDailyGoalState();
+      renderDailyGoalRing();
+      if (!wasDone && dailyGoalState.earned >= dailyGoalState.target) {
+        dailyGoalState.celebrated = true;
+        saveDailyGoalState();
+        launchGoldConfetti();
+      }
+    }
+
+    function addCustomDailyIncome(e) {
+      e.preventDefault();
+      const inp = document.getElementById('goal-custom-add');
+      const val = Number(inp?.value || 0);
+      if (val > 0) {
+        addDailyIncome(val);
+        inp.value = '';
+      }
+    }
+
+    function updateDailyGoalTarget(val) {
+      dailyGoalState.target = Math.max(100, Number(val) || 2500);
+      saveDailyGoalState();
+      renderDailyGoalRing();
+    }
+
+    function resetDailyGoal() {
+      dailyGoalState.earned = 0;
+      dailyGoalState.trips = 0;
+      dailyGoalState.celebrated = false;
+      saveDailyGoalState();
+      renderDailyGoalRing();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderVoicePhrases();
+      loadDailyGoalState();
+    });
+  </script>
 </body>
 </html>

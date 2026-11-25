@@ -352,12 +352,27 @@
     </section>
 
     <section class="dark-surface-card rounded-3xl p-5 sm:p-8 shadow-sm space-y-4">
-      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
         <h2 class="text-base sm:text-lg font-extrabold text-amber-300">รายการงานล่าสุดในเครือข่าย</h2>
         <button type="button" onclick="loadJobs()" class="text-xs font-bold bg-slate-950 hover:bg-slate-800 text-amber-300 border border-amber-400/35 px-3 py-1.5 rounded-xl transition">
           <i class="fa-solid fa-rotate mr-1"></i> รีเฟรช
         </button>
       </div>
+      <div class="grid sm:grid-cols-3 gap-2.5 text-xs">
+        <input type="text" id="job-filter-search" oninput="renderJobs()" placeholder="ค้นหาจังหวัด / เส้นทาง / สนามบิน..." class="dark-field rounded-xl px-3.5 py-2.5">
+        <select id="job-filter-vehicle" onchange="renderJobs()" class="dark-field rounded-xl px-3.5 py-2.5">
+          <option value="ALL">ประเภทรถ: ทั้งหมด</option>
+          <option value="sedan">Sedan (เก๋ง 4 ที่นั่ง)</option>
+          <option value="suv">SUV / PPV (7 ที่นั่ง)</option>
+          <option value="van">VIP Van / Alphard</option>
+          <option value="luxury">Luxury</option>
+        </select>
+        <select id="job-filter-status" onchange="renderJobs()" class="dark-field rounded-xl px-3.5 py-2.5">
+          <option value="ALL">สถานะ: ทั้งหมด</option>
+          <option value="OPEN">เฉพาะงานที่เปิดรับคนขับ</option>
+        </select>
+      </div>
+      <div id="jobs-copy-toast" class="hidden p-3 rounded-xl bg-emerald-950/90 border border-emerald-500/40 text-emerald-300 text-xs font-bold"></div>
       <div id="jobs-list" class="grid md:grid-cols-2 gap-4">
         <div class="col-span-full text-center py-8 text-slate-400 text-sm"><i class="fa-solid fa-spinner fa-spin mr-1"></i> กำลังโหลดรายการงาน...</div>
       </div>
@@ -401,43 +416,101 @@
 
   <script>
     const MASTER_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyeDCdxBD10D_AFZQY2NxeylLOiAmAHLesSDZHXYCb3TsYs4wYer_kRTPVOs3VpK2pP/exec';
+    let allJobsCache = [];
     function esc(s) { return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+    function copyJobForLine(jobId) {
+      const j = allJobsCache.find(x => String(x.jobId) === String(jobId));
+      if (!j) return;
+      const text =
+`🚖 แจ้งงานเครือข่าย The Driver TH
+• รหัสงาน: ${j.jobId}
+• วัน-เวลารับ: ${j.pickupDateTime}
+• จุดรับ: ${j.pickupLocation}
+• จุดส่ง: ${j.dropoffLocation}
+• ประเภทรถ: ${j.vehicleType}
+• ค่าจ้างสุทธิ: ${Number(j.fareAmount).toLocaleString()} บาท${j.notes ? '\n• หมายเหตุ: ' + j.notes : ''}
+• ผู้ปล่อยงาน: [${j.posterCode}] ${j.posterName}
+• กดรับงานได้ที่: ${window.location.origin}${window.location.pathname}`;
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      const toast = document.getElementById('jobs-copy-toast');
+      if (toast) {
+        toast.textContent = `คัดลอกข้อความงาน ${j.jobId} สำหรับส่งเข้า LINE เรียบร้อยแล้ว!`;
+        toast.classList.remove('hidden');
+        clearTimeout(toast._t);
+        toast._t = setTimeout(() => toast.classList.add('hidden'), 3000);
+      }
+    }
+
+    function renderJobs() {
+      const box = document.getElementById('jobs-list');
+      if (!box) return;
+      const kw = (document.getElementById('job-filter-search')?.value || '').trim().toLowerCase();
+      const veh = (document.getElementById('job-filter-vehicle')?.value || 'ALL').toLowerCase();
+      const st = document.getElementById('job-filter-status')?.value || 'ALL';
+
+      const jobs = allJobsCache.filter(j => {
+        if (st === 'OPEN' && j.status !== 'เปิดรับคนขับ') return false;
+        if (veh !== 'all') {
+          const vt = String(j.vehicleType || '').toLowerCase();
+          if (veh === 'van' && !(vt.includes('van') || vt.includes('alphard') || vt.includes('commuter'))) return false;
+          else if (veh !== 'van' && !vt.includes(veh)) return false;
+        }
+        if (kw) {
+          const hay = `${j.pickupLocation} ${j.dropoffLocation} ${j.vehicleType} ${j.notes} ${j.posterName} ${j.posterCode}`.toLowerCase();
+          if (!hay.includes(kw)) return false;
+        }
+        return true;
+      });
+
+      if (!jobs.length) {
+        box.innerHTML = '<div class="col-span-full text-center py-10 text-slate-400 text-sm">ไม่พบประกาศงานที่ตรงกับตัวกรอง สามารถกดปุ่ม “ลงประกาศปล่อยงาน” ด้านบนได้เลยครับ</div>';
+        return;
+      }
+      box.innerHTML = jobs.map(j => {
+        const isOpen = j.status === 'เปิดรับคนขับ';
+        return `
+          <div class="bg-slate-950/85 border border-slate-800 rounded-2xl p-5 space-y-3 flex flex-col justify-between">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-xs font-extrabold px-2.5 py-1 rounded-full ${isOpen ? 'bg-emerald-950/90 text-emerald-300 border border-emerald-500/40' : 'bg-slate-800 text-slate-300 border border-slate-700'}">${esc(j.status)}</span>
+                <span class="text-lg font-black text-amber-400 font-mono">฿${Number(j.fareAmount).toLocaleString()}</span>
+              </div>
+              <p class="text-xs text-slate-400"><i class="fa-regular fa-clock mr-1 text-amber-400"></i> ${esc(j.pickupDateTime)} · <strong class="text-slate-200">${esc(j.vehicleType)}</strong></p>
+              <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 text-xs space-y-1 text-slate-200">
+                <p><strong class="text-emerald-400">รับ:</strong> ${esc(j.pickupLocation)}</p>
+                <p><strong class="text-rose-400">ส่ง:</strong> ${esc(j.dropoffLocation)}</p>
+                ${j.notes ? `<p class="text-slate-400 pt-1">หมายเหตุ: ${esc(j.notes)}</p>` : ''}
+              </div>
+            </div>
+            <div class="pt-2 border-t border-slate-800 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-300">
+              <span>ผู้ปล่อยงาน: <strong class="text-white">[${esc(j.posterCode)}] ${esc(j.posterName)}</strong></span>
+              <div class="flex items-center gap-1.5">
+                <button type="button" onclick="copyJobForLine('${esc(j.jobId)}')" class="bg-slate-800 hover:bg-slate-700 text-emerald-300 border border-emerald-500/35 font-bold px-3 py-2 rounded-xl transition" title="คัดลอกข้อความงานส่งเข้า LINE">
+                  <i class="fa-brands fa-line mr-1"></i> คัดลอก
+                </button>
+                ${isOpen
+                  ? `<button type="button" onclick="openAcceptModal('${esc(j.jobId)}', '${esc(j.pickupLocation)} -> ${esc(j.dropoffLocation)}')" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-3.5 py-2 rounded-xl transition">กดรับงาน</button>`
+                  : `<span class="text-slate-400 font-semibold">รับโดย [${esc(j.accepterCode)}]</span>`}
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
 
     async function loadJobs() {
       const box = document.getElementById('jobs-list');
       try {
         const res = await fetch(`${MASTER_WEB_APP_URL}?action=job_feed&t=${Date.now()}`);
         const json = await res.json();
-        const jobs = Array.isArray(json?.jobs) ? json.jobs : [];
-        if (!jobs.length) {
-          box.innerHTML = '<div class="col-span-full text-center py-10 text-slate-400 text-sm">ยังไม่มีประกาศงานในขณะนี้ สามารถกดปุ่ม “ลงประกาศปล่อยงาน” ด้านบนได้เลยครับ</div>';
-          return;
-        }
-        box.innerHTML = jobs.map(j => {
-          const isOpen = j.status === 'เปิดรับคนขับ';
-          return `
-            <div class="bg-slate-950/85 border border-slate-800 rounded-2xl p-5 space-y-3 flex flex-col justify-between">
-              <div class="space-y-2">
-                <div class="flex items-center justify-between gap-2">
-                  <span class="text-xs font-extrabold px-2.5 py-1 rounded-full ${isOpen ? 'bg-emerald-950/90 text-emerald-300 border border-emerald-500/40' : 'bg-slate-800 text-slate-300 border border-slate-700'}">${esc(j.status)}</span>
-                  <span class="text-lg font-black text-amber-400 font-mono">฿${Number(j.fareAmount).toLocaleString()}</span>
-                </div>
-                <p class="text-xs text-slate-400"><i class="fa-regular fa-clock mr-1 text-amber-400"></i> ${esc(j.pickupDateTime)} · <strong class="text-slate-200">${esc(j.vehicleType)}</strong></p>
-                <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 text-xs space-y-1 text-slate-200">
-                  <p><strong class="text-emerald-400">รับ:</strong> ${esc(j.pickupLocation)}</p>
-                  <p><strong class="text-rose-400">ส่ง:</strong> ${esc(j.dropoffLocation)}</p>
-                  ${j.notes ? `<p class="text-slate-400 pt-1">หมายเหตุ: ${esc(j.notes)}</p>` : ''}
-                </div>
-              </div>
-              <div class="pt-2 border-t border-slate-800 flex items-center justify-between text-xs text-slate-300">
-                <span>ผู้ปล่อยงาน: <strong class="text-white">[${esc(j.posterCode)}] ${esc(j.posterName)}</strong></span>
-                ${isOpen
-                  ? `<button type="button" onclick="openAcceptModal('${esc(j.jobId)}', '${esc(j.pickupLocation)} -> ${esc(j.dropoffLocation)}')" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-3.5 py-2 rounded-xl transition">กดรับงาน</button>`
-                  : `<span class="text-slate-400 font-semibold">รับโดย [${esc(j.accepterCode)}]</span>`}
-              </div>
-            </div>
-          `;
-        }).join('');
+        allJobsCache = Array.isArray(json?.jobs) ? json.jobs : [];
+        renderJobs();
       } catch (_) {
         box.innerHTML = '<div class="col-span-full text-center py-8 text-rose-400 text-sm">โหลดข้อมูลงานไม่สำเร็จ</div>';
       }

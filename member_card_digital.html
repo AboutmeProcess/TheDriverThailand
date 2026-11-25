@@ -301,6 +301,7 @@
   <meta property="og:image" content="https://aboutmeprocess.github.io/TheDriverThailand/TheDriverTH.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="tdt-theme.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
 </head>
 <body class="min-h-screen flex flex-col">
   <!-- UNIFIED GLOBAL SITE NAVIGATION BAR -->
@@ -334,8 +335,8 @@
       <p id="card-error-msg" class="hidden text-xs text-rose-400 font-bold"></p>
     </section>
 
-    <section id="digital-card-wrapper" class="hidden flex justify-center">
-      <div class="digital-card-bg w-full max-w-lg rounded-3xl p-6 sm:p-8 text-white border-2 border-amber-400/70 shadow-2xl space-y-5 relative overflow-hidden">
+    <section id="digital-card-wrapper" class="hidden flex flex-col items-center gap-4">
+      <div id="digital-card-capture" class="digital-card-bg w-full max-w-lg rounded-3xl p-6 sm:p-8 text-white border-2 border-amber-400/70 shadow-2xl space-y-5 relative overflow-hidden">
         <div class="flex items-center justify-between border-b border-amber-400/25 pb-4">
           <div class="flex items-center gap-3">
             <img src="TheDriverTH.jpg" alt="โลโก้" onerror="this.onerror=null;this.src='https://placehold.co/80x80/0f172a/fbbf24?text=TDT';" class="w-12 h-12 rounded-2xl object-cover border border-amber-400">
@@ -373,7 +374,7 @@
           </div>
 
           <div class="col-span-4 flex flex-col items-center justify-center bg-white p-2.5 rounded-2xl shadow-lg">
-            <img id="dc-qr-img" src="" alt="QR Code ยืนยันตัวตน" class="w-28 h-28 object-contain">
+            <img id="dc-qr-img" src="" alt="QR Code ยืนยันตัวตน" crossorigin="anonymous" class="w-28 h-28 object-contain">
             <span class="text-xs text-slate-800 font-bold mt-1 text-center">สแกนตรวจสอบตัวตน</span>
           </div>
         </div>
@@ -383,6 +384,16 @@
           <span class="text-emerald-300 font-semibold"><i class="fa-solid fa-shield-halved mr-1"></i>ฐานข้อมูล DATAMember แท้</span>
         </div>
       </div>
+
+      <div class="flex flex-wrap items-center justify-center gap-3 w-full max-w-lg">
+        <button type="button" id="btn-download-card-png" onclick="downloadDigitalCardPng()" class="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold px-5 py-3 rounded-xl text-xs sm:text-sm shadow transition">
+          <i class="fa-solid fa-download mr-1.5"></i> บันทึกรูปบัตรลงมือถือ (PNG)
+        </button>
+        <button type="button" onclick="copyVerifyCardLink()" class="bg-slate-900 hover:bg-slate-800 text-emerald-300 border border-emerald-500/40 font-bold px-4 py-3 rounded-xl text-xs sm:text-sm transition">
+          <i class="fa-solid fa-link mr-1.5"></i> คัดลอกลิงก์ยืนยันตัวตน
+        </button>
+      </div>
+      <p id="card-action-msg" class="hidden text-xs text-emerald-400 font-bold"></p>
     </section>
   </main>
 
@@ -438,6 +449,8 @@
         document.getElementById('dc-phone').textContent = m.maskedPhone || '-';
 
         const verifyUrl = `${window.location.origin}${window.location.pathname.replace('member_card_digital.html', 'trip_voucher.html')}?verify=${encodeURIComponent(m.memberCode)}`;
+        window.__TDT_CARD_VERIFY_URL__ = verifyUrl;
+        window.__TDT_CARD_CODE__ = m.memberCode;
         document.getElementById('dc-qr-img').src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(verifyUrl)}`;
         cardWrap.classList.remove('hidden');
       } catch (_) {
@@ -447,6 +460,51 @@
         btn.disabled = false;
         btn.textContent = 'แสดงบัตรสมาชิก';
       }
+    }
+
+    function showCardActionMsg(msg) {
+      const el = document.getElementById('card-action-msg');
+      if (!el) return;
+      el.textContent = msg;
+      el.classList.remove('hidden');
+      clearTimeout(el._t);
+      el._t = setTimeout(() => el.classList.add('hidden'), 3000);
+    }
+
+    async function downloadDigitalCardPng() {
+      const target = document.getElementById('digital-card-capture');
+      const btn = document.getElementById('btn-download-card-png');
+      if (!target || typeof html2canvas === 'undefined') {
+        showCardActionMsg('กำลังโหลดตัวสร้างรูปภาพ กรุณาลองกดอีกครั้งครับ');
+        return;
+      }
+      const orig = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin mr-1.5"></i> กำลังบันทึกรูปบัตร...';
+      try {
+        const canvas = await html2canvas(target, { scale: 2, useCORS: true, backgroundColor: '#070a12' });
+        const link = document.createElement('a');
+        link.download = `TheDriverTH_Card_${window.__TDT_CARD_CODE__ || 'MEMBER'}.png`;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+        showCardActionMsg('บันทึกรูปบัตรสมาชิก (PNG) ลงเครื่องเรียบร้อยแล้ว');
+      } catch (_) {
+        showCardActionMsg('ไม่สามารถสร้างไฟล์รูปได้ กรุณาแคปหน้าจอบัตรแทนครับ');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = orig;
+      }
+    }
+
+    function copyVerifyCardLink() {
+      const url = window.__TDT_CARD_VERIFY_URL__ || window.location.href;
+      const ta = document.createElement('textarea');
+      ta.value = url;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      showCardActionMsg('คัดลอกลิงก์ยืนยันตัวตนสมาชิกเรียบร้อยแล้ว');
     }
 
     window.tdtToggleDropdown = function (cat, ev) {

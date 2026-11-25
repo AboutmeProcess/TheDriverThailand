@@ -294,6 +294,30 @@
     </header>
 
     <main class="flex-grow max-w-7xl w-full mx-auto px-4 py-6 space-y-6">
+      <!-- แดชบอร์ดสรุปสถิติภาพรวมแบบเรียลไทม์ -->
+      <section class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+        <div class="bg-slate-900 border border-amber-400/35 rounded-2xl p-4 space-y-1">
+          <span class="text-[11px] font-bold text-slate-400 block"><i class="fa-solid fa-users text-amber-400 mr-1"></i>สมาชิกอนุมัติแล้ว</span>
+          <strong id="kpi-approved-members" class="text-2xl font-black text-amber-300 font-mono">-</strong>
+        </div>
+        <div class="bg-slate-900 border border-emerald-500/35 rounded-2xl p-4 space-y-1">
+          <span class="text-[11px] font-bold text-slate-400 block"><i class="fa-solid fa-user-clock text-emerald-400 mr-1"></i>คำร้องสมาชิกรอตรวจ</span>
+          <strong id="kpi-pending-members" class="text-2xl font-black text-emerald-300 font-mono">-</strong>
+        </div>
+        <div class="bg-slate-900 border border-sky-500/35 rounded-2xl p-4 space-y-1">
+          <span class="text-[11px] font-bold text-slate-400 block"><i class="fa-solid fa-handshake text-sky-400 mr-1"></i>งานเปิดรับบนกระดาน</span>
+          <strong id="kpi-open-jobs" class="text-2xl font-black text-sky-300 font-mono">-</strong>
+        </div>
+        <div class="bg-slate-900 border border-rose-500/35 rounded-2xl p-4 space-y-1">
+          <span class="text-[11px] font-bold text-slate-400 block"><i class="fa-solid fa-user-shield text-rose-400 mr-1"></i>เคส Blacklist ทั้งหมด</span>
+          <strong id="kpi-blacklist-cases" class="text-2xl font-black text-rose-300 font-mono">-</strong>
+        </div>
+        <div class="bg-slate-900 border border-purple-500/35 rounded-2xl p-4 space-y-1 col-span-2 sm:col-span-1">
+          <span class="text-[11px] font-bold text-slate-400 block"><i class="fa-solid fa-comments text-purple-400 mr-1"></i>เว็บบอร์ดรออนุมัติ</span>
+          <strong id="kpi-pending-forum" class="text-2xl font-black text-purple-300 font-mono">-</strong>
+        </div>
+      </section>
+
       <!-- เมนูแท็บการทำงานทั้งหมด -->
       <div class="flex flex-wrap gap-2 bg-slate-900 p-2 rounded-2xl border border-slate-800">
         <button type="button" onclick="switchTab('site')" data-tab="site" class="admin-nav-tab gold-grad text-slate-950 font-extrabold px-4 py-2.5 rounded-xl text-xs">
@@ -557,6 +581,43 @@
 
           <div id="news-cms-list" class="space-y-2.5"></div>
         </div>
+
+        <!-- จัดการสิทธิพิเศษ & คูปองพาร์ทเนอร์ (Partner Perks CMS) -->
+        <div class="pt-6 border-t border-slate-800 space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <h3 class="text-base font-extrabold text-amber-300">
+                <i class="fa-solid fa-ticket mr-1.5"></i>จัดการสิทธิพิเศษ &amp; คูปองพาร์ทเนอร์ (Partner Perks CMS)
+              </h3>
+              <p class="text-xs text-slate-400">เพิ่ม แก้ไข หรือลบคูปองส่วนลดสำหรับสมาชิกในหน้า <a href="driver_pitstop_reputation.html" target="_blank" class="text-emerald-300 underline">driver_pitstop_reputation.html</a></p>
+            </div>
+            <div class="flex items-center gap-2">
+              <span id="perks-cms-count" class="text-xs bg-amber-400/15 text-amber-300 border border-amber-400/35 px-3 py-1 rounded-full font-bold">ทั้งหมด 4 รายการ</span>
+              <button type="button" onclick="resetPartnerPerksCms()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 font-bold px-3 py-1.5 rounded-xl text-xs transition">
+                <i class="fa-solid fa-rotate-left mr-1"></i> คืนค่าเริ่มต้น
+              </button>
+            </div>
+          </div>
+
+          <div class="grid md:grid-cols-3 gap-3 bg-slate-950/70 border border-slate-800 rounded-2xl p-4 text-xs sm:text-sm">
+            <input type="hidden" id="perk-cms-edit-idx" value="-1">
+            <input type="text" id="perk-cms-category" placeholder="หมวดหมู่ (เช่น ล้างรถ / ประกันภัย / ยาง) *" class="bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-white">
+            <input type="text" id="perk-cms-partner" placeholder="ชื่อร้านค้า / พาร์ทเนอร์ *" class="bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-white">
+            <input type="text" id="perk-cms-discount" placeholder="ส่วนลด (เช่น ลด 15% / ผ่อน 0%) *" class="bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-emerald-300 font-bold">
+            <input type="text" id="perk-cms-code" placeholder="รหัสคูปอง (เช่น TDT-WASH15)" class="bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-amber-300 font-mono">
+            <input type="text" id="perk-cms-cta-label" placeholder="ข้อความบนปุ่ม (เช่น รับสิทธิ์สมาชิก)" class="bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-white">
+            <input type="text" id="perk-cms-href" placeholder="ลิงก์ปลายทาง (เช่น member_card_digital.html)" class="bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-amber-300 font-mono">
+            <textarea id="perk-cms-detail" rows="2" placeholder="รายละเอียดเงื่อนไขการรับสิทธิ์..." class="md:col-span-3 bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-white"></textarea>
+            <div class="md:col-span-3 flex justify-end gap-2">
+              <button type="button" id="perk-cms-cancel-btn" onclick="clearPartnerPerkForm()" class="hidden bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold px-4 py-2.5 rounded-xl text-xs">ยกเลิกการแก้ไข</button>
+              <button type="button" onclick="savePartnerPerkItem()" class="gold-grad text-slate-950 font-extrabold px-5 py-2.5 rounded-xl text-xs shadow transition">
+                <i class="fa-solid fa-plus mr-1"></i> <span id="perk-cms-submit-label">เพิ่มและเผยแพร่สิทธิพิเศษ</span>
+              </button>
+            </div>
+          </div>
+
+          <div id="perks-cms-list" class="space-y-2.5"></div>
+        </div>
       </section>
 
       <!-- 2. อนุมัติสมาชิกใหม่ -->
@@ -786,7 +847,8 @@
               ga4Id: document.getElementById('cfg-ga4-id')?.value.trim() || '',
               cfAnalyticsToken: document.getElementById('cfg-cf-analytics-token')?.value.trim() || '',
               pageAnnouncements: JSON.stringify(pageAnnouncementsMap),
-              driverNewsItems: JSON.stringify(driverNewsCmsList)
+              driverNewsItems: JSON.stringify(driverNewsCmsList),
+              partnerPerks: JSON.stringify(partnerPerksCmsList)
             }
           })
         });
@@ -1019,6 +1081,128 @@
       await persistPageAnnouncementsToCloud();
       toast('คืนค่าข่าวสารเริ่มต้นเรียบร้อยแล้ว');
     }
+
+    // =========================================================================
+    // PARTNER PERKS CMS (จัดการคูปองพาร์ทเนอร์ใน driver_pitstop_reputation.html)
+    // =========================================================================
+    const PARTNER_PERKS_KEY = 'tdt_partner_perks_v1';
+    const DEFAULT_PARTNER_PERKS_CMS = [
+      { category: 'ประกันภัย & พ.ร.บ.', partner: 'Captain Insurance (พาร์ทเนอร์หลัก)', discount: 'ส่วนลดสมาชิก + ผ่อน 0%', code: 'TDT-CAPTAIN', detail: 'ประกันภัยชั้น 1, 2+, 3+ และ พ.ร.บ. รถรับจ้าง รย.17/รย.18 พร้อมดูแลเคลม 24 ชม.', href: 'captain_insurance.html', ctaLabel: 'เช็กเบี้ยประกันราคาสมาชิก' },
+      { category: 'ล้างรถ & ดูแลสีรถ', partner: 'คาร์แคร์พันธมิตรโซนสนามบิน', discount: 'ลด 15% ล้างสีดูดฝุ่น', code: 'TDT-WASH15', detail: 'แสดงบัตรสมาชิกดิจิทัล The Driver TH รับส่วนลดล้างสีดูดฝุ่นและเคลือบแก้วราคาพิเศษ', href: 'member_card_digital.html', ctaLabel: 'เปิดบัตรสมาชิกแสดงสิทธิ์' },
+      { category: 'ยางรถยนต์ & อู่ซ่อม', partner: 'ศูนย์บริการยางและเช็กระยะพันธมิตร', discount: 'ฟรีตั้งศูนย์ + ส่วนลดอะไหล่ 10%', code: 'TDT-SERVICE10', detail: 'ตรวจเช็กสภาพรถ 30 รายการฟรี สำหรับสมาชิกเครือข่ายที่วิ่งงานรับ-ส่งสนามบินและต่างจังหวัด', href: 'member_card_digital.html', ctaLabel: 'เปิดบัตรสมาชิกแสดงสิทธิ์' },
+      { category: 'สมุดทัวร์ & ลายแทง VIP', partner: 'The Driver TH Official Partner', discount: 'รับค่าคอมมิชชั่นพิเศษ VIP', code: 'TDT-VIPGUIDE', detail: 'รับลายแทงร้านค้าและแหล่งท่องเที่ยวพันธมิตรสำหรับรถรับส่งนักท่องเที่ยว', href: 'vip_referral_guide.html', ctaLabel: 'ดูรายละเอียดลายแทง VIP' }
+    ];
+    let partnerPerksCmsList = DEFAULT_PARTNER_PERKS_CMS.slice();
+
+    function initPartnerPerksCms(cloudRaw) {
+      if (cloudRaw) {
+        try {
+          const parsed = typeof cloudRaw === 'string' ? JSON.parse(cloudRaw) : cloudRaw;
+          if (Array.isArray(parsed) && parsed.length) {
+            partnerPerksCmsList = parsed;
+            try { localStorage.setItem(PARTNER_PERKS_KEY, JSON.stringify(parsed)); } catch (_) {}
+          }
+        } catch (_) {}
+      } else {
+        try {
+          const local = JSON.parse(localStorage.getItem(PARTNER_PERKS_KEY) || 'null');
+          if (Array.isArray(local) && local.length) partnerPerksCmsList = local;
+        } catch (_) {}
+      }
+      renderPartnerPerksCmsList();
+    }
+
+    function renderPartnerPerksCmsList() {
+      const box = document.getElementById('perks-cms-list');
+      const cnt = document.getElementById('perks-cms-count');
+      if (cnt) cnt.textContent = `ทั้งหมด ${partnerPerksCmsList.length} รายการ`;
+      if (!box) return;
+      box.innerHTML = partnerPerksCmsList.map((p, idx) => `
+        <div class="bg-slate-950 border border-slate-800 rounded-2xl p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+          <div class="space-y-0.5 min-w-0">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="bg-amber-400/15 text-amber-300 border border-amber-400/35 px-2 py-0.5 rounded-full font-bold">${esc(p.category)}</span>
+              <span class="text-emerald-300 font-bold">${esc(p.discount)}</span>
+              ${p.code ? `<span class="font-mono text-slate-400">(${esc(p.code)})</span>` : ''}
+            </div>
+            <p class="font-bold text-white truncate">${esc(p.partner)}</p>
+          </div>
+          <div class="flex items-center gap-2 shrink-0">
+            <button type="button" onclick="editPartnerPerkItem(${idx})" class="bg-slate-800 hover:bg-slate-700 text-amber-300 font-bold px-3 py-1.5 rounded-xl">แก้ไข</button>
+            <button type="button" onclick="deletePartnerPerkItem(${idx})" class="bg-rose-950 hover:bg-rose-900 text-rose-300 border border-rose-500/35 font-bold px-3 py-1.5 rounded-xl">ลบ</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function clearPartnerPerkForm() {
+      document.getElementById('perk-cms-edit-idx').value = '-1';
+      ['perk-cms-category','perk-cms-partner','perk-cms-discount','perk-cms-code','perk-cms-cta-label','perk-cms-href','perk-cms-detail'].forEach(id => {
+        const el = document.getElementById(id); if (el) el.value = '';
+      });
+      document.getElementById('perk-cms-submit-label').textContent = 'เพิ่มและเผยแพร่สิทธิพิเศษ';
+      document.getElementById('perk-cms-cancel-btn').classList.add('hidden');
+    }
+
+    function editPartnerPerkItem(idx) {
+      const p = partnerPerksCmsList[idx];
+      if (!p) return;
+      document.getElementById('perk-cms-edit-idx').value = String(idx);
+      document.getElementById('perk-cms-category').value = p.category || '';
+      document.getElementById('perk-cms-partner').value = p.partner || '';
+      document.getElementById('perk-cms-discount').value = p.discount || '';
+      document.getElementById('perk-cms-code').value = p.code || '';
+      document.getElementById('perk-cms-cta-label').value = p.ctaLabel || '';
+      document.getElementById('perk-cms-href').value = p.href || '';
+      document.getElementById('perk-cms-detail').value = p.detail || '';
+      document.getElementById('perk-cms-submit-label').textContent = 'บันทึกการแก้ไขสิทธิพิเศษ';
+      document.getElementById('perk-cms-cancel-btn').classList.remove('hidden');
+      document.getElementById('perk-cms-partner').focus();
+    }
+
+    async function savePartnerPerkItem() {
+      const category = document.getElementById('perk-cms-category').value.trim();
+      const partner = document.getElementById('perk-cms-partner').value.trim();
+      const discount = document.getElementById('perk-cms-discount').value.trim();
+      if (!category || !partner || !discount) {
+        toast('กรุณากรอกหมวดหมู่ ชื่อพาร์ทเนอร์ และส่วนลดให้ครบ', false);
+        return;
+      }
+      const entry = {
+        category, partner, discount,
+        code: document.getElementById('perk-cms-code').value.trim(),
+        ctaLabel: document.getElementById('perk-cms-cta-label').value.trim() || 'รับสิทธิ์สมาชิก',
+        href: document.getElementById('perk-cms-href').value.trim() || 'member_card_digital.html',
+        detail: document.getElementById('perk-cms-detail').value.trim()
+      };
+      const editIdx = Number(document.getElementById('perk-cms-edit-idx').value);
+      if (editIdx >= 0 && editIdx < partnerPerksCmsList.length) partnerPerksCmsList[editIdx] = entry;
+      else partnerPerksCmsList.unshift(entry);
+      try { localStorage.setItem(PARTNER_PERKS_KEY, JSON.stringify(partnerPerksCmsList)); } catch (_) {}
+      renderPartnerPerksCmsList();
+      clearPartnerPerkForm();
+      const ok = await persistPageAnnouncementsToCloud();
+      toast(ok ? 'เผยแพร่สิทธิพิเศษขึ้นเว็บไซต์เรียบร้อยแล้ว' : 'บันทึกสิทธิพิเศษลงเครื่องเรียบร้อยแล้ว');
+    }
+
+    async function deletePartnerPerkItem(idx) {
+      if (!confirm('ยืนยันลบสิทธิพิเศษรายการนี้ใช่หรือไม่?')) return;
+      partnerPerksCmsList.splice(idx, 1);
+      try { localStorage.setItem(PARTNER_PERKS_KEY, JSON.stringify(partnerPerksCmsList)); } catch (_) {}
+      renderPartnerPerksCmsList();
+      await persistPageAnnouncementsToCloud();
+      toast('ลบสิทธิพิเศษเรียบร้อยแล้ว');
+    }
+
+    async function resetPartnerPerksCms() {
+      if (!confirm('คืนค่าสิทธิพิเศษเริ่มต้นใช่หรือไม่?')) return;
+      partnerPerksCmsList = DEFAULT_PARTNER_PERKS_CMS.slice();
+      try { localStorage.setItem(PARTNER_PERKS_KEY, JSON.stringify(partnerPerksCmsList)); } catch (_) {}
+      renderPartnerPerksCmsList();
+      clearPartnerPerkForm();
+      await persistPageAnnouncementsToCloud();
+      toast('คืนค่าสิทธิพิเศษเริ่มต้นเรียบร้อยแล้ว');
+    }
     const DEFAULT_ADMINS = [];
 
     let sessionAdmin = null;
@@ -1094,6 +1278,7 @@
         renderAdminAccountsList();
         initPageAnnouncementEditor();
         initDriverNewsCms();
+        initPartnerPerksCms();
         refreshAllAdminData();
         toast('เข้าสู่ระบบหลังบ้านสำเร็จ');
       } finally {
@@ -1207,6 +1392,14 @@
           } catch (_) {}
         }
         initDriverNewsCms(cfg.driverNewsItems);
+        initPartnerPerksCms(cfg.partnerPerks);
+
+        const st = json.stats || {};
+        if (document.getElementById('kpi-approved-members')) document.getElementById('kpi-approved-members').textContent = Number(st.approvedMembers || 0).toLocaleString();
+        if (document.getElementById('kpi-pending-members')) document.getElementById('kpi-pending-members').textContent = Number(st.pendingMembers ?? (json.pendingMembers || []).length).toLocaleString();
+        if (document.getElementById('kpi-open-jobs')) document.getElementById('kpi-open-jobs').textContent = Number(st.openJobs || 0).toLocaleString();
+        if (document.getElementById('kpi-blacklist-cases')) document.getElementById('kpi-blacklist-cases').textContent = Number(st.blacklistCases || 0).toLocaleString();
+        if (document.getElementById('kpi-pending-forum')) document.getElementById('kpi-pending-forum').textContent = Number(st.pendingForumUsers ?? (json.pendingForumUsers || []).length).toLocaleString();
 
         const pendingMembers = Array.isArray(json.pendingMembers) ? json.pendingMembers : [];
         document.getElementById('count-pending-members').textContent = pendingMembers.length;
@@ -1272,7 +1465,8 @@
             ga4Id: document.getElementById('cfg-ga4-id').value.trim(),
             cfAnalyticsToken: document.getElementById('cfg-cf-analytics-token').value.trim(),
             pageAnnouncements: JSON.stringify(pageAnnouncementsMap),
-            driverNewsItems: JSON.stringify(driverNewsCmsList)
+            driverNewsItems: JSON.stringify(driverNewsCmsList),
+            partnerPerks: JSON.stringify(partnerPerksCmsList)
           }
         })
       });

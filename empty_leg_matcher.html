@@ -155,9 +155,15 @@
           <h2 class="text-base sm:text-lg font-extrabold text-amber-300">รายการรถว่างขากลับที่พร้อมรับงานตอนนี้</h2>
           <p class="text-xs text-slate-400">ค้นหาตามจังหวัดต้นทางหรือปลายทางเพื่อส่งต่องานขากลับให้เพื่อนสมาชิก</p>
         </div>
-        <div class="flex items-center gap-2">
+        <div class="flex flex-wrap items-center gap-2">
           <input type="text" id="el-search" oninput="renderEmptyLegs()" placeholder="ค้นหาจังหวัด เช่น พัทยา, หัวหิน..."
-            class="dark-field rounded-xl px-3.5 py-2 text-xs w-48 sm:w-60">
+            class="dark-field rounded-xl px-3.5 py-2 text-xs w-44 sm:w-52">
+          <select id="el-filter-vehicle" onchange="renderEmptyLegs()" class="dark-field rounded-xl px-3 py-2 text-xs">
+            <option value="ALL">ประเภทรถ: ทั้งหมด</option>
+            <option value="sedan">Sedan</option>
+            <option value="suv">SUV / PPV</option>
+            <option value="van">VIP Van / Alphard</option>
+          </select>
           <button type="button" onclick="loadEmptyLegs()" class="bg-slate-950 hover:bg-slate-800 text-amber-300 border border-amber-400/35 px-3.5 py-2 rounded-xl text-xs font-bold">
             <i class="fa-solid fa-rotate mr-1"></i> รีเฟรช
           </button>
@@ -230,10 +236,39 @@
       }
     }
 
+    function copyEmptyLegForLine(id) {
+      const it = allEmptyLegs.find(x => String(x.id) === String(id));
+      if (!it) return;
+      const text =
+`🚗 แจ้งรถว่างขากลับ (Empty-Leg) The Driver TH
+• ออกเดินทางกลับ: ${it.departTime}
+• ต้นทางรถว่าง: ${it.origin}
+• ปลายทางขากลับ: ${it.destination}
+• ประเภทรถ: ${it.vehicleType}
+• ราคาพิเศษขากลับ: ${Number(it.offerFare).toLocaleString()} บาท${it.notes ? '\n• หมายเหตุ: ' + it.notes : ''}
+• คนขับ: [${it.driverCode}] ${it.driverName}
+• จับคู่งานได้ที่: ${window.location.origin}${window.location.pathname}`;
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      showToast('คัดลอกข้อความรถว่างขากลับสำหรับส่งเข้า LINE เรียบร้อยแล้ว');
+    }
+
     function renderEmptyLegs() {
       const grid = document.getElementById('empty-legs-grid');
       const kw = (document.getElementById('el-search')?.value || '').trim().toLowerCase();
-      const filtered = allEmptyLegs.filter(it => !kw || `${it.origin} ${it.destination} ${it.vehicleType} ${it.driverName}`.toLowerCase().includes(kw));
+      const veh = (document.getElementById('el-filter-vehicle')?.value || 'ALL').toLowerCase();
+      const filtered = allEmptyLegs.filter(it => {
+        if (veh !== 'all') {
+          const vt = String(it.vehicleType || '').toLowerCase();
+          if (veh === 'van' && !(vt.includes('van') || vt.includes('alphard') || vt.includes('commuter'))) return false;
+          else if (veh !== 'van' && !vt.includes(veh)) return false;
+        }
+        return !kw || `${it.origin} ${it.destination} ${it.vehicleType} ${it.driverName}`.toLowerCase().includes(kw);
+      });
 
       if (!filtered.length) {
         grid.innerHTML = '<div class="col-span-full text-center py-10 text-slate-400 text-xs">ยังไม่มีรายการรถว่างขากลับที่ตรงกับคำค้นหา สามารถกดปุ่ม “ปักหมุดแจ้งรถว่างขากลับ” ด้านบนได้เลยครับ</div>';
@@ -257,11 +292,16 @@
                 ${it.notes ? `<p class="text-slate-400 pt-1">หมายเหตุ: ${esc(it.notes)}</p>` : ''}
               </div>
             </div>
-            <div class="pt-2 border-t border-slate-800 flex items-center justify-between text-xs text-slate-300">
+            <div class="pt-2 border-t border-slate-800 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-300">
               <span>คนขับ: <strong class="text-white">[${esc(it.driverCode)}] ${esc(it.driverName)}</strong></span>
-              ${isOpen
-                ? `<button type="button" onclick="openMatchModal('${esc(it.id)}', '${esc(it.origin)} → ${esc(it.destination)}')" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-3.5 py-2 rounded-xl transition">จับคู่งานขากลับ</button>`
-                : `<span class="text-slate-400 font-semibold">จับคู่แล้วโดย [${esc(it.matchedByCode)}]</span>`}
+              <div class="flex items-center gap-1.5">
+                <button type="button" onclick="copyEmptyLegForLine('${esc(it.id)}')" class="bg-slate-800 hover:bg-slate-700 text-emerald-300 border border-emerald-500/35 font-bold px-3 py-2 rounded-xl transition" title="คัดลอกข้อความรถว่างส่งเข้า LINE">
+                  <i class="fa-brands fa-line mr-1"></i> คัดลอก
+                </button>
+                ${isOpen
+                  ? `<button type="button" onclick="openMatchModal('${esc(it.id)}', '${esc(it.origin)} → ${esc(it.destination)}')" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-3.5 py-2 rounded-xl transition">จับคู่งานขากลับ</button>`
+                  : `<span class="text-slate-400 font-semibold">จับคู่แล้วโดย [${esc(it.matchedByCode)}]</span>`}
+              </div>
             </div>
           </div>
         `;

@@ -793,13 +793,80 @@
   }, true);
 
   /* ------------------------------------------------------------------
-   * 7. BOOT ON DOM READY
+   * 7. PWA INSTALL BANNER (ANDROID NATIVE + IOS SAFARI GUIDE)
+   * ------------------------------------------------------------------ */
+  var deferredInstallPrompt = null;
+  var PWA_DISMISS_KEY = "tdt_pwa_dismiss_until";
+
+  function isStandaloneApp() {
+    return (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) || window.navigator.standalone === true;
+  }
+
+  function isPwaDismissed() {
+    try { return Number(localStorage.getItem(PWA_DISMISS_KEY) || 0) > Date.now(); } catch (_) { return false; }
+  }
+
+  function dismissPwaBanner() {
+    var b = document.getElementById("tdt-pwa-banner");
+    if (b) b.remove();
+    try { localStorage.setItem(PWA_DISMISS_KEY, String(Date.now() + 7 * 86400000)); } catch (_) {}
+  }
+
+  function showPwaBanner(isIos) {
+    if (isStandaloneApp() || isPwaDismissed() || document.getElementById("tdt-pwa-banner") || !document.body) return;
+    var bar = document.createElement("div");
+    bar.id = "tdt-pwa-banner";
+    bar.style.cssText =
+      "position:fixed;left:14px;bottom:76px;z-index:9980;max-width:320px;" +
+      "background:linear-gradient(135deg,#0f172a,#1e293b);color:#f8fafc;" +
+      "border:1px solid rgba(251,191,36,0.5);border-radius:16px;padding:12px 14px;" +
+      "box-shadow:0 16px 36px rgba(0,0,0,0.55);font-size:12px;display:flex;align-items:center;gap:10px;";
+    bar.innerHTML =
+      '<img src="TheDriverTH.jpg" alt="TDT" style="width:36px;height:36px;border-radius:10px;border:1px solid #fbbf24;object-fit:cover;flex-shrink:0;">' +
+      '<div style="flex:1;min-width:0;">' +
+        '<div style="font-weight:700;color:#fbbf24;font-size:12px;">ติดตั้งแอป The Driver TH</div>' +
+        '<div style="color:#cbd5e1;font-size:11px;line-height:1.3;">' +
+          (isIos ? 'แตะปุ่มแชร์ (Share) แล้วเลือก "เพิ่มไปยังหน้าจอโฮม"' : 'เพิ่มไอคอนลงหน้าจอมือถือ เปิดใช้งานไวใน 1 แตะ') +
+        '</div>' +
+      '</div>' +
+      (isIos ? '' : '<button type="button" id="tdt-pwa-install-btn" style="background:linear-gradient(135deg,#fbbf24,#d97706);color:#060911;font-weight:800;border:none;border-radius:10px;padding:6px 10px;font-size:11px;cursor:pointer;white-space:nowrap;">ติดตั้ง</button>') +
+      '<button type="button" id="tdt-pwa-close-btn" aria-label="ปิด" style="background:transparent;border:none;color:#94a3b8;font-size:15px;cursor:pointer;padding:2px 4px;">✕</button>';
+    document.body.appendChild(bar);
+
+    var closeBtn = document.getElementById("tdt-pwa-close-btn");
+    if (closeBtn) closeBtn.addEventListener("click", dismissPwaBanner);
+
+    var installBtn = document.getElementById("tdt-pwa-install-btn");
+    if (installBtn) {
+      installBtn.addEventListener("click", function () {
+        if (!deferredInstallPrompt) return;
+        deferredInstallPrompt.prompt();
+        deferredInstallPrompt.userChoice.then(function () {
+          deferredInstallPrompt = null;
+          dismissPwaBanner();
+        }).catch(function () {});
+      });
+    }
+  }
+
+  window.addEventListener("beforeinstallprompt", function (e) {
+    e.preventDefault();
+    deferredInstallPrompt = e;
+    showPwaBanner(false);
+  });
+
+  /* ------------------------------------------------------------------
+   * 8. BOOT ON DOM READY
    * ------------------------------------------------------------------ */
   function boot() {
     ensureFloatingLineBtn();
     syncSiteSettings();
     if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {
       navigator.serviceWorker.register("sw.js").catch(function () {});
+    }
+    var isIos = /iphone|ipad|ipod/i.test(navigator.userAgent || "") && !window.MSStream;
+    if (isIos && !isStandaloneApp() && !isPwaDismissed()) {
+      setTimeout(function () { showPwaBanner(true); }, 3500);
     }
   }
 

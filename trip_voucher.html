@@ -100,6 +100,7 @@
   <meta property="og:image" content="https://aboutmeprocess.github.io/TheDriverThailand/TheDriverTH.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="tdt-theme.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
 </head>
 <body class="min-h-screen flex flex-col">
   <!-- กล่องแจ้งเตือน Toast -->
@@ -253,7 +254,7 @@
             </div>
 
             <div class="sm:col-span-4 flex flex-col items-center justify-center bg-white p-3 rounded-2xl shadow-lg text-center">
-              <img id="prev-qr-img" src="" alt="QR Code ตรวจสอบคนขับ" class="w-32 h-32 object-contain">
+              <img id="prev-qr-img" src="" alt="QR Code ตรวจสอบคนขับ" crossorigin="anonymous" class="w-32 h-32 object-contain">
               <span class="text-xs text-slate-900 font-extrabold mt-1.5">สแกนตรวจสอบประวัติคนขับ</span>
               <span class="text-xs text-slate-500">ฐานข้อมูล The Driver TH แท้</span>
             </div>
@@ -270,6 +271,15 @@
           </div>
         </div>
       </section>
+
+      <div class="flex flex-wrap items-center justify-center gap-2.5">
+        <button type="button" id="btn-download-vch-png" onclick="downloadVoucherPng()" class="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold px-5 py-3 rounded-xl text-xs sm:text-sm shadow transition">
+          <i class="fa-solid fa-image mr-1.5"></i> บันทึกรูป E-Voucher (PNG)
+        </button>
+        <button type="button" onclick="copyVoucherTextEn()" class="bg-slate-900 hover:bg-slate-800 text-sky-300 border border-sky-500/40 font-bold px-4 py-3 rounded-xl text-xs sm:text-sm transition">
+          <i class="fa-solid fa-globe mr-1.5"></i> คัดลอกฉบับภาษาอังกฤษ (EN)
+        </button>
+      </div>
     </div>
 
     <!-- โหมดที่ 2: หน้าตรวจสอบคนขับสำหรับผู้โดยสาร (Public Driver Verification) -->
@@ -508,13 +518,74 @@ The Driver TH Premium Service
       copyToClipboard(getPublicVerifyUrl(driverInfo.memberCode), 'คัดลอกลิงก์ตรวจสอบตัวตนคนขับสำหรับผู้โดยสารเรียบร้อยแล้ว');
     }
 
+    function copyVoucherTextEn() {
+      const docId = document.getElementById('vch-doc-id').textContent;
+      const passenger = document.getElementById('vch-passenger-name').value || 'Valued Guest';
+      const time = document.getElementById('vch-pickup-time').value || '-';
+      const pickup = document.getElementById('vch-pickup').value || '-';
+      const dropoff = document.getElementById('vch-dropoff').value || '-';
+      const amount = Number(document.getElementById('vch-amount').value || 0).toLocaleString();
+      const verifyUrl = getPublicVerifyUrl(driverInfo.memberCode);
+      const text =
+`🚖 BOOKING CONFIRMATION / E-VOUCHER
+The Driver TH Premium Service (Verified Executive Network)
+• Ref No.: ${docId}
+• Passenger: ${passenger}
+• Pick-up Time: ${time}
+• Pick-up: ${pickup}
+• Drop-off: ${dropoff}
+• Chauffeur: [${driverInfo.memberCode}] ${driverInfo.fullName}
+• Vehicle: ${driverInfo.carBrand} ${driverInfo.carModel} (${driverInfo.licensePlate})
+• Total Fare: ${amount} THB (All-inclusive)
+• Verify Driver Identity: ${verifyUrl}`;
+      copyToClipboard(text, 'Copied English E-Voucher to clipboard!');
+    }
+
+    async function downloadVoucherPng() {
+      const target = document.getElementById('voucher-preview-card');
+      const btn = document.getElementById('btn-download-vch-png');
+      if (!target || typeof html2canvas === 'undefined') {
+        showToast('กำลังโหลดตัวสร้างรูปภาพ กรุณาลองกดอีกครั้งครับ');
+        return;
+      }
+      const orig = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin mr-1.5"></i> กำลังสร้างรูป E-Voucher...';
+      try {
+        const canvas = await html2canvas(target, { scale: 2, useCORS: true, backgroundColor: '#070a12' });
+        const docId = (document.getElementById('vch-doc-id')?.textContent || 'VOUCHER').trim();
+        const link = document.createElement('a');
+        link.download = `TheDriverTH_${docId}.png`;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+        showToast('บันทึกรูป E-Voucher (PNG) ลงเครื่องเรียบร้อยแล้ว');
+      } catch (_) {
+        showToast('ไม่สามารถสร้างรูปได้ กรุณาแคปหน้าจอแทนครับ');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = orig;
+      }
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       const now = new Date();
       const stamp = `VCH-${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}-${String(now.getHours()).padStart(2, '0')}${String(now.getMinutes()).padStart(2, '0')}`;
       document.getElementById('vch-doc-id').textContent = stamp;
-      renderVoucherPreview();
 
       const params = new URLSearchParams(window.location.search);
+      // รับค่าอัตโนมัติจากหน้าคำนวณค่าโดยสาร (fare_calculator.html)
+      if (params.get('pickup')) document.getElementById('vch-pickup').value = params.get('pickup');
+      if (params.get('dropoff')) document.getElementById('vch-dropoff').value = params.get('dropoff');
+      if (params.get('amount')) document.getElementById('vch-amount').value = params.get('amount');
+      if (params.get('car')) {
+        driverInfo.carBrand = params.get('car');
+        driverInfo.carModel = '';
+      }
+      renderVoucherPreview();
+      if (params.get('amount') || params.get('pickup')) {
+        showToast('นำเข้าข้อมูลราคาและเส้นทางจากเครื่องคิดเลขเรียบร้อยแล้ว');
+      }
+
       const verifyCode = params.get('verify');
       if (verifyCode) {
         switchMode('verify');

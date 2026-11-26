@@ -317,6 +317,7 @@
             '</div>' +
           '</div>' +
           '<div class="tdt-nav-actions">' +
+            '<span id="tdt-member-nav-slot" style="display:inline-flex;align-items:center;gap:6px;"></span>' +
             '<button type="button" id="tdt-quick-search-btn" onclick="openTdtQuickSearch()" aria-label="ค้นหาบริการด่วนทั่วเว็บ" title="ค้นหาบริการด่วน (Ctrl+K)" class="tdt-theme-btn">' +
               '<i class="fa-solid fa-magnifying-glass"></i>' +
             '</button>' +
@@ -344,6 +345,7 @@
           '<button type="button" onclick="closeTdtDrawer()" aria-label="ปิดเมนู" class="tdt-drawer-close"><i class="fa-solid fa-xmark"></i></button>' +
         '</div>' +
         '<div class="tdt-drawer-body">' +
+          '<div id="tdt-member-drawer-slot" style="margin-bottom:10px;"></div>' +
           '<input type="search" id="tdt-drawer-search" oninput="filterTdtDrawer(this.value)" placeholder="ค้นหาเมนูบริการ..." class="tdt-drawer-search">' +
           '<a href="index.html" class="tdt-drawer-link"><i class="fa-solid fa-house"></i> หน้าหลัก</a>' +
           '<div class="tdt-drawer-cat">' +
@@ -985,9 +987,251 @@
   });
 
   /* ------------------------------------------------------------------
+   * 8.5 UNIFIED GLOBAL MEMBER LOGIN (SSO) & MEMBER-ONLY PAGE GATE
+   * ------------------------------------------------------------------ */
+  var MEMBER_AUTH_API = "https://script.google.com/macros/s/AKfycbyeDCdxBD10D_AFZQY2NxeylLOiAmAHLesSDZHXYCb3TsYs4wYer_kRTPVOs3VpK2pP/exec";
+  var MEMBER_SSO_KEY = "tdt_member_sso_v1";
+  var MEMBER_GATED_PAGES = ["blacklist.html"]; // หน้าที่ต้องล็อกอินรหัสสมาชิกก่อนจึงจะเห็นข้อมูล
+
+  function getTdtMemberSession() {
+    try {
+      var raw = localStorage.getItem(MEMBER_SSO_KEY);
+      if (!raw) return null;
+      var parsed = JSON.parse(raw);
+      if (!parsed || !parsed.memberToken || !parsed.member || !parsed.member.memberCode) return null;
+      if (Number(parsed.expiresAt || 0) > 0 && Date.now() > Number(parsed.expiresAt)) {
+        localStorage.removeItem(MEMBER_SSO_KEY);
+        return null;
+      }
+      return parsed;
+    } catch (_) {
+      return null;
+    }
+  }
+
+  function saveTdtMemberSession(token, memberObj) {
+    var payload = {
+      memberToken: token,
+      member: memberObj,
+      expiresAt: Date.now() + (7 * 24 * 60 * 60 * 1000)
+    };
+    try { localStorage.setItem(MEMBER_SSO_KEY, JSON.stringify(payload)); } catch (_) {}
+    syncTdtMemberUI();
+    try {
+      window.dispatchEvent(new CustomEvent("tdt-member-auth-changed", { detail: payload }));
+    } catch (_) {}
+    return payload;
+  }
+
+  function logoutTdtMember() {
+    try { localStorage.removeItem(MEMBER_SSO_KEY); } catch (_) {}
+    syncTdtMemberUI();
+    try {
+      window.dispatchEvent(new CustomEvent("tdt-member-auth-changed", { detail: null }));
+    } catch (_) {}
+  }
+
+  function isCurrentPageMemberGated() {
+    return MEMBER_GATED_PAGES.indexOf(currentFile) !== -1;
+  }
+
+  function ensureTdtMemberGateOverlay() {
+    var gate = document.getElementById("tdt-member-gate-overlay");
+    var sess = getTdtMemberSession();
+    if (!isCurrentPageMemberGated()) {
+      if (gate) gate.remove();
+      return;
+    }
+    if (sess) {
+      if (gate) gate.style.display = "none";
+      return;
+    }
+    if (!gate) {
+      gate = document.createElement("div");
+      gate.id = "tdt-member-gate-overlay";
+      gate.style.cssText = "position:fixed;inset:0;z-index:1090;background:rgba(7,10,18,0.96);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;padding:18px;font-family:'Prompt',sans-serif;";
+      gate.innerHTML =
+        '<div style="width:100%;max-width:440px;background:#0f172a;border:1px solid rgba(251,191,36,0.45);border-radius:26px;padding:28px 24px;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,0.85);color:#f8fafc;">' +
+          '<div style="width:58px;height:58px;margin:0 auto 14px;border-radius:18px;background:rgba(251,191,36,0.16);border:1px solid rgba(251,191,36,0.45);color:#fbbf24;display:flex;align-items:center;justify-content:center;font-size:24px;"><i class="fa-solid fa-user-shield"></i></div>' +
+          '<h2 style="margin:0 0 8px;font-size:20px;font-weight:800;color:#fde68a;">เฉพาะสมาชิก The Driver Thailand</h2>' +
+          '<p style="margin:0 0 20px;font-size:13px;line-height:1.65;color:#cbd5e1;">ข้อมูลในหน้านี้สงวนสิทธิ์เฉพาะสมาชิกที่ลงทะเบียนไว้ในฐานข้อมูลรหัสสมาชิก (DATAMember) กรุณาเข้าสู่ระบบด้วยรหัสสมาชิกและเบอร์ที่ลงทะเบียนไว้ก่อนเข้าดูข้อมูลครับ</p>' +
+          '<button type="button" onclick="openTdtMemberLogin(\'กรุณาเข้าสู่ระบบด้วยรหัสสมาชิกเพื่อดูข้อมูลในหน้านี้\')" style="width:100%;padding:13px 18px;border-radius:14px;border:none;background:linear-gradient(135deg,#fbbf24 0%,#d97706 100%);color:#070a12;font-size:14px;font-weight:800;cursor:pointer;box-shadow:0 8px 24px rgba(251,191,36,0.3);">' +
+            '<i class="fa-solid fa-right-to-bracket" style="margin-right:6px;"></i> เข้าสู่ระบบด้วยรหัสสมาชิก' +
+          '</button>' +
+          '<div style="display:flex;justify-content:center;gap:14px;margin-top:16px;font-size:12px;">' +
+            '<a href="register.html" style="color:#fbbf24;text-decoration:underline;font-weight:600;">ตรวจสอบรหัสสมาชิก</a>' +
+            '<span style="color:#475569;">|</span>' +
+            '<a href="member_register.html" style="color:#34d399;text-decoration:underline;font-weight:600;">สมัครสมาชิกใหม่</a>' +
+            '<span style="color:#475569;">|</span>' +
+            '<a href="index.html" style="color:#94a3b8;text-decoration:underline;">กลับหน้าหลัก</a>' +
+          '</div>' +
+        '</div>';
+      document.body.appendChild(gate);
+    } else {
+      gate.style.display = "flex";
+    }
+  }
+
+  function syncTdtMemberUI() {
+    var sess = getTdtMemberSession();
+    var navSlot = document.getElementById("tdt-member-nav-slot");
+    var drawerSlot = document.getElementById("tdt-member-drawer-slot");
+
+    if (navSlot) {
+      if (sess && sess.member) {
+        var code = escHtml(sess.member.memberCode);
+        navSlot.innerHTML =
+          '<a href="member_portal.html" title="ศูนย์รวมสมาชิก (' + code + ')" style="display:inline-flex;align-items:center;gap:6px;padding:6px 11px;border-radius:999px;background:rgba(16,185,129,0.16);border:1px solid rgba(52,211,153,0.45);color:#6ee7b7;font-size:12px;font-weight:700;text-decoration:none;white-space:nowrap;">' +
+            '<i class="fa-solid fa-circle-check"></i><span>' + code + '</span>' +
+          '</a>' +
+          '<button type="button" onclick="logoutTdtMember()" title="ออกจากระบบสมาชิก" aria-label="ออกจากระบบสมาชิก" style="display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:10px;background:rgba(244,63,94,0.15);border:1px solid rgba(251,113,133,0.38);color:#fda4af;cursor:pointer;font-size:12px;">' +
+            '<i class="fa-solid fa-right-from-bracket"></i>' +
+          '</button>';
+      } else {
+        navSlot.innerHTML =
+          '<button type="button" onclick="openTdtMemberLogin()" style="display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:999px;background:rgba(251,191,36,0.14);border:1px solid rgba(251,191,36,0.5);color:#fde68a;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;">' +
+            '<i class="fa-solid fa-user-lock"></i><span>เข้าสู่ระบบ</span>' +
+          '</button>';
+      }
+    }
+
+    if (drawerSlot) {
+      if (sess && sess.member) {
+        drawerSlot.innerHTML =
+          '<div style="background:rgba(16,185,129,0.12);border:1px solid rgba(52,211,153,0.38);border-radius:14px;padding:12px;display:flex;align-items:center;justify-content:space-between;gap:8px;">' +
+            '<div style="min-width:0;">' +
+              '<div style="font-size:12px;font-weight:800;color:#6ee7b7;">[' + escHtml(sess.member.memberCode) + '] ยืนยันตัวตนแล้ว</div>' +
+              '<div style="font-size:11px;color:#cbd5e1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + escHtml(sess.member.chatName || sess.member.fullName || "") + '</div>' +
+            '</div>' +
+            '<button type="button" onclick="logoutTdtMember()" style="padding:6px 10px;border-radius:10px;background:rgba(244,63,94,0.2);border:1px solid rgba(251,113,133,0.4);color:#fda4af;font-size:11px;font-weight:700;cursor:pointer;flex-shrink:0;">ออก</button>' +
+          '</div>';
+      } else {
+        drawerSlot.innerHTML =
+          '<button type="button" onclick="closeTdtDrawer();openTdtMemberLogin();" style="width:100%;padding:11px 14px;border-radius:14px;border:none;background:linear-gradient(135deg,#fbbf24 0%,#d97706 100%);color:#070a12;font-size:13px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;">' +
+            '<i class="fa-solid fa-user-lock"></i> เข้าสู่ระบบด้วยรหัสสมาชิก' +
+          '</button>';
+      }
+    }
+
+    ensureTdtMemberGateOverlay();
+  }
+
+  function openTdtMemberLogin(reasonText) {
+    var modal = document.getElementById("tdt-member-login-modal");
+    if (!modal) {
+      modal = document.createElement("div");
+      modal.id = "tdt-member-login-modal";
+      modal.style.cssText = "position:fixed;inset:0;z-index:1300;background:rgba(2,6,23,0.82);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:16px;font-family:'Prompt',sans-serif;";
+      modal.innerHTML =
+        '<div style="width:100%;max-width:410px;background:#0f172a;border:1px solid rgba(251,191,36,0.45);border-radius:24px;padding:24px;position:relative;color:#f8fafc;box-shadow:0 24px 60px rgba(0,0,0,0.85);">' +
+          '<button type="button" id="tdt-ml-close" aria-label="ปิดหน้าต่าง" style="position:absolute;top:14px;right:14px;width:32px;height:32px;border-radius:999px;border:1px solid #334155;background:#1e293b;color:#cbd5e1;cursor:pointer;"><i class="fa-solid fa-xmark"></i></button>' +
+          '<div style="text-align:center;margin-bottom:16px;">' +
+            '<div style="width:48px;height:48px;margin:0 auto 10px;border-radius:14px;background:rgba(251,191,36,0.16);border:1px solid rgba(251,191,36,0.45);color:#fbbf24;display:flex;align-items:center;justify-content:center;font-size:20px;"><i class="fa-solid fa-id-card"></i></div>' +
+            '<h3 style="margin:0;font-size:18px;font-weight:800;color:#fde68a;">เข้าสู่ระบบสมาชิก The Driver TH</h3>' +
+            '<p id="tdt-ml-sub" style="margin:5px 0 0;font-size:12px;color:#94a3b8;">ใช้รหัสสมาชิกและเบอร์ที่ลงทะเบียนไว้ในฐานข้อมูล (ล็อกอินครั้งเดียวใช้ได้ทุกหน้า)</p>' +
+          '</div>' +
+          '<form id="tdt-ml-form" style="display:flex;flex-direction:column;gap:12px;">' +
+            '<div>' +
+              '<label style="display:block;font-size:12px;font-weight:700;color:#cbd5e1;margin-bottom:4px;">รหัสสมาชิก *</label>' +
+              '<input type="text" id="tdt-ml-code" required placeholder="เช่น B2464" style="width:100%;box-sizing:border-box;background:#070a12;border:1px solid #334155;border-radius:12px;padding:11px 14px;color:#fbbf24;font-size:14px;font-weight:700;text-transform:uppercase;">' +
+            '</div>' +
+            '<div>' +
+              '<label style="display:block;font-size:12px;font-weight:700;color:#cbd5e1;margin-bottom:4px;">เบอร์ที่ลงทะเบียนสมาชิก (10 หลัก) *</label>' +
+              '<input type="tel" id="tdt-ml-phone" required maxlength="10" inputmode="numeric" placeholder="เช่น 0812345678" style="width:100%;box-sizing:border-box;background:#070a12;border:1px solid #334155;border-radius:12px;padding:11px 14px;color:#ffffff;font-size:14px;">' +
+            '</div>' +
+            '<p id="tdt-ml-err" style="display:none;margin:0;padding:9px 12px;border-radius:10px;background:rgba(244,63,94,0.15);border:1px solid rgba(251,113,133,0.4);color:#fda4af;font-size:12px;font-weight:600;"></p>' +
+            '<button type="submit" id="tdt-ml-submit" style="width:100%;padding:12px;border-radius:12px;border:none;background:linear-gradient(135deg,#fbbf24 0%,#d97706 100%);color:#070a12;font-size:14px;font-weight:800;cursor:pointer;">เข้าสู่ระบบสมาชิก</button>' +
+          '</form>' +
+          '<div style="text-align:center;margin-top:14px;padding-top:12px;border-top:1px solid #1e293b;font-size:12px;color:#94a3b8;">' +
+            'จำรหัสไม่ได้? <a href="register.html" style="color:#fbbf24;font-weight:700;">ตรวจสอบรหัสสมาชิก</a> · <a href="member_register.html" style="color:#34d399;font-weight:700;">สมัครสมาชิก</a>' +
+          '</div>' +
+        '</div>';
+      modal.addEventListener("click", function (ev) {
+        if (ev.target === modal) closeTdtMemberLogin();
+      });
+      document.body.appendChild(modal);
+      var closeBtn = document.getElementById("tdt-ml-close");
+      if (closeBtn) closeBtn.addEventListener("click", closeTdtMemberLogin);
+      var form = document.getElementById("tdt-ml-form");
+      if (form) {
+        form.addEventListener("submit", async function (ev) {
+          ev.preventDefault();
+          var codeEl = document.getElementById("tdt-ml-code");
+          var phoneEl = document.getElementById("tdt-ml-phone");
+          var errEl = document.getElementById("tdt-ml-err");
+          var btn = document.getElementById("tdt-ml-submit");
+          var code = String(codeEl.value || "").trim().toUpperCase().replace(/^\[|\]$/g, "");
+          var phone = String(phoneEl.value || "").replace(/\D/g, "");
+          errEl.style.display = "none";
+          if (!code || !/^0\d{9}$/.test(phone)) {
+            errEl.textContent = "กรุณากรอกรหัสสมาชิกและเบอร์ที่ลงทะเบียนสมาชิกให้ครบ 10 หลัก (ขึ้นต้นด้วย 0)";
+            errEl.style.display = "block";
+            return;
+          }
+          btn.disabled = true;
+          btn.textContent = "กำลังตรวจสอบกับฐานข้อมูลสมาชิก...";
+          try {
+            var res = await fetch(MEMBER_AUTH_API, {
+              method: "POST",
+              headers: { "Content-Type": "text/plain;charset=utf-8" },
+              body: JSON.stringify({ action: "member_login", memberCode: code, phone: phone })
+            });
+            var json = await res.json();
+            if (!json || !json.success || !json.memberToken) {
+              errEl.textContent = (json && json.error) || "รหัสสมาชิกหรือเบอร์ที่ลงทะเบียนไม่ตรงกับฐานข้อมูลสมาชิก";
+              errEl.style.display = "block";
+              return;
+            }
+            saveTdtMemberSession(json.memberToken, json.member);
+            phoneEl.value = "";
+            closeTdtMemberLogin();
+          } catch (_) {
+            errEl.textContent = "ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์ตรวจสอบสมาชิกได้ กรุณาลองใหม่";
+            errEl.style.display = "block";
+          } finally {
+            btn.disabled = false;
+            btn.textContent = "เข้าสู่ระบบสมาชิก";
+          }
+        });
+      }
+    }
+    var subEl = document.getElementById("tdt-ml-sub");
+    if (subEl && reasonText) subEl.textContent = reasonText;
+    var errBox = document.getElementById("tdt-ml-err");
+    if (errBox) errBox.style.display = "none";
+    modal.style.display = "flex";
+    setTimeout(function () {
+      var c = document.getElementById("tdt-ml-code");
+      if (c) c.focus();
+    }, 30);
+  }
+
+  function closeTdtMemberLogin() {
+    var modal = document.getElementById("tdt-member-login-modal");
+    if (modal) modal.style.display = "none";
+  }
+
+  window.openTdtMemberLogin = openTdtMemberLogin;
+  window.closeTdtMemberLogin = closeTdtMemberLogin;
+  window.logoutTdtMember = logoutTdtMember;
+  window.TDTAuth = {
+    getSession: getTdtMemberSession,
+    isLoggedIn: function () { return !!getTdtMemberSession(); },
+    openLogin: openTdtMemberLogin,
+    closeLogin: closeTdtMemberLogin,
+    logout: logoutTdtMember,
+    syncUI: syncTdtMemberUI
+  };
+
+  window.addEventListener("storage", function (ev) {
+    if (ev.key === MEMBER_SSO_KEY) syncTdtMemberUI();
+  });
+
+  /* ------------------------------------------------------------------
    * 9. BOOT ON DOM READY
    * ------------------------------------------------------------------ */
   function boot() {
+    syncTdtMemberUI();
     ensureFloatingLineBtn();
     syncSiteSettings();
     if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {

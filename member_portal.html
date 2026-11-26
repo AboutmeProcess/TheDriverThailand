@@ -180,7 +180,7 @@
   </main>
 
   <div id="tdt-layout-footer"></div>
-  <script src="tdt-layout.js?v=20261126"></script>
+  <script src="tdt-layout.js?v=20261126sso"></script>
   <script>
     const MASTER_API_URL = 'https://script.google.com/macros/s/AKfycbyeDCdxBD10D_AFZQY2NxeylLOiAmAHLesSDZHXYCb3TsYs4wYer_kRTPVOs3VpK2pP/exec';
     const PORTAL_STORAGE_KEY = 'tdt_member_portal_session_v1';
@@ -286,7 +286,22 @@
       document.getElementById('portal-phone4-input').value = '';
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
+    async function loadPortalByGlobalSSO() {
+      const sess = window.TDTAuth && window.TDTAuth.getSession ? window.TDTAuth.getSession() : null;
+      if (!sess || !sess.memberToken) return false;
+      try {
+        const res = await fetch(`${MASTER_API_URL}?action=member_portal_lookup&memberToken=${encodeURIComponent(sess.memberToken)}`);
+        const json = await res.json();
+        if (json && json.success) {
+          renderPortalDashboard(json);
+          return true;
+        }
+      } catch (_) {}
+      return false;
+    }
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      if (await loadPortalByGlobalSSO()) return;
       try {
         const raw = sessionStorage.getItem(PORTAL_STORAGE_KEY);
         if (!raw) return;
@@ -295,6 +310,14 @@
           renderPortalDashboard(parsed.cached);
         }
       } catch (_) {}
+    });
+
+    window.addEventListener('tdt-member-auth-changed', (ev) => {
+      if (ev.detail && ev.detail.memberToken) {
+        loadPortalByGlobalSSO();
+      } else {
+        portalLogout();
+      }
     });
   </script>
 </body>

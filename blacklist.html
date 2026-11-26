@@ -417,7 +417,7 @@
   <!-- UNIFIED GLOBAL SITE NAVIGATION BAR -->
     <!-- SHARED EXECUTIVE HEADER, DRAWER & ANNOUNCEMENT BAR -->
   <div id="tdt-layout-header" data-page="blacklist.html"></div>
-  <script src="tdt-layout.js?v=20261125b"></script>
+  <script src="tdt-layout.js?v=20261126sso"></script>
 
 <!-- SUB-HEADER BAR -->
   <header class="bg-slate-950/95 border-b border-amber-400/20 shadow-sm">
@@ -1018,12 +1018,28 @@
 
         async function fetchDataFromCloud() {
             const spinIcon = document.getElementById('refreshSpinIcon');
+            const sess = window.TDTAuth && window.TDTAuth.getSession ? window.TDTAuth.getSession() : null;
+            if (!sess || !sess.memberToken) {
+                allReports = [];
+                try { localStorage.removeItem(LOCAL_STORAGE_KEY); } catch (_) {}
+                updateStats();
+                onSearchOrFilterChange();
+                if (window.TDTAuth && window.TDTAuth.syncUI) window.TDTAuth.syncUI();
+                return;
+            }
             if (spinIcon) spinIcon.classList.add('fa-spin');
 
             try {
-                const res = await fetch(`${WEB_APP_URL}?action=blacklist_reports&t=${Date.now()}`, { method: 'GET' });
+                const res = await fetch(`${WEB_APP_URL}?action=blacklist_reports&memberToken=${encodeURIComponent(sess.memberToken)}&t=${Date.now()}`, { method: 'GET' });
                 if (!res.ok) throw new Error('Network error');
                 const rawData = await res.json();
+
+                if (rawData && rawData.requiresAuth) {
+                    allReports = [];
+                    try { localStorage.removeItem(LOCAL_STORAGE_KEY); } catch (_) {}
+                    if (window.TDTAuth && window.TDTAuth.logout) window.TDTAuth.logout();
+                    return;
+                }
 
                 if (Array.isArray(rawData)) {
                     allReports = rawData.map(normalizeRecord).reverse();
@@ -1042,6 +1058,10 @@
                 onSearchOrFilterChange();
             }
         }
+
+        window.addEventListener('tdt-member-auth-changed', () => {
+            fetchDataFromCloud();
+        });
 
         function normalizeRecord(item) {
             let rawImages = [];

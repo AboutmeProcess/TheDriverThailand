@@ -32,6 +32,14 @@
     "text": "เช็กเบี้ยประกันภัยรถยนต์ชั้น 1, 2+, 3+, ชั้น 3 และ พ.ร.บ. ราคาสมาชิก",
     "badge": "Captain Insurance"
   },
+  "car_rental.html": {
+    "pillColor": "amber",
+    "pillStyle": "solid",
+    "pillIcon": "fa-solid fa-key",
+    "pillText": "CAR RENTAL HUB",
+    "text": "ศูนย์รวมปล่อยรถเช่าและค้นหารถเช่าสำหรับคนขับ Grab / Bolt (รองรับ รย.18 และเช่าได้รถ)",
+    "badge": "ตลาดรถเช่าคนขับ"
+  },
   "community.html": {
     "pillColor": "sky",
     "pillStyle": "solid",
@@ -280,6 +288,7 @@
                 '<i class="fa-solid fa-car-on"></i> งาน &amp; เครื่องมือ <i id="chevron-cat-tools" class="fa-solid fa-chevron-down text-xs"></i>' +
               '</button>' +
               '<div id="panel-cat-tools" class="tdt-d-panel">' +
+                '<a href="car_rental.html" class="tdt-d-item" style="color:#fde68a;font-weight:700;"><i class="fa-solid fa-key"></i> ตลาดรถเช่า / ปล่อยเช่ารถขับแอป</a>' +
                 '<a href="job_board.html" class="tdt-d-item"><i class="fa-solid fa-handshake"></i> กระดานแลกเปลี่ยนงาน</a>' +
                 '<a href="empty_leg_matcher.html" class="tdt-d-item"><i class="fa-solid fa-route"></i> จับคู่รถว่างขากลับ</a>' +
                 '<a href="fare_calculator.html" class="tdt-d-item"><i class="fa-solid fa-calculator"></i> คำนวณค่าโดยสาร</a>' +
@@ -360,7 +369,8 @@
             '<a href="unblock_request.html" class="tdt-drawer-link"><i class="fa-solid fa-unlock-keyhole"></i> ขอปลดล็อก OpenChat</a>' +
           '</div>' +
           '<div class="tdt-drawer-cat">' +
-            '<div class="tdt-drawer-cat-title">2. งาน &amp; เครื่องมือคนขับ (6)</div>' +
+            '<div class="tdt-drawer-cat-title">2. งาน &amp; เครื่องมือคนขับ (7)</div>' +
+            '<a href="car_rental.html" class="tdt-drawer-link" style="color:#fde68a;font-weight:700;"><i class="fa-solid fa-key"></i> ตลาดรถเช่า / ปล่อยเช่ารถขับแอป</a>' +
             '<a href="job_board.html" class="tdt-drawer-link"><i class="fa-solid fa-handshake"></i> กระดานแลกเปลี่ยนงาน</a>' +
             '<a href="empty_leg_matcher.html" class="tdt-drawer-link"><i class="fa-solid fa-route"></i> จับคู่รถว่างขากลับ</a>' +
             '<a href="fare_calculator.html" class="tdt-drawer-link"><i class="fa-solid fa-calculator"></i> คำนวณค่าโดยสาร</a>' +
@@ -991,7 +1001,7 @@
    * ------------------------------------------------------------------ */
   var MEMBER_AUTH_API = "https://script.google.com/macros/s/AKfycbyeDCdxBD10D_AFZQY2NxeylLOiAmAHLesSDZHXYCb3TsYs4wYer_kRTPVOs3VpK2pP/exec";
   var MEMBER_SSO_KEY = "tdt_member_sso_v1";
-  var MEMBER_GATED_PAGES = ["blacklist.html"]; // หน้าที่ต้องล็อกอินรหัสสมาชิกก่อนจึงจะเห็นข้อมูล
+  var MEMBER_GATED_PAGES = ["blacklist.html", "member_edit.html"]; // หน้าที่ต้องล็อกอินรหัสสมาชิกก่อนจึงจะเห็นข้อมูล
 
   function getTdtMemberSession() {
     try {

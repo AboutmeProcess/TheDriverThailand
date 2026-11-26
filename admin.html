@@ -876,13 +876,25 @@
         </div>
       </section>
 
-      <!-- 2. อนุมัติสมาชิกใหม่ -->
-      <section id="tab-panel-members" class="hidden bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-4">
-        <div class="border-b border-slate-800 pb-4">
-          <h2 class="text-lg font-extrabold text-emerald-400">อนุมัติสมาชิกใหม่เข้าสู่ DATAMember</h2>
-          <p class="text-xs text-slate-400">ตรวจสอบข้อมูลและรูปถ่าย แล้วกดอนุมัติ (เว้นช่องรหัสไว้เพื่อให้ระบบรันเลขต่ออัตโนมัติ หรือพิมพ์รหัสเองได้)</p>
+      <!-- 2. อนุมัติสมาชิกใหม่ & คำร้องแก้ไขข้อมูลสมาชิกเดิม -->
+      <section id="tab-panel-members" class="hidden bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-6">
+        <div class="space-y-4">
+          <div class="border-b border-slate-800 pb-4">
+            <h2 class="text-lg font-extrabold text-emerald-400">อนุมัติสมาชิกใหม่เข้าสู่ DATAMember</h2>
+            <p class="text-xs text-slate-400">ตรวจสอบข้อมูลและรูปถ่าย แล้วกดอนุมัติ (เว้นช่องรหัสไว้เพื่อให้ระบบรันเลขต่ออัตโนมัติ หรือพิมพ์รหัสเองได้)</p>
+          </div>
+          <div id="admin-pending-members" class="space-y-3"></div>
         </div>
-        <div id="admin-pending-members" class="space-y-3"></div>
+
+        <div class="pt-5 border-t border-slate-800 space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <h2 class="text-lg font-extrabold text-amber-300"><i class="fa-solid fa-user-pen mr-1.5"></i>คำร้องขอแก้ไขข้อมูลสมาชิกเดิม (<span id="count-pending-member-edits">0</span>)</h2>
+              <p class="text-xs text-slate-400">เมื่อกด “อนุมัติ” ระบบจะอัปเดตข้อมูลใหม่ลงแผ่นงาน DATAMember ให้อัตโนมัติ • หาก “ไม่อนุมัติ” สามารถใส่เหตุผลเพื่อให้แสดงผลที่หน้าคำร้องของสมาชิกได้</p>
+            </div>
+          </div>
+          <div id="admin-pending-member-edits" class="space-y-3"></div>
+        </div>
       </section>
 
       <!-- 3. อนุมัติบัญชีเว็บบอร์ด -->
@@ -2541,6 +2553,8 @@
       admin_login: { label: 'เข้าสู่ระบบ', cls: 'bg-sky-500/15 text-sky-300 border-sky-400/35' },
       approve_member: { label: 'อนุมัติสมาชิก', cls: 'bg-emerald-500/15 text-emerald-300 border-emerald-400/35' },
       reject_member: { label: 'ไม่อนุมัติสมาชิก', cls: 'bg-rose-500/15 text-rose-300 border-rose-400/35' },
+      approve_member_edit: { label: 'อนุมัติแก้ข้อมูล', cls: 'bg-emerald-500/15 text-emerald-300 border-emerald-400/35' },
+      reject_member_edit: { label: 'ไม่อนุมัติแก้ข้อมูล', cls: 'bg-rose-500/15 text-rose-300 border-rose-400/35' },
       decide_forum_user: { label: 'อนุมัติเว็บบอร์ด', cls: 'bg-purple-500/15 text-purple-300 border-purple-400/35' },
       update_tracking: { label: 'อัปเดตพัสดุ', cls: 'bg-amber-500/15 text-amber-300 border-amber-400/35' },
       save_site_settings: { label: 'ตั้งค่าเว็บ', cls: 'bg-amber-500/15 text-amber-300 border-amber-400/35' },
@@ -2684,6 +2698,40 @@
             </div>
           `).join('');
 
+        const pendingMemberEdits = Array.isArray(json.pendingMemberEdits) ? json.pendingMemberEdits : [];
+        const editCntEl = document.getElementById('count-pending-member-edits');
+        if (editCntEl) editCntEl.textContent = pendingMemberEdits.length;
+        const editBox = document.getElementById('admin-pending-member-edits');
+        if (editBox) {
+          editBox.innerHTML = pendingMemberEdits.length === 0
+            ? '<p class="text-xs text-slate-400 py-4 text-center">ไม่มีคำร้องขอแก้ไขข้อมูลสมาชิกที่รอตรวจสอบ</p>'
+            : pendingMemberEdits.map(ed => `
+              <div class="bg-slate-950 border border-amber-400/25 rounded-2xl p-4 space-y-3 text-xs">
+                <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-3">
+                  <div class="space-y-1">
+                    <p class="font-extrabold text-white">
+                      <span class="text-amber-300 font-mono">[${esc(ed.memberCode)}]</span> ${esc(ed.chatName)} (${esc(ed.firstName)} ${esc(ed.lastName)})
+                      <span class="text-slate-400 font-normal ml-1">· ${esc(ed.refCode)}</span>
+                    </p>
+                    <p class="text-amber-200 font-semibold">หัวข้อขอแก้ไข: ${esc(ed.editTopics || '-')}</p>
+                    <p class="text-slate-300">โทร: ${esc(ed.phone)} · Line: ${esc(ed.lineId)} · รถ: ${esc(ed.carBrand)} ${esc(ed.carModel)} ทะเบียน <strong class="text-amber-300">${esc(ed.licensePlate)}</strong></p>
+                    ${ed.address ? `<p class="text-slate-400">ที่อยู่ใหม่: ${esc(ed.address)}</p>` : ''}
+                    ${ed.editNote ? `<p class="text-sky-300">รายละเอียดเพิ่มเติม: ${esc(ed.editNote)}</p>` : ''}
+                    <div class="flex gap-3 pt-1">
+                      ${ed.carPhoto ? `<a href="${esc(ed.carPhoto)}" target="_blank" class="text-emerald-400 underline">ดูรูปรถใหม่</a>` : ''}
+                      ${ed.selfiePhoto ? `<a href="${esc(ed.selfiePhoto)}" target="_blank" class="text-amber-300 underline">ดูรูปคู่กระดาษ</a>` : ''}
+                    </div>
+                  </div>
+                  <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 shrink-0">
+                    <input type="text" id="edit-admin-note-${esc(ed.refCode)}" placeholder="หมายเหตุ / เหตุผลกรณีไม่อนุมัติ" class="w-full sm:w-56 bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
+                    <button type="button" onclick="decideMemberEdit('${esc(ed.refCode)}', 'อนุมัติ')" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-3.5 py-2 rounded-xl whitespace-nowrap">อนุมัติ &amp; อัปเดต</button>
+                    <button type="button" onclick="decideMemberEdit('${esc(ed.refCode)}', 'ไม่อนุมัติ')" class="bg-rose-600 hover:bg-rose-500 text-white font-bold px-3.5 py-2 rounded-xl whitespace-nowrap">ไม่อนุมัติ</button>
+                  </div>
+                </div>
+              </div>
+            `).join('');
+        }
+
         const pendingForum = Array.isArray(json.pendingForumUsers) ? json.pendingForumUsers : [];
         document.getElementById('count-pending-forum').textContent = pendingForum.length;
         document.getElementById('admin-pending-forum').innerHTML = pendingForum.length === 0
@@ -2780,6 +2828,22 @@
         decision
       });
       toast(json.message || (json.success ? 'ดำเนินการเรียบร้อย' : 'ผิดพลาด'), Boolean(json.success));
+      refreshAllAdminData();
+    }
+
+    async function decideMemberEdit(refCode, decision) {
+      if (!sessionAdmin) return;
+      const adminNote = (document.getElementById(`edit-admin-note-${refCode}`)?.value || '').trim();
+      if (decision === 'ไม่อนุมัติ' && !adminNote) {
+        if (!confirm('ยังไม่ได้ระบุเหตุผลที่ไม่อนุมัติ ต้องการใช้ข้อความเริ่มต้นแจ้งสมาชิกหรือไม่?')) return;
+      }
+      const json = await adminPost({
+        action: 'admin_decide_member_edit',
+        refCode,
+        decision,
+        adminNote
+      });
+      toast(json.message || json.error || (json.success ? 'ดำเนินการเรียบร้อย' : 'ผิดพลาด'), Boolean(json.success));
       refreshAllAdminData();
     }
 

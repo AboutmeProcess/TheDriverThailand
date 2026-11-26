@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ตลาดรถเช่า &amp; ปล่อยรถเช่าคนขับแอป | 🚖 The Driver TH 🇹🇭 Premium Service</title>
+  <meta name="description" content="ศูนย์รวมลงประกาศปล่อยรถเช่าและค้นหารถเช่าสำหรับคนขับ Grab / Bolt รองรับการกรองรถจดทะเบียน รย.18 โหมดขับขี่ ส่วนลดระยะยาว และเช่าได้รถ">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#070a12">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="tdt-theme.css?v=20261126">
+  <style>
+    html, body, input, select, textarea, button { font-family: 'Prompt', sans-serif !important; }
+    body { background-color: #070a12; color: #f8fafc; overflow-x: clip; }
+    .gold-grad { background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%); }
+    .hero-glow-bg {
+      background:
+        radial-gradient(circle at 18% 22%, rgba(251, 191, 36, 0.22) 0%, transparent 45%),
+        radial-gradient(circle at 82% 78%, rgba(16, 185, 129, 0.16) 0%, transparent 50%),
+        linear-gradient(145deg, #070a12 0%, #0f172a 55%, #162033 100%);
+    }
+    .dark-card {
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(251, 191, 36, 0.22);
+      box-shadow: 0 18px 38px -16px rgba(2, 6, 23, 0.78);
+    }
+    .dark-field {
+      background-color: #070b14;
+      border: 1px solid #334155;
+      color: #f8fafc;
+    }
+    .dark-field:focus { outline: none; border-color: #fbbf24; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+  <!-- Toast -->
+  <div id="rental-toast-box" class="fixed top-5 right-5 z-[1400] flex flex-col gap-2 max-w-sm w-full pointer-events-none px-4"></div>
+
+  <!-- Shared Header -->
+  <div id="tdt-layout-header" data-page="car_rental.html"></div>
+  <script src="tdt-layout.js?v=20261126sso"></script>
+
+  <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-6">
+    <!-- Hero -->
+    <section class="hero-glow-bg border border-amber-400/35 rounded-3xl p-6 sm:p-8 shadow-2xl">
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
+        <div class="space-y-2 max-w-2xl">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="px-3 py-1 rounded-full text-[11px] font-extrabold bg-amber-400/15 text-amber-300 border border-amber-400/40">
+              <i class="fa-solid fa-key mr-1"></i> DRIVER CAR RENTAL MARKETPLACE
+            </span>
+            <span class="px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-500/15 text-emerald-300 border border-emerald-400/35">
+              รองรับรถ รย.18 · Grab / Bolt · เช่าได้รถ
+            </span>
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-black text-white">ตลาดปล่อยเช่ารถ &amp; ค้นหารถเช่า <span class="text-amber-300">The Driver TH</span></h1>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">พื้นที่กลางสำหรับเจ้าของรถและคนขับที่ต้องการเช่ารถวิ่งแอป ค้นหาได้ครบทั้งรถจดทะเบียน <strong>รย.18</strong>, โหมดขับขี่ <strong>Grab / Bolt</strong>, ส่วนลดระยะยาว, แบบ <strong>เช่าปกติ / เช่าได้รถ</strong> พร้อมรูปภายนอก-ภายในครบทุกคัน</p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row lg:flex-col gap-2.5 shrink-0">
+          <button type="button" onclick="openRentalPostModal()" class="gold-grad hover:opacity-95 text-slate-950 font-extrabold px-6 py-3.5 rounded-2xl text-sm shadow-xl transition flex items-center justify-center gap-2">
+            <i class="fa-solid fa-plus-circle"></i> ลงประกาศปล่อยรถเช่า
+          </button>
+          <p class="text-[11px] text-slate-400 text-center">เฉพาะสมาชิกที่ล็อกอินรหัสสมาชิกจึงจะลงประกาศได้</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Live Stats -->
+    <section class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+      <div class="dark-card rounded-2xl p-4 flex items-center gap-3">
+        <span class="w-10 h-10 rounded-xl bg-amber-400/15 border border-amber-400/35 text-amber-300 flex items-center justify-center shrink-0"><i class="fa-solid fa-car-side"></i></span>
+        <div>
+          <strong id="stat-rent-avail" class="text-xl font-black text-white font-mono leading-none block">0</strong>
+          <span class="text-[11px] text-slate-400">รถว่างพร้อมเช่า</span>
+        </div>
+      </div>
+      <div class="dark-card rounded-2xl p-4 flex items-center gap-3">
+        <span class="w-10 h-10 rounded-xl bg-emerald-500/15 border border-emerald-400/35 text-emerald-300 flex items-center justify-center shrink-0"><i class="fa-solid fa-certificate"></i></span>
+        <div>
+          <strong id="stat-rent-ry18" class="text-xl font-black text-emerald-300 font-mono leading-none block">0</strong>
+          <span class="text-[11px] text-slate-400">จดทะเบียน รย.18 แล้ว</span>
+        </div>
+      </div>
+      <div class="dark-card rounded-2xl p-4 flex items-center gap-3">
+        <span class="w-10 h-10 rounded-xl bg-sky-500/15 border border-sky-400/35 text-sky-300 flex items-center justify-center shrink-0"><i class="fa-solid fa-handshake-angle"></i></span>
+        <div>
+          <strong id="stat-rent-own" class="text-xl font-black text-sky-300 font-mono leading-none block">0</strong>
+          <span class="text-[11px] text-slate-400">แบบเช่าได้รถ</span>
+        </div>
+      </div>
+      <div class="dark-card rounded-2xl p-4 flex items-center gap-3">
+        <span class="w-10 h-10 rounded-xl bg-purple-500/15 border border-purple-400/35 text-purple-300 flex items-center justify-center shrink-0"><i class="fa-solid fa-tags"></i></span>
+        <div>
+          <strong id="stat-rent-disc" class="text-xl font-black text-purple-300 font-mono leading-none block">0</strong>
+          <span class="text-[11px] text-slate-400">มีส่วนลดระยะยาว</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Smart Filter & Search Bar -->
+    <section class="dark-card rounded-3xl p-4 sm:p-5 space-y-4">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-3 text-xs">
+        <div class="lg:col-span-2 relative">
+          <i class="fa-solid fa-magnifying-glass text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+          <input type="search" id="filter-search" oninput="renderRentalsGrid()" placeholder="ค้นหายี่ห้อ, รุ่นรถ, พื้นที่รับรถ, รายละเอียด..." class="dark-field w-full rounded-xl pl-9 pr-3 py-2.5">
+        </div>
+        <select id="filter-rental-type" onchange="renderRentalsGrid()" class="dark-field rounded-xl px-3 py-2.5 font-semibold">
+          <option value="ALL">ประเภทเช่า: ทั้งหมด</option>
+          <option value="เช่าปกติ">🚗 เช่าปกติ (รายวัน/รายเดือน)</option>
+          <option value="เช่าได้รถ">🔑 เช่าได้รถ (ผ่อนครบโอนรถ)</option>
+        </select>
+        <select id="filter-app-mode" onchange="renderRentalsGrid()" class="dark-field rounded-xl px-3 py-2.5 font-semibold">
+          <option value="ALL">โหมด Grab / Bolt: ทั้งหมด</option>
+          <option value="JustGrab">JustGrab</option>
+          <option value="GrabCar">GrabCar</option>
+          <option value="GrabCar Premium">GrabCar Premium</option>
+          <option value="GrabSUV">GrabSUV</option>
+          <option value="GrabCar Plus / Executive">GrabCar Plus / Executive</option>
+          <option value="GrabTaxi">GrabTaxi</option>
+          <option value="Bolt Economy">Bolt Economy</option>
+          <option value="Bolt Comfort">Bolt Comfort</option>
+          <option value="Bolt XL">Bolt XL</option>
+          <option value="Bolt EV">Bolt EV</option>
+          <option value="Bolt Taxi">Bolt Taxi</option>
+        </select>
+        <select id="filter-max-price" onchange="renderRentalsGrid()" class="dark-field rounded-xl px-3 py-2.5 font-semibold">
+          <option value="0">งบต่อวัน: ทุกราคา</option>
+          <option value="600">ไม่เกิน 600 บาท/วัน</option>
+          <option value="900">ไม่เกิน 900 บาท/วัน</option>
+          <option value="1200">ไม่เกิน 1,200 บาท/วัน</option>
+          <option value="1800">ไม่เกิน 1,800 บาท/วัน</option>
+        </select>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-800/80 text-xs">
+        <div class="flex flex-wrap items-center gap-3">
+          <label class="inline-flex items-center gap-2 bg-slate-950 border border-emerald-500/35 px-3 py-1.5 rounded-xl cursor-pointer">
+            <input type="checkbox" id="filter-only-ry18" onchange="renderRentalsGrid()" class="accent-emerald-400 w-4 h-4">
+            <span class="font-bold text-emerald-300">✅ เฉพาะรถจดทะเบียน รย.18</span>
+          </label>
+          <label class="inline-flex items-center gap-2 bg-slate-950 border border-purple-500/35 px-3 py-1.5 rounded-xl cursor-pointer">
+            <input type="checkbox" id="filter-only-discount" onchange="renderRentalsGrid()" class="accent-purple-400 w-4 h-4">
+            <span class="font-bold text-purple-300">🏷️ มีส่วนลดระยะยาว</span>
+          </label>
+          <label class="inline-flex items-center gap-2 bg-slate-950 border border-slate-700 px-3 py-1.5 rounded-xl cursor-pointer">
+            <input type="checkbox" id="filter-only-avail" checked onchange="renderRentalsGrid()" class="accent-amber-400 w-4 h-4">
+            <span class="font-semibold text-slate-200">แสดงเฉพาะรถว่าง</span>
+          </label>
+        </div>
+        <button type="button" onclick="loadRentalsFromCloud(true)" class="bg-slate-950 hover:bg-slate-800 text-amber-300 border border-amber-400/35 px-3.5 py-1.5 rounded-xl font-bold">
+          <i id="rental-refresh-icon" class="fa-solid fa-rotate mr-1"></i> โหลดประกาศล่าสุด
+        </button>
+      </div>
+    </section>
+
+    <!-- Listings Grid -->
+    <section id="rentals-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div class="md:col-span-2 lg:col-span-3 text-center py-12 text-slate-400 text-sm">
+        <i class="fa-solid fa-spinner fa-spin mr-1.5"></i> กำลังโหลดรายการรถเช่าล่าสุด...
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal ลงประกาศปล่อยรถเช่า -->
+  <div id="rental-post-modal" class="hidden fixed inset-0 z-[1250] bg-black/85 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-amber-400/40 rounded-3xl max-w-2xl w-full p-5 sm:p-7 max-h-[92vh] overflow-y-auto shadow-2xl space-y-5 relative">
+      <button type="button" onclick="closeRentalPostModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div>
+        <span class="text-[11px] font-extrabold text-amber-300 bg-amber-400/15 border border-amber-400/35 px-3 py-0.5 rounded-full">POST CAR RENTAL</span>
+        <h2 class="text-lg sm:text-xl font-black text-white mt-1.5"><i class="fa-solid fa-key text-amber-400 mr-1.5"></i>ลงประกาศปล่อยรถเช่าสำหรับคนขับ</h2>
+        <p class="text-xs text-slate-400">กรอกรายละเอียดให้ครบถ้วนและแนบรูปถ่ายภายนอก-ภายในรถทั้ง 2 รูปเพื่อให้ผู้เช่าตัดสินใจได้ไวขึ้น</p>
+      </div>
+
+      <form id="rental-post-form" onsubmit="handleRentalPostSubmit(event)" class="space-y-4 text-xs">
+        <div class="grid sm:grid-cols-2 gap-3">
+          <div class="space-y-1">
+            <label class="font-bold text-slate-300 block">ยี่ห้อและรุ่นรถ *</label>
+            <input type="text" id="post-car-title" required placeholder="เช่น Toyota Corolla Altis Hybrid / BYD Atto 3" class="dark-field w-full rounded-xl px-3.5 py-2.5">
+          </div>
+          <div class="space-y-1">
+            <label class="font-bold text-slate-300 block">ปีรถ / ระบบเชื้อเพลิง *</label>
+            <input type="text" id="post-year-fuel" required placeholder="เช่น ปี 2023 • ไฟฟ้า EV / ไฮบริด / เบนซิน+LPG" class="dark-field w-full rounded-xl px-3.5 py-2.5">
+          </div>
+          <div class="space-y-1">
+            <label class="font-bold text-slate-300 block">ราคาเช่าต่อวัน (บาท) *</label>
+            <input type="number" id="post-daily-price" required min="100" step="10" placeholder="เช่น 750" class="dark-field w-full rounded-xl px-3.5 py-2.5 font-mono text-amber-300 font-bold">
+          </div>
+          <div class="space-y-1">
+            <label class="font-bold text-slate-300 block">ค่ามัดจำรถ (บาท)</label>
+            <input type="number" id="post-deposit" min="0" step="100" placeholder="เช่น 5000 (หรือ 0 หากไม่มี)" class="dark-field w-full rounded-xl px-3.5 py-2.5 font-mono">
+          </div>
+          <div class="space-y-1">
+            <label class="font-bold text-slate-300 block">ประเภทการเช่า *</label>
+            <select id="post-rental-type" required class="dark-field w-full rounded-xl px-3.5 py-2.5 font-bold text-amber-300">
+              <option value="เช่าปกติ">🚗 เช่าปกติ (รายวัน / รายสัปดาห์ / รายเดือน)</option>
+              <option value="เช่าได้รถ">🔑 เช่าได้รถ (ผ่อนเช่าครบตามสัญญาโอนกรรมสิทธิ์)</option>
+            </select>
+          </div>
+          <div class="space-y-1">
+            <label class="font-bold text-slate-300 block">จังหวัด / พื้นที่นัดรับรถ *</label>
+            <input type="text" id="post-location" required placeholder="เช่น กรุงเทพฯ (ลาดพร้าว) / พัทยา / นนทบุรี" class="dark-field w-full rounded-xl px-3.5 py-2.5">
+          </div>
+        </div>
+
+        <!-- เงื่อนไขสำคัญ: รย.18 & ส่วนลดระยะยาว -->
+        <div class="bg-slate-950/90 border border-slate-800 rounded-2xl p-4 space-y-3">
+          <p class="font-extrabold text-amber-300">เงื่อนไขของรถและโปรโมชันส่วนลด</p>
+          <div class="grid sm:grid-cols-2 gap-2.5">
+            <label class="flex items-center gap-2.5 bg-slate-900 border border-emerald-500/40 rounded-xl p-3 cursor-pointer">
+              <input type="checkbox" id="post-is-ry18" class="accent-emerald-400 w-4 h-4">
+              <span class="font-bold text-emerald-300">✅ รถจดทะเบียน รย.18 เรียบร้อยแล้ว</span>
+            </label>
+            <label class="flex items-center gap-2.5 bg-slate-900 border border-purple-500/40 rounded-xl p-3 cursor-pointer">
+              <input type="checkbox" id="post-has-discount" onchange="document.getElementById('post-discount-detail-wrap').classList.toggle('hidden', !this.checked)" class="accent-purple-400 w-4 h-4">
+              <span class="font-bold text-purple-300">🏷️ มีส่วนลดเมื่อเช่าระยะยาว</span>
+            </label>
+          </div>
+          <div id="post-discount-detail-wrap" class="hidden space-y-1">
+            <label class="font-bold text-purple-300 block">ระบุรายละเอียดส่วนลดระยะยาว</label>
+            <input type="text" id="post-discount-detail" placeholder="เช่น เช่ารายสัปดาห์ลด 10%, เช่ารายเดือนเหลือวันละ 600 บ., ฟรีวันหยุด 1 วัน/สัปดาห์" class="dark-field w-full rounded-xl px-3.5 py-2.5">
+          </div>
+        </div>
+
+        <!-- โหมดขับขี่ Grab / Bolt -->
+        <div class="bg-slate-950/90 border border-slate-800 rounded-2xl p-4 space-y-2.5">
+          <p class="font-extrabold text-sky-300">โหมดขับขี่ที่ได้รับจาก Grab / Bolt โดยสังเขป (ติ๊กได้หลายรายการ)</p>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+            <label class="flex items-center gap-2 bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 cursor-pointer"><input type="checkbox" class="post-mode-chk accent-emerald-400 w-4 h-4" value="JustGrab"><span>JustGrab</span></label>
+            <label class="flex items-center gap-2 bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 cursor-pointer"><input type="checkbox" class="post-mode-chk accent-emerald-400 w-4 h-4" value="GrabCar"><span>GrabCar</span></label>
+            <label class="flex items-center gap-2 bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 cursor-pointer"><input type="checkbox" class="post-mode-chk accent-emerald-400 w-4 h-4" value="GrabCar Premium"><span>GrabCar Premium</span></label>
+            <label class="flex items-center gap-2 bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 cursor-pointer"><input type="checkbox" class="post-mode-chk accent-emerald-400 w-4 h-4" value="GrabSUV"><span>GrabSUV</span></label>
+            <label class="flex items-center gap-2 bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 cursor-pointer"><input type="checkbox" class="post-mode-chk accent-emerald-400 w-4 h-4" value="GrabCar Plus / Executive"><span>GrabCar Plus / Exec</span></label>
+            <label class="flex items-center gap-2 bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 cursor-pointer"><input type="checkbox" class="post-mode-chk accent-emerald-400 w-4 h-4" value="GrabTaxi"><span>GrabTaxi</span></label>
+            <label class="flex items-center gap-2 bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 cursor-pointer"><input type="checkbox" class="post-mode-chk accent-sky-400 w-4 h-4" value="Bolt Economy"><span>Bolt Economy</span></label>
+            <label class="flex items-center gap-2 bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 cursor-pointer"><input type="checkbox" class="post-mode-chk accent-sky-400 w-4 h-4" value="Bolt Comfort"><span>Bolt Comfort</span></label>
+            <label class="flex items-center gap-2 bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 cursor-pointer"><input type="checkbox" class="post-mode-chk accent-sky-400 w-4 h-4" value="Bolt XL"><span>Bolt XL</span></label>
+            <label class="flex items-center gap-2 bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 cursor-pointer"><input type="checkbox" class="post-mode-chk accent-sky-400 w-4 h-4" value="Bolt EV"><span>Bolt EV</span></label>
+            <label class="flex items-center gap-2 bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 cursor-pointer"><input type="checkbox" class="post-mode-chk accent-sky-400 w-4 h-4" value="Bolt Taxi"><span>Bolt Taxi</span></label>
+          </div>
+        </div>
+
+        <!-- อัปโหลดรูปภายนอก + ภายใน (บังคับทั้ง 2 รูป) -->
+        <div class="bg-slate-950/90 border border-amber-400/35 rounded-2xl p-4 space-y-3">
+          <p class="font-extrabold text-amber-300"><i class="fa-solid fa-camera mr-1"></i>รูปถ่ายรถยนต์ (บังคับแนบครบทั้งภายนอกและภายใน) *</p>
+          <div class="grid sm:grid-cols-2 gap-3">
+            <div class="bg-slate-900 border border-slate-700 rounded-xl p-3 space-y-2 text-center">
+              <p class="font-bold text-white">1. รูปถ่ายภายนอกรถ *</p>
+              <label class="inline-flex items-center justify-center gap-1.5 w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold cursor-pointer">
+                <i class="fa-solid fa-upload"></i> เลือกรูปภายนอก
+                <input type="file" accept="image/*" onchange="handleRentalPhoto(this, 'exterior')" class="hidden">
+              </label>
+              <div id="preview-rent-exterior" class="hidden"></div>
+            </div>
+            <div class="bg-slate-900 border border-slate-700 rounded-xl p-3 space-y-2 text-center">
+              <p class="font-bold text-white">2. รูปถ่ายภายในห้องโดยสาร *</p>
+              <label class="inline-flex items-center justify-center gap-1.5 w-full py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-bold cursor-pointer">
+                <i class="fa-solid fa-upload"></i> เลือกรูปภายใน
+                <input type="file" accept="image/*" onchange="handleRentalPhoto(this, 'interior')" class="hidden">
+              </label>
+              <div id="preview-rent-interior" class="hidden"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ข้อมูลติดต่อและรายละเอียดอื่นๆ -->
+        <div class="grid sm:grid-cols-2 gap-3">
+          <div class="space-y-1">
+            <label class="font-bold text-slate-300 block">เบอร์โทรติดต่อผู้ปล่อยเช่า *</label>
+            <input type="tel" id="post-phone" required placeholder="เช่น 0812345678" class="dark-field w-full rounded-xl px-3.5 py-2.5 font-mono">
+          </div>
+          <div class="space-y-1">
+            <label class="font-bold text-slate-300 block">Line ID สำหรับติดต่อ</label>
+            <input type="text" id="post-line" placeholder="เช่น @mycarrental" class="dark-field w-full rounded-xl px-3.5 py-2.5">
+          </div>
+        </div>
+
+        <div class="space-y-1">
+          <label class="font-bold text-slate-300 block">รายละเอียดอื่นๆ ที่ต้องการสื่อสารกับผู้เช่า</label>
+          <textarea id="post-extra-notes" rows="3" placeholder="เช่น ประกันชั้น 1 เชิงพาณิชย์, ฟรีบำรุงรักษา/เปลี่ยนน้ำมันเครื่อง, เอกสารที่ใช้ทำสัญญา, เงื่อนไขการขับต่างจังหวัด..." class="dark-field w-full rounded-xl px-3.5 py-2.5"></textarea>
+        </div>
+
+        <button type="submit" id="btn-submit-rental" class="w-full gold-grad text-slate-950 font-extrabold py-3.5 rounded-xl text-sm shadow-xl transition">
+          <i class="fa-solid fa-paper-plane mr-1.5"></i> เผยแพร่ประกาศปล่อยรถเช่า
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Image Lightbox -->
+  <div id="rental-lightbox" onclick="this.classList.add('hidden')" class="hidden fixed inset-0 z-[1350] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 cursor-zoom-out">
+    <img id="rental-lightbox-img" src="" alt="รูปขยาย" onclick="event.stopPropagation()" class="max-w-full max-h-[88vh] rounded-2xl border border-amber-400/40 object-contain">
+  </div>
+
+  <footer class="bg-slate-950 text-slate-400 border-t border-amber-500/25 py-8 px-4 text-xs mt-10 text-center">
+    <p class="font-bold text-amber-300">🚖 The Driver TH 🇹🇭 Premium Service — ตลาดปล่อยเช่ารถและค้นหารถเช่าคนขับมืออาชีพ</p>
+  </footer>
+
+  <script>
+    const RENTAL_API_URL = 'https://script.google.com/macros/s/AKfycbyeDCdxBD10D_AFZQY2NxeylLOiAmAHLesSDZHXYCb3TsYs4wYer_kRTPVOs3VpK2pP/exec';
+    let allRentals = [];
+    let rentalPhotos = { exterior: '', interior: '' };
+
+    function esc(s) {
+      return String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function resolveDriveImg(url) {
+      const s = String(url || '').trim();
+      if (!s) return '';
+      if (s.startsWith('data:image')) return s;
+      const m = s.match(/(?:[?&]id=|\/file\/d\/|\/d\/)([a-zA-Z0-9_-]{25,})/);
+      return m && m[1] ? `https://drive.google.com/thumbnail?id=${m[1]}&sz=w1000` : s;
+    }
+
+    function showRentalToast(msg, ok = true) {
+      const box = document.getElementById('rental-toast-box');
+      if (!box) return;
+      const el = document.createElement('div');
+      el.className = `pointer-events-auto px-4 py-3 rounded-2xl border text-xs font-bold shadow-2xl ${ok ? 'bg-emerald-950 text-emerald-200 border-emerald-500/45' : 'bg-rose-950 text-rose-200 border-rose-500/45'}`;
+      el.textContent = msg;
+      box.appendChild(el);
+      setTimeout(() => el.remove(), 4000);
+    }
+
+    function compressRentalImage(file, maxW = 960, q = 0.78) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = e => {
+          const img = new Image();
+          img.onload = () => {
+            const c = document.createElement('canvas');
+            let w = img.width, h = img.height;
+            if (w > maxW) { h = Math.round((h * maxW) / w); w = maxW; }
+            c.width = w; c.height = h;
+            c.getContext('2d').drawImage(img, 0, 0, w, h);
+            resolve(c.toDataURL('image/jpeg', q));
+          };
+          img.onerror = reject;
+          img.src = e.target.result;
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    async function handleRentalPhoto(inputEl, side) {
+      const f = inputEl?.files?.[0];
+      if (!f) return;
+      try {
+        const b64 = await compressRentalImage(f);
+        rentalPhotos[side] = b64;
+        const prev = document.getElementById(`preview-rent-${side}`);
+        if (prev) {
+          prev.classList.remove('hidden');
+          prev.innerHTML = `<img src="${b64}" class="w-full h-28 object-cover rounded-xl border border-amber-400/40">`;
+        }
+      } catch (_) {
+        showRentalToast('ไม่สามารถอ่านไฟล์รูปภาพได้ กรุณาลองรูปอื่น', false);
+      }
+    }
+
+    function openRentalPostModal() {
+      const sess = window.TDTAuth && window.TDTAuth.getSession ? window.TDTAuth.getSession() : null;
+      if (!sess || !sess.memberToken) {
+        if (window.TDTAuth) window.TDTAuth.openLogin('กรุณาเข้าสู่ระบบด้วยรหัสสมาชิกก่อนลงประกาศปล่อยรถเช่า');
+        return;
+      }
+      if (sess.member && sess.member.lineId && !document.getElementById('post-line').value) {
+        document.getElementById('post-line').value = sess.member.lineId;
+      }
+      document.getElementById('rental-post-modal')?.classList.remove('hidden');
+    }
+
+    function closeRentalPostModal() {
+      document.getElementById('rental-post-modal')?.classList.add('hidden');
+    }
+
+    function openRentalLightbox(url) {
+      const m = document.getElementById('rental-lightbox');
+      const img = document.getElementById('rental-lightbox-img');
+      if (!m || !img || !url) return;
+      img.src = url;
+      m.classList.remove('hidden');
+    }
+
+    function copyLineContact(lineId) {
+      if (!lineId) return;
+      navigator.clipboard?.writeText(lineId).then(() => showRentalToast(`คัดลอก Line ID: ${lineId} แล้ว`));
+    }
+
+    async function handleRentalPostSubmit(e) {
+      e.preventDefault();
+      const sess = window.TDTAuth && window.TDTAuth.getSession ? window.TDTAuth.getSession() : null;
+      if (!sess || !sess.memberToken) {
+        showRentalToast('กรุณาเข้าสู่ระบบสมาชิกก่อนลงประกาศ', false);
+        return;
+      }
+      if (!rentalPhotos.exterior || !rentalPhotos.interior) {
+        showRentalToast('กรุณาแนบรูปถ่ายภายนอกรถและรูปถ่ายภายในห้องโดยสารให้ครบทั้ง 2 รูป', false);
+        return;
+      }
+      const btn = document.getElementById('btn-submit-rental');
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin mr-1.5"></i> กำลังอัปโหลดรูปและบันทึกประกาศ...';
+      try {
+        const appModes = Array.from(document.querySelectorAll('.post-mode-chk:checked')).map(c => c.value);
+        const res = await fetch(RENTAL_API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({
+            action: 'car_rental_post',
+            memberToken: sess.memberToken,
+            ownerName: sess.member?.chatName || sess.member?.fullName || '',
+            carTitle: document.getElementById('post-car-title').value.trim(),
+            yearFuel: document.getElementById('post-year-fuel').value.trim(),
+            dailyPrice: Number(document.getElementById('post-daily-price').value || 0),
+            deposit: Number(document.getElementById('post-deposit').value || 0),
+            rentalType: document.getElementById('post-rental-type').value,
+            location: document.getElementById('post-location').value.trim(),
+            isRY18: document.getElementById('post-is-ry18').checked,
+            hasLongTermDiscount: document.getElementById('post-has-discount').checked,
+            discountDetail: document.getElementById('post-discount-detail').value.trim(),
+            appModes,
+            contactPhone: document.getElementById('post-phone').value.trim(),
+            lineId: document.getElementById('post-line').value.trim(),
+            extraNotes: document.getElementById('post-extra-notes').value.trim(),
+            exteriorPhotoBase64: rentalPhotos.exterior,
+            interiorPhotoBase64: rentalPhotos.interior
+          })
+        });
+        const json = await res.json();
+        if (!json || !json.success) {
+          showRentalToast((json && json.error) || 'ลงประกาศไม่สำเร็จ', false);
+          return;
+        }
+        document.getElementById('rental-post-form')?.reset();
+        document.getElementById('post-discount-detail-wrap')?.classList.add('hidden');
+        document.getElementById('preview-rent-exterior')?.classList.add('hidden');
+        document.getElementById('preview-rent-interior')?.classList.add('hidden');
+        rentalPhotos = { exterior: '', interior: '' };
+        closeRentalPostModal();
+        showRentalToast('เผยแพร่ประกาศปล่อยรถเช่าเรียบร้อยแล้ว!');
+        await loadRentalsFromCloud(false);
+      } catch (_) {
+        showRentalToast('เชื่อมต่อเซิร์ฟเวอร์ไม่สำเร็จ กรุณาลองใหม่', false);
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-paper-plane mr-1.5"></i> เผยแพร่ประกาศปล่อยรถเช่า';
+      }
+    }
+
+    async function toggleMyRentalStatus(id) {
+      const sess = window.TDTAuth && window.TDTAuth.getSession ? window.TDTAuth.getSession() : null;
+      if (!sess || !sess.memberToken) return;
+      try {
+        const res = await fetch(RENTAL_API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({ action: 'car_rental_toggle_status', memberToken: sess.memberToken, id })
+        });
+        const json = await res.json();
+        if (json && json.success) {
+          showRentalToast(`อัปเดตสถานะเป็น "${json.status}" แล้ว`);
+          await loadRentalsFromCloud(false);
+        } else {
+          showRentalToast((json && json.error) || 'อัปเดตไม่สำเร็จ', false);
+        }
+      } catch (_) {}
+    }
+
+    function updateRentalStats() {
+      const avail = allRentals.filter(r => r.status === 'ว่างพร้อมเช่า');
+      document.getElementById('stat-rent-avail').textContent = avail.length.toLocaleString();
+      document.getElementById('stat-rent-ry18').textContent = avail.filter(r => r.isRY18).length.toLocaleString();
+      document.getElementById('stat-rent-own').textContent = avail.filter(r => r.rentalType === 'เช่าได้รถ').length.toLocaleString();
+      document.getElementById('stat-rent-disc').textContent = avail.filter(r => r.hasLongTermDiscount).length.toLocaleString();
+    }
+
+    function renderRentalsGrid() {
+      const grid = document.getElementById('rentals-grid');
+      if (!grid) return;
+      const q = (document.getElementById('filter-search')?.value || '').trim().toLowerCase();
+      const type = document.getElementById('filter-rental-type')?.value || 'ALL';
+      const mode = document.getElementById('filter-app-mode')?.value || 'ALL';
+      const maxPrice = Number(document.getElementById('filter-max-price')?.value || 0);
+      const onlyRY18 = !!document.getElementById('filter-only-ry18')?.checked;
+      const onlyDisc = !!document.getElementById('filter-only-discount')?.checked;
+      const onlyAvail = !!document.getElementById('filter-only-avail')?.checked;
+      const myCode = window.TDTAuth && window.TDTAuth.getSession && window.TDTAuth.getSession()?.member?.memberCode;
+
+      const filtered = allRentals.filter(r => {
+        if (onlyAvail && r.status !== 'ว่างพร้อมเช่า') return false;
+        if (type !== 'ALL' && r.rentalType !== type) return false;
+        if (mode !== 'ALL' && !(r.appModes || []).includes(mode)) return false;
+        if (maxPrice > 0 && Number(r.dailyPrice || 0) > maxPrice) return false;
+        if (onlyRY18 && !r.isRY18) return false;
+        if (onlyDisc && !r.hasLongTermDiscount) return false;
+        if (q) {
+          const hay = `${r.carTitle} ${r.yearFuel} ${r.location} ${r.extraNotes} ${r.discountDetail} ${(r.appModes || []).join(' ')} ${r.ownerName}`.toLowerCase();
+          if (!hay.includes(q)) return false;
+        }
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="md:col-span-2 lg:col-span-3 dark-card rounded-3xl p-10 text-center space-y-2">
+            <i class="fa-solid fa-car-side text-3xl text-slate-600"></i>
+            <p class="text-sm font-bold text-slate-200">ไม่พบประกาศรถเช่าที่ตรงกับเงื่อนไขการค้นหา</p>
+            <p class="text-xs text-slate-400">ลองปรับตัวกรอง หรือกดปุ่ม “ลงประกาศปล่อยรถเช่า” เพื่อเป็นคันแรกในหมวดนี้ครับ</p>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(r => {
+        const extImg = resolveDriveImg(r.exteriorPhoto) || 'https://placehold.co/600x400/0f172a/fbbf24?text=Exterior';
+        const intImg = resolveDriveImg(r.interiorPhoto) || 'https://placehold.co/600x400/0f172a/38bdf8?text=Interior';
+        const isAvail = r.status === 'ว่างพร้อมเช่า';
+        const isMine = myCode && String(r.memberCode).toUpperCase() === String(myCode).toUpperCase();
+        return `
+          <article class="dark-card rounded-3xl overflow-hidden flex flex-col justify-between ${isAvail ? '' : 'opacity-70'}">
+            <div>
+              <!-- Dual Photo Strip: Exterior & Interior -->
+              <div class="grid grid-cols-2 gap-0.5 bg-slate-950 relative">
+                <div class="relative group cursor-zoom-in" onclick="openRentalLightbox('${esc(extImg)}')">
+                  <img src="${esc(extImg)}" alt="ภายนอกรถ" class="w-full h-40 object-cover">
+                  <span class="absolute bottom-1.5 left-1.5 px-2 py-0.5 rounded-md bg-black/75 text-[10px] font-bold text-white">ภายนอก</span>
+                </div>
+                <div class="relative group cursor-zoom-in" onclick="openRentalLightbox('${esc(intImg)}')">
+                  <img src="${esc(intImg)}" alt="ภายในรถ" class="w-full h-40 object-cover">
+                  <span class="absolute bottom-1.5 right-1.5 px-2 py-0.5 rounded-md bg-black/75 text-[10px] font-bold text-sky-200">ภายใน</span>
+                </div>
+                <span class="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-full text-[11px] font-extrabold shadow ${isAvail ? 'bg-emerald-500 text-slate-950' : 'bg-rose-600 text-white'}">${esc(r.status)}</span>
+                <span class="absolute top-2.5 right-2.5 px-2.5 py-0.5 rounded-full text-[11px] font-extrabold shadow ${r.rentalType === 'เช่าได้รถ' ? 'bg-amber-400 text-slate-950' : 'bg-slate-900/90 text-sky-300 border border-sky-400/40'}">${esc(r.rentalType)}</span>
+              </div>
+
+              <div class="p-4 sm:p-5 space-y-3 text-xs">
+                <div>
+                  <h2 class="text-base font-black text-white leading-snug">${esc(r.carTitle)}</h2>
+                  <p class="text-[11px] text-slate-400 mt-0.5">${esc(r.yearFuel)} · <i class="fa-solid fa-location-dot text-amber-400 mr-0.5"></i>${esc(r.location)}</p>
+                </div>
+
+                <!-- Price & Discount -->
+                <div class="bg-slate-950/90 border border-slate-800 rounded-2xl p-3 flex items-center justify-between gap-2">
+                  <div>
+                    <span class="text-[10px] text-slate-400 block">ราคาเช่าต่อวัน</span>
+                    <strong class="text-xl font-black text-amber-300 font-mono">฿${Number(r.dailyPrice || 0).toLocaleString()}</strong>
+                    <span class="text-[11px] text-slate-400">/ วัน</span>
+                  </div>
+                  <div class="text-right">
+                    <span class="text-[10px] text-slate-400 block">ค่ามัดจำ</span>
+                    <strong class="text-xs font-bold text-white font-mono">${Number(r.deposit || 0) > 0 ? '฿' + Number(r.deposit).toLocaleString() : 'ไม่ระบุ/ตามตกลง'}</strong>
+                  </div>
+                </div>
+
+                <!-- Badges: RY18 & Long-Term Discount -->
+                <div class="flex flex-wrap gap-1.5">
+                  <span class="px-2.5 py-1 rounded-full text-[11px] font-bold border ${r.isRY18 ? 'bg-emerald-500/15 text-emerald-300 border-emerald-400/40' : 'bg-slate-800 text-slate-400 border-slate-700'}">
+                    ${r.isRY18 ? '✅ จดทะเบียน รย.18 แล้ว' : '⚪ ยังไม่จด รย.18'}
+                  </span>
+                  ${r.hasLongTermDiscount ? `<span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-purple-500/15 text-purple-300 border border-purple-400/40">🏷️ มีส่วนลดระยะยาว</span>` : ''}
+                </div>
+                ${r.hasLongTermDiscount && r.discountDetail ? `<p class="text-[11px] text-purple-200 bg-purple-950/40 border border-purple-500/25 rounded-xl px-3 py-2"><strong>ส่วนลด:</strong> ${esc(r.discountDetail)}</p>` : ''}
+
+                <!-- Grab / Bolt Modes -->
+                ${(r.appModes && r.appModes.length > 0) ? `
+                  <div class="space-y-1">
+                    <span class="text-[10px] text-slate-400 font-bold block">โหมด Grab / Bolt ที่รับได้:</span>
+                    <div class="flex flex-wrap gap-1">
+                      ${r.appModes.map(m => `<span class="px-2 py-0.5 rounded-md text-[10px] font-bold ${m.startsWith('Bolt') ? 'bg-sky-500/15 text-sky-300 border border-sky-400/30' : 'bg-emerald-500/15 text-emerald-300 border border-emerald-400/30'}">${esc(m)}</span>`).join('')}
+                    </div>
+                  </div>
+                ` : ''}
+
+                ${r.extraNotes ? `<p class="text-xs text-slate-300 leading-relaxed whitespace-pre-line border-t border-slate-800/80 pt-2.5">${esc(r.extraNotes)}</p>` : ''}
+              </div>
+            </div>
+
+            <!-- Footer Contact -->
+            <div class="p-4 pt-0 space-y-2 text-xs">
+              <div class="flex items-center justify-between text-[11px] text-slate-400 border-t border-slate-800 pt-2.5">
+                <span>ผู้ปล่อยเช่า: <strong class="text-slate-200">[${esc(r.memberCode)}] ${esc(r.ownerName)}</strong></span>
+                <span>${esc(r.createdAt).slice(0, 10)}</span>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                ${r.contactPhone ? `<a href="tel:${esc(r.contactPhone)}" class="flex-1 text-center py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold"><i class="fa-solid fa-phone mr-1"></i> ${esc(r.contactPhone)}</a>` : ''}
+                ${r.lineId ? `<button type="button" onclick="copyLineContact('${esc(r.lineId)}')" class="flex-1 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-300 border border-slate-700 font-bold"><i class="fa-brands fa-line mr-1"></i> ${esc(r.lineId)}</button>` : ''}
+              </div>
+              ${isMine ? `
+                <button type="button" onclick="toggleMyRentalStatus('${esc(r.id)}')" class="w-full py-2 rounded-xl bg-amber-400/15 hover:bg-amber-400/25 text-amber-300 border border-amber-400/40 font-bold">
+                  <i class="fa-solid fa-arrows-rotate mr-1"></i> เปลี่ยนสถานะเป็น "${isAvail ? 'ปล่อยเช่าแล้ว' : 'ว่างพร้อมเช่า'}"
+                </button>
+              ` : ''}
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    async function loadRentalsFromCloud(showNotice = false) {
+      const icon = document.getElementById('rental-refresh-icon');
+      icon?.classList.add('fa-spin');
+      try {
+        const res = await fetch(`${RENTAL_API_URL}?action=car_rentals&t=${Date.now()}`);
+        const json = await res.json();
+        if (json && json.success && Array.isArray(json.data)) {
+          allRentals = json.data;
+          updateRentalStats();
+          renderRentalsGrid();
+          if (showNotice) showRentalToast(`โหลดประกาศรถเช่าล่าสุด ${allRentals.length} รายการแล้ว`);
+        }
+      } catch (_) {
+        document.getElementById('rentals-grid').innerHTML = '<div class="md:col-span-2 lg:col-span-3 text-center py-10 text-rose-400 text-xs">ไม่สามารถโหลดรายการรถเช่าได้ในขณะนี้ กรุณากดโหลดใหม่</div>';
+      } finally {
+        icon?.classList.remove('fa-spin');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => loadRentalsFromCloud(false));
+    window.addEventListener('tdt-member-auth-changed', () => renderRentalsGrid());
+  </script>
+</body>
+</html>

@@ -339,7 +339,74 @@
       <p class="text-slate-300 text-xs sm:text-sm max-w-3xl font-light">สำหรับสมาชิกที่มีหมายเลขสมาชิกอยู่แล้วและต้องการแจ้งเปลี่ยนรถ เปลี่ยนทะเบียน หรือแก้ไขข้อมูลติดต่อ</p>
     </section>
 
-    <section class="dark-form-card rounded-3xl p-5 sm:p-8 space-y-5">
+    <!-- การ์ดแสดงข้อมูลสมาชิกปัจจุบันจากฐานข้อมูล (DATAMember) + ปุ่มแก้ไข -->
+    <section id="member-current-profile-card" class="dark-form-card rounded-3xl p-5 sm:p-7 space-y-5">
+      <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-4">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-2xl bg-amber-400/15 border border-amber-400/45 text-amber-300 flex items-center justify-center text-xl shrink-0">
+            <i class="fa-solid fa-id-card"></i>
+          </div>
+          <div>
+            <span class="text-[11px] font-bold text-emerald-300 uppercase tracking-wide"><i class="fa-solid fa-circle-check mr-1"></i>ข้อมูลปัจจุบันในฐานข้อมูลสมาชิก</span>
+            <h2 class="text-lg sm:text-xl font-black text-white">รหัสสมาชิก: <span id="prof-member-code" class="text-amber-300 font-mono">-</span></h2>
+          </div>
+        </div>
+        <div class="flex flex-wrap items-center gap-2">
+          <button type="button" onclick="loadMemberEditProfile(true)" class="px-3.5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-bold transition">
+            <i class="fa-solid fa-rotate mr-1"></i> โหลดข้อมูลล่าสุด
+          </button>
+          <button type="button" id="btn-start-member-edit" onclick="enableMemberEditMode()" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold text-xs sm:text-sm shadow-lg transition">
+            <i class="fa-solid fa-pen-to-square mr-1.5"></i> แก้ไขข้อมูลสมาชิก
+          </button>
+        </div>
+      </div>
+
+      <div id="prof-loading-state" class="text-center py-6 text-xs text-slate-400">
+        <i class="fa-solid fa-spinner fa-spin mr-1.5"></i> กำลังดึงข้อมูลสมาชิกจากฐานข้อมูล...
+      </div>
+
+      <div id="prof-details-grid" class="hidden grid sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">
+        <div class="bg-slate-950/85 border border-slate-800 rounded-2xl p-3.5">
+          <span class="text-slate-400 block text-[11px]">ชื่อในห้อง Line OpenChat</span>
+          <strong id="prof-chat-name" class="text-white text-sm font-bold">-</strong>
+        </div>
+        <div class="bg-slate-950/85 border border-slate-800 rounded-2xl p-3.5">
+          <span class="text-slate-400 block text-[11px]">ชื่อ - นามสกุลจริง</span>
+          <strong id="prof-full-name" class="text-white text-sm font-bold">-</strong>
+        </div>
+        <div class="bg-slate-950/85 border border-slate-800 rounded-2xl p-3.5">
+          <span class="text-slate-400 block text-[11px]">เบอร์โทรศัพท์ติดต่อ</span>
+          <strong id="prof-phone" class="text-emerald-300 text-sm font-mono font-bold">-</strong>
+        </div>
+        <div class="bg-slate-950/85 border border-slate-800 rounded-2xl p-3.5">
+          <span class="text-slate-400 block text-[11px]">Line ID</span>
+          <strong id="prof-line-id" class="text-white text-sm font-bold">-</strong>
+        </div>
+        <div class="bg-slate-950/85 border border-slate-800 rounded-2xl p-3.5">
+          <span class="text-slate-400 block text-[11px]">รถยนต์ &amp; ทะเบียนรถ</span>
+          <strong id="prof-vehicle" class="text-amber-300 text-sm font-bold">-</strong>
+        </div>
+        <div class="bg-slate-950/85 border border-slate-800 rounded-2xl p-3.5 sm:col-span-2 lg:col-span-1">
+          <span class="text-slate-400 block text-[11px]">ที่อยู่ปัจจุบัน</span>
+          <strong id="prof-address" class="text-slate-200 text-xs font-semibold leading-relaxed">-</strong>
+        </div>
+      </div>
+    </section>
+
+    <!-- ประวัติคำร้องขอแก้ไขข้อมูลและผลการอนุมัติของสมาชิก -->
+    <section id="member-edit-history-card" class="dark-form-card rounded-3xl p-5 sm:p-7 space-y-4">
+      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+        <div>
+          <h2 class="text-base sm:text-lg font-extrabold text-sky-300"><i class="fa-solid fa-clock-rotate-left mr-1.5"></i>สถานะคำร้องขอแก้ไขข้อมูลของคุณ</h2>
+          <p class="text-xs text-slate-400">ติดตามผลการตรวจสอบจากผู้ดูแลระบบ — หากผ่านจะปรับปรุงลงฐานข้อมูลสมาชิกอัตโนมัติ หากไม่ผ่านจะแสดงเหตุผลที่นี่</p>
+        </div>
+      </div>
+      <div id="member-edit-requests-list" class="space-y-3 text-xs">
+        <p class="text-slate-400 text-center py-4">กำลังตรวจสอบประวัติคำร้อง...</p>
+      </div>
+    </section>
+
+    <section id="member-edit-form-section" class="hidden dark-form-card rounded-3xl p-5 sm:p-8 space-y-5 border-amber-400/50">
       <div id="edit-msg" class="hidden p-4 rounded-2xl text-xs sm:text-sm font-bold"></div>
 
       <!-- กล่องแสดงผลการส่งคำร้องแก้ไขข้อมูลสำเร็จ -->
@@ -378,6 +445,9 @@
           <span id="edit-draft-badge" class="text-xs font-semibold text-slate-200 bg-slate-950 px-3 py-1.5 rounded-full border border-slate-700">
             <i class="fa-solid fa-floppy-disk text-amber-400 mr-1"></i> พร้อมบันทึกร่าง
           </span>
+          <button type="button" onclick="cancelMemberEditMode()" class="text-xs font-bold text-slate-300 bg-slate-800 hover:bg-slate-700 border border-slate-600 px-3 py-1.5 rounded-xl transition">
+            <i class="fa-solid fa-xmark mr-1"></i> ยกเลิกการแก้ไข
+          </button>
           <button type="button" onclick="clearEditDraft()" class="text-xs font-bold text-rose-300 bg-rose-500/15 hover:bg-rose-500/25 border border-rose-400/35 px-3 py-1.5 rounded-xl transition">
             <i class="fa-solid fa-eraser mr-1"></i> ล้างแบบร่าง
           </button>
@@ -823,19 +893,147 @@
         box?.classList.remove('hidden');
         box?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-        document.getElementById('member-edit-form')?.reset();
         editPhotos = { car: { base64: '', name: '', mimeType: '' }, selfie: { base64: '', name: '', mimeType: '' } };
         document.getElementById('preview-edit-car')?.classList.add('hidden');
         document.getElementById('preview-edit-selfie')?.classList.add('hidden');
+        setTimeout(() => loadMemberEditProfile(false), 1500);
       } finally {
         btn.disabled = false;
         btn.innerHTML = origHtml;
       }
     }
 
+    let loadedMemberProfile = null;
+
+    function fillEditFormFromProfile(p) {
+      if (!p) return;
+      const setVal = (id, v) => { const el = document.getElementById(id); if (el) el.value = v || ''; };
+      const codeEl = document.getElementById('existing_member_code');
+      if (codeEl) {
+        codeEl.value = p.memberCode || '';
+        codeEl.readOnly = true;
+        codeEl.classList.add('opacity-75');
+      }
+      setVal('current_chat_name', p.chatName);
+      setVal('edit_first_name', p.firstName);
+      setVal('edit_last_name', p.lastName);
+      setVal('edit_phone', p.phone);
+      setVal('edit_line_id', p.lineId);
+      setVal('edit_car_brand', p.carBrand);
+      setVal('edit_car_model', p.carModel);
+      setVal('edit_license_plate', p.licensePlate);
+      setVal('edit_address', p.address);
+    }
+
+    function enableMemberEditMode() {
+      const sec = document.getElementById('member-edit-form-section');
+      if (loadedMemberProfile) fillEditFormFromProfile(loadedMemberProfile);
+      if (sec) {
+        sec.classList.remove('hidden');
+        sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    function cancelMemberEditMode() {
+      document.getElementById('member-edit-form-section')?.classList.add('hidden');
+      document.getElementById('member-current-profile-card')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function renderMyEditRequests(requests) {
+      const box = document.getElementById('member-edit-requests-list');
+      if (!box) return;
+      if (!Array.isArray(requests) || requests.length === 0) {
+        box.innerHTML = '<div class="bg-slate-950/80 border border-slate-800 rounded-2xl p-4 text-center text-slate-400">คุณยังไม่เคยส่งคำร้องขอแก้ไขข้อมูลสมาชิก กดปุ่ม “แก้ไขข้อมูลสมาชิก” ด้านบนเพื่อยื่นคำร้องได้เลยครับ</div>';
+        return;
+      }
+      box.innerHTML = requests.map(r => {
+        const st = String(r.status || 'รอตรวจสอบการแก้ไข');
+        const isApproved = st.includes('อนุมัติ') && !st.includes('ไม่อนุมัติ');
+        const isRejected = st.includes('ไม่อนุมัติ');
+        const badgeCls = isApproved
+          ? 'bg-emerald-500/20 text-emerald-300 border-emerald-400/45'
+          : (isRejected ? 'bg-rose-500/20 text-rose-300 border-rose-400/45' : 'bg-amber-400/15 text-amber-300 border-amber-400/40');
+        const icon = isApproved ? 'fa-circle-check' : (isRejected ? 'fa-circle-xmark' : 'fa-clock');
+        return `
+          <div class="bg-slate-950/90 border ${isRejected ? 'border-rose-500/45' : (isApproved ? 'border-emerald-500/35' : 'border-slate-800')} rounded-2xl p-4 space-y-2">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div>
+                <span class="font-mono font-bold text-amber-300">${esc(r.refCode)}</span>
+                <span class="text-slate-400 ml-2">${esc(r.date)}</span>
+              </div>
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-extrabold border ${badgeCls}">
+                <i class="fa-solid ${icon}"></i> ${esc(st)}
+              </span>
+            </div>
+            <p class="text-slate-200"><strong class="text-slate-400">หัวข้อที่ขอแก้ไข:</strong> ${esc(r.editTopics || '-')}</p>
+            <p class="text-slate-300 text-[11px]">ข้อมูลที่แจ้งใหม่: ${esc(r.chatName)} · ${esc(r.firstName)} ${esc(r.lastName)} · รถ ${esc(r.carBrand)} ${esc(r.carModel)} (${esc(r.licensePlate)})</p>
+            ${r.adminNote ? `
+              <div class="rounded-xl px-3.5 py-2.5 text-xs ${isRejected ? 'bg-rose-950/70 border border-rose-500/40 text-rose-200' : 'bg-emerald-950/50 border border-emerald-500/30 text-emerald-200'}">
+                <strong><i class="fa-solid ${isRejected ? 'fa-triangle-exclamation' : 'fa-comment-dots'} mr-1"></i>${isRejected ? 'เหตุผลที่ไม่ผ่านการอนุมัติ:' : 'หมายเหตุจากผู้ดูแล:'}</strong> ${esc(r.adminNote)}
+              </div>
+            ` : ''}
+            ${isRejected ? `
+              <div class="pt-1">
+                <button type="button" onclick="enableMemberEditMode()" class="px-3.5 py-1.5 rounded-xl bg-amber-400/15 hover:bg-amber-400/25 text-amber-300 border border-amber-400/40 font-bold text-xs">
+                  <i class="fa-solid fa-rotate-right mr-1"></i> แก้ไขและส่งคำร้องใหม่อีกครั้ง
+                </button>
+              </div>
+            ` : ''}
+          </div>
+        `;
+      }).join('');
+    }
+
+    async function loadMemberEditProfile(showSpinner = true) {
+      const sess = window.TDTAuth && window.TDTAuth.getSession ? window.TDTAuth.getSession() : null;
+      const loadEl = document.getElementById('prof-loading-state');
+      const gridEl = document.getElementById('prof-details-grid');
+      if (!sess || !sess.memberToken) {
+        if (loadEl) loadEl.textContent = 'กรุณาเข้าสู่ระบบด้วยรหัสสมาชิกก่อนเพื่อดึงข้อมูลของคุณ';
+        gridEl?.classList.add('hidden');
+        return;
+      }
+      if (showSpinner && loadEl) {
+        loadEl.classList.remove('hidden');
+        loadEl.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1.5"></i> กำลังดึงข้อมูลสมาชิกจากฐานข้อมูล...';
+      }
+      try {
+        const res = await fetch(`${SUBMIT_ENDPOINT_URL}?action=member_profile_for_edit&memberToken=${encodeURIComponent(sess.memberToken)}&t=${Date.now()}`);
+        const json = await res.json();
+        if (!json || !json.success) {
+          if (json && json.requiresAuth && window.TDTAuth) window.TDTAuth.logout();
+          return;
+        }
+        const p = json.profile || {};
+        loadedMemberProfile = p;
+        document.getElementById('prof-member-code').textContent = `[${p.memberCode || '-'}]`;
+        document.getElementById('prof-chat-name').textContent = p.chatName || '-';
+        document.getElementById('prof-full-name').textContent = `${p.firstName || ''} ${p.lastName || ''}`.trim() || '-';
+        document.getElementById('prof-phone').textContent = p.phone || '-';
+        document.getElementById('prof-line-id').textContent = p.lineId || '-';
+        document.getElementById('prof-vehicle').textContent = `${p.carBrand || ''} ${p.carModel || ''} ${p.licensePlate ? '(' + p.licensePlate + ')' : ''}`.trim() || '-';
+        document.getElementById('prof-address').textContent = p.address || '-';
+        loadEl?.classList.add('hidden');
+        gridEl?.classList.remove('hidden');
+        fillEditFormFromProfile(p);
+        renderMyEditRequests(json.requests || []);
+      } catch (_) {
+        if (loadEl) loadEl.textContent = 'ไม่สามารถเชื่อมต่อฐานข้อมูลสมาชิกได้ กรุณากดโหลดข้อมูลล่าสุดอีกครั้ง';
+      }
+    }
+
+    window.addEventListener('tdt-member-auth-changed', (ev) => {
+      if (ev.detail && ev.detail.memberToken) {
+        loadMemberEditProfile(true);
+      } else {
+        loadedMemberProfile = null;
+        document.getElementById('member-edit-form-section')?.classList.add('hidden');
+      }
+    });
+
     document.addEventListener('DOMContentLoaded', () => {
       updateEditPrivacyBadge();
-      restoreEditDraft();
+      loadMemberEditProfile(true);
       EDIT_FIELD_IDS.forEach(id => {
         const el = document.getElementById(id);
         el?.addEventListener('input', saveEditDraft);
